@@ -58,6 +58,9 @@ import com.isaackogan.tiktok.shop.generated.models.GetOpenCollaborationSampleRul
 import com.isaackogan.tiktok.shop.generated.models.GetOpenCollaborationSettingsResponse
 import com.isaackogan.tiktok.shop.generated.models.GetOrCreateCreatorConversationRequest
 import com.isaackogan.tiktok.shop.generated.models.GetOrCreateCreatorConversationResponse
+import com.isaackogan.tiktok.shop.generated.models.GetSellerPartnerCampaignCandidateProductsResponse
+import com.isaackogan.tiktok.shop.generated.models.GetSellerPartnerCampaignDetailResponse
+import com.isaackogan.tiktok.shop.generated.models.GetSellerPartnerCampaignRegisteredProductsResponse
 import com.isaackogan.tiktok.shop.generated.models.GetWeeklyCreatorOutreachQuotaResponse
 import com.isaackogan.tiktok.shop.generated.models.GetWeeklyCreatorOutreachRecordsRequest
 import com.isaackogan.tiktok.shop.generated.models.GetWeeklyCreatorOutreachRecordsResponse
@@ -66,6 +69,8 @@ import com.isaackogan.tiktok.shop.generated.models.MarkConversationsAsReadRespon
 import com.isaackogan.tiktok.shop.generated.models.QueryCreatorPromotionDetailsInTargetCollaborationRequest
 import com.isaackogan.tiktok.shop.generated.models.QueryCreatorPromotionDetailsInTargetCollaborationResponse
 import com.isaackogan.tiktok.shop.generated.models.QueryTargetCollaborationDetailResponse
+import com.isaackogan.tiktok.shop.generated.models.RegisterSellerPartnerCampaignProductsRequest
+import com.isaackogan.tiktok.shop.generated.models.RegisterSellerPartnerCampaignProductsResponse
 import com.isaackogan.tiktok.shop.generated.models.RemoveCreatorFromOpenCollaborationProductRequest
 import com.isaackogan.tiktok.shop.generated.models.RemoveCreatorFromOpenCollaborationProductResponse
 import com.isaackogan.tiktok.shop.generated.models.RemoveOpenCollaborationResponse
@@ -84,6 +89,7 @@ import com.isaackogan.tiktok.shop.generated.models.SearchSampleApplicationsReque
 import com.isaackogan.tiktok.shop.generated.models.SearchSampleApplicationsResponse
 import com.isaackogan.tiktok.shop.generated.models.SearchSellerAffiliateOrdersRequest
 import com.isaackogan.tiktok.shop.generated.models.SearchSellerAffiliateOrdersResponse
+import com.isaackogan.tiktok.shop.generated.models.SearchSellerPartnerCampaignsResponse
 import com.isaackogan.tiktok.shop.generated.models.SearchTargetCollaborationsRequest
 import com.isaackogan.tiktok.shop.generated.models.SearchTargetCollaborationsResponse
 import com.isaackogan.tiktok.shop.generated.models.SellerGetSampleRequestDeeplinkResponse
@@ -1768,6 +1774,279 @@ open class AffiliateSellerApi(basePath: kotlin.String = defaultBasePath, client:
     }
 
     /**
+     * GET /affiliate_seller/202611/partner_campaigns/{campaign_id}/candidate_products
+     * Get Seller Partner Campaign Candidate Products
+     * Lists the authorized shop&#39;s live products as candidates for a partner campaign. is_under_governed and has_registered identify relevant restrictions; listing a product does not guarantee successful registration. Product prices and available Open Plan commission settings are included. Omit page_token for the first page; pass next_page_token for subsequent pages. page_size must be 20, 50 or 100. total_num is the total matching count. Optional properties may be absent when the corresponding data is unavailable.
+     * @param campaignId Required. Positive campaign ID for the existing registration checks, encoded as a decimal string within the signed 64-bit range.
+     * @param pageSize Required. Existing supported page sizes: 20, 50, 100.
+     * @param productSearchKey Keyword matching mode: SEARCH_BY_PRODUCT_NAME matches the product name; SEARCH_BY_PRODUCT_ID matches the product ID.
+     * @param pageToken Omit or send an empty string for the first page. For the next page, pass next_page_token from the previous response unchanged. Keep page_size and all filters unchanged while paging; tokens do not provide a result snapshot. (optional)
+     * @param keyWord Product name or product ID, as selected by product_search_key. A non-numeric product-ID keyword returns an empty successful result. (optional)
+     * @param categoryId Optional. Empty means no category filter; otherwise provide a positive category ID within the signed 64-bit range, encoded as a decimal string. (optional)
+     * @return GetSellerPartnerCampaignCandidateProductsResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getSellerPartnerCampaignCandidateProducts(campaignId: kotlin.String, pageSize: kotlin.Long, productSearchKey: kotlin.String, pageToken: kotlin.String? = null, keyWord: kotlin.String? = null, categoryId: kotlin.String? = null) : GetSellerPartnerCampaignCandidateProductsResponse {
+        val localVarResponse = getSellerPartnerCampaignCandidateProductsWithHttpInfo(campaignId = campaignId, pageSize = pageSize, productSearchKey = productSearchKey, pageToken = pageToken, keyWord = keyWord, categoryId = categoryId)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetSellerPartnerCampaignCandidateProductsResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /affiliate_seller/202611/partner_campaigns/{campaign_id}/candidate_products
+     * Get Seller Partner Campaign Candidate Products
+     * Lists the authorized shop&#39;s live products as candidates for a partner campaign. is_under_governed and has_registered identify relevant restrictions; listing a product does not guarantee successful registration. Product prices and available Open Plan commission settings are included. Omit page_token for the first page; pass next_page_token for subsequent pages. page_size must be 20, 50 or 100. total_num is the total matching count. Optional properties may be absent when the corresponding data is unavailable.
+     * @param campaignId Required. Positive campaign ID for the existing registration checks, encoded as a decimal string within the signed 64-bit range.
+     * @param pageSize Required. Existing supported page sizes: 20, 50, 100.
+     * @param productSearchKey Keyword matching mode: SEARCH_BY_PRODUCT_NAME matches the product name; SEARCH_BY_PRODUCT_ID matches the product ID.
+     * @param pageToken Omit or send an empty string for the first page. For the next page, pass next_page_token from the previous response unchanged. Keep page_size and all filters unchanged while paging; tokens do not provide a result snapshot. (optional)
+     * @param keyWord Product name or product ID, as selected by product_search_key. A non-numeric product-ID keyword returns an empty successful result. (optional)
+     * @param categoryId Optional. Empty means no category filter; otherwise provide a positive category ID within the signed 64-bit range, encoded as a decimal string. (optional)
+     * @return ApiResponse<GetSellerPartnerCampaignCandidateProductsResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getSellerPartnerCampaignCandidateProductsWithHttpInfo(campaignId: kotlin.String, pageSize: kotlin.Long, productSearchKey: kotlin.String, pageToken: kotlin.String?, keyWord: kotlin.String?, categoryId: kotlin.String?) : ApiResponse<GetSellerPartnerCampaignCandidateProductsResponse?> {
+        val localVariableConfig = getSellerPartnerCampaignCandidateProductsRequestConfig(campaignId = campaignId, pageSize = pageSize, productSearchKey = productSearchKey, pageToken = pageToken, keyWord = keyWord, categoryId = categoryId)
+
+        return request<Unit, GetSellerPartnerCampaignCandidateProductsResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getSellerPartnerCampaignCandidateProducts
+     *
+     * @param campaignId Required. Positive campaign ID for the existing registration checks, encoded as a decimal string within the signed 64-bit range.
+     * @param pageSize Required. Existing supported page sizes: 20, 50, 100.
+     * @param productSearchKey Keyword matching mode: SEARCH_BY_PRODUCT_NAME matches the product name; SEARCH_BY_PRODUCT_ID matches the product ID.
+     * @param pageToken Omit or send an empty string for the first page. For the next page, pass next_page_token from the previous response unchanged. Keep page_size and all filters unchanged while paging; tokens do not provide a result snapshot. (optional)
+     * @param keyWord Product name or product ID, as selected by product_search_key. A non-numeric product-ID keyword returns an empty successful result. (optional)
+     * @param categoryId Optional. Empty means no category filter; otherwise provide a positive category ID within the signed 64-bit range, encoded as a decimal string. (optional)
+     * @return RequestConfig
+     */
+    fun getSellerPartnerCampaignCandidateProductsRequestConfig(campaignId: kotlin.String, pageSize: kotlin.Long, productSearchKey: kotlin.String, pageToken: kotlin.String?, keyWord: kotlin.String?, categoryId: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("page_size", listOf(pageSize.toString()))
+                if (pageToken != null) {
+                    put("page_token", listOf(pageToken.toString()))
+                }
+                if (keyWord != null) {
+                    put("key_word", listOf(keyWord.toString()))
+                }
+                if (categoryId != null) {
+                    put("category_id", listOf(categoryId.toString()))
+                }
+                put("product_search_key", listOf(productSearchKey.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/affiliate_seller/202611/partner_campaigns/{campaign_id}/candidate_products".replace("{"+"campaign_id"+"}", encodeURIComponent(campaignId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /affiliate_seller/202611/partner_campaigns/{campaign_id}
+     * Get Seller Partner Campaign Detail
+     * Returns the rules, registration period, campaign period, available statistics and applicable shop or agency summaries for a campaign visible to the authorized shop. can_register indicates the campaign registration-window state, not a guarantee of shop or product eligibility. is_registered reflects existing participation. Contact details and linked TikTok business accounts are not returned. Optional fields depend on campaign type and available data. Display text can contain user-authored content.
+     * @param campaignId Required. Positive campaign ID within the signed 64-bit range, encoded as a decimal string.
+     * @return GetSellerPartnerCampaignDetailResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getSellerPartnerCampaignDetail(campaignId: kotlin.String) : GetSellerPartnerCampaignDetailResponse {
+        val localVarResponse = getSellerPartnerCampaignDetailWithHttpInfo(campaignId = campaignId)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetSellerPartnerCampaignDetailResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /affiliate_seller/202611/partner_campaigns/{campaign_id}
+     * Get Seller Partner Campaign Detail
+     * Returns the rules, registration period, campaign period, available statistics and applicable shop or agency summaries for a campaign visible to the authorized shop. can_register indicates the campaign registration-window state, not a guarantee of shop or product eligibility. is_registered reflects existing participation. Contact details and linked TikTok business accounts are not returned. Optional fields depend on campaign type and available data. Display text can contain user-authored content.
+     * @param campaignId Required. Positive campaign ID within the signed 64-bit range, encoded as a decimal string.
+     * @return ApiResponse<GetSellerPartnerCampaignDetailResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getSellerPartnerCampaignDetailWithHttpInfo(campaignId: kotlin.String) : ApiResponse<GetSellerPartnerCampaignDetailResponse?> {
+        val localVariableConfig = getSellerPartnerCampaignDetailRequestConfig(campaignId = campaignId)
+
+        return request<Unit, GetSellerPartnerCampaignDetailResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getSellerPartnerCampaignDetail
+     *
+     * @param campaignId Required. Positive campaign ID within the signed 64-bit range, encoded as a decimal string.
+     * @return RequestConfig
+     */
+    fun getSellerPartnerCampaignDetailRequestConfig(campaignId: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/affiliate_seller/202611/partner_campaigns/{campaign_id}".replace("{"+"campaign_id"+"}", encodeURIComponent(campaignId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /affiliate_seller/202611/partner_campaigns/{campaign_id}/products
+     * Get Seller Partner Campaign Registered Products
+     * Lists the authorized shop&#39;s product registrations for one partner campaign. product_status selects PENDING, ONGOING, REJECTED or CLOSED. Pending records await review; approved records become Ongoing; rejected records may permit resubmission when can_seller_re_register is true. Closed records are no longer active in the campaign. Omit page_token for the first page; pass next_page_token for subsequent pages. page_size must be 10, 20, 50 or 100. Rejection text is for human display and may be absent. Optional fields vary by status and available source data.
+     * @param campaignId Required. Positive campaign ID within the signed 64-bit range, encoded as a decimal string.
+     * @param pageSize Required. Existing supported page sizes: 10, 20, 50, 100.
+     * @param productSearchKey Keyword matching mode: SEARCH_BY_PRODUCT_NAME matches the product name; SEARCH_BY_PRODUCT_ID matches the product ID.
+     * @param productStatus Campaign product registration status to query.
+     * @param pageToken Omit or send an empty string for the first page. For the next page, pass next_page_token from the previous response unchanged. Keep page_size and all filters unchanged while paging; tokens do not provide a result snapshot. (optional)
+     * @param keyWord Product name or product ID, as selected by product_search_key. A non-numeric product-ID keyword returns an empty successful result. (optional)
+     * @return GetSellerPartnerCampaignRegisteredProductsResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getSellerPartnerCampaignRegisteredProducts(campaignId: kotlin.String, pageSize: kotlin.Long, productSearchKey: kotlin.String, productStatus: kotlin.String, pageToken: kotlin.String? = null, keyWord: kotlin.String? = null) : GetSellerPartnerCampaignRegisteredProductsResponse {
+        val localVarResponse = getSellerPartnerCampaignRegisteredProductsWithHttpInfo(campaignId = campaignId, pageSize = pageSize, productSearchKey = productSearchKey, productStatus = productStatus, pageToken = pageToken, keyWord = keyWord)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetSellerPartnerCampaignRegisteredProductsResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /affiliate_seller/202611/partner_campaigns/{campaign_id}/products
+     * Get Seller Partner Campaign Registered Products
+     * Lists the authorized shop&#39;s product registrations for one partner campaign. product_status selects PENDING, ONGOING, REJECTED or CLOSED. Pending records await review; approved records become Ongoing; rejected records may permit resubmission when can_seller_re_register is true. Closed records are no longer active in the campaign. Omit page_token for the first page; pass next_page_token for subsequent pages. page_size must be 10, 20, 50 or 100. Rejection text is for human display and may be absent. Optional fields vary by status and available source data.
+     * @param campaignId Required. Positive campaign ID within the signed 64-bit range, encoded as a decimal string.
+     * @param pageSize Required. Existing supported page sizes: 10, 20, 50, 100.
+     * @param productSearchKey Keyword matching mode: SEARCH_BY_PRODUCT_NAME matches the product name; SEARCH_BY_PRODUCT_ID matches the product ID.
+     * @param productStatus Campaign product registration status to query.
+     * @param pageToken Omit or send an empty string for the first page. For the next page, pass next_page_token from the previous response unchanged. Keep page_size and all filters unchanged while paging; tokens do not provide a result snapshot. (optional)
+     * @param keyWord Product name or product ID, as selected by product_search_key. A non-numeric product-ID keyword returns an empty successful result. (optional)
+     * @return ApiResponse<GetSellerPartnerCampaignRegisteredProductsResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getSellerPartnerCampaignRegisteredProductsWithHttpInfo(campaignId: kotlin.String, pageSize: kotlin.Long, productSearchKey: kotlin.String, productStatus: kotlin.String, pageToken: kotlin.String?, keyWord: kotlin.String?) : ApiResponse<GetSellerPartnerCampaignRegisteredProductsResponse?> {
+        val localVariableConfig = getSellerPartnerCampaignRegisteredProductsRequestConfig(campaignId = campaignId, pageSize = pageSize, productSearchKey = productSearchKey, productStatus = productStatus, pageToken = pageToken, keyWord = keyWord)
+
+        return request<Unit, GetSellerPartnerCampaignRegisteredProductsResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getSellerPartnerCampaignRegisteredProducts
+     *
+     * @param campaignId Required. Positive campaign ID within the signed 64-bit range, encoded as a decimal string.
+     * @param pageSize Required. Existing supported page sizes: 10, 20, 50, 100.
+     * @param productSearchKey Keyword matching mode: SEARCH_BY_PRODUCT_NAME matches the product name; SEARCH_BY_PRODUCT_ID matches the product ID.
+     * @param productStatus Campaign product registration status to query.
+     * @param pageToken Omit or send an empty string for the first page. For the next page, pass next_page_token from the previous response unchanged. Keep page_size and all filters unchanged while paging; tokens do not provide a result snapshot. (optional)
+     * @param keyWord Product name or product ID, as selected by product_search_key. A non-numeric product-ID keyword returns an empty successful result. (optional)
+     * @return RequestConfig
+     */
+    fun getSellerPartnerCampaignRegisteredProductsRequestConfig(campaignId: kotlin.String, pageSize: kotlin.Long, productSearchKey: kotlin.String, productStatus: kotlin.String, pageToken: kotlin.String?, keyWord: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("page_size", listOf(pageSize.toString()))
+                if (pageToken != null) {
+                    put("page_token", listOf(pageToken.toString()))
+                }
+                if (keyWord != null) {
+                    put("key_word", listOf(keyWord.toString()))
+                }
+                put("product_search_key", listOf(productSearchKey.toString()))
+                put("product_status", listOf(productStatus.toString()))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/affiliate_seller/202611/partner_campaigns/{campaign_id}/products".replace("{"+"campaign_id"+"}", encodeURIComponent(campaignId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * GET /affiliate_seller/202607/creator_outreach/quota
      * Get Weekly Creator Outreach Quota
      * Query the weekly outreach invitation quota for a shop. It returns the current GMV tier, maximum reachable creator follower count corresponding to the tier, consumed quota, remaining quota and other related information.
@@ -2125,6 +2404,83 @@ open class AffiliateSellerApi(basePath: kotlin.String = defaultBasePath, client:
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/affiliate_seller/202508/target_collaborations/{target_collaboration_id}".replace("{"+"target_collaboration_id"+"}", encodeURIComponent(targetCollaborationId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /affiliate_seller/202611/partner_campaigns/{campaign_id}/products
+     * Register Seller Partner Campaign Products
+     * Submits 1 to 200 products belonging to the authorized shop to one partner campaign. The campaign registration window, shop eligibility, product ownership and applicable commission rules are checked. Commission values use percentage multiplied by 100: 1500 means 15%. Provide an authorized contact entry of type EMAIL; type WHATSAPP also requires region_code. Other contact types are not supported. The same sample_quota applies to each submitted product. Ads-commission map keys must occur in product_ids. A successful response has data: {}; it does not return per-product results. Query registered products to inspect resulting status. No idempotency-key guarantee is provided; check the registration records before retrying an ambiguous submission.
+     * @param campaignId Required. Positive campaign ID encoded as a decimal string.
+     * @param registerSellerPartnerCampaignProductsRequest 
+     * @return RegisterSellerPartnerCampaignProductsResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun registerSellerPartnerCampaignProducts(campaignId: kotlin.String, registerSellerPartnerCampaignProductsRequest: RegisterSellerPartnerCampaignProductsRequest) : RegisterSellerPartnerCampaignProductsResponse {
+        val localVarResponse = registerSellerPartnerCampaignProductsWithHttpInfo(campaignId = campaignId, registerSellerPartnerCampaignProductsRequest = registerSellerPartnerCampaignProductsRequest)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as RegisterSellerPartnerCampaignProductsResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /affiliate_seller/202611/partner_campaigns/{campaign_id}/products
+     * Register Seller Partner Campaign Products
+     * Submits 1 to 200 products belonging to the authorized shop to one partner campaign. The campaign registration window, shop eligibility, product ownership and applicable commission rules are checked. Commission values use percentage multiplied by 100: 1500 means 15%. Provide an authorized contact entry of type EMAIL; type WHATSAPP also requires region_code. Other contact types are not supported. The same sample_quota applies to each submitted product. Ads-commission map keys must occur in product_ids. A successful response has data: {}; it does not return per-product results. Query registered products to inspect resulting status. No idempotency-key guarantee is provided; check the registration records before retrying an ambiguous submission.
+     * @param campaignId Required. Positive campaign ID encoded as a decimal string.
+     * @param registerSellerPartnerCampaignProductsRequest 
+     * @return ApiResponse<RegisterSellerPartnerCampaignProductsResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun registerSellerPartnerCampaignProductsWithHttpInfo(campaignId: kotlin.String, registerSellerPartnerCampaignProductsRequest: RegisterSellerPartnerCampaignProductsRequest) : ApiResponse<RegisterSellerPartnerCampaignProductsResponse?> {
+        val localVariableConfig = registerSellerPartnerCampaignProductsRequestConfig(campaignId = campaignId, registerSellerPartnerCampaignProductsRequest = registerSellerPartnerCampaignProductsRequest)
+
+        return request<RegisterSellerPartnerCampaignProductsRequest, RegisterSellerPartnerCampaignProductsResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation registerSellerPartnerCampaignProducts
+     *
+     * @param campaignId Required. Positive campaign ID encoded as a decimal string.
+     * @param registerSellerPartnerCampaignProductsRequest 
+     * @return RequestConfig
+     */
+    fun registerSellerPartnerCampaignProductsRequestConfig(campaignId: kotlin.String, registerSellerPartnerCampaignProductsRequest: RegisterSellerPartnerCampaignProductsRequest) : RequestConfig<RegisterSellerPartnerCampaignProductsRequest> {
+        val localVariableBody = registerSellerPartnerCampaignProductsRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/affiliate_seller/202611/partner_campaigns/{campaign_id}/products".replace("{"+"campaign_id"+"}", encodeURIComponent(campaignId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -2959,6 +3315,118 @@ open class AffiliateSellerApi(basePath: kotlin.String = defaultBasePath, client:
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/affiliate_seller/202410/orders/search",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /affiliate_seller/202611/partner_campaigns
+     * Search Seller Partner Campaigns
+     * Lists partner campaigns visible to the authorized shop. Use JOINED for Manage, NOT_JOINED for Discover, or CLOSED for Closed. An omitted category or UNSPECIFIED retains the existing default search behavior. Campaign type and online-status filters apply to the specified-category branch. Results do not provide a complete assessment of product or shop registration eligibility. Omit page_token for the first page and use next_page_token to continue, keeping filters and page_size unchanged. Only full pages within the first 10000 matching records are accessible; total_num remains the actual matching count. Optional fields vary by campaign type and query branch. Display text can contain user-authored content.
+     * @param pageSize Required. Number of records per page, from 1 to 100. Only pages fully within the first 10000 matching records are accessible.
+     * @param pageToken Omit or send an empty string for the first page. For the next page, pass next_page_token from the previous response unchanged. Keep page_size and all filters unchanged while paging; tokens do not provide a result snapshot. (optional)
+     * @param keyWord For JOINED, NOT_JOINED or CLOSED, leading and trailing whitespace is removed. A non-empty keyword requires CAMPAIGN_NAME, CAMPAIGN_ID or AGENCY_NAME in search_type. An omitted or UNSPECIFIED category retains the legacy name search. (optional)
+     * @param campaignJoinStatusCategory JOINED selects Manage, NOT_JOINED selects Discover, and CLOSED selects Closed. Omit or use UNSPECIFIED for the existing default search. (optional)
+     * @param campaignOnlineStatus Filter upcoming or ongoing campaigns. Omit or use UNSPECIFIED for all online states. Applies when a join-status category is specified. (optional)
+     * @param campaignTypes Campaign types to include. Omit or send an empty list to use AGENCY_INITIATED, SELLER_INITIATED and OPS_CAMPAIGN. Applies when a join-status category is specified. Send multiple values as a comma-separated query parameter. (optional)
+     * @param searchType Keyword matching mode. UNSPECIFIED or omission is allowed only without a keyword in the specified-category branch; the default search branch retains its name-search behavior. (optional)
+     * @return SearchSellerPartnerCampaignsResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun searchSellerPartnerCampaigns(pageSize: kotlin.Long, pageToken: kotlin.String? = null, keyWord: kotlin.String? = null, campaignJoinStatusCategory: kotlin.String? = null, campaignOnlineStatus: kotlin.String? = null, campaignTypes: kotlin.collections.List<kotlin.String>? = null, searchType: kotlin.String? = null) : SearchSellerPartnerCampaignsResponse {
+        val localVarResponse = searchSellerPartnerCampaignsWithHttpInfo(pageSize = pageSize, pageToken = pageToken, keyWord = keyWord, campaignJoinStatusCategory = campaignJoinStatusCategory, campaignOnlineStatus = campaignOnlineStatus, campaignTypes = campaignTypes, searchType = searchType)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchSellerPartnerCampaignsResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /affiliate_seller/202611/partner_campaigns
+     * Search Seller Partner Campaigns
+     * Lists partner campaigns visible to the authorized shop. Use JOINED for Manage, NOT_JOINED for Discover, or CLOSED for Closed. An omitted category or UNSPECIFIED retains the existing default search behavior. Campaign type and online-status filters apply to the specified-category branch. Results do not provide a complete assessment of product or shop registration eligibility. Omit page_token for the first page and use next_page_token to continue, keeping filters and page_size unchanged. Only full pages within the first 10000 matching records are accessible; total_num remains the actual matching count. Optional fields vary by campaign type and query branch. Display text can contain user-authored content.
+     * @param pageSize Required. Number of records per page, from 1 to 100. Only pages fully within the first 10000 matching records are accessible.
+     * @param pageToken Omit or send an empty string for the first page. For the next page, pass next_page_token from the previous response unchanged. Keep page_size and all filters unchanged while paging; tokens do not provide a result snapshot. (optional)
+     * @param keyWord For JOINED, NOT_JOINED or CLOSED, leading and trailing whitespace is removed. A non-empty keyword requires CAMPAIGN_NAME, CAMPAIGN_ID or AGENCY_NAME in search_type. An omitted or UNSPECIFIED category retains the legacy name search. (optional)
+     * @param campaignJoinStatusCategory JOINED selects Manage, NOT_JOINED selects Discover, and CLOSED selects Closed. Omit or use UNSPECIFIED for the existing default search. (optional)
+     * @param campaignOnlineStatus Filter upcoming or ongoing campaigns. Omit or use UNSPECIFIED for all online states. Applies when a join-status category is specified. (optional)
+     * @param campaignTypes Campaign types to include. Omit or send an empty list to use AGENCY_INITIATED, SELLER_INITIATED and OPS_CAMPAIGN. Applies when a join-status category is specified. Send multiple values as a comma-separated query parameter. (optional)
+     * @param searchType Keyword matching mode. UNSPECIFIED or omission is allowed only without a keyword in the specified-category branch; the default search branch retains its name-search behavior. (optional)
+     * @return ApiResponse<SearchSellerPartnerCampaignsResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun searchSellerPartnerCampaignsWithHttpInfo(pageSize: kotlin.Long, pageToken: kotlin.String?, keyWord: kotlin.String?, campaignJoinStatusCategory: kotlin.String?, campaignOnlineStatus: kotlin.String?, campaignTypes: kotlin.collections.List<kotlin.String>?, searchType: kotlin.String?) : ApiResponse<SearchSellerPartnerCampaignsResponse?> {
+        val localVariableConfig = searchSellerPartnerCampaignsRequestConfig(pageSize = pageSize, pageToken = pageToken, keyWord = keyWord, campaignJoinStatusCategory = campaignJoinStatusCategory, campaignOnlineStatus = campaignOnlineStatus, campaignTypes = campaignTypes, searchType = searchType)
+
+        return request<Unit, SearchSellerPartnerCampaignsResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation searchSellerPartnerCampaigns
+     *
+     * @param pageSize Required. Number of records per page, from 1 to 100. Only pages fully within the first 10000 matching records are accessible.
+     * @param pageToken Omit or send an empty string for the first page. For the next page, pass next_page_token from the previous response unchanged. Keep page_size and all filters unchanged while paging; tokens do not provide a result snapshot. (optional)
+     * @param keyWord For JOINED, NOT_JOINED or CLOSED, leading and trailing whitespace is removed. A non-empty keyword requires CAMPAIGN_NAME, CAMPAIGN_ID or AGENCY_NAME in search_type. An omitted or UNSPECIFIED category retains the legacy name search. (optional)
+     * @param campaignJoinStatusCategory JOINED selects Manage, NOT_JOINED selects Discover, and CLOSED selects Closed. Omit or use UNSPECIFIED for the existing default search. (optional)
+     * @param campaignOnlineStatus Filter upcoming or ongoing campaigns. Omit or use UNSPECIFIED for all online states. Applies when a join-status category is specified. (optional)
+     * @param campaignTypes Campaign types to include. Omit or send an empty list to use AGENCY_INITIATED, SELLER_INITIATED and OPS_CAMPAIGN. Applies when a join-status category is specified. Send multiple values as a comma-separated query parameter. (optional)
+     * @param searchType Keyword matching mode. UNSPECIFIED or omission is allowed only without a keyword in the specified-category branch; the default search branch retains its name-search behavior. (optional)
+     * @return RequestConfig
+     */
+    fun searchSellerPartnerCampaignsRequestConfig(pageSize: kotlin.Long, pageToken: kotlin.String?, keyWord: kotlin.String?, campaignJoinStatusCategory: kotlin.String?, campaignOnlineStatus: kotlin.String?, campaignTypes: kotlin.collections.List<kotlin.String>?, searchType: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("page_size", listOf(pageSize.toString()))
+                if (pageToken != null) {
+                    put("page_token", listOf(pageToken.toString()))
+                }
+                if (keyWord != null) {
+                    put("key_word", listOf(keyWord.toString()))
+                }
+                if (campaignJoinStatusCategory != null) {
+                    put("campaign_join_status_category", listOf(campaignJoinStatusCategory.toString()))
+                }
+                if (campaignOnlineStatus != null) {
+                    put("campaign_online_status", listOf(campaignOnlineStatus.toString()))
+                }
+                if (campaignTypes != null) {
+                    put("campaign_types", toMultiValue(campaignTypes.toList(), "csv"))
+                }
+                if (searchType != null) {
+                    put("search_type", listOf(searchType.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/affiliate_seller/202611/partner_campaigns",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

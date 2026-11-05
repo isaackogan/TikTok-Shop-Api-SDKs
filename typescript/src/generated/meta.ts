@@ -697,6 +697,46 @@ export const OPERATIONS: readonly OperationMeta[] = [
     "requiresShopCipher": true
   },
   {
+    "operationId": "searchSellerPartnerCampaigns",
+    "tag": "Affiliate seller",
+    "group": "affiliateSeller",
+    "method": "get",
+    "path": "/affiliate_seller/202611/partner_campaigns",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getSellerPartnerCampaignDetail",
+    "tag": "Affiliate seller",
+    "group": "affiliateSeller",
+    "method": "get",
+    "path": "/affiliate_seller/202611/partner_campaigns/{campaign_id}",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getSellerPartnerCampaignCandidateProducts",
+    "tag": "Affiliate seller",
+    "group": "affiliateSeller",
+    "method": "get",
+    "path": "/affiliate_seller/202611/partner_campaigns/{campaign_id}/candidate_products",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getSellerPartnerCampaignRegisteredProducts",
+    "tag": "Affiliate seller",
+    "group": "affiliateSeller",
+    "method": "get",
+    "path": "/affiliate_seller/202611/partner_campaigns/{campaign_id}/products",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "registerSellerPartnerCampaignProducts",
+    "tag": "Affiliate seller",
+    "group": "affiliateSeller",
+    "method": "post",
+    "path": "/affiliate_seller/202611/partner_campaigns/{campaign_id}/products",
+    "requiresShopCipher": true
+  },
+  {
     "operationId": "getVideoPerformances",
     "tag": "Analytics",
     "group": "analytics",

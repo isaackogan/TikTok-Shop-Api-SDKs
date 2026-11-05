@@ -328,6 +328,7 @@ from .create_video_precheck_task_response_data import CreateVideoPrecheckTaskRes
 from .create_video_precheck_task_response_data_precheck import CreateVideoPrecheckTaskResponseDataPrecheck
 from .creator_deauthorization_webhook import CreatorDeauthorizationWebhook
 from .creator_deauthorization_webhook_data import CreatorDeauthorizationWebhookData
+from .creator_preference import CreatorPreference
 from .creator_search_sample_application_fulfillments_request import CreatorSearchSampleApplicationFulfillmentsRequest
 from .creator_search_sample_application_fulfillments_request_fulfillment_statuses_item import CreatorSearchSampleApplicationFulfillmentsRequestFulfillmentStatusesItem
 from .creator_search_sample_application_fulfillments_response import CreatorSearchSampleApplicationFulfillmentsResponse
@@ -1116,6 +1117,23 @@ from .get_seller_financial_transactions_response import GetSellerFinancialTransa
 from .get_seller_financial_transactions_response_data import GetSellerFinancialTransactionsResponseData
 from .get_seller_financial_transactions_response_data_withdrawal import GetSellerFinancialTransactionsResponseDataWithdrawal
 from .get_seller_financial_transactions_types_item import GetSellerFinancialTransactionsTypesItem
+from .get_seller_partner_campaign_candidate_products_response import GetSellerPartnerCampaignCandidateProductsResponse
+from .get_seller_partner_campaign_candidate_products_response_data import GetSellerPartnerCampaignCandidateProductsResponseData
+from .get_seller_partner_campaign_candidate_products_response_data_product_detail import GetSellerPartnerCampaignCandidateProductsResponseDataProductDetail
+from .get_seller_partner_campaign_candidate_products_response_data_product_detail_image import GetSellerPartnerCampaignCandidateProductsResponseDataProductDetailImage
+from .get_seller_partner_campaign_detail_response import GetSellerPartnerCampaignDetailResponse
+from .get_seller_partner_campaign_detail_response_data import GetSellerPartnerCampaignDetailResponseData
+from .get_seller_partner_campaign_detail_response_data_campaign_detail import GetSellerPartnerCampaignDetailResponseDataCampaignDetail
+from .get_seller_partner_campaign_detail_response_data_campaign_detail_campaign_statistic import GetSellerPartnerCampaignDetailResponseDataCampaignDetailCampaignStatistic
+from .get_seller_partner_campaign_detail_response_data_campaign_detail_invited_agency_detail import GetSellerPartnerCampaignDetailResponseDataCampaignDetailInvitedAgencyDetail
+from .get_seller_partner_campaign_detail_response_data_campaign_detail_seller_campaign_extra import GetSellerPartnerCampaignDetailResponseDataCampaignDetailSellerCampaignExtra
+from .get_seller_partner_campaign_detail_response_data_campaign_detail_seller_info import GetSellerPartnerCampaignDetailResponseDataCampaignDetailSellerInfo
+from .get_seller_partner_campaign_detail_response_data_campaign_detail_seller_info_image import GetSellerPartnerCampaignDetailResponseDataCampaignDetailSellerInfoImage
+from .get_seller_partner_campaign_registered_products_response import GetSellerPartnerCampaignRegisteredProductsResponse
+from .get_seller_partner_campaign_registered_products_response_data import GetSellerPartnerCampaignRegisteredProductsResponseData
+from .get_seller_partner_campaign_registered_products_response_data_product_detail import GetSellerPartnerCampaignRegisteredProductsResponseDataProductDetail
+from .get_seller_partner_campaign_registered_products_response_data_product_detail_product_statistic import GetSellerPartnerCampaignRegisteredProductsResponseDataProductDetailProductStatistic
+from .get_seller_partner_campaign_registered_products_response_data_product_detail_rejected_reason import GetSellerPartnerCampaignRegisteredProductsResponseDataProductDetailRejectedReason
 from .get_shipping_providers_response import GetShippingProvidersResponse
 from .get_shipping_providers_response_data import GetShippingProvidersResponseData
 from .get_shipping_template_availability_request import GetShippingTemplateAvailabilityRequest
@@ -1674,6 +1692,7 @@ from .predict_product_package_dimensions_and_weight_response_data_package_dimens
 from .predict_product_package_dimensions_and_weight_response_data_package_weight import PredictProductPackageDimensionsAndWeightResponseDataPackageWeight
 from .price import Price
 from .price_detail import PriceDetail
+from .price_range import PriceRange
 from .print_inbound_order_labels_request import PrintInboundOrderLabelsRequest
 from .print_inbound_order_labels_request_carton_label_format import PrintInboundOrderLabelsRequestCartonLabelFormat
 from .print_inbound_order_labels_request_print_items_item import PrintInboundOrderLabelsRequestPrintItemsItem
@@ -1781,6 +1800,10 @@ from .refund_amount import RefundAmount
 from .refund_success_webhook import RefundSuccessWebhook
 from .refund_success_webhook_data import RefundSuccessWebhookData
 from .refund_success_webhook_data_line_item import RefundSuccessWebhookDataLineItem
+from .register_seller_partner_campaign_products_request import RegisterSellerPartnerCampaignProductsRequest
+from .register_seller_partner_campaign_products_request_campaign_contact_info import RegisterSellerPartnerCampaignProductsRequestCampaignContactInfo
+from .register_seller_partner_campaign_products_response import RegisterSellerPartnerCampaignProductsResponse
+from .register_seller_partner_campaign_products_response_data import RegisterSellerPartnerCampaignProductsResponseData
 from .reject_cancellation_request import RejectCancellationRequest
 from .reject_cancellation_request_image import RejectCancellationRequestImage
 from .reject_cancellation_response import RejectCancellationResponse
@@ -2122,6 +2145,12 @@ from .search_seller_affiliate_orders_response_data_order_sku_estimated_cofunded_
 from .search_seller_affiliate_orders_response_data_order_sku_estimated_paid_commission import SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedPaidCommission
 from .search_seller_affiliate_orders_response_data_order_sku_estimated_paid_partner_commission import SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedPaidPartnerCommission
 from .search_seller_affiliate_orders_response_data_order_sku_estimated_paid_shop_ads_commission import SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedPaidShopAdsCommission
+from .search_seller_partner_campaigns_response import SearchSellerPartnerCampaignsResponse
+from .search_seller_partner_campaigns_response_data import SearchSellerPartnerCampaignsResponseData
+from .search_seller_partner_campaigns_response_data_campaign_detail import SearchSellerPartnerCampaignsResponseDataCampaignDetail
+from .search_seller_partner_campaigns_response_data_campaign_detail_campaign_statistic import SearchSellerPartnerCampaignsResponseDataCampaignDetailCampaignStatistic
+from .search_seller_partner_campaigns_response_data_campaign_detail_seller_campaign_extra import SearchSellerPartnerCampaignsResponseDataCampaignDetailSellerCampaignExtra
+from .search_seller_partner_campaigns_response_data_campaign_join_status_count import SearchSellerPartnerCampaignsResponseDataCampaignJoinStatusCount
 from .search_sessions_request import SearchSessionsRequest
 from .search_sessions_response import SearchSessionsResponse
 from .search_sessions_response_data import SearchSessionsResponseData
@@ -2290,6 +2319,7 @@ from .tax import Tax
 from .template import Template
 from .text_area import TextArea
 from .threshold import Threshold
+from .tier_commission_info import TierCommissionInfo
 from .tiktok_shop_gmv import TiktokShopGmv
 from .time import Time
 from .tokopedia_mirror_status_change_webhook import TokopediaMirrorStatusChangeWebhook
@@ -2785,6 +2815,7 @@ __all__ = (
     "CreateVideoPrecheckTaskResponseDataPrecheck",
     "CreatorDeauthorizationWebhook",
     "CreatorDeauthorizationWebhookData",
+    "CreatorPreference",
     "CreatorSearchSampleApplicationFulfillmentsRequest",
     "CreatorSearchSampleApplicationFulfillmentsRequestFulfillmentStatusesItem",
     "CreatorSearchSampleApplicationFulfillmentsResponse",
@@ -3573,6 +3604,23 @@ __all__ = (
     "GetSellerFinancialTransactionsResponseData",
     "GetSellerFinancialTransactionsResponseDataWithdrawal",
     "GetSellerFinancialTransactionsTypesItem",
+    "GetSellerPartnerCampaignCandidateProductsResponse",
+    "GetSellerPartnerCampaignCandidateProductsResponseData",
+    "GetSellerPartnerCampaignCandidateProductsResponseDataProductDetail",
+    "GetSellerPartnerCampaignCandidateProductsResponseDataProductDetailImage",
+    "GetSellerPartnerCampaignDetailResponse",
+    "GetSellerPartnerCampaignDetailResponseData",
+    "GetSellerPartnerCampaignDetailResponseDataCampaignDetail",
+    "GetSellerPartnerCampaignDetailResponseDataCampaignDetailCampaignStatistic",
+    "GetSellerPartnerCampaignDetailResponseDataCampaignDetailInvitedAgencyDetail",
+    "GetSellerPartnerCampaignDetailResponseDataCampaignDetailSellerCampaignExtra",
+    "GetSellerPartnerCampaignDetailResponseDataCampaignDetailSellerInfo",
+    "GetSellerPartnerCampaignDetailResponseDataCampaignDetailSellerInfoImage",
+    "GetSellerPartnerCampaignRegisteredProductsResponse",
+    "GetSellerPartnerCampaignRegisteredProductsResponseData",
+    "GetSellerPartnerCampaignRegisteredProductsResponseDataProductDetail",
+    "GetSellerPartnerCampaignRegisteredProductsResponseDataProductDetailProductStatistic",
+    "GetSellerPartnerCampaignRegisteredProductsResponseDataProductDetailRejectedReason",
     "GetShippingProvidersResponse",
     "GetShippingProvidersResponseData",
     "GetShippingTemplateAvailabilityRequest",
@@ -4131,6 +4179,7 @@ __all__ = (
     "PreSale",
     "Price",
     "PriceDetail",
+    "PriceRange",
     "PrintInboundOrderLabelsRequest",
     "PrintInboundOrderLabelsRequestCartonLabelFormat",
     "PrintInboundOrderLabelsRequestPrintItemsItem",
@@ -4238,6 +4287,10 @@ __all__ = (
     "RefundSuccessWebhook",
     "RefundSuccessWebhookData",
     "RefundSuccessWebhookDataLineItem",
+    "RegisterSellerPartnerCampaignProductsRequest",
+    "RegisterSellerPartnerCampaignProductsRequestCampaignContactInfo",
+    "RegisterSellerPartnerCampaignProductsResponse",
+    "RegisterSellerPartnerCampaignProductsResponseData",
     "RejectCancellationRequest",
     "RejectCancellationRequestImage",
     "RejectCancellationResponse",
@@ -4579,6 +4632,12 @@ __all__ = (
     "SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedPaidCommission",
     "SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedPaidPartnerCommission",
     "SearchSellerAffiliateOrdersResponseDataOrderSkuEstimatedPaidShopAdsCommission",
+    "SearchSellerPartnerCampaignsResponse",
+    "SearchSellerPartnerCampaignsResponseData",
+    "SearchSellerPartnerCampaignsResponseDataCampaignDetail",
+    "SearchSellerPartnerCampaignsResponseDataCampaignDetailCampaignStatistic",
+    "SearchSellerPartnerCampaignsResponseDataCampaignDetailSellerCampaignExtra",
+    "SearchSellerPartnerCampaignsResponseDataCampaignJoinStatusCount",
     "SearchSessionsRequest",
     "SearchSessionsResponse",
     "SearchSessionsResponseData",
@@ -4747,6 +4806,7 @@ __all__ = (
     "Template",
     "TextArea",
     "Threshold",
+    "TierCommissionInfo",
     "TiktokShopGmv",
     "Time",
     "TokopediaMirrorStatusChangeWebhook",

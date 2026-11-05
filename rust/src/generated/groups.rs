@@ -1238,6 +1238,102 @@ impl AffiliateSellerApi {
         .await
         .map_err(Error::from)
     }
+
+    /// Lists partner campaigns visible to the authorized shop. Use JOINED for Manage, NOT_JOINED for Discover, or CLOSED for Closed. An omitted category or UNSPECIFIED retains the existing default search behavior. Campaign type and online-status filters apply to the specified-category branch. Results do not provide a complete assessment of product or shop registration eligibility. Omit page_token for the first page and use next_page_token to continue, keeping filters and page_size unchanged. Only full pages within the first 10000 matching records are accessible; total_num remains the actual matching count. Optional fields vary by campaign type and query branch. Display text can contain user-authored content.
+    pub async fn search_seller_partner_campaigns(
+        &self,
+        page_size: i64,
+        page_token: Option<&str>,
+        key_word: Option<&str>,
+        campaign_join_status_category: Option<&str>,
+        campaign_online_status: Option<&str>,
+        campaign_types: Option<Vec<String>>,
+        search_type: Option<&str>,
+    ) -> Result<models::SearchSellerPartnerCampaignsResponse, Error> {
+        apis::affiliate_seller_api::search_seller_partner_campaigns(
+            &self.config,
+            page_size,
+            page_token,
+            key_word,
+            campaign_join_status_category,
+            campaign_online_status,
+            campaign_types,
+            search_type,
+        )
+        .await
+        .map_err(Error::from)
+    }
+
+    /// Returns the rules, registration period, campaign period, available statistics and applicable shop or agency summaries for a campaign visible to the authorized shop. can_register indicates the campaign registration-window state, not a guarantee of shop or product eligibility. is_registered reflects existing participation. Contact details and linked TikTok business accounts are not returned. Optional fields depend on campaign type and available data. Display text can contain user-authored content.
+    pub async fn get_seller_partner_campaign_detail(
+        &self,
+        campaign_id: &str,
+    ) -> Result<models::GetSellerPartnerCampaignDetailResponse, Error> {
+        apis::affiliate_seller_api::get_seller_partner_campaign_detail(&self.config, campaign_id)
+            .await
+            .map_err(Error::from)
+    }
+
+    /// Lists the authorized shop's live products as candidates for a partner campaign. is_under_governed and has_registered identify relevant restrictions; listing a product does not guarantee successful registration. Product prices and available Open Plan commission settings are included. Omit page_token for the first page; pass next_page_token for subsequent pages. page_size must be 20, 50 or 100. total_num is the total matching count. Optional properties may be absent when the corresponding data is unavailable.
+    pub async fn get_seller_partner_campaign_candidate_products(
+        &self,
+        campaign_id: &str,
+        page_size: i64,
+        product_search_key: &str,
+        page_token: Option<&str>,
+        key_word: Option<&str>,
+        category_id: Option<&str>,
+    ) -> Result<models::GetSellerPartnerCampaignCandidateProductsResponse, Error> {
+        apis::affiliate_seller_api::get_seller_partner_campaign_candidate_products(
+            &self.config,
+            campaign_id,
+            page_size,
+            product_search_key,
+            page_token,
+            key_word,
+            category_id,
+        )
+        .await
+        .map_err(Error::from)
+    }
+
+    /// Lists the authorized shop's product registrations for one partner campaign. product_status selects PENDING, ONGOING, REJECTED or CLOSED. Pending records await review; approved records become Ongoing; rejected records may permit resubmission when can_seller_re_register is true. Closed records are no longer active in the campaign. Omit page_token for the first page; pass next_page_token for subsequent pages. page_size must be 10, 20, 50 or 100. Rejection text is for human display and may be absent. Optional fields vary by status and available source data.
+    pub async fn get_seller_partner_campaign_registered_products(
+        &self,
+        campaign_id: &str,
+        page_size: i64,
+        product_search_key: &str,
+        product_status: &str,
+        page_token: Option<&str>,
+        key_word: Option<&str>,
+    ) -> Result<models::GetSellerPartnerCampaignRegisteredProductsResponse, Error> {
+        apis::affiliate_seller_api::get_seller_partner_campaign_registered_products(
+            &self.config,
+            campaign_id,
+            page_size,
+            product_search_key,
+            product_status,
+            page_token,
+            key_word,
+        )
+        .await
+        .map_err(Error::from)
+    }
+
+    /// Submits 1 to 200 products belonging to the authorized shop to one partner campaign. The campaign registration window, shop eligibility, product ownership and applicable commission rules are checked. Commission values use percentage multiplied by 100: 1500 means 15%. Provide an authorized contact entry of type EMAIL; type WHATSAPP also requires region_code. Other contact types are not supported. The same sample_quota applies to each submitted product. Ads-commission map keys must occur in product_ids. A successful response has data: {}; it does not return per-product results. Query registered products to inspect resulting status. No idempotency-key guarantee is provided; check the registration records before retrying an ambiguous submission.
+    pub async fn register_seller_partner_campaign_products(
+        &self,
+        campaign_id: &str,
+        register_seller_partner_campaign_products_request: models::RegisterSellerPartnerCampaignProductsRequest,
+    ) -> Result<models::RegisterSellerPartnerCampaignProductsResponse, Error> {
+        apis::affiliate_seller_api::register_seller_partner_campaign_products(
+            &self.config,
+            campaign_id,
+            register_seller_partner_campaign_products_request,
+        )
+        .await
+        .map_err(Error::from)
+    }
 }
 
 impl fmt::Debug for AffiliateSellerApi {

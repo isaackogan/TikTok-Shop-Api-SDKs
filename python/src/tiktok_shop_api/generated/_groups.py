@@ -294,6 +294,9 @@ if TYPE_CHECKING:
     from .models.get_return_records_response import GetReturnRecordsResponse
     from .models.get_seller_financial_transactions_response import GetSellerFinancialTransactionsResponse
     from .models.get_seller_financial_transactions_types_item import GetSellerFinancialTransactionsTypesItem
+    from .models.get_seller_partner_campaign_candidate_products_response import GetSellerPartnerCampaignCandidateProductsResponse
+    from .models.get_seller_partner_campaign_detail_response import GetSellerPartnerCampaignDetailResponse
+    from .models.get_seller_partner_campaign_registered_products_response import GetSellerPartnerCampaignRegisteredProductsResponse
     from .models.get_shipping_providers_response import GetShippingProvidersResponse
     from .models.get_shipping_template_availability_request import GetShippingTemplateAvailabilityRequest
     from .models.get_shipping_template_availability_response import GetShippingTemplateAvailabilityResponse
@@ -436,6 +439,8 @@ if TYPE_CHECKING:
     from .models.recommend_required_product_properties_response import RecommendRequiredProductPropertiesResponse
     from .models.recover_products_request import RecoverProductsRequest
     from .models.recover_products_response import RecoverProductsResponse
+    from .models.register_seller_partner_campaign_products_request import RegisterSellerPartnerCampaignProductsRequest
+    from .models.register_seller_partner_campaign_products_response import RegisterSellerPartnerCampaignProductsResponse
     from .models.reject_cancellation_request import RejectCancellationRequest
     from .models.reject_cancellation_response import RejectCancellationResponse
     from .models.reject_return_request import RejectReturnRequest
@@ -531,6 +536,7 @@ if TYPE_CHECKING:
     from .models.search_sample_applications_response import SearchSampleApplicationsResponse
     from .models.search_seller_affiliate_orders_request import SearchSellerAffiliateOrdersRequest
     from .models.search_seller_affiliate_orders_response import SearchSellerAffiliateOrdersResponse
+    from .models.search_seller_partner_campaigns_response import SearchSellerPartnerCampaignsResponse
     from .models.search_sessions_request import SearchSessionsRequest
     from .models.search_sessions_response import SearchSessionsResponse
     from .models.search_size_charts_locales_item import SearchSizeChartsLocalesItem
@@ -3137,6 +3143,100 @@ class AffiliateSellerApi(SyncGroup):
 
         return self._run(_op.sync_detailed, body=body)
 
+    def get_seller_partner_campaign_candidate_products(
+        self,
+        campaign_id: str,
+        *,
+        page_size: int,
+        page_token: str | Unset = UNSET,
+        key_word: str | Unset = UNSET,
+        category_id: str | Unset = UNSET,
+        product_search_key: str,
+    ) -> GetSellerPartnerCampaignCandidateProductsResponse | None:
+        """Get Seller Partner Campaign Candidate Products
+
+         Lists the authorized shop's live products as candidates for a partner campaign. is_under_governed
+        and has_registered identify relevant restrictions; listing a product does not guarantee successful
+        registration. Product prices and available Open Plan commission settings are included. Omit
+        page_token for the first page; pass next_page_token for subsequent pages. page_size must be 20, 50
+        or 100. total_num is the total matching count. Optional properties may be absent when the
+        corresponding data is unavailable.
+
+        Args:
+            campaign_id (str):
+            page_size (int):
+            page_token (str | Unset):
+            key_word (str | Unset):
+            category_id (str | Unset):
+            product_search_key (str):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.affiliate_seller import get_seller_partner_campaign_candidate_products as _op
+
+        return self._run(_op.sync_detailed, campaign_id=campaign_id, page_size=page_size, page_token=page_token, key_word=key_word, category_id=category_id, product_search_key=product_search_key)
+
+    def get_seller_partner_campaign_detail(
+        self,
+        campaign_id: str,
+    ) -> GetSellerPartnerCampaignDetailResponse | None:
+        """Get Seller Partner Campaign Detail
+
+         Returns the rules, registration period, campaign period, available statistics and applicable shop or
+        agency summaries for a campaign visible to the authorized shop. can_register indicates the campaign
+        registration-window state, not a guarantee of shop or product eligibility. is_registered reflects
+        existing participation. Contact details and linked TikTok business accounts are not returned.
+        Optional fields depend on campaign type and available data. Display text can contain user-authored
+        content.
+
+        Args:
+            campaign_id (str):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.affiliate_seller import get_seller_partner_campaign_detail as _op
+
+        return self._run(_op.sync_detailed, campaign_id=campaign_id)
+
+    def get_seller_partner_campaign_registered_products(
+        self,
+        campaign_id: str,
+        *,
+        page_size: int,
+        page_token: str | Unset = UNSET,
+        key_word: str | Unset = UNSET,
+        product_search_key: str,
+        product_status: str,
+    ) -> GetSellerPartnerCampaignRegisteredProductsResponse | None:
+        """Get Seller Partner Campaign Registered Products
+
+         Lists the authorized shop's product registrations for one partner campaign. product_status selects
+        PENDING, ONGOING, REJECTED or CLOSED. Pending records await review; approved records become Ongoing;
+        rejected records may permit resubmission when can_seller_re_register is true. Closed records are no
+        longer active in the campaign. Omit page_token for the first page; pass next_page_token for
+        subsequent pages. page_size must be 10, 20, 50 or 100. Rejection text is for human display and may
+        be absent. Optional fields vary by status and available source data.
+
+        Args:
+            campaign_id (str):
+            page_size (int):
+            page_token (str | Unset):
+            key_word (str | Unset):
+            product_search_key (str):
+            product_status (str):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.affiliate_seller import get_seller_partner_campaign_registered_products as _op
+
+        return self._run(_op.sync_detailed, campaign_id=campaign_id, page_size=page_size, page_token=page_token, key_word=key_word, product_search_key=product_search_key, product_status=product_status)
+
     def get_weekly_creator_outreach_quota(
         self,
     ) -> GetWeeklyCreatorOutreachQuotaResponse | None:
@@ -3235,6 +3335,35 @@ class AffiliateSellerApi(SyncGroup):
         from .api.affiliate_seller import query_target_collaboration_detail as _op
 
         return self._run(_op.sync_detailed, target_collaboration_id=target_collaboration_id)
+
+    def register_seller_partner_campaign_products(
+        self,
+        campaign_id: str,
+        *,
+        body: RegisterSellerPartnerCampaignProductsRequest,
+    ) -> RegisterSellerPartnerCampaignProductsResponse | None:
+        """Register Seller Partner Campaign Products
+
+         Submits 1 to 200 products belonging to the authorized shop to one partner campaign. The campaign
+        registration window, shop eligibility, product ownership and applicable commission rules are
+        checked. Commission values use percentage multiplied by 100: 1500 means 15%. Provide an authorized
+        contact entry of type EMAIL; type WHATSAPP also requires region_code. Other contact types are not
+        supported. The same sample_quota applies to each submitted product. Ads-commission map keys must
+        occur in product_ids. A successful response has data: {}; it does not return per-product results.
+        Query registered products to inspect resulting status. No idempotency-key guarantee is provided;
+        check the registration records before retrying an ambiguous submission.
+
+        Args:
+            campaign_id (str):
+            body (RegisterSellerPartnerCampaignProductsRequest):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.affiliate_seller import register_seller_partner_campaign_products as _op
+
+        return self._run(_op.sync_detailed, campaign_id=campaign_id, body=body)
 
     def remove_creator_from_open_collaboration_product(
         self,
@@ -3485,6 +3614,45 @@ class AffiliateSellerApi(SyncGroup):
         from .api.affiliate_seller import search_seller_affiliate_orders as _op
 
         return self._run(_op.sync_detailed, body=body, page_token=page_token, page_size=page_size)
+
+    def search_seller_partner_campaigns(
+        self,
+        *,
+        page_size: int,
+        page_token: str | Unset = UNSET,
+        key_word: str | Unset = UNSET,
+        campaign_join_status_category: str | Unset = UNSET,
+        campaign_online_status: str | Unset = UNSET,
+        campaign_types: list[str] | Unset = UNSET,
+        search_type: str | Unset = UNSET,
+    ) -> SearchSellerPartnerCampaignsResponse | None:
+        """Search Seller Partner Campaigns
+
+         Lists partner campaigns visible to the authorized shop. Use JOINED for Manage, NOT_JOINED for
+        Discover, or CLOSED for Closed. An omitted category or UNSPECIFIED retains the existing default
+        search behavior. Campaign type and online-status filters apply to the specified-category branch.
+        Results do not provide a complete assessment of product or shop registration eligibility. Omit
+        page_token for the first page and use next_page_token to continue, keeping filters and page_size
+        unchanged. Only full pages within the first 10000 matching records are accessible; total_num remains
+        the actual matching count. Optional fields vary by campaign type and query branch. Display text can
+        contain user-authored content.
+
+        Args:
+            page_size (int):
+            page_token (str | Unset):
+            key_word (str | Unset):
+            campaign_join_status_category (str | Unset):
+            campaign_online_status (str | Unset):
+            campaign_types (list[str] | Unset):
+            search_type (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.affiliate_seller import search_seller_partner_campaigns as _op
+
+        return self._run(_op.sync_detailed, page_size=page_size, page_token=page_token, key_word=key_word, campaign_join_status_category=campaign_join_status_category, campaign_online_status=campaign_online_status, campaign_types=campaign_types, search_type=search_type)
 
     def search_target_collaborations(
         self,
@@ -4142,6 +4310,100 @@ class AsyncAffiliateSellerApi(AsyncGroup):
 
         return await self._run(_op.asyncio_detailed, body=body)
 
+    async def get_seller_partner_campaign_candidate_products(
+        self,
+        campaign_id: str,
+        *,
+        page_size: int,
+        page_token: str | Unset = UNSET,
+        key_word: str | Unset = UNSET,
+        category_id: str | Unset = UNSET,
+        product_search_key: str,
+    ) -> GetSellerPartnerCampaignCandidateProductsResponse | None:
+        """Get Seller Partner Campaign Candidate Products
+
+         Lists the authorized shop's live products as candidates for a partner campaign. is_under_governed
+        and has_registered identify relevant restrictions; listing a product does not guarantee successful
+        registration. Product prices and available Open Plan commission settings are included. Omit
+        page_token for the first page; pass next_page_token for subsequent pages. page_size must be 20, 50
+        or 100. total_num is the total matching count. Optional properties may be absent when the
+        corresponding data is unavailable.
+
+        Args:
+            campaign_id (str):
+            page_size (int):
+            page_token (str | Unset):
+            key_word (str | Unset):
+            category_id (str | Unset):
+            product_search_key (str):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.affiliate_seller import get_seller_partner_campaign_candidate_products as _op
+
+        return await self._run(_op.asyncio_detailed, campaign_id=campaign_id, page_size=page_size, page_token=page_token, key_word=key_word, category_id=category_id, product_search_key=product_search_key)
+
+    async def get_seller_partner_campaign_detail(
+        self,
+        campaign_id: str,
+    ) -> GetSellerPartnerCampaignDetailResponse | None:
+        """Get Seller Partner Campaign Detail
+
+         Returns the rules, registration period, campaign period, available statistics and applicable shop or
+        agency summaries for a campaign visible to the authorized shop. can_register indicates the campaign
+        registration-window state, not a guarantee of shop or product eligibility. is_registered reflects
+        existing participation. Contact details and linked TikTok business accounts are not returned.
+        Optional fields depend on campaign type and available data. Display text can contain user-authored
+        content.
+
+        Args:
+            campaign_id (str):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.affiliate_seller import get_seller_partner_campaign_detail as _op
+
+        return await self._run(_op.asyncio_detailed, campaign_id=campaign_id)
+
+    async def get_seller_partner_campaign_registered_products(
+        self,
+        campaign_id: str,
+        *,
+        page_size: int,
+        page_token: str | Unset = UNSET,
+        key_word: str | Unset = UNSET,
+        product_search_key: str,
+        product_status: str,
+    ) -> GetSellerPartnerCampaignRegisteredProductsResponse | None:
+        """Get Seller Partner Campaign Registered Products
+
+         Lists the authorized shop's product registrations for one partner campaign. product_status selects
+        PENDING, ONGOING, REJECTED or CLOSED. Pending records await review; approved records become Ongoing;
+        rejected records may permit resubmission when can_seller_re_register is true. Closed records are no
+        longer active in the campaign. Omit page_token for the first page; pass next_page_token for
+        subsequent pages. page_size must be 10, 20, 50 or 100. Rejection text is for human display and may
+        be absent. Optional fields vary by status and available source data.
+
+        Args:
+            campaign_id (str):
+            page_size (int):
+            page_token (str | Unset):
+            key_word (str | Unset):
+            product_search_key (str):
+            product_status (str):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.affiliate_seller import get_seller_partner_campaign_registered_products as _op
+
+        return await self._run(_op.asyncio_detailed, campaign_id=campaign_id, page_size=page_size, page_token=page_token, key_word=key_word, product_search_key=product_search_key, product_status=product_status)
+
     async def get_weekly_creator_outreach_quota(
         self,
     ) -> GetWeeklyCreatorOutreachQuotaResponse | None:
@@ -4240,6 +4502,35 @@ class AsyncAffiliateSellerApi(AsyncGroup):
         from .api.affiliate_seller import query_target_collaboration_detail as _op
 
         return await self._run(_op.asyncio_detailed, target_collaboration_id=target_collaboration_id)
+
+    async def register_seller_partner_campaign_products(
+        self,
+        campaign_id: str,
+        *,
+        body: RegisterSellerPartnerCampaignProductsRequest,
+    ) -> RegisterSellerPartnerCampaignProductsResponse | None:
+        """Register Seller Partner Campaign Products
+
+         Submits 1 to 200 products belonging to the authorized shop to one partner campaign. The campaign
+        registration window, shop eligibility, product ownership and applicable commission rules are
+        checked. Commission values use percentage multiplied by 100: 1500 means 15%. Provide an authorized
+        contact entry of type EMAIL; type WHATSAPP also requires region_code. Other contact types are not
+        supported. The same sample_quota applies to each submitted product. Ads-commission map keys must
+        occur in product_ids. A successful response has data: {}; it does not return per-product results.
+        Query registered products to inspect resulting status. No idempotency-key guarantee is provided;
+        check the registration records before retrying an ambiguous submission.
+
+        Args:
+            campaign_id (str):
+            body (RegisterSellerPartnerCampaignProductsRequest):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.affiliate_seller import register_seller_partner_campaign_products as _op
+
+        return await self._run(_op.asyncio_detailed, campaign_id=campaign_id, body=body)
 
     async def remove_creator_from_open_collaboration_product(
         self,
@@ -4490,6 +4781,45 @@ class AsyncAffiliateSellerApi(AsyncGroup):
         from .api.affiliate_seller import search_seller_affiliate_orders as _op
 
         return await self._run(_op.asyncio_detailed, body=body, page_token=page_token, page_size=page_size)
+
+    async def search_seller_partner_campaigns(
+        self,
+        *,
+        page_size: int,
+        page_token: str | Unset = UNSET,
+        key_word: str | Unset = UNSET,
+        campaign_join_status_category: str | Unset = UNSET,
+        campaign_online_status: str | Unset = UNSET,
+        campaign_types: list[str] | Unset = UNSET,
+        search_type: str | Unset = UNSET,
+    ) -> SearchSellerPartnerCampaignsResponse | None:
+        """Search Seller Partner Campaigns
+
+         Lists partner campaigns visible to the authorized shop. Use JOINED for Manage, NOT_JOINED for
+        Discover, or CLOSED for Closed. An omitted category or UNSPECIFIED retains the existing default
+        search behavior. Campaign type and online-status filters apply to the specified-category branch.
+        Results do not provide a complete assessment of product or shop registration eligibility. Omit
+        page_token for the first page and use next_page_token to continue, keeping filters and page_size
+        unchanged. Only full pages within the first 10000 matching records are accessible; total_num remains
+        the actual matching count. Optional fields vary by campaign type and query branch. Display text can
+        contain user-authored content.
+
+        Args:
+            page_size (int):
+            page_token (str | Unset):
+            key_word (str | Unset):
+            campaign_join_status_category (str | Unset):
+            campaign_online_status (str | Unset):
+            campaign_types (list[str] | Unset):
+            search_type (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.affiliate_seller import search_seller_partner_campaigns as _op
+
+        return await self._run(_op.asyncio_detailed, page_size=page_size, page_token=page_token, key_word=key_word, campaign_join_status_category=campaign_join_status_category, campaign_online_status=campaign_online_status, campaign_types=campaign_types, search_type=search_type)
 
     async def search_target_collaborations(
         self,
