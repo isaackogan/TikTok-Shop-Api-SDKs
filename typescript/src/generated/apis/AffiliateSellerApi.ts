@@ -89,11 +89,6 @@ import {
     EditOpenCollaborationSettingsResponseToJSON,
 } from '../models/EditOpenCollaborationSettingsResponse';
 import {
-    type GenerateAffiliateProductPromotionLinkResponse,
-    GenerateAffiliateProductPromotionLinkResponseFromJSON,
-    GenerateAffiliateProductPromotionLinkResponseToJSON,
-} from '../models/GenerateAffiliateProductPromotionLinkResponse';
-import {
     type GenerateTargetCollaborationLinkResponse,
     GenerateTargetCollaborationLinkResponseFromJSON,
     GenerateTargetCollaborationLinkResponseToJSON,
@@ -424,11 +419,6 @@ export interface EditOpenCollaborationSampleRuleOperationRequest {
 
 export interface EditOpenCollaborationSettingsOperationRequest {
     editOpenCollaborationSettingsRequest?: EditOpenCollaborationSettingsRequest;
-}
-
-export interface GenerateAffiliateProductPromotionLinkRequest {
-    productId: string;
-    body?: object;
 }
 
 export interface GenerateTargetCollaborationLinkRequest {
@@ -1040,60 +1030,6 @@ export class AffiliateSellerApi extends runtime.BaseAPI {
      */
     async editOpenCollaborationSettings(requestParameters: EditOpenCollaborationSettingsOperationRequest = {}, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<EditOpenCollaborationSettingsResponse> {
         const response = await this.editOpenCollaborationSettingsRaw(requestParameters, initOverrides);
-        return await response.value();
-    }
-
-    /**
-     * Creates request options for generateAffiliateProductPromotionLink without sending the request
-     */
-    async generateAffiliateProductPromotionLinkRequestOpts(requestParameters: GenerateAffiliateProductPromotionLinkRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['productId'] == null) {
-            throw new runtime.RequiredError(
-                'productId',
-                'Required parameter "productId" was null or undefined when calling generateAffiliateProductPromotionLink().'
-            );
-        }
-
-        const queryParameters: any = {};
-
-        const headerParameters: runtime.HTTPHeaders = {};
-
-        headerParameters['Content-Type'] = 'application/json';
-
-        if (this.configuration && this.configuration.apiKey) {
-            headerParameters["x-tts-access-token"] = await this.configuration.apiKey("x-tts-access-token"); // accessToken authentication
-        }
-
-
-        let urlPath = `/affiliate_seller/202405/products/{product_id}/promotion_link/generate`;
-        urlPath = urlPath.replace('{product_id}', encodeURIComponent(String(requestParameters['productId'])));
-
-        return {
-            path: urlPath,
-            method: 'POST',
-            headers: headerParameters,
-            query: queryParameters,
-            body: requestParameters['body'] as any,
-        };
-    }
-
-    /**
-     * Partner developers acting on behalf of sellers use this API to generate an affiliate-exclusive promotion link for a specific open-collaboration product, identified by `product_id`, in the TikTok Shop Affiliate Product Marketplace.  The partner developer can distribute the generated link to creators. A creator can use the link to add the product to the creator\'s showcase. If a creator adds the product to a showcase through this link, subsequent consumer purchases can be attributed to the partner.
-     * Generate Affiliate Product Promotion Link
-     */
-    async generateAffiliateProductPromotionLinkRaw(requestParameters: GenerateAffiliateProductPromotionLinkRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GenerateAffiliateProductPromotionLinkResponse>> {
-        const requestOptions = await this.generateAffiliateProductPromotionLinkRequestOpts(requestParameters);
-        const response = await this.request(requestOptions, initOverrides);
-
-        return new runtime.JSONApiResponse(response, (jsonValue) => GenerateAffiliateProductPromotionLinkResponseFromJSON(jsonValue));
-    }
-
-    /**
-     * Partner developers acting on behalf of sellers use this API to generate an affiliate-exclusive promotion link for a specific open-collaboration product, identified by `product_id`, in the TikTok Shop Affiliate Product Marketplace.  The partner developer can distribute the generated link to creators. A creator can use the link to add the product to the creator\'s showcase. If a creator adds the product to a showcase through this link, subsequent consumer purchases can be attributed to the partner.
-     * Generate Affiliate Product Promotion Link
-     */
-    async generateAffiliateProductPromotionLink(requestParameters: GenerateAffiliateProductPromotionLinkRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GenerateAffiliateProductPromotionLinkResponse> {
-        const response = await this.generateAffiliateProductPromotionLinkRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

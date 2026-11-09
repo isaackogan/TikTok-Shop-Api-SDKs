@@ -42,7 +42,6 @@ import com.isaackogan.tiktok.shop.generated.models.EditOpenCollaborationSampleRu
 import com.isaackogan.tiktok.shop.generated.models.EditOpenCollaborationSampleRuleResponse
 import com.isaackogan.tiktok.shop.generated.models.EditOpenCollaborationSettingsRequest
 import com.isaackogan.tiktok.shop.generated.models.EditOpenCollaborationSettingsResponse
-import com.isaackogan.tiktok.shop.generated.models.GenerateAffiliateProductPromotionLinkResponse
 import com.isaackogan.tiktok.shop.generated.models.GenerateTargetCollaborationLinkResponse
 import com.isaackogan.tiktok.shop.generated.models.GetCompassTaskListResponse
 import com.isaackogan.tiktok.shop.generated.models.GetConversationListRequest
@@ -712,83 +711,6 @@ open class AffiliateSellerApi(basePath: kotlin.String = defaultBasePath, client:
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/affiliate_seller/202405/open_collaboration_settings",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = true,
-            body = localVariableBody
-        )
-    }
-
-    /**
-     * POST /affiliate_seller/202405/products/{product_id}/promotion_link/generate
-     * Generate Affiliate Product Promotion Link
-     * Partner developers acting on behalf of sellers use this API to generate an affiliate-exclusive promotion link for a specific open-collaboration product, identified by &#x60;product_id&#x60;, in the TikTok Shop Affiliate Product Marketplace.  The partner developer can distribute the generated link to creators. A creator can use the link to add the product to the creator&#39;s showcase. If a creator adds the product to a showcase through this link, subsequent consumer purchases can be attributed to the partner.
-     * @param productId The product identifier.
-     * @param body  (optional)
-     * @return GenerateAffiliateProductPromotionLinkResponse
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     * @throws UnsupportedOperationException If the API returns an informational or redirection response
-     * @throws ClientException If the API returns a client error response
-     * @throws ServerException If the API returns a server error response
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
-    fun generateAffiliateProductPromotionLink(productId: kotlin.String, body: kotlin.Any? = null) : GenerateAffiliateProductPromotionLinkResponse {
-        val localVarResponse = generateAffiliateProductPromotionLinkWithHttpInfo(productId = productId, body = body)
-
-        return when (localVarResponse.responseType) {
-            ResponseType.Success -> (localVarResponse as Success<*>).data as GenerateAffiliateProductPromotionLinkResponse
-            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
-            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
-            ResponseType.ClientError -> {
-                val localVarError = localVarResponse as ClientError<*>
-                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
-            }
-            ResponseType.ServerError -> {
-                val localVarError = localVarResponse as ServerError<*>
-                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
-            }
-        }
-    }
-
-    /**
-     * POST /affiliate_seller/202405/products/{product_id}/promotion_link/generate
-     * Generate Affiliate Product Promotion Link
-     * Partner developers acting on behalf of sellers use this API to generate an affiliate-exclusive promotion link for a specific open-collaboration product, identified by &#x60;product_id&#x60;, in the TikTok Shop Affiliate Product Marketplace.  The partner developer can distribute the generated link to creators. A creator can use the link to add the product to the creator&#39;s showcase. If a creator adds the product to a showcase through this link, subsequent consumer purchases can be attributed to the partner.
-     * @param productId The product identifier.
-     * @param body  (optional)
-     * @return ApiResponse<GenerateAffiliateProductPromotionLinkResponse?>
-     * @throws IllegalStateException If the request is not correctly configured
-     * @throws IOException Rethrows the OkHttp execute method exception
-     */
-    @Suppress("UNCHECKED_CAST")
-    @Throws(IllegalStateException::class, IOException::class)
-    fun generateAffiliateProductPromotionLinkWithHttpInfo(productId: kotlin.String, body: kotlin.Any?) : ApiResponse<GenerateAffiliateProductPromotionLinkResponse?> {
-        val localVariableConfig = generateAffiliateProductPromotionLinkRequestConfig(productId = productId, body = body)
-
-        return request<kotlin.Any, GenerateAffiliateProductPromotionLinkResponse>(
-            localVariableConfig
-        )
-    }
-
-    /**
-     * To obtain the request config of the operation generateAffiliateProductPromotionLink
-     *
-     * @param productId The product identifier.
-     * @param body  (optional)
-     * @return RequestConfig
-     */
-    fun generateAffiliateProductPromotionLinkRequestConfig(productId: kotlin.String, body: kotlin.Any?) : RequestConfig<kotlin.Any> {
-        val localVariableBody = body
-        val localVariableQuery: MultiValueMap = mutableMapOf()
-        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
-        localVariableHeaders["Content-Type"] = "application/json"
-        localVariableHeaders["Accept"] = "application/json"
-
-        return RequestConfig(
-            method = RequestMethod.POST,
-            path = "/affiliate_seller/202405/products/{product_id}/promotion_link/generate".replace("{"+"product_id"+"}", encodeURIComponent(productId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

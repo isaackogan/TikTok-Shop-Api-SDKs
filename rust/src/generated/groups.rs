@@ -715,17 +715,6 @@ impl AffiliateSellerApi {
         .map_err(Error::from)
     }
 
-    /// Partner developers acting on behalf of sellers use this API to generate an affiliate-exclusive promotion link for a specific open-collaboration product, identified by `product_id`, in the TikTok Shop Affiliate Product Marketplace.  The partner developer can distribute the generated link to creators. A creator can use the link to add the product to the creator's showcase. If a creator adds the product to a showcase through this link, subsequent consumer purchases can be attributed to the partner.
-    pub async fn generate_affiliate_product_promotion_link(
-        &self,
-        product_id: &str,
-        body: Option<serde_json::Value>,
-    ) -> Result<models::GenerateAffiliateProductPromotionLinkResponse, Error> {
-        apis::affiliate_seller_api::generate_affiliate_product_promotion_link(&self.config, product_id, body)
-            .await
-            .map_err(Error::from)
-    }
-
     /// Get the open collaboration settings, including auto add settings.
     pub async fn get_open_collaboration_settings(&self) -> Result<models::GetOpenCollaborationSettingsResponse, Error> {
         apis::affiliate_seller_api::get_open_collaboration_settings(&self.config).await.map_err(Error::from)

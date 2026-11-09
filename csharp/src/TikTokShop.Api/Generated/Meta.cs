@@ -65,7 +65,6 @@ public static class Meta
         new("SearchTAPAffiliateOrders", "AffiliatePartner", "POST", "/affiliate_partner/202603/orders/search", false),
         new("EditOpenCollaborationSettings", "AffiliateSeller", "POST", "/affiliate_seller/202405/open_collaboration_settings", true),
         new("SellerSearchOpenCollaborationProducts", "AffiliateSeller", "POST", "/affiliate_seller/202405/open_collaborations/products/search", true),
-        new("GenerateAffiliateProductPromotionLink", "AffiliateSeller", "POST", "/affiliate_seller/202405/products/{product_id}/promotion_link/generate", true),
         new("GetOpenCollaborationSettings", "AffiliateSeller", "GET", "/affiliate_seller/202409/open_collaboration_settings", true),
         new("RemoveOpenCollaboration", "AffiliateSeller", "DELETE", "/affiliate_seller/202409/open_collaborations/products/{product_id}", true),
         new("SearchSampleApplicationFulfillments", "AffiliateSeller", "POST", "/affiliate_seller/202409/sample_applications/{application_id}/fulfillments/search", true),

@@ -108,7 +108,6 @@ public final class Meta {
             new Operation("searchTAPAffiliateOrders", "Affiliate partner", "affiliatePartner", "AffiliatePartnerApi", "POST", "/affiliate_partner/202603/orders/search", false),
             new Operation("editOpenCollaborationSettings", "Affiliate seller", "affiliateSeller", "AffiliateSellerApi", "POST", "/affiliate_seller/202405/open_collaboration_settings", true),
             new Operation("sellerSearchOpenCollaborationProducts", "Affiliate seller", "affiliateSeller", "AffiliateSellerApi", "POST", "/affiliate_seller/202405/open_collaborations/products/search", true),
-            new Operation("generateAffiliateProductPromotionLink", "Affiliate seller", "affiliateSeller", "AffiliateSellerApi", "POST", "/affiliate_seller/202405/products/{product_id}/promotion_link/generate", true),
             new Operation("getOpenCollaborationSettings", "Affiliate seller", "affiliateSeller", "AffiliateSellerApi", "GET", "/affiliate_seller/202409/open_collaboration_settings", true),
             new Operation("removeOpenCollaboration", "Affiliate seller", "affiliateSeller", "AffiliateSellerApi", "DELETE", "/affiliate_seller/202409/open_collaborations/products/{product_id}", true),
             new Operation("searchSampleApplicationFulfillments", "Affiliate seller", "affiliateSeller", "AffiliateSellerApi", "POST", "/affiliate_seller/202409/sample_applications/{application_id}/fulfillments/search", true),

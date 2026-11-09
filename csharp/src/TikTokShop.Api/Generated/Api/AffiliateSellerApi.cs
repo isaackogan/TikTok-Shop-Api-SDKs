@@ -196,29 +196,6 @@ namespace TikTokShop.Api.Generated.Api
         /// <returns>ApiResponse of EditOpenCollaborationSettingsResponse</returns>
         ApiResponse<EditOpenCollaborationSettingsResponse> EditOpenCollaborationSettingsWithHttpInfo(EditOpenCollaborationSettingsRequest? editOpenCollaborationSettingsRequest = default);
         /// <summary>
-        /// Generate Affiliate Product Promotion Link
-        /// </summary>
-        /// <remarks>
-        /// Partner developers acting on behalf of sellers use this API to generate an affiliate-exclusive promotion link for a specific open-collaboration product, identified by &#x60;product_id&#x60;, in the TikTok Shop Affiliate Product Marketplace.  The partner developer can distribute the generated link to creators. A creator can use the link to add the product to the creator&#39;s showcase. If a creator adds the product to a showcase through this link, subsequent consumer purchases can be attributed to the partner.
-        /// </remarks>
-        /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="productId">The product identifier.</param>
-        /// <param name="body"> (optional)</param>
-        /// <returns>GenerateAffiliateProductPromotionLinkResponse</returns>
-        GenerateAffiliateProductPromotionLinkResponse GenerateAffiliateProductPromotionLink(string productId, Object? body = default);
-
-        /// <summary>
-        /// Generate Affiliate Product Promotion Link
-        /// </summary>
-        /// <remarks>
-        /// Partner developers acting on behalf of sellers use this API to generate an affiliate-exclusive promotion link for a specific open-collaboration product, identified by &#x60;product_id&#x60;, in the TikTok Shop Affiliate Product Marketplace.  The partner developer can distribute the generated link to creators. A creator can use the link to add the product to the creator&#39;s showcase. If a creator adds the product to a showcase through this link, subsequent consumer purchases can be attributed to the partner.
-        /// </remarks>
-        /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="productId">The product identifier.</param>
-        /// <param name="body"> (optional)</param>
-        /// <returns>ApiResponse of GenerateAffiliateProductPromotionLinkResponse</returns>
-        ApiResponse<GenerateAffiliateProductPromotionLinkResponse> GenerateAffiliateProductPromotionLinkWithHttpInfo(string productId, Object? body = default);
-        /// <summary>
         /// Generate Target Collaboration Link
         /// </summary>
         /// <remarks>
@@ -1353,31 +1330,6 @@ namespace TikTokShop.Api.Generated.Api
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (EditOpenCollaborationSettingsResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<EditOpenCollaborationSettingsResponse>> EditOpenCollaborationSettingsWithHttpInfoAsync(EditOpenCollaborationSettingsRequest? editOpenCollaborationSettingsRequest = default, System.Threading.CancellationToken cancellationToken = default);
-        /// <summary>
-        /// Generate Affiliate Product Promotion Link
-        /// </summary>
-        /// <remarks>
-        /// Partner developers acting on behalf of sellers use this API to generate an affiliate-exclusive promotion link for a specific open-collaboration product, identified by &#x60;product_id&#x60;, in the TikTok Shop Affiliate Product Marketplace.  The partner developer can distribute the generated link to creators. A creator can use the link to add the product to the creator&#39;s showcase. If a creator adds the product to a showcase through this link, subsequent consumer purchases can be attributed to the partner.
-        /// </remarks>
-        /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="productId">The product identifier.</param>
-        /// <param name="body"> (optional)</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of GenerateAffiliateProductPromotionLinkResponse</returns>
-        System.Threading.Tasks.Task<GenerateAffiliateProductPromotionLinkResponse> GenerateAffiliateProductPromotionLinkAsync(string productId, Object? body = default, System.Threading.CancellationToken cancellationToken = default);
-
-        /// <summary>
-        /// Generate Affiliate Product Promotion Link
-        /// </summary>
-        /// <remarks>
-        /// Partner developers acting on behalf of sellers use this API to generate an affiliate-exclusive promotion link for a specific open-collaboration product, identified by &#x60;product_id&#x60;, in the TikTok Shop Affiliate Product Marketplace.  The partner developer can distribute the generated link to creators. A creator can use the link to add the product to the creator&#39;s showcase. If a creator adds the product to a showcase through this link, subsequent consumer purchases can be attributed to the partner.
-        /// </remarks>
-        /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="productId">The product identifier.</param>
-        /// <param name="body"> (optional)</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (GenerateAffiliateProductPromotionLinkResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GenerateAffiliateProductPromotionLinkResponse>> GenerateAffiliateProductPromotionLinkWithHttpInfoAsync(string productId, Object? body = default, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Generate Target Collaboration Link
         /// </summary>
@@ -3605,139 +3557,6 @@ namespace TikTokShop.Api.Generated.Api
             if (this.ExceptionFactory != null)
             {
                 Exception _exception = this.ExceptionFactory("EditOpenCollaborationSettings", localVarResponse);
-                if (_exception != null) throw _exception;
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        /// Generate Affiliate Product Promotion Link Partner developers acting on behalf of sellers use this API to generate an affiliate-exclusive promotion link for a specific open-collaboration product, identified by &#x60;product_id&#x60;, in the TikTok Shop Affiliate Product Marketplace.  The partner developer can distribute the generated link to creators. A creator can use the link to add the product to the creator&#39;s showcase. If a creator adds the product to a showcase through this link, subsequent consumer purchases can be attributed to the partner.
-        /// </summary>
-        /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="productId">The product identifier.</param>
-        /// <param name="body"> (optional)</param>
-        /// <returns>GenerateAffiliateProductPromotionLinkResponse</returns>
-        public GenerateAffiliateProductPromotionLinkResponse GenerateAffiliateProductPromotionLink(string productId, Object? body = default)
-        {
-            TikTokShop.Api.Generated.Client.ApiResponse<GenerateAffiliateProductPromotionLinkResponse> localVarResponse = GenerateAffiliateProductPromotionLinkWithHttpInfo(productId, body);
-            return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Generate Affiliate Product Promotion Link Partner developers acting on behalf of sellers use this API to generate an affiliate-exclusive promotion link for a specific open-collaboration product, identified by &#x60;product_id&#x60;, in the TikTok Shop Affiliate Product Marketplace.  The partner developer can distribute the generated link to creators. A creator can use the link to add the product to the creator&#39;s showcase. If a creator adds the product to a showcase through this link, subsequent consumer purchases can be attributed to the partner.
-        /// </summary>
-        /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="productId">The product identifier.</param>
-        /// <param name="body"> (optional)</param>
-        /// <returns>ApiResponse of GenerateAffiliateProductPromotionLinkResponse</returns>
-        public TikTokShop.Api.Generated.Client.ApiResponse<GenerateAffiliateProductPromotionLinkResponse> GenerateAffiliateProductPromotionLinkWithHttpInfo(string productId, Object? body = default)
-        {
-            // verify the required parameter 'productId' is set
-            if (productId == null)
-                throw new TikTokShop.Api.Generated.Client.ApiException(400, "Missing required parameter 'productId' when calling AffiliateSellerApi->GenerateAffiliateProductPromotionLink");
-
-            TikTokShop.Api.Generated.Client.RequestOptions localVarRequestOptions = new TikTokShop.Api.Generated.Client.RequestOptions();
-
-            string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-            // to determine the Accept header
-            string[] _accepts = new string[] {
-                "application/json"
-            };
-
-            var localVarContentType = TikTokShop.Api.Generated.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-            var localVarAccept = TikTokShop.Api.Generated.Client.ClientUtils.SelectHeaderAccept(_accepts);
-            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-            localVarRequestOptions.PathParameters.Add("product_id", TikTokShop.Api.Generated.Client.ClientUtils.ParameterToString(productId)); // path parameter
-            localVarRequestOptions.Data = body;
-
-            // authentication (accessToken) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-tts-access-token")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("x-tts-access-token", this.Configuration.GetApiKeyWithPrefix("x-tts-access-token"));
-            }
-
-            // make the HTTP request
-            var localVarResponse = this.Client.Post<GenerateAffiliateProductPromotionLinkResponse>("/affiliate_seller/202405/products/{product_id}/promotion_link/generate", localVarRequestOptions, this.Configuration);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception _exception = this.ExceptionFactory("GenerateAffiliateProductPromotionLink", localVarResponse);
-                if (_exception != null) throw _exception;
-            }
-
-            return localVarResponse;
-        }
-
-        /// <summary>
-        /// Generate Affiliate Product Promotion Link Partner developers acting on behalf of sellers use this API to generate an affiliate-exclusive promotion link for a specific open-collaboration product, identified by &#x60;product_id&#x60;, in the TikTok Shop Affiliate Product Marketplace.  The partner developer can distribute the generated link to creators. A creator can use the link to add the product to the creator&#39;s showcase. If a creator adds the product to a showcase through this link, subsequent consumer purchases can be attributed to the partner.
-        /// </summary>
-        /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="productId">The product identifier.</param>
-        /// <param name="body"> (optional)</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of GenerateAffiliateProductPromotionLinkResponse</returns>
-        public async System.Threading.Tasks.Task<GenerateAffiliateProductPromotionLinkResponse> GenerateAffiliateProductPromotionLinkAsync(string productId, Object? body = default, System.Threading.CancellationToken cancellationToken = default)
-        {
-            TikTokShop.Api.Generated.Client.ApiResponse<GenerateAffiliateProductPromotionLinkResponse> localVarResponse = await GenerateAffiliateProductPromotionLinkWithHttpInfoAsync(productId, body, cancellationToken).ConfigureAwait(false);
-            return localVarResponse.Data;
-        }
-
-        /// <summary>
-        /// Generate Affiliate Product Promotion Link Partner developers acting on behalf of sellers use this API to generate an affiliate-exclusive promotion link for a specific open-collaboration product, identified by &#x60;product_id&#x60;, in the TikTok Shop Affiliate Product Marketplace.  The partner developer can distribute the generated link to creators. A creator can use the link to add the product to the creator&#39;s showcase. If a creator adds the product to a showcase through this link, subsequent consumer purchases can be attributed to the partner.
-        /// </summary>
-        /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="productId">The product identifier.</param>
-        /// <param name="body"> (optional)</param>
-        /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (GenerateAffiliateProductPromotionLinkResponse)</returns>
-        public async System.Threading.Tasks.Task<TikTokShop.Api.Generated.Client.ApiResponse<GenerateAffiliateProductPromotionLinkResponse>> GenerateAffiliateProductPromotionLinkWithHttpInfoAsync(string productId, Object? body = default, System.Threading.CancellationToken cancellationToken = default)
-        {
-            // verify the required parameter 'productId' is set
-            if (productId == null)
-                throw new TikTokShop.Api.Generated.Client.ApiException(400, "Missing required parameter 'productId' when calling AffiliateSellerApi->GenerateAffiliateProductPromotionLink");
-
-
-            TikTokShop.Api.Generated.Client.RequestOptions localVarRequestOptions = new TikTokShop.Api.Generated.Client.RequestOptions();
-
-            string[] _contentTypes = new string[] {
-                "application/json"
-            };
-
-            // to determine the Accept header
-            string[] _accepts = new string[] {
-                "application/json"
-            };
-
-
-            var localVarContentType = TikTokShop.Api.Generated.Client.ClientUtils.SelectHeaderContentType(_contentTypes);
-            if (localVarContentType != null) localVarRequestOptions.HeaderParameters.Add("Content-Type", localVarContentType);
-
-            var localVarAccept = TikTokShop.Api.Generated.Client.ClientUtils.SelectHeaderAccept(_accepts);
-            if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
-
-            localVarRequestOptions.PathParameters.Add("product_id", TikTokShop.Api.Generated.Client.ClientUtils.ParameterToString(productId)); // path parameter
-            localVarRequestOptions.Data = body;
-
-            // authentication (accessToken) required
-            if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-tts-access-token")))
-            {
-                localVarRequestOptions.HeaderParameters.Add("x-tts-access-token", this.Configuration.GetApiKeyWithPrefix("x-tts-access-token"));
-            }
-
-            // make the HTTP request
-
-            var localVarResponse = await this.AsynchronousClient.PostAsync<GenerateAffiliateProductPromotionLinkResponse>("/affiliate_seller/202405/products/{product_id}/promotion_link/generate", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
-
-            if (this.ExceptionFactory != null)
-            {
-                Exception _exception = this.ExceptionFactory("GenerateAffiliateProductPromotionLink", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 

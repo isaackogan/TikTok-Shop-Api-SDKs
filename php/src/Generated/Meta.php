@@ -58,7 +58,6 @@ final class Meta
         ['searchTAPAffiliateOrders', 'affiliatePartner', 'POST', '/affiliate_partner/202603/orders/search', false],
         ['editOpenCollaborationSettings', 'affiliateSeller', 'POST', '/affiliate_seller/202405/open_collaboration_settings', true],
         ['sellerSearchOpenCollaborationProducts', 'affiliateSeller', 'POST', '/affiliate_seller/202405/open_collaborations/products/search', true],
-        ['generateAffiliateProductPromotionLink', 'affiliateSeller', 'POST', '/affiliate_seller/202405/products/{product_id}/promotion_link/generate', true],
         ['getOpenCollaborationSettings', 'affiliateSeller', 'GET', '/affiliate_seller/202409/open_collaboration_settings', true],
         ['removeOpenCollaboration', 'affiliateSeller', 'DELETE', '/affiliate_seller/202409/open_collaborations/products/{product_id}', true],
         ['searchSampleApplicationFulfillments', 'affiliateSeller', 'POST', '/affiliate_seller/202409/sample_applications/{application_id}/fulfillments/search', true],

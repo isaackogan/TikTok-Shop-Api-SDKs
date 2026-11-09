@@ -468,8 +468,6 @@ public class JSON {
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.GenerateAffiliatePartnerCampaignProductLinkRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.GenerateAffiliatePartnerCampaignProductLinkResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.GenerateAffiliatePartnerCampaignProductLinkResponseData.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.GenerateAffiliateProductPromotionLinkResponse.CustomTypeAdapterFactory());
-        gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.GenerateAffiliateProductPromotionLinkResponseData.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.GenerateCampaignProductPromotionLinksInBatchRequest.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.GenerateCampaignProductPromotionLinksInBatchResponse.CustomTypeAdapterFactory());
         gsonBuilder.registerTypeAdapterFactory(new com.isaackogan.tiktok.shop.generated.model.GenerateCampaignProductPromotionLinksInBatchResponseData.CustomTypeAdapterFactory());

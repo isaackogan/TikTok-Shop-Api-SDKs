@@ -73,7 +73,6 @@ object Meta {
         Operation("searchTAPAffiliateOrders", "Affiliate partner", "affiliatePartner", "AffiliatePartnerApi", "POST", "/affiliate_partner/202603/orders/search", false),
         Operation("editOpenCollaborationSettings", "Affiliate seller", "affiliateSeller", "AffiliateSellerApi", "POST", "/affiliate_seller/202405/open_collaboration_settings", true),
         Operation("sellerSearchOpenCollaborationProducts", "Affiliate seller", "affiliateSeller", "AffiliateSellerApi", "POST", "/affiliate_seller/202405/open_collaborations/products/search", true),
-        Operation("generateAffiliateProductPromotionLink", "Affiliate seller", "affiliateSeller", "AffiliateSellerApi", "POST", "/affiliate_seller/202405/products/{product_id}/promotion_link/generate", true),
         Operation("getOpenCollaborationSettings", "Affiliate seller", "affiliateSeller", "AffiliateSellerApi", "GET", "/affiliate_seller/202409/open_collaboration_settings", true),
         Operation("removeOpenCollaboration", "Affiliate seller", "affiliateSeller", "AffiliateSellerApi", "DELETE", "/affiliate_seller/202409/open_collaborations/products/{product_id}", true),
         Operation("searchSampleApplicationFulfillments", "Affiliate seller", "affiliateSeller", "AffiliateSellerApi", "POST", "/affiliate_seller/202409/sample_applications/{application_id}/fulfillments/search", true),

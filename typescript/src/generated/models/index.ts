@@ -371,8 +371,6 @@ export * from './GenderDistribution';
 export * from './GenerateAffiliatePartnerCampaignProductLinkRequest';
 export * from './GenerateAffiliatePartnerCampaignProductLinkResponse';
 export * from './GenerateAffiliatePartnerCampaignProductLinkResponseData';
-export * from './GenerateAffiliateProductPromotionLinkResponse';
-export * from './GenerateAffiliateProductPromotionLinkResponseData';
 export * from './GenerateCampaignProductPromotionLinksInBatchRequest';
 export * from './GenerateCampaignProductPromotionLinksInBatchResponse';
 export * from './GenerateCampaignProductPromotionLinksInBatchResponseData';

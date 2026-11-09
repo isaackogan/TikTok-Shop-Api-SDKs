@@ -361,14 +361,6 @@ export const OPERATIONS: readonly OperationMeta[] = [
     "requiresShopCipher": true
   },
   {
-    "operationId": "generateAffiliateProductPromotionLink",
-    "tag": "Affiliate seller",
-    "group": "affiliateSeller",
-    "method": "post",
-    "path": "/affiliate_seller/202405/products/{product_id}/promotion_link/generate",
-    "requiresShopCipher": true
-  },
-  {
     "operationId": "getOpenCollaborationSettings",
     "tag": "Affiliate seller",
     "group": "affiliateSeller",

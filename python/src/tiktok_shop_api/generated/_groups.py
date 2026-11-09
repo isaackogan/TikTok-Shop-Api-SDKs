@@ -132,8 +132,6 @@ if TYPE_CHECKING:
     from .models.end_session_response import EndSessionResponse
     from .models.generate_affiliate_partner_campaign_product_link_request import GenerateAffiliatePartnerCampaignProductLinkRequest
     from .models.generate_affiliate_partner_campaign_product_link_response import GenerateAffiliatePartnerCampaignProductLinkResponse
-    from .models.generate_affiliate_product_promotion_link_request import GenerateAffiliateProductPromotionLinkRequest
-    from .models.generate_affiliate_product_promotion_link_response import GenerateAffiliateProductPromotionLinkResponse
     from .models.generate_campaign_product_promotion_links_in_batch_request import GenerateCampaignProductPromotionLinksInBatchRequest
     from .models.generate_campaign_product_promotion_links_in_batch_response import GenerateCampaignProductPromotionLinksInBatchResponse
     from .models.generate_general_sharing_links_request import GenerateGeneralSharingLinksRequest
@@ -2859,34 +2857,6 @@ class AffiliateSellerApi(SyncGroup):
 
         return self._run(_op.sync_detailed, body=body)
 
-    def generate_affiliate_product_promotion_link(
-        self,
-        product_id: str,
-        *,
-        body: GenerateAffiliateProductPromotionLinkRequest | Unset = UNSET,
-    ) -> GenerateAffiliateProductPromotionLinkResponse | None:
-        """Generate Affiliate Product Promotion Link
-
-         Partner developers acting on behalf of sellers use this API to generate an affiliate-exclusive
-        promotion link for a specific open-collaboration product, identified by `product_id`, in the TikTok
-        Shop Affiliate Product Marketplace.
-
-        The partner developer can distribute the generated link to creators. A creator can use the link to
-        add the product to the creator's showcase. If a creator adds the product to a showcase through this
-        link, subsequent consumer purchases can be attributed to the partner.
-
-        Args:
-            product_id (str):
-            body (GenerateAffiliateProductPromotionLinkRequest | Unset):
-
-        Raises:
-            TikTokShopError: for a TikTok error code, a non-2xx status,
-                an unparseable response, a network error or a timeout.
-        """
-        from .api.affiliate_seller import generate_affiliate_product_promotion_link as _op
-
-        return self._run(_op.sync_detailed, product_id=product_id, body=body)
-
     def generate_target_collaboration_link(
         self,
         target_collaboration_id: str,
@@ -4025,34 +3995,6 @@ class AsyncAffiliateSellerApi(AsyncGroup):
         from .api.affiliate_seller import edit_open_collaboration_settings as _op
 
         return await self._run(_op.asyncio_detailed, body=body)
-
-    async def generate_affiliate_product_promotion_link(
-        self,
-        product_id: str,
-        *,
-        body: GenerateAffiliateProductPromotionLinkRequest | Unset = UNSET,
-    ) -> GenerateAffiliateProductPromotionLinkResponse | None:
-        """Generate Affiliate Product Promotion Link
-
-         Partner developers acting on behalf of sellers use this API to generate an affiliate-exclusive
-        promotion link for a specific open-collaboration product, identified by `product_id`, in the TikTok
-        Shop Affiliate Product Marketplace.
-
-        The partner developer can distribute the generated link to creators. A creator can use the link to
-        add the product to the creator's showcase. If a creator adds the product to a showcase through this
-        link, subsequent consumer purchases can be attributed to the partner.
-
-        Args:
-            product_id (str):
-            body (GenerateAffiliateProductPromotionLinkRequest | Unset):
-
-        Raises:
-            TikTokShopError: for a TikTok error code, a non-2xx status,
-                an unparseable response, a network error or a timeout.
-        """
-        from .api.affiliate_seller import generate_affiliate_product_promotion_link as _op
-
-        return await self._run(_op.asyncio_detailed, product_id=product_id, body=body)
 
     async def generate_target_collaboration_link(
         self,
