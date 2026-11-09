@@ -3196,53 +3196,6 @@ paths:
         - Read Seller Affiliate Collaboration
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/seller-search-open-collaboration-products-202405
-  /affiliate_seller/202405/products/{product_id}/promotion_link/generate:
-    post:
-      operationId: generateAffiliateProductPromotionLink
-      summary: Generate Affiliate Product Promotion Link
-      description: |-
-        Partner developers acting on behalf of sellers use this API to generate an affiliate-exclusive promotion link for a specific open-collaboration product, identified by `product_id`, in the TikTok Shop Affiliate Product Marketplace.
-
-        The partner developer can distribute the generated link to creators. A creator can use the link to add the product to the creator's showcase. If a creator adds the product to a showcase through this link, subsequent consumer purchases can be attributed to the partner.
-      tags:
-        - Affiliate seller
-      parameters:
-        - name: product_id
-          in: path
-          required: true
-          description: The product identifier.
-          schema:
-            type: string
-        - $ref: "#/components/parameters/ShopCipher"
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/GenerateAffiliateProductPromotionLinkRequest"
-            example: {}
-      responses:
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GenerateAffiliateProductPromotionLinkResponse"
-              example:
-                code: 0
-                data:
-                  product_promotion_link: https://www.example.com/t/acibsnsgSIngls
-                message: Success
-                request_id: 202203070749000101890810281E8C70B7
-      x-tts-requires-shop-cipher: true
-      x-tts-scenario: 1
-      x-tts-scopes:
-        - Manage Seller Affiliate Collaboration
-      x-tts-error-codes:
-        - code: "16015001"
-          message: Invalid parameter, the product Ids are not correct. Please ensure the products are in the showcase right now.
-        - code: "16015014"
-          message: get product meta failed
-      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/generate-affiliate-product-promotion-link-202405
   /affiliate_seller/202409/open_collaboration_settings:
     get:
       operationId: getOpenCollaborationSettings
@@ -41115,30 +41068,6 @@ components:
         product_promotion_link:
           type: string
           description: A URL for product promotion content. This URL is provided to agencies for sharing with colloborating creators. Creators share this link with followers via the TikTok App. Note that creators control whether or not to add products to their showcase in the pop-up window.
-    GenerateAffiliateProductPromotionLinkRequest:
-      type: object
-      properties: {}
-    GenerateAffiliateProductPromotionLinkResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int64
-          description: Status code; 0 means success.
-        message:
-          type: string
-          description: Success or failure message.
-        request_id:
-          type: string
-          description: Request log ID.
-        data:
-          $ref: "#/components/schemas/GenerateAffiliateProductPromotionLinkResponseData"
-    GenerateAffiliateProductPromotionLinkResponseData:
-      type: object
-      properties:
-        product_promotion_link:
-          type: string
-          description: The URL for a web page with information about the product promotion.
     GenerateCampaignProductPromotionLinksInBatchRequest:
       type: object
       properties:
