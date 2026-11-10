@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: TikTok Shop Partner API
-  version: 2026.11.05
+  version: 2026.11.09
   description: Generated from the TikTok Shop Partner Center documentation (https://partner.tiktokshop.com/docv2). Do not edit by hand.
 externalDocs:
   url: https://partner.tiktokshop.com/docv2
@@ -7119,6 +7119,11 @@ paths:
                       id: 105xxxxxxxxxxxxx247
                       name: Product Name
                       product_clicks: 0
+                      product_detail_url: https://www.tiktok.com/shop/pdp/105xxxxxxxxxxxxx247
+                      product_image:
+                        thumb_uri: tos-useast5-i-abcdef/example
+                        thumb_url_list:
+                          - https://example.com/product-thumb.jpg
                       product_impressions: 0
                       units_sold: 0
                   total_count: 10
@@ -19696,7 +19701,7 @@ paths:
         - code: "12052054"
           message: The seller SKU text length cannot exceed max limit characters
         - code: "12052055"
-          message: The SKU inventory quantity for the warehouse must be within allowed limits.
+          message: The inventory quantity for a SKU at a warehouse is outside the allowed range. For Update Stock, the quantity must be between 0 and 999,999, inclusive.
         - code: "12052056"
           message: The num of image in description cannot exceed max limit
         - code: "12052073"
@@ -19704,7 +19709,7 @@ paths:
         - code: "12052084"
           message: The provided currency is not available for this shop/region.
         - code: "12052096"
-          message: Unable to update the price for SKUs with no warehouse. Assign a warehouse and try again.
+          message: Each SKU must remain linked to at least one warehouse after the update. Retain an existing warehouse or add a new warehouse before unlinking the remaining warehouse.
         - code: "12052104"
           message: property is required
         - code: "12052105"
@@ -19854,7 +19859,7 @@ paths:
         - code: "12052530"
           message: The warehouse ' {{warehouse ID}} ' does not belong to this shop/seller.
         - code: "12052531"
-          message: The warehouse is disabled.
+          message: The specified warehouse is disabled or otherwise unavailable for this operation. Check the warehouse's status and availability, or select another available warehouse.
         - code: "12052550"
           message: SKU property must contain all properties
         - code: "12052554"
@@ -19890,11 +19895,11 @@ paths:
         - code: "12052702"
           message: seller does not support pre-order
         - code: "12052703"
-          message: Invalid seller tax number
+          message: The seller's tax identification number could not be validated. Check and update the seller's tax information in Seller Center before retrying.
         - code: "12052704"
           message: seller id not exist
         - code: "12052910"
-          message: Invalid input parameters. Refer to the API documentation for details.
+          message: The warehouse update parameters are invalid. Check the update mode and warehouse IDs. Warehouse IDs must be valid and unique, and a warehouse cannot appear in both inventory and unlink_warehouse_ids. The unlink list is only supported in INCREMENTAL mode.
         - code: "36009003"
           message: Internal error. Please try again. If the issue persists after multiple attempts, please contact platform support.
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/create-global-product-202309
@@ -20266,7 +20271,7 @@ paths:
         - code: "12052054"
           message: The seller SKU text length cannot exceed max limit characters
         - code: "12052055"
-          message: The SKU inventory quantity for the warehouse must be within allowed limits.
+          message: The inventory quantity for a SKU at a warehouse is outside the allowed range. For Update Stock, the quantity must be between 0 and 999,999, inclusive.
         - code: "12052056"
           message: The num of image in description cannot exceed max limit
         - code: "12052073"
@@ -20274,7 +20279,7 @@ paths:
         - code: "12052084"
           message: The provided currency is not available for this shop/region.
         - code: "12052096"
-          message: Unable to update the price for SKUs with no warehouse. Assign a warehouse and try again.
+          message: Each SKU must remain linked to at least one warehouse after the update. Retain an existing warehouse or add a new warehouse before unlinking the remaining warehouse.
         - code: "12052104"
           message: property is required
         - code: "12052105"
@@ -20426,7 +20431,7 @@ paths:
         - code: "12052530"
           message: The warehouse ' {{warehouse ID}} ' does not belong to this shop/seller.
         - code: "12052531"
-          message: The warehouse is disabled.
+          message: The specified warehouse is disabled or otherwise unavailable for this operation. Check the warehouse's status and availability, or select another available warehouse.
         - code: "12052550"
           message: SKU property must contain all properties
         - code: "12052554"
@@ -20460,13 +20465,13 @@ paths:
         - code: "12052702"
           message: seller does not support pre-order
         - code: "12052703"
-          message: Invalid seller tax number
+          message: The seller's tax identification number could not be validated. Check and update the seller's tax information in Seller Center before retrying.
         - code: "12052704"
           message: seller id not exist
         - code: "12052901"
           message: The product in its current status is not available for this operation. Change the product status and try again.
         - code: "12052910"
-          message: Invalid input parameters. Refer to the API documentation for details.
+          message: The warehouse update parameters are invalid. Check the update mode and warehouse IDs. Warehouse IDs must be valid and unique, and a warehouse cannot appear in both inventory and unlink_warehouse_ids. The unlink list is only supported in INCREMENTAL mode.
         - code: "12052912"
           message: No matching category found within your account's main category. Check your main category in the seller profile on Seller Center and ensure your product falls within its scope.
         - code: "36009003"
@@ -20525,7 +20530,7 @@ paths:
         - code: "12052048"
           message: You cannot edit the specified product(s) as it isn't listed in your account or shop.
         - code: "12052055"
-          message: The SKU inventory quantity for the warehouse must be within allowed limits.
+          message: The inventory quantity for a SKU at a warehouse is outside the allowed range. For Update Stock, the quantity must be between 0 and 999,999, inclusive.
         - code: "12052094"
           message: No multiple warehouse permission
         - code: "12052142"
@@ -20547,7 +20552,7 @@ paths:
         - code: "12052530"
           message: The warehouse ' {{warehouse ID}} ' does not belong to this shop/seller.
         - code: "12052531"
-          message: The warehouse is disabled.
+          message: The specified warehouse is disabled or otherwise unavailable for this operation. Check the warehouse's status and availability, or select another available warehouse.
         - code: "12052533"
           message: Removal, addition, and change of warehouses are not permitted. Please specify the original warehouses for the SKUs.
         - code: "12052556"
@@ -20653,7 +20658,7 @@ paths:
         - code: "12019212"
           message: region already published
         - code: "12052055"
-          message: The SKU inventory quantity for the warehouse must be within allowed limits.
+          message: The inventory quantity for a SKU at a warehouse is outside the allowed range. For Update Stock, the quantity must be between 0 and 999,999, inclusive.
         - code: "12052084"
           message: The provided currency is not available for this shop/region.
         - code: "12052117"
@@ -20669,7 +20674,7 @@ paths:
         - code: "12052424"
           message: Missing 'sale price' value
         - code: "12052531"
-          message: The warehouse is disabled.
+          message: The specified warehouse is disabled or otherwise unavailable for this operation. Check the warehouse's status and availability, or select another available warehouse.
         - code: "12052556"
           message: The SKU id not exist.
         - code: "12052700"
@@ -20681,7 +20686,7 @@ paths:
         - code: "12052903"
           message: The publish region is inactive.
         - code: "12052910"
-          message: Invalid input parameters. Refer to the API documentation for details.
+          message: The warehouse update parameters are invalid. Check the update mode and warehouse IDs. Warehouse IDs must be valid and unique, and a warehouse cannot appear in both inventory and unlink_warehouse_ids. The unlink list is only supported in INCREMENTAL mode.
         - code: "36009003"
           message: Internal error. Please try again. If the issue persists after multiple attempts, please contact platform support.
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/publish-global-product-202309
@@ -21083,7 +21088,7 @@ paths:
         - code: "12052054"
           message: The seller SKU text length cannot exceed max limit characters
         - code: "12052055"
-          message: The SKU inventory quantity for the warehouse must be within allowed limits.
+          message: The inventory quantity for a SKU at a warehouse is outside the allowed range. For Update Stock, the quantity must be between 0 and 999,999, inclusive.
         - code: "12052056"
           message: The num of image in description cannot exceed max limit
         - code: "12052073"
@@ -21097,7 +21102,7 @@ paths:
         - code: "12052094"
           message: No multiple warehouse permission
         - code: "12052096"
-          message: Unable to update the price for SKUs with no warehouse. Assign a warehouse and try again.
+          message: Each SKU must remain linked to at least one warehouse after the update. Retain an existing warehouse or add a new warehouse before unlinking the remaining warehouse.
         - code: "12052097"
           message: The warehouse does not exist
         - code: "12052104"
@@ -21137,7 +21142,7 @@ paths:
         - code: "12052201"
           message: You are not authorized to sell this brand in this category. To do so, apply through the Qualification Center in Seller Center.
         - code: "12052207"
-          message: receipt brand not support warehouse
+          message: The seller's current brand authorization does not permit shipping this product from the specified warehouse. Select a warehouse covered by the authorization or obtain the required brand authorization before retrying.
         - code: "12052208"
           message: A brand authorization is required to publish this listing.
         - code: "12052217"
@@ -21377,7 +21382,7 @@ paths:
         - code: "12052530"
           message: The warehouse ' {{warehouse ID}} ' does not belong to this shop/seller.
         - code: "12052531"
-          message: The warehouse is disabled.
+          message: The specified warehouse is disabled or otherwise unavailable for this operation. Check the warehouse's status and availability, or select another available warehouse.
         - code: "12052532"
           message: the warehouse not delivery warehouse
         - code: "12052535"
@@ -21437,7 +21442,7 @@ paths:
         - code: "12052702"
           message: seller does not support pre-order
         - code: "12052703"
-          message: Invalid seller tax number
+          message: The seller's tax identification number could not be validated. Check and update the seller's tax information in Seller Center before retrying.
         - code: "12052704"
           message: seller id not exist
         - code: "12052706"
@@ -21509,7 +21514,7 @@ paths:
         - code: "12052881"
           message: identity internal error
         - code: "12052910"
-          message: Invalid input parameters. Refer to the API documentation for details.
+          message: The warehouse update parameters are invalid. Check the update mode and warehouse IDs. Warehouse IDs must be valid and unique, and a warehouse cannot appear in both inventory and unlink_warehouse_ids. The unlink list is only supported in INCREMENTAL mode.
         - code: "12052915"
           message: package weight unit and dimension unit miss match.
         - code: "12052923"
@@ -21529,7 +21534,7 @@ paths:
         - code: "12052936"
           message: Seller SKU format invalid. SKU name must contain 6 - 50 characters and use alphabets, numbers, hyphens (-), or underscores (_) only.
         - code: "12052990"
-          message: The check failed.
+          message: The product failed one or more validation checks. Review any detailed failure reasons returned in the response, correct the affected product information, and retry.
         - code: "12052992"
           message: no permission to create gift product
         - code: "12052994"
@@ -21606,7 +21611,7 @@ paths:
         - code: "12052700"
           message: The seller is inactive.
         - code: "12052703"
-          message: Invalid seller tax number
+          message: The seller's tax identification number could not be validated. Check and update the seller's tax information in Seller Center before retrying.
         - code: "12052705"
           message: seller can not manage local product.
         - code: "12052901"
@@ -21679,9 +21684,9 @@ paths:
         - code: "12052901"
           message: The product in its current status is not available for this operation. Change the product status and try again.
         - code: "12052910"
-          message: Invalid input parameters. Refer to the API documentation for details.
+          message: The warehouse update parameters are invalid. Check the update mode and warehouse IDs. Warehouse IDs must be valid and unique, and a warehouse cannot appear in both inventory and unlink_warehouse_ids. The unlink list is only supported in INCREMENTAL mode.
         - code: "12052990"
-          message: The check failed.
+          message: The product failed one or more validation checks. Review any detailed failure reasons returned in the response, correct the affected product information, and retry.
         - code: "36009003"
           message: Internal error. Please try again. If the issue persists after multiple attempts, please contact platform support.
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/activate-products-202309
@@ -21745,11 +21750,11 @@ paths:
         - code: "12052700"
           message: The seller is inactive.
         - code: "12052703"
-          message: Invalid seller tax number
+          message: The seller's tax identification number could not be validated. Check and update the seller's tax information in Seller Center before retrying.
         - code: "12052901"
           message: The product in its current status is not available for this operation. Change the product status and try again.
         - code: "12052910"
-          message: Invalid input parameters. Refer to the API documentation for details.
+          message: The warehouse update parameters are invalid. Check the update mode and warehouse IDs. Warehouse IDs must be valid and unique, and a warehouse cannot appear in both inventory and unlink_warehouse_ids. The unlink list is only supported in INCREMENTAL mode.
         - code: "36009003"
           message: Internal error. Please try again. If the issue persists after multiple attempts, please contact platform support.
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/deactivate-products-202309
@@ -22026,7 +22031,7 @@ paths:
         - code: "12052881"
           message: identity internal error
         - code: "12052910"
-          message: Invalid input parameters. Refer to the API documentation for details.
+          message: The warehouse update parameters are invalid. Check the update mode and warehouse IDs. Warehouse IDs must be valid and unique, and a warehouse cannot appear in both inventory and unlink_warehouse_ids. The unlink list is only supported in INCREMENTAL mode.
         - code: "12052915"
           message: package weight unit and dimension unit miss match.
         - code: "12052916"
@@ -22099,7 +22104,7 @@ paths:
         - code: "12052700"
           message: The seller is inactive.
         - code: "12052703"
-          message: Invalid seller tax number
+          message: The seller's tax identification number could not be validated. Check and update the seller's tax information in Seller Center before retrying.
         - code: "12052705"
           message: seller can not manage local product.
         - code: "12052901"
@@ -22624,7 +22629,10 @@ paths:
     post:
       operationId: updateInventory
       summary: Update Inventory
-      description: Update the inventory quantity of SKUs belonging to a product. The product must be in `DRAFT`, `PENDING`, `FAILED`, `ACTIVATE`, or `SELLER_DEACTIVATED` status.
+      description: |-
+        Update the inventory quantity of SKUs belonging to a product. The product must be in`DRAFT`, `PENDING`, `FAILED`, `ACTIVATE`, or `SELLER_DEACTIVATED` status.
+        This API also supports `INCREMENTAL` mode to update inventory and add or unlink specific warehouses, and `FULL` mode to update inventory and replace each SKU’s warehouse list. For details, including the behavior when no mode is specified, see the sku_warehouse_stock_update_mode field description.
+        Note: FBT warehouses must not be included in the warehouse list in any update mode, including `FULL`, even if their inventory quantities remain unchanged.
       tags:
         - Products
       parameters:
@@ -22649,6 +22657,9 @@ paths:
                       quantity: 999
                       backorder_quantity: 888
                       handling_time: 5
+                  unlink_warehouse_ids:
+                    - "7068517275539719942"
+              sku_warehouse_stock_update_mode: INCREMENTAL
       responses:
         "200":
           description: Success
@@ -22678,7 +22689,7 @@ paths:
         - code: "12019022"
           message: SKU must contain a valid warehouse.
         - code: "12019024"
-          message: stock count is invalid
+          message: The inventory quantity is invalid. Provide a whole number within the range supported by this API.
         - code: "12019028"
           message: Multiple warehouses detected. Include all warehouse IDs and the corresponding details and try again.
         - code: "12052031"
@@ -22686,33 +22697,31 @@ paths:
         - code: "12052032"
           message: The product does not exist
         - code: "12052036"
-          message: The SKU ID is necessary
+          message: Provide a valid SKU ID for every SKU in the request.
         - code: "12052037"
-          message: |-
-            Couldn't update inventory. Possible causes:
-            - Inventory is automatically allocated and cannot be modified manually
-            - Warehouse IDs provided are incorrect
-            - Missing warehouse IDs (all warehouses that stock the product must be included)
+          message: The inventory update or warehouse unlink operation failed for this SKU and warehouse. Check the current inventory and warehouse links before retrying the failed operation.
         - code: "12052048"
           message: You cannot edit the specified product(s) as it isn't listed in your account or shop.
         - code: "12052050"
           message: A single product cannot have more than 100 different SKUs
         - code: "12052055"
-          message: The SKU inventory quantity for the warehouse must be within allowed limits.
+          message: The inventory quantity for a SKU at a warehouse is outside the allowed range. For Update Stock, the quantity must be between 0 and 999,999, inclusive.
         - code: "12052094"
           message: No multiple warehouse permission
         - code: "12052096"
-          message: Unable to update the price for SKUs with no warehouse. Assign a warehouse and try again.
+          message: Each SKU must remain linked to at least one warehouse after the update. Retain an existing warehouse or add a new warehouse before unlinking the remaining warehouse.
         - code: "12052097"
           message: The warehouse does not exist
         - code: "12052115"
           message: seller has no warehouse
         - code: "12052141"
-          message: please edit stock from global
+          message: Inventory for this SKU must be managed at the global product level. Update the corresponding global product's inventory instead of the local product's inventory.
         - code: "12052160"
           message: sku count must be one and disable variables
+        - code: "12052165"
+          message: The requested update would leave insufficient inventory to cover campaign reservations or would violate the permitted available-stock limit.Adjust the inventory quantities or reduce the warehouses being unlinked.
         - code: "12052207"
-          message: receipt brand not support warehouse
+          message: The seller's current brand authorization does not permit shipping this product from the specified warehouse. Select a warehouse covered by the authorization or obtain the required brand authorization before retrying.
         - code: "12052260"
           message: The product ID does not exist
         - code: "12052308"
@@ -22727,24 +22736,30 @@ paths:
           message: The warehouse does not support fulfillment for the current shop.
         - code: "12052465"
           message: warehouse is unavailable for eu gpr product
+        - code: "12052486"
+          message: In FULL mode, provide a non-empty inventory list for every SKU. In INCREMENTAL mode, provide at least one inventory entry or one warehouse ID to unlink for every SKU.
         - code: "12052530"
           message: The warehouse ' {{warehouse ID}} ' does not belong to this shop/seller.
         - code: "12052531"
-          message: The warehouse is disabled.
+          message: The specified warehouse is disabled or otherwise unavailable for this operation. Check the warehouse's status and availability, or select another available warehouse.
         - code: "12052532"
           message: the warehouse not delivery warehouse
         - code: "12052533"
           message: Removal, addition, and change of warehouses are not permitted. Please specify the original warehouses for the SKUs.
+        - code: "12052534"
+          message: The warehouse cannot be unlinked because it has inventory reserved for unfulfilled orders, its inventory configuration does not support unlinking, or its inventory relationships are invalid.
         - code: "12052535"
           message: Couldn't publish this product as you haven't set the return warehouse for your shop. Add the return warehouse information on TikTok Shop Seller Center first and try again.
         - code: "12052553"
           message: Sku id duplicate
         - code: "12052556"
           message: The SKU id not exist.
+        - code: "12052561"
+          message: The requested inventory change could not be completed because insufficient stock was available. Check the current inventory and reservations, then adjust the request.
         - code: "12052700"
           message: The seller is inactive.
         - code: "12052703"
-          message: Invalid seller tax number
+          message: The seller's tax identification number could not be validated. Check and update the seller's tax information in Seller Center before retrying.
         - code: "12052704"
           message: seller id not exist
         - code: "12052849"
@@ -22755,10 +22770,12 @@ paths:
           message: The product in its current status is not available for this operation. Change the product status and try again.
         - code: "12052902"
           message: The SKU list is empty. Either omit the list entirely, or provide all required details.
+        - code: "12052910"
+          message: The warehouse update parameters are invalid. Check the update mode and warehouse IDs. Warehouse IDs must be valid and unique, and a warehouse cannot appear in both inventory and unlink_warehouse_ids. The unlink list is only supported in INCREMENTAL mode.
         - code: "12052921"
           message: Couldn't edit the inventory quantity because this product shares the inventory with the source shop
         - code: "12052990"
-          message: The check failed.
+          message: The product failed one or more validation checks. Review any detailed failure reasons returned in the response, correct the affected product information, and retry.
         - code: "36009003"
           message: Internal error. Please try again. If the issue persists after multiple attempts, please contact platform support.
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/update-inventory-202309
@@ -22971,7 +22988,7 @@ paths:
         - code: "12052901"
           message: The product in its current status is not available for this operation. Change the product status and try again.
         - code: "12052910"
-          message: Invalid input parameters. Refer to the API documentation for details.
+          message: The warehouse update parameters are invalid. Check the update mode and warehouse IDs. Warehouse IDs must be valid and unique, and a warehouse cannot appear in both inventory and unlink_warehouse_ids. The unlink list is only supported in INCREMENTAL mode.
         - code: "36009003"
           message: Internal error. Please try again. If the issue persists after multiple attempts, please contact platform support.
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/search-global-products-202312
@@ -24170,7 +24187,7 @@ paths:
         - code: "12052704"
           message: seller id not exist
         - code: "12052910"
-          message: Invalid input parameters. Refer to the API documentation for details.
+          message: The warehouse update parameters are invalid. Check the update mode and warehouse IDs. Warehouse IDs must be valid and unique, and a warehouse cannot appear in both inventory and unlink_warehouse_ids. The unlink list is only supported in INCREMENTAL mode.
         - code: "36009003"
           message: Internal error. Please try again. If the issue persists after multiple attempts, please contact platform support.
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/search-products-202502
@@ -24875,11 +24892,7 @@ paths:
         - code: "12052034"
           message: This product doesn't belong to this shop
         - code: "12052037"
-          message: |-
-            Couldn't update inventory. Possible causes:
-            - Inventory is automatically allocated and cannot be modified manually
-            - Warehouse IDs provided are incorrect
-            - Missing warehouse IDs (all warehouses that stock the product must be included)
+          message: The inventory update or warehouse unlink operation failed for this SKU and warehouse. Check the current inventory and warehouse links before retrying the failed operation.
         - code: "12052038"
           message: Product price locked due to ongoing promotion.
         - code: "12052048"
@@ -24891,7 +24904,7 @@ paths:
         - code: "12052054"
           message: The seller SKU text length cannot exceed max limit characters
         - code: "12052055"
-          message: The SKU inventory quantity for the warehouse must be within allowed limits.
+          message: The inventory quantity for a SKU at a warehouse is outside the allowed range. For Update Stock, the quantity must be between 0 and 999,999, inclusive.
         - code: "12052056"
           message: The num of image in description cannot exceed max limit
         - code: "12052073"
@@ -24905,7 +24918,7 @@ paths:
         - code: "12052095"
           message: Warehouse information parsing error
         - code: "12052096"
-          message: Unable to update the price for SKUs with no warehouse. Assign a warehouse and try again.
+          message: Each SKU must remain linked to at least one warehouse after the update. Retain an existing warehouse or add a new warehouse before unlinking the remaining warehouse.
         - code: "12052097"
           message: The warehouse does not exist
         - code: "12052104"
@@ -24919,7 +24932,7 @@ paths:
         - code: "12052128"
           message: Size chart not found
         - code: "12052141"
-          message: please edit stock from global
+          message: Inventory for this SKU must be managed at the global product level. Update the corresponding global product's inventory instead of the local product's inventory.
         - code: "12052144"
           message: platform warehouse not support to edit
         - code: "12052151"
@@ -24949,7 +24962,7 @@ paths:
         - code: "12052201"
           message: You are not authorized to sell this brand in this category. To do so, apply through the Qualification Center in Seller Center.
         - code: "12052207"
-          message: receipt brand not support warehouse
+          message: The seller's current brand authorization does not permit shipping this product from the specified warehouse. Select a warehouse covered by the authorization or obtain the required brand authorization before retrying.
         - code: "12052208"
           message: A brand authorization is required to publish this listing.
         - code: "12052217"
@@ -25181,13 +25194,13 @@ paths:
         - code: "12052530"
           message: The warehouse ' {{warehouse ID}} ' does not belong to this shop/seller.
         - code: "12052531"
-          message: The warehouse is disabled.
+          message: The specified warehouse is disabled or otherwise unavailable for this operation. Check the warehouse's status and availability, or select another available warehouse.
         - code: "12052532"
           message: the warehouse not delivery warehouse
         - code: "12052533"
           message: Removal, addition, and change of warehouses are not permitted. Please specify the original warehouses for the SKUs.
         - code: "12052534"
-          message: warehouse unable to delete
+          message: The warehouse cannot be unlinked because it has inventory reserved for unfulfilled orders, its inventory configuration does not support unlinking, or its inventory relationships are invalid.
         - code: "12052535"
           message: Couldn't publish this product as you haven't set the return warehouse for your shop. Add the return warehouse information on TikTok Shop Seller Center first and try again.
         - code: "12052550"
@@ -25241,7 +25254,7 @@ paths:
         - code: "12052702"
           message: seller does not support pre-order
         - code: "12052703"
-          message: Invalid seller tax number
+          message: The seller's tax identification number could not be validated. Check and update the seller's tax information in Seller Center before retrying.
         - code: "12052704"
           message: seller id not exist
         - code: "12052706"
@@ -25293,7 +25306,7 @@ paths:
         - code: "12052902"
           message: The SKU list is empty. Either omit the list entirely, or provide all required details.
         - code: "12052910"
-          message: Invalid input parameters. Refer to the API documentation for details.
+          message: The warehouse update parameters are invalid. Check the update mode and warehouse IDs. Warehouse IDs must be valid and unique, and a warehouse cannot appear in both inventory and unlink_warehouse_ids. The unlink list is only supported in INCREMENTAL mode.
         - code: "12052915"
           message: package weight unit and dimension unit miss match.
         - code: "12052921"
@@ -25617,7 +25630,7 @@ paths:
         - code: "12052054"
           message: The seller SKU text length cannot exceed max limit characters
         - code: "12052055"
-          message: The SKU inventory quantity for the warehouse must be within allowed limits.
+          message: The inventory quantity for a SKU at a warehouse is outside the allowed range. For Update Stock, the quantity must be between 0 and 999,999, inclusive.
         - code: "12052056"
           message: The num of image in description cannot exceed max limit
         - code: "12052073"
@@ -25629,7 +25642,7 @@ paths:
         - code: "12052094"
           message: No multiple warehouse permission
         - code: "12052096"
-          message: Unable to update the price for SKUs with no warehouse. Assign a warehouse and try again.
+          message: Each SKU must remain linked to at least one warehouse after the update. Retain an existing warehouse or add a new warehouse before unlinking the remaining warehouse.
         - code: "12052104"
           message: property is required
         - code: "12052105"
@@ -25855,13 +25868,13 @@ paths:
         - code: "12052530"
           message: The warehouse ' {{warehouse ID}} ' does not belong to this shop/seller.
         - code: "12052531"
-          message: The warehouse is disabled.
+          message: The specified warehouse is disabled or otherwise unavailable for this operation. Check the warehouse's status and availability, or select another available warehouse.
         - code: "12052532"
           message: the warehouse not delivery warehouse
         - code: "12052533"
           message: Removal, addition, and change of warehouses are not permitted. Please specify the original warehouses for the SKUs.
         - code: "12052534"
-          message: warehouse unable to delete
+          message: The warehouse cannot be unlinked because it has inventory reserved for unfulfilled orders, its inventory configuration does not support unlinking, or its inventory relationships are invalid.
         - code: "12052535"
           message: Couldn't publish this product as you haven't set the return warehouse for your shop. Add the return warehouse information on TikTok Shop Seller Center first and try again.
         - code: "12052550"
@@ -25911,7 +25924,7 @@ paths:
         - code: "12052702"
           message: seller does not support pre-order
         - code: "12052703"
-          message: Invalid seller tax number
+          message: The seller's tax identification number could not be validated. Check and update the seller's tax information in Seller Center before retrying.
         - code: "12052704"
           message: seller id not exist
         - code: "12052706"
@@ -25941,7 +25954,7 @@ paths:
         - code: "12052902"
           message: The SKU list is empty. Either omit the list entirely, or provide all required details.
         - code: "12052910"
-          message: Invalid input parameters. Refer to the API documentation for details.
+          message: The warehouse update parameters are invalid. Check the update mode and warehouse IDs. Warehouse IDs must be valid and unique, and a warehouse cannot appear in both inventory and unlink_warehouse_ids. The unlink list is only supported in INCREMENTAL mode.
         - code: "12052915"
           message: package weight unit and dimension unit miss match.
         - code: "12052916"
@@ -26878,7 +26891,7 @@ paths:
         - code: "12052704"
           message: seller id not exist
         - code: "12052910"
-          message: Invalid input parameters. Refer to the API documentation for details.
+          message: The warehouse update parameters are invalid. Check the update mode and warehouse IDs. Warehouse IDs must be valid and unique, and a warehouse cannot appear in both inventory and unlink_warehouse_ids. The unlink list is only supported in INCREMENTAL mode.
         - code: "36009003"
           message: Internal error. Please try again. If the issue persists after multiple attempts, please contact platform support.
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/suggest-brands-202609
@@ -61146,6 +61159,12 @@ components:
           type: integer
           format: int64
           description: Number of product clicks.
+        product_detail_url:
+          type: string
+          description: URL of the product detail page.
+        product_image:
+          $ref: "#/components/schemas/GetShopVideoProductPerformanceListResponseDataProductProductImage"
+          description: Product image information.
         product_impressions:
           type: integer
           format: int64
@@ -61154,6 +61173,17 @@ components:
           type: integer
           format: int64
           description: Number of units sold for the current product.
+    GetShopVideoProductPerformanceListResponseDataProductProductImage:
+      type: object
+      properties:
+        thumb_uri:
+          type: string
+          description: URI of the product thumbnail image.
+        thumb_url_list:
+          type: array
+          items:
+            type: string
+          description: URLs of the product thumbnail image.
     GetShopVideosPerformanceDetailsResponse:
       type: object
       properties:
@@ -83025,6 +83055,22 @@ components:
           items:
             $ref: "#/components/schemas/UpdateInventoryRequestSku"
           description: A list of Stock Keeping Units (SKUs) used to identify distinct variants of the product.
+        sku_warehouse_stock_update_mode:
+          type: string
+          description: |-
+            The mode used to update warehouse inventory for a SKU. This parameter was introduced in October 2026.
+
+            Note:
+
+            - If omitted, DEFAULT mode applies. This follows the behavior used before October 2026: the submitted warehouse list must include at least one warehouse already associated with the SKU. For example, if a SKU is associated with warehouses A and B, a request specifying only warehouse C does not meet this requirement. The list must also include A or B.
+            - INCREMENTAL (1): Updates only the specified warehouses. You can specify warehouses regardless of whether they are already associated with the SKU. If an association does not exist, it is created and the inventory is set; otherwise, the inventory is updated. You can also use delete_warehouse_ids to specify warehouses to unlink from the SKU.
+            - FULL (2): Updates inventory and uses the submitted SKU–warehouse list as the complete set of warehouse associations to retain. Any existing warehouse associations omitted from the list are removed. Providing delete_warehouse_ids in this mode returns an error.
+
+            Important:
+
+            - Unlinking a warehouse is subject to multiple restrictions. For example, the warehouse must have no unfulfilled orders, and the inventory remaining after unlinking must be sufficient to cover quantities locked for campaigns.
+            - Avoid making inventory synchronization depend on successful warehouse unlinking. For this reason, FULL mode is not recommended for inventory synchronization.
+            - Use INCREMENTAL mode to add warehouse associations or update inventory. To unlink warehouses, send separate requests using INCREMENTAL mode with delete_warehouse_ids.
       required:
         - skus
     UpdateInventoryRequestSku:
@@ -83043,11 +83089,30 @@ components:
           items:
             $ref: "#/components/schemas/UpdateInventoryRequestSkuInventory"
           description: |-
-            SKU inventory information.
-            **Note**: You must include all warehouse IDs assigned to this SKU, along with the respective quantity. Do not omit any or add unrelated warehouses.
+            SKU inventory information, including warehouse IDs and their corresponding quantities.
+
+              Note:
+
+              • If sku_warehouse_stock_update_mode is omitted, this list is required and must not be empty. It must include at least one warehouse already associated with the SKU. Existing warehouse associations omitted from the list are retained.
+
+              • INCREMENTAL (1): Updates inventory only for the specified warehouses, creating warehouse associations if needed. This list can be omitted or empty when a non-empty unlink_warehouse_ids list is provided. At least one of inventory or
+                unlink_warehouse_ids must contain an item. Warehouses not specified in either list remain unchanged.
+
+              • FULL (2): This list is required and must not be empty. It specifies the complete set of warehouse associations to retain and their inventory quantities. Existing warehouse associations omitted from the list are removed, subject to
+                warehouse unlinking restrictions. Providing unlink_warehouse_ids in this mode returns an error.
+        unlink_warehouse_ids:
+          type: array
+          items:
+            type: string
+          description: |-
+            The IDs of the warehouses to unlink from the SKU.
+
+            Note:
+
+            - This field can only be used in INCREMENTAL (1) mode.
+            - Unlinking warehouses and updating warehouse inventory in the same request is not recommended. Send separate requests to prevent warehouse unlinking restrictions from blocking inventory updates.
       required:
         - id
-        - inventory
     UpdateInventoryRequestSkuInventory:
       type: object
       properties:
