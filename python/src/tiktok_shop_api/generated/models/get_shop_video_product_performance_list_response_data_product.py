@@ -12,6 +12,7 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
+  from ..models.get_shop_video_product_performance_list_response_data_product_product_image import GetShopVideoProductPerformanceListResponseDataProductProductImage
   from ..models.gmv import Gmv
   from ..models.gpm import Gpm
 
@@ -35,6 +36,8 @@ class GetShopVideoProductPerformanceListResponseDataProduct:
             id (str | Unset): The ID of the product promoted in the video.
             name (str | Unset): The name of the product promoted in the video.
             product_clicks (int | Unset): Number of product clicks.
+            product_detail_url (str | Unset): URL of the product detail page.
+            product_image (GetShopVideoProductPerformanceListResponseDataProductProductImage | Unset):
             product_impressions (int | Unset): Number of product impressions.
             units_sold (int | Unset): Number of units sold for the current product.
      """
@@ -47,6 +50,8 @@ class GetShopVideoProductPerformanceListResponseDataProduct:
     id: str | Unset = UNSET
     name: str | Unset = UNSET
     product_clicks: int | Unset = UNSET
+    product_detail_url: str | Unset = UNSET
+    product_image: GetShopVideoProductPerformanceListResponseDataProductProductImage | Unset = UNSET
     product_impressions: int | Unset = UNSET
     units_sold: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -56,6 +61,7 @@ class GetShopVideoProductPerformanceListResponseDataProduct:
 
 
     def to_dict(self) -> dict[str, Any]:
+        from ..models.get_shop_video_product_performance_list_response_data_product_product_image import GetShopVideoProductPerformanceListResponseDataProductProductImage # noqa: PLC0415
         from ..models.gmv import Gmv # noqa: PLC0415
         from ..models.gpm import Gpm # noqa: PLC0415
         ctr = self.ctr
@@ -77,6 +83,12 @@ class GetShopVideoProductPerformanceListResponseDataProduct:
         name = self.name
 
         product_clicks = self.product_clicks
+
+        product_detail_url = self.product_detail_url
+
+        product_image: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.product_image, Unset):
+            product_image = self.product_image.to_dict()
 
         product_impressions = self.product_impressions
 
@@ -103,6 +115,10 @@ class GetShopVideoProductPerformanceListResponseDataProduct:
             field_dict["name"] = name
         if product_clicks is not UNSET:
             field_dict["product_clicks"] = product_clicks
+        if product_detail_url is not UNSET:
+            field_dict["product_detail_url"] = product_detail_url
+        if product_image is not UNSET:
+            field_dict["product_image"] = product_image
         if product_impressions is not UNSET:
             field_dict["product_impressions"] = product_impressions
         if units_sold is not UNSET:
@@ -114,6 +130,7 @@ class GetShopVideoProductPerformanceListResponseDataProduct:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.get_shop_video_product_performance_list_response_data_product_product_image import GetShopVideoProductPerformanceListResponseDataProductProductImage # noqa: PLC0415
         from ..models.gmv import Gmv # noqa: PLC0415
         from ..models.gpm import Gpm # noqa: PLC0415
         d = dict(src_dict)
@@ -149,6 +166,18 @@ class GetShopVideoProductPerformanceListResponseDataProduct:
 
         product_clicks = d.pop("product_clicks", UNSET)
 
+        product_detail_url = d.pop("product_detail_url", UNSET)
+
+        _product_image = d.pop("product_image", UNSET)
+        product_image: GetShopVideoProductPerformanceListResponseDataProductProductImage | Unset
+        if isinstance(_product_image,  Unset):
+            product_image = UNSET
+        else:
+            product_image = GetShopVideoProductPerformanceListResponseDataProductProductImage.from_dict(_product_image)
+
+
+
+
         product_impressions = d.pop("product_impressions", UNSET)
 
         units_sold = d.pop("units_sold", UNSET)
@@ -162,6 +191,8 @@ class GetShopVideoProductPerformanceListResponseDataProduct:
             id=id,
             name=name,
             product_clicks=product_clicks,
+            product_detail_url=product_detail_url,
+            product_image=product_image,
             product_impressions=product_impressions,
             units_sold=units_sold,
         )

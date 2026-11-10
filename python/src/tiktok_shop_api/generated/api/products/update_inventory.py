@@ -73,8 +73,13 @@ def sync_detailed(
 ) -> Response[UpdateInventoryResponse]:
     """ Update Inventory
 
-     Update the inventory quantity of SKUs belonging to a product. The product must be in `DRAFT`,
+     Update the inventory quantity of SKUs belonging to a product. The product must be in`DRAFT`,
     `PENDING`, `FAILED`, `ACTIVATE`, or `SELLER_DEACTIVATED` status.
+    This API also supports `INCREMENTAL` mode to update inventory and add or unlink specific warehouses,
+    and `FULL` mode to update inventory and replace each SKU’s warehouse list. For details, including
+    the behavior when no mode is specified, see the sku_warehouse_stock_update_mode field description.
+    Note: FBT warehouses must not be included in the warehouse list in any update mode, including
+    `FULL`, even if their inventory quantities remain unchanged.
 
     Args:
         product_id (str):
@@ -110,8 +115,13 @@ def sync(
 ) -> UpdateInventoryResponse | None:
     """ Update Inventory
 
-     Update the inventory quantity of SKUs belonging to a product. The product must be in `DRAFT`,
+     Update the inventory quantity of SKUs belonging to a product. The product must be in`DRAFT`,
     `PENDING`, `FAILED`, `ACTIVATE`, or `SELLER_DEACTIVATED` status.
+    This API also supports `INCREMENTAL` mode to update inventory and add or unlink specific warehouses,
+    and `FULL` mode to update inventory and replace each SKU’s warehouse list. For details, including
+    the behavior when no mode is specified, see the sku_warehouse_stock_update_mode field description.
+    Note: FBT warehouses must not be included in the warehouse list in any update mode, including
+    `FULL`, even if their inventory quantities remain unchanged.
 
     Args:
         product_id (str):
@@ -142,8 +152,13 @@ async def asyncio_detailed(
 ) -> Response[UpdateInventoryResponse]:
     """ Update Inventory
 
-     Update the inventory quantity of SKUs belonging to a product. The product must be in `DRAFT`,
+     Update the inventory quantity of SKUs belonging to a product. The product must be in`DRAFT`,
     `PENDING`, `FAILED`, `ACTIVATE`, or `SELLER_DEACTIVATED` status.
+    This API also supports `INCREMENTAL` mode to update inventory and add or unlink specific warehouses,
+    and `FULL` mode to update inventory and replace each SKU’s warehouse list. For details, including
+    the behavior when no mode is specified, see the sku_warehouse_stock_update_mode field description.
+    Note: FBT warehouses must not be included in the warehouse list in any update mode, including
+    `FULL`, even if their inventory quantities remain unchanged.
 
     Args:
         product_id (str):
@@ -179,8 +194,13 @@ async def asyncio(
 ) -> UpdateInventoryResponse | None:
     """ Update Inventory
 
-     Update the inventory quantity of SKUs belonging to a product. The product must be in `DRAFT`,
+     Update the inventory quantity of SKUs belonging to a product. The product must be in`DRAFT`,
     `PENDING`, `FAILED`, `ACTIVATE`, or `SELLER_DEACTIVATED` status.
+    This API also supports `INCREMENTAL` mode to update inventory and add or unlink specific warehouses,
+    and `FULL` mode to update inventory and replace each SKU’s warehouse list. For details, including
+    the behavior when no mode is specified, see the sku_warehouse_stock_update_mode field description.
+    Note: FBT warehouses must not be included in the warehouse list in any update mode, including
+    `FULL`, even if their inventory quantities remain unchanged.
 
     Args:
         product_id (str):

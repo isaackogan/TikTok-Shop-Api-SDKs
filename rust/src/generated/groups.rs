@@ -3646,7 +3646,7 @@ impl ProductsApi {
         .map_err(Error::from)
     }
 
-    /// Update the inventory quantity of SKUs belonging to a product. The product must be in `DRAFT`, `PENDING`, `FAILED`, `ACTIVATE`, or `SELLER_DEACTIVATED` status.
+    /// Update the inventory quantity of SKUs belonging to a product. The product must be in`DRAFT`, `PENDING`, `FAILED`, `ACTIVATE`, or `SELLER_DEACTIVATED` status. This API also supports `INCREMENTAL` mode to update inventory and add or unlink specific warehouses, and `FULL` mode to update inventory and replace each SKU’s warehouse list. For details, including the behavior when no mode is specified, see the sku_warehouse_stock_update_mode field description. Note: FBT warehouses must not be included in the warehouse list in any update mode, including `FULL`, even if their inventory quantities remain unchanged.
     pub async fn update_inventory(
         &self,
         product_id: &str,

@@ -1320,6 +1320,7 @@ from .get_shop_video_product_performance_list_currency import GetShopVideoProduc
 from .get_shop_video_product_performance_list_response import GetShopVideoProductPerformanceListResponse
 from .get_shop_video_product_performance_list_response_data import GetShopVideoProductPerformanceListResponseData
 from .get_shop_video_product_performance_list_response_data_product import GetShopVideoProductPerformanceListResponseDataProduct
+from .get_shop_video_product_performance_list_response_data_product_product_image import GetShopVideoProductPerformanceListResponseDataProductProductImage
 from .get_shop_video_product_performance_list_sort_field import GetShopVideoProductPerformanceListSortField
 from .get_shop_video_product_performance_list_sort_order import GetShopVideoProductPerformanceListSortOrder
 from .get_shop_videos_performance_details_currency import GetShopVideosPerformanceDetailsCurrency
@@ -3814,6 +3815,7 @@ __all__ = (
     "GetShopVideoProductPerformanceListResponse",
     "GetShopVideoProductPerformanceListResponseData",
     "GetShopVideoProductPerformanceListResponseDataProduct",
+    "GetShopVideoProductPerformanceListResponseDataProductProductImage",
     "GetShopVideoProductPerformanceListSortField",
     "GetShopVideoProductPerformanceListSortOrder",
     "GetShopVideosPerformanceDetailsCurrency",

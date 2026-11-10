@@ -8,6 +8,7 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
@@ -30,13 +31,36 @@ class UpdateInventoryRequestSku:
                 **Note**:
                 - The SKU ID must belong to a product that is not in `FREEZE` or `DELETED` status.
                 - If you are updating multiple SKUs, all the SKU IDs must belong to the same product.
-            inventory (list[UpdateInventoryRequestSkuInventory]): SKU inventory information.
-                **Note**: You must include all warehouse IDs assigned to this SKU, along with the respective quantity. Do not
-                omit any or add unrelated warehouses.
+            inventory (list[UpdateInventoryRequestSkuInventory] | Unset): SKU inventory information, including warehouse IDs
+                and their corresponding quantities.
+
+                  Note:
+
+                  • If sku_warehouse_stock_update_mode is omitted, this list is required and must not be empty. It must include
+                at least one warehouse already associated with the SKU. Existing warehouse associations omitted from the list
+                are retained.
+
+                  • INCREMENTAL (1): Updates inventory only for the specified warehouses, creating warehouse associations if
+                needed. This list can be omitted or empty when a non-empty unlink_warehouse_ids list is provided. At least one
+                of inventory or
+                    unlink_warehouse_ids must contain an item. Warehouses not specified in either list remain unchanged.
+
+                  • FULL (2): This list is required and must not be empty. It specifies the complete set of warehouse
+                associations to retain and their inventory quantities. Existing warehouse associations omitted from the list are
+                removed, subject to
+                    warehouse unlinking restrictions. Providing unlink_warehouse_ids in this mode returns an error.
+            unlink_warehouse_ids (list[str] | Unset): The IDs of the warehouses to unlink from the SKU.
+
+                Note:
+
+                - This field can only be used in INCREMENTAL (1) mode.
+                - Unlinking warehouses and updating warehouse inventory in the same request is not recommended. Send separate
+                requests to prevent warehouse unlinking restrictions from blocking inventory updates.
      """
 
     id: str
-    inventory: list[UpdateInventoryRequestSkuInventory]
+    inventory: list[UpdateInventoryRequestSkuInventory] | Unset = UNSET
+    unlink_warehouse_ids: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -47,10 +71,18 @@ class UpdateInventoryRequestSku:
         from ..models.update_inventory_request_sku_inventory import UpdateInventoryRequestSkuInventory # noqa: PLC0415
         id = self.id
 
-        inventory = []
-        for inventory_item_data in self.inventory:
-            inventory_item = inventory_item_data.to_dict()
-            inventory.append(inventory_item)
+        inventory: list[dict[str, Any]] | Unset = UNSET
+        if not isinstance(self.inventory, Unset):
+            inventory = []
+            for inventory_item_data in self.inventory:
+                inventory_item = inventory_item_data.to_dict()
+                inventory.append(inventory_item)
+
+
+
+        unlink_warehouse_ids: list[str] | Unset = UNSET
+        if not isinstance(self.unlink_warehouse_ids, Unset):
+            unlink_warehouse_ids = self.unlink_warehouse_ids
 
 
 
@@ -59,8 +91,11 @@ class UpdateInventoryRequestSku:
         field_dict.update(self.additional_properties)
         field_dict.update({
             "id": id,
-            "inventory": inventory,
         })
+        if inventory is not UNSET:
+            field_dict["inventory"] = inventory
+        if unlink_warehouse_ids is not UNSET:
+            field_dict["unlink_warehouse_ids"] = unlink_warehouse_ids
 
         return field_dict
 
@@ -72,19 +107,25 @@ class UpdateInventoryRequestSku:
         d = dict(src_dict)
         id = d.pop("id")
 
-        inventory = []
-        _inventory = d.pop("inventory")
-        for inventory_item_data in (_inventory):
-            inventory_item = UpdateInventoryRequestSkuInventory.from_dict(inventory_item_data)
+        _inventory = d.pop("inventory", UNSET)
+        inventory: list[UpdateInventoryRequestSkuInventory] | Unset = UNSET
+        if _inventory is not UNSET:
+            inventory = []
+            for inventory_item_data in _inventory:
+                inventory_item = UpdateInventoryRequestSkuInventory.from_dict(inventory_item_data)
 
 
 
-            inventory.append(inventory_item)
+                inventory.append(inventory_item)
+
+
+        unlink_warehouse_ids = cast(list[str], d.pop("unlink_warehouse_ids", UNSET))
 
 
         update_inventory_request_sku = cls(
             id=id,
             inventory=inventory,
+            unlink_warehouse_ids=unlink_warehouse_ids,
         )
 
 

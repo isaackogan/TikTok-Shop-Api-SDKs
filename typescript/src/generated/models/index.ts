@@ -1191,6 +1191,7 @@ export * from './GetShopVideoPerformanceOverviewResponseDataPerformanceIntervalS
 export * from './GetShopVideoProductPerformanceListResponse';
 export * from './GetShopVideoProductPerformanceListResponseData';
 export * from './GetShopVideoProductPerformanceListResponseDataProduct';
+export * from './GetShopVideoProductPerformanceListResponseDataProductProductImage';
 export * from './GetShopVideosPerformanceDetailsResponse';
 export * from './GetShopVideosPerformanceDetailsResponseData';
 export * from './GetShopVideosPerformanceDetailsResponseDataVideo';

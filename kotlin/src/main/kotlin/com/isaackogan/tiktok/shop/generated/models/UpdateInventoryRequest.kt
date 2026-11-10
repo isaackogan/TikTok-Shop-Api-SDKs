@@ -31,6 +31,7 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param skus A list of Stock Keeping Units (SKUs) used to identify distinct variants of the product.
+ * @param skuWarehouseStockUpdateMode The mode used to update warehouse inventory for a SKU. This parameter was introduced in October 2026.  Note:  - If omitted, DEFAULT mode applies. This follows the behavior used before October 2026: the submitted warehouse list must include at least one warehouse already associated with the SKU. For example, if a SKU is associated with warehouses A and B, a request specifying only warehouse C does not meet this requirement. The list must also include A or B. - INCREMENTAL (1): Updates only the specified warehouses. You can specify warehouses regardless of whether they are already associated with the SKU. If an association does not exist, it is created and the inventory is set; otherwise, the inventory is updated. You can also use delete_warehouse_ids to specify warehouses to unlink from the SKU. - FULL (2): Updates inventory and uses the submitted SKU–warehouse list as the complete set of warehouse associations to retain. Any existing warehouse associations omitted from the list are removed. Providing delete_warehouse_ids in this mode returns an error.  Important:  - Unlinking a warehouse is subject to multiple restrictions. For example, the warehouse must have no unfulfilled orders, and the inventory remaining after unlinking must be sufficient to cover quantities locked for campaigns. - Avoid making inventory synchronization depend on successful warehouse unlinking. For this reason, FULL mode is not recommended for inventory synchronization. - Use INCREMENTAL mode to add warehouse associations or update inventory. To unlink warehouses, send separate requests using INCREMENTAL mode with delete_warehouse_ids.
  */
 
 
@@ -38,7 +39,11 @@ data class UpdateInventoryRequest (
 
     /* A list of Stock Keeping Units (SKUs) used to identify distinct variants of the product. */
     @SerializedName("skus")
-    val skus: kotlin.collections.List<UpdateInventoryRequestSku>
+    val skus: kotlin.collections.List<UpdateInventoryRequestSku>,
+
+    /* The mode used to update warehouse inventory for a SKU. This parameter was introduced in October 2026.  Note:  - If omitted, DEFAULT mode applies. This follows the behavior used before October 2026: the submitted warehouse list must include at least one warehouse already associated with the SKU. For example, if a SKU is associated with warehouses A and B, a request specifying only warehouse C does not meet this requirement. The list must also include A or B. - INCREMENTAL (1): Updates only the specified warehouses. You can specify warehouses regardless of whether they are already associated with the SKU. If an association does not exist, it is created and the inventory is set; otherwise, the inventory is updated. You can also use delete_warehouse_ids to specify warehouses to unlink from the SKU. - FULL (2): Updates inventory and uses the submitted SKU–warehouse list as the complete set of warehouse associations to retain. Any existing warehouse associations omitted from the list are removed. Providing delete_warehouse_ids in this mode returns an error.  Important:  - Unlinking a warehouse is subject to multiple restrictions. For example, the warehouse must have no unfulfilled orders, and the inventory remaining after unlinking must be sufficient to cover quantities locked for campaigns. - Avoid making inventory synchronization depend on successful warehouse unlinking. For this reason, FULL mode is not recommended for inventory synchronization. - Use INCREMENTAL mode to add warehouse associations or update inventory. To unlink warehouses, send separate requests using INCREMENTAL mode with delete_warehouse_ids. */
+    @SerializedName("sku_warehouse_stock_update_mode")
+    val skuWarehouseStockUpdateMode: kotlin.String? = null
 
 ) {
 

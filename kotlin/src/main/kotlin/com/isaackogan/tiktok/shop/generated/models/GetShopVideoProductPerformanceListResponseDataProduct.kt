@@ -23,6 +23,7 @@
 
 package com.isaackogan.tiktok.shop.generated.models
 
+import com.isaackogan.tiktok.shop.generated.models.GetShopVideoProductPerformanceListResponseDataProductProductImage
 import com.isaackogan.tiktok.shop.generated.models.Gmv
 import com.isaackogan.tiktok.shop.generated.models.Gpm
 
@@ -39,6 +40,8 @@ import com.google.gson.annotations.SerializedName
  * @param id The ID of the product promoted in the video.
  * @param name The name of the product promoted in the video.
  * @param productClicks Number of product clicks.
+ * @param productDetailUrl URL of the product detail page.
+ * @param productImage Product image information.
  * @param productImpressions Number of product impressions.
  * @param unitsSold Number of units sold for the current product.
  */
@@ -77,6 +80,14 @@ data class GetShopVideoProductPerformanceListResponseDataProduct (
     /* Number of product clicks. */
     @SerializedName("product_clicks")
     val productClicks: kotlin.Long? = null,
+
+    /* URL of the product detail page. */
+    @SerializedName("product_detail_url")
+    val productDetailUrl: kotlin.String? = null,
+
+    /* Product image information. */
+    @SerializedName("product_image")
+    val productImage: GetShopVideoProductPerformanceListResponseDataProductProductImage? = null,
 
     /* Number of product impressions. */
     @SerializedName("product_impressions")
