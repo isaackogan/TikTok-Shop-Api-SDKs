@@ -1714,11 +1714,6 @@ impl AnalyticsApi {
         apis::analytics_api::get_sps_metric_top_items(&self.config, metric_code, locale).await.map_err(Error::from)
     }
 
-    /// Returns the SPS overview for the authorized shop, including the score, tier, dimensions, benefits, and top issues.  Shop Performance Score (SPS) reflects a shop’s performance across key operational and service metrics on TikTok Shop. By integrating the read-only SPS APIs, ISVs can retrieve a shop’s score, tier, benefits, and metric benchmarks, diagnose performance gaps, and drill down to the products, logistics providers, aftersales types, orders, or chats associated with specific issues. This enables ISVs to embed actionable performance insights into their solutions, helping merchants identify problem areas faster and take targeted actions to improve shop performance. Available only for US-region shops. Use case guide: [Click here](https://partner.tiktokshop.com/docv2/page/ph0ccose)
-    pub async fn get_sps_overview(&self, locale: Option<&str>) -> Result<models::GetSpsOverviewResponse, Error> {
-        apis::analytics_api::get_sps_overview(&self.config, locale).await.map_err(Error::from)
-    }
-
     /// Returns performance metrics at shop/seller level.
     pub async fn get_shop_performance(
         &self,
@@ -2057,6 +2052,16 @@ impl AnalyticsApi {
     /// Retrieve the Pixel IDs available to the authorized shop.
     pub async fn get_shop_off_site_pixels(&self) -> Result<models::GetShopOffSitePixelsResponse, Error> {
         apis::analytics_api::get_shop_off_site_pixels(&self.config).await.map_err(Error::from)
+    }
+
+    /// Returns the current SPS benefits for the authorized shop.  Shop Performance Score (SPS) reflects a shop’s performance across key operational and service metrics on TikTok Shop. By integrating the read-only SPS APIs, ISVs can retrieve a shop’s score, tier, benefits, and metric benchmarks, diagnose performance gaps, and drill down to the products, logistics providers, aftersales types, orders, or chats associated with specific issues. This enables ISVs to embed actionable performance insights into their solutions, helping merchants identify problem areas faster and take targeted actions to improve shop performance. Available only for US-region shops. Use case guide: [Click here](https://partner.tiktokshop.com/docv2/page/ph0ccose)
+    pub async fn get_sps_benefits(&self, locale: Option<&str>) -> Result<models::GetSpsBenefitsResponse, Error> {
+        apis::analytics_api::get_sps_benefits(&self.config, locale).await.map_err(Error::from)
+    }
+
+    /// Returns the SPS overview for the authorized shop, including the score, tier and dimensions.  Shop Performance Score (SPS) reflects a shop’s performance across key operational and service metrics on TikTok Shop. By integrating the read-only SPS APIs, ISVs can retrieve a shop’s score, tier, benefits, and metric benchmarks, diagnose performance gaps, and drill down to the products, logistics providers, aftersales types, orders, or chats associated with specific issues. This enables ISVs to embed actionable performance insights into their solutions, helping merchants identify problem areas faster and take targeted actions to improve shop performance. Available only for US-region shops. Use case guide: [Click here](https://partner.tiktokshop.com/docv2/page/ph0ccose)
+    pub async fn get_sps_overview(&self, locale: Option<&str>) -> Result<models::GetSpsOverviewResponse, Error> {
+        apis::analytics_api::get_sps_overview(&self.config, locale).await.map_err(Error::from)
     }
 }
 

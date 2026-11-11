@@ -33,7 +33,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/analytics/202606/shop_performances/overview",
+        "url": "/analytics/202610/shop_performances/overview",
         "params": params,
     }
 
@@ -73,8 +73,7 @@ def sync_detailed(
 ) -> Response[GetSPSOverviewResponse]:
     """ Get SPS Overview
 
-     Returns the SPS overview for the authorized shop, including the score, tier, dimensions, benefits,
-    and top issues.
+     Returns the SPS overview for the authorized shop, including the score, tier and dimensions.
     Shop Performance Score (SPS) reflects a shop’s performance across key operational and service
     metrics on TikTok Shop. By integrating the read-only SPS APIs, ISVs can retrieve a shop’s score,
     tier, benefits, and metric benchmarks, diagnose performance gaps, and drill down to the products,
@@ -115,8 +114,7 @@ def sync(
 ) -> GetSPSOverviewResponse | None:
     """ Get SPS Overview
 
-     Returns the SPS overview for the authorized shop, including the score, tier, dimensions, benefits,
-    and top issues.
+     Returns the SPS overview for the authorized shop, including the score, tier and dimensions.
     Shop Performance Score (SPS) reflects a shop’s performance across key operational and service
     metrics on TikTok Shop. By integrating the read-only SPS APIs, ISVs can retrieve a shop’s score,
     tier, benefits, and metric benchmarks, diagnose performance gaps, and drill down to the products,
@@ -152,8 +150,7 @@ async def asyncio_detailed(
 ) -> Response[GetSPSOverviewResponse]:
     """ Get SPS Overview
 
-     Returns the SPS overview for the authorized shop, including the score, tier, dimensions, benefits,
-    and top issues.
+     Returns the SPS overview for the authorized shop, including the score, tier and dimensions.
     Shop Performance Score (SPS) reflects a shop’s performance across key operational and service
     metrics on TikTok Shop. By integrating the read-only SPS APIs, ISVs can retrieve a shop’s score,
     tier, benefits, and metric benchmarks, diagnose performance gaps, and drill down to the products,
@@ -194,8 +191,7 @@ async def asyncio(
 ) -> GetSPSOverviewResponse | None:
     """ Get SPS Overview
 
-     Returns the SPS overview for the authorized shop, including the score, tier, dimensions, benefits,
-    and top issues.
+     Returns the SPS overview for the authorized shop, including the score, tier and dimensions.
     Shop Performance Score (SPS) reflects a shop’s performance across key operational and service
     metrics on TikTok Shop. By integrating the read-only SPS APIs, ISVs can retrieve a shop’s score,
     tier, benefits, and metric benchmarks, diagnose performance gaps, and drill down to the products,

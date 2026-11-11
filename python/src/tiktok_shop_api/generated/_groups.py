@@ -359,6 +359,7 @@ if TYPE_CHECKING:
     from .models.get_shoppable_video_precheck_result_response import GetShoppableVideoPrecheckResultResponse
     from .models.get_shoppable_video_status_response import GetShoppableVideoStatusResponse
     from .models.get_showcase_products_response import GetShowcaseProductsResponse
+    from .models.get_sps_benefits_response import GetSPSBenefitsResponse
     from .models.get_sps_metric_diagnosis_response import GetSPSMetricDiagnosisResponse
     from .models.get_sps_metric_problem_details_response import GetSPSMetricProblemDetailsResponse
     from .models.get_sps_metric_top_items_response import GetSPSMetricTopItemsResponse
@@ -6020,6 +6021,34 @@ class AnalyticsApi(SyncGroup):
 
         return self._run(_op.sync_detailed, video_ids=video_ids, start_date_ge=start_date_ge, end_date_lt=end_date_lt, granularity=granularity, currency=currency)
 
+    def get_sps_benefits(
+        self,
+        *,
+        locale: str | Unset = UNSET,
+    ) -> GetSPSBenefitsResponse | None:
+        """Get SPS Benefits
+
+         Returns the current SPS benefits for the authorized shop.
+        Shop Performance Score (SPS) reflects a shop’s performance across key operational and service
+        metrics on TikTok Shop. By integrating the read-only SPS APIs, ISVs can retrieve a shop’s score,
+        tier, benefits, and metric benchmarks, diagnose performance gaps, and drill down to the products,
+        logistics providers, aftersales types, orders, or chats associated with specific issues. This
+        enables ISVs to embed actionable performance insights into their solutions, helping merchants
+        identify problem areas faster and take targeted actions to improve shop performance. Available only
+        for US-region shops.
+        Use case guide: [Click here](https://partner.tiktokshop.com/docv2/page/ph0ccose)
+
+        Args:
+            locale (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_sps_benefits as _op
+
+        return self._run(_op.sync_detailed, locale=locale)
+
     def get_sps_metric_diagnosis(
         self,
         metric_code: str,
@@ -6152,8 +6181,7 @@ class AnalyticsApi(SyncGroup):
     ) -> GetSPSOverviewResponse | None:
         """Get SPS Overview
 
-         Returns the SPS overview for the authorized shop, including the score, tier, dimensions, benefits,
-        and top issues.
+         Returns the SPS overview for the authorized shop, including the score, tier and dimensions.
         Shop Performance Score (SPS) reflects a shop’s performance across key operational and service
         metrics on TikTok Shop. By integrating the read-only SPS APIs, ISVs can retrieve a shop’s score,
         tier, benefits, and metric benchmarks, diagnose performance gaps, and drill down to the products,
@@ -7258,6 +7286,34 @@ class AsyncAnalyticsApi(AsyncGroup):
 
         return await self._run(_op.asyncio_detailed, video_ids=video_ids, start_date_ge=start_date_ge, end_date_lt=end_date_lt, granularity=granularity, currency=currency)
 
+    async def get_sps_benefits(
+        self,
+        *,
+        locale: str | Unset = UNSET,
+    ) -> GetSPSBenefitsResponse | None:
+        """Get SPS Benefits
+
+         Returns the current SPS benefits for the authorized shop.
+        Shop Performance Score (SPS) reflects a shop’s performance across key operational and service
+        metrics on TikTok Shop. By integrating the read-only SPS APIs, ISVs can retrieve a shop’s score,
+        tier, benefits, and metric benchmarks, diagnose performance gaps, and drill down to the products,
+        logistics providers, aftersales types, orders, or chats associated with specific issues. This
+        enables ISVs to embed actionable performance insights into their solutions, helping merchants
+        identify problem areas faster and take targeted actions to improve shop performance. Available only
+        for US-region shops.
+        Use case guide: [Click here](https://partner.tiktokshop.com/docv2/page/ph0ccose)
+
+        Args:
+            locale (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_sps_benefits as _op
+
+        return await self._run(_op.asyncio_detailed, locale=locale)
+
     async def get_sps_metric_diagnosis(
         self,
         metric_code: str,
@@ -7390,8 +7446,7 @@ class AsyncAnalyticsApi(AsyncGroup):
     ) -> GetSPSOverviewResponse | None:
         """Get SPS Overview
 
-         Returns the SPS overview for the authorized shop, including the score, tier, dimensions, benefits,
-        and top issues.
+         Returns the SPS overview for the authorized shop, including the score, tier and dimensions.
         Shop Performance Score (SPS) reflects a shop’s performance across key operational and service
         metrics on TikTok Shop. By integrating the read-only SPS APIs, ISVs can retrieve a shop’s score,
         tier, benefits, and metric benchmarks, diagnose performance gaps, and drill down to the products,

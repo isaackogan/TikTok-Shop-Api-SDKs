@@ -1362,6 +1362,9 @@ from .get_showcase_products_response_data_product_price_original_price import Ge
 from .get_showcase_products_response_data_product_price_platform_discount_price import GetShowcaseProductsResponseDataProductPricePlatformDiscountPrice
 from .get_showcase_products_response_data_product_price_seller_discount_price import GetShowcaseProductsResponseDataProductPriceSellerDiscountPrice
 from .get_showcase_products_response_data_product_status import GetShowcaseProductsResponseDataProductStatus
+from .get_sps_benefits_response import GetSPSBenefitsResponse
+from .get_sps_benefits_response_data import GetSPSBenefitsResponseData
+from .get_sps_benefits_response_data_benefit import GetSPSBenefitsResponseDataBenefit
 from .get_sps_metric_diagnosis_response import GetSPSMetricDiagnosisResponse
 from .get_sps_metric_diagnosis_response_data import GetSPSMetricDiagnosisResponseData
 from .get_sps_metric_diagnosis_response_data_analysis import GetSPSMetricDiagnosisResponseDataAnalysis
@@ -1388,11 +1391,8 @@ from .get_sps_metrics_response_data import GetSPSMetricsResponseData
 from .get_sps_metrics_response_data_metric import GetSPSMetricsResponseDataMetric
 from .get_sps_overview_response import GetSPSOverviewResponse
 from .get_sps_overview_response_data import GetSPSOverviewResponseData
-from .get_sps_overview_response_data_benefit import GetSPSOverviewResponseDataBenefit
 from .get_sps_overview_response_data_dimension import GetSPSOverviewResponseDataDimension
 from .get_sps_overview_response_data_primary_category import GetSPSOverviewResponseDataPrimaryCategory
-from .get_sps_overview_response_data_top_issue import GetSPSOverviewResponseDataTopIssue
-from .get_sps_overview_response_data_top_issue_issue import GetSPSOverviewResponseDataTopIssueIssue
 from .get_statements_payment_status import GetStatementsPaymentStatus
 from .get_statements_response import GetStatementsResponse
 from .get_statements_response_data import GetStatementsResponseData
@@ -3847,6 +3847,9 @@ __all__ = (
     "GetShowcaseProductsResponseDataProductPricePlatformDiscountPrice",
     "GetShowcaseProductsResponseDataProductPriceSellerDiscountPrice",
     "GetShowcaseProductsResponseDataProductStatus",
+    "GetSPSBenefitsResponse",
+    "GetSPSBenefitsResponseData",
+    "GetSPSBenefitsResponseDataBenefit",
     "GetSPSMetricDiagnosisResponse",
     "GetSPSMetricDiagnosisResponseData",
     "GetSPSMetricDiagnosisResponseDataAnalysis",
@@ -3873,11 +3876,8 @@ __all__ = (
     "GetSPSMetricTopItemsResponseDataOtdrLogisticsItem",
     "GetSPSOverviewResponse",
     "GetSPSOverviewResponseData",
-    "GetSPSOverviewResponseDataBenefit",
     "GetSPSOverviewResponseDataDimension",
     "GetSPSOverviewResponseDataPrimaryCategory",
-    "GetSPSOverviewResponseDataTopIssue",
-    "GetSPSOverviewResponseDataTopIssueIssue",
     "GetStatementsPaymentStatus",
     "GetStatementsResponse",
     "GetStatementsResponseData",

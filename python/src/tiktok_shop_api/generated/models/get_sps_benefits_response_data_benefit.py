@@ -15,12 +15,12 @@ from ..types import UNSET, Unset
 
 
 
-T = TypeVar("T", bound="GetSPSOverviewResponseDataBenefit")
+T = TypeVar("T", bound="GetSPSBenefitsResponseDataBenefit")
 
 
 
 @_attrs_define
-class GetSPSOverviewResponseDataBenefit:
+class GetSPSBenefitsResponseDataBenefit:
     """ 
         Attributes:
             benefit_name (str | Unset): Benefit display name localized by the requested locale.
@@ -69,15 +69,15 @@ class GetSPSOverviewResponseDataBenefit:
 
         unlock_score = d.pop("unlock_score", UNSET)
 
-        get_sps_overview_response_data_benefit = cls(
+        get_sps_benefits_response_data_benefit = cls(
             benefit_name=benefit_name,
             is_unlocked=is_unlocked,
             unlock_score=unlock_score,
         )
 
 
-        get_sps_overview_response_data_benefit.additional_properties = d
-        return get_sps_overview_response_data_benefit
+        get_sps_benefits_response_data_benefit.additional_properties = d
+        return get_sps_benefits_response_data_benefit
 
     @property
     def additional_keys(self) -> list[str]:

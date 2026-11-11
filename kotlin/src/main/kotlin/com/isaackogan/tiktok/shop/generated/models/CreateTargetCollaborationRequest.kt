@@ -39,7 +39,8 @@ import com.google.gson.annotations.SerializedName
  * @param sellerContactInfo Metadata and data associated with the seller contact information.
  * @param freeSampleRule A set of properties that control the free sample behavior for the product.
  * @param message The message sent to creators associated with the target collaboration.
- * @param preferredContentType preferred creator content type, \"LIVE\" or \"VIDEO\"
+ * @param preferredContentType Deprecated. Previously used to specify the preferred creator content type (LIVE or VIDEO). The value is still accepted without error, but it no longer takes effect. Use sample_fulfillment_content_type instead.
+ * @param sampleFulfillmentContentType Sample fulfillment content type required for the target collaboration. Valid values: NO_PREFERENCE, SHOPPABLE_LIVE. Defaults to NO_PREFERENCE when not provided.
  */
 
 
@@ -73,9 +74,14 @@ data class CreateTargetCollaborationRequest (
     @SerializedName("message")
     val message: kotlin.String? = null,
 
-    /* preferred creator content type, \"LIVE\" or \"VIDEO\" */
+    /* Deprecated. Previously used to specify the preferred creator content type (LIVE or VIDEO). The value is still accepted without error, but it no longer takes effect. Use sample_fulfillment_content_type instead. */
     @SerializedName("preferred_content_type")
-    val preferredContentType: kotlin.String? = null
+    @Deprecated(message = "This property is deprecated.")
+    val preferredContentType: kotlin.String? = null,
+
+    /* Sample fulfillment content type required for the target collaboration. Valid values: NO_PREFERENCE, SHOPPABLE_LIVE. Defaults to NO_PREFERENCE when not provided. */
+    @SerializedName("sample_fulfillment_content_type")
+    val sampleFulfillmentContentType: kotlin.String? = null
 
 ) {
 

@@ -37,7 +37,11 @@ class CreateTargetCollaborationRequest:
             seller_contact_info (SellerContactInfo):
             free_sample_rule (FreeSampleRule):
             message (str | Unset): The message sent to creators associated with the target collaboration.
-            preferred_content_type (str | Unset): preferred creator content type, "LIVE" or "VIDEO"
+            preferred_content_type (str | Unset): Deprecated. Previously used to specify the preferred creator content type
+                (LIVE or VIDEO). The value is still accepted without error, but it no longer takes effect. Use
+                sample_fulfillment_content_type instead.
+            sample_fulfillment_content_type (str | Unset): Sample fulfillment content type required for the target
+                collaboration. Valid values: NO_PREFERENCE, SHOPPABLE_LIVE. Defaults to NO_PREFERENCE when not provided.
      """
 
     name: str
@@ -48,6 +52,7 @@ class CreateTargetCollaborationRequest:
     free_sample_rule: FreeSampleRule
     message: str | Unset = UNSET
     preferred_content_type: str | Unset = UNSET
+    sample_fulfillment_content_type: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -81,6 +86,8 @@ class CreateTargetCollaborationRequest:
 
         preferred_content_type = self.preferred_content_type
 
+        sample_fulfillment_content_type = self.sample_fulfillment_content_type
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -96,6 +103,8 @@ class CreateTargetCollaborationRequest:
             field_dict["message"] = message
         if preferred_content_type is not UNSET:
             field_dict["preferred_content_type"] = preferred_content_type
+        if sample_fulfillment_content_type is not UNSET:
+            field_dict["sample_fulfillment_content_type"] = sample_fulfillment_content_type
 
         return field_dict
 
@@ -138,6 +147,8 @@ class CreateTargetCollaborationRequest:
 
         preferred_content_type = d.pop("preferred_content_type", UNSET)
 
+        sample_fulfillment_content_type = d.pop("sample_fulfillment_content_type", UNSET)
+
         create_target_collaboration_request = cls(
             name=name,
             end_time=end_time,
@@ -147,6 +158,7 @@ class CreateTargetCollaborationRequest:
             free_sample_rule=free_sample_rule,
             message=message,
             preferred_content_type=preferred_content_type,
+            sample_fulfillment_content_type=sample_fulfillment_content_type,
         )
 
 

@@ -23,27 +23,22 @@
 
 package com.isaackogan.tiktok.shop.generated.models
 
-import com.isaackogan.tiktok.shop.generated.models.GetSPSOverviewResponseDataTopIssueIssue
+import com.isaackogan.tiktok.shop.generated.models.GetSPSBenefitsResponseDataBenefit
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param issues Ranked issue list.
- * @param summary Localized summary of the top issues.
+ * @param benefits Fixed complete set of benefits associated with the shop SPS score.
  */
 
 
-data class GetSPSOverviewResponseDataTopIssue (
+data class GetSPSBenefitsResponseData (
 
-    /* Ranked issue list. */
-    @SerializedName("issues")
-    val issues: kotlin.collections.List<GetSPSOverviewResponseDataTopIssueIssue>? = null,
-
-    /* Localized summary of the top issues. */
-    @SerializedName("summary")
-    val summary: kotlin.String? = null
+    /* Fixed complete set of benefits associated with the shop SPS score. */
+    @SerializedName("benefits")
+    val benefits: kotlin.collections.List<GetSPSBenefitsResponseDataBenefit>? = null
 
 ) {
 

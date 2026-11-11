@@ -23,17 +23,14 @@
 
 package com.isaackogan.tiktok.shop.generated.models
 
-import com.isaackogan.tiktok.shop.generated.models.GetSPSOverviewResponseDataBenefit
 import com.isaackogan.tiktok.shop.generated.models.GetSPSOverviewResponseDataDimension
 import com.isaackogan.tiktok.shop.generated.models.GetSPSOverviewResponseDataPrimaryCategory
-import com.isaackogan.tiktok.shop.generated.models.GetSPSOverviewResponseDataTopIssue
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param benefits Fixed complete set of benefits associated with the shop SPS score.
  * @param dimensions Score details by SPS dimension.
  * @param evaluateDurationDays The number of days included in the score evaluation period.
  * @param endEvaluationTime The evaluation period end time. Unix timestamp in seconds.
@@ -43,16 +40,11 @@ import com.google.gson.annotations.SerializedName
  * @param spsScore The shop SPS score, from 0 to 5 with one decimal place.
  * @param spsTier The SPS tier. Possible values include EXCELLENT, GOOD, POOR, CRITICAL and NIL.
  * @param spsTierText The SPS tier. Values like Excellent, Good, Normal, Attention.
- * @param topIssues Top SPS issues that contributed to the current score.
  * @param updateTime The latest score refresh time. Unix timestamp in seconds.
  */
 
 
 data class GetSPSOverviewResponseData (
-
-    /* Fixed complete set of benefits associated with the shop SPS score. */
-    @SerializedName("benefits")
-    val benefits: kotlin.collections.List<GetSPSOverviewResponseDataBenefit>? = null,
 
     /* Score details by SPS dimension. */
     @SerializedName("dimensions")
@@ -89,10 +81,6 @@ data class GetSPSOverviewResponseData (
     /* The SPS tier. Values like Excellent, Good, Normal, Attention. */
     @SerializedName("sps_tier_text")
     val spsTierText: kotlin.String? = null,
-
-    /* Top SPS issues that contributed to the current score. */
-    @SerializedName("top_issues")
-    val topIssues: GetSPSOverviewResponseDataTopIssue? = null,
 
     /* The latest score refresh time. Unix timestamp in seconds. */
     @SerializedName("update_time")

@@ -48,6 +48,7 @@ import com.google.gson.annotations.SerializedName
  * @param products The information of products in the target collaboration.
  * @param creators The information of creators in the target collaboration.
  * @param type The type of target collaboration. Field values: - STANDARD: The target collaboration is created by sellers manually selecting products and creators. - TOP_CREATOR_PROGRAM: The target collaboration created by seller joining TikTok Shop Top Creator Program, requiring only product submission.
+ * @param sampleFulfillmentContentType Sample fulfillment content type of the target collaboration. Valid values: NO_PREFERENCE, SHOPPABLE_LIVE. Target collaborations created before this change return NO_PREFERENCE.
  */
 
 
@@ -111,7 +112,11 @@ data class QueryTargetCollaborationDetailResponseDataTargetCollaboration (
 
     /* The type of target collaboration. Field values: - STANDARD: The target collaboration is created by sellers manually selecting products and creators. - TOP_CREATOR_PROGRAM: The target collaboration created by seller joining TikTok Shop Top Creator Program, requiring only product submission. */
     @SerializedName("type")
-    val type: kotlin.String? = null
+    val type: kotlin.String? = null,
+
+    /* Sample fulfillment content type of the target collaboration. Valid values: NO_PREFERENCE, SHOPPABLE_LIVE. Target collaborations created before this change return NO_PREFERENCE. */
+    @SerializedName("sample_fulfillment_content_type")
+    val sampleFulfillmentContentType: kotlin.String? = null
 
 ) {
 

@@ -12,10 +12,8 @@ from ..types import UNSET, Unset
 from typing import cast
 
 if TYPE_CHECKING:
-  from ..models.get_sps_overview_response_data_benefit import GetSPSOverviewResponseDataBenefit
   from ..models.get_sps_overview_response_data_dimension import GetSPSOverviewResponseDataDimension
   from ..models.get_sps_overview_response_data_primary_category import GetSPSOverviewResponseDataPrimaryCategory
-  from ..models.get_sps_overview_response_data_top_issue import GetSPSOverviewResponseDataTopIssue
 
 
 
@@ -29,8 +27,6 @@ T = TypeVar("T", bound="GetSPSOverviewResponseData")
 class GetSPSOverviewResponseData:
     """ 
         Attributes:
-            benefits (list[GetSPSOverviewResponseDataBenefit] | Unset): Fixed complete set of benefits associated with the
-                shop SPS score.
             dimensions (list[GetSPSOverviewResponseDataDimension] | Unset): Score details by SPS dimension.
             evaluate_duration_days (int | Unset): The number of days included in the score evaluation period.
             end_evaluation_time (int | Unset): The evaluation period end time. Unix timestamp in seconds.
@@ -40,11 +36,9 @@ class GetSPSOverviewResponseData:
             sps_score (str | Unset): The shop SPS score, from 0 to 5 with one decimal place.
             sps_tier (str | Unset): The SPS tier. Possible values include EXCELLENT, GOOD, POOR, CRITICAL and NIL.
             sps_tier_text (str | Unset): The SPS tier. Values like Excellent, Good, Normal, Attention.
-            top_issues (GetSPSOverviewResponseDataTopIssue | Unset):
             update_time (int | Unset): The latest score refresh time. Unix timestamp in seconds.
      """
 
-    benefits: list[GetSPSOverviewResponseDataBenefit] | Unset = UNSET
     dimensions: list[GetSPSOverviewResponseDataDimension] | Unset = UNSET
     evaluate_duration_days: int | Unset = UNSET
     end_evaluation_time: int | Unset = UNSET
@@ -54,7 +48,6 @@ class GetSPSOverviewResponseData:
     sps_score: str | Unset = UNSET
     sps_tier: str | Unset = UNSET
     sps_tier_text: str | Unset = UNSET
-    top_issues: GetSPSOverviewResponseDataTopIssue | Unset = UNSET
     update_time: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -63,19 +56,8 @@ class GetSPSOverviewResponseData:
 
 
     def to_dict(self) -> dict[str, Any]:
-        from ..models.get_sps_overview_response_data_benefit import GetSPSOverviewResponseDataBenefit # noqa: PLC0415
         from ..models.get_sps_overview_response_data_dimension import GetSPSOverviewResponseDataDimension # noqa: PLC0415
         from ..models.get_sps_overview_response_data_primary_category import GetSPSOverviewResponseDataPrimaryCategory # noqa: PLC0415
-        from ..models.get_sps_overview_response_data_top_issue import GetSPSOverviewResponseDataTopIssue # noqa: PLC0415
-        benefits: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.benefits, Unset):
-            benefits = []
-            for benefits_item_data in self.benefits:
-                benefits_item = benefits_item_data.to_dict()
-                benefits.append(benefits_item)
-
-
-
         dimensions: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.dimensions, Unset):
             dimensions = []
@@ -103,10 +85,6 @@ class GetSPSOverviewResponseData:
 
         sps_tier_text = self.sps_tier_text
 
-        top_issues: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.top_issues, Unset):
-            top_issues = self.top_issues.to_dict()
-
         update_time = self.update_time
 
 
@@ -114,8 +92,6 @@ class GetSPSOverviewResponseData:
         field_dict.update(self.additional_properties)
         field_dict.update({
         })
-        if benefits is not UNSET:
-            field_dict["benefits"] = benefits
         if dimensions is not UNSET:
             field_dict["dimensions"] = dimensions
         if evaluate_duration_days is not UNSET:
@@ -134,8 +110,6 @@ class GetSPSOverviewResponseData:
             field_dict["sps_tier"] = sps_tier
         if sps_tier_text is not UNSET:
             field_dict["sps_tier_text"] = sps_tier_text
-        if top_issues is not UNSET:
-            field_dict["top_issues"] = top_issues
         if update_time is not UNSET:
             field_dict["update_time"] = update_time
 
@@ -145,23 +119,9 @@ class GetSPSOverviewResponseData:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.get_sps_overview_response_data_benefit import GetSPSOverviewResponseDataBenefit # noqa: PLC0415
         from ..models.get_sps_overview_response_data_dimension import GetSPSOverviewResponseDataDimension # noqa: PLC0415
         from ..models.get_sps_overview_response_data_primary_category import GetSPSOverviewResponseDataPrimaryCategory # noqa: PLC0415
-        from ..models.get_sps_overview_response_data_top_issue import GetSPSOverviewResponseDataTopIssue # noqa: PLC0415
         d = dict(src_dict)
-        _benefits = d.pop("benefits", UNSET)
-        benefits: list[GetSPSOverviewResponseDataBenefit] | Unset = UNSET
-        if _benefits is not UNSET:
-            benefits = []
-            for benefits_item_data in _benefits:
-                benefits_item = GetSPSOverviewResponseDataBenefit.from_dict(benefits_item_data)
-
-
-
-                benefits.append(benefits_item)
-
-
         _dimensions = d.pop("dimensions", UNSET)
         dimensions: list[GetSPSOverviewResponseDataDimension] | Unset = UNSET
         if _dimensions is not UNSET:
@@ -198,20 +158,9 @@ class GetSPSOverviewResponseData:
 
         sps_tier_text = d.pop("sps_tier_text", UNSET)
 
-        _top_issues = d.pop("top_issues", UNSET)
-        top_issues: GetSPSOverviewResponseDataTopIssue | Unset
-        if isinstance(_top_issues,  Unset):
-            top_issues = UNSET
-        else:
-            top_issues = GetSPSOverviewResponseDataTopIssue.from_dict(_top_issues)
-
-
-
-
         update_time = d.pop("update_time", UNSET)
 
         get_sps_overview_response_data = cls(
-            benefits=benefits,
             dimensions=dimensions,
             evaluate_duration_days=evaluate_duration_days,
             end_evaluation_time=end_evaluation_time,
@@ -221,7 +170,6 @@ class GetSPSOverviewResponseData:
             sps_score=sps_score,
             sps_tier=sps_tier,
             sps_tier_text=sps_tier_text,
-            top_issues=top_issues,
             update_time=update_time,
         )
 

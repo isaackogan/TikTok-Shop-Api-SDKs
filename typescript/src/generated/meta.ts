@@ -937,14 +937,6 @@ export const OPERATIONS: readonly OperationMeta[] = [
     "requiresShopCipher": true
   },
   {
-    "operationId": "getSPSOverview",
-    "tag": "Analytics",
-    "group": "analytics",
-    "method": "get",
-    "path": "/analytics/202606/shop_performances/overview",
-    "requiresShopCipher": true
-  },
-  {
     "operationId": "getShopPerformance",
     "tag": "Analytics",
     "group": "analytics",
@@ -1070,6 +1062,22 @@ export const OPERATIONS: readonly OperationMeta[] = [
     "group": "analytics",
     "method": "get",
     "path": "/analytics/202610/off_site/pixels",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getSPSBenefits",
+    "tag": "Analytics",
+    "group": "analytics",
+    "method": "get",
+    "path": "/analytics/202610/shop_performances/benefits",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getSPSOverview",
+    "tag": "Analytics",
+    "group": "analytics",
+    "method": "get",
+    "path": "/analytics/202610/shop_performances/overview",
     "requiresShopCipher": true
   },
   {

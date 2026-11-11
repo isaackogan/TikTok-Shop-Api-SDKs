@@ -57,6 +57,9 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaboration:
                 - STANDARD: The target collaboration is created by sellers manually selecting products and creators.
                 - TOP_CREATOR_PROGRAM: The target collaboration created by seller joining TikTok Shop Top Creator Program,
                 requiring only product submission.
+            sample_fulfillment_content_type (str | Unset): Sample fulfillment content type of the target collaboration.
+                Valid values: NO_PREFERENCE, SHOPPABLE_LIVE. Target collaborations created before this change return
+                NO_PREFERENCE.
      """
 
     id: str | Unset = UNSET
@@ -74,6 +77,7 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaboration:
     products: list[QueryTargetCollaborationDetailResponseDataTargetCollaborationProduct] | Unset = UNSET
     creators: list[QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator] | Unset = UNSET
     type_: str | Unset = UNSET
+    sample_fulfillment_content_type: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -133,6 +137,8 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaboration:
 
         type_ = self.type_
 
+        sample_fulfillment_content_type = self.sample_fulfillment_content_type
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -168,6 +174,8 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaboration:
             field_dict["creators"] = creators
         if type_ is not UNSET:
             field_dict["type"] = type_
+        if sample_fulfillment_content_type is not UNSET:
+            field_dict["sample_fulfillment_content_type"] = sample_fulfillment_content_type
 
         return field_dict
 
@@ -246,6 +254,8 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaboration:
 
         type_ = d.pop("type", UNSET)
 
+        sample_fulfillment_content_type = d.pop("sample_fulfillment_content_type", UNSET)
+
         query_target_collaboration_detail_response_data_target_collaboration = cls(
             id=id,
             name=name,
@@ -262,6 +272,7 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaboration:
             products=products,
             creators=creators,
             type_=type_,
+            sample_fulfillment_content_type=sample_fulfillment_content_type,
         )
 
 

@@ -35,7 +35,7 @@ import com.google.gson.annotations.SerializedName
  */
 
 
-data class GetSPSOverviewResponseDataBenefit (
+data class GetSPSBenefitsResponseDataBenefit (
 
     /* Benefit display name localized by the requested locale. */
     @SerializedName("benefit_name")

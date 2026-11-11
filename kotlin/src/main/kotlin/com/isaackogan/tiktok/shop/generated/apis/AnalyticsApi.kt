@@ -48,6 +48,7 @@ import com.isaackogan.tiktok.shop.generated.models.GetLiveRoomViewTrendsResponse
 import com.isaackogan.tiktok.shop.generated.models.GetOffSiteAudienceInsightsResponse
 import com.isaackogan.tiktok.shop.generated.models.GetOffSitePerformanceDetailsResponse
 import com.isaackogan.tiktok.shop.generated.models.GetOffSitePerformanceOverviewResponse
+import com.isaackogan.tiktok.shop.generated.models.GetSPSBenefitsResponse
 import com.isaackogan.tiktok.shop.generated.models.GetSPSMetricDiagnosisResponse
 import com.isaackogan.tiktok.shop.generated.models.GetSPSMetricProblemDetailsResponse
 import com.isaackogan.tiktok.shop.generated.models.GetSPSMetricTopItemsResponse
@@ -2295,6 +2296,84 @@ open class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.
     }
 
     /**
+     * GET /analytics/202610/shop_performances/benefits
+     * Get SPS Benefits
+     * Returns the current SPS benefits for the authorized shop.  Shop Performance Score (SPS) reflects a shop’s performance across key operational and service metrics on TikTok Shop. By integrating the read-only SPS APIs, ISVs can retrieve a shop’s score, tier, benefits, and metric benchmarks, diagnose performance gaps, and drill down to the products, logistics providers, aftersales types, orders, or chats associated with specific issues. This enables ISVs to embed actionable performance insights into their solutions, helping merchants identify problem areas faster and take targeted actions to improve shop performance. Available only for US-region shops. Use case guide: [Click here](https://partner.tiktokshop.com/docv2/page/ph0ccose)
+     * @param locale BCP 47 locale code used to localize response text. If omitted, the default locale is resolved from the request context. (optional)
+     * @return GetSPSBenefitsResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getSPSBenefits(locale: kotlin.String? = null) : GetSPSBenefitsResponse {
+        val localVarResponse = getSPSBenefitsWithHttpInfo(locale = locale)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetSPSBenefitsResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /analytics/202610/shop_performances/benefits
+     * Get SPS Benefits
+     * Returns the current SPS benefits for the authorized shop.  Shop Performance Score (SPS) reflects a shop’s performance across key operational and service metrics on TikTok Shop. By integrating the read-only SPS APIs, ISVs can retrieve a shop’s score, tier, benefits, and metric benchmarks, diagnose performance gaps, and drill down to the products, logistics providers, aftersales types, orders, or chats associated with specific issues. This enables ISVs to embed actionable performance insights into their solutions, helping merchants identify problem areas faster and take targeted actions to improve shop performance. Available only for US-region shops. Use case guide: [Click here](https://partner.tiktokshop.com/docv2/page/ph0ccose)
+     * @param locale BCP 47 locale code used to localize response text. If omitted, the default locale is resolved from the request context. (optional)
+     * @return ApiResponse<GetSPSBenefitsResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getSPSBenefitsWithHttpInfo(locale: kotlin.String?) : ApiResponse<GetSPSBenefitsResponse?> {
+        val localVariableConfig = getSPSBenefitsRequestConfig(locale = locale)
+
+        return request<Unit, GetSPSBenefitsResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getSPSBenefits
+     *
+     * @param locale BCP 47 locale code used to localize response text. If omitted, the default locale is resolved from the request context. (optional)
+     * @return RequestConfig
+     */
+    fun getSPSBenefitsRequestConfig(locale: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (locale != null) {
+                    put("locale", listOf(locale.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/analytics/202610/shop_performances/benefits",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * GET /analytics/202606/shop_performances/metrics/{metric_code}/diagnosis
      * Get SPS Metric Diagnosis
      * Returns diagnosis details for a single SPS metric, including benchmark thresholds, trends, calculation details, and distribution details.  Shop Performance Score (SPS) reflects a shop’s performance across key operational and service metrics on TikTok Shop. By integrating the read-only SPS APIs, ISVs can retrieve a shop’s score, tier, benefits, and metric benchmarks, diagnose performance gaps, and drill down to the products, logistics providers, aftersales types, orders, or chats associated with specific issues. This enables ISVs to embed actionable performance insights into their solutions, helping merchants identify problem areas faster and take targeted actions to improve shop performance. Available only for US-region shops. Use case guide: [Click here](https://partner.tiktokshop.com/docv2/page/ph0ccose)
@@ -2634,9 +2713,9 @@ open class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.
     }
 
     /**
-     * GET /analytics/202606/shop_performances/overview
+     * GET /analytics/202610/shop_performances/overview
      * Get SPS Overview
-     * Returns the SPS overview for the authorized shop, including the score, tier, dimensions, benefits, and top issues.  Shop Performance Score (SPS) reflects a shop’s performance across key operational and service metrics on TikTok Shop. By integrating the read-only SPS APIs, ISVs can retrieve a shop’s score, tier, benefits, and metric benchmarks, diagnose performance gaps, and drill down to the products, logistics providers, aftersales types, orders, or chats associated with specific issues. This enables ISVs to embed actionable performance insights into their solutions, helping merchants identify problem areas faster and take targeted actions to improve shop performance. Available only for US-region shops. Use case guide: [Click here](https://partner.tiktokshop.com/docv2/page/ph0ccose)
+     * Returns the SPS overview for the authorized shop, including the score, tier and dimensions.  Shop Performance Score (SPS) reflects a shop’s performance across key operational and service metrics on TikTok Shop. By integrating the read-only SPS APIs, ISVs can retrieve a shop’s score, tier, benefits, and metric benchmarks, diagnose performance gaps, and drill down to the products, logistics providers, aftersales types, orders, or chats associated with specific issues. This enables ISVs to embed actionable performance insights into their solutions, helping merchants identify problem areas faster and take targeted actions to improve shop performance. Available only for US-region shops. Use case guide: [Click here](https://partner.tiktokshop.com/docv2/page/ph0ccose)
      * @param locale BCP 47 locale code used to localize response text. If omitted, the default locale is resolved from the request context. (optional)
      * @return GetSPSOverviewResponse
      * @throws IllegalStateException If the request is not correctly configured
@@ -2666,9 +2745,9 @@ open class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.
     }
 
     /**
-     * GET /analytics/202606/shop_performances/overview
+     * GET /analytics/202610/shop_performances/overview
      * Get SPS Overview
-     * Returns the SPS overview for the authorized shop, including the score, tier, dimensions, benefits, and top issues.  Shop Performance Score (SPS) reflects a shop’s performance across key operational and service metrics on TikTok Shop. By integrating the read-only SPS APIs, ISVs can retrieve a shop’s score, tier, benefits, and metric benchmarks, diagnose performance gaps, and drill down to the products, logistics providers, aftersales types, orders, or chats associated with specific issues. This enables ISVs to embed actionable performance insights into their solutions, helping merchants identify problem areas faster and take targeted actions to improve shop performance. Available only for US-region shops. Use case guide: [Click here](https://partner.tiktokshop.com/docv2/page/ph0ccose)
+     * Returns the SPS overview for the authorized shop, including the score, tier and dimensions.  Shop Performance Score (SPS) reflects a shop’s performance across key operational and service metrics on TikTok Shop. By integrating the read-only SPS APIs, ISVs can retrieve a shop’s score, tier, benefits, and metric benchmarks, diagnose performance gaps, and drill down to the products, logistics providers, aftersales types, orders, or chats associated with specific issues. This enables ISVs to embed actionable performance insights into their solutions, helping merchants identify problem areas faster and take targeted actions to improve shop performance. Available only for US-region shops. Use case guide: [Click here](https://partner.tiktokshop.com/docv2/page/ph0ccose)
      * @param locale BCP 47 locale code used to localize response text. If omitted, the default locale is resolved from the request context. (optional)
      * @return ApiResponse<GetSPSOverviewResponse?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -2703,7 +2782,7 @@ open class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.
 
         return RequestConfig(
             method = RequestMethod.GET,
-            path = "/analytics/202606/shop_performances/overview",
+            path = "/analytics/202610/shop_performances/overview",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
