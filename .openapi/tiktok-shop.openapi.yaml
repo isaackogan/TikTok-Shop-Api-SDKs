@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: TikTok Shop Partner API
-  version: 2026.11.09
+  version: 2026.11.10
   description: Generated from the TikTok Shop Partner Center documentation (https://partner.tiktokshop.com/docv2). Do not edit by hand.
 externalDocs:
   url: https://partner.tiktokshop.com/docv2
@@ -4347,6 +4347,7 @@ paths:
                 has_free_sample: true
                 is_sample_approval_exempt: true
               preferred_content_type: LIVE
+              sample_fulfillment_content_type: SHOPPABLE_LIVE
       responses:
         "200":
           description: Success
@@ -4546,6 +4547,7 @@ paths:
                         product_effective_status: EFFECTIVE_ALL
                         creator_open_id: uACafQAAAABmUU2qon4R0vUYvUVS3QC6CICP2m5A2-wd77j8R9G0yg
                     type: STANDARD
+                    sample_fulfillment_content_type: SHOPPABLE_LIVE
                 message: Success
                 request_id: 202203070749000101890810281E8C70B7
       x-tts-requires-shop-cipher: true
@@ -8598,74 +8600,6 @@ paths:
         - TikTok Shop Analytics
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-sps-metric-top-items-202606
-  /analytics/202606/shop_performances/overview:
-    get:
-      operationId: getSPSOverview
-      summary: Get SPS Overview
-      description: |-
-        Returns the SPS overview for the authorized shop, including the score, tier, dimensions, benefits, and top issues. 
-        Shop Performance Score (SPS) reflects a shop’s performance across key operational and service metrics on TikTok Shop. By integrating the read-only SPS APIs, ISVs can retrieve a shop’s score, tier, benefits, and metric benchmarks, diagnose performance gaps, and drill down to the products, logistics providers, aftersales types, orders, or chats associated with specific issues. This enables ISVs to embed actionable performance insights into their solutions, helping merchants identify problem areas faster and take targeted actions to improve shop performance. Available only for US-region shops.
-        Use case guide: [Click here](https://partner.tiktokshop.com/docv2/page/ph0ccose)
-      tags:
-        - Analytics
-      parameters:
-        - $ref: "#/components/parameters/ShopCipher"
-        - name: locale
-          in: query
-          required: false
-          description: BCP 47 locale code used to localize response text. If omitted, the default locale is resolved from the request context.
-          schema:
-            type: string
-      responses:
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/GetSPSOverviewResponse"
-              example:
-                code: 0
-                data:
-                  benefits:
-                    - benefit_name: LIVE giveaway
-                      is_unlocked: true
-                      unlock_score: "4.5"
-                  dimensions:
-                    - name: Product satisfaction
-                      score: "4.8"
-                      status: EXCELLENT
-                      status_text: Excellent
-                      weight: "70"
-                  evaluate_duration_days: 90
-                  end_evaluation_time: 1782518400
-                  start_evaluation_time: 1774828800
-                  peer_percentile: "86.5"
-                  primary_category:
-                    category_id: "601450"
-                    category_name: Home Supplies
-                  sps_score: "4.6"
-                  sps_tier: GOOD
-                  sps_tier_text: Excellent
-                  top_issues:
-                    issues:
-                      - description: Your on-time delivery performance is lower than peer shops.
-                        evaluate_duration_days: 31
-                        end_evaluation_time: 1761264000
-                        start_evaluation_time: 1758672000
-                        metric_code: OTDR
-                        metric_name: On-time delivery rate
-                        percentile: "72.4"
-                        rank: 1
-                    summary: Improve late dispatch and negative reviews to increase your SPS score.
-                  update_time: 1761264000
-                message: Success
-                request_id: 202203070749000101890810281E8C70B7
-      x-tts-requires-shop-cipher: true
-      x-tts-scenario: 1
-      x-tts-scopes:
-        - TikTok Shop Analytics
-      x-tts-error-codes: []
-      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-sps-overview-202606
   /analytics/202609/shop/performance:
     get:
       operationId: getShopPerformance
@@ -10664,6 +10598,99 @@ paths:
         - TikTok Shop Analytics
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-shop-off-site-pixels-202610
+  /analytics/202610/shop_performances/benefits:
+    get:
+      operationId: getSPSBenefits
+      summary: Get SPS Benefits
+      description: |-
+        Returns the current SPS benefits for the authorized shop. 
+        Shop Performance Score (SPS) reflects a shop’s performance across key operational and service metrics on TikTok Shop. By integrating the read-only SPS APIs, ISVs can retrieve a shop’s score, tier, benefits, and metric benchmarks, diagnose performance gaps, and drill down to the products, logistics providers, aftersales types, orders, or chats associated with specific issues. This enables ISVs to embed actionable performance insights into their solutions, helping merchants identify problem areas faster and take targeted actions to improve shop performance. Available only for US-region shops.
+        Use case guide: [Click here](https://partner.tiktokshop.com/docv2/page/ph0ccose)
+      tags:
+        - Analytics
+      parameters:
+        - $ref: "#/components/parameters/ShopCipher"
+        - name: locale
+          in: query
+          required: false
+          description: BCP 47 locale code used to localize response text. If omitted, the default locale is resolved from the request context.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetSPSBenefitsResponse"
+              example:
+                code: 0
+                data:
+                  benefits:
+                    - benefit_name: LIVE giveaway
+                      is_unlocked: true
+                      unlock_score: "4.5"
+                message: Success
+                request_id: 202203070749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes:
+        - TikTok Shop Analytics
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-sps-benefits-202610
+  /analytics/202610/shop_performances/overview:
+    get:
+      operationId: getSPSOverview
+      summary: Get SPS Overview
+      description: |-
+        Returns the SPS overview for the authorized shop, including the score, tier and dimensions. 
+        Shop Performance Score (SPS) reflects a shop’s performance across key operational and service metrics on TikTok Shop. By integrating the read-only SPS APIs, ISVs can retrieve a shop’s score, tier, benefits, and metric benchmarks, diagnose performance gaps, and drill down to the products, logistics providers, aftersales types, orders, or chats associated with specific issues. This enables ISVs to embed actionable performance insights into their solutions, helping merchants identify problem areas faster and take targeted actions to improve shop performance. Available only for US-region shops.
+        Use case guide: [Click here](https://partner.tiktokshop.com/docv2/page/ph0ccose)
+      tags:
+        - Analytics
+      parameters:
+        - $ref: "#/components/parameters/ShopCipher"
+        - name: locale
+          in: query
+          required: false
+          description: BCP 47 locale code used to localize response text. If omitted, the default locale is resolved from the request context.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetSPSOverviewResponse"
+              example:
+                code: 0
+                data:
+                  dimensions:
+                    - name: Product satisfaction
+                      score: "4.8"
+                      status: EXCELLENT
+                      status_text: Excellent
+                      weight: "70"
+                  evaluate_duration_days: 90
+                  end_evaluation_time: 1782518400
+                  start_evaluation_time: 1774828800
+                  peer_percentile: "86.5"
+                  primary_category:
+                    category_id: "601450"
+                    category_name: Home Supplies
+                  sps_score: "4.6"
+                  sps_tier: GOOD
+                  sps_tier_text: Excellent
+                  update_time: 1761264000
+                message: Success
+                request_id: 202203070749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes:
+        - TikTok Shop Analytics
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-sps-overview-202610
   /authorization/202309/shops:
     get:
       operationId: getAuthorizedShops
@@ -22858,7 +22885,7 @@ paths:
         - code: "12052092"
           message: product sale price is invalid
         - code: "12052096"
-          message: Unable to update the price for SKUs with no warehouse. Assign a warehouse and try again.
+          message: Each SKU must remain linked to at least one warehouse after the update. Retain an existing warehouse or add a new warehouse before unlinking the remaining warehouse.
         - code: "12052097"
           message: The warehouse does not exist
         - code: "12052163"
@@ -22876,7 +22903,7 @@ paths:
         - code: "12052424"
           message: Missing 'sale price' value
         - code: "12052531"
-          message: The warehouse is disabled.
+          message: The specified warehouse is disabled or otherwise unavailable for this operation. Check the warehouse's status and availability, or select another available warehouse.
         - code: "12052553"
           message: Sku id duplicate
         - code: "12052557"
@@ -22888,7 +22915,7 @@ paths:
         - code: "12052700"
           message: The seller is inactive.
         - code: "12052703"
-          message: Invalid seller tax number
+          message: The seller's tax identification number could not be validated. Check and update the seller's tax information in Seller Center before retrying.
         - code: "12052704"
           message: seller id not exist
         - code: "12052861"
@@ -22900,7 +22927,7 @@ paths:
         - code: "12052902"
           message: The SKU list is empty. Either omit the list entirely, or provide all required details.
         - code: "12052910"
-          message: Invalid input parameters. Refer to the API documentation for details.
+          message: The warehouse update parameters are invalid. Check the update mode and warehouse IDs. Warehouse IDs must be valid and unique, and a warehouse cannot appear in both inventory and unlink_warehouse_ids. The unlink list is only supported in INCREMENTAL mode.
         - code: "36009003"
           message: Internal error. Please try again. If the issue persists after multiple attempts, please contact platform support.
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/update-price-202309
@@ -38244,7 +38271,11 @@ components:
           description: A set of properties that control the free sample behavior for the product.
         preferred_content_type:
           type: string
-          description: preferred creator content type, "LIVE" or "VIDEO"
+          description: Deprecated. Previously used to specify the preferred creator content type (LIVE or VIDEO). The value is still accepted without error, but it no longer takes effect. Use sample_fulfillment_content_type instead.
+          deprecated: true
+        sample_fulfillment_content_type:
+          type: string
+          description: "Sample fulfillment content type required for the target collaboration. Valid values: NO_PREFERENCE, SHOPPABLE_LIVE. Defaults to NO_PREFERENCE when not provided."
       required:
         - name
         - end_time
@@ -56601,6 +56632,41 @@ components:
           description: |-
             Video duration. 
             Unit: milliseconds
+    GetSPSBenefitsResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/GetSPSBenefitsResponseData"
+    GetSPSBenefitsResponseData:
+      type: object
+      properties:
+        benefits:
+          type: array
+          items:
+            $ref: "#/components/schemas/GetSPSBenefitsResponseDataBenefit"
+          description: Fixed complete set of benefits associated with the shop SPS score.
+    GetSPSBenefitsResponseDataBenefit:
+      type: object
+      properties:
+        benefit_name:
+          type: string
+          description: Benefit display name localized by the requested locale.
+        is_unlocked:
+          type: boolean
+          description: Whether the shop has unlocked this benefit.
+        unlock_score:
+          type: string
+          description: Score required to unlock the benefit, from 0 to 5.
     GetSPSMetricDiagnosisResponse:
       type: object
       properties:
@@ -57161,11 +57227,6 @@ components:
     GetSPSOverviewResponseData:
       type: object
       properties:
-        benefits:
-          type: array
-          items:
-            $ref: "#/components/schemas/GetSPSOverviewResponseDataBenefit"
-          description: Fixed complete set of benefits associated with the shop SPS score.
         dimensions:
           type: array
           items:
@@ -57198,25 +57259,10 @@ components:
         sps_tier_text:
           type: string
           description: The SPS tier. Values like Excellent, Good, Normal, Attention.
-        top_issues:
-          $ref: "#/components/schemas/GetSPSOverviewResponseDataTopIssue"
-          description: Top SPS issues that contributed to the current score.
         update_time:
           type: integer
           format: int64
           description: The latest score refresh time. Unix timestamp in seconds.
-    GetSPSOverviewResponseDataBenefit:
-      type: object
-      properties:
-        benefit_name:
-          type: string
-          description: Benefit display name localized by the requested locale.
-        is_unlocked:
-          type: boolean
-          description: Whether the shop has unlocked this benefit.
-        unlock_score:
-          type: string
-          description: Score required to unlock the benefit, from 0 to 5.
     GetSPSOverviewResponseDataDimension:
       type: object
       properties:
@@ -57244,48 +57290,6 @@ components:
         category_name:
           type: string
           description: The primary category name.
-    GetSPSOverviewResponseDataTopIssue:
-      type: object
-      properties:
-        issues:
-          type: array
-          items:
-            $ref: "#/components/schemas/GetSPSOverviewResponseDataTopIssueIssue"
-          description: Ranked issue list.
-        summary:
-          type: string
-          description: Localized summary of the top issues.
-    GetSPSOverviewResponseDataTopIssueIssue:
-      type: object
-      properties:
-        description:
-          type: string
-          description: Localized issue description.
-        evaluate_duration_days:
-          type: integer
-          format: int64
-          description: Number of days included in this issue's evaluation period.
-        end_evaluation_time:
-          type: integer
-          format: int64
-          description: Issue evaluation period end time. Unix timestamp in seconds.
-        start_evaluation_time:
-          type: integer
-          format: int64
-          description: Issue evaluation period start time. Unix timestamp in seconds.
-        metric_code:
-          type: string
-          description: Related metric code. Possible values include NRR, NBFR, SFCR, OTDR, AHT, and IM_DSAT.
-        metric_name:
-          type: string
-          description: Localized metric display name.
-        percentile:
-          type: string
-          description: Metric percentile among peer shops, from 0 to 100.
-        rank:
-          type: integer
-          format: int64
-          description: Issue rank, where 1 is the top issue.
     GetSellerFinancialTransactionsResponse:
       type: object
       properties:
@@ -70595,6 +70599,9 @@ components:
             Field values:
             - STANDARD: The target collaboration is created by sellers manually selecting products and creators.
             - TOP_CREATOR_PROGRAM: The target collaboration created by seller joining TikTok Shop Top Creator Program, requiring only product submission.
+        sample_fulfillment_content_type:
+          type: string
+          description: "Sample fulfillment content type of the target collaboration. Valid values: NO_PREFERENCE, SHOPPABLE_LIVE. Target collaborations created before this change return NO_PREFERENCE."
     QueryTargetCollaborationDetailResponseDataTargetCollaborationCreator:
       type: object
       properties:
