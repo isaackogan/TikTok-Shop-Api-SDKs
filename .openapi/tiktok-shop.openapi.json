@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "TikTok Shop Partner API",
-    "version": "2026.11.10",
+    "version": "2026.11.11",
     "description": "Generated from the TikTok Shop Partner Center documentation (https://partner.tiktokshop.com/docv2). Do not edit by hand."
   },
   "externalDocs": {
@@ -44801,6 +44801,196 @@
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-shop-group-and-related-shops-202601"
       }
     },
+    "/seller/202611/carousel_permission": {
+      "get": {
+        "operationId": "getSellerCarouselPermission",
+        "summary": "Get Seller Carousel Permission",
+        "description": "Retrieve the carousel-related permissions for the currently authorized seller, including auto-post permission and photo mode permission.",
+        "tags": [
+          "Seller"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetSellerCarouselPermissionResponse"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "has_auto_post_permission": true,
+                    "has_photo_mode_permission": true
+                  },
+                  "message": "Success",
+                  "request_id": "202203070749000101890810281E8C70B7"
+                }
+              }
+            }
+          }
+        },
+        "x-tts-scenario": 2,
+        "x-tts-scopes": [
+          "Product Optimization"
+        ],
+        "x-tts-error-codes": [],
+        "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-seller-carousel-permission-202611"
+      }
+    },
+    "/seller/202611/images/upload": {
+      "post": {
+        "operationId": "uploadSellerImage",
+        "summary": "Upload Seller Image",
+        "description": "Upload an image material up to 10 MiB to TOS for the current seller.",
+        "tags": [
+          "Seller"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/UploadSellerImageRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadSellerImageResponse"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "uri": "tos-maliva-i-o3syd03w52-us/c668cdf70b7f483c94dbe",
+                    "url": "https://p-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/c668cdf70b7f483c94dbe"
+                  },
+                  "message": "Success",
+                  "request_id": "202203070749000101890810281E8C70B7"
+                }
+              }
+            }
+          }
+        },
+        "x-tts-scenario": 2,
+        "x-tts-scopes": [
+          "Product Optimization"
+        ],
+        "x-tts-error-codes": [],
+        "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/upload-seller-image-202611"
+      }
+    },
+    "/seller/202611/materials/upload": {
+      "post": {
+        "operationId": "uploadSellerMaterials",
+        "summary": "Upload Seller Materials",
+        "description": "Upload image materials for the current shop. Use `materials` for `ONE_PRODUCT_ONE_IMAGE` and `material_groups` for `ONE_PRODUCT_MULTIPLE_IMAGES`. Provide exactly one mode payload per request.",
+        "tags": [
+          "Seller"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ShopCipher"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UploadSellerMaterialsRequest"
+              },
+              "example": {
+                "material_groups": [
+                  {
+                    "materials": [
+                      {
+                        "expire_time": "2025-01-01T00:00:00Z",
+                        "image_description": "Model front view",
+                        "uri": "tos-maliva-i-o3syd03w52-us/1aa2bb3cc4dd5ee6ff7788"
+                      },
+                      {
+                        "expire_time": "2025-01-01T00:00:00Z",
+                        "image_description": "Model side view",
+                        "uri": "tos-maliva-i-o3syd03w52-us/8ff7ee6dd5cc4bb3aa2211"
+                      }
+                    ],
+                    "post_type": "ONE_PRODUCT_MULTIPLE_IMAGES"
+                  }
+                ],
+                "materials": [
+                  {
+                    "expire_time": "2025-01-01T00:00:00Z",
+                    "image_description": "Front view image",
+                    "uri": "tos-maliva-i-o3syd03w52-us/9f6f2d3ab1c94b75a12345"
+                  }
+                ],
+                "post_type": "ONE_PRODUCT_ONE_IMAGE",
+                "product_id": "1729382250675584241"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadSellerMaterialsResponse"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "material_groups": [
+                      {
+                        "image_group_id": "90010001",
+                        "materials": [
+                          {
+                            "expire_time": "2025-01-01T00:00:00Z",
+                            "image_description": "Model front view",
+                            "material_id": "7812233445566778900",
+                            "uri": "tos-maliva-i-o3syd03w52-us/1aa2bb3cc4dd5ee6ff7788"
+                          },
+                          {
+                            "expire_time": "2025-01-01T00:00:00Z",
+                            "image_description": "Model side view",
+                            "material_id": "7812233445566778901",
+                            "uri": "tos-maliva-i-o3syd03w52-us/8ff7ee6dd5cc4bb3aa2211"
+                          }
+                        ]
+                      }
+                    ],
+                    "materials": [
+                      {
+                        "expire_time": "2025-01-01T00:00:00Z",
+                        "image_description": "Front view image",
+                        "material_id": "7812233445566778899",
+                        "uri": "tos-maliva-i-o3syd03w52-us/9f6f2d3ab1c94b75a12345"
+                      }
+                    ]
+                  },
+                  "message": "Success",
+                  "request_id": "202203070749000101890810281E8C70B7"
+                }
+              }
+            }
+          }
+        },
+        "x-tts-requires-shop-cipher": true,
+        "x-tts-scenario": 1,
+        "x-tts-scopes": [
+          "Product Optimization"
+        ],
+        "x-tts-error-codes": [],
+        "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/upload-seller-materials-202611"
+      }
+    },
     "/supply_chain/202309/packages/sync": {
       "post": {
         "operationId": "confirmPackageShipment",
@@ -75213,6 +75403,44 @@
           }
         }
       },
+      "GetSellerCarouselPermissionResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Status code; 0 means success."
+          },
+          "message": {
+            "type": "string",
+            "description": "Success or failure message."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Request log ID."
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetSellerCarouselPermissionResponseData"
+          }
+        }
+      },
+      "GetSellerCarouselPermissionResponseData": {
+        "type": "object",
+        "properties": {
+          "has_auto_post_permission": {
+            "type": "boolean",
+            "description": "Whether the currently authorized seller has auto-post permission for carousel publishing."
+          },
+          "has_photo_mode_permission": {
+            "type": "boolean",
+            "description": "Whether the currently authorized seller has photo mode permission for carousel publishing."
+          }
+        },
+        "required": [
+          "has_auto_post_permission",
+          "has_photo_mode_permission"
+        ]
+      },
       "GetSellerFinancialTransactionsResponse": {
         "type": "object",
         "properties": {
@@ -86272,6 +86500,27 @@
             "description": "Warning message."
           }
         }
+      },
+      "Material": {
+        "type": "object",
+        "properties": {
+          "expire_time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The expiration time in RFC 3339 format. Omit this field when the material never expires."
+          },
+          "image_description": {
+            "type": "string",
+            "description": "The seller-provided description of the material."
+          },
+          "uri": {
+            "type": "string",
+            "description": "The TOS URI of the uploaded image material."
+          }
+        },
+        "required": [
+          "uri"
+        ]
       },
       "MaxDiscount": {
         "type": "object",
@@ -106858,6 +107107,195 @@
       "UploadReturnShippingInformationResponseData": {
         "type": "object",
         "properties": {}
+      },
+      "UploadSellerImageRequest": {
+        "type": "object",
+        "properties": {
+          "image_data": {
+            "type": "string",
+            "format": "binary",
+            "contentMediaType": "application/octet-stream",
+            "description": "The local image file to upload to TOS.\n\nRequirements:\n- Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP.\n- Zero-byte files are rejected.\n- Maximum file size: 10 MiB (10,485,760 bytes)."
+          }
+        },
+        "required": [
+          "image_data"
+        ]
+      },
+      "UploadSellerImageResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Status code; 0 means success."
+          },
+          "message": {
+            "type": "string",
+            "description": "Success or failure message."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Request log ID."
+          },
+          "data": {
+            "$ref": "#/components/schemas/UploadSellerImageResponseData"
+          }
+        }
+      },
+      "UploadSellerImageResponseData": {
+        "type": "object",
+        "properties": {
+          "uri": {
+            "type": "string",
+            "description": "The URI of the uploaded image in TOS."
+          },
+          "url": {
+            "type": "string",
+            "description": "The URL of the uploaded image in TOS."
+          }
+        },
+        "required": [
+          "uri",
+          "url"
+        ]
+      },
+      "UploadSellerMaterialsRequest": {
+        "type": "object",
+        "properties": {
+          "material_groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UploadSellerMaterialsRequestMaterialGroup"
+            },
+            "description": "Grouped materials for the `ONE_PRODUCT_MULTIPLE_IMAGES` mode. Provide 1 to 10 groups, omit `materials`, and keep the total number of uploaded images in one request within 30."
+          },
+          "materials": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Material"
+            },
+            "description": "Materials for the `ONE_PRODUCT_ONE_IMAGE` mode. Provide 1 to 30 items and omit `material_groups`."
+          },
+          "post_type": {
+            "type": "string",
+            "enum": [
+              "ONE_PRODUCT_MULTIPLE_IMAGES",
+              "ONE_PRODUCT_ONE_IMAGE"
+            ],
+            "x-enum-descriptions": [
+              "Upload one or more ordered groups for one product. Use `material_groups` only.",
+              "Upload standalone images for one product. Use `materials` only."
+            ],
+            "description": "The posting mode for the uploaded materials.\nPossible values:\n- ONE_PRODUCT_MULTIPLE_IMAGES: Upload one or more ordered groups for one product. Use `material_groups` only.\n- ONE_PRODUCT_ONE_IMAGE: Upload standalone images for one product. Use `materials` only."
+          },
+          "product_id": {
+            "type": "string",
+            "description": "The product ID that the uploaded materials belong to."
+          }
+        },
+        "required": [
+          "post_type",
+          "product_id"
+        ]
+      },
+      "UploadSellerMaterialsRequestMaterialGroup": {
+        "type": "object",
+        "properties": {
+          "materials": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Material"
+            },
+            "description": "Materials in the same group, sorted by array index. Each group must contain 2 to 35 materials."
+          },
+          "post_type": {
+            "type": "string",
+            "description": "The posting mode for this material group. Use `ONE_PRODUCT_MULTIPLE_IMAGES` and keep it consistent with the request-level `post_type`."
+          }
+        },
+        "required": [
+          "materials",
+          "post_type"
+        ]
+      },
+      "UploadSellerMaterialsResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Status code; 0 means success."
+          },
+          "message": {
+            "type": "string",
+            "description": "Success or failure message."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Request log ID."
+          },
+          "data": {
+            "$ref": "#/components/schemas/UploadSellerMaterialsResponseData"
+          }
+        }
+      },
+      "UploadSellerMaterialsResponseData": {
+        "type": "object",
+        "properties": {
+          "material_groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UploadSellerMaterialsResponseDataMaterialGroup"
+            },
+            "description": "Uploaded grouped materials with generated group IDs and material IDs."
+          },
+          "materials": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UploadSellerMaterialsResponseDataMaterialGroupMaterial"
+            },
+            "description": "Uploaded single-image materials with generated material IDs."
+          }
+        }
+      },
+      "UploadSellerMaterialsResponseDataMaterialGroup": {
+        "type": "object",
+        "properties": {
+          "image_group_id": {
+            "type": "string",
+            "description": "The generated image group ID for the uploaded material group."
+          },
+          "materials": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UploadSellerMaterialsResponseDataMaterialGroupMaterial"
+            },
+            "description": "Materials in the uploaded group with generated material IDs."
+          }
+        }
+      },
+      "UploadSellerMaterialsResponseDataMaterialGroupMaterial": {
+        "type": "object",
+        "properties": {
+          "expire_time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The expiration time in RFC 3339 format. This field is omitted when the material never expires."
+          },
+          "image_description": {
+            "type": "string",
+            "description": "The seller-provided description of the material."
+          },
+          "material_id": {
+            "type": "string",
+            "description": "The generated material ID."
+          },
+          "uri": {
+            "type": "string",
+            "description": "The TOS URI of the uploaded image material."
+          }
+        }
       },
       "UploadShoppablePhotoFileRequest": {
         "type": "object",
