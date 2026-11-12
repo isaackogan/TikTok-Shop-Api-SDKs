@@ -29,7 +29,11 @@ import okhttp3.HttpUrl
 
 import com.isaackogan.tiktok.shop.generated.models.GetActiveShopsResponse
 import com.isaackogan.tiktok.shop.generated.models.GetGlobalProductPermissionResponse
+import com.isaackogan.tiktok.shop.generated.models.GetSellerCarouselPermissionResponse
 import com.isaackogan.tiktok.shop.generated.models.GetShopGroupAndRelatedShopsResponse
+import com.isaackogan.tiktok.shop.generated.models.UploadSellerImageResponse
+import com.isaackogan.tiktok.shop.generated.models.UploadSellerMaterialsRequest
+import com.isaackogan.tiktok.shop.generated.models.UploadSellerMaterialsResponse
 
 import com.google.gson.annotations.SerializedName
 
@@ -196,6 +200,76 @@ open class SellerApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
     }
 
     /**
+     * GET /seller/202611/carousel_permission
+     * Get Seller Carousel Permission
+     * Retrieve the carousel-related permissions for the currently authorized seller, including auto-post permission and photo mode permission.
+     * @return GetSellerCarouselPermissionResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getSellerCarouselPermission() : GetSellerCarouselPermissionResponse {
+        val localVarResponse = getSellerCarouselPermissionWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetSellerCarouselPermissionResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /seller/202611/carousel_permission
+     * Get Seller Carousel Permission
+     * Retrieve the carousel-related permissions for the currently authorized seller, including auto-post permission and photo mode permission.
+     * @return ApiResponse<GetSellerCarouselPermissionResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getSellerCarouselPermissionWithHttpInfo() : ApiResponse<GetSellerCarouselPermissionResponse?> {
+        val localVariableConfig = getSellerCarouselPermissionRequestConfig()
+
+        return request<Unit, GetSellerCarouselPermissionResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getSellerCarouselPermission
+     *
+     * @return RequestConfig
+     */
+    fun getSellerCarouselPermissionRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/seller/202611/carousel_permission",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * GET /seller/202601/shop_groups
      * Get Shop Group and Related Shops
      * Retrieves the product interoperability group and related shops for the authenticated shop. For example, a group can include a U.S. shop and a Mexico shop.
@@ -258,6 +332,154 @@ open class SellerApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/seller/202601/shop_groups",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /seller/202611/images/upload
+     * Upload Seller Image
+     * Upload an image material up to 10 MiB to TOS for the current seller.
+     * @param imageData The local image file to upload to TOS.  Requirements: - Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP. - Zero-byte files are rejected. - Maximum file size: 10 MiB (10,485,760 bytes).
+     * @return UploadSellerImageResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun uploadSellerImage(imageData: java.io.File) : UploadSellerImageResponse {
+        val localVarResponse = uploadSellerImageWithHttpInfo(imageData = imageData)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as UploadSellerImageResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /seller/202611/images/upload
+     * Upload Seller Image
+     * Upload an image material up to 10 MiB to TOS for the current seller.
+     * @param imageData The local image file to upload to TOS.  Requirements: - Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP. - Zero-byte files are rejected. - Maximum file size: 10 MiB (10,485,760 bytes).
+     * @return ApiResponse<UploadSellerImageResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun uploadSellerImageWithHttpInfo(imageData: java.io.File) : ApiResponse<UploadSellerImageResponse?> {
+        val localVariableConfig = uploadSellerImageRequestConfig(imageData = imageData)
+
+        return request<Map<String, PartConfig<*>>, UploadSellerImageResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation uploadSellerImage
+     *
+     * @param imageData The local image file to upload to TOS.  Requirements: - Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP. - Zero-byte files are rejected. - Maximum file size: 10 MiB (10,485,760 bytes).
+     * @return RequestConfig
+     */
+    fun uploadSellerImageRequestConfig(imageData: java.io.File) : RequestConfig<Map<String, PartConfig<*>>> {
+        val localVariableBody = mapOf(
+            "image_data" to PartConfig(body = imageData, headers = mutableMapOf()),)
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf("Content-Type" to "multipart/form-data")
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/seller/202611/images/upload",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /seller/202611/materials/upload
+     * Upload Seller Materials
+     * Upload image materials for the current shop. Use &#x60;materials&#x60; for &#x60;ONE_PRODUCT_ONE_IMAGE&#x60; and &#x60;material_groups&#x60; for &#x60;ONE_PRODUCT_MULTIPLE_IMAGES&#x60;. Provide exactly one mode payload per request.
+     * @param uploadSellerMaterialsRequest 
+     * @return UploadSellerMaterialsResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun uploadSellerMaterials(uploadSellerMaterialsRequest: UploadSellerMaterialsRequest) : UploadSellerMaterialsResponse {
+        val localVarResponse = uploadSellerMaterialsWithHttpInfo(uploadSellerMaterialsRequest = uploadSellerMaterialsRequest)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as UploadSellerMaterialsResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /seller/202611/materials/upload
+     * Upload Seller Materials
+     * Upload image materials for the current shop. Use &#x60;materials&#x60; for &#x60;ONE_PRODUCT_ONE_IMAGE&#x60; and &#x60;material_groups&#x60; for &#x60;ONE_PRODUCT_MULTIPLE_IMAGES&#x60;. Provide exactly one mode payload per request.
+     * @param uploadSellerMaterialsRequest 
+     * @return ApiResponse<UploadSellerMaterialsResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun uploadSellerMaterialsWithHttpInfo(uploadSellerMaterialsRequest: UploadSellerMaterialsRequest) : ApiResponse<UploadSellerMaterialsResponse?> {
+        val localVariableConfig = uploadSellerMaterialsRequestConfig(uploadSellerMaterialsRequest = uploadSellerMaterialsRequest)
+
+        return request<UploadSellerMaterialsRequest, UploadSellerMaterialsResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation uploadSellerMaterials
+     *
+     * @param uploadSellerMaterialsRequest 
+     * @return RequestConfig
+     */
+    fun uploadSellerMaterialsRequestConfig(uploadSellerMaterialsRequest: UploadSellerMaterialsRequest) : RequestConfig<UploadSellerMaterialsRequest> {
+        val localVariableBody = uploadSellerMaterialsRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/seller/202611/materials/upload",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

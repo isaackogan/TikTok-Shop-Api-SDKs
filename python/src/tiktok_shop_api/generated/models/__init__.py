@@ -1110,6 +1110,8 @@ from .get_return_records_response_data import GetReturnRecordsResponseData
 from .get_return_records_response_data_record import GetReturnRecordsResponseDataRecord
 from .get_return_records_response_data_record_image import GetReturnRecordsResponseDataRecordImage
 from .get_return_records_response_data_record_video import GetReturnRecordsResponseDataRecordVideo
+from .get_seller_carousel_permission_response import GetSellerCarouselPermissionResponse
+from .get_seller_carousel_permission_response_data import GetSellerCarouselPermissionResponseData
 from .get_seller_financial_transactions_response import GetSellerFinancialTransactionsResponse
 from .get_seller_financial_transactions_response_data import GetSellerFinancialTransactionsResponseData
 from .get_seller_financial_transactions_response_data_withdrawal import GetSellerFinancialTransactionsResponseDataWithdrawal
@@ -1570,6 +1572,7 @@ from .mark_conversations_as_read_response_data import MarkConversationsAsReadRes
 from .mark_package_as_shipped_request import MarkPackageAsShippedRequest
 from .mark_package_as_shipped_response import MarkPackageAsShippedResponse
 from .mark_package_as_shipped_response_data import MarkPackageAsShippedResponseData
+from .material import Material
 from .max_discount import MaxDiscount
 from .max_price import MaxPrice
 from .metric import Metric
@@ -2464,6 +2467,16 @@ from .upload_return_shipping_information_request import UploadReturnShippingInfo
 from .upload_return_shipping_information_response import UploadReturnShippingInformationResponse
 from .upload_return_shipping_information_response_data import UploadReturnShippingInformationResponseData
 from .upload_return_shipping_information_return_id_type import UploadReturnShippingInformationReturnIdType
+from .upload_seller_image_request import UploadSellerImageRequest
+from .upload_seller_image_response import UploadSellerImageResponse
+from .upload_seller_image_response_data import UploadSellerImageResponseData
+from .upload_seller_materials_request import UploadSellerMaterialsRequest
+from .upload_seller_materials_request_material_group import UploadSellerMaterialsRequestMaterialGroup
+from .upload_seller_materials_request_post_type import UploadSellerMaterialsRequestPostType
+from .upload_seller_materials_response import UploadSellerMaterialsResponse
+from .upload_seller_materials_response_data import UploadSellerMaterialsResponseData
+from .upload_seller_materials_response_data_material_group import UploadSellerMaterialsResponseDataMaterialGroup
+from .upload_seller_materials_response_data_material_group_material import UploadSellerMaterialsResponseDataMaterialGroupMaterial
 from .upload_shoppable_photo_file_request import UploadShoppablePhotoFileRequest
 from .upload_shoppable_photo_file_response import UploadShoppablePhotoFileResponse
 from .upload_shoppable_photo_file_response_data import UploadShoppablePhotoFileResponseData
@@ -3595,6 +3608,8 @@ __all__ = (
     "GetReturnRecordsResponseDataRecord",
     "GetReturnRecordsResponseDataRecordImage",
     "GetReturnRecordsResponseDataRecordVideo",
+    "GetSellerCarouselPermissionResponse",
+    "GetSellerCarouselPermissionResponseData",
     "GetSellerFinancialTransactionsResponse",
     "GetSellerFinancialTransactionsResponseData",
     "GetSellerFinancialTransactionsResponseDataWithdrawal",
@@ -4055,6 +4070,7 @@ __all__ = (
     "MarkPackageAsShippedRequest",
     "MarkPackageAsShippedResponse",
     "MarkPackageAsShippedResponseData",
+    "Material",
     "MaxDiscount",
     "MaxPrice",
     "Metric",
@@ -4949,6 +4965,16 @@ __all__ = (
     "UploadReturnShippingInformationResponse",
     "UploadReturnShippingInformationResponseData",
     "UploadReturnShippingInformationReturnIdType",
+    "UploadSellerImageRequest",
+    "UploadSellerImageResponse",
+    "UploadSellerImageResponseData",
+    "UploadSellerMaterialsRequest",
+    "UploadSellerMaterialsRequestMaterialGroup",
+    "UploadSellerMaterialsRequestPostType",
+    "UploadSellerMaterialsResponse",
+    "UploadSellerMaterialsResponseData",
+    "UploadSellerMaterialsResponseDataMaterialGroup",
+    "UploadSellerMaterialsResponseDataMaterialGroupMaterial",
     "UploadShoppablePhotoFileRequest",
     "UploadShoppablePhotoFileResponse",
     "UploadShoppablePhotoFileResponseData",

@@ -357,6 +357,9 @@ public static class Meta
         new("GetGlobalProductPermission", "Seller", "GET", "/seller/202309/permissions", false),
         new("GetActiveShops", "Seller", "GET", "/seller/202309/shops", false),
         new("GetShopGroupAndRelatedShops", "Seller", "GET", "/seller/202601/shop_groups", false),
+        new("GetSellerCarouselPermission", "Seller", "GET", "/seller/202611/carousel_permission", false),
+        new("UploadSellerImage", "Seller", "POST", "/seller/202611/images/upload", false),
+        new("UploadSellerMaterials", "Seller", "POST", "/seller/202611/materials/upload", true),
         new("ConfirmPackageShipment", "SupplyChain", "POST", "/supply_chain/202309/packages/sync", false),
     };
 

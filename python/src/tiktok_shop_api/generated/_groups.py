@@ -290,6 +290,7 @@ if TYPE_CHECKING:
     from .models.get_recommended_product_title_and_description_response import GetRecommendedProductTitleAndDescriptionResponse
     from .models.get_reject_reasons_response import GetRejectReasonsResponse
     from .models.get_return_records_response import GetReturnRecordsResponse
+    from .models.get_seller_carousel_permission_response import GetSellerCarouselPermissionResponse
     from .models.get_seller_financial_transactions_response import GetSellerFinancialTransactionsResponse
     from .models.get_seller_financial_transactions_types_item import GetSellerFinancialTransactionsTypesItem
     from .models.get_seller_partner_campaign_candidate_products_response import GetSellerPartnerCampaignCandidateProductsResponse
@@ -631,6 +632,10 @@ if TYPE_CHECKING:
     from .models.upload_return_shipping_information_request import UploadReturnShippingInformationRequest
     from .models.upload_return_shipping_information_response import UploadReturnShippingInformationResponse
     from .models.upload_return_shipping_information_return_id_type import UploadReturnShippingInformationReturnIdType
+    from .models.upload_seller_image_request import UploadSellerImageRequest
+    from .models.upload_seller_image_response import UploadSellerImageResponse
+    from .models.upload_seller_materials_request import UploadSellerMaterialsRequest
+    from .models.upload_seller_materials_response import UploadSellerMaterialsResponse
     from .models.upload_shoppable_photo_file_request import UploadShoppablePhotoFileRequest
     from .models.upload_shoppable_photo_file_response import UploadShoppablePhotoFileResponse
     from .models.upload_shoppable_video_file_request import UploadShoppableVideoFileRequest
@@ -17888,6 +17893,22 @@ class SellerApi(SyncGroup):
 
         return self._run(_op.sync_detailed)
 
+    def get_seller_carousel_permission(
+        self,
+    ) -> GetSellerCarouselPermissionResponse | None:
+        """Get Seller Carousel Permission
+
+         Retrieve the carousel-related permissions for the currently authorized seller, including auto-post
+        permission and photo mode permission.
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.seller import get_seller_carousel_permission as _op
+
+        return self._run(_op.sync_detailed)
+
     def get_shop_group_and_related_shops(
         self,
     ) -> GetShopGroupAndRelatedShopsResponse | None:
@@ -17903,6 +17924,47 @@ class SellerApi(SyncGroup):
         from .api.seller import get_shop_group_and_related_shops as _op
 
         return self._run(_op.sync_detailed)
+
+    def upload_seller_image(
+        self,
+        *,
+        body: UploadSellerImageRequest,
+    ) -> UploadSellerImageResponse | None:
+        """Upload Seller Image
+
+         Upload an image material up to 10 MiB to TOS for the current seller.
+
+        Args:
+            body (UploadSellerImageRequest):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.seller import upload_seller_image as _op
+
+        return self._run(_op.sync_detailed, body=body)
+
+    def upload_seller_materials(
+        self,
+        *,
+        body: UploadSellerMaterialsRequest,
+    ) -> UploadSellerMaterialsResponse | None:
+        """Upload Seller Materials
+
+         Upload image materials for the current shop. Use `materials` for `ONE_PRODUCT_ONE_IMAGE` and
+        `material_groups` for `ONE_PRODUCT_MULTIPLE_IMAGES`. Provide exactly one mode payload per request.
+
+        Args:
+            body (UploadSellerMaterialsRequest):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.seller import upload_seller_materials as _op
+
+        return self._run(_op.sync_detailed, body=body)
 
 
 class AsyncSellerApi(AsyncGroup):
@@ -17942,6 +18004,22 @@ class AsyncSellerApi(AsyncGroup):
 
         return await self._run(_op.asyncio_detailed)
 
+    async def get_seller_carousel_permission(
+        self,
+    ) -> GetSellerCarouselPermissionResponse | None:
+        """Get Seller Carousel Permission
+
+         Retrieve the carousel-related permissions for the currently authorized seller, including auto-post
+        permission and photo mode permission.
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.seller import get_seller_carousel_permission as _op
+
+        return await self._run(_op.asyncio_detailed)
+
     async def get_shop_group_and_related_shops(
         self,
     ) -> GetShopGroupAndRelatedShopsResponse | None:
@@ -17957,6 +18035,47 @@ class AsyncSellerApi(AsyncGroup):
         from .api.seller import get_shop_group_and_related_shops as _op
 
         return await self._run(_op.asyncio_detailed)
+
+    async def upload_seller_image(
+        self,
+        *,
+        body: UploadSellerImageRequest,
+    ) -> UploadSellerImageResponse | None:
+        """Upload Seller Image
+
+         Upload an image material up to 10 MiB to TOS for the current seller.
+
+        Args:
+            body (UploadSellerImageRequest):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.seller import upload_seller_image as _op
+
+        return await self._run(_op.asyncio_detailed, body=body)
+
+    async def upload_seller_materials(
+        self,
+        *,
+        body: UploadSellerMaterialsRequest,
+    ) -> UploadSellerMaterialsResponse | None:
+        """Upload Seller Materials
+
+         Upload image materials for the current shop. Use `materials` for `ONE_PRODUCT_ONE_IMAGE` and
+        `material_groups` for `ONE_PRODUCT_MULTIPLE_IMAGES`. Provide exactly one mode payload per request.
+
+        Args:
+            body (UploadSellerMaterialsRequest):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.seller import upload_seller_materials as _op
+
+        return await self._run(_op.asyncio_detailed, body=body)
 
 
 class SupplyChainApi(SyncGroup):

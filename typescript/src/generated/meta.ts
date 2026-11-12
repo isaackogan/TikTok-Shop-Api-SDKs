@@ -2697,6 +2697,30 @@ export const OPERATIONS: readonly OperationMeta[] = [
     "requiresShopCipher": false
   },
   {
+    "operationId": "getSellerCarouselPermission",
+    "tag": "Seller",
+    "group": "seller",
+    "method": "get",
+    "path": "/seller/202611/carousel_permission",
+    "requiresShopCipher": false
+  },
+  {
+    "operationId": "uploadSellerImage",
+    "tag": "Seller",
+    "group": "seller",
+    "method": "post",
+    "path": "/seller/202611/images/upload",
+    "requiresShopCipher": false
+  },
+  {
+    "operationId": "uploadSellerMaterials",
+    "tag": "Seller",
+    "group": "seller",
+    "method": "post",
+    "path": "/seller/202611/materials/upload",
+    "requiresShopCipher": true
+  },
+  {
     "operationId": "confirmPackageShipment",
     "tag": "Supply chain",
     "group": "supplyChain",

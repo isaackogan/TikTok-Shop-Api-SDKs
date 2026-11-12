@@ -400,6 +400,9 @@ public final class Meta {
             new Operation("getGlobalProductPermission", "Seller", "seller", "SellerApi", "GET", "/seller/202309/permissions", false),
             new Operation("getActiveShops", "Seller", "seller", "SellerApi", "GET", "/seller/202309/shops", false),
             new Operation("getShopGroupAndRelatedShops", "Seller", "seller", "SellerApi", "GET", "/seller/202601/shop_groups", false),
+            new Operation("getSellerCarouselPermission", "Seller", "seller", "SellerApi", "GET", "/seller/202611/carousel_permission", false),
+            new Operation("uploadSellerImage", "Seller", "seller", "SellerApi", "POST", "/seller/202611/images/upload", false),
+            new Operation("uploadSellerMaterials", "Seller", "seller", "SellerApi", "POST", "/seller/202611/materials/upload", true),
             new Operation("confirmPackageShipment", "Supply chain", "supplyChain", "SupplyChainApi", "POST", "/supply_chain/202309/packages/sync", false)));
 
     public static final List<Group> GROUPS = Collections.unmodifiableList(Arrays.asList(

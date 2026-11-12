@@ -370,6 +370,9 @@ pub const OPERATIONS: &[OperationMeta] = &[
     OperationMeta { operation_id: "getGlobalProductPermission", tag: "Seller", group: "seller", method: "get_global_product_permission", http_method: "GET", path: "/seller/202309/permissions", requires_shop_cipher: false },
     OperationMeta { operation_id: "getActiveShops", tag: "Seller", group: "seller", method: "get_active_shops", http_method: "GET", path: "/seller/202309/shops", requires_shop_cipher: false },
     OperationMeta { operation_id: "getShopGroupAndRelatedShops", tag: "Seller", group: "seller", method: "get_shop_group_and_related_shops", http_method: "GET", path: "/seller/202601/shop_groups", requires_shop_cipher: false },
+    OperationMeta { operation_id: "getSellerCarouselPermission", tag: "Seller", group: "seller", method: "get_seller_carousel_permission", http_method: "GET", path: "/seller/202611/carousel_permission", requires_shop_cipher: false },
+    OperationMeta { operation_id: "uploadSellerImage", tag: "Seller", group: "seller", method: "upload_seller_image", http_method: "POST", path: "/seller/202611/images/upload", requires_shop_cipher: false },
+    OperationMeta { operation_id: "uploadSellerMaterials", tag: "Seller", group: "seller", method: "upload_seller_materials", http_method: "POST", path: "/seller/202611/materials/upload", requires_shop_cipher: true },
     OperationMeta { operation_id: "confirmPackageShipment", tag: "Supply chain", group: "supply_chain", method: "confirm_package_shipment", http_method: "POST", path: "/supply_chain/202309/packages/sync", requires_shop_cipher: false },
 ];
 

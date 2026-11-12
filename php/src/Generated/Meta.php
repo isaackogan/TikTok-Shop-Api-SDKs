@@ -350,6 +350,9 @@ final class Meta
         ['getGlobalProductPermission', 'seller', 'GET', '/seller/202309/permissions', false],
         ['getActiveShops', 'seller', 'GET', '/seller/202309/shops', false],
         ['getShopGroupAndRelatedShops', 'seller', 'GET', '/seller/202601/shop_groups', false],
+        ['getSellerCarouselPermission', 'seller', 'GET', '/seller/202611/carousel_permission', false],
+        ['uploadSellerImage', 'seller', 'POST', '/seller/202611/images/upload', false],
+        ['uploadSellerMaterials', 'seller', 'POST', '/seller/202611/materials/upload', true],
         ['confirmPackageShipment', 'supplyChain', 'POST', '/supply_chain/202309/packages/sync', false],
     ];
 
