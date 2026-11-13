@@ -43,6 +43,13 @@ class EditProductRequestSkuPreSale:
 
                 **ALL**
                 - `NONE`: To convert the product to a regular (non-presale) product.
+
+                When editing an existing US pre-order product, omitting skus[].pre_sale retains its current pre-order settings.
+                If you include this object, keep type set to PRE_ORDER and preserve the existing fulfillment_type.release_date.
+                Pre-order and list price cannot be enabled together. To clear an existing list price, explicitly pass
+                "list_price": {"amount": "", "currency": "USD"} for each affected SKU; do not omit list_price or pass null or
+                {}. Ensure your SDK preserves the empty amount string in the serialized request. Submit the complete product
+                data, including all existing SKUs, and preserve any values you do not intend to change.
             fulfillment_type (FulfillmentType | Unset):
      """
 

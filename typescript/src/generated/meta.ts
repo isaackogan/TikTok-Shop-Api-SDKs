@@ -2529,6 +2529,78 @@ export const OPERATIONS: readonly OperationMeta[] = [
     "requiresShopCipher": true
   },
   {
+    "operationId": "listCampaignGroup",
+    "tag": "Promotion",
+    "group": "promotion",
+    "method": "get",
+    "path": "/promotion/202611/campaign_groups",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getCampaignGroup",
+    "tag": "Promotion",
+    "group": "promotion",
+    "method": "get",
+    "path": "/promotion/202611/campaign_groups/{campaign_group_id}",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "listCampaign",
+    "tag": "Promotion",
+    "group": "promotion",
+    "method": "get",
+    "path": "/promotion/202611/campaigns",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getLivestreamCampaign",
+    "tag": "Promotion",
+    "group": "promotion",
+    "method": "get",
+    "path": "/promotion/202611/livestream_campaigns/{livestream_campaign_id}",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getProductCampaign",
+    "tag": "Promotion",
+    "group": "promotion",
+    "method": "get",
+    "path": "/promotion/202611/product_campaigns/{product_campaign_id}",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "listRegisteredCampaign",
+    "tag": "Promotion",
+    "group": "promotion",
+    "method": "get",
+    "path": "/promotion/202611/registered_campaigns",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getRegisteredCampaignCounts",
+    "tag": "Promotion",
+    "group": "promotion",
+    "method": "get",
+    "path": "/promotion/202611/registered_campaigns/counts",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getShopCampaign",
+    "tag": "Promotion",
+    "group": "promotion",
+    "method": "get",
+    "path": "/promotion/202611/shop_campaigns/{shop_campaign_id}",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getShortVideoCampaign",
+    "tag": "Promotion",
+    "group": "promotion",
+    "method": "get",
+    "path": "/promotion/202611/short_video_campaigns/{short_video_campaign_id}",
+    "requiresShopCipher": true
+  },
+  {
     "operationId": "approveCancellation",
     "tag": "Return and refund",
     "group": "returnAndRefund",

@@ -31,7 +31,16 @@ import com.isaackogan.tiktok.shop.generated.models.CreatePromotionActivityReques
 import com.isaackogan.tiktok.shop.generated.models.CreatePromotionActivityResponse
 import com.isaackogan.tiktok.shop.generated.models.DeactivateActivityResponse
 import com.isaackogan.tiktok.shop.generated.models.GetActivityResponse
+import com.isaackogan.tiktok.shop.generated.models.GetCampaignGroupResponse
 import com.isaackogan.tiktok.shop.generated.models.GetCouponResponse
+import com.isaackogan.tiktok.shop.generated.models.GetLivestreamCampaignResponse
+import com.isaackogan.tiktok.shop.generated.models.GetProductCampaignResponse
+import com.isaackogan.tiktok.shop.generated.models.GetRegisteredCampaignCountsResponse
+import com.isaackogan.tiktok.shop.generated.models.GetShopCampaignResponse
+import com.isaackogan.tiktok.shop.generated.models.GetShortVideoCampaignResponse
+import com.isaackogan.tiktok.shop.generated.models.ListCampaignGroupResponse
+import com.isaackogan.tiktok.shop.generated.models.ListCampaignResponse
+import com.isaackogan.tiktok.shop.generated.models.ListRegisteredCampaignResponse
 import com.isaackogan.tiktok.shop.generated.models.RemovePromotionActivityProductsRequest
 import com.isaackogan.tiktok.shop.generated.models.RemovePromotionActivityProductsResponse
 import com.isaackogan.tiktok.shop.generated.models.RepublishActivityRequest
@@ -294,6 +303,87 @@ open class PromotionApi(basePath: kotlin.String = defaultBasePath, client: Call.
     }
 
     /**
+     * GET /promotion/202611/campaign_groups/{campaign_group_id}
+     * Get Campaign Group
+     * Get a campaign group&#39;s basic information, campaign period, sales period, and linked campaign groups. If the query succeeds without an available result, campaign_group is omitted and data is empty; no invalid ID is generated. Use ListCampaign to paginate and filter campaigns within the group.  Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller&#39;s data.  This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.  Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform&#39;s standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.  Timestamps use RFC 3339 UTC with three fractional-second digits. See each field&#39;s description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.  Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.  locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign&#39;s localization rules and may contain rich text; HTML sanitization is not guaranteed. Unavailable text is omitted rather than replaced with a placeholder name.
+     * @param campaignGroupId Required positive campaign group ID, obtainable from ListCampaignGroup. Do not use an individual campaign ID. A decimal string from 1 to 9223372036854775807.
+     * @param locale BCP-47 language tag. Defaults to en-US. If text is unavailable in the requested language, the campaign&#39;s default text is used; en-GB returns English text. (optional)
+     * @return GetCampaignGroupResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getCampaignGroup(campaignGroupId: kotlin.String, locale: kotlin.String? = null) : GetCampaignGroupResponse {
+        val localVarResponse = getCampaignGroupWithHttpInfo(campaignGroupId = campaignGroupId, locale = locale)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetCampaignGroupResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /promotion/202611/campaign_groups/{campaign_group_id}
+     * Get Campaign Group
+     * Get a campaign group&#39;s basic information, campaign period, sales period, and linked campaign groups. If the query succeeds without an available result, campaign_group is omitted and data is empty; no invalid ID is generated. Use ListCampaign to paginate and filter campaigns within the group.  Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller&#39;s data.  This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.  Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform&#39;s standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.  Timestamps use RFC 3339 UTC with three fractional-second digits. See each field&#39;s description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.  Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.  locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign&#39;s localization rules and may contain rich text; HTML sanitization is not guaranteed. Unavailable text is omitted rather than replaced with a placeholder name.
+     * @param campaignGroupId Required positive campaign group ID, obtainable from ListCampaignGroup. Do not use an individual campaign ID. A decimal string from 1 to 9223372036854775807.
+     * @param locale BCP-47 language tag. Defaults to en-US. If text is unavailable in the requested language, the campaign&#39;s default text is used; en-GB returns English text. (optional)
+     * @return ApiResponse<GetCampaignGroupResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getCampaignGroupWithHttpInfo(campaignGroupId: kotlin.String, locale: kotlin.String?) : ApiResponse<GetCampaignGroupResponse?> {
+        val localVariableConfig = getCampaignGroupRequestConfig(campaignGroupId = campaignGroupId, locale = locale)
+
+        return request<Unit, GetCampaignGroupResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getCampaignGroup
+     *
+     * @param campaignGroupId Required positive campaign group ID, obtainable from ListCampaignGroup. Do not use an individual campaign ID. A decimal string from 1 to 9223372036854775807.
+     * @param locale BCP-47 language tag. Defaults to en-US. If text is unavailable in the requested language, the campaign&#39;s default text is used; en-GB returns English text. (optional)
+     * @return RequestConfig
+     */
+    fun getCampaignGroupRequestConfig(campaignGroupId: kotlin.String, locale: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (locale != null) {
+                    put("locale", listOf(locale.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/promotion/202611/campaign_groups/{campaign_group_id}".replace("{"+"campaign_group_id"+"}", encodeURIComponent(campaignGroupId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * GET /promotion/202406/coupons/{coupon_id}
      * Get Coupon
      * Use this API to get the full details of a coupon matching the {coupon_id}.
@@ -359,6 +449,746 @@ open class PromotionApi(basePath: kotlin.String = defaultBasePath, client: Call.
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/promotion/202406/coupons/{coupon_id}".replace("{"+"coupon_id"+"}", encodeURIComponent(couponId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /promotion/202611/livestream_campaigns/{livestream_campaign_id}
+     * Get Livestream Campaign
+     * Get details of a featured livestream or livestream competition, including times, participation requirements, benefits, agreement requirements, and the shop&#39;s registered session statistics. super_livestream applies only to featured livestreams. Successful queries return the campaign details. A campaign that does not exist, is not visible or applicable to the shop, or has a different supported type returns a resource-unavailable error.  Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller&#39;s data.  This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.  Missing or inconsistent data required to identify or return the campaign results in a system error, not a resource-unavailable error. Missing optional information only omits the corresponding fields. An existing campaign that the shop cannot register for is still returned with its eligibility or blocking reasons. Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform&#39;s standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.  Timestamps use RFC 3339 UTC with three fractional-second digits. See each field&#39;s description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.  Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.  locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign&#39;s localization rules. The campaign description field returns sanitized HTML, with scripts, event-handler attributes, and unsafe URLs removed. This guarantee applies only to the campaign description, not to other text fields or nested descriptions. Treat other text as text, not trusted HTML. Unavailable text is omitted rather than replaced with a placeholder name.  The requested campaign type must match the endpoint; otherwise a resource-unavailable error is returned. Only campaign-level information is exposed, without account lists, individual content, registration records, or session details. Participation requirements, benefits, and blocking reasons describe a single campaign&#39;s configuration and are not paginated or silently truncated. registration_status independently represents the registration stage and does not establish the shop&#39;s eligibility or existing registration.
+     * @param livestreamCampaignId Required positive livestream campaign ID, obtainable from ListCampaign or ListRegisteredCampaign entries with type&#x3D;LIVESTREAM. Not a session ID, livestream room ID, or video ID. A decimal string from 1 to 9223372036854775807.
+     * @param locale BCP-47 language tag. Defaults to en-US; maximum 64 characters. en-GB uses English text. (optional)
+     * @return GetLivestreamCampaignResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getLivestreamCampaign(livestreamCampaignId: kotlin.String, locale: kotlin.String? = null) : GetLivestreamCampaignResponse {
+        val localVarResponse = getLivestreamCampaignWithHttpInfo(livestreamCampaignId = livestreamCampaignId, locale = locale)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetLivestreamCampaignResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /promotion/202611/livestream_campaigns/{livestream_campaign_id}
+     * Get Livestream Campaign
+     * Get details of a featured livestream or livestream competition, including times, participation requirements, benefits, agreement requirements, and the shop&#39;s registered session statistics. super_livestream applies only to featured livestreams. Successful queries return the campaign details. A campaign that does not exist, is not visible or applicable to the shop, or has a different supported type returns a resource-unavailable error.  Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller&#39;s data.  This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.  Missing or inconsistent data required to identify or return the campaign results in a system error, not a resource-unavailable error. Missing optional information only omits the corresponding fields. An existing campaign that the shop cannot register for is still returned with its eligibility or blocking reasons. Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform&#39;s standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.  Timestamps use RFC 3339 UTC with three fractional-second digits. See each field&#39;s description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.  Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.  locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign&#39;s localization rules. The campaign description field returns sanitized HTML, with scripts, event-handler attributes, and unsafe URLs removed. This guarantee applies only to the campaign description, not to other text fields or nested descriptions. Treat other text as text, not trusted HTML. Unavailable text is omitted rather than replaced with a placeholder name.  The requested campaign type must match the endpoint; otherwise a resource-unavailable error is returned. Only campaign-level information is exposed, without account lists, individual content, registration records, or session details. Participation requirements, benefits, and blocking reasons describe a single campaign&#39;s configuration and are not paginated or silently truncated. registration_status independently represents the registration stage and does not establish the shop&#39;s eligibility or existing registration.
+     * @param livestreamCampaignId Required positive livestream campaign ID, obtainable from ListCampaign or ListRegisteredCampaign entries with type&#x3D;LIVESTREAM. Not a session ID, livestream room ID, or video ID. A decimal string from 1 to 9223372036854775807.
+     * @param locale BCP-47 language tag. Defaults to en-US; maximum 64 characters. en-GB uses English text. (optional)
+     * @return ApiResponse<GetLivestreamCampaignResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getLivestreamCampaignWithHttpInfo(livestreamCampaignId: kotlin.String, locale: kotlin.String?) : ApiResponse<GetLivestreamCampaignResponse?> {
+        val localVariableConfig = getLivestreamCampaignRequestConfig(livestreamCampaignId = livestreamCampaignId, locale = locale)
+
+        return request<Unit, GetLivestreamCampaignResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getLivestreamCampaign
+     *
+     * @param livestreamCampaignId Required positive livestream campaign ID, obtainable from ListCampaign or ListRegisteredCampaign entries with type&#x3D;LIVESTREAM. Not a session ID, livestream room ID, or video ID. A decimal string from 1 to 9223372036854775807.
+     * @param locale BCP-47 language tag. Defaults to en-US; maximum 64 characters. en-GB uses English text. (optional)
+     * @return RequestConfig
+     */
+    fun getLivestreamCampaignRequestConfig(livestreamCampaignId: kotlin.String, locale: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (locale != null) {
+                    put("locale", listOf(locale.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/promotion/202611/livestream_campaigns/{livestream_campaign_id}".replace("{"+"livestream_campaign_id"+"}", encodeURIComponent(livestreamCampaignId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /promotion/202611/product_campaigns/{product_campaign_id}
+     * Get Product Campaign
+     * Get a product campaign&#39;s basic information, registration period, participation rules, benefits and fees, shop eligibility, product registration quota, and participation statistics. registration_mode distinguishes STANDARD from ROLLING. linked_campaigns applies only to ROLLING; a link does not establish existing registration, synchronization, or eligibility.  Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller&#39;s data.  This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.  Missing or inconsistent data required to identify or return the campaign results in a system error, not a resource-unavailable error. Missing optional information only omits the corresponding fields. An existing campaign that the shop cannot register for is still returned with its eligibility or blocking reasons. Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform&#39;s standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.  Timestamps use RFC 3339 UTC with three fractional-second digits. See each field&#39;s description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.  Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.  locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign&#39;s localization rules. The campaign description field returns sanitized HTML, with scripts, event-handler attributes, and unsafe URLs removed. This guarantee applies only to the campaign description, not to other text fields or nested descriptions. Treat other text as text, not trusted HTML. Unavailable text is omitted rather than replaced with a placeholder name.  A type mismatch, nonexistent or invisible campaign, or inapplicable region returns a resource-unavailable error rather than a successful empty result. Unknown eligibility or registration availability alone does not fail the query. registration_period.status is determined only from query_time and registration boundaries, not campaign_status. The registration interval includes its end time; campaign and fee validity intervals exclude their end times. Rules, benefits, and fee policies are the complete applicable configuration of a single campaign, not product or registration record lists, and are neither paginated nor truncated. Fee text and resources jointly express the terms; omission does not mean free participation.
+     * @param productCampaignId Required positive product campaign ID, obtainable from ListCampaign or ListRegisteredCampaign entries with type&#x3D;PRODUCT. A campaign type mismatch returns a resource-unavailable error. A decimal string from 1 to 9223372036854775807.
+     * @param locale BCP-47 language tag. Defaults to en-US. If text is unavailable in the requested language, the campaign&#39;s default text is used without changing statuses or reason codes. (optional)
+     * @return GetProductCampaignResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getProductCampaign(productCampaignId: kotlin.String, locale: kotlin.String? = null) : GetProductCampaignResponse {
+        val localVarResponse = getProductCampaignWithHttpInfo(productCampaignId = productCampaignId, locale = locale)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetProductCampaignResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /promotion/202611/product_campaigns/{product_campaign_id}
+     * Get Product Campaign
+     * Get a product campaign&#39;s basic information, registration period, participation rules, benefits and fees, shop eligibility, product registration quota, and participation statistics. registration_mode distinguishes STANDARD from ROLLING. linked_campaigns applies only to ROLLING; a link does not establish existing registration, synchronization, or eligibility.  Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller&#39;s data.  This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.  Missing or inconsistent data required to identify or return the campaign results in a system error, not a resource-unavailable error. Missing optional information only omits the corresponding fields. An existing campaign that the shop cannot register for is still returned with its eligibility or blocking reasons. Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform&#39;s standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.  Timestamps use RFC 3339 UTC with three fractional-second digits. See each field&#39;s description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.  Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.  locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign&#39;s localization rules. The campaign description field returns sanitized HTML, with scripts, event-handler attributes, and unsafe URLs removed. This guarantee applies only to the campaign description, not to other text fields or nested descriptions. Treat other text as text, not trusted HTML. Unavailable text is omitted rather than replaced with a placeholder name.  A type mismatch, nonexistent or invisible campaign, or inapplicable region returns a resource-unavailable error rather than a successful empty result. Unknown eligibility or registration availability alone does not fail the query. registration_period.status is determined only from query_time and registration boundaries, not campaign_status. The registration interval includes its end time; campaign and fee validity intervals exclude their end times. Rules, benefits, and fee policies are the complete applicable configuration of a single campaign, not product or registration record lists, and are neither paginated nor truncated. Fee text and resources jointly express the terms; omission does not mean free participation.
+     * @param productCampaignId Required positive product campaign ID, obtainable from ListCampaign or ListRegisteredCampaign entries with type&#x3D;PRODUCT. A campaign type mismatch returns a resource-unavailable error. A decimal string from 1 to 9223372036854775807.
+     * @param locale BCP-47 language tag. Defaults to en-US. If text is unavailable in the requested language, the campaign&#39;s default text is used without changing statuses or reason codes. (optional)
+     * @return ApiResponse<GetProductCampaignResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getProductCampaignWithHttpInfo(productCampaignId: kotlin.String, locale: kotlin.String?) : ApiResponse<GetProductCampaignResponse?> {
+        val localVariableConfig = getProductCampaignRequestConfig(productCampaignId = productCampaignId, locale = locale)
+
+        return request<Unit, GetProductCampaignResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getProductCampaign
+     *
+     * @param productCampaignId Required positive product campaign ID, obtainable from ListCampaign or ListRegisteredCampaign entries with type&#x3D;PRODUCT. A campaign type mismatch returns a resource-unavailable error. A decimal string from 1 to 9223372036854775807.
+     * @param locale BCP-47 language tag. Defaults to en-US. If text is unavailable in the requested language, the campaign&#39;s default text is used without changing statuses or reason codes. (optional)
+     * @return RequestConfig
+     */
+    fun getProductCampaignRequestConfig(productCampaignId: kotlin.String, locale: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (locale != null) {
+                    put("locale", listOf(locale.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/promotion/202611/product_campaigns/{product_campaign_id}".replace("{"+"product_campaign_id"+"}", encodeURIComponent(productCampaignId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /promotion/202611/registered_campaigns/counts
+     * Get Registered Campaign Counts
+     * Get the shop&#39;s registered campaign counts: all_count, upcoming_count, active_count, and ended_count. ACTIVE covers the entire process from registration opening to campaign completion, not just execution. This operation has no list filters, so the result is not total_count for a particular filtered list. It uses the standard statistics scope, including manual and other registration methods. Queries specific to legacy automatic enrollment management are not supported. Categories are independent and are not guaranteed to sum to all_count. Successful data may be empty when all counts are unavailable.  Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller&#39;s data.  This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.  Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform&#39;s standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.  Timestamps use RFC 3339 UTC with three fractional-second digits. See each field&#39;s description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.
+     * @return GetRegisteredCampaignCountsResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getRegisteredCampaignCounts() : GetRegisteredCampaignCountsResponse {
+        val localVarResponse = getRegisteredCampaignCountsWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetRegisteredCampaignCountsResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /promotion/202611/registered_campaigns/counts
+     * Get Registered Campaign Counts
+     * Get the shop&#39;s registered campaign counts: all_count, upcoming_count, active_count, and ended_count. ACTIVE covers the entire process from registration opening to campaign completion, not just execution. This operation has no list filters, so the result is not total_count for a particular filtered list. It uses the standard statistics scope, including manual and other registration methods. Queries specific to legacy automatic enrollment management are not supported. Categories are independent and are not guaranteed to sum to all_count. Successful data may be empty when all counts are unavailable.  Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller&#39;s data.  This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.  Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform&#39;s standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.  Timestamps use RFC 3339 UTC with three fractional-second digits. See each field&#39;s description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.
+     * @return ApiResponse<GetRegisteredCampaignCountsResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getRegisteredCampaignCountsWithHttpInfo() : ApiResponse<GetRegisteredCampaignCountsResponse?> {
+        val localVariableConfig = getRegisteredCampaignCountsRequestConfig()
+
+        return request<Unit, GetRegisteredCampaignCountsResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getRegisteredCampaignCounts
+     *
+     * @return RequestConfig
+     */
+    fun getRegisteredCampaignCountsRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/promotion/202611/registered_campaigns/counts",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /promotion/202611/shop_campaigns/{shop_campaign_id}
+     * Get Shop Campaign
+     * Get a shop campaign&#39;s basic information, registration period, shop participation requirements, benefits and fees, shop eligibility, and participation statistics. Shop details do not include product registration quotas, product registration rules, or product statistics.  Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller&#39;s data.  This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.  Missing or inconsistent data required to identify or return the campaign results in a system error, not a resource-unavailable error. Missing optional information only omits the corresponding fields. An existing campaign that the shop cannot register for is still returned with its eligibility or blocking reasons. Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform&#39;s standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.  Timestamps use RFC 3339 UTC with three fractional-second digits. See each field&#39;s description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.  Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.  locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign&#39;s localization rules. The campaign description field returns sanitized HTML, with scripts, event-handler attributes, and unsafe URLs removed. This guarantee applies only to the campaign description, not to other text fields or nested descriptions. Treat other text as text, not trusted HTML. Unavailable text is omitted rather than replaced with a placeholder name.  A type mismatch, nonexistent or invisible campaign, or inapplicable region returns a resource-unavailable error rather than a successful empty result. Unknown eligibility or registration availability alone does not fail the query. registration_period.status is determined only from query_time and registration boundaries, not campaign_status. The registration interval includes its end time; campaign and fee validity intervals exclude their end times. Rules, benefits, and fee policies are the complete applicable configuration of a single campaign, not product or registration record lists, and are neither paginated nor truncated. Fee text and resources jointly express the terms; omission does not mean free participation.
+     * @param shopCampaignId Required positive shop campaign ID, obtainable from ListCampaign or ListRegisteredCampaign entries with type&#x3D;SHOP. A campaign type mismatch returns a resource-unavailable error. A decimal string from 1 to 9223372036854775807.
+     * @param locale BCP-47 language tag. Defaults to en-US. If text is unavailable in the requested language, the campaign&#39;s default text is used without changing statuses or reason codes. (optional)
+     * @return GetShopCampaignResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getShopCampaign(shopCampaignId: kotlin.String, locale: kotlin.String? = null) : GetShopCampaignResponse {
+        val localVarResponse = getShopCampaignWithHttpInfo(shopCampaignId = shopCampaignId, locale = locale)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetShopCampaignResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /promotion/202611/shop_campaigns/{shop_campaign_id}
+     * Get Shop Campaign
+     * Get a shop campaign&#39;s basic information, registration period, shop participation requirements, benefits and fees, shop eligibility, and participation statistics. Shop details do not include product registration quotas, product registration rules, or product statistics.  Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller&#39;s data.  This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.  Missing or inconsistent data required to identify or return the campaign results in a system error, not a resource-unavailable error. Missing optional information only omits the corresponding fields. An existing campaign that the shop cannot register for is still returned with its eligibility or blocking reasons. Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform&#39;s standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.  Timestamps use RFC 3339 UTC with three fractional-second digits. See each field&#39;s description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.  Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.  locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign&#39;s localization rules. The campaign description field returns sanitized HTML, with scripts, event-handler attributes, and unsafe URLs removed. This guarantee applies only to the campaign description, not to other text fields or nested descriptions. Treat other text as text, not trusted HTML. Unavailable text is omitted rather than replaced with a placeholder name.  A type mismatch, nonexistent or invisible campaign, or inapplicable region returns a resource-unavailable error rather than a successful empty result. Unknown eligibility or registration availability alone does not fail the query. registration_period.status is determined only from query_time and registration boundaries, not campaign_status. The registration interval includes its end time; campaign and fee validity intervals exclude their end times. Rules, benefits, and fee policies are the complete applicable configuration of a single campaign, not product or registration record lists, and are neither paginated nor truncated. Fee text and resources jointly express the terms; omission does not mean free participation.
+     * @param shopCampaignId Required positive shop campaign ID, obtainable from ListCampaign or ListRegisteredCampaign entries with type&#x3D;SHOP. A campaign type mismatch returns a resource-unavailable error. A decimal string from 1 to 9223372036854775807.
+     * @param locale BCP-47 language tag. Defaults to en-US. If text is unavailable in the requested language, the campaign&#39;s default text is used without changing statuses or reason codes. (optional)
+     * @return ApiResponse<GetShopCampaignResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getShopCampaignWithHttpInfo(shopCampaignId: kotlin.String, locale: kotlin.String?) : ApiResponse<GetShopCampaignResponse?> {
+        val localVariableConfig = getShopCampaignRequestConfig(shopCampaignId = shopCampaignId, locale = locale)
+
+        return request<Unit, GetShopCampaignResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getShopCampaign
+     *
+     * @param shopCampaignId Required positive shop campaign ID, obtainable from ListCampaign or ListRegisteredCampaign entries with type&#x3D;SHOP. A campaign type mismatch returns a resource-unavailable error. A decimal string from 1 to 9223372036854775807.
+     * @param locale BCP-47 language tag. Defaults to en-US. If text is unavailable in the requested language, the campaign&#39;s default text is used without changing statuses or reason codes. (optional)
+     * @return RequestConfig
+     */
+    fun getShopCampaignRequestConfig(shopCampaignId: kotlin.String, locale: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (locale != null) {
+                    put("locale", listOf(locale.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/promotion/202611/shop_campaigns/{shop_campaign_id}".replace("{"+"shop_campaign_id"+"}", encodeURIComponent(shopCampaignId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /promotion/202611/short_video_campaigns/{short_video_campaign_id}
+     * Get Short Video Campaign
+     * Get short video competition details, including times, participation requirements, benefits, agreement requirements, and account registration statistics. Statistics count account registration records, not videos or deduplicated accounts. Does not include livestream sessions, super livestream information, or a redundant subtype. Successful queries return the campaign details. A campaign that does not exist, is not visible or applicable to the shop, or has a different supported type returns a resource-unavailable error.  Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller&#39;s data.  This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.  Missing or inconsistent data required to identify or return the campaign results in a system error, not a resource-unavailable error. Missing optional information only omits the corresponding fields. An existing campaign that the shop cannot register for is still returned with its eligibility or blocking reasons. Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform&#39;s standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.  Timestamps use RFC 3339 UTC with three fractional-second digits. See each field&#39;s description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.  Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.  locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign&#39;s localization rules. The campaign description field returns sanitized HTML, with scripts, event-handler attributes, and unsafe URLs removed. This guarantee applies only to the campaign description, not to other text fields or nested descriptions. Treat other text as text, not trusted HTML. Unavailable text is omitted rather than replaced with a placeholder name.  The requested campaign type must match the endpoint; otherwise a resource-unavailable error is returned. Only campaign-level information is exposed, without account lists, individual content, registration records, or session details. Participation requirements, benefits, and blocking reasons describe a single campaign&#39;s configuration and are not paginated or silently truncated. registration_status independently represents the registration stage and does not establish the shop&#39;s eligibility or existing registration.
+     * @param shortVideoCampaignId Required positive short video campaign ID, obtainable from ListCampaign or ListRegisteredCampaign entries with type&#x3D;SHORT_VIDEO. Not a session ID, livestream room ID, or video ID. A decimal string from 1 to 9223372036854775807.
+     * @param locale BCP-47 language tag. Defaults to en-US; maximum 64 characters. en-GB uses English text. (optional)
+     * @return GetShortVideoCampaignResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getShortVideoCampaign(shortVideoCampaignId: kotlin.String, locale: kotlin.String? = null) : GetShortVideoCampaignResponse {
+        val localVarResponse = getShortVideoCampaignWithHttpInfo(shortVideoCampaignId = shortVideoCampaignId, locale = locale)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetShortVideoCampaignResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /promotion/202611/short_video_campaigns/{short_video_campaign_id}
+     * Get Short Video Campaign
+     * Get short video competition details, including times, participation requirements, benefits, agreement requirements, and account registration statistics. Statistics count account registration records, not videos or deduplicated accounts. Does not include livestream sessions, super livestream information, or a redundant subtype. Successful queries return the campaign details. A campaign that does not exist, is not visible or applicable to the shop, or has a different supported type returns a resource-unavailable error.  Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller&#39;s data.  This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.  Missing or inconsistent data required to identify or return the campaign results in a system error, not a resource-unavailable error. Missing optional information only omits the corresponding fields. An existing campaign that the shop cannot register for is still returned with its eligibility or blocking reasons. Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform&#39;s standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.  Timestamps use RFC 3339 UTC with three fractional-second digits. See each field&#39;s description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.  Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.  locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign&#39;s localization rules. The campaign description field returns sanitized HTML, with scripts, event-handler attributes, and unsafe URLs removed. This guarantee applies only to the campaign description, not to other text fields or nested descriptions. Treat other text as text, not trusted HTML. Unavailable text is omitted rather than replaced with a placeholder name.  The requested campaign type must match the endpoint; otherwise a resource-unavailable error is returned. Only campaign-level information is exposed, without account lists, individual content, registration records, or session details. Participation requirements, benefits, and blocking reasons describe a single campaign&#39;s configuration and are not paginated or silently truncated. registration_status independently represents the registration stage and does not establish the shop&#39;s eligibility or existing registration.
+     * @param shortVideoCampaignId Required positive short video campaign ID, obtainable from ListCampaign or ListRegisteredCampaign entries with type&#x3D;SHORT_VIDEO. Not a session ID, livestream room ID, or video ID. A decimal string from 1 to 9223372036854775807.
+     * @param locale BCP-47 language tag. Defaults to en-US; maximum 64 characters. en-GB uses English text. (optional)
+     * @return ApiResponse<GetShortVideoCampaignResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getShortVideoCampaignWithHttpInfo(shortVideoCampaignId: kotlin.String, locale: kotlin.String?) : ApiResponse<GetShortVideoCampaignResponse?> {
+        val localVariableConfig = getShortVideoCampaignRequestConfig(shortVideoCampaignId = shortVideoCampaignId, locale = locale)
+
+        return request<Unit, GetShortVideoCampaignResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getShortVideoCampaign
+     *
+     * @param shortVideoCampaignId Required positive short video campaign ID, obtainable from ListCampaign or ListRegisteredCampaign entries with type&#x3D;SHORT_VIDEO. Not a session ID, livestream room ID, or video ID. A decimal string from 1 to 9223372036854775807.
+     * @param locale BCP-47 language tag. Defaults to en-US; maximum 64 characters. en-GB uses English text. (optional)
+     * @return RequestConfig
+     */
+    fun getShortVideoCampaignRequestConfig(shortVideoCampaignId: kotlin.String, locale: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (locale != null) {
+                    put("locale", listOf(locale.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/promotion/202611/short_video_campaigns/{short_video_campaign_id}".replace("{"+"short_video_campaign_id"+"}", encodeURIComponent(shortVideoCampaignId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /promotion/202611/campaigns
+     * List Campaign
+     * List unified Campaign summaries visible to the shop within a specified campaign group. campaign_group_id is a required query parameter. Supports product, shop, livestream, and short video campaigns without expanding their full details.  Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller&#39;s data.  This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.  Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform&#39;s standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.  Timestamps use RFC 3339 UTC with three fractional-second digits. See each field&#39;s description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.  Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.  locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign&#39;s localization rules and may contain rich text; HTML sanitization is not guaranteed. Unavailable text is omitted rather than replaced with a placeholder name.  For a single-shop query, the default order prioritizes campaigns available for registration when that assessment is present for both campaigns, followed by pinned campaigns, the most recent pending-confirmation time descending, invited campaigns, and creation time descending. With only_pending_registrations&#x3D;true, the most recent pending-confirmation time takes precedence over those default priorities. After page selection, any applicable campaign-group display priority orders configured campaigns first in their configured sequence; other items retain their relative order. Equal priorities retain source order; stable ID ordering is not guaranteed. EU cross-shop queries apply the query order separately to each shop, then merge results and apply the display priority within the returned page; no global ordering across shops is guaranteed. Custom sorting is not supported. No additional sorting, deduplication, or truncation is applied by this API. List-level eligibility is not the full detail-level assessment; use type to select the detail endpoint. EU cross-shop aggregation may return more items than page_size. total_count is not guaranteed to be an exact deduplicated total across all accessible shops, and complete traversal of that scope is not guaranteed even when the data remains unchanged.  For the first page, omit page_token or pass an empty string. For subsequent pages, pass next_page_token unchanged and keep the authorized shop, filters, and page_size unchanged. An empty next_page_token means there are no further pages within the current query scope; it does not guarantee that all historical campaigns or campaigns accessible across shops have been retrieved. An empty page is not necessarily the last page. Do not stop pagination based on the number of returned items.
+     * @param campaignGroupId Required positive campaign group ID. Limits the query to this group. A decimal string from 1 to 9223372036854775807.
+     * @param pageToken Opaque pagination token. Omit it or pass an empty string for the first page. For subsequent pages, return next_page_token unchanged. Do not construct, parse, or modify it. (optional)
+     * @param pageSize Page size. Defaults to 20; allowed range: 1 to 100. (optional)
+     * @param eligibilityFilter List eligibility filter mode. Omission or ALL adds no eligibility filter; the campaign group, authorized visibility scope, and other filters still apply. ELIGIBLE retains campaigns that pass list-level eligibility checks and campaigns blocked because the shop has not registered for a designated prerequisite shop campaign. Those prerequisite-blocked results can have is_eligible&#x3D;false. Neither mode guarantees detail-level eligibility or current registration availability. Can be combined with only_pending_registrations; both filters apply. Unknown values return a parameter error. Reverse eligibility filtering is not supported. (optional)
+     * @param onlyPendingRegistrations When true, returns only campaigns with registrations awaiting seller confirmation. false or omission does not add this filter. Does not mean pending review. Can be combined with eligibility_filter; both filters apply. (optional)
+     * @param types Campaign type filter supporting product, shop, livestream, and short video campaigns. Omission or an empty list applies no type filter. Unknown values return a parameter error. Use one query key with comma-separated values; omit the parameter for an empty list. (optional)
+     * @param locale BCP-47 language tag. Defaults to en-US. If text is unavailable in the requested language, the campaign&#39;s default text is used; en-GB returns English text. (optional)
+     * @return ListCampaignResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun listCampaign(campaignGroupId: kotlin.String, pageToken: kotlin.String? = null, pageSize: kotlin.Long? = null, eligibilityFilter: kotlin.String? = null, onlyPendingRegistrations: kotlin.Boolean? = null, types: kotlin.collections.List<kotlin.String>? = null, locale: kotlin.String? = null) : ListCampaignResponse {
+        val localVarResponse = listCampaignWithHttpInfo(campaignGroupId = campaignGroupId, pageToken = pageToken, pageSize = pageSize, eligibilityFilter = eligibilityFilter, onlyPendingRegistrations = onlyPendingRegistrations, types = types, locale = locale)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ListCampaignResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /promotion/202611/campaigns
+     * List Campaign
+     * List unified Campaign summaries visible to the shop within a specified campaign group. campaign_group_id is a required query parameter. Supports product, shop, livestream, and short video campaigns without expanding their full details.  Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller&#39;s data.  This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.  Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform&#39;s standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.  Timestamps use RFC 3339 UTC with three fractional-second digits. See each field&#39;s description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.  Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.  locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign&#39;s localization rules and may contain rich text; HTML sanitization is not guaranteed. Unavailable text is omitted rather than replaced with a placeholder name.  For a single-shop query, the default order prioritizes campaigns available for registration when that assessment is present for both campaigns, followed by pinned campaigns, the most recent pending-confirmation time descending, invited campaigns, and creation time descending. With only_pending_registrations&#x3D;true, the most recent pending-confirmation time takes precedence over those default priorities. After page selection, any applicable campaign-group display priority orders configured campaigns first in their configured sequence; other items retain their relative order. Equal priorities retain source order; stable ID ordering is not guaranteed. EU cross-shop queries apply the query order separately to each shop, then merge results and apply the display priority within the returned page; no global ordering across shops is guaranteed. Custom sorting is not supported. No additional sorting, deduplication, or truncation is applied by this API. List-level eligibility is not the full detail-level assessment; use type to select the detail endpoint. EU cross-shop aggregation may return more items than page_size. total_count is not guaranteed to be an exact deduplicated total across all accessible shops, and complete traversal of that scope is not guaranteed even when the data remains unchanged.  For the first page, omit page_token or pass an empty string. For subsequent pages, pass next_page_token unchanged and keep the authorized shop, filters, and page_size unchanged. An empty next_page_token means there are no further pages within the current query scope; it does not guarantee that all historical campaigns or campaigns accessible across shops have been retrieved. An empty page is not necessarily the last page. Do not stop pagination based on the number of returned items.
+     * @param campaignGroupId Required positive campaign group ID. Limits the query to this group. A decimal string from 1 to 9223372036854775807.
+     * @param pageToken Opaque pagination token. Omit it or pass an empty string for the first page. For subsequent pages, return next_page_token unchanged. Do not construct, parse, or modify it. (optional)
+     * @param pageSize Page size. Defaults to 20; allowed range: 1 to 100. (optional)
+     * @param eligibilityFilter List eligibility filter mode. Omission or ALL adds no eligibility filter; the campaign group, authorized visibility scope, and other filters still apply. ELIGIBLE retains campaigns that pass list-level eligibility checks and campaigns blocked because the shop has not registered for a designated prerequisite shop campaign. Those prerequisite-blocked results can have is_eligible&#x3D;false. Neither mode guarantees detail-level eligibility or current registration availability. Can be combined with only_pending_registrations; both filters apply. Unknown values return a parameter error. Reverse eligibility filtering is not supported. (optional)
+     * @param onlyPendingRegistrations When true, returns only campaigns with registrations awaiting seller confirmation. false or omission does not add this filter. Does not mean pending review. Can be combined with eligibility_filter; both filters apply. (optional)
+     * @param types Campaign type filter supporting product, shop, livestream, and short video campaigns. Omission or an empty list applies no type filter. Unknown values return a parameter error. Use one query key with comma-separated values; omit the parameter for an empty list. (optional)
+     * @param locale BCP-47 language tag. Defaults to en-US. If text is unavailable in the requested language, the campaign&#39;s default text is used; en-GB returns English text. (optional)
+     * @return ApiResponse<ListCampaignResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun listCampaignWithHttpInfo(campaignGroupId: kotlin.String, pageToken: kotlin.String?, pageSize: kotlin.Long?, eligibilityFilter: kotlin.String?, onlyPendingRegistrations: kotlin.Boolean?, types: kotlin.collections.List<kotlin.String>?, locale: kotlin.String?) : ApiResponse<ListCampaignResponse?> {
+        val localVariableConfig = listCampaignRequestConfig(campaignGroupId = campaignGroupId, pageToken = pageToken, pageSize = pageSize, eligibilityFilter = eligibilityFilter, onlyPendingRegistrations = onlyPendingRegistrations, types = types, locale = locale)
+
+        return request<Unit, ListCampaignResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation listCampaign
+     *
+     * @param campaignGroupId Required positive campaign group ID. Limits the query to this group. A decimal string from 1 to 9223372036854775807.
+     * @param pageToken Opaque pagination token. Omit it or pass an empty string for the first page. For subsequent pages, return next_page_token unchanged. Do not construct, parse, or modify it. (optional)
+     * @param pageSize Page size. Defaults to 20; allowed range: 1 to 100. (optional)
+     * @param eligibilityFilter List eligibility filter mode. Omission or ALL adds no eligibility filter; the campaign group, authorized visibility scope, and other filters still apply. ELIGIBLE retains campaigns that pass list-level eligibility checks and campaigns blocked because the shop has not registered for a designated prerequisite shop campaign. Those prerequisite-blocked results can have is_eligible&#x3D;false. Neither mode guarantees detail-level eligibility or current registration availability. Can be combined with only_pending_registrations; both filters apply. Unknown values return a parameter error. Reverse eligibility filtering is not supported. (optional)
+     * @param onlyPendingRegistrations When true, returns only campaigns with registrations awaiting seller confirmation. false or omission does not add this filter. Does not mean pending review. Can be combined with eligibility_filter; both filters apply. (optional)
+     * @param types Campaign type filter supporting product, shop, livestream, and short video campaigns. Omission or an empty list applies no type filter. Unknown values return a parameter error. Use one query key with comma-separated values; omit the parameter for an empty list. (optional)
+     * @param locale BCP-47 language tag. Defaults to en-US. If text is unavailable in the requested language, the campaign&#39;s default text is used; en-GB returns English text. (optional)
+     * @return RequestConfig
+     */
+    fun listCampaignRequestConfig(campaignGroupId: kotlin.String, pageToken: kotlin.String?, pageSize: kotlin.Long?, eligibilityFilter: kotlin.String?, onlyPendingRegistrations: kotlin.Boolean?, types: kotlin.collections.List<kotlin.String>?, locale: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("campaign_group_id", listOf(campaignGroupId.toString()))
+                if (pageToken != null) {
+                    put("page_token", listOf(pageToken.toString()))
+                }
+                if (pageSize != null) {
+                    put("page_size", listOf(pageSize.toString()))
+                }
+                if (eligibilityFilter != null) {
+                    put("eligibility_filter", listOf(eligibilityFilter.toString()))
+                }
+                if (onlyPendingRegistrations != null) {
+                    put("only_pending_registrations", listOf(onlyPendingRegistrations.toString()))
+                }
+                if (types != null) {
+                    put("types", toMultiValue(types.toList(), "csv"))
+                }
+                if (locale != null) {
+                    put("locale", listOf(locale.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/promotion/202611/campaigns",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /promotion/202611/campaign_groups
+     * List Campaign Group
+     * List campaign groups visible to the shop. NORMAL groups return campaigns summaries, while LONG_TERM groups return linked_campaign_groups. These two fields are mutually exclusive and are both omitted for an unknown type. Campaign summaries within a group are not paginated separately. An empty summary list does not guarantee that the group contains no campaigns.  Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller&#39;s data.  This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.  Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform&#39;s standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.  Timestamps use RFC 3339 UTC with three fractional-second digits. See each field&#39;s description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.  Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.  locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign&#39;s localization rules and may contain rich text; HTML sanitization is not guaranteed. Unavailable text is omitted rather than replaced with a placeholder name.  Uses the seller-facing campaign group filters and ordering. In the standard flow, priority is given to pinned groups, long-term campaigns, registration availability, featured campaigns, campaign level, and start time. The pending-confirmation filter prioritizes the most recent join time. EU aggregation prioritizes long-term campaigns, followed by pending-confirmation time, registration availability, featured campaigns, campaign level, and start time. Custom sorting is not supported. Ties retain source order; stable ID ordering is not guaranteed. This query does not mark campaigns as visited or update the visit record used by the seller interface to identify new campaigns.  For the first page, omit page_token or pass an empty string. For subsequent pages, pass next_page_token unchanged and keep the authorized shop, filters, and page_size unchanged. An empty next_page_token means there are no further pages within the current query scope; it does not guarantee that all historical campaigns or campaigns accessible across shops have been retrieved. An empty page is not necessarily the last page. Do not stop pagination based on the number of returned items.
+     * @param pageToken Opaque pagination token. Omit it or pass an empty string for the first page. For subsequent pages, return next_page_token unchanged. Do not construct, parse, or modify it. (optional)
+     * @param pageSize Page size. Defaults to 20; allowed range: 1 to 100. (optional)
+     * @param campaignName Search by campaign group name or the name of a campaign within the group. If omitted or empty, no name filter is applied. (optional)
+     * @param isInvited When true, returns only campaigns to which the shop is invited. false or omission does not filter by invitation status. Mutually exclusive with only_pending_registrations&#x3D;true. (optional)
+     * @param onlyPendingRegistrations When true, returns only campaigns with registrations awaiting seller confirmation. false or omission does not add this filter. Mutually exclusive with is_invited&#x3D;true. This does not mean pending review. (optional)
+     * @param listScope Registration status filter. Accepts UNSPECIFIED, REGISTERED, or UNREGISTERED. If omitted or UNSPECIFIED, no registration status filter is applied. (optional)
+     * @param registrationRegions Registration region filter for EU cross-shop access. Omission or an empty list uses the default scope. Has no effect outside the EU flow and does not extend shop authorization. Region codes follow [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#search/code/); EU is also supported as an aggregate campaign region. A listed code does not guarantee campaign availability or extend authorization. Use one query key with comma-separated values; omit the parameter for an empty list. (optional)
+     * @param locale BCP-47 language tag. Defaults to en-US. If text is unavailable in the requested language, the campaign&#39;s default text is used; en-GB returns English text. (optional)
+     * @return ListCampaignGroupResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun listCampaignGroup(pageToken: kotlin.String? = null, pageSize: kotlin.Long? = null, campaignName: kotlin.String? = null, isInvited: kotlin.Boolean? = null, onlyPendingRegistrations: kotlin.Boolean? = null, listScope: kotlin.String? = null, registrationRegions: kotlin.collections.List<kotlin.String>? = null, locale: kotlin.String? = null) : ListCampaignGroupResponse {
+        val localVarResponse = listCampaignGroupWithHttpInfo(pageToken = pageToken, pageSize = pageSize, campaignName = campaignName, isInvited = isInvited, onlyPendingRegistrations = onlyPendingRegistrations, listScope = listScope, registrationRegions = registrationRegions, locale = locale)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ListCampaignGroupResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /promotion/202611/campaign_groups
+     * List Campaign Group
+     * List campaign groups visible to the shop. NORMAL groups return campaigns summaries, while LONG_TERM groups return linked_campaign_groups. These two fields are mutually exclusive and are both omitted for an unknown type. Campaign summaries within a group are not paginated separately. An empty summary list does not guarantee that the group contains no campaigns.  Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller&#39;s data.  This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.  Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform&#39;s standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.  Timestamps use RFC 3339 UTC with three fractional-second digits. See each field&#39;s description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.  Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.  locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign&#39;s localization rules and may contain rich text; HTML sanitization is not guaranteed. Unavailable text is omitted rather than replaced with a placeholder name.  Uses the seller-facing campaign group filters and ordering. In the standard flow, priority is given to pinned groups, long-term campaigns, registration availability, featured campaigns, campaign level, and start time. The pending-confirmation filter prioritizes the most recent join time. EU aggregation prioritizes long-term campaigns, followed by pending-confirmation time, registration availability, featured campaigns, campaign level, and start time. Custom sorting is not supported. Ties retain source order; stable ID ordering is not guaranteed. This query does not mark campaigns as visited or update the visit record used by the seller interface to identify new campaigns.  For the first page, omit page_token or pass an empty string. For subsequent pages, pass next_page_token unchanged and keep the authorized shop, filters, and page_size unchanged. An empty next_page_token means there are no further pages within the current query scope; it does not guarantee that all historical campaigns or campaigns accessible across shops have been retrieved. An empty page is not necessarily the last page. Do not stop pagination based on the number of returned items.
+     * @param pageToken Opaque pagination token. Omit it or pass an empty string for the first page. For subsequent pages, return next_page_token unchanged. Do not construct, parse, or modify it. (optional)
+     * @param pageSize Page size. Defaults to 20; allowed range: 1 to 100. (optional)
+     * @param campaignName Search by campaign group name or the name of a campaign within the group. If omitted or empty, no name filter is applied. (optional)
+     * @param isInvited When true, returns only campaigns to which the shop is invited. false or omission does not filter by invitation status. Mutually exclusive with only_pending_registrations&#x3D;true. (optional)
+     * @param onlyPendingRegistrations When true, returns only campaigns with registrations awaiting seller confirmation. false or omission does not add this filter. Mutually exclusive with is_invited&#x3D;true. This does not mean pending review. (optional)
+     * @param listScope Registration status filter. Accepts UNSPECIFIED, REGISTERED, or UNREGISTERED. If omitted or UNSPECIFIED, no registration status filter is applied. (optional)
+     * @param registrationRegions Registration region filter for EU cross-shop access. Omission or an empty list uses the default scope. Has no effect outside the EU flow and does not extend shop authorization. Region codes follow [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#search/code/); EU is also supported as an aggregate campaign region. A listed code does not guarantee campaign availability or extend authorization. Use one query key with comma-separated values; omit the parameter for an empty list. (optional)
+     * @param locale BCP-47 language tag. Defaults to en-US. If text is unavailable in the requested language, the campaign&#39;s default text is used; en-GB returns English text. (optional)
+     * @return ApiResponse<ListCampaignGroupResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun listCampaignGroupWithHttpInfo(pageToken: kotlin.String?, pageSize: kotlin.Long?, campaignName: kotlin.String?, isInvited: kotlin.Boolean?, onlyPendingRegistrations: kotlin.Boolean?, listScope: kotlin.String?, registrationRegions: kotlin.collections.List<kotlin.String>?, locale: kotlin.String?) : ApiResponse<ListCampaignGroupResponse?> {
+        val localVariableConfig = listCampaignGroupRequestConfig(pageToken = pageToken, pageSize = pageSize, campaignName = campaignName, isInvited = isInvited, onlyPendingRegistrations = onlyPendingRegistrations, listScope = listScope, registrationRegions = registrationRegions, locale = locale)
+
+        return request<Unit, ListCampaignGroupResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation listCampaignGroup
+     *
+     * @param pageToken Opaque pagination token. Omit it or pass an empty string for the first page. For subsequent pages, return next_page_token unchanged. Do not construct, parse, or modify it. (optional)
+     * @param pageSize Page size. Defaults to 20; allowed range: 1 to 100. (optional)
+     * @param campaignName Search by campaign group name or the name of a campaign within the group. If omitted or empty, no name filter is applied. (optional)
+     * @param isInvited When true, returns only campaigns to which the shop is invited. false or omission does not filter by invitation status. Mutually exclusive with only_pending_registrations&#x3D;true. (optional)
+     * @param onlyPendingRegistrations When true, returns only campaigns with registrations awaiting seller confirmation. false or omission does not add this filter. Mutually exclusive with is_invited&#x3D;true. This does not mean pending review. (optional)
+     * @param listScope Registration status filter. Accepts UNSPECIFIED, REGISTERED, or UNREGISTERED. If omitted or UNSPECIFIED, no registration status filter is applied. (optional)
+     * @param registrationRegions Registration region filter for EU cross-shop access. Omission or an empty list uses the default scope. Has no effect outside the EU flow and does not extend shop authorization. Region codes follow [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#search/code/); EU is also supported as an aggregate campaign region. A listed code does not guarantee campaign availability or extend authorization. Use one query key with comma-separated values; omit the parameter for an empty list. (optional)
+     * @param locale BCP-47 language tag. Defaults to en-US. If text is unavailable in the requested language, the campaign&#39;s default text is used; en-GB returns English text. (optional)
+     * @return RequestConfig
+     */
+    fun listCampaignGroupRequestConfig(pageToken: kotlin.String?, pageSize: kotlin.Long?, campaignName: kotlin.String?, isInvited: kotlin.Boolean?, onlyPendingRegistrations: kotlin.Boolean?, listScope: kotlin.String?, registrationRegions: kotlin.collections.List<kotlin.String>?, locale: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (pageToken != null) {
+                    put("page_token", listOf(pageToken.toString()))
+                }
+                if (pageSize != null) {
+                    put("page_size", listOf(pageSize.toString()))
+                }
+                if (campaignName != null) {
+                    put("campaign_name", listOf(campaignName.toString()))
+                }
+                if (isInvited != null) {
+                    put("is_invited", listOf(isInvited.toString()))
+                }
+                if (onlyPendingRegistrations != null) {
+                    put("only_pending_registrations", listOf(onlyPendingRegistrations.toString()))
+                }
+                if (listScope != null) {
+                    put("list_scope", listOf(listScope.toString()))
+                }
+                if (registrationRegions != null) {
+                    put("registration_regions", toMultiValue(registrationRegions.toList(), "csv"))
+                }
+                if (locale != null) {
+                    put("locale", listOf(locale.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/promotion/202611/campaign_groups",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /promotion/202611/registered_campaigns
+     * List Registered Campaign
+     * List the shop&#39;s registered campaign summaries, with registration statistics and product negotiation statistics where applicable to the campaign type. A registration relationship does not guarantee approval or effective benefits. This release does not expose filters for registration source, automatic enrollment-specific scenarios, or subtypes.  Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller&#39;s data.  This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.  Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform&#39;s standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.  Timestamps use RFC 3339 UTC with three fractional-second digits. See each field&#39;s description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.  Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.  locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign&#39;s localization rules and may contain rich text; HTML sanitization is not guaranteed. Unavailable text is omitted rather than replaced with a placeholder name.  The default order places ACTIVE campaigns first, then orders campaigns within each status-priority group by registration end time descending. Equal registration end times retain source order; stable ID ordering is not guaranteed. The same ordering applies to single-shop queries and the combined EU shop scope before pagination. ACTIVE uses the campaign lifecycle definition, not only the event execution period. Unknown types or statuses are not additionally removed by this API. Different filters are combined with AND; values within each filter array use OR. Custom sorting is not supported. Results contain registered campaigns within the current query scope and may not cover all historical registrations. A page may contain more items than page_size.  For the first page, omit page_token or pass an empty string. For subsequent pages, pass next_page_token unchanged and keep the authorized shop, filters, and page_size unchanged. An empty next_page_token means there are no further pages within the current query scope; it does not guarantee that all historical campaigns or campaigns accessible across shops have been retrieved. An empty page is not necessarily the last page. Do not stop pagination based on the number of returned items.
+     * @param pageToken Opaque pagination token. Omit it or pass an empty string for the first page. For subsequent pages, return next_page_token unchanged. Do not construct, parse, or modify it. (optional)
+     * @param pageSize Page size. Defaults to 20; allowed range: 1 to 100. (optional)
+     * @param campaignName Substring match against the campaign&#39;s default or localized names. Omission or an empty value applies no name filter. (optional)
+     * @param types Filter across the four campaign types, with OR between values. Omission or an empty list is equivalent to PRODUCT, SHOP, LIVESTREAM, and SHORT_VIDEO, including their supported subtypes within this endpoint&#39;s query scope. Visibility and historical query limits still apply. Unknown values return a parameter error. Use one query key with comma-separated values; omit the parameter for an empty list. (optional)
+     * @param campaignStatuses Campaign status filter, with OR between values. Supports INEFFECTIVE, UPCOMING, ACTIVE, and EXPIRED only; DEACTIVATED and unknown values return a parameter error. ACTIVE covers the process from registration opening to campaign completion. EXPIRED includes deactivated campaigns classified as ended. Omission or an empty list applies no filter. These are not registration review statuses. Use one query key with comma-separated values; omit the parameter for an empty list. (optional)
+     * @param campaignRegions Filter by each campaign&#39;s own region, with OR between values. Leading and trailing whitespace is removed, values are uppercased, and empty entries are ignored. Omission or no valid entries applies no filter. EU matches only campaigns with region&#x3D;EU, not campaigns in every European country. Region codes follow [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#search/code/); EU is also supported as an aggregate campaign region. A listed code does not guarantee campaign availability or extend authorization. Use one query key with comma-separated values; omit the parameter for an empty list. (optional)
+     * @param locale BCP-47 language tag. Defaults to en-US; maximum 64 characters. Names prefer nonempty localized text, then the default name. en-GB uses English text. (optional)
+     * @return ListRegisteredCampaignResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun listRegisteredCampaign(pageToken: kotlin.String? = null, pageSize: kotlin.Long? = null, campaignName: kotlin.String? = null, types: kotlin.collections.List<kotlin.String>? = null, campaignStatuses: kotlin.collections.List<kotlin.String>? = null, campaignRegions: kotlin.collections.List<kotlin.String>? = null, locale: kotlin.String? = null) : ListRegisteredCampaignResponse {
+        val localVarResponse = listRegisteredCampaignWithHttpInfo(pageToken = pageToken, pageSize = pageSize, campaignName = campaignName, types = types, campaignStatuses = campaignStatuses, campaignRegions = campaignRegions, locale = locale)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ListRegisteredCampaignResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /promotion/202611/registered_campaigns
+     * List Registered Campaign
+     * List the shop&#39;s registered campaign summaries, with registration statistics and product negotiation statistics where applicable to the campaign type. A registration relationship does not guarantee approval or effective benefits. This release does not expose filters for registration source, automatic enrollment-specific scenarios, or subtypes.  Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller&#39;s data.  This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.  Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform&#39;s standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.  Timestamps use RFC 3339 UTC with three fractional-second digits. See each field&#39;s description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.  Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.  locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign&#39;s localization rules and may contain rich text; HTML sanitization is not guaranteed. Unavailable text is omitted rather than replaced with a placeholder name.  The default order places ACTIVE campaigns first, then orders campaigns within each status-priority group by registration end time descending. Equal registration end times retain source order; stable ID ordering is not guaranteed. The same ordering applies to single-shop queries and the combined EU shop scope before pagination. ACTIVE uses the campaign lifecycle definition, not only the event execution period. Unknown types or statuses are not additionally removed by this API. Different filters are combined with AND; values within each filter array use OR. Custom sorting is not supported. Results contain registered campaigns within the current query scope and may not cover all historical registrations. A page may contain more items than page_size.  For the first page, omit page_token or pass an empty string. For subsequent pages, pass next_page_token unchanged and keep the authorized shop, filters, and page_size unchanged. An empty next_page_token means there are no further pages within the current query scope; it does not guarantee that all historical campaigns or campaigns accessible across shops have been retrieved. An empty page is not necessarily the last page. Do not stop pagination based on the number of returned items.
+     * @param pageToken Opaque pagination token. Omit it or pass an empty string for the first page. For subsequent pages, return next_page_token unchanged. Do not construct, parse, or modify it. (optional)
+     * @param pageSize Page size. Defaults to 20; allowed range: 1 to 100. (optional)
+     * @param campaignName Substring match against the campaign&#39;s default or localized names. Omission or an empty value applies no name filter. (optional)
+     * @param types Filter across the four campaign types, with OR between values. Omission or an empty list is equivalent to PRODUCT, SHOP, LIVESTREAM, and SHORT_VIDEO, including their supported subtypes within this endpoint&#39;s query scope. Visibility and historical query limits still apply. Unknown values return a parameter error. Use one query key with comma-separated values; omit the parameter for an empty list. (optional)
+     * @param campaignStatuses Campaign status filter, with OR between values. Supports INEFFECTIVE, UPCOMING, ACTIVE, and EXPIRED only; DEACTIVATED and unknown values return a parameter error. ACTIVE covers the process from registration opening to campaign completion. EXPIRED includes deactivated campaigns classified as ended. Omission or an empty list applies no filter. These are not registration review statuses. Use one query key with comma-separated values; omit the parameter for an empty list. (optional)
+     * @param campaignRegions Filter by each campaign&#39;s own region, with OR between values. Leading and trailing whitespace is removed, values are uppercased, and empty entries are ignored. Omission or no valid entries applies no filter. EU matches only campaigns with region&#x3D;EU, not campaigns in every European country. Region codes follow [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#search/code/); EU is also supported as an aggregate campaign region. A listed code does not guarantee campaign availability or extend authorization. Use one query key with comma-separated values; omit the parameter for an empty list. (optional)
+     * @param locale BCP-47 language tag. Defaults to en-US; maximum 64 characters. Names prefer nonempty localized text, then the default name. en-GB uses English text. (optional)
+     * @return ApiResponse<ListRegisteredCampaignResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun listRegisteredCampaignWithHttpInfo(pageToken: kotlin.String?, pageSize: kotlin.Long?, campaignName: kotlin.String?, types: kotlin.collections.List<kotlin.String>?, campaignStatuses: kotlin.collections.List<kotlin.String>?, campaignRegions: kotlin.collections.List<kotlin.String>?, locale: kotlin.String?) : ApiResponse<ListRegisteredCampaignResponse?> {
+        val localVariableConfig = listRegisteredCampaignRequestConfig(pageToken = pageToken, pageSize = pageSize, campaignName = campaignName, types = types, campaignStatuses = campaignStatuses, campaignRegions = campaignRegions, locale = locale)
+
+        return request<Unit, ListRegisteredCampaignResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation listRegisteredCampaign
+     *
+     * @param pageToken Opaque pagination token. Omit it or pass an empty string for the first page. For subsequent pages, return next_page_token unchanged. Do not construct, parse, or modify it. (optional)
+     * @param pageSize Page size. Defaults to 20; allowed range: 1 to 100. (optional)
+     * @param campaignName Substring match against the campaign&#39;s default or localized names. Omission or an empty value applies no name filter. (optional)
+     * @param types Filter across the four campaign types, with OR between values. Omission or an empty list is equivalent to PRODUCT, SHOP, LIVESTREAM, and SHORT_VIDEO, including their supported subtypes within this endpoint&#39;s query scope. Visibility and historical query limits still apply. Unknown values return a parameter error. Use one query key with comma-separated values; omit the parameter for an empty list. (optional)
+     * @param campaignStatuses Campaign status filter, with OR between values. Supports INEFFECTIVE, UPCOMING, ACTIVE, and EXPIRED only; DEACTIVATED and unknown values return a parameter error. ACTIVE covers the process from registration opening to campaign completion. EXPIRED includes deactivated campaigns classified as ended. Omission or an empty list applies no filter. These are not registration review statuses. Use one query key with comma-separated values; omit the parameter for an empty list. (optional)
+     * @param campaignRegions Filter by each campaign&#39;s own region, with OR between values. Leading and trailing whitespace is removed, values are uppercased, and empty entries are ignored. Omission or no valid entries applies no filter. EU matches only campaigns with region&#x3D;EU, not campaigns in every European country. Region codes follow [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#search/code/); EU is also supported as an aggregate campaign region. A listed code does not guarantee campaign availability or extend authorization. Use one query key with comma-separated values; omit the parameter for an empty list. (optional)
+     * @param locale BCP-47 language tag. Defaults to en-US; maximum 64 characters. Names prefer nonempty localized text, then the default name. en-GB uses English text. (optional)
+     * @return RequestConfig
+     */
+    fun listRegisteredCampaignRequestConfig(pageToken: kotlin.String?, pageSize: kotlin.Long?, campaignName: kotlin.String?, types: kotlin.collections.List<kotlin.String>?, campaignStatuses: kotlin.collections.List<kotlin.String>?, campaignRegions: kotlin.collections.List<kotlin.String>?, locale: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (pageToken != null) {
+                    put("page_token", listOf(pageToken.toString()))
+                }
+                if (pageSize != null) {
+                    put("page_size", listOf(pageSize.toString()))
+                }
+                if (campaignName != null) {
+                    put("campaign_name", listOf(campaignName.toString()))
+                }
+                if (types != null) {
+                    put("types", toMultiValue(types.toList(), "csv"))
+                }
+                if (campaignStatuses != null) {
+                    put("campaign_statuses", toMultiValue(campaignStatuses.toList(), "csv"))
+                }
+                if (campaignRegions != null) {
+                    put("campaign_regions", toMultiValue(campaignRegions.toList(), "csv"))
+                }
+                if (locale != null) {
+                    put("locale", listOf(locale.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/promotion/202611/registered_campaigns",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

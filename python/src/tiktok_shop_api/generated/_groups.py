@@ -178,6 +178,7 @@ if TYPE_CHECKING:
     from .models.get_bestselling_videos_response import GetBestsellingVideosResponse
     from .models.get_bestselling_videos_time_slot import GetBestsellingVideosTimeSlot
     from .models.get_brands_response import GetBrandsResponse
+    from .models.get_campaign_group_response import GetCampaignGroupResponse
     from .models.get_campaign_product_performance_list_response import GetCampaignProductPerformanceListResponse
     from .models.get_categories_listing_platform import GetCategoriesListingPlatform
     from .models.get_categories_locale import GetCategoriesLocale
@@ -242,6 +243,7 @@ if TYPE_CHECKING:
     from .models.get_live_room_traffic_performance_response import GetLiveRoomTrafficPerformanceResponse
     from .models.get_live_room_user_portraits_response import GetLiveRoomUserPortraitsResponse
     from .models.get_live_room_view_trends_response import GetLiveRoomViewTrendsResponse
+    from .models.get_livestream_campaign_response import GetLivestreamCampaignResponse
     from .models.get_logistics_tracking_response import GetLogisticsTrackingResponse
     from .models.get_marketplace_creator_performance_data_groups_item import GetMarketplaceCreatorPerformanceDataGroupsItem
     from .models.get_marketplace_creator_performance_response import GetMarketplaceCreatorPerformanceResponse
@@ -278,6 +280,7 @@ if TYPE_CHECKING:
     from .models.get_payments_sort_order import GetPaymentsSortOrder
     from .models.get_pod_customization_details_request import GetPODCustomizationDetailsRequest
     from .models.get_pod_customization_details_response import GetPODCustomizationDetailsResponse
+    from .models.get_product_campaign_response import GetProductCampaignResponse
     from .models.get_product_diagnoses_response import GetProductDiagnosesResponse
     from .models.get_product_locale import GetProductLocale
     from .models.get_product_package_recommendations_request import GetProductPackageRecommendationsRequest
@@ -288,6 +291,7 @@ if TYPE_CHECKING:
     from .models.get_product_skpp_detail_response import GetProductSKPPDetailResponse
     from .models.get_products_seo_words_response import GetProductsSEOWordsResponse
     from .models.get_recommended_product_title_and_description_response import GetRecommendedProductTitleAndDescriptionResponse
+    from .models.get_registered_campaign_counts_response import GetRegisteredCampaignCountsResponse
     from .models.get_reject_reasons_response import GetRejectReasonsResponse
     from .models.get_return_records_response import GetReturnRecordsResponse
     from .models.get_seller_carousel_permission_response import GetSellerCarouselPermissionResponse
@@ -299,6 +303,7 @@ if TYPE_CHECKING:
     from .models.get_shipping_providers_response import GetShippingProvidersResponse
     from .models.get_shipping_template_availability_request import GetShippingTemplateAvailabilityRequest
     from .models.get_shipping_template_availability_response import GetShippingTemplateAvailabilityResponse
+    from .models.get_shop_campaign_response import GetShopCampaignResponse
     from .models.get_shop_group_and_related_shops_response import GetShopGroupAndRelatedShopsResponse
     from .models.get_shop_live_minute_performance_response import GetShopLIVEMinutePerformanceResponse
     from .models.get_shop_live_performance_list_account_type import GetShopLivePerformanceListAccountType
@@ -359,6 +364,7 @@ if TYPE_CHECKING:
     from .models.get_shop_webhooks_response import GetShopWebhooksResponse
     from .models.get_shoppable_video_precheck_result_response import GetShoppableVideoPrecheckResultResponse
     from .models.get_shoppable_video_status_response import GetShoppableVideoStatusResponse
+    from .models.get_short_video_campaign_response import GetShortVideoCampaignResponse
     from .models.get_showcase_products_response import GetShowcaseProductsResponse
     from .models.get_sps_benefits_response import GetSPSBenefitsResponse
     from .models.get_sps_metric_diagnosis_response import GetSPSMetricDiagnosisResponse
@@ -390,10 +396,13 @@ if TYPE_CHECKING:
     from .models.inventory_search_response import InventorySearchResponse
     from .models.list_available_inbound_methods_request import ListAvailableInboundMethodsRequest
     from .models.list_available_inbound_methods_response import ListAvailableInboundMethodsResponse
+    from .models.list_campaign_group_response import ListCampaignGroupResponse
+    from .models.list_campaign_response import ListCampaignResponse
     from .models.list_opportunities_request import ListOpportunitiesRequest
     from .models.list_opportunities_response import ListOpportunitiesResponse
     from .models.list_product_skpp_statuses_request import ListProductSKPPStatusesRequest
     from .models.list_product_skpp_statuses_response import ListProductSKPPStatusesResponse
+    from .models.list_registered_campaign_response import ListRegisteredCampaignResponse
     from .models.map_tokopedia_to_tik_tok_shop_product_i_ds_request import MapTokopediaToTikTokShopProductIDsRequest
     from .models.map_tokopedia_to_tik_tok_shop_product_i_ds_response import MapTokopediaToTikTokShopProductIDsResponse
     from .models.mark_buyer_messages_as_read_request import MarkBuyerMessagesAsReadRequest
@@ -16467,6 +16476,62 @@ class PromotionApi(SyncGroup):
 
         return self._run(_op.sync_detailed, activity_id=activity_id)
 
+    def get_campaign_group(
+        self,
+        campaign_group_id: str,
+        *,
+        locale: str | Unset = UNSET,
+    ) -> GetCampaignGroupResponse | None:
+        """Get Campaign Group
+
+         Get a campaign group's basic information, campaign period, sales period, and linked campaign groups.
+        If the query succeeds without an available result, campaign_group is omitted and data is empty; no
+        invalid ID is generated. Use ListCampaign to paginate and filter campaigns within the group.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined
+        from the verified authorization context and cannot be supplied or overridden by the caller. Cross-
+        shop access in the EU is limited to eligible shops belonging to the same seller and does not allow
+        access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or
+        change campaign settings. Visibility, invitations, existing registrations, campaign status, and
+        registration stage do not independently establish whether registration is currently allowed. An
+        omitted eligibility result means unknown; it must not be interpreted as false, zero, free
+        participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays
+        retain their meanings. Text is for display; automated decisions should use structured statuses and
+        recognized reason codes.
+
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency
+        failures use the platform's standard error mechanism. A known failure is not returned as a
+        successful empty result. Campaign business processes determine status changes; this query does not
+        change status or guarantee that every intermediate status occurs. Response enums may gain values in
+        the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for
+        interval boundaries and omission semantics. Statistics may be delayed or incomplete; no
+        transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent
+        business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign,
+        LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a
+        detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the
+        campaign's localization rules and may contain rich text; HTML sanitization is not guaranteed.
+        Unavailable text is omitted rather than replaced with a placeholder name.
+
+        Args:
+            campaign_group_id (str):
+            locale (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.promotion import get_campaign_group as _op
+
+        return self._run(_op.sync_detailed, campaign_group_id=campaign_group_id, locale=locale)
+
     def get_coupon(
         self,
         coupon_id: str,
@@ -16485,6 +16550,592 @@ class PromotionApi(SyncGroup):
         from .api.promotion import get_coupon as _op
 
         return self._run(_op.sync_detailed, coupon_id=coupon_id)
+
+    def get_livestream_campaign(
+        self,
+        livestream_campaign_id: str,
+        *,
+        locale: str | Unset = UNSET,
+    ) -> GetLivestreamCampaignResponse | None:
+        """Get Livestream Campaign
+
+         Get details of a featured livestream or livestream competition, including times, participation
+        requirements, benefits, agreement requirements, and the shop's registered session statistics.
+        super_livestream applies only to featured livestreams. Successful queries return the campaign
+        details. A campaign that does not exist, is not visible or applicable to the shop, or has a
+        different supported type returns a resource-unavailable error.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined
+        from the verified authorization context and cannot be supplied or overridden by the caller. Cross-
+        shop access in the EU is limited to eligible shops belonging to the same seller and does not allow
+        access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or
+        change campaign settings. Visibility, invitations, existing registrations, campaign status, and
+        registration stage do not independently establish whether registration is currently allowed. An
+        omitted eligibility result means unknown; it must not be interpreted as false, zero, free
+        participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays
+        retain their meanings. Text is for display; automated decisions should use structured statuses and
+        recognized reason codes.
+
+        Missing or inconsistent data required to identify or return the campaign results in a system error,
+        not a resource-unavailable error. Missing optional information only omits the corresponding fields.
+        An existing campaign that the shop cannot register for is still returned with its eligibility or
+        blocking reasons.
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency
+        failures use the platform's standard error mechanism. A known failure is not returned as a
+        successful empty result. Campaign business processes determine status changes; this query does not
+        change status or guarantee that every intermediate status occurs. Response enums may gain values in
+        the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for
+        interval boundaries and omission semantics. Statistics may be delayed or incomplete; no
+        transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent
+        business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign,
+        LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a
+        detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the
+        campaign's localization rules. The campaign description field returns sanitized HTML, with scripts,
+        event-handler attributes, and unsafe URLs removed. This guarantee applies only to the campaign
+        description, not to other text fields or nested descriptions. Treat other text as text, not trusted
+        HTML. Unavailable text is omitted rather than replaced with a placeholder name.
+
+        The requested campaign type must match the endpoint; otherwise a resource-unavailable error is
+        returned. Only campaign-level information is exposed, without account lists, individual content,
+        registration records, or session details. Participation requirements, benefits, and blocking reasons
+        describe a single campaign's configuration and are not paginated or silently truncated.
+        registration_status independently represents the registration stage and does not establish the
+        shop's eligibility or existing registration.
+
+        Args:
+            livestream_campaign_id (str):
+            locale (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.promotion import get_livestream_campaign as _op
+
+        return self._run(_op.sync_detailed, livestream_campaign_id=livestream_campaign_id, locale=locale)
+
+    def get_product_campaign(
+        self,
+        product_campaign_id: str,
+        *,
+        locale: str | Unset = UNSET,
+    ) -> GetProductCampaignResponse | None:
+        """Get Product Campaign
+
+         Get a product campaign's basic information, registration period, participation rules, benefits and
+        fees, shop eligibility, product registration quota, and participation statistics. registration_mode
+        distinguishes STANDARD from ROLLING. linked_campaigns applies only to ROLLING; a link does not
+        establish existing registration, synchronization, or eligibility.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined
+        from the verified authorization context and cannot be supplied or overridden by the caller. Cross-
+        shop access in the EU is limited to eligible shops belonging to the same seller and does not allow
+        access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or
+        change campaign settings. Visibility, invitations, existing registrations, campaign status, and
+        registration stage do not independently establish whether registration is currently allowed. An
+        omitted eligibility result means unknown; it must not be interpreted as false, zero, free
+        participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays
+        retain their meanings. Text is for display; automated decisions should use structured statuses and
+        recognized reason codes.
+
+        Missing or inconsistent data required to identify or return the campaign results in a system error,
+        not a resource-unavailable error. Missing optional information only omits the corresponding fields.
+        An existing campaign that the shop cannot register for is still returned with its eligibility or
+        blocking reasons.
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency
+        failures use the platform's standard error mechanism. A known failure is not returned as a
+        successful empty result. Campaign business processes determine status changes; this query does not
+        change status or guarantee that every intermediate status occurs. Response enums may gain values in
+        the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for
+        interval boundaries and omission semantics. Statistics may be delayed or incomplete; no
+        transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent
+        business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign,
+        LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a
+        detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the
+        campaign's localization rules. The campaign description field returns sanitized HTML, with scripts,
+        event-handler attributes, and unsafe URLs removed. This guarantee applies only to the campaign
+        description, not to other text fields or nested descriptions. Treat other text as text, not trusted
+        HTML. Unavailable text is omitted rather than replaced with a placeholder name.
+
+        A type mismatch, nonexistent or invisible campaign, or inapplicable region returns a resource-
+        unavailable error rather than a successful empty result. Unknown eligibility or registration
+        availability alone does not fail the query. registration_period.status is determined only from
+        query_time and registration boundaries, not campaign_status. The registration interval includes its
+        end time; campaign and fee validity intervals exclude their end times. Rules, benefits, and fee
+        policies are the complete applicable configuration of a single campaign, not product or registration
+        record lists, and are neither paginated nor truncated. Fee text and resources jointly express the
+        terms; omission does not mean free participation.
+
+        Args:
+            product_campaign_id (str):
+            locale (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.promotion import get_product_campaign as _op
+
+        return self._run(_op.sync_detailed, product_campaign_id=product_campaign_id, locale=locale)
+
+    def get_registered_campaign_counts(
+        self,
+    ) -> GetRegisteredCampaignCountsResponse | None:
+        """Get Registered Campaign Counts
+
+         Get the shop's registered campaign counts: all_count, upcoming_count, active_count, and ended_count.
+        ACTIVE covers the entire process from registration opening to campaign completion, not just
+        execution. This operation has no list filters, so the result is not total_count for a particular
+        filtered list. It uses the standard statistics scope, including manual and other registration
+        methods. Queries specific to legacy automatic enrollment management are not supported. Categories
+        are independent and are not guaranteed to sum to all_count. Successful data may be empty when all
+        counts are unavailable.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined
+        from the verified authorization context and cannot be supplied or overridden by the caller. Cross-
+        shop access in the EU is limited to eligible shops belonging to the same seller and does not allow
+        access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or
+        change campaign settings. Visibility, invitations, existing registrations, campaign status, and
+        registration stage do not independently establish whether registration is currently allowed. An
+        omitted eligibility result means unknown; it must not be interpreted as false, zero, free
+        participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays
+        retain their meanings. Text is for display; automated decisions should use structured statuses and
+        recognized reason codes.
+
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency
+        failures use the platform's standard error mechanism. A known failure is not returned as a
+        successful empty result. Campaign business processes determine status changes; this query does not
+        change status or guarantee that every intermediate status occurs. Response enums may gain values in
+        the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for
+        interval boundaries and omission semantics. Statistics may be delayed or incomplete; no
+        transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent
+        business decision.
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.promotion import get_registered_campaign_counts as _op
+
+        return self._run(_op.sync_detailed)
+
+    def get_shop_campaign(
+        self,
+        shop_campaign_id: str,
+        *,
+        locale: str | Unset = UNSET,
+    ) -> GetShopCampaignResponse | None:
+        """Get Shop Campaign
+
+         Get a shop campaign's basic information, registration period, shop participation requirements,
+        benefits and fees, shop eligibility, and participation statistics. Shop details do not include
+        product registration quotas, product registration rules, or product statistics.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined
+        from the verified authorization context and cannot be supplied or overridden by the caller. Cross-
+        shop access in the EU is limited to eligible shops belonging to the same seller and does not allow
+        access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or
+        change campaign settings. Visibility, invitations, existing registrations, campaign status, and
+        registration stage do not independently establish whether registration is currently allowed. An
+        omitted eligibility result means unknown; it must not be interpreted as false, zero, free
+        participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays
+        retain their meanings. Text is for display; automated decisions should use structured statuses and
+        recognized reason codes.
+
+        Missing or inconsistent data required to identify or return the campaign results in a system error,
+        not a resource-unavailable error. Missing optional information only omits the corresponding fields.
+        An existing campaign that the shop cannot register for is still returned with its eligibility or
+        blocking reasons.
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency
+        failures use the platform's standard error mechanism. A known failure is not returned as a
+        successful empty result. Campaign business processes determine status changes; this query does not
+        change status or guarantee that every intermediate status occurs. Response enums may gain values in
+        the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for
+        interval boundaries and omission semantics. Statistics may be delayed or incomplete; no
+        transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent
+        business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign,
+        LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a
+        detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the
+        campaign's localization rules. The campaign description field returns sanitized HTML, with scripts,
+        event-handler attributes, and unsafe URLs removed. This guarantee applies only to the campaign
+        description, not to other text fields or nested descriptions. Treat other text as text, not trusted
+        HTML. Unavailable text is omitted rather than replaced with a placeholder name.
+
+        A type mismatch, nonexistent or invisible campaign, or inapplicable region returns a resource-
+        unavailable error rather than a successful empty result. Unknown eligibility or registration
+        availability alone does not fail the query. registration_period.status is determined only from
+        query_time and registration boundaries, not campaign_status. The registration interval includes its
+        end time; campaign and fee validity intervals exclude their end times. Rules, benefits, and fee
+        policies are the complete applicable configuration of a single campaign, not product or registration
+        record lists, and are neither paginated nor truncated. Fee text and resources jointly express the
+        terms; omission does not mean free participation.
+
+        Args:
+            shop_campaign_id (str):
+            locale (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.promotion import get_shop_campaign as _op
+
+        return self._run(_op.sync_detailed, shop_campaign_id=shop_campaign_id, locale=locale)
+
+    def get_short_video_campaign(
+        self,
+        short_video_campaign_id: str,
+        *,
+        locale: str | Unset = UNSET,
+    ) -> GetShortVideoCampaignResponse | None:
+        """Get Short Video Campaign
+
+         Get short video competition details, including times, participation requirements, benefits,
+        agreement requirements, and account registration statistics. Statistics count account registration
+        records, not videos or deduplicated accounts. Does not include livestream sessions, super livestream
+        information, or a redundant subtype. Successful queries return the campaign details. A campaign that
+        does not exist, is not visible or applicable to the shop, or has a different supported type returns
+        a resource-unavailable error.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined
+        from the verified authorization context and cannot be supplied or overridden by the caller. Cross-
+        shop access in the EU is limited to eligible shops belonging to the same seller and does not allow
+        access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or
+        change campaign settings. Visibility, invitations, existing registrations, campaign status, and
+        registration stage do not independently establish whether registration is currently allowed. An
+        omitted eligibility result means unknown; it must not be interpreted as false, zero, free
+        participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays
+        retain their meanings. Text is for display; automated decisions should use structured statuses and
+        recognized reason codes.
+
+        Missing or inconsistent data required to identify or return the campaign results in a system error,
+        not a resource-unavailable error. Missing optional information only omits the corresponding fields.
+        An existing campaign that the shop cannot register for is still returned with its eligibility or
+        blocking reasons.
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency
+        failures use the platform's standard error mechanism. A known failure is not returned as a
+        successful empty result. Campaign business processes determine status changes; this query does not
+        change status or guarantee that every intermediate status occurs. Response enums may gain values in
+        the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for
+        interval boundaries and omission semantics. Statistics may be delayed or incomplete; no
+        transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent
+        business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign,
+        LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a
+        detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the
+        campaign's localization rules. The campaign description field returns sanitized HTML, with scripts,
+        event-handler attributes, and unsafe URLs removed. This guarantee applies only to the campaign
+        description, not to other text fields or nested descriptions. Treat other text as text, not trusted
+        HTML. Unavailable text is omitted rather than replaced with a placeholder name.
+
+        The requested campaign type must match the endpoint; otherwise a resource-unavailable error is
+        returned. Only campaign-level information is exposed, without account lists, individual content,
+        registration records, or session details. Participation requirements, benefits, and blocking reasons
+        describe a single campaign's configuration and are not paginated or silently truncated.
+        registration_status independently represents the registration stage and does not establish the
+        shop's eligibility or existing registration.
+
+        Args:
+            short_video_campaign_id (str):
+            locale (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.promotion import get_short_video_campaign as _op
+
+        return self._run(_op.sync_detailed, short_video_campaign_id=short_video_campaign_id, locale=locale)
+
+    def list_campaign(
+        self,
+        *,
+        campaign_group_id: str,
+        page_token: str | Unset = UNSET,
+        page_size: int | Unset = UNSET,
+        eligibility_filter: str | Unset = UNSET,
+        only_pending_registrations: bool | Unset = UNSET,
+        types: list[str] | Unset = UNSET,
+        locale: str | Unset = UNSET,
+    ) -> ListCampaignResponse | None:
+        """List Campaign
+
+         List unified Campaign summaries visible to the shop within a specified campaign group.
+        campaign_group_id is a required query parameter. Supports product, shop, livestream, and short video
+        campaigns without expanding their full details.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined
+        from the verified authorization context and cannot be supplied or overridden by the caller. Cross-
+        shop access in the EU is limited to eligible shops belonging to the same seller and does not allow
+        access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or
+        change campaign settings. Visibility, invitations, existing registrations, campaign status, and
+        registration stage do not independently establish whether registration is currently allowed. An
+        omitted eligibility result means unknown; it must not be interpreted as false, zero, free
+        participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays
+        retain their meanings. Text is for display; automated decisions should use structured statuses and
+        recognized reason codes.
+
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency
+        failures use the platform's standard error mechanism. A known failure is not returned as a
+        successful empty result. Campaign business processes determine status changes; this query does not
+        change status or guarantee that every intermediate status occurs. Response enums may gain values in
+        the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for
+        interval boundaries and omission semantics. Statistics may be delayed or incomplete; no
+        transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent
+        business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign,
+        LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a
+        detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the
+        campaign's localization rules and may contain rich text; HTML sanitization is not guaranteed.
+        Unavailable text is omitted rather than replaced with a placeholder name.
+
+        For a single-shop query, the default order prioritizes campaigns available for registration when
+        that assessment is present for both campaigns, followed by pinned campaigns, the most recent
+        pending-confirmation time descending, invited campaigns, and creation time descending. With
+        only_pending_registrations=true, the most recent pending-confirmation time takes precedence over
+        those default priorities. After page selection, any applicable campaign-group display priority
+        orders configured campaigns first in their configured sequence; other items retain their relative
+        order. Equal priorities retain source order; stable ID ordering is not guaranteed. EU cross-shop
+        queries apply the query order separately to each shop, then merge results and apply the display
+        priority within the returned page; no global ordering across shops is guaranteed. Custom sorting is
+        not supported. No additional sorting, deduplication, or truncation is applied by this API. List-
+        level eligibility is not the full detail-level assessment; use type to select the detail endpoint.
+        EU cross-shop aggregation may return more items than page_size. total_count is not guaranteed to be
+        an exact deduplicated total across all accessible shops, and complete traversal of that scope is not
+        guaranteed even when the data remains unchanged.
+
+        For the first page, omit page_token or pass an empty string. For subsequent pages, pass
+        next_page_token unchanged and keep the authorized shop, filters, and page_size unchanged. An empty
+        next_page_token means there are no further pages within the current query scope; it does not
+        guarantee that all historical campaigns or campaigns accessible across shops have been retrieved. An
+        empty page is not necessarily the last page. Do not stop pagination based on the number of returned
+        items.
+
+        Args:
+            campaign_group_id (str):
+            page_token (str | Unset):
+            page_size (int | Unset):
+            eligibility_filter (str | Unset):
+            only_pending_registrations (bool | Unset):
+            types (list[str] | Unset):
+            locale (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.promotion import list_campaign as _op
+
+        return self._run(_op.sync_detailed, campaign_group_id=campaign_group_id, page_token=page_token, page_size=page_size, eligibility_filter=eligibility_filter, only_pending_registrations=only_pending_registrations, types=types, locale=locale)
+
+    def list_campaign_group(
+        self,
+        *,
+        page_token: str | Unset = UNSET,
+        page_size: int | Unset = UNSET,
+        campaign_name: str | Unset = UNSET,
+        is_invited: bool | Unset = UNSET,
+        only_pending_registrations: bool | Unset = UNSET,
+        list_scope: str | Unset = UNSET,
+        registration_regions: list[str] | Unset = UNSET,
+        locale: str | Unset = UNSET,
+    ) -> ListCampaignGroupResponse | None:
+        """List Campaign Group
+
+         List campaign groups visible to the shop. NORMAL groups return campaigns summaries, while LONG_TERM
+        groups return linked_campaign_groups. These two fields are mutually exclusive and are both omitted
+        for an unknown type. Campaign summaries within a group are not paginated separately. An empty
+        summary list does not guarantee that the group contains no campaigns.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined
+        from the verified authorization context and cannot be supplied or overridden by the caller. Cross-
+        shop access in the EU is limited to eligible shops belonging to the same seller and does not allow
+        access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or
+        change campaign settings. Visibility, invitations, existing registrations, campaign status, and
+        registration stage do not independently establish whether registration is currently allowed. An
+        omitted eligibility result means unknown; it must not be interpreted as false, zero, free
+        participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays
+        retain their meanings. Text is for display; automated decisions should use structured statuses and
+        recognized reason codes.
+
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency
+        failures use the platform's standard error mechanism. A known failure is not returned as a
+        successful empty result. Campaign business processes determine status changes; this query does not
+        change status or guarantee that every intermediate status occurs. Response enums may gain values in
+        the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for
+        interval boundaries and omission semantics. Statistics may be delayed or incomplete; no
+        transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent
+        business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign,
+        LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a
+        detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the
+        campaign's localization rules and may contain rich text; HTML sanitization is not guaranteed.
+        Unavailable text is omitted rather than replaced with a placeholder name.
+
+        Uses the seller-facing campaign group filters and ordering. In the standard flow, priority is given
+        to pinned groups, long-term campaigns, registration availability, featured campaigns, campaign
+        level, and start time. The pending-confirmation filter prioritizes the most recent join time. EU
+        aggregation prioritizes long-term campaigns, followed by pending-confirmation time, registration
+        availability, featured campaigns, campaign level, and start time. Custom sorting is not supported.
+        Ties retain source order; stable ID ordering is not guaranteed. This query does not mark campaigns
+        as visited or update the visit record used by the seller interface to identify new campaigns.
+
+        For the first page, omit page_token or pass an empty string. For subsequent pages, pass
+        next_page_token unchanged and keep the authorized shop, filters, and page_size unchanged. An empty
+        next_page_token means there are no further pages within the current query scope; it does not
+        guarantee that all historical campaigns or campaigns accessible across shops have been retrieved. An
+        empty page is not necessarily the last page. Do not stop pagination based on the number of returned
+        items.
+
+        Args:
+            page_token (str | Unset):
+            page_size (int | Unset):
+            campaign_name (str | Unset):
+            is_invited (bool | Unset):
+            only_pending_registrations (bool | Unset):
+            list_scope (str | Unset):
+            registration_regions (list[str] | Unset):
+            locale (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.promotion import list_campaign_group as _op
+
+        return self._run(_op.sync_detailed, page_token=page_token, page_size=page_size, campaign_name=campaign_name, is_invited=is_invited, only_pending_registrations=only_pending_registrations, list_scope=list_scope, registration_regions=registration_regions, locale=locale)
+
+    def list_registered_campaign(
+        self,
+        *,
+        page_token: str | Unset = UNSET,
+        page_size: int | Unset = UNSET,
+        campaign_name: str | Unset = UNSET,
+        types: list[str] | Unset = UNSET,
+        campaign_statuses: list[str] | Unset = UNSET,
+        campaign_regions: list[str] | Unset = UNSET,
+        locale: str | Unset = UNSET,
+    ) -> ListRegisteredCampaignResponse | None:
+        """List Registered Campaign
+
+         List the shop's registered campaign summaries, with registration statistics and product negotiation
+        statistics where applicable to the campaign type. A registration relationship does not guarantee
+        approval or effective benefits. This release does not expose filters for registration source,
+        automatic enrollment-specific scenarios, or subtypes.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined
+        from the verified authorization context and cannot be supplied or overridden by the caller. Cross-
+        shop access in the EU is limited to eligible shops belonging to the same seller and does not allow
+        access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or
+        change campaign settings. Visibility, invitations, existing registrations, campaign status, and
+        registration stage do not independently establish whether registration is currently allowed. An
+        omitted eligibility result means unknown; it must not be interpreted as false, zero, free
+        participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays
+        retain their meanings. Text is for display; automated decisions should use structured statuses and
+        recognized reason codes.
+
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency
+        failures use the platform's standard error mechanism. A known failure is not returned as a
+        successful empty result. Campaign business processes determine status changes; this query does not
+        change status or guarantee that every intermediate status occurs. Response enums may gain values in
+        the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for
+        interval boundaries and omission semantics. Statistics may be delayed or incomplete; no
+        transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent
+        business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign,
+        LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a
+        detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the
+        campaign's localization rules and may contain rich text; HTML sanitization is not guaranteed.
+        Unavailable text is omitted rather than replaced with a placeholder name.
+
+        The default order places ACTIVE campaigns first, then orders campaigns within each status-priority
+        group by registration end time descending. Equal registration end times retain source order; stable
+        ID ordering is not guaranteed. The same ordering applies to single-shop queries and the combined EU
+        shop scope before pagination. ACTIVE uses the campaign lifecycle definition, not only the event
+        execution period. Unknown types or statuses are not additionally removed by this API. Different
+        filters are combined with AND; values within each filter array use OR. Custom sorting is not
+        supported. Results contain registered campaigns within the current query scope and may not cover all
+        historical registrations. A page may contain more items than page_size.
+
+        For the first page, omit page_token or pass an empty string. For subsequent pages, pass
+        next_page_token unchanged and keep the authorized shop, filters, and page_size unchanged. An empty
+        next_page_token means there are no further pages within the current query scope; it does not
+        guarantee that all historical campaigns or campaigns accessible across shops have been retrieved. An
+        empty page is not necessarily the last page. Do not stop pagination based on the number of returned
+        items.
+
+        Args:
+            page_token (str | Unset):
+            page_size (int | Unset):
+            campaign_name (str | Unset):
+            types (list[str] | Unset):
+            campaign_statuses (list[str] | Unset):
+            campaign_regions (list[str] | Unset):
+            locale (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.promotion import list_registered_campaign as _op
+
+        return self._run(_op.sync_detailed, page_token=page_token, page_size=page_size, campaign_name=campaign_name, types=types, campaign_statuses=campaign_statuses, campaign_regions=campaign_regions, locale=locale)
 
     def remove_promotion_activity_products(
         self,
@@ -16742,6 +17393,62 @@ class AsyncPromotionApi(AsyncGroup):
 
         return await self._run(_op.asyncio_detailed, activity_id=activity_id)
 
+    async def get_campaign_group(
+        self,
+        campaign_group_id: str,
+        *,
+        locale: str | Unset = UNSET,
+    ) -> GetCampaignGroupResponse | None:
+        """Get Campaign Group
+
+         Get a campaign group's basic information, campaign period, sales period, and linked campaign groups.
+        If the query succeeds without an available result, campaign_group is omitted and data is empty; no
+        invalid ID is generated. Use ListCampaign to paginate and filter campaigns within the group.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined
+        from the verified authorization context and cannot be supplied or overridden by the caller. Cross-
+        shop access in the EU is limited to eligible shops belonging to the same seller and does not allow
+        access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or
+        change campaign settings. Visibility, invitations, existing registrations, campaign status, and
+        registration stage do not independently establish whether registration is currently allowed. An
+        omitted eligibility result means unknown; it must not be interpreted as false, zero, free
+        participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays
+        retain their meanings. Text is for display; automated decisions should use structured statuses and
+        recognized reason codes.
+
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency
+        failures use the platform's standard error mechanism. A known failure is not returned as a
+        successful empty result. Campaign business processes determine status changes; this query does not
+        change status or guarantee that every intermediate status occurs. Response enums may gain values in
+        the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for
+        interval boundaries and omission semantics. Statistics may be delayed or incomplete; no
+        transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent
+        business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign,
+        LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a
+        detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the
+        campaign's localization rules and may contain rich text; HTML sanitization is not guaranteed.
+        Unavailable text is omitted rather than replaced with a placeholder name.
+
+        Args:
+            campaign_group_id (str):
+            locale (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.promotion import get_campaign_group as _op
+
+        return await self._run(_op.asyncio_detailed, campaign_group_id=campaign_group_id, locale=locale)
+
     async def get_coupon(
         self,
         coupon_id: str,
@@ -16760,6 +17467,592 @@ class AsyncPromotionApi(AsyncGroup):
         from .api.promotion import get_coupon as _op
 
         return await self._run(_op.asyncio_detailed, coupon_id=coupon_id)
+
+    async def get_livestream_campaign(
+        self,
+        livestream_campaign_id: str,
+        *,
+        locale: str | Unset = UNSET,
+    ) -> GetLivestreamCampaignResponse | None:
+        """Get Livestream Campaign
+
+         Get details of a featured livestream or livestream competition, including times, participation
+        requirements, benefits, agreement requirements, and the shop's registered session statistics.
+        super_livestream applies only to featured livestreams. Successful queries return the campaign
+        details. A campaign that does not exist, is not visible or applicable to the shop, or has a
+        different supported type returns a resource-unavailable error.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined
+        from the verified authorization context and cannot be supplied or overridden by the caller. Cross-
+        shop access in the EU is limited to eligible shops belonging to the same seller and does not allow
+        access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or
+        change campaign settings. Visibility, invitations, existing registrations, campaign status, and
+        registration stage do not independently establish whether registration is currently allowed. An
+        omitted eligibility result means unknown; it must not be interpreted as false, zero, free
+        participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays
+        retain their meanings. Text is for display; automated decisions should use structured statuses and
+        recognized reason codes.
+
+        Missing or inconsistent data required to identify or return the campaign results in a system error,
+        not a resource-unavailable error. Missing optional information only omits the corresponding fields.
+        An existing campaign that the shop cannot register for is still returned with its eligibility or
+        blocking reasons.
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency
+        failures use the platform's standard error mechanism. A known failure is not returned as a
+        successful empty result. Campaign business processes determine status changes; this query does not
+        change status or guarantee that every intermediate status occurs. Response enums may gain values in
+        the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for
+        interval boundaries and omission semantics. Statistics may be delayed or incomplete; no
+        transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent
+        business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign,
+        LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a
+        detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the
+        campaign's localization rules. The campaign description field returns sanitized HTML, with scripts,
+        event-handler attributes, and unsafe URLs removed. This guarantee applies only to the campaign
+        description, not to other text fields or nested descriptions. Treat other text as text, not trusted
+        HTML. Unavailable text is omitted rather than replaced with a placeholder name.
+
+        The requested campaign type must match the endpoint; otherwise a resource-unavailable error is
+        returned. Only campaign-level information is exposed, without account lists, individual content,
+        registration records, or session details. Participation requirements, benefits, and blocking reasons
+        describe a single campaign's configuration and are not paginated or silently truncated.
+        registration_status independently represents the registration stage and does not establish the
+        shop's eligibility or existing registration.
+
+        Args:
+            livestream_campaign_id (str):
+            locale (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.promotion import get_livestream_campaign as _op
+
+        return await self._run(_op.asyncio_detailed, livestream_campaign_id=livestream_campaign_id, locale=locale)
+
+    async def get_product_campaign(
+        self,
+        product_campaign_id: str,
+        *,
+        locale: str | Unset = UNSET,
+    ) -> GetProductCampaignResponse | None:
+        """Get Product Campaign
+
+         Get a product campaign's basic information, registration period, participation rules, benefits and
+        fees, shop eligibility, product registration quota, and participation statistics. registration_mode
+        distinguishes STANDARD from ROLLING. linked_campaigns applies only to ROLLING; a link does not
+        establish existing registration, synchronization, or eligibility.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined
+        from the verified authorization context and cannot be supplied or overridden by the caller. Cross-
+        shop access in the EU is limited to eligible shops belonging to the same seller and does not allow
+        access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or
+        change campaign settings. Visibility, invitations, existing registrations, campaign status, and
+        registration stage do not independently establish whether registration is currently allowed. An
+        omitted eligibility result means unknown; it must not be interpreted as false, zero, free
+        participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays
+        retain their meanings. Text is for display; automated decisions should use structured statuses and
+        recognized reason codes.
+
+        Missing or inconsistent data required to identify or return the campaign results in a system error,
+        not a resource-unavailable error. Missing optional information only omits the corresponding fields.
+        An existing campaign that the shop cannot register for is still returned with its eligibility or
+        blocking reasons.
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency
+        failures use the platform's standard error mechanism. A known failure is not returned as a
+        successful empty result. Campaign business processes determine status changes; this query does not
+        change status or guarantee that every intermediate status occurs. Response enums may gain values in
+        the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for
+        interval boundaries and omission semantics. Statistics may be delayed or incomplete; no
+        transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent
+        business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign,
+        LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a
+        detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the
+        campaign's localization rules. The campaign description field returns sanitized HTML, with scripts,
+        event-handler attributes, and unsafe URLs removed. This guarantee applies only to the campaign
+        description, not to other text fields or nested descriptions. Treat other text as text, not trusted
+        HTML. Unavailable text is omitted rather than replaced with a placeholder name.
+
+        A type mismatch, nonexistent or invisible campaign, or inapplicable region returns a resource-
+        unavailable error rather than a successful empty result. Unknown eligibility or registration
+        availability alone does not fail the query. registration_period.status is determined only from
+        query_time and registration boundaries, not campaign_status. The registration interval includes its
+        end time; campaign and fee validity intervals exclude their end times. Rules, benefits, and fee
+        policies are the complete applicable configuration of a single campaign, not product or registration
+        record lists, and are neither paginated nor truncated. Fee text and resources jointly express the
+        terms; omission does not mean free participation.
+
+        Args:
+            product_campaign_id (str):
+            locale (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.promotion import get_product_campaign as _op
+
+        return await self._run(_op.asyncio_detailed, product_campaign_id=product_campaign_id, locale=locale)
+
+    async def get_registered_campaign_counts(
+        self,
+    ) -> GetRegisteredCampaignCountsResponse | None:
+        """Get Registered Campaign Counts
+
+         Get the shop's registered campaign counts: all_count, upcoming_count, active_count, and ended_count.
+        ACTIVE covers the entire process from registration opening to campaign completion, not just
+        execution. This operation has no list filters, so the result is not total_count for a particular
+        filtered list. It uses the standard statistics scope, including manual and other registration
+        methods. Queries specific to legacy automatic enrollment management are not supported. Categories
+        are independent and are not guaranteed to sum to all_count. Successful data may be empty when all
+        counts are unavailable.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined
+        from the verified authorization context and cannot be supplied or overridden by the caller. Cross-
+        shop access in the EU is limited to eligible shops belonging to the same seller and does not allow
+        access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or
+        change campaign settings. Visibility, invitations, existing registrations, campaign status, and
+        registration stage do not independently establish whether registration is currently allowed. An
+        omitted eligibility result means unknown; it must not be interpreted as false, zero, free
+        participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays
+        retain their meanings. Text is for display; automated decisions should use structured statuses and
+        recognized reason codes.
+
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency
+        failures use the platform's standard error mechanism. A known failure is not returned as a
+        successful empty result. Campaign business processes determine status changes; this query does not
+        change status or guarantee that every intermediate status occurs. Response enums may gain values in
+        the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for
+        interval boundaries and omission semantics. Statistics may be delayed or incomplete; no
+        transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent
+        business decision.
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.promotion import get_registered_campaign_counts as _op
+
+        return await self._run(_op.asyncio_detailed)
+
+    async def get_shop_campaign(
+        self,
+        shop_campaign_id: str,
+        *,
+        locale: str | Unset = UNSET,
+    ) -> GetShopCampaignResponse | None:
+        """Get Shop Campaign
+
+         Get a shop campaign's basic information, registration period, shop participation requirements,
+        benefits and fees, shop eligibility, and participation statistics. Shop details do not include
+        product registration quotas, product registration rules, or product statistics.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined
+        from the verified authorization context and cannot be supplied or overridden by the caller. Cross-
+        shop access in the EU is limited to eligible shops belonging to the same seller and does not allow
+        access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or
+        change campaign settings. Visibility, invitations, existing registrations, campaign status, and
+        registration stage do not independently establish whether registration is currently allowed. An
+        omitted eligibility result means unknown; it must not be interpreted as false, zero, free
+        participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays
+        retain their meanings. Text is for display; automated decisions should use structured statuses and
+        recognized reason codes.
+
+        Missing or inconsistent data required to identify or return the campaign results in a system error,
+        not a resource-unavailable error. Missing optional information only omits the corresponding fields.
+        An existing campaign that the shop cannot register for is still returned with its eligibility or
+        blocking reasons.
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency
+        failures use the platform's standard error mechanism. A known failure is not returned as a
+        successful empty result. Campaign business processes determine status changes; this query does not
+        change status or guarantee that every intermediate status occurs. Response enums may gain values in
+        the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for
+        interval boundaries and omission semantics. Statistics may be delayed or incomplete; no
+        transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent
+        business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign,
+        LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a
+        detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the
+        campaign's localization rules. The campaign description field returns sanitized HTML, with scripts,
+        event-handler attributes, and unsafe URLs removed. This guarantee applies only to the campaign
+        description, not to other text fields or nested descriptions. Treat other text as text, not trusted
+        HTML. Unavailable text is omitted rather than replaced with a placeholder name.
+
+        A type mismatch, nonexistent or invisible campaign, or inapplicable region returns a resource-
+        unavailable error rather than a successful empty result. Unknown eligibility or registration
+        availability alone does not fail the query. registration_period.status is determined only from
+        query_time and registration boundaries, not campaign_status. The registration interval includes its
+        end time; campaign and fee validity intervals exclude their end times. Rules, benefits, and fee
+        policies are the complete applicable configuration of a single campaign, not product or registration
+        record lists, and are neither paginated nor truncated. Fee text and resources jointly express the
+        terms; omission does not mean free participation.
+
+        Args:
+            shop_campaign_id (str):
+            locale (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.promotion import get_shop_campaign as _op
+
+        return await self._run(_op.asyncio_detailed, shop_campaign_id=shop_campaign_id, locale=locale)
+
+    async def get_short_video_campaign(
+        self,
+        short_video_campaign_id: str,
+        *,
+        locale: str | Unset = UNSET,
+    ) -> GetShortVideoCampaignResponse | None:
+        """Get Short Video Campaign
+
+         Get short video competition details, including times, participation requirements, benefits,
+        agreement requirements, and account registration statistics. Statistics count account registration
+        records, not videos or deduplicated accounts. Does not include livestream sessions, super livestream
+        information, or a redundant subtype. Successful queries return the campaign details. A campaign that
+        does not exist, is not visible or applicable to the shop, or has a different supported type returns
+        a resource-unavailable error.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined
+        from the verified authorization context and cannot be supplied or overridden by the caller. Cross-
+        shop access in the EU is limited to eligible shops belonging to the same seller and does not allow
+        access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or
+        change campaign settings. Visibility, invitations, existing registrations, campaign status, and
+        registration stage do not independently establish whether registration is currently allowed. An
+        omitted eligibility result means unknown; it must not be interpreted as false, zero, free
+        participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays
+        retain their meanings. Text is for display; automated decisions should use structured statuses and
+        recognized reason codes.
+
+        Missing or inconsistent data required to identify or return the campaign results in a system error,
+        not a resource-unavailable error. Missing optional information only omits the corresponding fields.
+        An existing campaign that the shop cannot register for is still returned with its eligibility or
+        blocking reasons.
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency
+        failures use the platform's standard error mechanism. A known failure is not returned as a
+        successful empty result. Campaign business processes determine status changes; this query does not
+        change status or guarantee that every intermediate status occurs. Response enums may gain values in
+        the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for
+        interval boundaries and omission semantics. Statistics may be delayed or incomplete; no
+        transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent
+        business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign,
+        LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a
+        detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the
+        campaign's localization rules. The campaign description field returns sanitized HTML, with scripts,
+        event-handler attributes, and unsafe URLs removed. This guarantee applies only to the campaign
+        description, not to other text fields or nested descriptions. Treat other text as text, not trusted
+        HTML. Unavailable text is omitted rather than replaced with a placeholder name.
+
+        The requested campaign type must match the endpoint; otherwise a resource-unavailable error is
+        returned. Only campaign-level information is exposed, without account lists, individual content,
+        registration records, or session details. Participation requirements, benefits, and blocking reasons
+        describe a single campaign's configuration and are not paginated or silently truncated.
+        registration_status independently represents the registration stage and does not establish the
+        shop's eligibility or existing registration.
+
+        Args:
+            short_video_campaign_id (str):
+            locale (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.promotion import get_short_video_campaign as _op
+
+        return await self._run(_op.asyncio_detailed, short_video_campaign_id=short_video_campaign_id, locale=locale)
+
+    async def list_campaign(
+        self,
+        *,
+        campaign_group_id: str,
+        page_token: str | Unset = UNSET,
+        page_size: int | Unset = UNSET,
+        eligibility_filter: str | Unset = UNSET,
+        only_pending_registrations: bool | Unset = UNSET,
+        types: list[str] | Unset = UNSET,
+        locale: str | Unset = UNSET,
+    ) -> ListCampaignResponse | None:
+        """List Campaign
+
+         List unified Campaign summaries visible to the shop within a specified campaign group.
+        campaign_group_id is a required query parameter. Supports product, shop, livestream, and short video
+        campaigns without expanding their full details.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined
+        from the verified authorization context and cannot be supplied or overridden by the caller. Cross-
+        shop access in the EU is limited to eligible shops belonging to the same seller and does not allow
+        access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or
+        change campaign settings. Visibility, invitations, existing registrations, campaign status, and
+        registration stage do not independently establish whether registration is currently allowed. An
+        omitted eligibility result means unknown; it must not be interpreted as false, zero, free
+        participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays
+        retain their meanings. Text is for display; automated decisions should use structured statuses and
+        recognized reason codes.
+
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency
+        failures use the platform's standard error mechanism. A known failure is not returned as a
+        successful empty result. Campaign business processes determine status changes; this query does not
+        change status or guarantee that every intermediate status occurs. Response enums may gain values in
+        the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for
+        interval boundaries and omission semantics. Statistics may be delayed or incomplete; no
+        transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent
+        business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign,
+        LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a
+        detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the
+        campaign's localization rules and may contain rich text; HTML sanitization is not guaranteed.
+        Unavailable text is omitted rather than replaced with a placeholder name.
+
+        For a single-shop query, the default order prioritizes campaigns available for registration when
+        that assessment is present for both campaigns, followed by pinned campaigns, the most recent
+        pending-confirmation time descending, invited campaigns, and creation time descending. With
+        only_pending_registrations=true, the most recent pending-confirmation time takes precedence over
+        those default priorities. After page selection, any applicable campaign-group display priority
+        orders configured campaigns first in their configured sequence; other items retain their relative
+        order. Equal priorities retain source order; stable ID ordering is not guaranteed. EU cross-shop
+        queries apply the query order separately to each shop, then merge results and apply the display
+        priority within the returned page; no global ordering across shops is guaranteed. Custom sorting is
+        not supported. No additional sorting, deduplication, or truncation is applied by this API. List-
+        level eligibility is not the full detail-level assessment; use type to select the detail endpoint.
+        EU cross-shop aggregation may return more items than page_size. total_count is not guaranteed to be
+        an exact deduplicated total across all accessible shops, and complete traversal of that scope is not
+        guaranteed even when the data remains unchanged.
+
+        For the first page, omit page_token or pass an empty string. For subsequent pages, pass
+        next_page_token unchanged and keep the authorized shop, filters, and page_size unchanged. An empty
+        next_page_token means there are no further pages within the current query scope; it does not
+        guarantee that all historical campaigns or campaigns accessible across shops have been retrieved. An
+        empty page is not necessarily the last page. Do not stop pagination based on the number of returned
+        items.
+
+        Args:
+            campaign_group_id (str):
+            page_token (str | Unset):
+            page_size (int | Unset):
+            eligibility_filter (str | Unset):
+            only_pending_registrations (bool | Unset):
+            types (list[str] | Unset):
+            locale (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.promotion import list_campaign as _op
+
+        return await self._run(_op.asyncio_detailed, campaign_group_id=campaign_group_id, page_token=page_token, page_size=page_size, eligibility_filter=eligibility_filter, only_pending_registrations=only_pending_registrations, types=types, locale=locale)
+
+    async def list_campaign_group(
+        self,
+        *,
+        page_token: str | Unset = UNSET,
+        page_size: int | Unset = UNSET,
+        campaign_name: str | Unset = UNSET,
+        is_invited: bool | Unset = UNSET,
+        only_pending_registrations: bool | Unset = UNSET,
+        list_scope: str | Unset = UNSET,
+        registration_regions: list[str] | Unset = UNSET,
+        locale: str | Unset = UNSET,
+    ) -> ListCampaignGroupResponse | None:
+        """List Campaign Group
+
+         List campaign groups visible to the shop. NORMAL groups return campaigns summaries, while LONG_TERM
+        groups return linked_campaign_groups. These two fields are mutually exclusive and are both omitted
+        for an unknown type. Campaign summaries within a group are not paginated separately. An empty
+        summary list does not guarantee that the group contains no campaigns.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined
+        from the verified authorization context and cannot be supplied or overridden by the caller. Cross-
+        shop access in the EU is limited to eligible shops belonging to the same seller and does not allow
+        access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or
+        change campaign settings. Visibility, invitations, existing registrations, campaign status, and
+        registration stage do not independently establish whether registration is currently allowed. An
+        omitted eligibility result means unknown; it must not be interpreted as false, zero, free
+        participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays
+        retain their meanings. Text is for display; automated decisions should use structured statuses and
+        recognized reason codes.
+
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency
+        failures use the platform's standard error mechanism. A known failure is not returned as a
+        successful empty result. Campaign business processes determine status changes; this query does not
+        change status or guarantee that every intermediate status occurs. Response enums may gain values in
+        the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for
+        interval boundaries and omission semantics. Statistics may be delayed or incomplete; no
+        transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent
+        business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign,
+        LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a
+        detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the
+        campaign's localization rules and may contain rich text; HTML sanitization is not guaranteed.
+        Unavailable text is omitted rather than replaced with a placeholder name.
+
+        Uses the seller-facing campaign group filters and ordering. In the standard flow, priority is given
+        to pinned groups, long-term campaigns, registration availability, featured campaigns, campaign
+        level, and start time. The pending-confirmation filter prioritizes the most recent join time. EU
+        aggregation prioritizes long-term campaigns, followed by pending-confirmation time, registration
+        availability, featured campaigns, campaign level, and start time. Custom sorting is not supported.
+        Ties retain source order; stable ID ordering is not guaranteed. This query does not mark campaigns
+        as visited or update the visit record used by the seller interface to identify new campaigns.
+
+        For the first page, omit page_token or pass an empty string. For subsequent pages, pass
+        next_page_token unchanged and keep the authorized shop, filters, and page_size unchanged. An empty
+        next_page_token means there are no further pages within the current query scope; it does not
+        guarantee that all historical campaigns or campaigns accessible across shops have been retrieved. An
+        empty page is not necessarily the last page. Do not stop pagination based on the number of returned
+        items.
+
+        Args:
+            page_token (str | Unset):
+            page_size (int | Unset):
+            campaign_name (str | Unset):
+            is_invited (bool | Unset):
+            only_pending_registrations (bool | Unset):
+            list_scope (str | Unset):
+            registration_regions (list[str] | Unset):
+            locale (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.promotion import list_campaign_group as _op
+
+        return await self._run(_op.asyncio_detailed, page_token=page_token, page_size=page_size, campaign_name=campaign_name, is_invited=is_invited, only_pending_registrations=only_pending_registrations, list_scope=list_scope, registration_regions=registration_regions, locale=locale)
+
+    async def list_registered_campaign(
+        self,
+        *,
+        page_token: str | Unset = UNSET,
+        page_size: int | Unset = UNSET,
+        campaign_name: str | Unset = UNSET,
+        types: list[str] | Unset = UNSET,
+        campaign_statuses: list[str] | Unset = UNSET,
+        campaign_regions: list[str] | Unset = UNSET,
+        locale: str | Unset = UNSET,
+    ) -> ListRegisteredCampaignResponse | None:
+        """List Registered Campaign
+
+         List the shop's registered campaign summaries, with registration statistics and product negotiation
+        statistics where applicable to the campaign type. A registration relationship does not guarantee
+        approval or effective benefits. This release does not expose filters for registration source,
+        automatic enrollment-specific scenarios, or subtypes.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined
+        from the verified authorization context and cannot be supplied or overridden by the caller. Cross-
+        shop access in the EU is limited to eligible shops belonging to the same seller and does not allow
+        access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or
+        change campaign settings. Visibility, invitations, existing registrations, campaign status, and
+        registration stage do not independently establish whether registration is currently allowed. An
+        omitted eligibility result means unknown; it must not be interpreted as false, zero, free
+        participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays
+        retain their meanings. Text is for display; automated decisions should use structured statuses and
+        recognized reason codes.
+
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency
+        failures use the platform's standard error mechanism. A known failure is not returned as a
+        successful empty result. Campaign business processes determine status changes; this query does not
+        change status or guarantee that every intermediate status occurs. Response enums may gain values in
+        the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for
+        interval boundaries and omission semantics. Statistics may be delayed or incomplete; no
+        transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent
+        business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign,
+        LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a
+        detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the
+        campaign's localization rules and may contain rich text; HTML sanitization is not guaranteed.
+        Unavailable text is omitted rather than replaced with a placeholder name.
+
+        The default order places ACTIVE campaigns first, then orders campaigns within each status-priority
+        group by registration end time descending. Equal registration end times retain source order; stable
+        ID ordering is not guaranteed. The same ordering applies to single-shop queries and the combined EU
+        shop scope before pagination. ACTIVE uses the campaign lifecycle definition, not only the event
+        execution period. Unknown types or statuses are not additionally removed by this API. Different
+        filters are combined with AND; values within each filter array use OR. Custom sorting is not
+        supported. Results contain registered campaigns within the current query scope and may not cover all
+        historical registrations. A page may contain more items than page_size.
+
+        For the first page, omit page_token or pass an empty string. For subsequent pages, pass
+        next_page_token unchanged and keep the authorized shop, filters, and page_size unchanged. An empty
+        next_page_token means there are no further pages within the current query scope; it does not
+        guarantee that all historical campaigns or campaigns accessible across shops have been retrieved. An
+        empty page is not necessarily the last page. Do not stop pagination based on the number of returned
+        items.
+
+        Args:
+            page_token (str | Unset):
+            page_size (int | Unset):
+            campaign_name (str | Unset):
+            types (list[str] | Unset):
+            campaign_statuses (list[str] | Unset):
+            campaign_regions (list[str] | Unset):
+            locale (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.promotion import list_registered_campaign as _op
+
+        return await self._run(_op.asyncio_detailed, page_token=page_token, page_size=page_size, campaign_name=campaign_name, types=types, campaign_statuses=campaign_statuses, campaign_regions=campaign_regions, locale=locale)
 
     async def remove_promotion_activity_products(
         self,

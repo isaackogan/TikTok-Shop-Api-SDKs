@@ -31,6 +31,7 @@ import com.google.gson.annotations.SerializedName
  *
  * @param hasFreeSample If true, free samples are provided to creators invited to the target collaboration group.
  * @param isSampleApprovalExempt If true, creators invited to the target collaboration are exempt from seller review and will automatically be approved for a free sample. Note that if has_free_sample=false, this field will not take effect.
+ * @param useProductSampleSetting If true, creators invited to the target collaboration will apply the product-level sample rules. Note that if has_free_sample=false, this field will not take effect.
  */
 
 
@@ -42,7 +43,11 @@ data class QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSamp
 
     /* If true, creators invited to the target collaboration are exempt from seller review and will automatically be approved for a free sample. Note that if has_free_sample=false, this field will not take effect. */
     @SerializedName("is_sample_approval_exempt")
-    val isSampleApprovalExempt: kotlin.Boolean? = null
+    val isSampleApprovalExempt: kotlin.Boolean? = null,
+
+    /* If true, creators invited to the target collaboration will apply the product-level sample rules. Note that if has_free_sample=false, this field will not take effect. */
+    @SerializedName("use_product_sample_setting")
+    val useProductSampleSetting: kotlin.Boolean? = null
 
 ) {
 

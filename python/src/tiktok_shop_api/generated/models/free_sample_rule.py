@@ -8,6 +8,7 @@ from attrs import field as _attrs_field
 
 from ..types import UNSET, Unset
 
+from ..types import UNSET, Unset
 
 
 
@@ -27,10 +28,14 @@ class FreeSampleRule:
             is_sample_approval_exempt (bool): If set to `true`, creators invited to the target collaboration are exempt from
                 seller review and are automatically approved for a free  product sample. Note that the `has_free_sample`
                 property overrides the free sample behavior.
+            use_product_sample_setting (bool | Unset): If true, creators invited to the target collaboration will apply the
+                product-level sample rules.
+                Note that if has_free_sample=false, this field will not take effect.
      """
 
     has_free_sample: bool
     is_sample_approval_exempt: bool
+    use_product_sample_setting: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -42,6 +47,8 @@ class FreeSampleRule:
 
         is_sample_approval_exempt = self.is_sample_approval_exempt
 
+        use_product_sample_setting = self.use_product_sample_setting
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -49,6 +56,8 @@ class FreeSampleRule:
             "has_free_sample": has_free_sample,
             "is_sample_approval_exempt": is_sample_approval_exempt,
         })
+        if use_product_sample_setting is not UNSET:
+            field_dict["use_product_sample_setting"] = use_product_sample_setting
 
         return field_dict
 
@@ -61,9 +70,12 @@ class FreeSampleRule:
 
         is_sample_approval_exempt = d.pop("is_sample_approval_exempt")
 
+        use_product_sample_setting = d.pop("use_product_sample_setting", UNSET)
+
         free_sample_rule = cls(
             has_free_sample=has_free_sample,
             is_sample_approval_exempt=is_sample_approval_exempt,
+            use_product_sample_setting=use_product_sample_setting,
         )
 
 

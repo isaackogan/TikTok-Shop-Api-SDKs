@@ -51,10 +51,11 @@ class CreateProductRequestSku:
                 `"name": "Color"`, `"value_name": "Red"` in different SKUs.
             seller_sku (str | Unset): An internal code/name for managing SKUs, not visible to buyers.
                 Valid length:
-                - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: 6-50 characters
+                - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: 6-70 characters
                 - Other regions: 1-50 characters
                 Format:
-                - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: Use alphabets, numbers, hyphens (-), or underscores (_) only
+                - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: Use letters, numbers, spaces, and these symbols only: . -
+                _ @ # & * + / ( )
                 - Other regions: Text without spaces
             external_sku_id (str | Unset): An external identifier used in an external ecommerce platform. This is used to
                 associate the SKU between TikTok Shop and the external ecommerce platform.

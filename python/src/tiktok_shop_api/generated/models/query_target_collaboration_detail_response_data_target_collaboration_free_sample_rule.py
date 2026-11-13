@@ -28,10 +28,14 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRul
             is_sample_approval_exempt (bool | Unset): If true, creators invited to the target collaboration are exempt from
                 seller review and will automatically be approved for a free sample.
                 Note that if has_free_sample=false, this field will not take effect.
+            use_product_sample_setting (bool | Unset): If true, creators invited to the target collaboration will apply the
+                product-level sample rules.
+                Note that if has_free_sample=false, this field will not take effect.
      """
 
     has_free_sample: bool | Unset = UNSET
     is_sample_approval_exempt: bool | Unset = UNSET
+    use_product_sample_setting: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -43,6 +47,8 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRul
 
         is_sample_approval_exempt = self.is_sample_approval_exempt
 
+        use_product_sample_setting = self.use_product_sample_setting
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -52,6 +58,8 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRul
             field_dict["has_free_sample"] = has_free_sample
         if is_sample_approval_exempt is not UNSET:
             field_dict["is_sample_approval_exempt"] = is_sample_approval_exempt
+        if use_product_sample_setting is not UNSET:
+            field_dict["use_product_sample_setting"] = use_product_sample_setting
 
         return field_dict
 
@@ -64,9 +72,12 @@ class QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRul
 
         is_sample_approval_exempt = d.pop("is_sample_approval_exempt", UNSET)
 
+        use_product_sample_setting = d.pop("use_product_sample_setting", UNSET)
+
         query_target_collaboration_detail_response_data_target_collaboration_free_sample_rule = cls(
             has_free_sample=has_free_sample,
             is_sample_approval_exempt=is_sample_approval_exempt,
+            use_product_sample_setting=use_product_sample_setting,
         )
 
 

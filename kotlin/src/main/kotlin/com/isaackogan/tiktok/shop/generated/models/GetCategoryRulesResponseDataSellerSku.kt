@@ -29,13 +29,13 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param isRequired A flag to indicate whether a Seller SKU is required when creating or editing a product in this category. When required, the Seller SKU must be 6 to 50 characters long and can contain only letters, digits, hyphens (-) and underscores (_).
+ * @param isRequired A flag to indicate whether a Seller SKU is required when creating or editing a product in this category. When required, the Seller SKU must be 6 to 70 characters long and can contain only letters, numbers, spaces, and these symbols only: . - _ @ # & * + / ( )
  */
 
 
 data class GetCategoryRulesResponseDataSellerSku (
 
-    /* A flag to indicate whether a Seller SKU is required when creating or editing a product in this category. When required, the Seller SKU must be 6 to 50 characters long and can contain only letters, digits, hyphens (-) and underscores (_). */
+    /* A flag to indicate whether a Seller SKU is required when creating or editing a product in this category. When required, the Seller SKU must be 6 to 70 characters long and can contain only letters, numbers, spaces, and these symbols only: . - _ @ # & * + / ( ) */
     @SerializedName("is_required")
     val isRequired: kotlin.Boolean? = null
 

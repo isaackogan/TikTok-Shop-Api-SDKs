@@ -24,8 +24,8 @@ class GetCategoryRulesResponseDataSellerSku:
     """ 
         Attributes:
             is_required (bool | Unset): A flag to indicate whether a Seller SKU is required when creating or editing a
-                product in this category. When required, the Seller SKU must be 6 to 50 characters long and can contain only
-                letters, digits, hyphens (-) and underscores (_).
+                product in this category. When required, the Seller SKU must be 6 to 70 characters long and can contain only
+                letters, numbers, spaces, and these symbols only: . - _ @ # & * + / ( )
      """
 
     is_required: bool | Unset = UNSET

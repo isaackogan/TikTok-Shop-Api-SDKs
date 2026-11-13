@@ -34,7 +34,7 @@ import com.google.gson.annotations.SerializedName
  * @param inventory SKU inventory information per warehouse. This field is only required if the inventory allocation mode for the warehouse is MANUAL. Otherwise, it is optional.
  * @param price The SKU's **local display price** shown on the product page before any discounts.
  * @param sourceSkuId The ID of the SKU being replicated
- * @param sellerSku An internal code/name for managing SKUs, not visible to buyers.   Valid length:  - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: 6-50 characters - Other regions: 1-50 characters Format:  - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: Use alphabets, numbers, hyphens (-), or underscores (_) only - Other regions: Text without spaces
+ * @param sellerSku An internal code/name for managing SKUs, not visible to buyers. Valid length: - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: 6-70 characters - Other regions: 1-50 characters Format: - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: Use letters, numbers, spaces, and these symbols only: . - _ @ # & * + / ( ) - Other regions: Text without spaces
  */
 
 
@@ -52,7 +52,7 @@ data class ReplicateProductRequestReplicateTargetSku (
     @SerializedName("source_sku_id")
     val sourceSkuId: kotlin.String? = null,
 
-    /* An internal code/name for managing SKUs, not visible to buyers.   Valid length:  - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: 6-50 characters - Other regions: 1-50 characters Format:  - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: Use alphabets, numbers, hyphens (-), or underscores (_) only - Other regions: Text without spaces */
+    /* An internal code/name for managing SKUs, not visible to buyers. Valid length: - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: 6-70 characters - Other regions: 1-50 characters Format: - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: Use letters, numbers, spaces, and these symbols only: . - _ @ # & * + / ( ) - Other regions: Text without spaces */
     @SerializedName("seller_sku")
     val sellerSku: kotlin.String? = null
 

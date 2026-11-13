@@ -1,5 +1,6 @@
 """ Contains all the data models used in inputs/outputs """
 
+from .account_requirement import AccountRequirement
 from .activate_products_request import ActivateProductsRequest
 from .activate_products_request_listing_platforms_item import ActivateProductsRequestListingPlatformsItem
 from .activate_products_response import ActivateProductsResponse
@@ -38,6 +39,7 @@ from .aerosol_extra_info import AerosolExtraInfo
 from .aftersales_request_status_update_webhook import AftersalesRequestStatusUpdateWebhook
 from .aftersales_request_status_update_webhook_data import AftersalesRequestStatusUpdateWebhookData
 from .age_distribution import AgeDistribution
+from .agreement import Agreement
 from .aov import Aov
 from .appeal_completed_webhook import AppealCompletedWebhook
 from .appeal_completed_webhook_data import AppealCompletedWebhookData
@@ -70,6 +72,7 @@ from .batch_ship_packages_response_data_error_detail import BatchShipPackagesRes
 from .battery_extra_info import BatteryExtraInfo
 from .battery_extra_info_battery_packaging_type import BatteryExtraInfoBatteryPackagingType
 from .benchmark import Benchmark
+from .benefit import Benefit
 from .box_measurement import BoxMeasurement
 from .box_measurement_length_unit import BoxMeasurementLengthUnit
 from .box_measurement_weight_unit import BoxMeasurementWeightUnit
@@ -81,6 +84,9 @@ from .calculate_refund_request import CalculateRefundRequest
 from .calculate_refund_response import CalculateRefundResponse
 from .calculate_refund_response_data import CalculateRefundResponseData
 from .calculate_refund_response_data_order_refund_amount import CalculateRefundResponseDataOrderRefundAmount
+from .campaign import Campaign
+from .campaign_group import CampaignGroup
+from .campaign_period import CampaignPeriod
 from .cancel_fbtmcf_order_request import CancelFBTMCFOrderRequest
 from .cancel_fbtmcf_order_request_consign_order import CancelFBTMCFOrderRequestConsignOrder
 from .cancel_fbtmcf_order_response import CancelFBTMCFOrderResponse
@@ -418,6 +424,7 @@ from .edit_product_response_data_audit import EditProductResponseDataAudit
 from .edit_size_chart_v2_request import EditSizeChartV2Request
 from .edit_size_chart_v2_response import EditSizeChartV2Response
 from .edit_size_chart_v2_response_data import EditSizeChartV2ResponseData
+from .effective_period import EffectivePeriod
 from .end_session_request import EndSessionRequest
 from .end_session_response import EndSessionResponse
 from .end_session_response_data import EndSessionResponseData
@@ -609,6 +616,9 @@ from .get_bestselling_videos_time_slot import GetBestsellingVideosTimeSlot
 from .get_brands_response import GetBrandsResponse
 from .get_brands_response_data import GetBrandsResponseData
 from .get_brands_response_data_brand import GetBrandsResponseDataBrand
+from .get_campaign_group_response import GetCampaignGroupResponse
+from .get_campaign_group_response_data import GetCampaignGroupResponseData
+from .get_campaign_group_response_data_campaign_group import GetCampaignGroupResponseDataCampaignGroup
 from .get_campaign_product_performance_list_response import GetCampaignProductPerformanceListResponse
 from .get_campaign_product_performance_list_response_data import GetCampaignProductPerformanceListResponseData
 from .get_campaign_product_performance_list_response_data_campaign_product_statistic import GetCampaignProductPerformanceListResponseDataCampaignProductStatistic
@@ -868,6 +878,13 @@ from .get_live_room_user_portraits_response_data_region_indicator import GetLive
 from .get_live_room_view_trends_response import GetLiveRoomViewTrendsResponse
 from .get_live_room_view_trends_response_data import GetLiveRoomViewTrendsResponseData
 from .get_live_room_view_trends_response_data_view_trend_performance import GetLiveRoomViewTrendsResponseDataViewTrendPerformance
+from .get_livestream_campaign_response import GetLivestreamCampaignResponse
+from .get_livestream_campaign_response_data import GetLivestreamCampaignResponseData
+from .get_livestream_campaign_response_data_livestream_campaign import GetLivestreamCampaignResponseDataLivestreamCampaign
+from .get_livestream_campaign_response_data_livestream_campaign_participation_requirement import GetLivestreamCampaignResponseDataLivestreamCampaignParticipationRequirement
+from .get_livestream_campaign_response_data_livestream_campaign_session_statistic import GetLivestreamCampaignResponseDataLivestreamCampaignSessionStatistic
+from .get_livestream_campaign_response_data_livestream_campaign_super_livestream import GetLivestreamCampaignResponseDataLivestreamCampaignSuperLivestream
+from .get_livestream_campaign_response_data_livestream_campaign_super_livestream_target_gmv_threshold import GetLivestreamCampaignResponseDataLivestreamCampaignSuperLivestreamTargetGmvThreshold
 from .get_logistics_tracking_response import GetLogisticsTrackingResponse
 from .get_logistics_tracking_response_data import GetLogisticsTrackingResponseData
 from .get_logistics_tracking_response_data_logistics_detail import GetLogisticsTrackingResponseDataLogisticsDetail
@@ -1015,6 +1032,18 @@ from .get_pod_customization_details_request import GetPODCustomizationDetailsReq
 from .get_pod_customization_details_response import GetPODCustomizationDetailsResponse
 from .get_pod_customization_details_response_data import GetPODCustomizationDetailsResponseData
 from .get_pod_customization_details_response_data_pod_detail import GetPODCustomizationDetailsResponseDataPodDetail
+from .get_product_campaign_response import GetProductCampaignResponse
+from .get_product_campaign_response_data import GetProductCampaignResponseData
+from .get_product_campaign_response_data_product_campaign import GetProductCampaignResponseDataProductCampaign
+from .get_product_campaign_response_data_product_campaign_fee import GetProductCampaignResponseDataProductCampaignFee
+from .get_product_campaign_response_data_product_campaign_linked_campaign import GetProductCampaignResponseDataProductCampaignLinkedCampaign
+from .get_product_campaign_response_data_product_campaign_participation_rule import GetProductCampaignResponseDataProductCampaignParticipationRule
+from .get_product_campaign_response_data_product_campaign_participation_rule_campaign_rule import GetProductCampaignResponseDataProductCampaignParticipationRuleCampaignRule
+from .get_product_campaign_response_data_product_campaign_participation_rule_product_rule import GetProductCampaignResponseDataProductCampaignParticipationRuleProductRule
+from .get_product_campaign_response_data_product_campaign_registration_limit import GetProductCampaignResponseDataProductCampaignRegistrationLimit
+from .get_product_campaign_response_data_product_campaign_registration_period import GetProductCampaignResponseDataProductCampaignRegistrationPeriod
+from .get_product_campaign_response_data_product_campaign_shop_participation import GetProductCampaignResponseDataProductCampaignShopParticipation
+from .get_product_campaign_response_data_product_campaign_shop_participation_registration_statistic import GetProductCampaignResponseDataProductCampaignShopParticipationRegistrationStatistic
 from .get_product_diagnoses_response import GetProductDiagnosesResponse
 from .get_product_diagnoses_response_data import GetProductDiagnosesResponseData
 from .get_product_diagnoses_response_data_product import GetProductDiagnosesResponseDataProduct
@@ -1102,6 +1131,8 @@ from .get_recommended_product_title_and_description_response_data import GetReco
 from .get_recommended_product_title_and_description_response_data_product import GetRecommendedProductTitleAndDescriptionResponseDataProduct
 from .get_recommended_product_title_and_description_response_data_product_suggestion import GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestion
 from .get_recommended_product_title_and_description_response_data_product_suggestion_item import GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestionItem
+from .get_registered_campaign_counts_response import GetRegisteredCampaignCountsResponse
+from .get_registered_campaign_counts_response_data import GetRegisteredCampaignCountsResponseData
 from .get_reject_reasons_response import GetRejectReasonsResponse
 from .get_reject_reasons_response_data import GetRejectReasonsResponseData
 from .get_reject_reasons_response_data_reason import GetRejectReasonsResponseDataReason
@@ -1145,6 +1176,12 @@ from .get_shipping_template_availability_response_data_template import GetShippi
 from .get_shipping_template_availability_response_data_template_service_unreachable_reason import GetShippingTemplateAvailabilityResponseDataTemplateServiceUnreachableReason
 from .get_shipping_template_availability_response_data_template_service_unreachable_reason_filter_reason import GetShippingTemplateAvailabilityResponseDataTemplateServiceUnreachableReasonFilterReason
 from .get_shipping_template_availability_response_data_template_template import GetShippingTemplateAvailabilityResponseDataTemplateTemplate
+from .get_shop_campaign_response import GetShopCampaignResponse
+from .get_shop_campaign_response_data import GetShopCampaignResponseData
+from .get_shop_campaign_response_data_shop_campaign import GetShopCampaignResponseDataShopCampaign
+from .get_shop_campaign_response_data_shop_campaign_participation_rule import GetShopCampaignResponseDataShopCampaignParticipationRule
+from .get_shop_campaign_response_data_shop_campaign_shop_participation import GetShopCampaignResponseDataShopCampaignShopParticipation
+from .get_shop_campaign_response_data_shop_campaign_shop_participation_registration_statistic import GetShopCampaignResponseDataShopCampaignShopParticipationRegistrationStatistic
 from .get_shop_group_and_related_shops_response import GetShopGroupAndRelatedShopsResponse
 from .get_shop_group_and_related_shops_response_data import GetShopGroupAndRelatedShopsResponseData
 from .get_shop_group_and_related_shops_response_data_shop_group_data import GetShopGroupAndRelatedShopsResponseDataShopGroupData
@@ -1350,6 +1387,11 @@ from .get_shoppable_video_precheck_result_response_data_precheck_task_violation_
 from .get_shoppable_video_status_response import GetShoppableVideoStatusResponse
 from .get_shoppable_video_status_response_data import GetShoppableVideoStatusResponseData
 from .get_shoppable_video_status_response_data_video import GetShoppableVideoStatusResponseDataVideo
+from .get_short_video_campaign_response import GetShortVideoCampaignResponse
+from .get_short_video_campaign_response_data import GetShortVideoCampaignResponseData
+from .get_short_video_campaign_response_data_short_video_campaign import GetShortVideoCampaignResponseDataShortVideoCampaign
+from .get_short_video_campaign_response_data_short_video_campaign_participation_requirement import GetShortVideoCampaignResponseDataShortVideoCampaignParticipationRequirement
+from .get_short_video_campaign_response_data_short_video_campaign_registration_statistic import GetShortVideoCampaignResponseDataShortVideoCampaignRegistrationStatistic
 from .get_showcase_products_response import GetShowcaseProductsResponse
 from .get_showcase_products_response_data import GetShowcaseProductsResponseData
 from .get_showcase_products_response_data_product import GetShowcaseProductsResponseDataProduct
@@ -1530,6 +1572,7 @@ from .invoice_status_change_webhook_data import InvoiceStatusChangeWebhookData
 from .item import Item
 from .item_tax import ItemTax
 from .line_item import LineItem
+from .linked_campaign_group import LinkedCampaignGroup
 from .linked_product import LinkedProduct
 from .list_available_inbound_methods_request import ListAvailableInboundMethodsRequest
 from .list_available_inbound_methods_response import ListAvailableInboundMethodsResponse
@@ -1538,6 +1581,13 @@ from .list_available_inbound_methods_response_data_available_inbound_method_list
 from .list_available_inbound_methods_response_data_available_inbound_method_list_available_time_window_list import ListAvailableInboundMethodsResponseDataAvailableInboundMethodListAvailableTimeWindowList
 from .list_available_inbound_methods_response_data_available_inbound_method_list_placement_fee_estimate import ListAvailableInboundMethodsResponseDataAvailableInboundMethodListPlacementFeeEstimate
 from .list_available_inbound_methods_response_data_available_inbound_method_list_warehouse_list import ListAvailableInboundMethodsResponseDataAvailableInboundMethodListWarehouseList
+from .list_campaign_group_response import ListCampaignGroupResponse
+from .list_campaign_group_response_data import ListCampaignGroupResponseData
+from .list_campaign_group_response_data_campaign_group import ListCampaignGroupResponseDataCampaignGroup
+from .list_campaign_group_response_data_campaign_group_campaign_registration_summary import ListCampaignGroupResponseDataCampaignGroupCampaignRegistrationSummary
+from .list_campaign_group_response_data_campaign_group_campaign_registration_summary_registration_block_reason import ListCampaignGroupResponseDataCampaignGroupCampaignRegistrationSummaryRegistrationBlockReason
+from .list_campaign_response import ListCampaignResponse
+from .list_campaign_response_data import ListCampaignResponseData
 from .list_opportunities_request import ListOpportunitiesRequest
 from .list_opportunities_request_opportunity_type import ListOpportunitiesRequestOpportunityType
 from .list_opportunities_response import ListOpportunitiesResponse
@@ -1551,6 +1601,11 @@ from .list_product_skpp_statuses_response import ListProductSKPPStatusesResponse
 from .list_product_skpp_statuses_response_data import ListProductSKPPStatusesResponseData
 from .list_product_skpp_statuses_response_data_product import ListProductSKPPStatusesResponseDataProduct
 from .list_product_skpp_statuses_response_data_product_reward import ListProductSKPPStatusesResponseDataProductReward
+from .list_registered_campaign_response import ListRegisteredCampaignResponse
+from .list_registered_campaign_response_data import ListRegisteredCampaignResponseData
+from .list_registered_campaign_response_data_campaign import ListRegisteredCampaignResponseDataCampaign
+from .list_registered_campaign_response_data_campaign_bargain_statistic import ListRegisteredCampaignResponseDataCampaignBargainStatistic
+from .list_registered_campaign_response_data_campaign_registration_statistic import ListRegisteredCampaignResponseDataCampaignRegistrationStatistic
 from .listing_quality import ListingQuality
 from .live_attributed_gmv import LiveAttributedGmv
 from .live_auction_attributed_gmv import LiveAuctionAttributedGmv
@@ -1592,6 +1647,7 @@ from .new_message_webhook import NewMessageWebhook
 from .new_message_webhook_data import NewMessageWebhookData
 from .new_message_webhook_data_sender import NewMessageWebhookDataSender
 from .off_site_gmv import OffSiteGmv
+from .official_sales_period import OfficialSalesPeriod
 from .opportunity_matching_status_change_webhook import OpportunityMatchingStatusChangeWebhook
 from .opportunity_matching_status_change_webhook_data import OpportunityMatchingStatusChangeWebhookData
 from .optimize_images_request import OptimizeImagesRequest
@@ -1607,6 +1663,7 @@ from .order_line_list import OrderLineList
 from .order_status_change_webhook import OrderStatusChangeWebhook
 from .order_status_change_webhook_data import OrderStatusChangeWebhookData
 from .original_price import OriginalPrice
+from .other_rule import OtherRule
 from .package import Package
 from .package_dimension import PackageDimension
 from .package_update_webhook import PackageUpdateWebhook
@@ -1669,9 +1726,12 @@ from .partial_edit_responsible_person_response import PartialEditResponsiblePers
 from .partial_edit_responsible_person_response_data import PartialEditResponsiblePersonResponseData
 from .partial_refund import PartialRefund
 from .partial_refund_amount import PartialRefundAmount
+from .participation_relation import ParticipationRelation
 from .payment import Payment
+from .pending_registration_statistic import PendingRegistrationStatistic
 from .phone_number import PhoneNumber
 from .pickup_slot import PickupSlot
+from .policy import Policy
 from .post_shoppable_photos_request import PostShoppablePhotosRequest
 from .post_shoppable_photos_request_link_info import PostShoppablePhotosRequestLinkInfo
 from .post_shoppable_photos_request_link_info_link import PostShoppablePhotosRequestLinkInfoLink
@@ -1767,6 +1827,7 @@ from .query_target_collaboration_detail_response_data_target_collaboration_creat
 from .query_target_collaboration_detail_response_data_target_collaboration_free_sample_rule import QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule
 from .query_target_collaboration_detail_response_data_target_collaboration_product import QueryTargetCollaborationDetailResponseDataTargetCollaborationProduct
 from .query_target_collaboration_detail_response_data_target_collaboration_product_commission import QueryTargetCollaborationDetailResponseDataTargetCollaborationProductCommission
+from .reason import Reason
 from .recipient_address_update_webhook import RecipientAddressUpdateWebhook
 from .recipient_address_update_webhook_data import RecipientAddressUpdateWebhookData
 from .recommend_category_request import RecommendCategoryRequest
@@ -1805,6 +1866,10 @@ from .register_seller_partner_campaign_products_request import RegisterSellerPar
 from .register_seller_partner_campaign_products_request_campaign_contact_info import RegisterSellerPartnerCampaignProductsRequestCampaignContactInfo
 from .register_seller_partner_campaign_products_response import RegisterSellerPartnerCampaignProductsResponse
 from .register_seller_partner_campaign_products_response_data import RegisterSellerPartnerCampaignProductsResponseData
+from .registration_availability import RegistrationAvailability
+from .registration_block_reason import RegistrationBlockReason
+from .registration_period import RegistrationPeriod
+from .registration_summary import RegistrationSummary
 from .reject_cancellation_request import RejectCancellationRequest
 from .reject_cancellation_request_image import RejectCancellationRequestImage
 from .reject_cancellation_response import RejectCancellationResponse
@@ -1813,6 +1878,7 @@ from .reject_return_request import RejectReturnRequest
 from .reject_return_request_decision import RejectReturnRequestDecision
 from .reject_return_response import RejectReturnResponse
 from .reject_return_response_data import RejectReturnResponseData
+from .relation import Relation
 from .remove_creator_from_open_collaboration_product_request import RemoveCreatorFromOpenCollaborationProductRequest
 from .remove_creator_from_open_collaboration_product_response import RemoveCreatorFromOpenCollaborationProductResponse
 from .remove_creator_from_open_collaboration_product_response_data import RemoveCreatorFromOpenCollaborationProductResponseData
@@ -1850,6 +1916,7 @@ from .resolve_target_collaboration_conflicts_response import ResolveTargetCollab
 from .resolve_target_collaboration_conflicts_response_data import ResolveTargetCollaborationConflictsResponseData
 from .resolve_target_collaboration_conflicts_response_data_failed_item import ResolveTargetCollaborationConflictsResponseDataFailedItem
 from .resolve_target_collaboration_conflicts_response_data_success_item import ResolveTargetCollaborationConflictsResponseDataSuccessItem
+from .resource import Resource
 from .return_line_item import ReturnLineItem
 from .return_status_change_webhook import ReturnStatusChangeWebhook
 from .return_status_change_webhook_data import ReturnStatusChangeWebhookData
@@ -2241,6 +2308,9 @@ from .shipping_fee import ShippingFee
 from .shipping_info_list import ShippingInfoList
 from .shipping_provider import ShippingProvider
 from .shop import Shop
+from .shop_eligibility import ShopEligibility
+from .shop_requirement import ShopRequirement
+from .shop_rule import ShopRule
 from .shoppable_content_posting_webhook import ShoppableContentPostingWebhook
 from .shoppable_content_posting_webhook_data import ShoppableContentPostingWebhookData
 from .shoppable_content_posting_webhook_data_event import ShoppableContentPostingWebhookDataEvent
@@ -2498,6 +2568,7 @@ from .warning import Warning_
 from .weight import Weight
 
 __all__ = (
+    "AccountRequirement",
     "ActivateProductsRequest",
     "ActivateProductsRequestListingPlatformsItem",
     "ActivateProductsResponse",
@@ -2536,6 +2607,7 @@ __all__ = (
     "AftersalesRequestStatusUpdateWebhook",
     "AftersalesRequestStatusUpdateWebhookData",
     "AgeDistribution",
+    "Agreement",
     "Aov",
     "AppealCompletedWebhook",
     "AppealCompletedWebhookData",
@@ -2568,6 +2640,7 @@ __all__ = (
     "BatteryExtraInfo",
     "BatteryExtraInfoBatteryPackagingType",
     "Benchmark",
+    "Benefit",
     "BoxMeasurement",
     "BoxMeasurementLengthUnit",
     "BoxMeasurementWeightUnit",
@@ -2579,6 +2652,9 @@ __all__ = (
     "CalculateRefundResponse",
     "CalculateRefundResponseData",
     "CalculateRefundResponseDataOrderRefundAmount",
+    "Campaign",
+    "CampaignGroup",
+    "CampaignPeriod",
     "CancelFBTMCFOrderRequest",
     "CancelFBTMCFOrderRequestConsignOrder",
     "CancelFBTMCFOrderResponse",
@@ -2916,6 +2992,7 @@ __all__ = (
     "EditSizeChartV2Request",
     "EditSizeChartV2Response",
     "EditSizeChartV2ResponseData",
+    "EffectivePeriod",
     "EndSessionRequest",
     "EndSessionResponse",
     "EndSessionResponseData",
@@ -3107,6 +3184,9 @@ __all__ = (
     "GetBrandsResponse",
     "GetBrandsResponseData",
     "GetBrandsResponseDataBrand",
+    "GetCampaignGroupResponse",
+    "GetCampaignGroupResponseData",
+    "GetCampaignGroupResponseDataCampaignGroup",
     "GetCampaignProductPerformanceListResponse",
     "GetCampaignProductPerformanceListResponseData",
     "GetCampaignProductPerformanceListResponseDataCampaignProductStatistic",
@@ -3366,6 +3446,13 @@ __all__ = (
     "GetLiveRoomViewTrendsResponse",
     "GetLiveRoomViewTrendsResponseData",
     "GetLiveRoomViewTrendsResponseDataViewTrendPerformance",
+    "GetLivestreamCampaignResponse",
+    "GetLivestreamCampaignResponseData",
+    "GetLivestreamCampaignResponseDataLivestreamCampaign",
+    "GetLivestreamCampaignResponseDataLivestreamCampaignParticipationRequirement",
+    "GetLivestreamCampaignResponseDataLivestreamCampaignSessionStatistic",
+    "GetLivestreamCampaignResponseDataLivestreamCampaignSuperLivestream",
+    "GetLivestreamCampaignResponseDataLivestreamCampaignSuperLivestreamTargetGmvThreshold",
     "GetLogisticsTrackingResponse",
     "GetLogisticsTrackingResponseData",
     "GetLogisticsTrackingResponseDataLogisticsDetail",
@@ -3513,6 +3600,18 @@ __all__ = (
     "GetPODCustomizationDetailsResponse",
     "GetPODCustomizationDetailsResponseData",
     "GetPODCustomizationDetailsResponseDataPodDetail",
+    "GetProductCampaignResponse",
+    "GetProductCampaignResponseData",
+    "GetProductCampaignResponseDataProductCampaign",
+    "GetProductCampaignResponseDataProductCampaignFee",
+    "GetProductCampaignResponseDataProductCampaignLinkedCampaign",
+    "GetProductCampaignResponseDataProductCampaignParticipationRule",
+    "GetProductCampaignResponseDataProductCampaignParticipationRuleCampaignRule",
+    "GetProductCampaignResponseDataProductCampaignParticipationRuleProductRule",
+    "GetProductCampaignResponseDataProductCampaignRegistrationLimit",
+    "GetProductCampaignResponseDataProductCampaignRegistrationPeriod",
+    "GetProductCampaignResponseDataProductCampaignShopParticipation",
+    "GetProductCampaignResponseDataProductCampaignShopParticipationRegistrationStatistic",
     "GetProductDiagnosesResponse",
     "GetProductDiagnosesResponseData",
     "GetProductDiagnosesResponseDataProduct",
@@ -3600,6 +3699,8 @@ __all__ = (
     "GetRecommendedProductTitleAndDescriptionResponseDataProduct",
     "GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestion",
     "GetRecommendedProductTitleAndDescriptionResponseDataProductSuggestionItem",
+    "GetRegisteredCampaignCountsResponse",
+    "GetRegisteredCampaignCountsResponseData",
     "GetRejectReasonsResponse",
     "GetRejectReasonsResponseData",
     "GetRejectReasonsResponseDataReason",
@@ -3643,6 +3744,12 @@ __all__ = (
     "GetShippingTemplateAvailabilityResponseDataTemplateServiceUnreachableReason",
     "GetShippingTemplateAvailabilityResponseDataTemplateServiceUnreachableReasonFilterReason",
     "GetShippingTemplateAvailabilityResponseDataTemplateTemplate",
+    "GetShopCampaignResponse",
+    "GetShopCampaignResponseData",
+    "GetShopCampaignResponseDataShopCampaign",
+    "GetShopCampaignResponseDataShopCampaignParticipationRule",
+    "GetShopCampaignResponseDataShopCampaignShopParticipation",
+    "GetShopCampaignResponseDataShopCampaignShopParticipationRegistrationStatistic",
     "GetShopGroupAndRelatedShopsResponse",
     "GetShopGroupAndRelatedShopsResponseData",
     "GetShopGroupAndRelatedShopsResponseDataShopGroupData",
@@ -3848,6 +3955,11 @@ __all__ = (
     "GetShopWebhooksResponse",
     "GetShopWebhooksResponseData",
     "GetShopWebhooksResponseDataWebhook",
+    "GetShortVideoCampaignResponse",
+    "GetShortVideoCampaignResponseData",
+    "GetShortVideoCampaignResponseDataShortVideoCampaign",
+    "GetShortVideoCampaignResponseDataShortVideoCampaignParticipationRequirement",
+    "GetShortVideoCampaignResponseDataShortVideoCampaignRegistrationStatistic",
     "GetShowcaseProductsResponse",
     "GetShowcaseProductsResponseData",
     "GetShowcaseProductsResponseDataProduct",
@@ -4028,6 +4140,7 @@ __all__ = (
     "Item",
     "ItemTax",
     "LineItem",
+    "LinkedCampaignGroup",
     "LinkedProduct",
     "ListAvailableInboundMethodsRequest",
     "ListAvailableInboundMethodsResponse",
@@ -4036,6 +4149,13 @@ __all__ = (
     "ListAvailableInboundMethodsResponseDataAvailableInboundMethodListAvailableTimeWindowList",
     "ListAvailableInboundMethodsResponseDataAvailableInboundMethodListPlacementFeeEstimate",
     "ListAvailableInboundMethodsResponseDataAvailableInboundMethodListWarehouseList",
+    "ListCampaignGroupResponse",
+    "ListCampaignGroupResponseData",
+    "ListCampaignGroupResponseDataCampaignGroup",
+    "ListCampaignGroupResponseDataCampaignGroupCampaignRegistrationSummary",
+    "ListCampaignGroupResponseDataCampaignGroupCampaignRegistrationSummaryRegistrationBlockReason",
+    "ListCampaignResponse",
+    "ListCampaignResponseData",
     "ListingQuality",
     "ListOpportunitiesRequest",
     "ListOpportunitiesRequestOpportunityType",
@@ -4050,6 +4170,11 @@ __all__ = (
     "ListProductSKPPStatusesResponseData",
     "ListProductSKPPStatusesResponseDataProduct",
     "ListProductSKPPStatusesResponseDataProductReward",
+    "ListRegisteredCampaignResponse",
+    "ListRegisteredCampaignResponseData",
+    "ListRegisteredCampaignResponseDataCampaign",
+    "ListRegisteredCampaignResponseDataCampaignBargainStatistic",
+    "ListRegisteredCampaignResponseDataCampaignRegistrationStatistic",
     "LiveAttributedGmv",
     "LiveAuctionAttributedGmv",
     "LiveGmv",
@@ -4089,6 +4214,7 @@ __all__ = (
     "NewMessageWebhook",
     "NewMessageWebhookData",
     "NewMessageWebhookDataSender",
+    "OfficialSalesPeriod",
     "OffSiteGmv",
     "OpportunityMatchingStatusChangeWebhook",
     "OpportunityMatchingStatusChangeWebhookData",
@@ -4105,6 +4231,7 @@ __all__ = (
     "OrderStatusChangeWebhook",
     "OrderStatusChangeWebhookData",
     "OriginalPrice",
+    "OtherRule",
     "Package",
     "PackageDimension",
     "PackageUpdateWebhook",
@@ -4167,9 +4294,12 @@ __all__ = (
     "PartialEditResponsiblePersonResponseData",
     "PartialRefund",
     "PartialRefundAmount",
+    "ParticipationRelation",
     "Payment",
+    "PendingRegistrationStatistic",
     "PhoneNumber",
     "PickupSlot",
+    "Policy",
     "PostShoppablePhotosRequest",
     "PostShoppablePhotosRequestLinkInfo",
     "PostShoppablePhotosRequestLinkInfoLink",
@@ -4265,6 +4395,7 @@ __all__ = (
     "QueryTargetCollaborationDetailResponseDataTargetCollaborationFreeSampleRule",
     "QueryTargetCollaborationDetailResponseDataTargetCollaborationProduct",
     "QueryTargetCollaborationDetailResponseDataTargetCollaborationProductCommission",
+    "Reason",
     "RecipientAddressUpdateWebhook",
     "RecipientAddressUpdateWebhookData",
     "RecommendCategoryRequest",
@@ -4303,6 +4434,10 @@ __all__ = (
     "RegisterSellerPartnerCampaignProductsRequestCampaignContactInfo",
     "RegisterSellerPartnerCampaignProductsResponse",
     "RegisterSellerPartnerCampaignProductsResponseData",
+    "RegistrationAvailability",
+    "RegistrationBlockReason",
+    "RegistrationPeriod",
+    "RegistrationSummary",
     "RejectCancellationRequest",
     "RejectCancellationRequestImage",
     "RejectCancellationResponse",
@@ -4311,6 +4446,7 @@ __all__ = (
     "RejectReturnRequestDecision",
     "RejectReturnResponse",
     "RejectReturnResponseData",
+    "Relation",
     "RemoveCreatorFromOpenCollaborationProductRequest",
     "RemoveCreatorFromOpenCollaborationProductResponse",
     "RemoveCreatorFromOpenCollaborationProductResponseData",
@@ -4348,6 +4484,7 @@ __all__ = (
     "ResolveTargetCollaborationConflictsResponseData",
     "ResolveTargetCollaborationConflictsResponseDataFailedItem",
     "ResolveTargetCollaborationConflictsResponseDataSuccessItem",
+    "Resource",
     "ReturnLineItem",
     "ReturnStatusChangeWebhook",
     "ReturnStatusChangeWebhookData",
@@ -4739,6 +4876,7 @@ __all__ = (
     "ShippingInfoList",
     "ShippingProvider",
     "Shop",
+    "ShopEligibility",
     "ShoppableContentPostingWebhook",
     "ShoppableContentPostingWebhookData",
     "ShoppableContentPostingWebhookDataEvent",
@@ -4748,6 +4886,8 @@ __all__ = (
     "ShoppableVideoPrecheckTasksResultWebhookDataGoodQualityCheckResultIssue",
     "ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResult",
     "ShoppableVideoPrecheckTasksResultWebhookDataViolationCheckResultIssue",
+    "ShopRequirement",
+    "ShopRule",
     "ShowGpm",
     "SiocAttribute",
     "SiocFile",

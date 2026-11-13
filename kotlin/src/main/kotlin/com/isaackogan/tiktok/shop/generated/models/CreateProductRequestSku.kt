@@ -43,7 +43,7 @@ import com.google.gson.annotations.SerializedName
  * @param inventory SKU inventory information.
  * @param price SKU pricing information.
  * @param salesAttributes A list of attributes  (e.g. size, color, length) that define each variant of a product.  **Note**:  - You can omit this object if there is only 1 SKU. Otherwise, this is **required**. - You can only have up to 3 types of sales attributes per product. - Each SKU must include the same number and type of sales attributes. For example, you cannot have one SKU that has only a Color attribute, while another SKU has both Color and Size attributes. - Provide either a built-in ID or a custom name; if both are provided, the ID takes priority. - The `id/name` and `value_id/value_name` pairs must be unique in each SKU. For example, you cannot repeat `\"name\": \"Color\"`, `\"value_name\": \"Red\"` in different SKUs.
- * @param sellerSku An internal code/name for managing SKUs, not visible to buyers.   Valid length:  - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: 6-50 characters - Other regions: 1-50 characters Format:  - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: Use alphabets, numbers, hyphens (-), or underscores (_) only - Other regions: Text without spaces
+ * @param sellerSku An internal code/name for managing SKUs, not visible to buyers. Valid length: - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: 6-70 characters - Other regions: 1-50 characters Format: - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: Use letters, numbers, spaces, and these symbols only: . - _ @ # & * + / ( ) - Other regions: Text without spaces
  * @param externalSkuId An external identifier used in an external ecommerce platform. This is used to associate the SKU between TikTok Shop and the external ecommerce platform.  Max length: 999 characters
  * @param identifierCode A regulated identifier code assigned to a product based on international standardized regulations (e.g. GTIN) to ensure the product is universally identifiable across various platforms and systems.  **IMPORTANT**: This object and its values can only be modified when the product is in DRAFT status. Once submitted for review, changes are not allowed. Please define the values carefully.
  * @param combinedSkus If this SKU belongs to a virtual bundle, this object contains the list of individual SKUs that form the bundle (e.g. gift basket, starter pack).
@@ -73,7 +73,7 @@ data class CreateProductRequestSku (
     @SerializedName("sales_attributes")
     val salesAttributes: kotlin.collections.List<CreateProductRequestSkuSalesAttribute>? = null,
 
-    /* An internal code/name for managing SKUs, not visible to buyers.   Valid length:  - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: 6-50 characters - Other regions: 1-50 characters Format:  - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: Use alphabets, numbers, hyphens (-), or underscores (_) only - Other regions: Text without spaces */
+    /* An internal code/name for managing SKUs, not visible to buyers. Valid length: - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: 6-70 characters - Other regions: 1-50 characters Format: - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: Use letters, numbers, spaces, and these symbols only: . - _ @ # & * + / ( ) - Other regions: Text without spaces */
     @SerializedName("seller_sku")
     val sellerSku: kotlin.String? = null,
 
