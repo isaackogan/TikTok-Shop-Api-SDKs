@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: TikTok Shop Partner API
-  version: 2026.11.11
+  version: 2026.11.13
   description: Generated from the TikTok Shop Partner Center documentation (https://partner.tiktokshop.com/docv2). Do not edit by hand.
 externalDocs:
   url: https://partner.tiktokshop.com/docv2
@@ -4346,6 +4346,7 @@ paths:
               free_sample_rule:
                 has_free_sample: true
                 is_sample_approval_exempt: true
+                use_product_sample_setting: false
               preferred_content_type: LIVE
               sample_fulfillment_content_type: SHOPPABLE_LIVE
       responses:
@@ -4463,6 +4464,7 @@ paths:
                       free_sample_rule:
                         has_free_sample: true
                         is_sample_approval_exempt: true
+                        use_product_sample_setting: false
                       type: STANDARD
                 message: Success
                 request_id: 202203070749000101890810281E8C70B7
@@ -4517,6 +4519,7 @@ paths:
                     free_sample_rule:
                       has_free_sample: true
                       is_sample_approval_exempt: true
+                      use_product_sample_setting: false
                     products:
                       - id: "789078671231312312"
                         main_image_url: https://p16-sign-useast2a.tiktokcdn.com/tos-useast2a/12345~c5_168x168.webp?lk3s=a5d48078&nonce=49646&refresh_token=b53364a3a1947c4ac7a0c4bea62e31ea&x-expires=1727175600&x-signature=ASPIxFDNDkN1cknLEItlyC%2Bcfbw%3D&shp=a5d48078&shcp=39dffb78
@@ -4598,6 +4601,7 @@ paths:
               free_sample_rule:
                 has_free_sample: true
                 is_sample_approval_exempt: true
+                use_product_sample_setting: false
       responses:
         "200":
           description: Success
@@ -28405,6 +28409,780 @@ paths:
         - code: "17003243"
           message: This activity don't allow republishing
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/republish-activity-202607
+  /promotion/202611/campaign_groups:
+    get:
+      operationId: listCampaignGroup
+      summary: List Campaign Group
+      description: |-
+        List campaign groups visible to the shop. NORMAL groups return campaigns summaries, while LONG_TERM groups return linked_campaign_groups. These two fields are mutually exclusive and are both omitted for an unknown type. Campaign summaries within a group are not paginated separately. An empty summary list does not guarantee that the group contains no campaigns.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.
+
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform's standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign's localization rules and may contain rich text; HTML sanitization is not guaranteed. Unavailable text is omitted rather than replaced with a placeholder name.
+
+        Uses the seller-facing campaign group filters and ordering. In the standard flow, priority is given to pinned groups, long-term campaigns, registration availability, featured campaigns, campaign level, and start time. The pending-confirmation filter prioritizes the most recent join time. EU aggregation prioritizes long-term campaigns, followed by pending-confirmation time, registration availability, featured campaigns, campaign level, and start time. Custom sorting is not supported. Ties retain source order; stable ID ordering is not guaranteed. This query does not mark campaigns as visited or update the visit record used by the seller interface to identify new campaigns.
+
+        For the first page, omit page_token or pass an empty string. For subsequent pages, pass next_page_token unchanged and keep the authorized shop, filters, and page_size unchanged. An empty next_page_token means there are no further pages within the current query scope; it does not guarantee that all historical campaigns or campaigns accessible across shops have been retrieved. An empty page is not necessarily the last page. Do not stop pagination based on the number of returned items.
+      tags:
+        - Promotion
+      parameters:
+        - $ref: "#/components/parameters/ShopCipher"
+        - name: page_token
+          in: query
+          required: false
+          description: Opaque pagination token. Omit it or pass an empty string for the first page. For subsequent pages, return next_page_token unchanged. Do not construct, parse, or modify it.
+          schema:
+            type: string
+        - name: page_size
+          in: query
+          required: false
+          description: "Page size. Defaults to 20; allowed range: 1 to 100."
+          schema:
+            type: integer
+            format: int64
+        - name: campaign_name
+          in: query
+          required: false
+          description: Search by campaign group name or the name of a campaign within the group. If omitted or empty, no name filter is applied.
+          schema:
+            type: string
+        - name: is_invited
+          in: query
+          required: false
+          description: When true, returns only campaigns to which the shop is invited. false or omission does not filter by invitation status. Mutually exclusive with only_pending_registrations=true.
+          schema:
+            type: boolean
+        - name: only_pending_registrations
+          in: query
+          required: false
+          description: When true, returns only campaigns with registrations awaiting seller confirmation. false or omission does not add this filter. Mutually exclusive with is_invited=true. This does not mean pending review.
+          schema:
+            type: boolean
+        - name: list_scope
+          in: query
+          required: false
+          description: Registration status filter. Accepts UNSPECIFIED, REGISTERED, or UNREGISTERED. If omitted or UNSPECIFIED, no registration status filter is applied.
+          schema:
+            type: string
+        - name: registration_regions
+          in: query
+          required: false
+          description: Registration region filter for EU cross-shop access. Omission or an empty list uses the default scope. Has no effect outside the EU flow and does not extend shop authorization. Region codes follow [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#search/code/); EU is also supported as an aggregate campaign region. A listed code does not guarantee campaign availability or extend authorization. Use one query key with comma-separated values; omit the parameter for an empty list.
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: locale
+          in: query
+          required: false
+          description: BCP-47 language tag. Defaults to en-US. If text is unavailable in the requested language, the campaign's default text is used; en-GB returns English text.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListCampaignGroupResponse"
+              example:
+                code: 0
+                data:
+                  campaign_groups:
+                    - campaign_count: 1
+                      campaign_status: ONGOING
+                      campaigns:
+                        - campaign_status: ACTIVE
+                          id: "7172491435265050374"
+                          region: US
+                          registration_mode: STANDARD
+                          title: Year-End Product Campaign
+                          type: PRODUCT
+                      id: "7172491435265050300"
+                      title: Year-End Sale Campaign Group
+                      type: NORMAL
+                  next_page_token: ""
+                  total_count: 1
+                message: Success
+                request_id: 202611090749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes: []
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/list-campaign-group-202611
+  /promotion/202611/campaign_groups/{campaign_group_id}:
+    get:
+      operationId: getCampaignGroup
+      summary: Get Campaign Group
+      description: |-
+        Get a campaign group's basic information, campaign period, sales period, and linked campaign groups. If the query succeeds without an available result, campaign_group is omitted and data is empty; no invalid ID is generated. Use ListCampaign to paginate and filter campaigns within the group.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.
+
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform's standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign's localization rules and may contain rich text; HTML sanitization is not guaranteed. Unavailable text is omitted rather than replaced with a placeholder name.
+      tags:
+        - Promotion
+      parameters:
+        - name: campaign_group_id
+          in: path
+          required: true
+          description: Required positive campaign group ID, obtainable from ListCampaignGroup. Do not use an individual campaign ID. A decimal string from 1 to 9223372036854775807.
+          schema:
+            type: string
+        - $ref: "#/components/parameters/ShopCipher"
+        - name: locale
+          in: query
+          required: false
+          description: BCP-47 language tag. Defaults to en-US. If text is unavailable in the requested language, the campaign's default text is used; en-GB returns English text.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetCampaignGroupResponse"
+              example:
+                code: 0
+                data:
+                  campaign_group:
+                    campaign_period:
+                      end_time: 2026-12-01T00:00:00.000Z
+                      start_time: 2026-11-01T00:00:00.000Z
+                    campaign_status: ONGOING
+                    id: "7172491435265050300"
+                    title: Year-End Sale Campaign Group
+                    type: NORMAL
+                message: Success
+                request_id: 202611090749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes: []
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-campaign-group-202611
+  /promotion/202611/campaigns:
+    get:
+      operationId: listCampaign
+      summary: List Campaign
+      description: |-
+        List unified Campaign summaries visible to the shop within a specified campaign group. campaign_group_id is a required query parameter. Supports product, shop, livestream, and short video campaigns without expanding their full details.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.
+
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform's standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign's localization rules and may contain rich text; HTML sanitization is not guaranteed. Unavailable text is omitted rather than replaced with a placeholder name.
+
+        For a single-shop query, the default order prioritizes campaigns available for registration when that assessment is present for both campaigns, followed by pinned campaigns, the most recent pending-confirmation time descending, invited campaigns, and creation time descending. With only_pending_registrations=true, the most recent pending-confirmation time takes precedence over those default priorities. After page selection, any applicable campaign-group display priority orders configured campaigns first in their configured sequence; other items retain their relative order. Equal priorities retain source order; stable ID ordering is not guaranteed. EU cross-shop queries apply the query order separately to each shop, then merge results and apply the display priority within the returned page; no global ordering across shops is guaranteed. Custom sorting is not supported. No additional sorting, deduplication, or truncation is applied by this API. List-level eligibility is not the full detail-level assessment; use type to select the detail endpoint. EU cross-shop aggregation may return more items than page_size. total_count is not guaranteed to be an exact deduplicated total across all accessible shops, and complete traversal of that scope is not guaranteed even when the data remains unchanged.
+
+        For the first page, omit page_token or pass an empty string. For subsequent pages, pass next_page_token unchanged and keep the authorized shop, filters, and page_size unchanged. An empty next_page_token means there are no further pages within the current query scope; it does not guarantee that all historical campaigns or campaigns accessible across shops have been retrieved. An empty page is not necessarily the last page. Do not stop pagination based on the number of returned items.
+      tags:
+        - Promotion
+      parameters:
+        - $ref: "#/components/parameters/ShopCipher"
+        - name: campaign_group_id
+          in: query
+          required: true
+          description: Required positive campaign group ID. Limits the query to this group. A decimal string from 1 to 9223372036854775807.
+          schema:
+            type: string
+        - name: page_token
+          in: query
+          required: false
+          description: Opaque pagination token. Omit it or pass an empty string for the first page. For subsequent pages, return next_page_token unchanged. Do not construct, parse, or modify it.
+          schema:
+            type: string
+        - name: page_size
+          in: query
+          required: false
+          description: "Page size. Defaults to 20; allowed range: 1 to 100."
+          schema:
+            type: integer
+            format: int64
+        - name: eligibility_filter
+          in: query
+          required: false
+          description: List eligibility filter mode. Omission or ALL adds no eligibility filter; the campaign group, authorized visibility scope, and other filters still apply. ELIGIBLE retains campaigns that pass list-level eligibility checks and campaigns blocked because the shop has not registered for a designated prerequisite shop campaign. Those prerequisite-blocked results can have is_eligible=false. Neither mode guarantees detail-level eligibility or current registration availability. Can be combined with only_pending_registrations; both filters apply. Unknown values return a parameter error. Reverse eligibility filtering is not supported.
+          schema:
+            type: string
+        - name: only_pending_registrations
+          in: query
+          required: false
+          description: When true, returns only campaigns with registrations awaiting seller confirmation. false or omission does not add this filter. Does not mean pending review. Can be combined with eligibility_filter; both filters apply.
+          schema:
+            type: boolean
+        - name: types
+          in: query
+          required: false
+          description: Campaign type filter supporting product, shop, livestream, and short video campaigns. Omission or an empty list applies no type filter. Unknown values return a parameter error. Use one query key with comma-separated values; omit the parameter for an empty list.
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: locale
+          in: query
+          required: false
+          description: BCP-47 language tag. Defaults to en-US. If text is unavailable in the requested language, the campaign's default text is used; en-GB returns English text.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListCampaignResponse"
+              example:
+                code: 0
+                data:
+                  campaigns:
+                    - campaign_status: ACTIVE
+                      id: "7172491435265050374"
+                      region: US
+                      registration_mode: STANDARD
+                      title: Year-End Product Campaign
+                      type: PRODUCT
+                  next_page_token: ""
+                  total_count: 1
+                message: Success
+                request_id: 202611090749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes: []
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/list-campaign-202611
+  /promotion/202611/livestream_campaigns/{livestream_campaign_id}:
+    get:
+      operationId: getLivestreamCampaign
+      summary: Get Livestream Campaign
+      description: |-
+        Get details of a featured livestream or livestream competition, including times, participation requirements, benefits, agreement requirements, and the shop's registered session statistics. super_livestream applies only to featured livestreams. Successful queries return the campaign details. A campaign that does not exist, is not visible or applicable to the shop, or has a different supported type returns a resource-unavailable error.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.
+
+        Missing or inconsistent data required to identify or return the campaign results in a system error, not a resource-unavailable error. Missing optional information only omits the corresponding fields. An existing campaign that the shop cannot register for is still returned with its eligibility or blocking reasons.
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform's standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign's localization rules. The campaign description field returns sanitized HTML, with scripts, event-handler attributes, and unsafe URLs removed. This guarantee applies only to the campaign description, not to other text fields or nested descriptions. Treat other text as text, not trusted HTML. Unavailable text is omitted rather than replaced with a placeholder name.
+
+        The requested campaign type must match the endpoint; otherwise a resource-unavailable error is returned. Only campaign-level information is exposed, without account lists, individual content, registration records, or session details. Participation requirements, benefits, and blocking reasons describe a single campaign's configuration and are not paginated or silently truncated. registration_status independently represents the registration stage and does not establish the shop's eligibility or existing registration.
+      tags:
+        - Promotion
+      parameters:
+        - name: livestream_campaign_id
+          in: path
+          required: true
+          description: Required positive livestream campaign ID, obtainable from ListCampaign or ListRegisteredCampaign entries with type=LIVESTREAM. Not a session ID, livestream room ID, or video ID. A decimal string from 1 to 9223372036854775807.
+          schema:
+            type: string
+        - $ref: "#/components/parameters/ShopCipher"
+        - name: locale
+          in: query
+          required: false
+          description: BCP-47 language tag. Defaults to en-US; maximum 64 characters. en-GB uses English text.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetLivestreamCampaignResponse"
+              example:
+                code: 0
+                data:
+                  livestream_campaign:
+                    campaign_group_id: "7172491435265050300"
+                    campaign_status: ACTIVE
+                    description: <p>Campaign introduction.</p><p>Campaign calendar</p><img src="https://example.com/campaign/calendar.png" alt="Campaign calendar">
+                    id: "7172491435265050374"
+                    region: US
+                    registration_status: OPEN
+                    registration_summary:
+                      is_eligible: true
+                      registration_block_reasons: []
+                    session_statistics:
+                      approved_count: 2
+                      total_count: 3
+                      under_review_count: 1
+                    subtype: KEY_LIVESTREAM
+                    title: Featured Livestream Campaign
+                    type: LIVESTREAM
+                message: Success
+                request_id: 202611090749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes: []
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-livestream-campaign-202611
+  /promotion/202611/product_campaigns/{product_campaign_id}:
+    get:
+      operationId: getProductCampaign
+      summary: Get Product Campaign
+      description: |-
+        Get a product campaign's basic information, registration period, participation rules, benefits and fees, shop eligibility, product registration quota, and participation statistics. registration_mode distinguishes STANDARD from ROLLING. linked_campaigns applies only to ROLLING; a link does not establish existing registration, synchronization, or eligibility.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.
+
+        Missing or inconsistent data required to identify or return the campaign results in a system error, not a resource-unavailable error. Missing optional information only omits the corresponding fields. An existing campaign that the shop cannot register for is still returned with its eligibility or blocking reasons.
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform's standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign's localization rules. The campaign description field returns sanitized HTML, with scripts, event-handler attributes, and unsafe URLs removed. This guarantee applies only to the campaign description, not to other text fields or nested descriptions. Treat other text as text, not trusted HTML. Unavailable text is omitted rather than replaced with a placeholder name.
+
+        A type mismatch, nonexistent or invisible campaign, or inapplicable region returns a resource-unavailable error rather than a successful empty result. Unknown eligibility or registration availability alone does not fail the query. registration_period.status is determined only from query_time and registration boundaries, not campaign_status. The registration interval includes its end time; campaign and fee validity intervals exclude their end times. Rules, benefits, and fee policies are the complete applicable configuration of a single campaign, not product or registration record lists, and are neither paginated nor truncated. Fee text and resources jointly express the terms; omission does not mean free participation.
+      tags:
+        - Promotion
+      parameters:
+        - name: product_campaign_id
+          in: path
+          required: true
+          description: Required positive product campaign ID, obtainable from ListCampaign or ListRegisteredCampaign entries with type=PRODUCT. A campaign type mismatch returns a resource-unavailable error. A decimal string from 1 to 9223372036854775807.
+          schema:
+            type: string
+        - $ref: "#/components/parameters/ShopCipher"
+        - name: locale
+          in: query
+          required: false
+          description: BCP-47 language tag. Defaults to en-US. If text is unavailable in the requested language, the campaign's default text is used without changing statuses or reason codes.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetProductCampaignResponse"
+              example:
+                code: 0
+                data:
+                  product_campaign:
+                    benefits:
+                      - description: Products meeting the campaign rules may receive campaign placement opportunities. Traffic or sales are not guaranteed.
+                        title: Campaign Placement Benefits
+                    campaign_group:
+                      id: "7172491435265050300"
+                      title: Year-End Sale Campaign Group
+                    campaign_period:
+                      end_time: 2026-12-01T00:00:00.000Z
+                      start_time: 2026-11-01T00:00:00.000Z
+                    campaign_status: ACTIVE
+                    description: <p>Campaign introduction.</p><p>Campaign calendar</p><img src="https://example.com/campaign/calendar.png" alt="Campaign calendar">
+                    fees:
+                      description: Confirm the applicable fee terms when registering.
+                      policies:
+                        - description: Charges follow the approved campaign fee plan. The actual amount is determined by the bill.
+                          resources:
+                            - title: Fee Details
+                              type: LINK
+                              url: https://example.com/campaign/fee-terms
+                          title: Campaign Service Fee
+                    id: "7172491435265050374"
+                    linked_campaigns:
+                      - campaign_period:
+                          end_time: 2026-12-01T00:00:00.000Z
+                          start_time: 2026-11-01T00:00:00.000Z
+                        id: "7172491435265050500"
+                        title: Linked Product Campaign
+                        type: PRODUCT
+                    participation_rules:
+                      campaign_rules: []
+                      other_rules: []
+                      product_rules: []
+                      shop_rules: []
+                    region: US
+                    registration_availability:
+                      can_register: true
+                      reasons: []
+                    registration_limit:
+                      has_limit: true
+                      is_limit_reached: false
+                      limit_count: 100
+                      remaining_count: 80
+                      used_count: 20
+                    registration_mode: ROLLING
+                    registration_period:
+                      end_time: 2026-11-20T23:59:59.000Z
+                      start_time: 2026-10-20T00:00:00.000Z
+                      status: OPEN
+                    shop_eligibility:
+                      is_eligible: true
+                      reasons: []
+                    shop_participation:
+                      has_joined: true
+                      registration_statistics:
+                        approved_count: 18
+                        registered_count: 20
+                        under_review_count: 2
+                      relation:
+                        method: DIRECT
+                    subtypes:
+                      - GENERAL_PRODUCT
+                    title: Year-End Product Campaign
+                    type: PRODUCT
+                  query_time: 2026-11-09T00:00:00.000Z
+                message: Success
+                request_id: 202611090749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes: []
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-product-campaign-202611
+  /promotion/202611/registered_campaigns:
+    get:
+      operationId: listRegisteredCampaign
+      summary: List Registered Campaign
+      description: |-
+        List the shop's registered campaign summaries, with registration statistics and product negotiation statistics where applicable to the campaign type. A registration relationship does not guarantee approval or effective benefits. This release does not expose filters for registration source, automatic enrollment-specific scenarios, or subtypes.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.
+
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform's standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign's localization rules and may contain rich text; HTML sanitization is not guaranteed. Unavailable text is omitted rather than replaced with a placeholder name.
+
+        The default order places ACTIVE campaigns first, then orders campaigns within each status-priority group by registration end time descending. Equal registration end times retain source order; stable ID ordering is not guaranteed. The same ordering applies to single-shop queries and the combined EU shop scope before pagination. ACTIVE uses the campaign lifecycle definition, not only the event execution period. Unknown types or statuses are not additionally removed by this API. Different filters are combined with AND; values within each filter array use OR. Custom sorting is not supported. Results contain registered campaigns within the current query scope and may not cover all historical registrations. A page may contain more items than page_size.
+
+        For the first page, omit page_token or pass an empty string. For subsequent pages, pass next_page_token unchanged and keep the authorized shop, filters, and page_size unchanged. An empty next_page_token means there are no further pages within the current query scope; it does not guarantee that all historical campaigns or campaigns accessible across shops have been retrieved. An empty page is not necessarily the last page. Do not stop pagination based on the number of returned items.
+      tags:
+        - Promotion
+      parameters:
+        - $ref: "#/components/parameters/ShopCipher"
+        - name: page_token
+          in: query
+          required: false
+          description: Opaque pagination token. Omit it or pass an empty string for the first page. For subsequent pages, return next_page_token unchanged. Do not construct, parse, or modify it.
+          schema:
+            type: string
+        - name: page_size
+          in: query
+          required: false
+          description: "Page size. Defaults to 20; allowed range: 1 to 100."
+          schema:
+            type: integer
+            format: int64
+        - name: campaign_name
+          in: query
+          required: false
+          description: Substring match against the campaign's default or localized names. Omission or an empty value applies no name filter.
+          schema:
+            type: string
+        - name: types
+          in: query
+          required: false
+          description: Filter across the four campaign types, with OR between values. Omission or an empty list is equivalent to PRODUCT, SHOP, LIVESTREAM, and SHORT_VIDEO, including their supported subtypes within this endpoint's query scope. Visibility and historical query limits still apply. Unknown values return a parameter error. Use one query key with comma-separated values; omit the parameter for an empty list.
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: campaign_statuses
+          in: query
+          required: false
+          description: Campaign status filter, with OR between values. Supports INEFFECTIVE, UPCOMING, ACTIVE, and EXPIRED only; DEACTIVATED and unknown values return a parameter error. ACTIVE covers the process from registration opening to campaign completion. EXPIRED includes deactivated campaigns classified as ended. Omission or an empty list applies no filter. These are not registration review statuses. Use one query key with comma-separated values; omit the parameter for an empty list.
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: campaign_regions
+          in: query
+          required: false
+          description: Filter by each campaign's own region, with OR between values. Leading and trailing whitespace is removed, values are uppercased, and empty entries are ignored. Omission or no valid entries applies no filter. EU matches only campaigns with region=EU, not campaigns in every European country. Region codes follow [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#search/code/); EU is also supported as an aggregate campaign region. A listed code does not guarantee campaign availability or extend authorization. Use one query key with comma-separated values; omit the parameter for an empty list.
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+        - name: locale
+          in: query
+          required: false
+          description: BCP-47 language tag. Defaults to en-US; maximum 64 characters. Names prefer nonempty localized text, then the default name. en-GB uses English text.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListRegisteredCampaignResponse"
+              example:
+                code: 0
+                data:
+                  campaigns:
+                    - campaign_status: ACTIVE
+                      id: "7172491435265050374"
+                      region: US
+                      registration_mode: STANDARD
+                      title: Year-End Product Campaign
+                      type: PRODUCT
+                  next_page_token: ""
+                  total_count: 1
+                message: Success
+                request_id: 202611090749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes: []
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/list-registered-campaign-202611
+  /promotion/202611/registered_campaigns/counts:
+    get:
+      operationId: getRegisteredCampaignCounts
+      summary: Get Registered Campaign Counts
+      description: |-
+        Get the shop's registered campaign counts: all_count, upcoming_count, active_count, and ended_count. ACTIVE covers the entire process from registration opening to campaign completion, not just execution. This operation has no list filters, so the result is not total_count for a particular filtered list. It uses the standard statistics scope, including manual and other registration methods. Queries specific to legacy automatic enrollment management are not supported. Categories are independent and are not guaranteed to sum to all_count. Successful data may be empty when all counts are unavailable.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.
+
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform's standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.
+      tags:
+        - Promotion
+      parameters:
+        - $ref: "#/components/parameters/ShopCipher"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetRegisteredCampaignCountsResponse"
+              example:
+                code: 0
+                data:
+                  active_count: 8
+                  all_count: 12
+                  ended_count: 2
+                  upcoming_count: 2
+                message: Success
+                request_id: 202611090749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes: []
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-registered-campaign-counts-202611
+  /promotion/202611/shop_campaigns/{shop_campaign_id}:
+    get:
+      operationId: getShopCampaign
+      summary: Get Shop Campaign
+      description: |-
+        Get a shop campaign's basic information, registration period, shop participation requirements, benefits and fees, shop eligibility, and participation statistics. Shop details do not include product registration quotas, product registration rules, or product statistics.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.
+
+        Missing or inconsistent data required to identify or return the campaign results in a system error, not a resource-unavailable error. Missing optional information only omits the corresponding fields. An existing campaign that the shop cannot register for is still returned with its eligibility or blocking reasons.
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform's standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign's localization rules. The campaign description field returns sanitized HTML, with scripts, event-handler attributes, and unsafe URLs removed. This guarantee applies only to the campaign description, not to other text fields or nested descriptions. Treat other text as text, not trusted HTML. Unavailable text is omitted rather than replaced with a placeholder name.
+
+        A type mismatch, nonexistent or invisible campaign, or inapplicable region returns a resource-unavailable error rather than a successful empty result. Unknown eligibility or registration availability alone does not fail the query. registration_period.status is determined only from query_time and registration boundaries, not campaign_status. The registration interval includes its end time; campaign and fee validity intervals exclude their end times. Rules, benefits, and fee policies are the complete applicable configuration of a single campaign, not product or registration record lists, and are neither paginated nor truncated. Fee text and resources jointly express the terms; omission does not mean free participation.
+      tags:
+        - Promotion
+      parameters:
+        - name: shop_campaign_id
+          in: path
+          required: true
+          description: Required positive shop campaign ID, obtainable from ListCampaign or ListRegisteredCampaign entries with type=SHOP. A campaign type mismatch returns a resource-unavailable error. A decimal string from 1 to 9223372036854775807.
+          schema:
+            type: string
+        - $ref: "#/components/parameters/ShopCipher"
+        - name: locale
+          in: query
+          required: false
+          description: BCP-47 language tag. Defaults to en-US. If text is unavailable in the requested language, the campaign's default text is used without changing statuses or reason codes.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetShopCampaignResponse"
+              example:
+                code: 0
+                data:
+                  query_time: 2026-11-09T00:00:00.000Z
+                  shop_campaign:
+                    benefits:
+                      - description: Products meeting the campaign rules may receive campaign placement opportunities. Traffic or sales are not guaranteed.
+                        title: Campaign Placement Benefits
+                    campaign_group:
+                      id: "7172491435265050300"
+                      title: Year-End Sale Campaign Group
+                    campaign_period:
+                      end_time: 2026-12-01T00:00:00.000Z
+                      start_time: 2026-11-01T00:00:00.000Z
+                    campaign_status: ACTIVE
+                    description: <p>Campaign introduction.</p><p>Campaign calendar</p><img src="https://example.com/campaign/calendar.png" alt="Campaign calendar">
+                    fees:
+                      description: Confirm the applicable fee terms when registering.
+                      policies:
+                        - description: Charges follow the approved campaign fee plan. The actual amount is determined by the bill.
+                          resources:
+                            - title: Fee Details
+                              type: LINK
+                              url: https://example.com/campaign/fee-terms
+                          title: Campaign Service Fee
+                    id: "7172491435265050374"
+                    participation_rules:
+                      other_rules: []
+                      shop_rules: []
+                    region: US
+                    registration_availability:
+                      can_register: false
+                      reasons:
+                        - code: CAMPAIGN_ALREADY_REGISTERED
+                          message: The shop already participates in this campaign.
+                    registration_period:
+                      end_time: 2026-11-20T23:59:59.000Z
+                      start_time: 2026-10-20T00:00:00.000Z
+                      status: OPEN
+                    shop_eligibility:
+                      is_eligible: true
+                      reasons: []
+                    shop_participation:
+                      has_joined: true
+                      is_participating: true
+                      registration_statistics:
+                        approved_count: 1
+                      relation:
+                        method: DIRECT
+                    subtypes:
+                      - SHOP_COFUNDED_PROMOTION
+                    title: Shop Benefits Campaign
+                    type: SHOP
+                message: Success
+                request_id: 202611090749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes: []
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-shop-campaign-202611
+  /promotion/202611/short_video_campaigns/{short_video_campaign_id}:
+    get:
+      operationId: getShortVideoCampaign
+      summary: Get Short Video Campaign
+      description: |-
+        Get short video competition details, including times, participation requirements, benefits, agreement requirements, and account registration statistics. Statistics count account registration records, not videos or deduplicated accounts. Does not include livestream sessions, super livestream information, or a redundant subtype. Successful queries return the campaign details. A campaign that does not exist, is not visible or applicable to the shop, or has a different supported type returns a resource-unavailable error.
+
+        Requires SHOP authorization and shop_cipher. The shop, its seller, and its region are determined from the verified authorization context and cannot be supplied or overridden by the caller. Cross-shop access in the EU is limited to eligible shops belonging to the same seller and does not allow access to another seller's data.
+
+        This is a query operation. It does not register for or withdraw from campaigns, sign agreements, or change campaign settings. Visibility, invitations, existing registrations, campaign status, and registration stage do not independently establish whether registration is currently allowed. An omitted eligibility result means unknown; it must not be interpreted as false, zero, free participation, an unlimited quota, or permission to register. Explicit false, zero, and empty arrays retain their meanings. Text is for display; automated decisions should use structured statuses and recognized reason codes.
+
+        Missing or inconsistent data required to identify or return the campaign results in a system error, not a resource-unavailable error. Missing optional information only omits the corresponding fields. An existing campaign that the shop cannot register for is still returned with its eligibility or blocking reasons.
+        Invalid parameters, unknown request enum values, authorization failures, rate limits, and dependency failures use the platform's standard error mechanism. A known failure is not returned as a successful empty result. Campaign business processes determine status changes; this query does not change status or guarantee that every intermediate status occurs. Response enums may gain values in the future. Clients should preserve unknown values and handle them conservatively.
+
+        Timestamps use RFC 3339 UTC with three fractional-second digits. See each field's description for interval boundaries and omission semantics. Statistics may be delayed or incomplete; no transactional snapshot is guaranteed across fields or pages. Query again before making a subsequent business decision.
+
+        Use each campaign ID together with type: PRODUCT uses GetProductCampaign, SHOP uses GetShopCampaign, LIVESTREAM uses GetLivestreamCampaign, and SHORT_VIDEO uses GetShortVideoCampaign. Do not infer a detail endpoint for an unknown type.
+
+        locale uses BCP-47 and defaults to en-US; en-GB uses English text. Text falls back according to the campaign's localization rules. The campaign description field returns sanitized HTML, with scripts, event-handler attributes, and unsafe URLs removed. This guarantee applies only to the campaign description, not to other text fields or nested descriptions. Treat other text as text, not trusted HTML. Unavailable text is omitted rather than replaced with a placeholder name.
+
+        The requested campaign type must match the endpoint; otherwise a resource-unavailable error is returned. Only campaign-level information is exposed, without account lists, individual content, registration records, or session details. Participation requirements, benefits, and blocking reasons describe a single campaign's configuration and are not paginated or silently truncated. registration_status independently represents the registration stage and does not establish the shop's eligibility or existing registration.
+      tags:
+        - Promotion
+      parameters:
+        - name: short_video_campaign_id
+          in: path
+          required: true
+          description: Required positive short video campaign ID, obtainable from ListCampaign or ListRegisteredCampaign entries with type=SHORT_VIDEO. Not a session ID, livestream room ID, or video ID. A decimal string from 1 to 9223372036854775807.
+          schema:
+            type: string
+        - $ref: "#/components/parameters/ShopCipher"
+        - name: locale
+          in: query
+          required: false
+          description: BCP-47 language tag. Defaults to en-US; maximum 64 characters. en-GB uses English text.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetShortVideoCampaignResponse"
+              example:
+                code: 0
+                data:
+                  short_video_campaign:
+                    campaign_group_id: "7172491435265050300"
+                    campaign_status: ACTIVE
+                    description: <p>Campaign introduction.</p><p>Campaign calendar</p><img src="https://example.com/campaign/calendar.png" alt="Campaign calendar">
+                    id: "7172491435265050374"
+                    region: US
+                    registration_statistics:
+                      approved_count: 2
+                      total_count: 3
+                      under_review_count: 1
+                    registration_status: OPEN
+                    registration_summary:
+                      is_eligible: true
+                      registration_block_reasons: []
+                    title: Short Video Competition
+                    type: SHORT_VIDEO
+                message: Success
+                request_id: 202611090749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes: []
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-short-video-campaign-202611
   /return_refund/202309/cancellations/{cancel_id}/approve:
     post:
       operationId: approveCancellation
@@ -32068,6 +32846,15 @@ webhooks:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/iygh3ycz
 components:
   schemas:
+    AccountRequirement:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Business information body. Omitted if unavailable; an entry may contain only a title.
+        title:
+          type: string
+          description: Title. Omitted if unavailable; an entry may contain only a body.
     ActivateProductsRequest:
       type: object
       properties:
@@ -32696,6 +33483,20 @@ components:
         percentage:
           type: string
           description: Proportion for the corresponding age group within this viewer profile, expressed as a decimal fraction.
+    Agreement:
+      type: object
+      properties:
+        is_confirmation_required:
+          type: boolean
+          description: Whether agreement confirmation is required before entering the registration flow. Omission means unknown.
+        sign_status:
+          type: string
+          description: |-
+            The shop's agreement signing status. Omission means unknown. Signing does not establish that other registration conditions are met.
+            The shop's campaign agreement signing status.
+            - NO_SIGN_REQUIRED: Signing is not required.
+            - PENDING_TO_SIGN: Awaiting signature.
+            - SIGNED: Signed.
     Aov:
       type: object
       properties:
@@ -33095,6 +33896,15 @@ components:
         poor_threshold:
           type: string
           description: Poor tier threshold.
+    Benefit:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Business information body. Omitted if unavailable; an entry may contain only a title.
+        title:
+          type: string
+          description: Title. Omitted if unavailable; an entry may contain only a body.
     BoxMeasurement:
       type: object
       properties:
@@ -33321,6 +34131,97 @@ components:
         retail_delivery_fee:
           type: string
           description: Retail delivery fee takes effect once platform GMV exceeds 500,000 USD, according to US Colorado states' compliance rules.
+    Campaign:
+      type: object
+      properties:
+        campaign_period:
+          $ref: "#/components/schemas/CampaignPeriod"
+          description: Campaign time interval. Omitted time information does not imply an unbounded interval.
+        campaign_status:
+          type: string
+          description: |-
+            Campaign status, using the same enum as campaign details. Omitted if unavailable or unknown. Distinct from the registration stage and the shop's registration status.
+            Unified status for product, shop, livestream, and short video campaigns, shared by lists and details. Campaign groups use CampaignGroupStatus.
+            Represents the overall campaign process, separately from the registration period, participation eligibility, and review status of the shop's registration.
+            DEACTIVATED is returned only when deactivation is explicitly distinguished. Campaigns already classified as EXPIRED retain EXPIRED; the specific reason for ending is not inferred.
+            - INEFFECTIVE: The campaign is not yet effective or is currently unavailable.
+            - UPCOMING: Registration has not started. This does not simply mean that the campaign execution period has not started.
+            - ACTIVE: The campaign process is open, covering the period from registration opening to campaign completion, including registration, the wait for campaign execution, and execution itself. It does not mean that registration is still open, campaign execution has started, or benefits are effective for the shop.
+            - EXPIRED: The campaign has ended or is no longer effective. May include deactivated campaigns whose deactivation is not distinguished; it does not guarantee a scheduled end.
+            - DEACTIVATED: The campaign is explicitly deactivated. Not inferred from time intervals or EXPIRED status.
+        description:
+          type: string
+          description: Campaign summary text. Prefers a nonempty description in the requested language, falling back to the default description if missing or empty. Omitted if no description is available after fallback. Does not include the full detail description.
+        has_joined:
+          type: boolean
+          description: Whether the shop has an existing participation record. Omission means no result was provided. A record does not establish current approval, effective benefits, or permission to register again.
+        id:
+          type: string
+          description: Positive campaign ID, always returned for each item. Use type to select the product, shop, livestream, or short video detail endpoint. A decimal string from 1 to 9223372036854775807.
+        is_invited:
+          type: boolean
+          description: Whether the shop is invited. Omission means no result was provided. An invitation does not establish registration eligibility.
+        participation_relation:
+          $ref: "#/components/schemas/ParticipationRelation"
+          description: Returned only when the shop's participation method for this campaign is confirmed. Does not describe registration conflicts caused by other campaigns. Omission does not mean the shop is not participating.
+        pending_registration_statistics:
+          $ref: "#/components/schemas/PendingRegistrationStatistic"
+          description: Indicator and progress of registrations awaiting seller confirmation. Returned if any field is known; otherwise omitted. Does not represent pending review.
+        region:
+          type: string
+          description: Campaign region, which may be EU and need not match the authorized shop's region. Region codes follow [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#search/code/); EU is also supported as an aggregate campaign region. A listed code does not guarantee campaign availability or extend authorization.
+        registration_mode:
+          type: string
+          description: |-
+            Product campaign registration mode, distinguishing standard registration from ongoing participation. Omitted for other campaign types. Omission means the mode is unknown. Independent of the parent campaign group's type and whether the shop is registered.
+            Product campaign registration mode. Independent of the four campaign types, direct or bundle participation, and whether the shop is registered.
+            Describes the participation model offered by the campaign. Rolling registration may cover linked campaigns; standard registration does not imply ongoing participation.
+            Omission means the registration mode is unknown, not STANDARD. Do not infer the mode from the title or whether the linked campaign list is empty.
+            - STANDARD: Standard registration without ongoing participation in linked campaigns. Does not mean registration is limited to once; actual registration limits and bundle participation must be assessed separately.
+            - ROLLING: Ongoing registration that can enable continued participation in linked campaigns according to their rules. Does not guarantee existing registration, synchronization, or eligibility for all linked campaigns.
+        registration_period:
+          $ref: "#/components/schemas/RegistrationPeriod"
+          description: Registration time interval. Being within this interval does not establish that all registration conditions are met.
+        registration_summary:
+          $ref: "#/components/schemas/ListCampaignGroupResponseDataCampaignGroupCampaignRegistrationSummary"
+          description: List-level eligibility and registration availability summary. Omission means no result was provided. This is not the full eligibility assessment returned by a detail endpoint.
+        subtypes:
+          type: array
+          items:
+            type: string
+          description: Distinct campaign subtypes. Returns [] when there are explicitly no subtypes; omitted if unavailable or not fully representable. Order does not indicate priority.
+        title:
+          type: string
+          description: Task and long-term campaigns retain their original names. Other campaigns prefer a nonempty name in the requested language, falling back to the default name if missing or empty. Omitted if no name is available after fallback.
+        type:
+          type: string
+          description: |-
+            Always returned for the four defined campaign types. For an unknown type, the summary is retained and this field is omitted. Callers must not guess the type or select a detail endpoint without it.
+            Unified campaign type with the same semantics in lists and all four detail models. Distinct from campaign group type.
+            - PRODUCT: Product campaign.
+            - SHOP: Shop campaign.
+            - LIVESTREAM: Livestream campaign.
+            - SHORT_VIDEO: Short video campaign.
+    CampaignGroup:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Always returned. Campaign group ID. A decimal string from 1 to 9223372036854775807.
+        title:
+          type: string
+          description: Always returned. Nonempty campaign group name.
+    CampaignPeriod:
+      type: object
+      properties:
+        end_time:
+          type: string
+          format: date-time
+          description: End time in RFC 3339 UTC with millisecond precision. Omitted if unavailable.
+        start_time:
+          type: string
+          format: date-time
+          description: Start time in RFC 3339 UTC with millisecond precision. Omitted if unavailable.
     CancelFBTMCFOrderRequest:
       type: object
       properties:
@@ -34278,12 +35179,12 @@ components:
         seller_sku:
           type: string
           description: |-
-            An internal code/name for managing SKUs, not visible to buyers.  
-            Valid length: 
-            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: 6-50 characters
+            An internal code/name for managing SKUs, not visible to buyers.
+            Valid length:
+            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: 6-70 characters
             - Other regions: 1-50 characters
-            Format: 
-            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: Use alphabets, numbers, hyphens (-), or underscores (_) only
+            Format:
+            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: Use letters, numbers, spaces, and these symbols only: . - _ @ # & * + / ( )
             - Other regions: Text without spaces
         price:
           $ref: "#/components/schemas/CheckProductListingRequestSkuPrice"
@@ -37608,12 +38509,12 @@ components:
         seller_sku:
           type: string
           description: |-
-            An internal code/name for managing SKUs, not visible to buyers.  
-            Valid length: 
-            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: 6-50 characters
+            An internal code/name for managing SKUs, not visible to buyers.
+            Valid length:
+            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: 6-70 characters
             - Other regions: 1-50 characters
-            Format: 
-            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: Use alphabets, numbers, hyphens (-), or underscores (_) only
+            Format:
+            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: Use letters, numbers, spaces, and these symbols only: . - _ @ # & * + / ( )
             - Other regions: Text without spaces
         price:
           $ref: "#/components/schemas/CreateProductRequestSkuPrice"
@@ -37872,12 +38773,12 @@ components:
         seller_sku:
           type: string
           description: |-
-            An internal code/name for managing SKUs, not visible to buyers.  
-            Valid length: 
-            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: 6-50 characters
+            An internal code/name for managing SKUs, not visible to buyers.
+            Valid length:
+            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: 6-70 characters
             - Other regions: 1-50 characters
-            Format: 
-            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: Use alphabets, numbers, hyphens (-), or underscores (_) only
+            Format:
+            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: Use letters, numbers, spaces, and these symbols only: . - _ @ # & * + / ( )
             - Other regions: Text without spaces
         sales_attributes:
           type: array
@@ -40674,6 +41575,8 @@ components:
 
             **ALL**
             - `NONE`: To convert the product to a regular (non-presale) product.
+
+            When editing an existing US pre-order product, omitting skus[].pre_sale retains its current pre-order settings. If you include this object, keep type set to PRE_ORDER and preserve the existing fulfillment_type.release_date. Pre-order and list price cannot be enabled together. To clear an existing list price, explicitly pass "list_price": {"amount": "", "currency": "USD"} for each affected SKU; do not omit list_price or pass null or {}. Ensure your SDK preserves the empty amount string in the serialized request. Submit the complete product data, including all existing SKUs, and preserve any values you do not intend to change.
         fulfillment_type:
           $ref: "#/components/schemas/FulfillmentType"
           description: |-
@@ -40789,6 +41692,17 @@ components:
         size_chart_id:
           type: string
           description: The ID of the updated size chart. This is the same ID provided in `size_chart_id`.
+    EffectivePeriod:
+      type: object
+      properties:
+        end_time:
+          type: string
+          format: date-time
+          description: Always returned when configured. Omission means there is no end-time restriction. RFC 3339 UTC with millisecond precision.
+        start_time:
+          type: string
+          format: date-time
+          description: Always returned when configured. A campaign interval must have a start. RFC 3339 UTC with millisecond precision.
     EndSessionRequest:
       type: object
       properties: {}
@@ -41155,6 +42069,11 @@ components:
         is_sample_approval_exempt:
           type: boolean
           description: If set to `true`, creators invited to the target collaboration are exempt from seller review and are automatically approved for a free  product sample. Note that the `has_free_sample` property overrides the free sample behavior.
+        use_product_sample_setting:
+          type: boolean
+          description: |-
+            If true, creators invited to the target collaboration will apply the product-level sample rules.
+            Note that if has_free_sample=false, this field will not take effect.
       required:
         - has_free_sample
         - is_sample_approval_exempt
@@ -44199,6 +45118,74 @@ components:
             - UNAVAILABLE
 
             **Note**: Not applicable if you did not specify the category ID, or the brand is unauthorized.
+    GetCampaignGroupResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/GetCampaignGroupResponseData"
+    GetCampaignGroupResponseData:
+      type: object
+      properties:
+        campaign_group:
+          $ref: "#/components/schemas/GetCampaignGroupResponseDataCampaignGroup"
+          description: Get a campaign group's basic information, campaign period, sales period, and linked campaign groups. If the query succeeds without an available result, campaign_group is omitted and data is empty; no invalid ID is generated. Use ListCampaign to paginate and filter campaigns within the group.
+    GetCampaignGroupResponseDataCampaignGroup:
+      type: object
+      properties:
+        available_regions:
+          type: array
+          items:
+            type: string
+          description: Applicable countries or regions. Omission does not mean that there are no regional restrictions and does not extend shop authorization. Region codes follow [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#search/code/); EU is also supported as an aggregate campaign region. A listed code does not guarantee campaign availability or extend authorization.
+        campaign_period:
+          $ref: "#/components/schemas/CampaignPeriod"
+          description: Campaign period for regular and long-term campaign groups. It does not represent the registration window of campaigns within the group.
+        campaign_status:
+          type: string
+          description: |-
+            Campaign group status. Omission means the status was not provided; it does not establish registration eligibility.
+            Campaign group status. None of these statuses establishes shop registration eligibility.
+            - INEFFECTIVE: Not yet effective.
+            - UPCOMING: Starting soon.
+            - ONGOING: In progress.
+            - EXPIRED: Ended or no longer effective.
+        description:
+          type: string
+          description: Localized campaign group description. Omitted if no description is available.
+        id:
+          type: string
+          description: Always returned when a result exists and matches the requested campaign_group_id. A decimal string from 1 to 9223372036854775807.
+        linked_campaign_groups:
+          type: array
+          items:
+            $ref: "#/components/schemas/LinkedCampaignGroup"
+          description: Linked campaign group summaries. Omitted if unavailable, or [] if explicitly empty. Linked groups are not expanded recursively.
+        official_sales_period:
+          $ref: "#/components/schemas/OfficialSalesPeriod"
+          description: Sales period, represented separately from the campaign period.
+        region:
+          type: string
+          description: Campaign region, which may be EU. It need not match the authorized shop's region and does not grant access to additional shops. Region codes follow [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#search/code/); EU is also supported as an aggregate campaign region. A listed code does not guarantee campaign availability or extend authorization.
+        title:
+          type: string
+          description: Localized campaign group name. Omitted if no name is available.
+        type:
+          type: string
+          description: |-
+            Campaign group type. Omitted if no defined type is available.
+            Campaign group type.
+            - NORMAL: A regular campaign group.
+            - LONG_TERM: A long-term campaign group that may link to multiple regular groups. This does not mean that the shop is registered.
     GetCampaignProductPerformanceListResponse:
       type: object
       properties:
@@ -44796,7 +45783,7 @@ components:
       properties:
         is_required:
           type: boolean
-          description: A flag to indicate whether a Seller SKU is required when creating or editing a product in this category. When required, the Seller SKU must be 6 to 50 characters long and can contain only letters, digits, hyphens (-) and underscores (_).
+          description: "A flag to indicate whether a Seller SKU is required when creating or editing a product in this category. When required, the Seller SKU must be 6 to 70 characters long and can contain only letters, numbers, spaces, and these symbols only: . - _ @ # & * + / ( )"
     GetCategoryRulesResponseDataSizeChart:
       type: object
       properties:
@@ -50134,6 +51121,180 @@ components:
           items:
             $ref: "#/components/schemas/DataPoint"
           description: Viewer count data points for the corresponding trend category.
+    GetLivestreamCampaignResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/GetLivestreamCampaignResponseData"
+    GetLivestreamCampaignResponseData:
+      type: object
+      properties:
+        livestream_campaign:
+          $ref: "#/components/schemas/GetLivestreamCampaignResponseDataLivestreamCampaign"
+          description: Get details of a featured livestream or livestream competition, including times, participation requirements, benefits, agreement requirements, and the shop's registered session statistics. super_livestream applies only to featured livestreams. Always returned on success. An unavailable campaign returns an error rather than a successful empty result.
+    GetLivestreamCampaignResponseDataLivestreamCampaign:
+      type: object
+      properties:
+        agreement:
+          $ref: "#/components/schemas/Agreement"
+          description: Seller agreement signing requirements and status. Does not return the signing account, agreement text, or signing operation parameters.
+        benefits:
+          type: array
+          items:
+            $ref: "#/components/schemas/Benefit"
+          description: Benefits and exposure information applicable to the shop, including conditions, responsible parties, and limits. Does not guarantee returns.
+        campaign_group_id:
+          type: string
+          description: Positive ID of the campaign group. Omitted if unavailable. A decimal string from 1 to 9223372036854775807.
+        campaign_period:
+          $ref: "#/components/schemas/CampaignPeriod"
+          description: Campaign time interval.
+        campaign_status:
+          type: string
+          description: |-
+            Campaign status, using the same enum as lists and other detail types. Omitted if unknown. Does not establish the shop's registration eligibility.
+            Unified status for product, shop, livestream, and short video campaigns, shared by lists and details. Campaign groups use CampaignGroupStatus.
+            Represents the overall campaign process, separately from the registration period, participation eligibility, and review status of the shop's registration.
+            DEACTIVATED is returned only when deactivation is explicitly distinguished. Campaigns already classified as EXPIRED retain EXPIRED; the specific reason for ending is not inferred.
+            - INEFFECTIVE: The campaign is not yet effective or is currently unavailable.
+            - UPCOMING: Registration has not started. This does not simply mean that the campaign execution period has not started.
+            - ACTIVE: The campaign process is open, covering the period from registration opening to campaign completion, including registration, the wait for campaign execution, and execution itself. It does not mean that registration is still open, campaign execution has started, or benefits are effective for the shop.
+            - EXPIRED: The campaign has ended or is no longer effective. May include deactivated campaigns whose deactivation is not distinguished; it does not guarantee a scheduled end.
+            - DEACTIVATED: The campaign is explicitly deactivated. Not inferred from time intervals or EXPIRED status.
+        description:
+          type: string
+          description: Localized campaign introduction as sanitized HTML rich text, preserving text, images, links, and their order. Render as HTML rather than plain text. Scripts, event handlers, and unsafe URLs are removed. Omitted when no content is available. May not cover all participation rules, benefits, or fee terms.
+        id:
+          type: string
+          description: Always returned when the object exists and matches the requested livestream_campaign_id. A decimal string from 1 to 9223372036854775807.
+        is_invited:
+          type: boolean
+          description: Whether the shop is invited. Omission means unknown. An invitation does not guarantee registration availability.
+        participation_requirements:
+          $ref: "#/components/schemas/GetLivestreamCampaignResponseDataLivestreamCampaignParticipationRequirement"
+          description: Participation requirements applicable to the shop, without account identifiers or targeting lists.
+        region:
+          type: string
+          description: Campaign region, which may be EU. It need not match the authorized shop's region and does not extend shop authorization. Region codes follow [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#search/code/); EU is also supported as an aggregate campaign region. A listed code does not guarantee campaign availability or extend authorization.
+        registration_period:
+          $ref: "#/components/schemas/RegistrationPeriod"
+          description: Registration time interval. Being within this interval does not establish that all registration conditions are met.
+        registration_status:
+          type: string
+          description: |-
+            Campaign registration stage. Does not indicate whether the shop is already registered or can register.
+
+            - NOT_STARTED: Registration has not started.
+            - OPEN: Registration is open. Does not establish the shop's registration eligibility.
+            - CLOSED: Registration has ended.
+        registration_summary:
+          $ref: "#/components/schemas/RegistrationSummary"
+          description: The shop's campaign eligibility and registration-blocking reasons. Does not guarantee successful registration.
+        session_statistics:
+          $ref: "#/components/schemas/GetLivestreamCampaignResponseDataLivestreamCampaignSessionStatistic"
+          description: Livestream registration session statistics from the shop's perspective. EU cross-shop access may include eligible shops belonging to the same seller. Statistics may be delayed or incomplete.
+        subtype:
+          type: string
+          description: |-
+            Always returned when the object exists. Supports featured livestreams and livestream competitions only. Use GetShortVideoCampaign for short video campaigns.
+            Livestream campaign subtype, represented separately from the broad category in CampaignType.
+            - KEY_LIVESTREAM: Featured livestream, including those with super livestream settings enabled.
+            - LIVESTREAM_COMPETITION: Livestream competition.
+        super_livestream:
+          $ref: "#/components/schemas/GetLivestreamCampaignResponseDataLivestreamCampaignSuperLivestream"
+          description: Super livestream mode and campaign-level target threshold, applicable only to featured livestreams. Omitted for livestream competitions. Does not include the seller's actual performance metrics or progress toward a target.
+        target_seller_type:
+          type: string
+          description: |-
+            Seller types targeted by the campaign, not the current seller's type. Omitted if unavailable.
+            Seller types targeted by the campaign.
+            - ALL: Local and cross-border sellers.
+            - LOCAL: Local sellers.
+            - CROSS_BORDER: Cross-border sellers.
+        title:
+          type: string
+          description: Localized campaign name. Uses the default name if text in the requested language is missing. Omitted if the requested-language name is explicitly empty or no name is ultimately available.
+        type:
+          type: string
+          description: |-
+            Always returned when the object exists. Fixed to LIVESTREAM, consistent with the campaign type in lists.
+            Unified campaign type with the same semantics in lists and all four detail models. Distinct from campaign group type.
+            - PRODUCT: Product campaign.
+            - SHOP: Shop campaign.
+            - LIVESTREAM: Livestream campaign.
+            - SHORT_VIDEO: Short video campaign.
+    GetLivestreamCampaignResponseDataLivestreamCampaignParticipationRequirement:
+      type: object
+      properties:
+        account_requirements:
+          type: array
+          items:
+            $ref: "#/components/schemas/AccountRequirement"
+          description: Applicable requirements for linked accounts, account performance, and e-commerce permissions. Does not establish that any specific account has passed eligibility checks.
+        max_account_session_count:
+          type: integer
+          format: int64
+          description: Maximum number of sessions each account may register, as a positive integer. Omitted if unknown or inapplicable; omission does not mean unlimited. Not the remaining session quota.
+        shop_requirements:
+          type: array
+          items:
+            $ref: "#/components/schemas/ShopRequirement"
+          description: Applicable shop status, targeting, and other requirements, without targeting lists. Does not establish that the shop has passed eligibility checks.
+    GetLivestreamCampaignResponseDataLivestreamCampaignSessionStatistic:
+      type: object
+      properties:
+        approved_count:
+          type: integer
+          format: int64
+          description: Number of approved registration records.
+        expired_count:
+          type: integer
+          format: int64
+          description: Number of registration records that are no longer effective.
+        rejected_count:
+          type: integer
+          format: int64
+          description: Number of rejected registration records.
+        total_count:
+          type: integer
+          format: int64
+          description: Total registered livestream sessions, not actual livestream broadcasts.
+        under_review_count:
+          type: integer
+          format: int64
+          description: Number of registration records under review.
+        withdrawal_under_review_count:
+          type: integer
+          format: int64
+          description: Number of registration records with withdrawal under review.
+    GetLivestreamCampaignResponseDataLivestreamCampaignSuperLivestream:
+      type: object
+      properties:
+        is_enabled:
+          type: boolean
+          description: Whether super livestream is enabled. Omitted if unavailable; not defaulted to false.
+        target_gmv_threshold:
+          $ref: "#/components/schemas/GetLivestreamCampaignResponseDataLivestreamCampaignSuperLivestreamTargetGmvThreshold"
+          description: Returned only when is_enabled=true and a valid threshold exists. The seller's target GMV must be strictly greater than this amount. It is not the shop's actual GMV, guaranteed revenue, or submitted target.
+    GetLivestreamCampaignResponseDataLivestreamCampaignSuperLivestreamTargetGmvThreshold:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: Always returned when the object exists. A nonnegative decimal amount string in the major unit of currency.
+        currency:
+          type: string
+          description: Always returned when the object exists. Currency code for the amount, using a three-letter ISO 4217 code such as USD.
     GetLogisticsTrackingResponse:
       type: object
       properties:
@@ -54459,6 +55620,287 @@ components:
         currency:
           type: string
           description: The original currency code in ISO 4217 format.
+    GetProductCampaignResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/GetProductCampaignResponseData"
+    GetProductCampaignResponseData:
+      type: object
+      properties:
+        product_campaign:
+          $ref: "#/components/schemas/GetProductCampaignResponseDataProductCampaign"
+          description: Get a product campaign's basic information, registration period, participation rules, benefits and fees, shop eligibility, product registration quota, and participation statistics. registration_mode distinguishes STANDARD from ROLLING. linked_campaigns applies only to ROLLING; a link does not establish existing registration, synchronization, or eligibility.
+        query_time:
+          type: string
+          format: date-time
+          description: Always returned on success. Time used to determine registration period status in this query. RFC 3339 UTC with millisecond precision. Does not mean all data belongs to the same transactional snapshot.
+    GetProductCampaignResponseDataProductCampaign:
+      type: object
+      properties:
+        available_regions:
+          type: array
+          items:
+            type: string
+          description: Specific country or region codes covered by this campaign, when available. For a campaign whose region is EU, this list identifies the specific countries covered. This field is not restricted to EU campaigns. Omission does not mean unrestricted regional coverage. A listed region does not establish the shop's eligibility to register or extend its authorization scope.
+        benefits:
+          type: array
+          items:
+            $ref: "#/components/schemas/Benefit"
+          description: Always returned. General campaign benefits and conditions applicable to the shop, excluding per-product tier benefits. Returns [] if no information is available.
+        campaign_group:
+          $ref: "#/components/schemas/CampaignGroup"
+          description: Always returned. Minimal summary of the campaign group.
+        campaign_period:
+          $ref: "#/components/schemas/CampaignPeriod"
+          description: Always returned. Campaign validity interval.
+        campaign_status:
+          type: string
+          description: |-
+            Always returned. Uses the same enum as lists and other detail types. Does not directly indicate whether the current time is within the campaign execution period.
+            Unified status for product, shop, livestream, and short video campaigns, shared by lists and details. Campaign groups use CampaignGroupStatus.
+            Represents the overall campaign process, separately from the registration period, participation eligibility, and review status of the shop's registration.
+            DEACTIVATED is returned only when deactivation is explicitly distinguished. Campaigns already classified as EXPIRED retain EXPIRED; the specific reason for ending is not inferred.
+            - INEFFECTIVE: The campaign is not yet effective or is currently unavailable.
+            - UPCOMING: Registration has not started. This does not simply mean that the campaign execution period has not started.
+            - ACTIVE: The campaign process is open, covering the period from registration opening to campaign completion, including registration, the wait for campaign execution, and execution itself. It does not mean that registration is still open, campaign execution has started, or benefits are effective for the shop.
+            - EXPIRED: The campaign has ended or is no longer effective. May include deactivated campaigns whose deactivation is not distinguished; it does not guarantee a scheduled end.
+            - DEACTIVATED: The campaign is explicitly deactivated. Not inferred from time intervals or EXPIRED status.
+        description:
+          type: string
+          description: Localized campaign introduction as sanitized HTML rich text, preserving text, images, links, and their order. Render as HTML rather than plain text. Scripts, event handlers, and unsafe URLs are removed. Omitted when no content is available. May not cover all participation rules, benefits, or fee terms.
+        fees:
+          $ref: "#/components/schemas/GetProductCampaignResponseDataProductCampaignFee"
+          description: Fee information, policies, and related resources applicable to the shop, when available. The fees object may be omitted when fee information is unavailable. Individual unknown fields are omitted. Omission does not mean free participation, zero fees, or unconfigured fees.
+        id:
+          type: string
+          description: Always returned and matches the requested product_campaign_id. A decimal string from 1 to 9223372036854775807.
+        linked_campaigns:
+          type: array
+          items:
+            $ref: "#/components/schemas/GetProductCampaignResponseDataProductCampaignLinkedCampaign"
+          description: Summaries of specific campaigns linked through rolling registration. Applicable only to ROLLING mode and not paginated separately. Omitted if unavailable. [] means no linked summaries were returned for this query, not that no other links exist. Excludes nested relationships, full campaign details, and synchronization statistics.
+        participation_rules:
+          $ref: "#/components/schemas/GetProductCampaignResponseDataProductCampaignParticipationRule"
+          description: Always returned. Complete participation requirements.
+        region:
+          type: string
+          description: Always returned. Applicable campaign region, which may be EU and need not match the authorized shop's shop_region. Region codes follow [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#search/code/); EU is also supported as an aggregate campaign region. A listed code does not guarantee campaign availability or extend authorization.
+        registration_availability:
+          $ref: "#/components/schemas/RegistrationAvailability"
+          description: Always returned. Assessment of whether the shop can currently enter the registration flow.
+        registration_limit:
+          $ref: "#/components/schemas/GetProductCampaignResponseDataProductCampaignRegistrationLimit"
+          description: Product registration quota. The object is always returned. Unknown conclusions remain omitted and are not treated as an unlimited quota.
+        registration_mode:
+          type: string
+          description: |-
+            Registration mode of this product campaign. Omission means unknown. Independent of the parent campaign group's type and whether the shop is registered.
+            Product campaign registration mode. Independent of the four campaign types, direct or bundle participation, and whether the shop is registered.
+            Describes the participation model offered by the campaign. Rolling registration may cover linked campaigns; standard registration does not imply ongoing participation.
+            Omission means the registration mode is unknown, not STANDARD. Do not infer the mode from the title or whether the linked campaign list is empty.
+            - STANDARD: Standard registration without ongoing participation in linked campaigns. Does not mean registration is limited to once; actual registration limits and bundle participation must be assessed separately.
+            - ROLLING: Ongoing registration that can enable continued participation in linked campaigns according to their rules. Does not guarantee existing registration, synchronization, or eligibility for all linked campaigns.
+        registration_period:
+          $ref: "#/components/schemas/GetProductCampaignResponseDataProductCampaignRegistrationPeriod"
+          description: Always returned. Represents only the registration period and its status.
+        shop_eligibility:
+          $ref: "#/components/schemas/ShopEligibility"
+          description: Always returned. The shop's eligibility assessment.
+        shop_participation:
+          $ref: "#/components/schemas/GetProductCampaignResponseDataProductCampaignShopParticipation"
+          description: Always returned. The shop's participation information.
+        subtypes:
+          type: array
+          items:
+            type: string
+          description: Always returned. Distinct applicable public campaign subtypes. Returns [] if there are none. Order does not indicate priority.
+        title:
+          type: string
+          description: Always returned. Nonempty product campaign name.
+        type:
+          type: string
+          description: |-
+            Always returned and fixed to PRODUCT, consistent with CampaignType in lists. Other campaign types are not accepted.
+            Unified campaign type with the same semantics in lists and all four detail models. Distinct from campaign group type.
+            - PRODUCT: Product campaign.
+            - SHOP: Shop campaign.
+            - LIVESTREAM: Livestream campaign.
+            - SHORT_VIDEO: Short video campaign.
+    GetProductCampaignResponseDataProductCampaignFee:
+      type: object
+      properties:
+        description:
+          type: string
+          description: General fee information. Omitted if unavailable; this does not mean participation is free or fees are unconfigured, and does not guarantee the final billed amount.
+        policies:
+          type: array
+          items:
+            $ref: "#/components/schemas/Policy"
+          description: Fee policies applicable to the shop. Omitted if unknown; [] when there are explicitly no applicable policies. An empty list does not rule out other fees.
+    GetProductCampaignResponseDataProductCampaignLinkedCampaign:
+      type: object
+      properties:
+        campaign_period:
+          $ref: "#/components/schemas/CampaignPeriod"
+          description: Execution period of the linked campaign, using RFC 3339 UTC with millisecond precision. An omitted boundary means unknown, not an unbounded interval.
+        id:
+          type: string
+          description: Positive campaign ID, always returned when the summary exists. Not a campaign group ID. Use it with type when querying details. A decimal string from 1 to 9223372036854775807.
+        title:
+          type: string
+          description: Nonempty localized name of the linked campaign. Falls back to the default name if no name is available in the requested language; omitted if still unavailable.
+        type:
+          type: string
+          description: |-
+            Type of the linked campaign, used to select its detail endpoint. Omitted if unknown. May differ from the current campaign's type.
+            Unified campaign type with the same semantics in lists and all four detail models. Distinct from campaign group type.
+            - PRODUCT: Product campaign.
+            - SHOP: Shop campaign.
+            - LIVESTREAM: Livestream campaign.
+            - SHORT_VIDEO: Short video campaign.
+    GetProductCampaignResponseDataProductCampaignParticipationRule:
+      type: object
+      properties:
+        campaign_rules:
+          type: array
+          items:
+            $ref: "#/components/schemas/GetProductCampaignResponseDataProductCampaignParticipationRuleCampaignRule"
+          description: Applicable campaign rules such as registration price, inventory, and tiers. Does not establish that any specific product meets the requirements.
+        other_rules:
+          type: array
+          items:
+            $ref: "#/components/schemas/OtherRule"
+          description: Includes prerequisites such as required agreements, without signing account information or operation parameters.
+        product_rules:
+          type: array
+          items:
+            $ref: "#/components/schemas/GetProductCampaignResponseDataProductCampaignParticipationRuleProductRule"
+          description: General product requirements, not eligibility results for individual products.
+        shop_rules:
+          type: array
+          items:
+            $ref: "#/components/schemas/ShopRule"
+          description: Includes exemption information applicable to the shop, without exemption lists.
+    GetProductCampaignResponseDataProductCampaignParticipationRuleCampaignRule:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Complete business information, including applicable thresholds, exemptions, conditions, responsible parties, and validity periods. Omitted if unavailable.
+        title:
+          type: string
+          description: Nonempty title. Omitted if unavailable.
+    GetProductCampaignResponseDataProductCampaignParticipationRuleProductRule:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Complete business information, including applicable thresholds, exemptions, conditions, responsible parties, and validity periods. Omitted if unavailable.
+        title:
+          type: string
+          description: Nonempty title. Omitted if unavailable.
+    GetProductCampaignResponseDataProductCampaignRegistrationLimit:
+      type: object
+      properties:
+        has_limit:
+          type: boolean
+          description: "true: The shop has a quota limit. false: No limit applies, including exemptions. Omitted if the business quota conclusion is undetermined. Query failures still return an API error."
+        is_limit_reached:
+          type: boolean
+          description: Always returned when has_limit=true and equals remaining_count==0. Always false when has_limit=false. Omitted when has_limit is omitted.
+        limit_count:
+          type: integer
+          format: int64
+          description: Always returned when has_limit=true. Nonnegative product quota applicable to the shop; otherwise omitted.
+        remaining_count:
+          type: integer
+          format: int64
+          description: Always returned when has_limit=true; equals max(limit_count-used_count, 0). Otherwise omitted. Zero must not be used to represent an unknown value.
+        used_count:
+          type: integer
+          format: int64
+          description: Always returned when has_limit=true. Nonnegative product slots consumed under the quota rules, not cumulative registrations; otherwise omitted.
+    GetProductCampaignResponseDataProductCampaignRegistrationPeriod:
+      type: object
+      properties:
+        end_time:
+          type: string
+          format: date-time
+          description: Always returned when a deadline exists and must not precede the start. Inclusive end time in RFC 3339 UTC with millisecond precision. Omitted if there is no deadline.
+        start_time:
+          type: string
+          format: date-time
+          description: Always returned. Inclusive registration start time in RFC 3339 UTC with millisecond precision.
+        status:
+          type: string
+          description: |-
+            Always returned. Determined solely by the registration period. Campaign deactivation and ineligibility do not change this status.
+            Registration period status, evaluated at query_time.
+            - NOT_STARTED: The evaluation time is before registration starts.
+            - OPEN: The evaluation time is at or after start_time and has not passed end_time, or no deadline exists.
+            - CLOSED: The evaluation time is after the registration deadline.
+    GetProductCampaignResponseDataProductCampaignShopParticipation:
+      type: object
+      properties:
+        has_joined:
+          type: boolean
+          description: Whether a participation record exists. Omission means unknown. A record does not establish approval or effective benefits.
+        pending_confirmation_count:
+          type: integer
+          format: int64
+          description: Number of products awaiting seller confirmation of registration. Known nonnegative values are retained; omitted if unknown or inapplicable. Does not mean pending review.
+        registration_statistics:
+          $ref: "#/components/schemas/GetProductCampaignResponseDataProductCampaignShopParticipationRegistrationStatistic"
+          description: Returned when at least one product statistic is available. Missing values are not defaulted to zero. Does not query product or SKU details.
+        relation:
+          $ref: "#/components/schemas/Relation"
+          description: Confirmed participation method for the current campaign. Omission does not mean the shop is not participating.
+    GetProductCampaignResponseDataProductCampaignShopParticipationRegistrationStatistic:
+      type: object
+      properties:
+        approved_count:
+          type: integer
+          format: int64
+          description: Number of products whose current registrations are approved. Not the number of products currently effective in the campaign.
+        expired_count:
+          type: integer
+          format: int64
+          description: Number of products whose current registrations are no longer effective.
+        join_failed_count:
+          type: integer
+          format: int64
+          description: Number of products whose participation failed during execution after approval.
+        registered_count:
+          type: integer
+          format: int64
+          description: Number of products with submitted or confirmed registrations, including subsequent rejection, invalidation, and withdrawal outcomes.
+        rejected_count:
+          type: integer
+          format: int64
+          description: Number of products whose current registration reviews were rejected.
+        scheduled_count:
+          type: integer
+          format: int64
+          description: Number of products assigned a campaign schedule. May overlap with the approved count.
+        under_review_count:
+          type: integer
+          format: int64
+          description: Number of products whose registrations are still under review.
+        withdrawal_under_review_count:
+          type: integer
+          format: int64
+          description: Number of products whose withdrawal requests are still under review.
     GetProductDiagnosesResponse:
       type: object
       properties:
@@ -56608,6 +58050,40 @@ components:
         text:
           type: string
           description: The optimized text.
+    GetRegisteredCampaignCountsResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/GetRegisteredCampaignCountsResponseData"
+    GetRegisteredCampaignCountsResponseData:
+      type: object
+      properties:
+        active_count:
+          type: integer
+          format: int64
+          description: Number of campaigns in the current statistics scope with CampaignStatus.ACTIVE, covering registration, the wait for execution, and execution itself. Not limited to campaigns currently executing and does not establish that benefits are effective for the shop.
+        all_count:
+          type: integer
+          format: int64
+          description: Total campaigns in the current statistics scope. Not a count of campaign groups, products, registration records, or livestream sessions.
+        ended_count:
+          type: integer
+          format: int64
+          description: Number of ended or no longer effective campaigns in the current statistics scope, including deactivated campaigns counted as ended.
+        upcoming_count:
+          type: integer
+          format: int64
+          description: Number of campaigns in the current statistics scope whose registration has not started, corresponding to CampaignStatus.UPCOMING.
     GetRejectReasonsResponse:
       type: object
       properties:
@@ -58227,6 +59703,161 @@ components:
           description: |-
             1 for shipping by platform template
             2 for shipping by seller template
+    GetShopCampaignResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/GetShopCampaignResponseData"
+    GetShopCampaignResponseData:
+      type: object
+      properties:
+        query_time:
+          type: string
+          format: date-time
+          description: Always returned on success. Time used to determine registration period status in this query. RFC 3339 UTC with millisecond precision. Does not mean all data belongs to the same transactional snapshot.
+        shop_campaign:
+          $ref: "#/components/schemas/GetShopCampaignResponseDataShopCampaign"
+          description: Get a shop campaign's basic information, registration period, shop participation requirements, benefits and fees, shop eligibility, and participation statistics. Shop details do not include product registration quotas, product registration rules, or product statistics.
+    GetShopCampaignResponseDataShopCampaign:
+      type: object
+      properties:
+        available_regions:
+          type: array
+          items:
+            type: string
+          description: Specific country or region codes covered by this campaign, when available. For a campaign whose region is EU, this list identifies the specific countries covered. This field is not restricted to EU campaigns. Omission does not mean unrestricted regional coverage. A listed region does not establish the shop's eligibility to register or extend its authorization scope.
+        benefits:
+          type: array
+          items:
+            $ref: "#/components/schemas/Benefit"
+          description: Always returned. General campaign benefits and conditions applicable to the shop, excluding per-product tier benefits. Returns [] if no information is available.
+        campaign_group:
+          $ref: "#/components/schemas/CampaignGroup"
+          description: Always returned. Minimal summary of the campaign group.
+        campaign_period:
+          $ref: "#/components/schemas/CampaignPeriod"
+          description: Always returned. Campaign validity interval.
+        campaign_status:
+          type: string
+          description: |-
+            Always returned. Uses the same enum as lists and other detail types. Does not directly indicate whether the current time is within the campaign execution period.
+            Unified status for product, shop, livestream, and short video campaigns, shared by lists and details. Campaign groups use CampaignGroupStatus.
+            Represents the overall campaign process, separately from the registration period, participation eligibility, and review status of the shop's registration.
+            DEACTIVATED is returned only when deactivation is explicitly distinguished. Campaigns already classified as EXPIRED retain EXPIRED; the specific reason for ending is not inferred.
+            - INEFFECTIVE: The campaign is not yet effective or is currently unavailable.
+            - UPCOMING: Registration has not started. This does not simply mean that the campaign execution period has not started.
+            - ACTIVE: The campaign process is open, covering the period from registration opening to campaign completion, including registration, the wait for campaign execution, and execution itself. It does not mean that registration is still open, campaign execution has started, or benefits are effective for the shop.
+            - EXPIRED: The campaign has ended or is no longer effective. May include deactivated campaigns whose deactivation is not distinguished; it does not guarantee a scheduled end.
+            - DEACTIVATED: The campaign is explicitly deactivated. Not inferred from time intervals or EXPIRED status.
+        description:
+          type: string
+          description: Localized campaign introduction as sanitized HTML rich text, preserving text, images, links, and their order. Render as HTML rather than plain text. Scripts, event handlers, and unsafe URLs are removed. Omitted when no content is available. May not cover all participation rules, benefits, or fee terms.
+        fees:
+          $ref: "#/components/schemas/GetProductCampaignResponseDataProductCampaignFee"
+          description: Fee information, policies, and related resources applicable to the shop, when available. The fees object may be omitted when fee information is unavailable. Individual unknown fields are omitted. Omission does not mean free participation, zero fees, or unconfigured fees.
+        id:
+          type: string
+          description: Always returned and matches the requested shop_campaign_id. A decimal string from 1 to 9223372036854775807.
+        participation_rules:
+          $ref: "#/components/schemas/GetShopCampaignResponseDataShopCampaignParticipationRule"
+          description: Always returned. Shop requirements and prerequisites applicable to the shop.
+        region:
+          type: string
+          description: Always returned. Applicable campaign region, which may be EU and need not match the authorized shop's shop_region. Region codes follow [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#search/code/); EU is also supported as an aggregate campaign region. A listed code does not guarantee campaign availability or extend authorization.
+        registration_availability:
+          $ref: "#/components/schemas/RegistrationAvailability"
+          description: Always returned. Assessment of whether the shop can currently enter the registration flow.
+        registration_period:
+          $ref: "#/components/schemas/GetProductCampaignResponseDataProductCampaignRegistrationPeriod"
+          description: Always returned. Represents only the registration period and its status.
+        shop_eligibility:
+          $ref: "#/components/schemas/ShopEligibility"
+          description: Always returned. The shop's eligibility assessment.
+        shop_participation:
+          $ref: "#/components/schemas/GetShopCampaignResponseDataShopCampaignShopParticipation"
+          description: Always returned. The shop's participation information.
+        subtypes:
+          type: array
+          items:
+            type: string
+          description: Always returned. Distinct applicable public campaign subtypes. Returns [] if there are none. Order does not indicate priority.
+        title:
+          type: string
+          description: Always returned. Nonempty shop campaign name.
+        type:
+          type: string
+          description: |-
+            Always returned and fixed to SHOP, consistent with CampaignType in lists. Other campaign types are not accepted.
+            Unified campaign type with the same semantics in lists and all four detail models. Distinct from campaign group type.
+            - PRODUCT: Product campaign.
+            - SHOP: Shop campaign.
+            - LIVESTREAM: Livestream campaign.
+            - SHORT_VIDEO: Short video campaign.
+    GetShopCampaignResponseDataShopCampaignParticipationRule:
+      type: object
+      properties:
+        other_rules:
+          type: array
+          items:
+            $ref: "#/components/schemas/OtherRule"
+          description: Prerequisites applicable to the shop, such as required agreements. Excludes individual product requirements, registration prices, inventory, and tier rules.
+        shop_rules:
+          type: array
+          items:
+            $ref: "#/components/schemas/ShopRule"
+          description: Includes exemption information applicable to the shop, without exemption lists.
+    GetShopCampaignResponseDataShopCampaignShopParticipation:
+      type: object
+      properties:
+        has_joined:
+          type: boolean
+          description: Whether a participation record exists. Omission means unknown. A record does not establish current approval or effective benefits.
+        is_participating:
+          type: boolean
+          description: Whether the shop is currently participating. true when there is a registration pending review, approved, paused, or pending withdrawal review, or a valid submission. Omission means unknown.
+        registration_statistics:
+          $ref: "#/components/schemas/GetShopCampaignResponseDataShopCampaignShopParticipationRegistrationStatistic"
+          description: Returned when at least one shop registration statistic is available. Not the number of sellers across the campaign. Does not include shop details.
+        relation:
+          $ref: "#/components/schemas/Relation"
+          description: Confirmed participation method for the current campaign. Conflicts with other campaigns are described only in registration reasons.
+    GetShopCampaignResponseDataShopCampaignShopParticipationRegistrationStatistic:
+      type: object
+      properties:
+        approved_count:
+          type: integer
+          format: int64
+          description: Number of approved shop registrations.
+        expired_count:
+          type: integer
+          format: int64
+          description: Number of shop registrations that are no longer effective.
+        rejected_count:
+          type: integer
+          format: int64
+          description: Number of rejected shop registrations.
+        suspended_count:
+          type: integer
+          format: int64
+          description: Number of paused shop participations.
+        under_review_count:
+          type: integer
+          format: int64
+          description: Number of shop registrations awaiting review.
+        withdrawal_under_review_count:
+          type: integer
+          format: int64
+          description: Number of shop withdrawal requests awaiting review.
     GetShopGroupAndRelatedShopsResponse:
       type: object
       properties:
@@ -61742,6 +63373,151 @@ components:
           description: |-
             Returned if the video has been successfully posted, i.e. `posting_status = SUCCESS`.
             Represented in seconds.
+    GetShortVideoCampaignResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/GetShortVideoCampaignResponseData"
+    GetShortVideoCampaignResponseData:
+      type: object
+      properties:
+        short_video_campaign:
+          $ref: "#/components/schemas/GetShortVideoCampaignResponseDataShortVideoCampaign"
+          description: Get short video competition details, including times, participation requirements, benefits, agreement requirements, and account registration statistics. Statistics count account registration records, not videos or deduplicated accounts. Does not include livestream sessions, super livestream information, or a redundant subtype. Always returned on success. An unavailable campaign returns an error rather than a successful empty result.
+    GetShortVideoCampaignResponseDataShortVideoCampaign:
+      type: object
+      properties:
+        agreement:
+          $ref: "#/components/schemas/Agreement"
+          description: Seller agreement signing requirements and status. Does not return the signing account, agreement text, or signing operation parameters.
+        benefits:
+          type: array
+          items:
+            $ref: "#/components/schemas/Benefit"
+          description: Benefits and exposure information applicable to the shop, including conditions, responsible parties, and limits. Does not guarantee returns.
+        campaign_group_id:
+          type: string
+          description: Positive ID of the campaign group. Omitted if unavailable. A decimal string from 1 to 9223372036854775807.
+        campaign_period:
+          $ref: "#/components/schemas/CampaignPeriod"
+          description: Campaign time interval.
+        campaign_status:
+          type: string
+          description: |-
+            Campaign status, using the same enum as lists and other detail types. Omitted if unknown. Does not establish the shop's registration eligibility.
+            Unified status for product, shop, livestream, and short video campaigns, shared by lists and details. Campaign groups use CampaignGroupStatus.
+            Represents the overall campaign process, separately from the registration period, participation eligibility, and review status of the shop's registration.
+            DEACTIVATED is returned only when deactivation is explicitly distinguished. Campaigns already classified as EXPIRED retain EXPIRED; the specific reason for ending is not inferred.
+            - INEFFECTIVE: The campaign is not yet effective or is currently unavailable.
+            - UPCOMING: Registration has not started. This does not simply mean that the campaign execution period has not started.
+            - ACTIVE: The campaign process is open, covering the period from registration opening to campaign completion, including registration, the wait for campaign execution, and execution itself. It does not mean that registration is still open, campaign execution has started, or benefits are effective for the shop.
+            - EXPIRED: The campaign has ended or is no longer effective. May include deactivated campaigns whose deactivation is not distinguished; it does not guarantee a scheduled end.
+            - DEACTIVATED: The campaign is explicitly deactivated. Not inferred from time intervals or EXPIRED status.
+        description:
+          type: string
+          description: Localized campaign introduction as sanitized HTML rich text, preserving text, images, links, and their order. Render as HTML rather than plain text. Scripts, event handlers, and unsafe URLs are removed. Omitted when no content is available. May not cover all participation rules, benefits, or fee terms.
+        id:
+          type: string
+          description: Always returned when the object exists and matches the requested short_video_campaign_id. A decimal string from 1 to 9223372036854775807.
+        is_invited:
+          type: boolean
+          description: Whether the shop is invited. Omission means unknown. An invitation does not guarantee registration availability.
+        participation_requirements:
+          $ref: "#/components/schemas/GetShortVideoCampaignResponseDataShortVideoCampaignParticipationRequirement"
+          description: Participation requirements applicable to the shop, without account identifiers or targeting lists.
+        region:
+          type: string
+          description: Campaign region, which may be EU. It need not match the authorized shop's region and does not extend shop authorization. Region codes follow [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#search/code/); EU is also supported as an aggregate campaign region. A listed code does not guarantee campaign availability or extend authorization.
+        registration_period:
+          $ref: "#/components/schemas/RegistrationPeriod"
+          description: Registration time interval. Being within this interval does not establish that all registration conditions are met.
+        registration_statistics:
+          $ref: "#/components/schemas/GetShortVideoCampaignResponseDataShortVideoCampaignRegistrationStatistic"
+          description: Account registration record statistics from the shop's perspective, not published video counts or deduplicated account counts. EU cross-shop access may include eligible shops belonging to the same seller. Statistics may be delayed or incomplete.
+        registration_status:
+          type: string
+          description: |-
+            Campaign registration stage. Does not indicate whether the shop is already registered or can register.
+            - NOT_STARTED: Registration has not started.
+            - OPEN: Registration is open. Does not establish the shop's registration eligibility.
+            - CLOSED: Registration has ended.
+        registration_summary:
+          $ref: "#/components/schemas/RegistrationSummary"
+          description: The shop's campaign eligibility and registration-blocking reasons. Does not guarantee successful registration.
+        target_seller_type:
+          type: string
+          description: |-
+            Seller types targeted by the campaign, not the current seller's type. Omitted if unavailable.
+            Seller types targeted by the campaign.
+            - ALL: Local and cross-border sellers.
+            - LOCAL: Local sellers.
+            - CROSS_BORDER: Cross-border sellers.
+        title:
+          type: string
+          description: Localized campaign name. Uses the default name if text in the requested language is missing. Omitted if the requested-language name is explicitly empty or no name is ultimately available.
+        type:
+          type: string
+          description: |-
+            Always returned when the object exists. Fixed to SHORT_VIDEO, consistent with the campaign type in lists.
+            Unified campaign type with the same semantics in lists and all four detail models. Distinct from campaign group type.
+            - PRODUCT: Product campaign.
+            - SHOP: Shop campaign.
+            - LIVESTREAM: Livestream campaign.
+            - SHORT_VIDEO: Short video campaign.
+    GetShortVideoCampaignResponseDataShortVideoCampaignParticipationRequirement:
+      type: object
+      properties:
+        account_requirements:
+          type: array
+          items:
+            $ref: "#/components/schemas/AccountRequirement"
+          description: Applicable requirements for linked accounts, account performance, and e-commerce permissions. Does not establish that any specific account has passed eligibility checks.
+        max_account_registration_count:
+          type: integer
+          format: int64
+          description: Maximum registration records each account may submit, as a positive integer. Omitted if unknown or inapplicable; omission does not mean unlimited. Not a video count limit or remaining registration quota.
+        shop_requirements:
+          type: array
+          items:
+            $ref: "#/components/schemas/ShopRequirement"
+          description: Applicable shop status, targeting, and other requirements, without targeting lists. Does not establish that the shop has passed eligibility checks.
+    GetShortVideoCampaignResponseDataShortVideoCampaignRegistrationStatistic:
+      type: object
+      properties:
+        approved_count:
+          type: integer
+          format: int64
+          description: Number of approved registration records.
+        expired_count:
+          type: integer
+          format: int64
+          description: Number of registration records that are no longer effective.
+        rejected_count:
+          type: integer
+          format: int64
+          description: Number of rejected registration records.
+        total_count:
+          type: integer
+          format: int64
+          description: Total account registration records, not videos or deduplicated accounts.
+        under_review_count:
+          type: integer
+          format: int64
+          description: Number of registration records under review.
+        withdrawal_under_review_count:
+          type: integer
+          format: int64
+          description: Number of registration records with withdrawal under review.
     GetShowcaseProductsResponse:
       type: object
       properties:
@@ -65608,6 +67384,18 @@ components:
         sku_return_request_id:
           type: string
           description: Identifier of the associated SKU-level, sub return request.
+    LinkedCampaignGroup:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Positive campaign group ID, always returned when the summary exists. A decimal string from 1 to 9223372036854775807.
+        official_sales_period:
+          $ref: "#/components/schemas/OfficialSalesPeriod"
+          description: Sales period of the linked campaign group.
+        title:
+          type: string
+          description: Nonempty campaign group name. Omitted if unavailable.
     LinkedProduct:
       type: object
       properties:
@@ -65712,6 +67500,183 @@ components:
         warehouse_id:
           type: string
           description: Warehouse identifier for this available inbound method option.
+    ListCampaignGroupResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/ListCampaignGroupResponseData"
+    ListCampaignGroupResponseData:
+      type: object
+      properties:
+        campaign_groups:
+          type: array
+          items:
+            $ref: "#/components/schemas/ListCampaignGroupResponseDataCampaignGroup"
+          description: Always returned. Campaign groups on the current page, each with summaries applicable to its type. Returns [] when no results match.
+        next_page_token:
+          type: string
+          description: Opaque token for the next page. An empty string indicates the last page within the current query scope. An empty page may still have a next-page token; do not infer completion from its item count.
+        total_count:
+          type: integer
+          format: int64
+          description: Always returned. Nonnegative total for this query, not the current page's item count. Consistency across pages is not guaranteed.
+    ListCampaignGroupResponseDataCampaignGroup:
+      type: object
+      properties:
+        available_regions:
+          type: array
+          items:
+            type: string
+          description: Applicable countries or regions. Omission does not mean that there are no regional restrictions and does not extend shop authorization. Region codes follow [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#search/code/); EU is also supported as an aggregate campaign region. A listed code does not guarantee campaign availability or extend authorization.
+        campaign_count:
+          type: integer
+          format: int64
+          description: Number of campaigns in the group within the current query scope, potentially including product, shop, livestream, and short video campaigns. Omission means unknown, not zero. The count is not guaranteed to equal the number of campaigns entries.
+        campaign_period:
+          $ref: "#/components/schemas/CampaignPeriod"
+          description: Campaign period for regular and long-term campaign groups, represented separately from the sales period.
+        campaign_status:
+          type: string
+          description: |-
+            Campaign group status. Omission means the status was not provided; it does not establish registration eligibility.
+            Campaign group status. None of these statuses establishes shop registration eligibility.
+            - INEFFECTIVE: Not yet effective.
+            - UPCOMING: Starting soon.
+            - ONGOING: In progress.
+            - EXPIRED: Ended or no longer effective.
+        campaigns:
+          type: array
+          items:
+            $ref: "#/components/schemas/Campaign"
+          description: Always returned for type=NORMAL; omitted for other types. Campaign summaries within the group for this query, without separate pagination. Returns [] when no campaigns are returned; this does not establish that the group contains no campaigns. Includes summaries only, without full details or nested campaign relationships.
+        description:
+          type: string
+          description: Localized campaign group description. Omitted if no description is available.
+        id:
+          type: string
+          description: Positive campaign group ID, always returned for each item. A decimal string from 1 to 9223372036854775807.
+        is_invited:
+          type: boolean
+          description: Whether the shop is invited. Omission means no result was provided. An invitation does not establish registration eligibility.
+        linked_campaign_groups:
+          type: array
+          items:
+            $ref: "#/components/schemas/LinkedCampaignGroup"
+          description: Applicable only to type=LONG_TERM; omitted for other types. Summaries of campaign groups linked to the long-term group, describing associated major sale arrangements. These groups are not included in campaign_count. Not paginated separately. Omitted if unavailable; [] means no linked group summaries were returned for this query, not that no other links exist.
+        official_sales_period:
+          $ref: "#/components/schemas/OfficialSalesPeriod"
+          description: Sales period. Distinct from the campaign period and registration times.
+        region:
+          type: string
+          description: Campaign region, which may be EU and need not match the authorized shop's region. Region codes follow [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#search/code/); EU is also supported as an aggregate campaign region. A listed code does not guarantee campaign availability or extend authorization.
+        title:
+          type: string
+          description: Localized campaign group name. Omitted if no name is available.
+        type:
+          type: string
+          description: |-
+            Campaign group type, which determines the summary list returned. If no defined type is available, this field and both summary lists are omitted.
+            Campaign group type.
+            - NORMAL: A regular campaign group.
+            - LONG_TERM: A long-term campaign group that may link to multiple regular groups. This does not mean that the shop is registered.
+    ListCampaignGroupResponseDataCampaignGroupCampaignRegistrationSummary:
+      type: object
+      properties:
+        is_eligible:
+          type: boolean
+          description: Whether the list-level eligibility conditions are met. Omitted if no conclusion is available.
+        is_registration_available:
+          type: boolean
+          description: Whether registration can be entered according to the list-level assessment. Omitted if no conclusion is available.
+        registration_block_reason:
+          $ref: "#/components/schemas/ListCampaignGroupResponseDataCampaignGroupCampaignRegistrationSummaryRegistrationBlockReason"
+          description: Confirmed reason registration is blocked. Returned if a reason code or message is available; otherwise omitted, never an empty object. Omission does not mean registration is allowed.
+    ListCampaignGroupResponseDataCampaignGroupCampaignRegistrationSummaryRegistrationBlockReason:
+      type: object
+      properties:
+        code:
+          type: string
+          description: |-
+            Public reason code shared with detail endpoints. Omitted when no defined reason applies; no code is invented or substituted.
+            Business reason for blocked eligibility or registration, not an API request error code.
+            - INELIGIBLE: The shop is not eligible to participate.
+            - NOT_IN_DESIGNATED_SHOP: The shop is outside the designated scope.
+            - REGISTRATION_HAS_CLOSED: Registration has closed.
+            - SHOP_NOT_ACTIVE: The shop is not operating normally.
+            - NOT_IN_REGISTRATION_DATE: Outside the registration period.
+            - NOT_ALLOW_REGISTER: Registration is explicitly prohibited by business rules.
+            - CAMPAIGN_DEACTIVATE: The campaign is deactivated.
+            - NOT_ALLOW_ADS: An existing advertising campaign registration causes a conflict. This does not mean insufficient advertising permissions.
+            - NOT_INVITED_ADS: The shop is not invited to the advertising campaign.
+            - SAME_TYPE_ACTIVE_REGISTRATION_EXISTS: Only one effective registration is allowed for this campaign type.
+            - CAMPAIGN_ALREADY_REGISTERED: This campaign allows registration only once.
+            - REGISTERED_AS_BUNDLE: Already participating in this campaign through a bundle.
+            - REGISTERED_SAME_TYPE: Already registered for the same campaign type.
+            - REGISTERED_ANOTHER_BUNDLE: Already registered for another bundle.
+            - NOT_REGISTER_DESIGNATED_RESOURCE_PKG: Not registered for the required resource package.
+            - NOT_ALLOW_SWITCH_TIER_ING: A tier change is in progress.
+            - REGISTERED_AS_SAME_TYPE_BUNDLE: Already registered for the same campaign type through another bundle.
+            - NOT_REGISTER_DESIGNATED_SHOP_CAMPAIGN: Not registered for the required shop campaign.
+            - REGISTERED_SERVICE_FEE_CAMPAIGN_CONFLICT: An existing service fee campaign registration causes a conflict.
+            - GMV_MAX_PERMISSION_DENIED: The shop does not meet this campaign's GMV Max eligibility requirements and no exemption applies.
+            - PRODUCT_REGISTRATION_LIMIT_REACHED: The shop has reached the product registration quota for this campaign.
+            - PRODUCT_REGISTRATION_IN_PROGRESS: A batch product registration for this shop and campaign is still in progress; another registration cannot be started yet.
+            - REGISTRATION_AGREEMENT_REQUIRED: The shop must confirm the required registration agreement before registering.
+        message:
+          type: string
+          description: Localized reason message visible to the shop. Omitted if unavailable; never an empty string.
+        related_campaign_id:
+          type: string
+          description: Positive product or shop campaign ID. Returned only when needed to explain a confirmed conflict or prerequisite and the related campaign is visible to the shop. Does not establish participation in the current campaign. A decimal string from 1 to 9223372036854775807.
+        related_campaign_type:
+          type: string
+          description: |-
+            Type of the related campaign, used to select its detail endpoint. Returned together with related_campaign_id. Both fields are omitted if the type cannot be confirmed, without affecting the reason code or message.
+            Unified campaign type with the same semantics in lists and all four detail models. Distinct from campaign group type.
+            - PRODUCT: Product campaign.
+            - SHOP: Shop campaign.
+            - LIVESTREAM: Livestream campaign.
+            - SHORT_VIDEO: Short video campaign.
+    ListCampaignResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/ListCampaignResponseData"
+    ListCampaignResponseData:
+      type: object
+      properties:
+        campaigns:
+          type: array
+          items:
+            $ref: "#/components/schemas/Campaign"
+          description: Campaign summaries on the current page. Returns [] when no results match. Campaign relationships are not expanded recursively.
+        next_page_token:
+          type: string
+          description: Opaque token for the next page. An empty string indicates the last page within the current query scope. An empty page may still have a next-page token; do not infer completion from its item count.
+        total_count:
+          type: integer
+          format: int64
+          description: Nonnegative pagination total used by this query, not the current page's item count. For EU cross-shop access, it may not be an exact deduplicated aggregate total. Consistency with other endpoints or later queries is not guaranteed.
     ListOpportunitiesRequest:
       type: object
       properties:
@@ -66059,6 +68024,149 @@ components:
         ad_credit_claim_status:
           type: string
           description: "Ad-credit-only sub-status, returned only when reward_type = ADS_CREDIT and status = AVAILABLE. Possible values: UNCLAIMED (eligible, not yet claimed) / CLAIMED (claimed). Ad credit must be claimed manually."
+    ListRegisteredCampaignResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/ListRegisteredCampaignResponseData"
+    ListRegisteredCampaignResponseData:
+      type: object
+      properties:
+        campaigns:
+          type: array
+          items:
+            $ref: "#/components/schemas/ListRegisteredCampaignResponseDataCampaign"
+          description: Registered campaign summaries on the current page. Returns [] when no items are returned; next_page_token may still be nonempty. Does not include full details or nested campaign relationships.
+        next_page_token:
+          type: string
+          description: Opaque token for the next page. An empty string indicates the last page within the current query scope. An empty page may still have a next-page token; do not infer completion from its item count.
+        total_count:
+          type: integer
+          format: int64
+          description: Nonnegative reference total for the current query scope. May not be an exact total of all visible records. Not used to determine whether another page exists.
+    ListRegisteredCampaignResponseDataCampaign:
+      type: object
+      properties:
+        bargain_statistics:
+          $ref: "#/components/schemas/ListRegisteredCampaignResponseDataCampaignBargainStatistic"
+          description: Negotiation statistics for a product campaign. Omitted for other campaign types or if no count is available. Independent of registration statistics.
+        campaign_period:
+          $ref: "#/components/schemas/CampaignPeriod"
+          description: Campaign execution period in RFC 3339 UTC with millisecond precision. Omission does not imply an unbounded interval.
+        campaign_status:
+          type: string
+          description: |-
+            Campaign status, using the same enum as other lists and details. Omitted if unavailable or unknown. Distinct from the shop's registration status.
+            Unified status for product, shop, livestream, and short video campaigns, shared by lists and details. Campaign groups use CampaignGroupStatus.
+            Represents the overall campaign process, separately from the registration period, participation eligibility, and review status of the shop's registration.
+            DEACTIVATED is returned only when deactivation is explicitly distinguished. Campaigns already classified as EXPIRED retain EXPIRED; the specific reason for ending is not inferred.
+            - INEFFECTIVE: The campaign is not yet effective or is currently unavailable.
+            - UPCOMING: Registration has not started. This does not simply mean that the campaign execution period has not started.
+            - ACTIVE: The campaign process is open, covering the period from registration opening to campaign completion, including registration, the wait for campaign execution, and execution itself. It does not mean that registration is still open, campaign execution has started, or benefits are effective for the shop.
+            - EXPIRED: The campaign has ended or is no longer effective. May include deactivated campaigns whose deactivation is not distinguished; it does not guarantee a scheduled end.
+            - DEACTIVATED: The campaign is explicitly deactivated. Not inferred from time intervals or EXPIRED status.
+        id:
+          type: string
+          description: Positive campaign ID, always returned for each item. Use type to select one of the four detail endpoints. Do not use a campaign group ID. A decimal string from 1 to 9223372036854775807.
+        region:
+          type: string
+          description: Campaign region, which may be EU. It need not match the authorized shop's region and does not grant access to additional shops. Region codes follow [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#search/code/); EU is also supported as an aggregate campaign region. A listed code does not guarantee campaign availability or extend authorization.
+        registration_mode:
+          type: string
+          description: |-
+            Product campaign registration mode, with the same meaning as registration_mode in Campaign. Omitted for other campaign types. Omission means the mode is unknown.
+            Product campaign registration mode. Independent of the four campaign types, direct or bundle participation, and whether the shop is registered.
+            Describes the participation model offered by the campaign. Rolling registration may cover linked campaigns; standard registration does not imply ongoing participation.
+            Omission means the registration mode is unknown, not STANDARD. Do not infer the mode from the title or whether the linked campaign list is empty.
+            - STANDARD: Standard registration without ongoing participation in linked campaigns. Does not mean registration is limited to once; actual registration limits and bundle participation must be assessed separately.
+            - ROLLING: Ongoing registration that can enable continued participation in linked campaigns according to their rules. Does not guarantee existing registration, synchronization, or eligibility for all linked campaigns.
+        registration_period:
+          $ref: "#/components/schemas/RegistrationPeriod"
+          description: Period during which campaign registration is open, not when the shop actually submitted its registration. Does not establish current registration availability for the shop.
+        registration_statistics:
+          $ref: "#/components/schemas/ListRegisteredCampaignResponseDataCampaignRegistrationStatistic"
+          description: Registration statistics applicable to the current campaign type. Omitted if the type is unknown or no applicable count is available. Not equivalent to complete detail-level statistics or registration eligibility.
+        subtypes:
+          type: array
+          items:
+            type: string
+          description: Distinct campaign subtypes. Order does not indicate priority. Returns [] when there are explicitly no subtypes; omitted if unknown or not fully representable.
+        title:
+          type: string
+          description: Nonempty name returned according to the registered campaign list's localization rules. Omitted if unavailable; no placeholder is used.
+        type:
+          type: string
+          description: |-
+            Campaign type. Returns the corresponding value for the four known types. For an unknown type, the summary is retained and this field is omitted. Do not guess a detail endpoint or statistics unit.
+            Unified campaign type with the same semantics in lists and all four detail models. Distinct from campaign group type.
+            - PRODUCT: Product campaign.
+            - SHOP: Shop campaign.
+            - LIVESTREAM: Livestream campaign.
+            - SHORT_VIDEO: Short video campaign.
+    ListRegisteredCampaignResponseDataCampaignBargainStatistic:
+      type: object
+      properties:
+        promotion_rejected_count:
+          type: integer
+          format: int64
+          description: Number of rejected subsidy plans, not rejected product registrations.
+        promotion_to_be_set_count:
+          type: integer
+          format: int64
+          description: Number awaiting subsidy plan configuration.
+        promotion_under_review_count:
+          type: integer
+          format: int64
+          description: Number of subsidy plans under review, independent of standard registration review counts.
+        under_review_count:
+          type: integer
+          format: int64
+          description: Number of products under review in the negotiation process, not standard registrations awaiting review.
+    ListRegisteredCampaignResponseDataCampaignRegistrationStatistic:
+      type: object
+      properties:
+        approved_count:
+          type: integer
+          format: int64
+          description: Registrations currently approved. Not the number with effective benefits.
+        expired_count:
+          type: integer
+          format: int64
+          description: Registrations currently no longer effective. Not limited to campaigns that ended as scheduled.
+        registered_count:
+          type: integer
+          format: int64
+          description: Total registrations for product, livestream, or short video campaigns, including rejected and no longer effective registrations. Omitted for shop campaigns.
+        rejected_count:
+          type: integer
+          format: int64
+          description: Registrations currently rejected.
+        scheduled_count:
+          type: integer
+          format: int64
+          description: Scheduled product count, applicable only to product campaigns. Omitted for other types. Must not be added to approved_count.
+        suspended_count:
+          type: integer
+          format: int64
+          description: Paused registration record count, applicable only to shop campaigns. Omitted for other types.
+        under_review_count:
+          type: integer
+          format: int64
+          description: Registrations currently under review. Not the number awaiting seller confirmation.
+        withdrawal_under_review_count:
+          type: integer
+          format: int64
+          description: Withdrawal requests under review. Does not mean withdrawal is complete.
     ListingQuality:
       type: object
       properties:
@@ -66692,6 +68800,17 @@ components:
         currency:
           type: string
           description: ISO 4217 three-letter currency code for the GMV amount, taken from the authorized shop context.
+    OfficialSalesPeriod:
+      type: object
+      properties:
+        end_time:
+          type: string
+          format: date-time
+          description: End time in RFC 3339 UTC with millisecond precision. Omitted if unavailable.
+        start_time:
+          type: string
+          format: date-time
+          description: Start time in RFC 3339 UTC with millisecond precision. Omitted if unavailable.
     OpportunityMatchingStatusChangeWebhook:
       type: object
       properties:
@@ -66968,6 +69087,15 @@ components:
         maximum_amount:
           type: string
           description: The maximum original price of all skus of this product.
+    OtherRule:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Complete business information, including applicable thresholds, exemptions, conditions, responsible parties, and validity periods. Omitted if unavailable.
+        title:
+          type: string
+          description: Nonempty title. Omitted if unavailable.
     Package:
       type: object
       properties:
@@ -68265,12 +70393,12 @@ components:
         seller_sku:
           type: string
           description: |-
-            An internal code/name for managing SKUs, not visible to buyers.  
-            Valid length: 
-            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: 6-50 characters
+            An internal code/name for managing SKUs, not visible to buyers.
+            Valid length:
+            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: 6-70 characters
             - Other regions: 1-50 characters
-            Format: 
-            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: Use alphabets, numbers, hyphens (-), or underscores (_) only
+            Format:
+            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: Use letters, numbers, spaces, and these symbols only: . - _ @ # & * + / ( )
             - Other regions: Text without spaces
       required:
         - price
@@ -68454,12 +70582,12 @@ components:
         seller_sku:
           type: string
           description: |-
-            An internal code/name for managing SKUs, not visible to buyers.  
-            Valid length: 
-            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: 6-50 characters
+            An internal code/name for managing SKUs, not visible to buyers.
+            Valid length:
+            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: 6-70 characters
             - Other regions: 1-50 characters
-            Format: 
-            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: Use alphabets, numbers, hyphens (-), or underscores (_) only
+            Format:
+            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: Use letters, numbers, spaces, and these symbols only: . - _ @ # & * + / ( )
             - Other regions: Text without spaces
         sku_dimensions:
           $ref: "#/components/schemas/PartialEditProductRequestSkuSkuDimension"
@@ -68819,12 +70947,12 @@ components:
         seller_sku:
           type: string
           description: |-
-            An internal code/name for managing SKUs, not visible to buyers.  
-            Valid length: 
-            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: 6-50 characters
+            An internal code/name for managing SKUs, not visible to buyers.
+            Valid length:
+            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: 6-70 characters
             - Other regions: 1-50 characters
-            Format: 
-            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: Use alphabets, numbers, hyphens (-), or underscores (_) only
+            Format:
+            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: Use letters, numbers, spaces, and these symbols only: . - _ @ # & * + / ( )
             - Other regions: Text without spaces
     PartialEditResponsiblePersonRequest:
       type: object
@@ -68899,6 +71027,28 @@ components:
         currency:
           type: string
           description: Currency of the partial refund amount. When `decision` is `OFFER_PARTIAL_REFUND_AFTER_RECEIVING_PKG`, this field is required and must match the return order's currency.
+    ParticipationRelation:
+      type: object
+      properties:
+        method:
+          type: string
+          description: |-
+            Always returned when the object exists. DIRECT means direct registration for this campaign; BUNDLE means participation through a bundle registration.
+            How the shop participates in this campaign.
+            - DIRECT: The shop registers directly for this campaign. Related records for other campaigns are not treated as registration for this campaign.
+            - BUNDLE: The shop participates in this campaign through a bundle registration.
+        related_campaign_id:
+          type: string
+          description: Positive ID of the bundle entry campaign. Returned only when method=BUNDLE and the entry is visible to the shop; omitted for DIRECT. Not expanded recursively. A decimal string from 1 to 9223372036854775807.
+        related_campaign_type:
+          type: string
+          description: |-
+            Type of the bundle entry campaign, used to select its detail endpoint. Returned together with related_campaign_id. Both fields are omitted if the type cannot be confirmed, without affecting the confirmed participation method.
+            Unified campaign type with the same semantics in lists and all four detail models. Distinct from campaign group type.
+            - PRODUCT: Product campaign.
+            - SHOP: Shop campaign.
+            - LIVESTREAM: Livestream campaign.
+            - SHORT_VIDEO: Short video campaign.
     Payment:
       type: object
       properties:
@@ -68998,6 +71148,20 @@ components:
         distance_fee:
           type: string
           description: Total distance fee for Horizon+ Program. Only applicable for ID market
+    PendingRegistrationStatistic:
+      type: object
+      properties:
+        has_pending_registrations:
+          type: boolean
+          description: Whether any registrations await seller confirmation. Omitted if no conclusion is available.
+        processed_count:
+          type: integer
+          format: int64
+          description: Nonnegative number of processed items in the same confirmation workflow. Omitted if unavailable. Does not count approved registrations or successful participation.
+        total_count:
+          type: integer
+          format: int64
+          description: Nonnegative total in the pending-confirmation workflow, including processed items. Omitted if unavailable. Not the number of remaining items.
     PhoneNumber:
       type: object
       properties:
@@ -69039,6 +71203,23 @@ components:
           type: integer
           format: int64
           description: The end of the package pickup time slot, as a Unix timestamp in seconds.
+    Policy:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Complete policy information, including discount conditions and exceptions. Omitted when terms are expressed only through images or links; the relevant resources are then provided in resources.
+        effective_period:
+          $ref: "#/components/schemas/EffectivePeriod"
+          description: Each independently configured validity boundary is always returned. Omitted if there are no time restrictions.
+        resources:
+          type: array
+          items:
+            $ref: "#/components/schemas/Resource"
+          description: Fee images and explanatory links in the applicable language. Always returned when terms include resources. Use these resources to understand the complete fees.
+        title:
+          type: string
+          description: Nonempty policy name. Omitted if unavailable.
     PostShoppablePhotosRequest:
       type: object
       properties:
@@ -70826,6 +73007,11 @@ components:
           description: |-
             If true, creators invited to the target collaboration are exempt from seller review and will automatically be approved for a free sample.
             Note that if has_free_sample=false, this field will not take effect.
+        use_product_sample_setting:
+          type: boolean
+          description: |-
+            If true, creators invited to the target collaboration will apply the product-level sample rules.
+            Note that if has_free_sample=false, this field will not take effect.
     QueryTargetCollaborationDetailResponseDataTargetCollaborationProduct:
       type: object
       properties:
@@ -70972,6 +73158,57 @@ components:
           type: integer
           format: int64
           description: Last update time of the RMA in Unix seconds.
+    Reason:
+      type: object
+      properties:
+        code:
+          type: string
+          description: |-
+            Returned for every reason represented by a defined public code. Confirmed participation-criteria failures return INELIGIBLE with the specific explanation in message. GMV Max eligibility blockers return GMV_MAX_PERMISSION_DENIED. Existing participation that blocks another registration returns CAMPAIGN_ALREADY_REGISTERED. Product quota, in-progress product registration, and required agreement blockers return PRODUCT_REGISTRATION_LIMIT_REACHED, PRODUCT_REGISTRATION_IN_PROGRESS, and REGISTRATION_AGREEMENT_REQUIRED respectively when applicable. Unclassified reasons may still omit code; a missing code does not mean that no blocker exists. Do not infer a code from localized message text.
+            Business reason for blocked eligibility or registration, not an API request error code.
+            - INELIGIBLE: The shop fails participation criteria. Multiple specific explanations may share this code.
+            - NOT_IN_DESIGNATED_SHOP: The shop is outside the designated scope.
+            - REGISTRATION_HAS_CLOSED: Registration has closed.
+            - SHOP_NOT_ACTIVE: The shop is not operating normally.
+            - NOT_IN_REGISTRATION_DATE: Outside the registration period.
+            - NOT_ALLOW_REGISTER: Registration is explicitly prohibited by business rules.
+            - CAMPAIGN_DEACTIVATE: The campaign is deactivated.
+            - NOT_ALLOW_ADS: An existing advertising campaign registration causes a conflict. This does not mean insufficient advertising permissions.
+            - NOT_INVITED_ADS: The shop is not invited to the advertising campaign.
+            - SAME_TYPE_ACTIVE_REGISTRATION_EXISTS: Only one effective registration is allowed for this campaign type.
+            - CAMPAIGN_ALREADY_REGISTERED: The shop already participates in this campaign and another registration is not allowed.
+            - REGISTERED_AS_BUNDLE: Already participating in this campaign through a bundle.
+            - REGISTERED_SAME_TYPE: Already registered for the same campaign type.
+            - REGISTERED_ANOTHER_BUNDLE: Already registered for another bundle.
+            - NOT_REGISTER_DESIGNATED_RESOURCE_PKG: Not registered for the required resource package.
+            - NOT_ALLOW_SWITCH_TIER_ING: A tier change is in progress.
+            - REGISTERED_AS_SAME_TYPE_BUNDLE: Already registered for the same campaign type through another bundle.
+            - NOT_REGISTER_DESIGNATED_SHOP_CAMPAIGN: Not registered for the required shop campaign.
+            - REGISTERED_SERVICE_FEE_CAMPAIGN_CONFLICT: An existing service fee campaign registration causes a conflict.
+            - GMV_MAX_PERMISSION_DENIED: The shop does not meet this campaign's GMV Max eligibility requirements and no exemption applies.
+            - PRODUCT_REGISTRATION_LIMIT_REACHED: The shop has reached the product registration quota for this campaign.
+            - PRODUCT_REGISTRATION_IN_PROGRESS: A batch product registration for this shop and campaign is still in progress; another registration cannot be started yet.
+            - REGISTRATION_AGREEMENT_REQUIRED: The shop has not accepted an agreement required to join this campaign. Already accepted agreements and agreements that do not require acceptance do not block registration. Accept the required agreement in Seller Center and query again; this query does not sign agreements.
+        message:
+          type: string
+          description: Always returned. Nonempty localized reason message visible to the shop.
+        regions:
+          type: array
+          items:
+            type: string
+          description: Regions associated with this reason. For EU cross-shop access, may include regions applicable to eligible shops belonging to the same seller. Region codes follow [ISO 3166-1 alpha-2](https://www.iso.org/obp/ui/#search/code/); EU is also supported as an aggregate campaign region. A listed code does not guarantee campaign availability or extend authorization.
+        related_campaign_id:
+          type: string
+          description: Returned only when needed to explain a conflict or prerequisite and the related campaign is visible to the shop. A decimal string from 1 to 9223372036854775807.
+        related_campaign_type:
+          type: string
+          description: |-
+            Type of the related campaign, used to select its detail endpoint. Returned together with related_campaign_id. Both fields are omitted if the type cannot be confirmed, without affecting the reason code or message.
+            Unified campaign type with the same semantics in lists and all four detail models. Distinct from campaign group type.
+            - PRODUCT: Product campaign.
+            - SHOP: Shop campaign.
+            - LIVESTREAM: Livestream campaign.
+            - SHORT_VIDEO: Short video campaign.
     RecipientAddressUpdateWebhook:
       type: object
       properties:
@@ -71719,6 +73956,63 @@ components:
     RegisterSellerPartnerCampaignProductsResponseData:
       type: object
       properties: {}
+    RegistrationAvailability:
+      type: object
+      properties:
+        can_register:
+          type: boolean
+          description: Always returned. True when all applicable registration-period, campaign-status, eligibility, conflict, participation, quota, ongoing-operation, and agreement-acceptance checks have passed, are exempt, or do not apply. False when a registration blocker is confirmed; see reasons. A fee information dialog alone does not constitute an unaccepted required agreement.
+        reasons:
+          type: array
+          items:
+            $ref: "#/components/schemas/Reason"
+          description: Always returned. Empty when can_register is true; contains at least one confirmed blocker when can_register is false. Use can_register as the decision rather than inferring permission from an empty list. Necessary query failures return an API error.
+    RegistrationBlockReason:
+      type: object
+      properties:
+        code:
+          type: string
+          description: |-
+            Always returned when the object exists. UNKNOWN means an unclassified blocking reason exists.
+            Livestream campaign registration-blocking reason.
+            - UNKNOWN: An unclassified registration-blocking reason exists. Must not be treated as no blocker.
+            - INELIGIBLE: Campaign eligibility requirements are not met.
+            - NOT_IN_DESIGNATED_SHOP: Outside the designated shop scope.
+            - REGISTRATION_HAS_CLOSED: Registration has closed.
+            - SHOP_NOT_ACTIVE: The shop is not operating normally.
+            - NOT_IN_REGISTRATION_DATE: Outside the registration period.
+            - NOT_IN_DESIGNATED_CREATOR: Outside the designated account scope. No account list or identifiers are returned.
+            - NOT_ALLOW_REGISTER: Registration is explicitly prohibited by business rules.
+            - NOT_ALLOW_REGISTER_ON_SELLER_APP: Registration through the seller mobile app is not supported. Does not mean registration is unavailable through all channels.
+            - NOT_BIND_ACCOUNT_ID: The shop has no linked account.
+            - ALL_BIND_ACCOUNT_NOT_ALLOW_REGISTER: None of the linked accounts meets registration requirements.
+            - CAMPAIGN_DEACTIVATE: The campaign is deactivated.
+            - MAX_SESSIONS_PER_ACCOUNT_REACHED: The livestream competition's per-account registration session limit has been reached.
+        message:
+          type: string
+          description: Localized reason message visible to the shop. Omitted if unavailable; never an empty string.
+    RegistrationPeriod:
+      type: object
+      properties:
+        end_time:
+          type: string
+          format: date-time
+          description: Valid end time. Omitted if unavailable. RFC 3339 UTC with millisecond precision.
+        start_time:
+          type: string
+          format: date-time
+          description: Valid start time. Omitted if unavailable. RFC 3339 UTC with millisecond precision.
+    RegistrationSummary:
+      type: object
+      properties:
+        is_eligible:
+          type: boolean
+          description: Whether the shop meets campaign eligibility requirements. Omitted if no definite conclusion is available. Does not establish final registration availability.
+        registration_block_reasons:
+          type: array
+          items:
+            $ref: "#/components/schemas/RegistrationBlockReason"
+          description: Confirmed registration-blocking reasons for the shop. [] means there are explicitly no blocking reasons; omission means unknown. An omitted message does not change the meaning of an existing reason code.
     RejectCancellationRequest:
       type: object
       properties:
@@ -71835,6 +74129,28 @@ components:
     RejectReturnResponseData:
       type: object
       properties: {}
+    Relation:
+      type: object
+      properties:
+        method:
+          type: string
+          description: |-
+            Always returned. Participation method for the current campaign, not a conflict record for another campaign.
+            How the shop participates in this campaign.
+            - DIRECT: The shop registers directly for this campaign. Related records for other campaigns are not treated as registration for this campaign.
+            - BUNDLE: The shop participates in this campaign through a bundle registration.
+        related_campaign_id:
+          type: string
+          description: For BUNDLE, returned only if the bundle entry campaign is visible to the shop. Omitted for DIRECT. A decimal string from 1 to 9223372036854775807.
+        related_campaign_type:
+          type: string
+          description: |-
+            Type of the bundle entry campaign, used to select its detail endpoint. Returned together with related_campaign_id. Both fields are omitted if the type cannot be confirmed, without affecting the confirmed participation method.
+            Unified campaign type with the same semantics in lists and all four detail models. Distinct from campaign group type.
+            - PRODUCT: Product campaign.
+            - SHOP: Shop campaign.
+            - LIVESTREAM: Livestream campaign.
+            - SHORT_VIDEO: Short video campaign.
     RemoveCreatorFromOpenCollaborationProductRequest:
       type: object
       properties:
@@ -72175,12 +74491,12 @@ components:
         seller_sku:
           type: string
           description: |-
-            An internal code/name for managing SKUs, not visible to buyers.  
-            Valid length: 
-            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: 6-50 characters
+            An internal code/name for managing SKUs, not visible to buyers.
+            Valid length:
+            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: 6-70 characters
             - Other regions: 1-50 characters
-            Format: 
-            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU: Use alphabets, numbers, hyphens (-), or underscores (_) only
+            Format:
+            - DE, ES, FR, IT, PL, NL, BE, CZ, AT, GR, PT, HU, IE: Use letters, numbers, spaces, and these symbols only: . - _ @ # & * + / ( )
             - Other regions: Text without spaces
     ReplicateProductRequestReplicateTargetSkuPrice:
       type: object
@@ -72356,6 +74672,22 @@ components:
         existing_collaboration_id:
           type: string
           description: The confict target collaboration id
+    Resource:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Nonempty resource name. Omitted if unavailable.
+        type:
+          type: string
+          description: |-
+            Always returned for each item.
+            Supplementary fee-term resource, which may be an image or a link to details.
+            - IMAGE: Fee illustration. Terms may exist only in the image; missing text must not be interpreted as no fees.
+            - LINK: Link to fee details. Does not authorize an agent to register or perform modifications.
+        url:
+          type: string
+          description: Always returned for each item. HTTPS image or explanatory link associated with the shop's applicable fee terms.
     ReturnLineItem:
       type: object
       properties:
@@ -81058,6 +83390,35 @@ components:
         name:
           type: string
           description: The name of the shop to which the product belongs.
+    ShopEligibility:
+      type: object
+      properties:
+        is_eligible:
+          type: boolean
+          description: "true: All applicable eligibility checks pass, including exemptions. false: A blocker is confirmed. Omitted if no business conclusion is available; this does not indicate a query failure or establish that any product is eligible."
+        reasons:
+          type: array
+          items:
+            $ref: "#/components/schemas/Reason"
+          description: Always returned. [] when the conclusion is true, confirmed reasons when false, and [] when the conclusion is undetermined.
+    ShopRequirement:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Business information body. Omitted if unavailable; an entry may contain only a title.
+        title:
+          type: string
+          description: Title. Omitted if unavailable; an entry may contain only a body.
+    ShopRule:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Complete business information, including applicable thresholds, exemptions, conditions, responsible parties, and validity periods. Omitted if unavailable.
+        title:
+          type: string
+          description: Nonempty title. Omitted if unavailable.
     ShoppableContentPostingWebhook:
       type: object
       properties:
