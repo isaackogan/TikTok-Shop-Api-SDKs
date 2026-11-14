@@ -42010,7 +42010,9 @@
         },
         "x-tts-requires-shop-cipher": true,
         "x-tts-scenario": 1,
-        "x-tts-scopes": [],
+        "x-tts-scopes": [
+          "Promotion Information"
+        ],
         "x-tts-error-codes": [],
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/list-campaign-group-202611"
       }
@@ -42077,7 +42079,9 @@
         },
         "x-tts-requires-shop-cipher": true,
         "x-tts-scenario": 1,
-        "x-tts-scopes": [],
+        "x-tts-scopes": [
+          "Promotion Information"
+        ],
         "x-tts-error-codes": [],
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-campaign-group-202611"
       }
@@ -42196,7 +42200,9 @@
         },
         "x-tts-requires-shop-cipher": true,
         "x-tts-scenario": 1,
-        "x-tts-scopes": [],
+        "x-tts-scopes": [
+          "Promotion Information"
+        ],
         "x-tts-error-codes": [],
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/list-campaign-202611"
       }
@@ -42273,7 +42279,9 @@
         },
         "x-tts-requires-shop-cipher": true,
         "x-tts-scenario": 1,
-        "x-tts-scopes": [],
+        "x-tts-scopes": [
+          "Promotion Information"
+        ],
         "x-tts-error-codes": [],
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-livestream-campaign-202611"
       }
@@ -42421,7 +42429,9 @@
         },
         "x-tts-requires-shop-cipher": true,
         "x-tts-scenario": 1,
-        "x-tts-scopes": [],
+        "x-tts-scopes": [
+          "Promotion Information"
+        ],
         "x-tts-error-codes": [],
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-product-campaign-202611"
       }
@@ -42548,7 +42558,9 @@
         },
         "x-tts-requires-shop-cipher": true,
         "x-tts-scenario": 1,
-        "x-tts-scopes": [],
+        "x-tts-scopes": [
+          "Promotion Information"
+        ],
         "x-tts-error-codes": [],
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/list-registered-campaign-202611"
       }
@@ -42591,7 +42603,9 @@
         },
         "x-tts-requires-shop-cipher": true,
         "x-tts-scenario": 1,
-        "x-tts-scopes": [],
+        "x-tts-scopes": [
+          "Promotion Information"
+        ],
         "x-tts-error-codes": [],
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-registered-campaign-counts-202611"
       }
@@ -42722,7 +42736,9 @@
         },
         "x-tts-requires-shop-cipher": true,
         "x-tts-scenario": 1,
-        "x-tts-scopes": [],
+        "x-tts-scopes": [
+          "Promotion Information"
+        ],
         "x-tts-error-codes": [],
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-shop-campaign-202611"
       }
@@ -42798,7 +42814,9 @@
         },
         "x-tts-requires-shop-cipher": true,
         "x-tts-scenario": 1,
-        "x-tts-scopes": [],
+        "x-tts-scopes": [
+          "Promotion Information"
+        ],
         "x-tts-error-codes": [],
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-short-video-campaign-202611"
       }
@@ -82589,7 +82607,7 @@
           },
           "gmv": {
             "$ref": "#/components/schemas/Gmv",
-            "description": "Gross merchandise value generated directly from the shoppable video."
+            "description": "Total GMV attributed to the video."
           },
           "gpm": {
             "$ref": "#/components/schemas/Gpm",

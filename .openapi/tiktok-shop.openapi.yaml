@@ -28516,7 +28516,8 @@ paths:
                 request_id: 202611090749000101890810281E8C70B7
       x-tts-requires-shop-cipher: true
       x-tts-scenario: 1
-      x-tts-scopes: []
+      x-tts-scopes:
+        - Promotion Information
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/list-campaign-group-202611
   /promotion/202611/campaign_groups/{campaign_group_id}:
@@ -28575,7 +28576,8 @@ paths:
                 request_id: 202611090749000101890810281E8C70B7
       x-tts-requires-shop-cipher: true
       x-tts-scenario: 1
-      x-tts-scopes: []
+      x-tts-scopes:
+        - Promotion Information
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-campaign-group-202611
   /promotion/202611/campaigns:
@@ -28673,7 +28675,8 @@ paths:
                 request_id: 202611090749000101890810281E8C70B7
       x-tts-requires-shop-cipher: true
       x-tts-scenario: 1
-      x-tts-scopes: []
+      x-tts-scopes:
+        - Promotion Information
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/list-campaign-202611
   /promotion/202611/livestream_campaigns/{livestream_campaign_id}:
@@ -28744,7 +28747,8 @@ paths:
                 request_id: 202611090749000101890810281E8C70B7
       x-tts-requires-shop-cipher: true
       x-tts-scenario: 1
-      x-tts-scopes: []
+      x-tts-scopes:
+        - Promotion Information
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-livestream-campaign-202611
   /promotion/202611/product_campaigns/{product_campaign_id}:
@@ -28863,7 +28867,8 @@ paths:
                 request_id: 202611090749000101890810281E8C70B7
       x-tts-requires-shop-cipher: true
       x-tts-scenario: 1
-      x-tts-scopes: []
+      x-tts-scopes:
+        - Promotion Information
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-product-campaign-202611
   /promotion/202611/registered_campaigns:
@@ -28967,7 +28972,8 @@ paths:
                 request_id: 202611090749000101890810281E8C70B7
       x-tts-requires-shop-cipher: true
       x-tts-scenario: 1
-      x-tts-scopes: []
+      x-tts-scopes:
+        - Promotion Information
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/list-registered-campaign-202611
   /promotion/202611/registered_campaigns/counts:
@@ -29006,7 +29012,8 @@ paths:
                 request_id: 202611090749000101890810281E8C70B7
       x-tts-requires-shop-cipher: true
       x-tts-scenario: 1
-      x-tts-scopes: []
+      x-tts-scopes:
+        - Promotion Information
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-registered-campaign-counts-202611
   /promotion/202611/shop_campaigns/{shop_campaign_id}:
@@ -29110,7 +29117,8 @@ paths:
                 request_id: 202611090749000101890810281E8C70B7
       x-tts-requires-shop-cipher: true
       x-tts-scenario: 1
-      x-tts-scopes: []
+      x-tts-scopes:
+        - Promotion Information
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-shop-campaign-202611
   /promotion/202611/short_video_campaigns/{short_video_campaign_id}:
@@ -29180,7 +29188,8 @@ paths:
                 request_id: 202611090749000101890810281E8C70B7
       x-tts-requires-shop-cipher: true
       x-tts-scenario: 1
-      x-tts-scopes: []
+      x-tts-scopes:
+        - Promotion Information
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-short-video-campaign-202611
   /return_refund/202309/cancellations/{cancel_id}/approve:
@@ -63059,7 +63068,7 @@ components:
           description: The total number of customers who placed orders directly from the shoppable video.
         gmv:
           $ref: "#/components/schemas/Gmv"
-          description: Gross merchandise value generated directly from the shoppable video.
+          description: Total GMV attributed to the video.
         gpm:
           $ref: "#/components/schemas/Gpm"
           description: GMV generated per 1,000 video views.
