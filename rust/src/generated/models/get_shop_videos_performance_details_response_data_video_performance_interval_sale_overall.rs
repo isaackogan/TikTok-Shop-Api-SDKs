@@ -19,7 +19,7 @@ pub struct GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSa
     /// The total number of customers who placed orders directly from the shoppable video.
     #[serde(rename = "customers", skip_serializing_if = "Option::is_none")]
     pub customers: Option<i64>,
-    /// Gross merchandise value generated directly from the shoppable video.
+    /// Total GMV attributed to the video.
     #[serde(rename = "gmv", skip_serializing_if = "Option::is_none")]
     pub gmv: Option<Box<models::Gmv>>,
     /// GMV generated per 1,000 video views.

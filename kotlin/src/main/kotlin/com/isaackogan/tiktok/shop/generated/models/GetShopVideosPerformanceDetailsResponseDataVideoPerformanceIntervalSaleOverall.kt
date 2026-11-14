@@ -33,7 +33,7 @@ import com.google.gson.annotations.SerializedName
  *
  * @param ctr Product clicks from the video divided by impressions of all video products.
  * @param customers The total number of customers who placed orders directly from the shoppable video.
- * @param gmv Gross merchandise value generated directly from the shoppable video.
+ * @param gmv Total GMV attributed to the video.
  * @param gpm GMV generated per 1,000 video views.
  * @param itemsSold The total number of items sold directly from the shoppable video.
  * @param productClicks The number of product clicks from the video.
@@ -51,7 +51,7 @@ data class GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSa
     @SerializedName("customers")
     val customers: kotlin.Long? = null,
 
-    /* Gross merchandise value generated directly from the shoppable video. */
+    /* Total GMV attributed to the video. */
     @SerializedName("gmv")
     val gmv: Gmv? = null,
 

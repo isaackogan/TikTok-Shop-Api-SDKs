@@ -47,7 +47,7 @@ export interface GetShopVideosPerformanceDetailsResponseDataVideoPerformanceInte
      */
     customers?: number;
     /**
-     * Gross merchandise value generated directly from the shoppable video.
+     * Total GMV attributed to the video.
      * @type {Gmv}
      * @memberof GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSaleOverall
      */

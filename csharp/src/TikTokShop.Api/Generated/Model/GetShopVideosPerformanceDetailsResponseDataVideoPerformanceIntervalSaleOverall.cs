@@ -37,7 +37,7 @@ namespace TikTokShop.Api.Generated.Model
         /// </summary>
         /// <param name="ctr">Product clicks from the video divided by impressions of all video products..</param>
         /// <param name="customers">The total number of customers who placed orders directly from the shoppable video..</param>
-        /// <param name="gmv">Gross merchandise value generated directly from the shoppable video..</param>
+        /// <param name="gmv">Total GMV attributed to the video..</param>
         /// <param name="gpm">GMV generated per 1,000 video views..</param>
         /// <param name="itemsSold">The total number of items sold directly from the shoppable video..</param>
         /// <param name="productClicks">The number of product clicks from the video..</param>
@@ -69,9 +69,9 @@ namespace TikTokShop.Api.Generated.Model
         public long Customers { get; set; }
 
         /// <summary>
-        /// Gross merchandise value generated directly from the shoppable video.
+        /// Total GMV attributed to the video.
         /// </summary>
-        /// <value>Gross merchandise value generated directly from the shoppable video.</value>
+        /// <value>Total GMV attributed to the video.</value>
         [DataMember(Name = "gmv", EmitDefaultValue = false)]
         public Gmv Gmv { get; set; }
 

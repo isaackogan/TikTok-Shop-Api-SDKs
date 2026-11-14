@@ -134,7 +134,7 @@ public class GetShopVideosPerformanceDetailsResponseDataVideoPerformanceInterval
   }
 
   /**
-   * Gross merchandise value generated directly from the shoppable video.
+   * Total GMV attributed to the video.
    * @return gmv
    */
   @javax.annotation.Nullable

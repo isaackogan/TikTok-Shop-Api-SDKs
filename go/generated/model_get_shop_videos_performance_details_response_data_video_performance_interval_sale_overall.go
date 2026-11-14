@@ -23,7 +23,7 @@ type GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSaleOver
 	Ctr *string `json:"ctr,omitempty"`
 	// The total number of customers who placed orders directly from the shoppable video.
 	Customers *int64 `json:"customers,omitempty"`
-	// Gross merchandise value generated directly from the shoppable video.
+	// Total GMV attributed to the video.
 	Gmv *Gmv `json:"gmv,omitempty"`
 	// GMV generated per 1,000 video views.
 	Gpm *Gpm `json:"gpm,omitempty"`

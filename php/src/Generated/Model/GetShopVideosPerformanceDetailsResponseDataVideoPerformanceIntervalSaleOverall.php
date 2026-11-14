@@ -398,7 +398,7 @@ class GetShopVideosPerformanceDetailsResponseDataVideoPerformanceIntervalSaleOve
     /**
      * Sets gmv
      *
-     * @param \TikTokShop\Api\Generated\Model\Gmv|null $gmv Gross merchandise value generated directly from the shoppable video.
+     * @param \TikTokShop\Api\Generated\Model\Gmv|null $gmv Total GMV attributed to the video.
      *
      * @return self
      */
