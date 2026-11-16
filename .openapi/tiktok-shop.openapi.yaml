@@ -31203,18 +31203,20 @@ paths:
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-shop-group-and-related-shops-202601
   /seller/202611/carousel_permission:
     get:
-      operationId: getSellerCarouselPermission
-      summary: Get Seller Carousel Permission
-      description: Retrieve the carousel-related permissions for the currently authorized seller, including auto-post permission and photo mode permission.
+      operationId: getShopCarouselPermission
+      summary: Get Shop Carousel Permission
+      description: Retrieve the carousel-related permissions for the currently authorized shop, including auto-post permission and photo mode permission.
       tags:
         - Seller
+      parameters:
+        - $ref: "#/components/parameters/ShopCipher"
       responses:
         "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GetSellerCarouselPermissionResponse"
+                $ref: "#/components/schemas/GetShopCarouselPermissionResponse"
               example:
                 code: 0
                 data:
@@ -31222,31 +31224,34 @@ paths:
                   has_photo_mode_permission: true
                 message: Success
                 request_id: 202203070749000101890810281E8C70B7
-      x-tts-scenario: 2
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
       x-tts-scopes:
         - Product Optimization
       x-tts-error-codes: []
-      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-seller-carousel-permission-202611
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-shop-carousel-permission-202611
   /seller/202611/images/upload:
     post:
-      operationId: uploadSellerImage
-      summary: Upload Seller Image
-      description: Upload an image material up to 10 MiB to TOS for the current seller.
+      operationId: uploadShopImage
+      summary: Upload Shop Image
+      description: Upload an image material up to 10 MiB to TOS for the current shop.
       tags:
         - Seller
+      parameters:
+        - $ref: "#/components/parameters/ShopCipher"
       requestBody:
         required: true
         content:
           multipart/form-data:
             schema:
-              $ref: "#/components/schemas/UploadSellerImageRequest"
+              $ref: "#/components/schemas/UploadShopImageRequest"
       responses:
         "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UploadSellerImageResponse"
+                $ref: "#/components/schemas/UploadShopImageResponse"
               example:
                 code: 0
                 data:
@@ -31254,15 +31259,16 @@ paths:
                   url: https://p-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/c668cdf70b7f483c94dbe
                 message: Success
                 request_id: 202203070749000101890810281E8C70B7
-      x-tts-scenario: 2
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
       x-tts-scopes:
         - Product Optimization
       x-tts-error-codes: []
-      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/upload-seller-image-202611
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/upload-shop-image-202611
   /seller/202611/materials/upload:
     post:
-      operationId: uploadSellerMaterials
-      summary: Upload Seller Materials
+      operationId: uploadShopMaterials
+      summary: Upload Shop Materials
       description: Upload image materials for the current shop. Use `materials` for `ONE_PRODUCT_ONE_IMAGE` and `material_groups` for `ONE_PRODUCT_MULTIPLE_IMAGES`. Provide exactly one mode payload per request.
       tags:
         - Seller
@@ -31273,7 +31279,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UploadSellerMaterialsRequest"
+              $ref: "#/components/schemas/UploadShopMaterialsRequest"
             example:
               material_groups:
                 - materials:
@@ -31296,7 +31302,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/UploadSellerMaterialsResponse"
+                $ref: "#/components/schemas/UploadShopMaterialsResponse"
               example:
                 code: 0
                 data:
@@ -31323,7 +31329,7 @@ paths:
       x-tts-scopes:
         - Product Optimization
       x-tts-error-codes: []
-      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/upload-seller-materials-202611
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/upload-shop-materials-202611
   /supply_chain/202309/packages/sync:
     post:
       operationId: confirmPackageShipment
@@ -58898,33 +58904,6 @@ components:
         category_name:
           type: string
           description: The primary category name.
-    GetSellerCarouselPermissionResponse:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int64
-          description: Status code; 0 means success.
-        message:
-          type: string
-          description: Success or failure message.
-        request_id:
-          type: string
-          description: Request log ID.
-        data:
-          $ref: "#/components/schemas/GetSellerCarouselPermissionResponseData"
-    GetSellerCarouselPermissionResponseData:
-      type: object
-      properties:
-        has_auto_post_permission:
-          type: boolean
-          description: Whether the currently authorized seller has auto-post permission for carousel publishing.
-        has_photo_mode_permission:
-          type: boolean
-          description: Whether the currently authorized seller has photo mode permission for carousel publishing.
-      required:
-        - has_auto_post_permission
-        - has_photo_mode_permission
     GetSellerFinancialTransactionsResponse:
       type: object
       properties:
@@ -59867,6 +59846,33 @@ components:
           type: integer
           format: int64
           description: Number of shop withdrawal requests awaiting review.
+    GetShopCarouselPermissionResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/GetShopCarouselPermissionResponseData"
+    GetShopCarouselPermissionResponseData:
+      type: object
+      properties:
+        has_auto_post_permission:
+          type: boolean
+          description: Whether the currently authorized shop has auto-post permission for carousel publishing.
+        has_photo_mode_permission:
+          type: boolean
+          description: Whether the currently authorized shop has photo mode permission for carousel publishing.
+      required:
+        - has_auto_post_permission
+        - has_photo_mode_permission
     GetShopGroupAndRelatedShopsResponse:
       type: object
       properties:
@@ -87218,7 +87224,7 @@ components:
     UploadReturnShippingInformationResponseData:
       type: object
       properties: {}
-    UploadSellerImageRequest:
+    UploadShopImageRequest:
       type: object
       properties:
         image_data:
@@ -87234,7 +87240,7 @@ components:
             - Maximum file size: 10 MiB (10,485,760 bytes).
       required:
         - image_data
-    UploadSellerImageResponse:
+    UploadShopImageResponse:
       type: object
       properties:
         code:
@@ -87248,8 +87254,8 @@ components:
           type: string
           description: Request log ID.
         data:
-          $ref: "#/components/schemas/UploadSellerImageResponseData"
-    UploadSellerImageResponseData:
+          $ref: "#/components/schemas/UploadShopImageResponseData"
+    UploadShopImageResponseData:
       type: object
       properties:
         uri:
@@ -87261,13 +87267,13 @@ components:
       required:
         - uri
         - url
-    UploadSellerMaterialsRequest:
+    UploadShopMaterialsRequest:
       type: object
       properties:
         material_groups:
           type: array
           items:
-            $ref: "#/components/schemas/UploadSellerMaterialsRequestMaterialGroup"
+            $ref: "#/components/schemas/UploadShopMaterialsRequestMaterialGroup"
           description: Grouped materials for the `ONE_PRODUCT_MULTIPLE_IMAGES` mode. Provide 1 to 10 groups, omit `materials`, and keep the total number of uploaded images in one request within 30.
         materials:
           type: array
@@ -87293,7 +87299,7 @@ components:
       required:
         - post_type
         - product_id
-    UploadSellerMaterialsRequestMaterialGroup:
+    UploadShopMaterialsRequestMaterialGroup:
       type: object
       properties:
         materials:
@@ -87307,7 +87313,7 @@ components:
       required:
         - materials
         - post_type
-    UploadSellerMaterialsResponse:
+    UploadShopMaterialsResponse:
       type: object
       properties:
         code:
@@ -87321,21 +87327,21 @@ components:
           type: string
           description: Request log ID.
         data:
-          $ref: "#/components/schemas/UploadSellerMaterialsResponseData"
-    UploadSellerMaterialsResponseData:
+          $ref: "#/components/schemas/UploadShopMaterialsResponseData"
+    UploadShopMaterialsResponseData:
       type: object
       properties:
         material_groups:
           type: array
           items:
-            $ref: "#/components/schemas/UploadSellerMaterialsResponseDataMaterialGroup"
+            $ref: "#/components/schemas/UploadShopMaterialsResponseDataMaterialGroup"
           description: Uploaded grouped materials with generated group IDs and material IDs.
         materials:
           type: array
           items:
-            $ref: "#/components/schemas/UploadSellerMaterialsResponseDataMaterialGroupMaterial"
+            $ref: "#/components/schemas/UploadShopMaterialsResponseDataMaterialGroupMaterial"
           description: Uploaded single-image materials with generated material IDs.
-    UploadSellerMaterialsResponseDataMaterialGroup:
+    UploadShopMaterialsResponseDataMaterialGroup:
       type: object
       properties:
         image_group_id:
@@ -87344,9 +87350,9 @@ components:
         materials:
           type: array
           items:
-            $ref: "#/components/schemas/UploadSellerMaterialsResponseDataMaterialGroupMaterial"
+            $ref: "#/components/schemas/UploadShopMaterialsResponseDataMaterialGroupMaterial"
           description: Materials in the uploaded group with generated material IDs.
-    UploadSellerMaterialsResponseDataMaterialGroupMaterial:
+    UploadShopMaterialsResponseDataMaterialGroupMaterial:
       type: object
       properties:
         expire_time:
