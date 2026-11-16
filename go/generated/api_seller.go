@@ -244,41 +244,41 @@ func (a *SellerAPIService) GetGlobalProductPermissionExecute(r ApiGetGlobalProdu
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetSellerCarouselPermissionRequest struct {
+type ApiGetShopCarouselPermissionRequest struct {
 	ctx context.Context
 	ApiService *SellerAPIService
 }
 
-func (r ApiGetSellerCarouselPermissionRequest) Execute() (*GetSellerCarouselPermissionResponse, *http.Response, error) {
-	return r.ApiService.GetSellerCarouselPermissionExecute(r)
+func (r ApiGetShopCarouselPermissionRequest) Execute() (*GetShopCarouselPermissionResponse, *http.Response, error) {
+	return r.ApiService.GetShopCarouselPermissionExecute(r)
 }
 
 /*
-GetSellerCarouselPermission Get Seller Carousel Permission
+GetShopCarouselPermission Get Shop Carousel Permission
 
-Retrieve the carousel-related permissions for the currently authorized seller, including auto-post permission and photo mode permission.
+Retrieve the carousel-related permissions for the currently authorized shop, including auto-post permission and photo mode permission.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiGetSellerCarouselPermissionRequest
+ @return ApiGetShopCarouselPermissionRequest
 */
-func (a *SellerAPIService) GetSellerCarouselPermission(ctx context.Context) ApiGetSellerCarouselPermissionRequest {
-	return ApiGetSellerCarouselPermissionRequest{
+func (a *SellerAPIService) GetShopCarouselPermission(ctx context.Context) ApiGetShopCarouselPermissionRequest {
+	return ApiGetShopCarouselPermissionRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return GetSellerCarouselPermissionResponse
-func (a *SellerAPIService) GetSellerCarouselPermissionExecute(r ApiGetSellerCarouselPermissionRequest) (*GetSellerCarouselPermissionResponse, *http.Response, error) {
+//  @return GetShopCarouselPermissionResponse
+func (a *SellerAPIService) GetShopCarouselPermissionExecute(r ApiGetShopCarouselPermissionRequest) (*GetShopCarouselPermissionResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *GetSellerCarouselPermissionResponse
+		localVarReturnValue  *GetShopCarouselPermissionResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SellerAPIService.GetSellerCarouselPermission")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SellerAPIService.GetShopCarouselPermission")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -462,48 +462,48 @@ func (a *SellerAPIService) GetShopGroupAndRelatedShopsExecute(r ApiGetShopGroupA
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUploadSellerImageRequest struct {
+type ApiUploadShopImageRequest struct {
 	ctx context.Context
 	ApiService *SellerAPIService
 	imageData *os.File
 }
 
 // The local image file to upload to TOS.  Requirements: - Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP. - Zero-byte files are rejected. - Maximum file size: 10 MiB (10,485,760 bytes).
-func (r ApiUploadSellerImageRequest) ImageData(imageData *os.File) ApiUploadSellerImageRequest {
+func (r ApiUploadShopImageRequest) ImageData(imageData *os.File) ApiUploadShopImageRequest {
 	r.imageData = imageData
 	return r
 }
 
-func (r ApiUploadSellerImageRequest) Execute() (*UploadSellerImageResponse, *http.Response, error) {
-	return r.ApiService.UploadSellerImageExecute(r)
+func (r ApiUploadShopImageRequest) Execute() (*UploadShopImageResponse, *http.Response, error) {
+	return r.ApiService.UploadShopImageExecute(r)
 }
 
 /*
-UploadSellerImage Upload Seller Image
+UploadShopImage Upload Shop Image
 
-Upload an image material up to 10 MiB to TOS for the current seller.
+Upload an image material up to 10 MiB to TOS for the current shop.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiUploadSellerImageRequest
+ @return ApiUploadShopImageRequest
 */
-func (a *SellerAPIService) UploadSellerImage(ctx context.Context) ApiUploadSellerImageRequest {
-	return ApiUploadSellerImageRequest{
+func (a *SellerAPIService) UploadShopImage(ctx context.Context) ApiUploadShopImageRequest {
+	return ApiUploadShopImageRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return UploadSellerImageResponse
-func (a *SellerAPIService) UploadSellerImageExecute(r ApiUploadSellerImageRequest) (*UploadSellerImageResponse, *http.Response, error) {
+//  @return UploadShopImageResponse
+func (a *SellerAPIService) UploadShopImageExecute(r ApiUploadShopImageRequest) (*UploadShopImageResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *UploadSellerImageResponse
+		localVarReturnValue  *UploadShopImageResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SellerAPIService.UploadSellerImage")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SellerAPIService.UploadShopImage")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -596,47 +596,47 @@ func (a *SellerAPIService) UploadSellerImageExecute(r ApiUploadSellerImageReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUploadSellerMaterialsRequest struct {
+type ApiUploadShopMaterialsRequest struct {
 	ctx context.Context
 	ApiService *SellerAPIService
-	uploadSellerMaterialsRequest *UploadSellerMaterialsRequest
+	uploadShopMaterialsRequest *UploadShopMaterialsRequest
 }
 
-func (r ApiUploadSellerMaterialsRequest) UploadSellerMaterialsRequest(uploadSellerMaterialsRequest UploadSellerMaterialsRequest) ApiUploadSellerMaterialsRequest {
-	r.uploadSellerMaterialsRequest = &uploadSellerMaterialsRequest
+func (r ApiUploadShopMaterialsRequest) UploadShopMaterialsRequest(uploadShopMaterialsRequest UploadShopMaterialsRequest) ApiUploadShopMaterialsRequest {
+	r.uploadShopMaterialsRequest = &uploadShopMaterialsRequest
 	return r
 }
 
-func (r ApiUploadSellerMaterialsRequest) Execute() (*UploadSellerMaterialsResponse, *http.Response, error) {
-	return r.ApiService.UploadSellerMaterialsExecute(r)
+func (r ApiUploadShopMaterialsRequest) Execute() (*UploadShopMaterialsResponse, *http.Response, error) {
+	return r.ApiService.UploadShopMaterialsExecute(r)
 }
 
 /*
-UploadSellerMaterials Upload Seller Materials
+UploadShopMaterials Upload Shop Materials
 
 Upload image materials for the current shop. Use `materials` for `ONE_PRODUCT_ONE_IMAGE` and `material_groups` for `ONE_PRODUCT_MULTIPLE_IMAGES`. Provide exactly one mode payload per request.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiUploadSellerMaterialsRequest
+ @return ApiUploadShopMaterialsRequest
 */
-func (a *SellerAPIService) UploadSellerMaterials(ctx context.Context) ApiUploadSellerMaterialsRequest {
-	return ApiUploadSellerMaterialsRequest{
+func (a *SellerAPIService) UploadShopMaterials(ctx context.Context) ApiUploadShopMaterialsRequest {
+	return ApiUploadShopMaterialsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return UploadSellerMaterialsResponse
-func (a *SellerAPIService) UploadSellerMaterialsExecute(r ApiUploadSellerMaterialsRequest) (*UploadSellerMaterialsResponse, *http.Response, error) {
+//  @return UploadShopMaterialsResponse
+func (a *SellerAPIService) UploadShopMaterialsExecute(r ApiUploadShopMaterialsRequest) (*UploadShopMaterialsResponse, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  *UploadSellerMaterialsResponse
+		localVarReturnValue  *UploadShopMaterialsResponse
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SellerAPIService.UploadSellerMaterials")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "SellerAPIService.UploadShopMaterials")
 	if err != nil {
 		return localVarReturnValue, nil, &GenericOpenAPIError{error: err.Error()}
 	}
@@ -646,8 +646,8 @@ func (a *SellerAPIService) UploadSellerMaterialsExecute(r ApiUploadSellerMateria
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := url.Values{}
 	localVarFormParams := url.Values{}
-	if r.uploadSellerMaterialsRequest == nil {
-		return localVarReturnValue, nil, reportError("uploadSellerMaterialsRequest is required and must be specified")
+	if r.uploadShopMaterialsRequest == nil {
+		return localVarReturnValue, nil, reportError("uploadShopMaterialsRequest is required and must be specified")
 	}
 
 	// to determine the Content-Type header
@@ -668,7 +668,7 @@ func (a *SellerAPIService) UploadSellerMaterialsExecute(r ApiUploadSellerMateria
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.uploadSellerMaterialsRequest
+	localVarPostBody = r.uploadShopMaterialsRequest
 	if r.ctx != nil {
 		// API Key Authentication
 		if auth, ok := r.ctx.Value(ContextAPIKeys).(map[string]APIKey); ok {

@@ -31,10 +31,10 @@ pub enum GetGlobalProductPermissionError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`get_seller_carousel_permission`]
+/// struct for typed errors of method [`get_shop_carousel_permission`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum GetSellerCarouselPermissionError {
+pub enum GetShopCarouselPermissionError {
     UnknownValue(serde_json::Value),
 }
 
@@ -45,17 +45,17 @@ pub enum GetShopGroupAndRelatedShopsError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`upload_seller_image`]
+/// struct for typed errors of method [`upload_shop_image`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum UploadSellerImageError {
+pub enum UploadShopImageError {
     UnknownValue(serde_json::Value),
 }
 
-/// struct for typed errors of method [`upload_seller_materials`]
+/// struct for typed errors of method [`upload_shop_materials`]
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(untagged)]
-pub enum UploadSellerMaterialsError {
+pub enum UploadShopMaterialsError {
     UnknownValue(serde_json::Value),
 }
 
@@ -146,8 +146,8 @@ pub async fn get_global_product_permission(configuration: &configuration::Config
     }
 }
 
-/// Retrieve the carousel-related permissions for the currently authorized seller, including auto-post permission and photo mode permission.
-pub async fn get_seller_carousel_permission(configuration: &configuration::Configuration, ) -> Result<models::GetSellerCarouselPermissionResponse, Error<GetSellerCarouselPermissionError>> {
+/// Retrieve the carousel-related permissions for the currently authorized shop, including auto-post permission and photo mode permission.
+pub async fn get_shop_carousel_permission(configuration: &configuration::Configuration, ) -> Result<models::GetShopCarouselPermissionResponse, Error<GetShopCarouselPermissionError>> {
 
     let uri_str = format!("{}/seller/202611/carousel_permission", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::GET, &uri_str);
@@ -179,12 +179,12 @@ pub async fn get_seller_carousel_permission(configuration: &configuration::Confi
         let content = resp.text().await?;
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::GetSellerCarouselPermissionResponse`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::GetSellerCarouselPermissionResponse`")))),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::GetShopCarouselPermissionResponse`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::GetShopCarouselPermissionResponse`")))),
         }
     } else {
         let content = resp.text().await?;
-        let entity: Option<GetSellerCarouselPermissionError> = serde_json::from_str(&content).ok();
+        let entity: Option<GetShopCarouselPermissionError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
@@ -232,8 +232,8 @@ pub async fn get_shop_group_and_related_shops(configuration: &configuration::Con
     }
 }
 
-/// Upload an image material up to 10 MiB to TOS for the current seller.
-pub async fn upload_seller_image(configuration: &configuration::Configuration, image_data: std::path::PathBuf) -> Result<models::UploadSellerImageResponse, Error<UploadSellerImageError>> {
+/// Upload an image material up to 10 MiB to TOS for the current shop.
+pub async fn upload_shop_image(configuration: &configuration::Configuration, image_data: std::path::PathBuf) -> Result<models::UploadShopImageResponse, Error<UploadShopImageError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_form_image_data = image_data;
 
@@ -274,20 +274,20 @@ pub async fn upload_seller_image(configuration: &configuration::Configuration, i
         let content = resp.text().await?;
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::UploadSellerImageResponse`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::UploadSellerImageResponse`")))),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::UploadShopImageResponse`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::UploadShopImageResponse`")))),
         }
     } else {
         let content = resp.text().await?;
-        let entity: Option<UploadSellerImageError> = serde_json::from_str(&content).ok();
+        let entity: Option<UploadShopImageError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }
 
 /// Upload image materials for the current shop. Use `materials` for `ONE_PRODUCT_ONE_IMAGE` and `material_groups` for `ONE_PRODUCT_MULTIPLE_IMAGES`. Provide exactly one mode payload per request.
-pub async fn upload_seller_materials(configuration: &configuration::Configuration, upload_seller_materials_request: models::UploadSellerMaterialsRequest) -> Result<models::UploadSellerMaterialsResponse, Error<UploadSellerMaterialsError>> {
+pub async fn upload_shop_materials(configuration: &configuration::Configuration, upload_shop_materials_request: models::UploadShopMaterialsRequest) -> Result<models::UploadShopMaterialsResponse, Error<UploadShopMaterialsError>> {
     // add a prefix to parameters to efficiently prevent name collisions
-    let p_body_upload_seller_materials_request = upload_seller_materials_request;
+    let p_body_upload_shop_materials_request = upload_shop_materials_request;
 
     let uri_str = format!("{}/seller/202611/materials/upload", configuration.base_path);
     let mut req_builder = configuration.client.request(reqwest::Method::POST, &uri_str);
@@ -303,7 +303,7 @@ pub async fn upload_seller_materials(configuration: &configuration::Configuratio
         };
         req_builder = req_builder.header("x-tts-access-token", value);
     };
-    req_builder = req_builder.json(&p_body_upload_seller_materials_request);
+    req_builder = req_builder.json(&p_body_upload_shop_materials_request);
 
     let req = req_builder.build()?;
     let resp = configuration.client.execute(req).await?;
@@ -320,12 +320,12 @@ pub async fn upload_seller_materials(configuration: &configuration::Configuratio
         let content = resp.text().await?;
         match content_type {
             ContentType::Json => serde_json::from_str(&content).map_err(Error::from),
-            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::UploadSellerMaterialsResponse`"))),
-            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::UploadSellerMaterialsResponse`")))),
+            ContentType::Text => return Err(Error::from(serde_json::Error::custom("Received `text/plain` content type response that cannot be converted to `models::UploadShopMaterialsResponse`"))),
+            ContentType::Unsupported(unknown_type) => return Err(Error::from(serde_json::Error::custom(format!("Received `{unknown_type}` content type response that cannot be converted to `models::UploadShopMaterialsResponse`")))),
         }
     } else {
         let content = resp.text().await?;
-        let entity: Option<UploadSellerMaterialsError> = serde_json::from_str(&content).ok();
+        let entity: Option<UploadShopMaterialsError> = serde_json::from_str(&content).ok();
         Err(Error::ResponseError(ResponseContent { status, content, entity }))
     }
 }

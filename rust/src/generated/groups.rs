@@ -4711,27 +4711,25 @@ impl SellerApi {
         apis::seller_api::get_shop_group_and_related_shops(&self.config).await.map_err(Error::from)
     }
 
-    /// Retrieve the carousel-related permissions for the currently authorized seller, including auto-post permission and photo mode permission.
-    pub async fn get_seller_carousel_permission(&self) -> Result<models::GetSellerCarouselPermissionResponse, Error> {
-        apis::seller_api::get_seller_carousel_permission(&self.config).await.map_err(Error::from)
+    /// Retrieve the carousel-related permissions for the currently authorized shop, including auto-post permission and photo mode permission.
+    pub async fn get_shop_carousel_permission(&self) -> Result<models::GetShopCarouselPermissionResponse, Error> {
+        apis::seller_api::get_shop_carousel_permission(&self.config).await.map_err(Error::from)
     }
 
-    /// Upload an image material up to 10 MiB to TOS for the current seller.
-    pub async fn upload_seller_image(
+    /// Upload an image material up to 10 MiB to TOS for the current shop.
+    pub async fn upload_shop_image(
         &self,
         image_data: std::path::PathBuf,
-    ) -> Result<models::UploadSellerImageResponse, Error> {
-        apis::seller_api::upload_seller_image(&self.config, image_data).await.map_err(Error::from)
+    ) -> Result<models::UploadShopImageResponse, Error> {
+        apis::seller_api::upload_shop_image(&self.config, image_data).await.map_err(Error::from)
     }
 
     /// Upload image materials for the current shop. Use `materials` for `ONE_PRODUCT_ONE_IMAGE` and `material_groups` for `ONE_PRODUCT_MULTIPLE_IMAGES`. Provide exactly one mode payload per request.
-    pub async fn upload_seller_materials(
+    pub async fn upload_shop_materials(
         &self,
-        upload_seller_materials_request: models::UploadSellerMaterialsRequest,
-    ) -> Result<models::UploadSellerMaterialsResponse, Error> {
-        apis::seller_api::upload_seller_materials(&self.config, upload_seller_materials_request)
-            .await
-            .map_err(Error::from)
+        upload_shop_materials_request: models::UploadShopMaterialsRequest,
+    ) -> Result<models::UploadShopMaterialsResponse, Error> {
+        apis::seller_api::upload_shop_materials(&self.config, upload_shop_materials_request).await.map_err(Error::from)
     }
 }
 

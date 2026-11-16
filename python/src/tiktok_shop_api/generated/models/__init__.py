@@ -1141,8 +1141,6 @@ from .get_return_records_response_data import GetReturnRecordsResponseData
 from .get_return_records_response_data_record import GetReturnRecordsResponseDataRecord
 from .get_return_records_response_data_record_image import GetReturnRecordsResponseDataRecordImage
 from .get_return_records_response_data_record_video import GetReturnRecordsResponseDataRecordVideo
-from .get_seller_carousel_permission_response import GetSellerCarouselPermissionResponse
-from .get_seller_carousel_permission_response_data import GetSellerCarouselPermissionResponseData
 from .get_seller_financial_transactions_response import GetSellerFinancialTransactionsResponse
 from .get_seller_financial_transactions_response_data import GetSellerFinancialTransactionsResponseData
 from .get_seller_financial_transactions_response_data_withdrawal import GetSellerFinancialTransactionsResponseDataWithdrawal
@@ -1182,6 +1180,8 @@ from .get_shop_campaign_response_data_shop_campaign import GetShopCampaignRespon
 from .get_shop_campaign_response_data_shop_campaign_participation_rule import GetShopCampaignResponseDataShopCampaignParticipationRule
 from .get_shop_campaign_response_data_shop_campaign_shop_participation import GetShopCampaignResponseDataShopCampaignShopParticipation
 from .get_shop_campaign_response_data_shop_campaign_shop_participation_registration_statistic import GetShopCampaignResponseDataShopCampaignShopParticipationRegistrationStatistic
+from .get_shop_carousel_permission_response import GetShopCarouselPermissionResponse
+from .get_shop_carousel_permission_response_data import GetShopCarouselPermissionResponseData
 from .get_shop_group_and_related_shops_response import GetShopGroupAndRelatedShopsResponse
 from .get_shop_group_and_related_shops_response_data import GetShopGroupAndRelatedShopsResponseData
 from .get_shop_group_and_related_shops_response_data_shop_group_data import GetShopGroupAndRelatedShopsResponseDataShopGroupData
@@ -2537,16 +2537,16 @@ from .upload_return_shipping_information_request import UploadReturnShippingInfo
 from .upload_return_shipping_information_response import UploadReturnShippingInformationResponse
 from .upload_return_shipping_information_response_data import UploadReturnShippingInformationResponseData
 from .upload_return_shipping_information_return_id_type import UploadReturnShippingInformationReturnIdType
-from .upload_seller_image_request import UploadSellerImageRequest
-from .upload_seller_image_response import UploadSellerImageResponse
-from .upload_seller_image_response_data import UploadSellerImageResponseData
-from .upload_seller_materials_request import UploadSellerMaterialsRequest
-from .upload_seller_materials_request_material_group import UploadSellerMaterialsRequestMaterialGroup
-from .upload_seller_materials_request_post_type import UploadSellerMaterialsRequestPostType
-from .upload_seller_materials_response import UploadSellerMaterialsResponse
-from .upload_seller_materials_response_data import UploadSellerMaterialsResponseData
-from .upload_seller_materials_response_data_material_group import UploadSellerMaterialsResponseDataMaterialGroup
-from .upload_seller_materials_response_data_material_group_material import UploadSellerMaterialsResponseDataMaterialGroupMaterial
+from .upload_shop_image_request import UploadShopImageRequest
+from .upload_shop_image_response import UploadShopImageResponse
+from .upload_shop_image_response_data import UploadShopImageResponseData
+from .upload_shop_materials_request import UploadShopMaterialsRequest
+from .upload_shop_materials_request_material_group import UploadShopMaterialsRequestMaterialGroup
+from .upload_shop_materials_request_post_type import UploadShopMaterialsRequestPostType
+from .upload_shop_materials_response import UploadShopMaterialsResponse
+from .upload_shop_materials_response_data import UploadShopMaterialsResponseData
+from .upload_shop_materials_response_data_material_group import UploadShopMaterialsResponseDataMaterialGroup
+from .upload_shop_materials_response_data_material_group_material import UploadShopMaterialsResponseDataMaterialGroupMaterial
 from .upload_shoppable_photo_file_request import UploadShoppablePhotoFileRequest
 from .upload_shoppable_photo_file_response import UploadShoppablePhotoFileResponse
 from .upload_shoppable_photo_file_response_data import UploadShoppablePhotoFileResponseData
@@ -3709,8 +3709,6 @@ __all__ = (
     "GetReturnRecordsResponseDataRecord",
     "GetReturnRecordsResponseDataRecordImage",
     "GetReturnRecordsResponseDataRecordVideo",
-    "GetSellerCarouselPermissionResponse",
-    "GetSellerCarouselPermissionResponseData",
     "GetSellerFinancialTransactionsResponse",
     "GetSellerFinancialTransactionsResponseData",
     "GetSellerFinancialTransactionsResponseDataWithdrawal",
@@ -3750,6 +3748,8 @@ __all__ = (
     "GetShopCampaignResponseDataShopCampaignParticipationRule",
     "GetShopCampaignResponseDataShopCampaignShopParticipation",
     "GetShopCampaignResponseDataShopCampaignShopParticipationRegistrationStatistic",
+    "GetShopCarouselPermissionResponse",
+    "GetShopCarouselPermissionResponseData",
     "GetShopGroupAndRelatedShopsResponse",
     "GetShopGroupAndRelatedShopsResponseData",
     "GetShopGroupAndRelatedShopsResponseDataShopGroupData",
@@ -5105,16 +5105,16 @@ __all__ = (
     "UploadReturnShippingInformationResponse",
     "UploadReturnShippingInformationResponseData",
     "UploadReturnShippingInformationReturnIdType",
-    "UploadSellerImageRequest",
-    "UploadSellerImageResponse",
-    "UploadSellerImageResponseData",
-    "UploadSellerMaterialsRequest",
-    "UploadSellerMaterialsRequestMaterialGroup",
-    "UploadSellerMaterialsRequestPostType",
-    "UploadSellerMaterialsResponse",
-    "UploadSellerMaterialsResponseData",
-    "UploadSellerMaterialsResponseDataMaterialGroup",
-    "UploadSellerMaterialsResponseDataMaterialGroupMaterial",
+    "UploadShopImageRequest",
+    "UploadShopImageResponse",
+    "UploadShopImageResponseData",
+    "UploadShopMaterialsRequest",
+    "UploadShopMaterialsRequestMaterialGroup",
+    "UploadShopMaterialsRequestPostType",
+    "UploadShopMaterialsResponse",
+    "UploadShopMaterialsResponseData",
+    "UploadShopMaterialsResponseDataMaterialGroup",
+    "UploadShopMaterialsResponseDataMaterialGroupMaterial",
     "UploadShoppablePhotoFileRequest",
     "UploadShoppablePhotoFileResponse",
     "UploadShoppablePhotoFileResponseData",

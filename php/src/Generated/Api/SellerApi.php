@@ -80,16 +80,16 @@ class SellerApi
         'getGlobalProductPermission' => [
             'application/json',
         ],
-        'getSellerCarouselPermission' => [
+        'getShopCarouselPermission' => [
             'application/json',
         ],
         'getShopGroupAndRelatedShops' => [
             'application/json',
         ],
-        'uploadSellerImage' => [
+        'uploadShopImage' => [
             'multipart/form-data',
         ],
-        'uploadSellerMaterials' => [
+        'uploadShopMaterials' => [
             'application/json',
         ],
     ];
@@ -653,36 +653,36 @@ class SellerApi
     }
 
     /**
-     * Operation getSellerCarouselPermission
+     * Operation getShopCarouselPermission
      *
-     * Get Seller Carousel Permission
+     * Get Shop Carousel Permission
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSellerCarouselPermission'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getShopCarouselPermission'] to see the possible values for this operation
      *
      * @throws \TikTokShop\Api\Generated\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \TikTokShop\Api\Generated\Model\GetSellerCarouselPermissionResponse
+     * @return \TikTokShop\Api\Generated\Model\GetShopCarouselPermissionResponse
      */
-    public function getSellerCarouselPermission(string $contentType = self::contentTypes['getSellerCarouselPermission'][0])
+    public function getShopCarouselPermission(string $contentType = self::contentTypes['getShopCarouselPermission'][0])
     {
-        list($response) = $this->getSellerCarouselPermissionWithHttpInfo($contentType);
+        list($response) = $this->getShopCarouselPermissionWithHttpInfo($contentType);
         return $response;
     }
 
     /**
-     * Operation getSellerCarouselPermissionWithHttpInfo
+     * Operation getShopCarouselPermissionWithHttpInfo
      *
-     * Get Seller Carousel Permission
+     * Get Shop Carousel Permission
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSellerCarouselPermission'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getShopCarouselPermission'] to see the possible values for this operation
      *
      * @throws \TikTokShop\Api\Generated\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \TikTokShop\Api\Generated\Model\GetSellerCarouselPermissionResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \TikTokShop\Api\Generated\Model\GetShopCarouselPermissionResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function getSellerCarouselPermissionWithHttpInfo(string $contentType = self::contentTypes['getSellerCarouselPermission'][0])
+    public function getShopCarouselPermissionWithHttpInfo(string $contentType = self::contentTypes['getShopCarouselPermission'][0])
     {
-        $request = $this->getSellerCarouselPermissionRequest($contentType);
+        $request = $this->getShopCarouselPermissionRequest($contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -710,7 +710,7 @@ class SellerApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\TikTokShop\Api\Generated\Model\GetSellerCarouselPermissionResponse',
+                        '\TikTokShop\Api\Generated\Model\GetShopCarouselPermissionResponse',
                         $request,
                         $response,
                     );
@@ -732,7 +732,7 @@ class SellerApi
             }
 
             return $this->handleResponseWithDataType(
-                '\TikTokShop\Api\Generated\Model\GetSellerCarouselPermissionResponse',
+                '\TikTokShop\Api\Generated\Model\GetShopCarouselPermissionResponse',
                 $request,
                 $response,
             );
@@ -741,7 +741,7 @@ class SellerApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\TikTokShop\Api\Generated\Model\GetSellerCarouselPermissionResponse',
+                        '\TikTokShop\Api\Generated\Model\GetShopCarouselPermissionResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -754,18 +754,18 @@ class SellerApi
     }
 
     /**
-     * Operation getSellerCarouselPermissionAsync
+     * Operation getShopCarouselPermissionAsync
      *
-     * Get Seller Carousel Permission
+     * Get Shop Carousel Permission
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSellerCarouselPermission'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getShopCarouselPermission'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getSellerCarouselPermissionAsync(string $contentType = self::contentTypes['getSellerCarouselPermission'][0])
+    public function getShopCarouselPermissionAsync(string $contentType = self::contentTypes['getShopCarouselPermission'][0])
     {
-        return $this->getSellerCarouselPermissionAsyncWithHttpInfo($contentType)
+        return $this->getShopCarouselPermissionAsyncWithHttpInfo($contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -774,19 +774,19 @@ class SellerApi
     }
 
     /**
-     * Operation getSellerCarouselPermissionAsyncWithHttpInfo
+     * Operation getShopCarouselPermissionAsyncWithHttpInfo
      *
-     * Get Seller Carousel Permission
+     * Get Shop Carousel Permission
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSellerCarouselPermission'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getShopCarouselPermission'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function getSellerCarouselPermissionAsyncWithHttpInfo(string $contentType = self::contentTypes['getSellerCarouselPermission'][0])
+    public function getShopCarouselPermissionAsyncWithHttpInfo(string $contentType = self::contentTypes['getShopCarouselPermission'][0])
     {
-        $returnType = '\TikTokShop\Api\Generated\Model\GetSellerCarouselPermissionResponse';
-        $request = $this->getSellerCarouselPermissionRequest($contentType);
+        $returnType = '\TikTokShop\Api\Generated\Model\GetShopCarouselPermissionResponse';
+        $request = $this->getShopCarouselPermissionRequest($contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -828,14 +828,14 @@ class SellerApi
     }
 
     /**
-     * Create request for operation 'getSellerCarouselPermission'
+     * Create request for operation 'getShopCarouselPermission'
      *
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getSellerCarouselPermission'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getShopCarouselPermission'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function getSellerCarouselPermissionRequest(string $contentType = self::contentTypes['getSellerCarouselPermission'][0])
+    public function getShopCarouselPermissionRequest(string $contentType = self::contentTypes['getShopCarouselPermission'][0])
     {
 
 
@@ -1165,38 +1165,38 @@ class SellerApi
     }
 
     /**
-     * Operation uploadSellerImage
+     * Operation uploadShopImage
      *
-     * Upload Seller Image
+     * Upload Shop Image
      *
      * @param  \SplFileObject $image_data The local image file to upload to TOS.  Requirements: - Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP. - Zero-byte files are rejected. - Maximum file size: 10 MiB (10,485,760 bytes). (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadSellerImage'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadShopImage'] to see the possible values for this operation
      *
      * @throws \TikTokShop\Api\Generated\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \TikTokShop\Api\Generated\Model\UploadSellerImageResponse
+     * @return \TikTokShop\Api\Generated\Model\UploadShopImageResponse
      */
-    public function uploadSellerImage($image_data, string $contentType = self::contentTypes['uploadSellerImage'][0])
+    public function uploadShopImage($image_data, string $contentType = self::contentTypes['uploadShopImage'][0])
     {
-        list($response) = $this->uploadSellerImageWithHttpInfo($image_data, $contentType);
+        list($response) = $this->uploadShopImageWithHttpInfo($image_data, $contentType);
         return $response;
     }
 
     /**
-     * Operation uploadSellerImageWithHttpInfo
+     * Operation uploadShopImageWithHttpInfo
      *
-     * Upload Seller Image
+     * Upload Shop Image
      *
      * @param  \SplFileObject $image_data The local image file to upload to TOS.  Requirements: - Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP. - Zero-byte files are rejected. - Maximum file size: 10 MiB (10,485,760 bytes). (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadSellerImage'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadShopImage'] to see the possible values for this operation
      *
      * @throws \TikTokShop\Api\Generated\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \TikTokShop\Api\Generated\Model\UploadSellerImageResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \TikTokShop\Api\Generated\Model\UploadShopImageResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function uploadSellerImageWithHttpInfo($image_data, string $contentType = self::contentTypes['uploadSellerImage'][0])
+    public function uploadShopImageWithHttpInfo($image_data, string $contentType = self::contentTypes['uploadShopImage'][0])
     {
-        $request = $this->uploadSellerImageRequest($image_data, $contentType);
+        $request = $this->uploadShopImageRequest($image_data, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1224,7 +1224,7 @@ class SellerApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\TikTokShop\Api\Generated\Model\UploadSellerImageResponse',
+                        '\TikTokShop\Api\Generated\Model\UploadShopImageResponse',
                         $request,
                         $response,
                     );
@@ -1246,7 +1246,7 @@ class SellerApi
             }
 
             return $this->handleResponseWithDataType(
-                '\TikTokShop\Api\Generated\Model\UploadSellerImageResponse',
+                '\TikTokShop\Api\Generated\Model\UploadShopImageResponse',
                 $request,
                 $response,
             );
@@ -1255,7 +1255,7 @@ class SellerApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\TikTokShop\Api\Generated\Model\UploadSellerImageResponse',
+                        '\TikTokShop\Api\Generated\Model\UploadShopImageResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1268,19 +1268,19 @@ class SellerApi
     }
 
     /**
-     * Operation uploadSellerImageAsync
+     * Operation uploadShopImageAsync
      *
-     * Upload Seller Image
+     * Upload Shop Image
      *
      * @param  \SplFileObject $image_data The local image file to upload to TOS.  Requirements: - Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP. - Zero-byte files are rejected. - Maximum file size: 10 MiB (10,485,760 bytes). (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadSellerImage'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadShopImage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function uploadSellerImageAsync($image_data, string $contentType = self::contentTypes['uploadSellerImage'][0])
+    public function uploadShopImageAsync($image_data, string $contentType = self::contentTypes['uploadShopImage'][0])
     {
-        return $this->uploadSellerImageAsyncWithHttpInfo($image_data, $contentType)
+        return $this->uploadShopImageAsyncWithHttpInfo($image_data, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1289,20 +1289,20 @@ class SellerApi
     }
 
     /**
-     * Operation uploadSellerImageAsyncWithHttpInfo
+     * Operation uploadShopImageAsyncWithHttpInfo
      *
-     * Upload Seller Image
+     * Upload Shop Image
      *
      * @param  \SplFileObject $image_data The local image file to upload to TOS.  Requirements: - Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP. - Zero-byte files are rejected. - Maximum file size: 10 MiB (10,485,760 bytes). (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadSellerImage'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadShopImage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function uploadSellerImageAsyncWithHttpInfo($image_data, string $contentType = self::contentTypes['uploadSellerImage'][0])
+    public function uploadShopImageAsyncWithHttpInfo($image_data, string $contentType = self::contentTypes['uploadShopImage'][0])
     {
-        $returnType = '\TikTokShop\Api\Generated\Model\UploadSellerImageResponse';
-        $request = $this->uploadSellerImageRequest($image_data, $contentType);
+        $returnType = '\TikTokShop\Api\Generated\Model\UploadShopImageResponse';
+        $request = $this->uploadShopImageRequest($image_data, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1344,21 +1344,21 @@ class SellerApi
     }
 
     /**
-     * Create request for operation 'uploadSellerImage'
+     * Create request for operation 'uploadShopImage'
      *
      * @param  \SplFileObject $image_data The local image file to upload to TOS.  Requirements: - Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP. - Zero-byte files are rejected. - Maximum file size: 10 MiB (10,485,760 bytes). (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadSellerImage'] to see the possible values for this operation
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadShopImage'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function uploadSellerImageRequest($image_data, string $contentType = self::contentTypes['uploadSellerImage'][0])
+    public function uploadShopImageRequest($image_data, string $contentType = self::contentTypes['uploadShopImage'][0])
     {
 
         // verify the required parameter 'image_data' is set
         if ($image_data === null || (is_array($image_data) && count($image_data) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $image_data when calling uploadSellerImage'
+                'Missing the required parameter $image_data when calling uploadShopImage'
             );
         }
 
@@ -1443,38 +1443,38 @@ class SellerApi
     }
 
     /**
-     * Operation uploadSellerMaterials
+     * Operation uploadShopMaterials
      *
-     * Upload Seller Materials
+     * Upload Shop Materials
      *
-     * @param  \TikTokShop\Api\Generated\Model\UploadSellerMaterialsRequest $upload_seller_materials_request upload_seller_materials_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadSellerMaterials'] to see the possible values for this operation
+     * @param  \TikTokShop\Api\Generated\Model\UploadShopMaterialsRequest $upload_shop_materials_request upload_shop_materials_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadShopMaterials'] to see the possible values for this operation
      *
      * @throws \TikTokShop\Api\Generated\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return \TikTokShop\Api\Generated\Model\UploadSellerMaterialsResponse
+     * @return \TikTokShop\Api\Generated\Model\UploadShopMaterialsResponse
      */
-    public function uploadSellerMaterials($upload_seller_materials_request, string $contentType = self::contentTypes['uploadSellerMaterials'][0])
+    public function uploadShopMaterials($upload_shop_materials_request, string $contentType = self::contentTypes['uploadShopMaterials'][0])
     {
-        list($response) = $this->uploadSellerMaterialsWithHttpInfo($upload_seller_materials_request, $contentType);
+        list($response) = $this->uploadShopMaterialsWithHttpInfo($upload_shop_materials_request, $contentType);
         return $response;
     }
 
     /**
-     * Operation uploadSellerMaterialsWithHttpInfo
+     * Operation uploadShopMaterialsWithHttpInfo
      *
-     * Upload Seller Materials
+     * Upload Shop Materials
      *
-     * @param  \TikTokShop\Api\Generated\Model\UploadSellerMaterialsRequest $upload_seller_materials_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadSellerMaterials'] to see the possible values for this operation
+     * @param  \TikTokShop\Api\Generated\Model\UploadShopMaterialsRequest $upload_shop_materials_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadShopMaterials'] to see the possible values for this operation
      *
      * @throws \TikTokShop\Api\Generated\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
-     * @return array of \TikTokShop\Api\Generated\Model\UploadSellerMaterialsResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \TikTokShop\Api\Generated\Model\UploadShopMaterialsResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function uploadSellerMaterialsWithHttpInfo($upload_seller_materials_request, string $contentType = self::contentTypes['uploadSellerMaterials'][0])
+    public function uploadShopMaterialsWithHttpInfo($upload_shop_materials_request, string $contentType = self::contentTypes['uploadShopMaterials'][0])
     {
-        $request = $this->uploadSellerMaterialsRequest($upload_seller_materials_request, $contentType);
+        $request = $this->uploadShopMaterialsRequest($upload_shop_materials_request, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -1502,7 +1502,7 @@ class SellerApi
             switch($statusCode) {
                 case 200:
                     return $this->handleResponseWithDataType(
-                        '\TikTokShop\Api\Generated\Model\UploadSellerMaterialsResponse',
+                        '\TikTokShop\Api\Generated\Model\UploadShopMaterialsResponse',
                         $request,
                         $response,
                     );
@@ -1524,7 +1524,7 @@ class SellerApi
             }
 
             return $this->handleResponseWithDataType(
-                '\TikTokShop\Api\Generated\Model\UploadSellerMaterialsResponse',
+                '\TikTokShop\Api\Generated\Model\UploadShopMaterialsResponse',
                 $request,
                 $response,
             );
@@ -1533,7 +1533,7 @@ class SellerApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\TikTokShop\Api\Generated\Model\UploadSellerMaterialsResponse',
+                        '\TikTokShop\Api\Generated\Model\UploadShopMaterialsResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -1546,19 +1546,19 @@ class SellerApi
     }
 
     /**
-     * Operation uploadSellerMaterialsAsync
+     * Operation uploadShopMaterialsAsync
      *
-     * Upload Seller Materials
+     * Upload Shop Materials
      *
-     * @param  \TikTokShop\Api\Generated\Model\UploadSellerMaterialsRequest $upload_seller_materials_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadSellerMaterials'] to see the possible values for this operation
+     * @param  \TikTokShop\Api\Generated\Model\UploadShopMaterialsRequest $upload_shop_materials_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadShopMaterials'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function uploadSellerMaterialsAsync($upload_seller_materials_request, string $contentType = self::contentTypes['uploadSellerMaterials'][0])
+    public function uploadShopMaterialsAsync($upload_shop_materials_request, string $contentType = self::contentTypes['uploadShopMaterials'][0])
     {
-        return $this->uploadSellerMaterialsAsyncWithHttpInfo($upload_seller_materials_request, $contentType)
+        return $this->uploadShopMaterialsAsyncWithHttpInfo($upload_shop_materials_request, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -1567,20 +1567,20 @@ class SellerApi
     }
 
     /**
-     * Operation uploadSellerMaterialsAsyncWithHttpInfo
+     * Operation uploadShopMaterialsAsyncWithHttpInfo
      *
-     * Upload Seller Materials
+     * Upload Shop Materials
      *
-     * @param  \TikTokShop\Api\Generated\Model\UploadSellerMaterialsRequest $upload_seller_materials_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadSellerMaterials'] to see the possible values for this operation
+     * @param  \TikTokShop\Api\Generated\Model\UploadShopMaterialsRequest $upload_shop_materials_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadShopMaterials'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function uploadSellerMaterialsAsyncWithHttpInfo($upload_seller_materials_request, string $contentType = self::contentTypes['uploadSellerMaterials'][0])
+    public function uploadShopMaterialsAsyncWithHttpInfo($upload_shop_materials_request, string $contentType = self::contentTypes['uploadShopMaterials'][0])
     {
-        $returnType = '\TikTokShop\Api\Generated\Model\UploadSellerMaterialsResponse';
-        $request = $this->uploadSellerMaterialsRequest($upload_seller_materials_request, $contentType);
+        $returnType = '\TikTokShop\Api\Generated\Model\UploadShopMaterialsResponse';
+        $request = $this->uploadShopMaterialsRequest($upload_shop_materials_request, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -1622,21 +1622,21 @@ class SellerApi
     }
 
     /**
-     * Create request for operation 'uploadSellerMaterials'
+     * Create request for operation 'uploadShopMaterials'
      *
-     * @param  \TikTokShop\Api\Generated\Model\UploadSellerMaterialsRequest $upload_seller_materials_request (required)
-     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadSellerMaterials'] to see the possible values for this operation
+     * @param  \TikTokShop\Api\Generated\Model\UploadShopMaterialsRequest $upload_shop_materials_request (required)
+     * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['uploadShopMaterials'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function uploadSellerMaterialsRequest($upload_seller_materials_request, string $contentType = self::contentTypes['uploadSellerMaterials'][0])
+    public function uploadShopMaterialsRequest($upload_shop_materials_request, string $contentType = self::contentTypes['uploadShopMaterials'][0])
     {
 
-        // verify the required parameter 'upload_seller_materials_request' is set
-        if ($upload_seller_materials_request === null || (is_array($upload_seller_materials_request) && count($upload_seller_materials_request) === 0)) {
+        // verify the required parameter 'upload_shop_materials_request' is set
+        if ($upload_shop_materials_request === null || (is_array($upload_shop_materials_request) && count($upload_shop_materials_request) === 0)) {
             throw new \InvalidArgumentException(
-                'Missing the required parameter $upload_seller_materials_request when calling uploadSellerMaterials'
+                'Missing the required parameter $upload_shop_materials_request when calling uploadShopMaterials'
             );
         }
 
@@ -1659,12 +1659,12 @@ class SellerApi
         );
 
         // for model (json/xml)
-        if (isset($upload_seller_materials_request)) {
+        if (isset($upload_shop_materials_request)) {
             if (stripos($headers['Content-Type'], 'application/json') !== false) {
                 # if Content-Type contains "application/json", json_encode the body
-                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($upload_seller_materials_request));
+                $httpBody = \GuzzleHttp\Utils::jsonEncode(ObjectSerializer::sanitizeForSerialization($upload_shop_materials_request));
             } else {
-                $httpBody = $upload_seller_materials_request;
+                $httpBody = $upload_shop_materials_request;
             }
         } elseif (count($formParams) > 0) {
             if ($multipart) {

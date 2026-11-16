@@ -2769,23 +2769,23 @@ export const OPERATIONS: readonly OperationMeta[] = [
     "requiresShopCipher": false
   },
   {
-    "operationId": "getSellerCarouselPermission",
+    "operationId": "getShopCarouselPermission",
     "tag": "Seller",
     "group": "seller",
     "method": "get",
     "path": "/seller/202611/carousel_permission",
-    "requiresShopCipher": false
+    "requiresShopCipher": true
   },
   {
-    "operationId": "uploadSellerImage",
+    "operationId": "uploadShopImage",
     "tag": "Seller",
     "group": "seller",
     "method": "post",
     "path": "/seller/202611/images/upload",
-    "requiresShopCipher": false
+    "requiresShopCipher": true
   },
   {
-    "operationId": "uploadSellerMaterials",
+    "operationId": "uploadShopMaterials",
     "tag": "Seller",
     "group": "seller",
     "method": "post",

@@ -24,37 +24,37 @@ import {
     GetGlobalProductPermissionResponseToJSON,
 } from '../models/GetGlobalProductPermissionResponse';
 import {
-    type GetSellerCarouselPermissionResponse,
-    GetSellerCarouselPermissionResponseFromJSON,
-    GetSellerCarouselPermissionResponseToJSON,
-} from '../models/GetSellerCarouselPermissionResponse';
+    type GetShopCarouselPermissionResponse,
+    GetShopCarouselPermissionResponseFromJSON,
+    GetShopCarouselPermissionResponseToJSON,
+} from '../models/GetShopCarouselPermissionResponse';
 import {
     type GetShopGroupAndRelatedShopsResponse,
     GetShopGroupAndRelatedShopsResponseFromJSON,
     GetShopGroupAndRelatedShopsResponseToJSON,
 } from '../models/GetShopGroupAndRelatedShopsResponse';
 import {
-    type UploadSellerImageResponse,
-    UploadSellerImageResponseFromJSON,
-    UploadSellerImageResponseToJSON,
-} from '../models/UploadSellerImageResponse';
+    type UploadShopImageResponse,
+    UploadShopImageResponseFromJSON,
+    UploadShopImageResponseToJSON,
+} from '../models/UploadShopImageResponse';
 import {
-    type UploadSellerMaterialsRequest,
-    UploadSellerMaterialsRequestFromJSON,
-    UploadSellerMaterialsRequestToJSON,
-} from '../models/UploadSellerMaterialsRequest';
+    type UploadShopMaterialsRequest,
+    UploadShopMaterialsRequestFromJSON,
+    UploadShopMaterialsRequestToJSON,
+} from '../models/UploadShopMaterialsRequest';
 import {
-    type UploadSellerMaterialsResponse,
-    UploadSellerMaterialsResponseFromJSON,
-    UploadSellerMaterialsResponseToJSON,
-} from '../models/UploadSellerMaterialsResponse';
+    type UploadShopMaterialsResponse,
+    UploadShopMaterialsResponseFromJSON,
+    UploadShopMaterialsResponseToJSON,
+} from '../models/UploadShopMaterialsResponse';
 
-export interface UploadSellerImageRequest {
+export interface UploadShopImageRequest {
     imageData: Blob;
 }
 
-export interface UploadSellerMaterialsOperationRequest {
-    uploadSellerMaterialsRequest: UploadSellerMaterialsRequest;
+export interface UploadShopMaterialsOperationRequest {
+    uploadShopMaterialsRequest: UploadShopMaterialsRequest;
 }
 
 /**
@@ -149,9 +149,9 @@ export class SellerApi extends runtime.BaseAPI {
     }
 
     /**
-     * Creates request options for getSellerCarouselPermission without sending the request
+     * Creates request options for getShopCarouselPermission without sending the request
      */
-    async getSellerCarouselPermissionRequestOpts(): Promise<runtime.RequestOpts> {
+    async getShopCarouselPermissionRequestOpts(): Promise<runtime.RequestOpts> {
         const queryParameters: any = {};
 
         const headerParameters: runtime.HTTPHeaders = {};
@@ -172,22 +172,22 @@ export class SellerApi extends runtime.BaseAPI {
     }
 
     /**
-     * Retrieve the carousel-related permissions for the currently authorized seller, including auto-post permission and photo mode permission.
-     * Get Seller Carousel Permission
+     * Retrieve the carousel-related permissions for the currently authorized shop, including auto-post permission and photo mode permission.
+     * Get Shop Carousel Permission
      */
-    async getSellerCarouselPermissionRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetSellerCarouselPermissionResponse>> {
-        const requestOptions = await this.getSellerCarouselPermissionRequestOpts();
+    async getShopCarouselPermissionRaw(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetShopCarouselPermissionResponse>> {
+        const requestOptions = await this.getShopCarouselPermissionRequestOpts();
         const response = await this.request(requestOptions, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => GetSellerCarouselPermissionResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => GetShopCarouselPermissionResponseFromJSON(jsonValue));
     }
 
     /**
-     * Retrieve the carousel-related permissions for the currently authorized seller, including auto-post permission and photo mode permission.
-     * Get Seller Carousel Permission
+     * Retrieve the carousel-related permissions for the currently authorized shop, including auto-post permission and photo mode permission.
+     * Get Shop Carousel Permission
      */
-    async getSellerCarouselPermission(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetSellerCarouselPermissionResponse> {
-        const response = await this.getSellerCarouselPermissionRaw(initOverrides);
+    async getShopCarouselPermission(initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetShopCarouselPermissionResponse> {
+        const response = await this.getShopCarouselPermissionRaw(initOverrides);
         return await response.value();
     }
 
@@ -235,13 +235,13 @@ export class SellerApi extends runtime.BaseAPI {
     }
 
     /**
-     * Creates request options for uploadSellerImage without sending the request
+     * Creates request options for uploadShopImage without sending the request
      */
-    async uploadSellerImageRequestOpts(requestParameters: UploadSellerImageRequest): Promise<runtime.RequestOpts> {
+    async uploadShopImageRequestOpts(requestParameters: UploadShopImageRequest): Promise<runtime.RequestOpts> {
         if (requestParameters['imageData'] == null) {
             throw new runtime.RequiredError(
                 'imageData',
-                'Required parameter "imageData" was null or undefined when calling uploadSellerImage().'
+                'Required parameter "imageData" was null or undefined when calling uploadShopImage().'
             );
         }
 
@@ -286,33 +286,33 @@ export class SellerApi extends runtime.BaseAPI {
     }
 
     /**
-     * Upload an image material up to 10 MiB to TOS for the current seller.
-     * Upload Seller Image
+     * Upload an image material up to 10 MiB to TOS for the current shop.
+     * Upload Shop Image
      */
-    async uploadSellerImageRaw(requestParameters: UploadSellerImageRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UploadSellerImageResponse>> {
-        const requestOptions = await this.uploadSellerImageRequestOpts(requestParameters);
+    async uploadShopImageRaw(requestParameters: UploadShopImageRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UploadShopImageResponse>> {
+        const requestOptions = await this.uploadShopImageRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => UploadSellerImageResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => UploadShopImageResponseFromJSON(jsonValue));
     }
 
     /**
-     * Upload an image material up to 10 MiB to TOS for the current seller.
-     * Upload Seller Image
+     * Upload an image material up to 10 MiB to TOS for the current shop.
+     * Upload Shop Image
      */
-    async uploadSellerImage(requestParameters: UploadSellerImageRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UploadSellerImageResponse> {
-        const response = await this.uploadSellerImageRaw(requestParameters, initOverrides);
+    async uploadShopImage(requestParameters: UploadShopImageRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UploadShopImageResponse> {
+        const response = await this.uploadShopImageRaw(requestParameters, initOverrides);
         return await response.value();
     }
 
     /**
-     * Creates request options for uploadSellerMaterials without sending the request
+     * Creates request options for uploadShopMaterials without sending the request
      */
-    async uploadSellerMaterialsRequestOpts(requestParameters: UploadSellerMaterialsOperationRequest): Promise<runtime.RequestOpts> {
-        if (requestParameters['uploadSellerMaterialsRequest'] == null) {
+    async uploadShopMaterialsRequestOpts(requestParameters: UploadShopMaterialsOperationRequest): Promise<runtime.RequestOpts> {
+        if (requestParameters['uploadShopMaterialsRequest'] == null) {
             throw new runtime.RequiredError(
-                'uploadSellerMaterialsRequest',
-                'Required parameter "uploadSellerMaterialsRequest" was null or undefined when calling uploadSellerMaterials().'
+                'uploadShopMaterialsRequest',
+                'Required parameter "uploadShopMaterialsRequest" was null or undefined when calling uploadShopMaterials().'
             );
         }
 
@@ -334,27 +334,27 @@ export class SellerApi extends runtime.BaseAPI {
             method: 'POST',
             headers: headerParameters,
             query: queryParameters,
-            body: UploadSellerMaterialsRequestToJSON(requestParameters['uploadSellerMaterialsRequest']),
+            body: UploadShopMaterialsRequestToJSON(requestParameters['uploadShopMaterialsRequest']),
         };
     }
 
     /**
      * Upload image materials for the current shop. Use `materials` for `ONE_PRODUCT_ONE_IMAGE` and `material_groups` for `ONE_PRODUCT_MULTIPLE_IMAGES`. Provide exactly one mode payload per request.
-     * Upload Seller Materials
+     * Upload Shop Materials
      */
-    async uploadSellerMaterialsRaw(requestParameters: UploadSellerMaterialsOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UploadSellerMaterialsResponse>> {
-        const requestOptions = await this.uploadSellerMaterialsRequestOpts(requestParameters);
+    async uploadShopMaterialsRaw(requestParameters: UploadShopMaterialsOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<UploadShopMaterialsResponse>> {
+        const requestOptions = await this.uploadShopMaterialsRequestOpts(requestParameters);
         const response = await this.request(requestOptions, initOverrides);
 
-        return new runtime.JSONApiResponse(response, (jsonValue) => UploadSellerMaterialsResponseFromJSON(jsonValue));
+        return new runtime.JSONApiResponse(response, (jsonValue) => UploadShopMaterialsResponseFromJSON(jsonValue));
     }
 
     /**
      * Upload image materials for the current shop. Use `materials` for `ONE_PRODUCT_ONE_IMAGE` and `material_groups` for `ONE_PRODUCT_MULTIPLE_IMAGES`. Provide exactly one mode payload per request.
-     * Upload Seller Materials
+     * Upload Shop Materials
      */
-    async uploadSellerMaterials(requestParameters: UploadSellerMaterialsOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UploadSellerMaterialsResponse> {
-        const response = await this.uploadSellerMaterialsRaw(requestParameters, initOverrides);
+    async uploadShopMaterials(requestParameters: UploadShopMaterialsOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<UploadShopMaterialsResponse> {
+        const response = await this.uploadShopMaterialsRaw(requestParameters, initOverrides);
         return await response.value();
     }
 

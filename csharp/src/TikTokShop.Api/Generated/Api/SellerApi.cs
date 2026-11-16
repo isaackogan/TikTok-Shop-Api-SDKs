@@ -66,24 +66,24 @@ namespace TikTokShop.Api.Generated.Api
         /// <returns>ApiResponse of GetGlobalProductPermissionResponse</returns>
         ApiResponse<GetGlobalProductPermissionResponse> GetGlobalProductPermissionWithHttpInfo();
         /// <summary>
-        /// Get Seller Carousel Permission
+        /// Get Shop Carousel Permission
         /// </summary>
         /// <remarks>
-        /// Retrieve the carousel-related permissions for the currently authorized seller, including auto-post permission and photo mode permission.
+        /// Retrieve the carousel-related permissions for the currently authorized shop, including auto-post permission and photo mode permission.
         /// </remarks>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>GetSellerCarouselPermissionResponse</returns>
-        GetSellerCarouselPermissionResponse GetSellerCarouselPermission();
+        /// <returns>GetShopCarouselPermissionResponse</returns>
+        GetShopCarouselPermissionResponse GetShopCarouselPermission();
 
         /// <summary>
-        /// Get Seller Carousel Permission
+        /// Get Shop Carousel Permission
         /// </summary>
         /// <remarks>
-        /// Retrieve the carousel-related permissions for the currently authorized seller, including auto-post permission and photo mode permission.
+        /// Retrieve the carousel-related permissions for the currently authorized shop, including auto-post permission and photo mode permission.
         /// </remarks>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>ApiResponse of GetSellerCarouselPermissionResponse</returns>
-        ApiResponse<GetSellerCarouselPermissionResponse> GetSellerCarouselPermissionWithHttpInfo();
+        /// <returns>ApiResponse of GetShopCarouselPermissionResponse</returns>
+        ApiResponse<GetShopCarouselPermissionResponse> GetShopCarouselPermissionWithHttpInfo();
         /// <summary>
         /// Get Shop Group and Related Shops
         /// </summary>
@@ -104,47 +104,47 @@ namespace TikTokShop.Api.Generated.Api
         /// <returns>ApiResponse of GetShopGroupAndRelatedShopsResponse</returns>
         ApiResponse<GetShopGroupAndRelatedShopsResponse> GetShopGroupAndRelatedShopsWithHttpInfo();
         /// <summary>
-        /// Upload Seller Image
+        /// Upload Shop Image
         /// </summary>
         /// <remarks>
-        /// Upload an image material up to 10 MiB to TOS for the current seller.
+        /// Upload an image material up to 10 MiB to TOS for the current shop.
         /// </remarks>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="imageData">The local image file to upload to TOS.  Requirements: - Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP. - Zero-byte files are rejected. - Maximum file size: 10 MiB (10,485,760 bytes).</param>
-        /// <returns>UploadSellerImageResponse</returns>
-        UploadSellerImageResponse UploadSellerImage(FileParameter imageData);
+        /// <returns>UploadShopImageResponse</returns>
+        UploadShopImageResponse UploadShopImage(FileParameter imageData);
 
         /// <summary>
-        /// Upload Seller Image
+        /// Upload Shop Image
         /// </summary>
         /// <remarks>
-        /// Upload an image material up to 10 MiB to TOS for the current seller.
+        /// Upload an image material up to 10 MiB to TOS for the current shop.
         /// </remarks>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="imageData">The local image file to upload to TOS.  Requirements: - Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP. - Zero-byte files are rejected. - Maximum file size: 10 MiB (10,485,760 bytes).</param>
-        /// <returns>ApiResponse of UploadSellerImageResponse</returns>
-        ApiResponse<UploadSellerImageResponse> UploadSellerImageWithHttpInfo(FileParameter imageData);
+        /// <returns>ApiResponse of UploadShopImageResponse</returns>
+        ApiResponse<UploadShopImageResponse> UploadShopImageWithHttpInfo(FileParameter imageData);
         /// <summary>
-        /// Upload Seller Materials
+        /// Upload Shop Materials
         /// </summary>
         /// <remarks>
         /// Upload image materials for the current shop. Use &#x60;materials&#x60; for &#x60;ONE_PRODUCT_ONE_IMAGE&#x60; and &#x60;material_groups&#x60; for &#x60;ONE_PRODUCT_MULTIPLE_IMAGES&#x60;. Provide exactly one mode payload per request.
         /// </remarks>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uploadSellerMaterialsRequest"></param>
-        /// <returns>UploadSellerMaterialsResponse</returns>
-        UploadSellerMaterialsResponse UploadSellerMaterials(UploadSellerMaterialsRequest uploadSellerMaterialsRequest);
+        /// <param name="uploadShopMaterialsRequest"></param>
+        /// <returns>UploadShopMaterialsResponse</returns>
+        UploadShopMaterialsResponse UploadShopMaterials(UploadShopMaterialsRequest uploadShopMaterialsRequest);
 
         /// <summary>
-        /// Upload Seller Materials
+        /// Upload Shop Materials
         /// </summary>
         /// <remarks>
         /// Upload image materials for the current shop. Use &#x60;materials&#x60; for &#x60;ONE_PRODUCT_ONE_IMAGE&#x60; and &#x60;material_groups&#x60; for &#x60;ONE_PRODUCT_MULTIPLE_IMAGES&#x60;. Provide exactly one mode payload per request.
         /// </remarks>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uploadSellerMaterialsRequest"></param>
-        /// <returns>ApiResponse of UploadSellerMaterialsResponse</returns>
-        ApiResponse<UploadSellerMaterialsResponse> UploadSellerMaterialsWithHttpInfo(UploadSellerMaterialsRequest uploadSellerMaterialsRequest);
+        /// <param name="uploadShopMaterialsRequest"></param>
+        /// <returns>ApiResponse of UploadShopMaterialsResponse</returns>
+        ApiResponse<UploadShopMaterialsResponse> UploadShopMaterialsWithHttpInfo(UploadShopMaterialsRequest uploadShopMaterialsRequest);
         #endregion Synchronous Operations
     }
 
@@ -197,26 +197,26 @@ namespace TikTokShop.Api.Generated.Api
         /// <returns>Task of ApiResponse (GetGlobalProductPermissionResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<GetGlobalProductPermissionResponse>> GetGlobalProductPermissionWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Get Seller Carousel Permission
+        /// Get Shop Carousel Permission
         /// </summary>
         /// <remarks>
-        /// Retrieve the carousel-related permissions for the currently authorized seller, including auto-post permission and photo mode permission.
+        /// Retrieve the carousel-related permissions for the currently authorized shop, including auto-post permission and photo mode permission.
         /// </remarks>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of GetSellerCarouselPermissionResponse</returns>
-        System.Threading.Tasks.Task<GetSellerCarouselPermissionResponse> GetSellerCarouselPermissionAsync(System.Threading.CancellationToken cancellationToken = default);
+        /// <returns>Task of GetShopCarouselPermissionResponse</returns>
+        System.Threading.Tasks.Task<GetShopCarouselPermissionResponse> GetShopCarouselPermissionAsync(System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Get Seller Carousel Permission
+        /// Get Shop Carousel Permission
         /// </summary>
         /// <remarks>
-        /// Retrieve the carousel-related permissions for the currently authorized seller, including auto-post permission and photo mode permission.
+        /// Retrieve the carousel-related permissions for the currently authorized shop, including auto-post permission and photo mode permission.
         /// </remarks>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (GetSellerCarouselPermissionResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<GetSellerCarouselPermissionResponse>> GetSellerCarouselPermissionWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default);
+        /// <returns>Task of ApiResponse (GetShopCarouselPermissionResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<GetShopCarouselPermissionResponse>> GetShopCarouselPermissionWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
         /// Get Shop Group and Related Shops
         /// </summary>
@@ -239,51 +239,51 @@ namespace TikTokShop.Api.Generated.Api
         /// <returns>Task of ApiResponse (GetShopGroupAndRelatedShopsResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<GetShopGroupAndRelatedShopsResponse>> GetShopGroupAndRelatedShopsWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Upload Seller Image
+        /// Upload Shop Image
         /// </summary>
         /// <remarks>
-        /// Upload an image material up to 10 MiB to TOS for the current seller.
+        /// Upload an image material up to 10 MiB to TOS for the current shop.
         /// </remarks>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="imageData">The local image file to upload to TOS.  Requirements: - Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP. - Zero-byte files are rejected. - Maximum file size: 10 MiB (10,485,760 bytes).</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of UploadSellerImageResponse</returns>
-        System.Threading.Tasks.Task<UploadSellerImageResponse> UploadSellerImageAsync(FileParameter imageData, System.Threading.CancellationToken cancellationToken = default);
+        /// <returns>Task of UploadShopImageResponse</returns>
+        System.Threading.Tasks.Task<UploadShopImageResponse> UploadShopImageAsync(FileParameter imageData, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Upload Seller Image
+        /// Upload Shop Image
         /// </summary>
         /// <remarks>
-        /// Upload an image material up to 10 MiB to TOS for the current seller.
+        /// Upload an image material up to 10 MiB to TOS for the current shop.
         /// </remarks>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="imageData">The local image file to upload to TOS.  Requirements: - Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP. - Zero-byte files are rejected. - Maximum file size: 10 MiB (10,485,760 bytes).</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (UploadSellerImageResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<UploadSellerImageResponse>> UploadSellerImageWithHttpInfoAsync(FileParameter imageData, System.Threading.CancellationToken cancellationToken = default);
+        /// <returns>Task of ApiResponse (UploadShopImageResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<UploadShopImageResponse>> UploadShopImageWithHttpInfoAsync(FileParameter imageData, System.Threading.CancellationToken cancellationToken = default);
         /// <summary>
-        /// Upload Seller Materials
+        /// Upload Shop Materials
         /// </summary>
         /// <remarks>
         /// Upload image materials for the current shop. Use &#x60;materials&#x60; for &#x60;ONE_PRODUCT_ONE_IMAGE&#x60; and &#x60;material_groups&#x60; for &#x60;ONE_PRODUCT_MULTIPLE_IMAGES&#x60;. Provide exactly one mode payload per request.
         /// </remarks>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uploadSellerMaterialsRequest"></param>
+        /// <param name="uploadShopMaterialsRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of UploadSellerMaterialsResponse</returns>
-        System.Threading.Tasks.Task<UploadSellerMaterialsResponse> UploadSellerMaterialsAsync(UploadSellerMaterialsRequest uploadSellerMaterialsRequest, System.Threading.CancellationToken cancellationToken = default);
+        /// <returns>Task of UploadShopMaterialsResponse</returns>
+        System.Threading.Tasks.Task<UploadShopMaterialsResponse> UploadShopMaterialsAsync(UploadShopMaterialsRequest uploadShopMaterialsRequest, System.Threading.CancellationToken cancellationToken = default);
 
         /// <summary>
-        /// Upload Seller Materials
+        /// Upload Shop Materials
         /// </summary>
         /// <remarks>
         /// Upload image materials for the current shop. Use &#x60;materials&#x60; for &#x60;ONE_PRODUCT_ONE_IMAGE&#x60; and &#x60;material_groups&#x60; for &#x60;ONE_PRODUCT_MULTIPLE_IMAGES&#x60;. Provide exactly one mode payload per request.
         /// </remarks>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uploadSellerMaterialsRequest"></param>
+        /// <param name="uploadShopMaterialsRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (UploadSellerMaterialsResponse)</returns>
-        System.Threading.Tasks.Task<ApiResponse<UploadSellerMaterialsResponse>> UploadSellerMaterialsWithHttpInfoAsync(UploadSellerMaterialsRequest uploadSellerMaterialsRequest, System.Threading.CancellationToken cancellationToken = default);
+        /// <returns>Task of ApiResponse (UploadShopMaterialsResponse)</returns>
+        System.Threading.Tasks.Task<ApiResponse<UploadShopMaterialsResponse>> UploadShopMaterialsWithHttpInfoAsync(UploadShopMaterialsRequest uploadShopMaterialsRequest, System.Threading.CancellationToken cancellationToken = default);
         #endregion Asynchronous Operations
     }
 
@@ -720,22 +720,22 @@ namespace TikTokShop.Api.Generated.Api
         }
 
         /// <summary>
-        /// Get Seller Carousel Permission Retrieve the carousel-related permissions for the currently authorized seller, including auto-post permission and photo mode permission.
+        /// Get Shop Carousel Permission Retrieve the carousel-related permissions for the currently authorized shop, including auto-post permission and photo mode permission.
         /// </summary>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>GetSellerCarouselPermissionResponse</returns>
-        public GetSellerCarouselPermissionResponse GetSellerCarouselPermission()
+        /// <returns>GetShopCarouselPermissionResponse</returns>
+        public GetShopCarouselPermissionResponse GetShopCarouselPermission()
         {
-            TikTokShop.Api.Generated.Client.ApiResponse<GetSellerCarouselPermissionResponse> localVarResponse = GetSellerCarouselPermissionWithHttpInfo();
+            TikTokShop.Api.Generated.Client.ApiResponse<GetShopCarouselPermissionResponse> localVarResponse = GetShopCarouselPermissionWithHttpInfo();
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Get Seller Carousel Permission Retrieve the carousel-related permissions for the currently authorized seller, including auto-post permission and photo mode permission.
+        /// Get Shop Carousel Permission Retrieve the carousel-related permissions for the currently authorized shop, including auto-post permission and photo mode permission.
         /// </summary>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <returns>ApiResponse of GetSellerCarouselPermissionResponse</returns>
-        public TikTokShop.Api.Generated.Client.ApiResponse<GetSellerCarouselPermissionResponse> GetSellerCarouselPermissionWithHttpInfo()
+        /// <returns>ApiResponse of GetShopCarouselPermissionResponse</returns>
+        public TikTokShop.Api.Generated.Client.ApiResponse<GetShopCarouselPermissionResponse> GetShopCarouselPermissionWithHttpInfo()
         {
             TikTokShop.Api.Generated.Client.RequestOptions localVarRequestOptions = new TikTokShop.Api.Generated.Client.RequestOptions();
 
@@ -761,11 +761,11 @@ namespace TikTokShop.Api.Generated.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Get<GetSellerCarouselPermissionResponse>("/seller/202611/carousel_permission", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Get<GetShopCarouselPermissionResponse>("/seller/202611/carousel_permission", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
-                Exception _exception = this.ExceptionFactory("GetSellerCarouselPermission", localVarResponse);
+                Exception _exception = this.ExceptionFactory("GetShopCarouselPermission", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
@@ -773,24 +773,24 @@ namespace TikTokShop.Api.Generated.Api
         }
 
         /// <summary>
-        /// Get Seller Carousel Permission Retrieve the carousel-related permissions for the currently authorized seller, including auto-post permission and photo mode permission.
+        /// Get Shop Carousel Permission Retrieve the carousel-related permissions for the currently authorized shop, including auto-post permission and photo mode permission.
         /// </summary>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of GetSellerCarouselPermissionResponse</returns>
-        public async System.Threading.Tasks.Task<GetSellerCarouselPermissionResponse> GetSellerCarouselPermissionAsync(System.Threading.CancellationToken cancellationToken = default)
+        /// <returns>Task of GetShopCarouselPermissionResponse</returns>
+        public async System.Threading.Tasks.Task<GetShopCarouselPermissionResponse> GetShopCarouselPermissionAsync(System.Threading.CancellationToken cancellationToken = default)
         {
-            TikTokShop.Api.Generated.Client.ApiResponse<GetSellerCarouselPermissionResponse> localVarResponse = await GetSellerCarouselPermissionWithHttpInfoAsync(cancellationToken).ConfigureAwait(false);
+            TikTokShop.Api.Generated.Client.ApiResponse<GetShopCarouselPermissionResponse> localVarResponse = await GetShopCarouselPermissionWithHttpInfoAsync(cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Get Seller Carousel Permission Retrieve the carousel-related permissions for the currently authorized seller, including auto-post permission and photo mode permission.
+        /// Get Shop Carousel Permission Retrieve the carousel-related permissions for the currently authorized shop, including auto-post permission and photo mode permission.
         /// </summary>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (GetSellerCarouselPermissionResponse)</returns>
-        public async System.Threading.Tasks.Task<TikTokShop.Api.Generated.Client.ApiResponse<GetSellerCarouselPermissionResponse>> GetSellerCarouselPermissionWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default)
+        /// <returns>Task of ApiResponse (GetShopCarouselPermissionResponse)</returns>
+        public async System.Threading.Tasks.Task<TikTokShop.Api.Generated.Client.ApiResponse<GetShopCarouselPermissionResponse>> GetShopCarouselPermissionWithHttpInfoAsync(System.Threading.CancellationToken cancellationToken = default)
         {
 
             TikTokShop.Api.Generated.Client.RequestOptions localVarRequestOptions = new TikTokShop.Api.Generated.Client.RequestOptions();
@@ -819,11 +819,11 @@ namespace TikTokShop.Api.Generated.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.GetAsync<GetSellerCarouselPermissionResponse>("/seller/202611/carousel_permission", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.GetAsync<GetShopCarouselPermissionResponse>("/seller/202611/carousel_permission", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
-                Exception _exception = this.ExceptionFactory("GetSellerCarouselPermission", localVarResponse);
+                Exception _exception = this.ExceptionFactory("GetShopCarouselPermission", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
@@ -942,28 +942,28 @@ namespace TikTokShop.Api.Generated.Api
         }
 
         /// <summary>
-        /// Upload Seller Image Upload an image material up to 10 MiB to TOS for the current seller.
+        /// Upload Shop Image Upload an image material up to 10 MiB to TOS for the current shop.
         /// </summary>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="imageData">The local image file to upload to TOS.  Requirements: - Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP. - Zero-byte files are rejected. - Maximum file size: 10 MiB (10,485,760 bytes).</param>
-        /// <returns>UploadSellerImageResponse</returns>
-        public UploadSellerImageResponse UploadSellerImage(FileParameter imageData)
+        /// <returns>UploadShopImageResponse</returns>
+        public UploadShopImageResponse UploadShopImage(FileParameter imageData)
         {
-            TikTokShop.Api.Generated.Client.ApiResponse<UploadSellerImageResponse> localVarResponse = UploadSellerImageWithHttpInfo(imageData);
+            TikTokShop.Api.Generated.Client.ApiResponse<UploadShopImageResponse> localVarResponse = UploadShopImageWithHttpInfo(imageData);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Upload Seller Image Upload an image material up to 10 MiB to TOS for the current seller.
+        /// Upload Shop Image Upload an image material up to 10 MiB to TOS for the current shop.
         /// </summary>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="imageData">The local image file to upload to TOS.  Requirements: - Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP. - Zero-byte files are rejected. - Maximum file size: 10 MiB (10,485,760 bytes).</param>
-        /// <returns>ApiResponse of UploadSellerImageResponse</returns>
-        public TikTokShop.Api.Generated.Client.ApiResponse<UploadSellerImageResponse> UploadSellerImageWithHttpInfo(FileParameter imageData)
+        /// <returns>ApiResponse of UploadShopImageResponse</returns>
+        public TikTokShop.Api.Generated.Client.ApiResponse<UploadShopImageResponse> UploadShopImageWithHttpInfo(FileParameter imageData)
         {
             // verify the required parameter 'imageData' is set
             if (imageData == null)
-                throw new TikTokShop.Api.Generated.Client.ApiException(400, "Missing required parameter 'imageData' when calling SellerApi->UploadSellerImage");
+                throw new TikTokShop.Api.Generated.Client.ApiException(400, "Missing required parameter 'imageData' when calling SellerApi->UploadShopImage");
 
             TikTokShop.Api.Generated.Client.RequestOptions localVarRequestOptions = new TikTokShop.Api.Generated.Client.RequestOptions();
 
@@ -991,11 +991,11 @@ namespace TikTokShop.Api.Generated.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<UploadSellerImageResponse>("/seller/202611/images/upload", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<UploadShopImageResponse>("/seller/202611/images/upload", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
-                Exception _exception = this.ExceptionFactory("UploadSellerImage", localVarResponse);
+                Exception _exception = this.ExceptionFactory("UploadShopImage", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
@@ -1003,30 +1003,30 @@ namespace TikTokShop.Api.Generated.Api
         }
 
         /// <summary>
-        /// Upload Seller Image Upload an image material up to 10 MiB to TOS for the current seller.
+        /// Upload Shop Image Upload an image material up to 10 MiB to TOS for the current shop.
         /// </summary>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="imageData">The local image file to upload to TOS.  Requirements: - Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP. - Zero-byte files are rejected. - Maximum file size: 10 MiB (10,485,760 bytes).</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of UploadSellerImageResponse</returns>
-        public async System.Threading.Tasks.Task<UploadSellerImageResponse> UploadSellerImageAsync(FileParameter imageData, System.Threading.CancellationToken cancellationToken = default)
+        /// <returns>Task of UploadShopImageResponse</returns>
+        public async System.Threading.Tasks.Task<UploadShopImageResponse> UploadShopImageAsync(FileParameter imageData, System.Threading.CancellationToken cancellationToken = default)
         {
-            TikTokShop.Api.Generated.Client.ApiResponse<UploadSellerImageResponse> localVarResponse = await UploadSellerImageWithHttpInfoAsync(imageData, cancellationToken).ConfigureAwait(false);
+            TikTokShop.Api.Generated.Client.ApiResponse<UploadShopImageResponse> localVarResponse = await UploadShopImageWithHttpInfoAsync(imageData, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Upload Seller Image Upload an image material up to 10 MiB to TOS for the current seller.
+        /// Upload Shop Image Upload an image material up to 10 MiB to TOS for the current shop.
         /// </summary>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
         /// <param name="imageData">The local image file to upload to TOS.  Requirements: - Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP. - Zero-byte files are rejected. - Maximum file size: 10 MiB (10,485,760 bytes).</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (UploadSellerImageResponse)</returns>
-        public async System.Threading.Tasks.Task<TikTokShop.Api.Generated.Client.ApiResponse<UploadSellerImageResponse>> UploadSellerImageWithHttpInfoAsync(FileParameter imageData, System.Threading.CancellationToken cancellationToken = default)
+        /// <returns>Task of ApiResponse (UploadShopImageResponse)</returns>
+        public async System.Threading.Tasks.Task<TikTokShop.Api.Generated.Client.ApiResponse<UploadShopImageResponse>> UploadShopImageWithHttpInfoAsync(FileParameter imageData, System.Threading.CancellationToken cancellationToken = default)
         {
             // verify the required parameter 'imageData' is set
             if (imageData == null)
-                throw new TikTokShop.Api.Generated.Client.ApiException(400, "Missing required parameter 'imageData' when calling SellerApi->UploadSellerImage");
+                throw new TikTokShop.Api.Generated.Client.ApiException(400, "Missing required parameter 'imageData' when calling SellerApi->UploadShopImage");
 
 
             TikTokShop.Api.Generated.Client.RequestOptions localVarRequestOptions = new TikTokShop.Api.Generated.Client.RequestOptions();
@@ -1057,11 +1057,11 @@ namespace TikTokShop.Api.Generated.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<UploadSellerImageResponse>("/seller/202611/images/upload", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<UploadShopImageResponse>("/seller/202611/images/upload", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
-                Exception _exception = this.ExceptionFactory("UploadSellerImage", localVarResponse);
+                Exception _exception = this.ExceptionFactory("UploadShopImage", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
@@ -1069,28 +1069,28 @@ namespace TikTokShop.Api.Generated.Api
         }
 
         /// <summary>
-        /// Upload Seller Materials Upload image materials for the current shop. Use &#x60;materials&#x60; for &#x60;ONE_PRODUCT_ONE_IMAGE&#x60; and &#x60;material_groups&#x60; for &#x60;ONE_PRODUCT_MULTIPLE_IMAGES&#x60;. Provide exactly one mode payload per request.
+        /// Upload Shop Materials Upload image materials for the current shop. Use &#x60;materials&#x60; for &#x60;ONE_PRODUCT_ONE_IMAGE&#x60; and &#x60;material_groups&#x60; for &#x60;ONE_PRODUCT_MULTIPLE_IMAGES&#x60;. Provide exactly one mode payload per request.
         /// </summary>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uploadSellerMaterialsRequest"></param>
-        /// <returns>UploadSellerMaterialsResponse</returns>
-        public UploadSellerMaterialsResponse UploadSellerMaterials(UploadSellerMaterialsRequest uploadSellerMaterialsRequest)
+        /// <param name="uploadShopMaterialsRequest"></param>
+        /// <returns>UploadShopMaterialsResponse</returns>
+        public UploadShopMaterialsResponse UploadShopMaterials(UploadShopMaterialsRequest uploadShopMaterialsRequest)
         {
-            TikTokShop.Api.Generated.Client.ApiResponse<UploadSellerMaterialsResponse> localVarResponse = UploadSellerMaterialsWithHttpInfo(uploadSellerMaterialsRequest);
+            TikTokShop.Api.Generated.Client.ApiResponse<UploadShopMaterialsResponse> localVarResponse = UploadShopMaterialsWithHttpInfo(uploadShopMaterialsRequest);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Upload Seller Materials Upload image materials for the current shop. Use &#x60;materials&#x60; for &#x60;ONE_PRODUCT_ONE_IMAGE&#x60; and &#x60;material_groups&#x60; for &#x60;ONE_PRODUCT_MULTIPLE_IMAGES&#x60;. Provide exactly one mode payload per request.
+        /// Upload Shop Materials Upload image materials for the current shop. Use &#x60;materials&#x60; for &#x60;ONE_PRODUCT_ONE_IMAGE&#x60; and &#x60;material_groups&#x60; for &#x60;ONE_PRODUCT_MULTIPLE_IMAGES&#x60;. Provide exactly one mode payload per request.
         /// </summary>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uploadSellerMaterialsRequest"></param>
-        /// <returns>ApiResponse of UploadSellerMaterialsResponse</returns>
-        public TikTokShop.Api.Generated.Client.ApiResponse<UploadSellerMaterialsResponse> UploadSellerMaterialsWithHttpInfo(UploadSellerMaterialsRequest uploadSellerMaterialsRequest)
+        /// <param name="uploadShopMaterialsRequest"></param>
+        /// <returns>ApiResponse of UploadShopMaterialsResponse</returns>
+        public TikTokShop.Api.Generated.Client.ApiResponse<UploadShopMaterialsResponse> UploadShopMaterialsWithHttpInfo(UploadShopMaterialsRequest uploadShopMaterialsRequest)
         {
-            // verify the required parameter 'uploadSellerMaterialsRequest' is set
-            if (uploadSellerMaterialsRequest == null)
-                throw new TikTokShop.Api.Generated.Client.ApiException(400, "Missing required parameter 'uploadSellerMaterialsRequest' when calling SellerApi->UploadSellerMaterials");
+            // verify the required parameter 'uploadShopMaterialsRequest' is set
+            if (uploadShopMaterialsRequest == null)
+                throw new TikTokShop.Api.Generated.Client.ApiException(400, "Missing required parameter 'uploadShopMaterialsRequest' when calling SellerApi->UploadShopMaterials");
 
             TikTokShop.Api.Generated.Client.RequestOptions localVarRequestOptions = new TikTokShop.Api.Generated.Client.RequestOptions();
 
@@ -1109,7 +1109,7 @@ namespace TikTokShop.Api.Generated.Api
             var localVarAccept = TikTokShop.Api.Generated.Client.ClientUtils.SelectHeaderAccept(_accepts);
             if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
 
-            localVarRequestOptions.Data = uploadSellerMaterialsRequest;
+            localVarRequestOptions.Data = uploadShopMaterialsRequest;
 
             // authentication (accessToken) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-tts-access-token")))
@@ -1118,11 +1118,11 @@ namespace TikTokShop.Api.Generated.Api
             }
 
             // make the HTTP request
-            var localVarResponse = this.Client.Post<UploadSellerMaterialsResponse>("/seller/202611/materials/upload", localVarRequestOptions, this.Configuration);
+            var localVarResponse = this.Client.Post<UploadShopMaterialsResponse>("/seller/202611/materials/upload", localVarRequestOptions, this.Configuration);
 
             if (this.ExceptionFactory != null)
             {
-                Exception _exception = this.ExceptionFactory("UploadSellerMaterials", localVarResponse);
+                Exception _exception = this.ExceptionFactory("UploadShopMaterials", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 
@@ -1130,30 +1130,30 @@ namespace TikTokShop.Api.Generated.Api
         }
 
         /// <summary>
-        /// Upload Seller Materials Upload image materials for the current shop. Use &#x60;materials&#x60; for &#x60;ONE_PRODUCT_ONE_IMAGE&#x60; and &#x60;material_groups&#x60; for &#x60;ONE_PRODUCT_MULTIPLE_IMAGES&#x60;. Provide exactly one mode payload per request.
+        /// Upload Shop Materials Upload image materials for the current shop. Use &#x60;materials&#x60; for &#x60;ONE_PRODUCT_ONE_IMAGE&#x60; and &#x60;material_groups&#x60; for &#x60;ONE_PRODUCT_MULTIPLE_IMAGES&#x60;. Provide exactly one mode payload per request.
         /// </summary>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uploadSellerMaterialsRequest"></param>
+        /// <param name="uploadShopMaterialsRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of UploadSellerMaterialsResponse</returns>
-        public async System.Threading.Tasks.Task<UploadSellerMaterialsResponse> UploadSellerMaterialsAsync(UploadSellerMaterialsRequest uploadSellerMaterialsRequest, System.Threading.CancellationToken cancellationToken = default)
+        /// <returns>Task of UploadShopMaterialsResponse</returns>
+        public async System.Threading.Tasks.Task<UploadShopMaterialsResponse> UploadShopMaterialsAsync(UploadShopMaterialsRequest uploadShopMaterialsRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            TikTokShop.Api.Generated.Client.ApiResponse<UploadSellerMaterialsResponse> localVarResponse = await UploadSellerMaterialsWithHttpInfoAsync(uploadSellerMaterialsRequest, cancellationToken).ConfigureAwait(false);
+            TikTokShop.Api.Generated.Client.ApiResponse<UploadShopMaterialsResponse> localVarResponse = await UploadShopMaterialsWithHttpInfoAsync(uploadShopMaterialsRequest, cancellationToken).ConfigureAwait(false);
             return localVarResponse.Data;
         }
 
         /// <summary>
-        /// Upload Seller Materials Upload image materials for the current shop. Use &#x60;materials&#x60; for &#x60;ONE_PRODUCT_ONE_IMAGE&#x60; and &#x60;material_groups&#x60; for &#x60;ONE_PRODUCT_MULTIPLE_IMAGES&#x60;. Provide exactly one mode payload per request.
+        /// Upload Shop Materials Upload image materials for the current shop. Use &#x60;materials&#x60; for &#x60;ONE_PRODUCT_ONE_IMAGE&#x60; and &#x60;material_groups&#x60; for &#x60;ONE_PRODUCT_MULTIPLE_IMAGES&#x60;. Provide exactly one mode payload per request.
         /// </summary>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="uploadSellerMaterialsRequest"></param>
+        /// <param name="uploadShopMaterialsRequest"></param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
-        /// <returns>Task of ApiResponse (UploadSellerMaterialsResponse)</returns>
-        public async System.Threading.Tasks.Task<TikTokShop.Api.Generated.Client.ApiResponse<UploadSellerMaterialsResponse>> UploadSellerMaterialsWithHttpInfoAsync(UploadSellerMaterialsRequest uploadSellerMaterialsRequest, System.Threading.CancellationToken cancellationToken = default)
+        /// <returns>Task of ApiResponse (UploadShopMaterialsResponse)</returns>
+        public async System.Threading.Tasks.Task<TikTokShop.Api.Generated.Client.ApiResponse<UploadShopMaterialsResponse>> UploadShopMaterialsWithHttpInfoAsync(UploadShopMaterialsRequest uploadShopMaterialsRequest, System.Threading.CancellationToken cancellationToken = default)
         {
-            // verify the required parameter 'uploadSellerMaterialsRequest' is set
-            if (uploadSellerMaterialsRequest == null)
-                throw new TikTokShop.Api.Generated.Client.ApiException(400, "Missing required parameter 'uploadSellerMaterialsRequest' when calling SellerApi->UploadSellerMaterials");
+            // verify the required parameter 'uploadShopMaterialsRequest' is set
+            if (uploadShopMaterialsRequest == null)
+                throw new TikTokShop.Api.Generated.Client.ApiException(400, "Missing required parameter 'uploadShopMaterialsRequest' when calling SellerApi->UploadShopMaterials");
 
 
             TikTokShop.Api.Generated.Client.RequestOptions localVarRequestOptions = new TikTokShop.Api.Generated.Client.RequestOptions();
@@ -1174,7 +1174,7 @@ namespace TikTokShop.Api.Generated.Api
             var localVarAccept = TikTokShop.Api.Generated.Client.ClientUtils.SelectHeaderAccept(_accepts);
             if (localVarAccept != null) localVarRequestOptions.HeaderParameters.Add("Accept", localVarAccept);
 
-            localVarRequestOptions.Data = uploadSellerMaterialsRequest;
+            localVarRequestOptions.Data = uploadShopMaterialsRequest;
 
             // authentication (accessToken) required
             if (!string.IsNullOrEmpty(this.Configuration.GetApiKeyWithPrefix("x-tts-access-token")))
@@ -1184,11 +1184,11 @@ namespace TikTokShop.Api.Generated.Api
 
             // make the HTTP request
 
-            var localVarResponse = await this.AsynchronousClient.PostAsync<UploadSellerMaterialsResponse>("/seller/202611/materials/upload", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
+            var localVarResponse = await this.AsynchronousClient.PostAsync<UploadShopMaterialsResponse>("/seller/202611/materials/upload", localVarRequestOptions, this.Configuration, cancellationToken).ConfigureAwait(false);
 
             if (this.ExceptionFactory != null)
             {
-                Exception _exception = this.ExceptionFactory("UploadSellerMaterials", localVarResponse);
+                Exception _exception = this.ExceptionFactory("UploadShopMaterials", localVarResponse);
                 if (_exception != null) throw _exception;
             }
 

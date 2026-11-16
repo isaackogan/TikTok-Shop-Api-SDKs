@@ -30,11 +30,11 @@ import java.io.IOException;
 import java.io.File;
 import com.isaackogan.tiktok.shop.generated.model.GetActiveShopsResponse;
 import com.isaackogan.tiktok.shop.generated.model.GetGlobalProductPermissionResponse;
-import com.isaackogan.tiktok.shop.generated.model.GetSellerCarouselPermissionResponse;
+import com.isaackogan.tiktok.shop.generated.model.GetShopCarouselPermissionResponse;
 import com.isaackogan.tiktok.shop.generated.model.GetShopGroupAndRelatedShopsResponse;
-import com.isaackogan.tiktok.shop.generated.model.UploadSellerImageResponse;
-import com.isaackogan.tiktok.shop.generated.model.UploadSellerMaterialsRequest;
-import com.isaackogan.tiktok.shop.generated.model.UploadSellerMaterialsResponse;
+import com.isaackogan.tiktok.shop.generated.model.UploadShopImageResponse;
+import com.isaackogan.tiktok.shop.generated.model.UploadShopMaterialsRequest;
+import com.isaackogan.tiktok.shop.generated.model.UploadShopMaterialsResponse;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -314,7 +314,7 @@ public class SellerApi {
         return localVarCall;
     }
     /**
-     * Build call for getSellerCarouselPermission
+     * Build call for getShopCarouselPermission
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -325,7 +325,7 @@ public class SellerApi {
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getSellerCarouselPermissionCall(final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call getShopCarouselPermissionCall(final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -370,15 +370,15 @@ public class SellerApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call getSellerCarouselPermissionValidateBeforeCall(final ApiCallback _callback) throws ApiException {
-        return getSellerCarouselPermissionCall(_callback);
+    private okhttp3.Call getShopCarouselPermissionValidateBeforeCall(final ApiCallback _callback) throws ApiException {
+        return getShopCarouselPermissionCall(_callback);
 
     }
 
     /**
-     * Get Seller Carousel Permission
-     * Retrieve the carousel-related permissions for the currently authorized seller, including auto-post permission and photo mode permission.
-     * @return GetSellerCarouselPermissionResponse
+     * Get Shop Carousel Permission
+     * Retrieve the carousel-related permissions for the currently authorized shop, including auto-post permission and photo mode permission.
+     * @return GetShopCarouselPermissionResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -387,15 +387,15 @@ public class SellerApi {
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
      </table>
      */
-    public GetSellerCarouselPermissionResponse getSellerCarouselPermission() throws ApiException {
-        ApiResponse<GetSellerCarouselPermissionResponse> localVarResp = getSellerCarouselPermissionWithHttpInfo();
+    public GetShopCarouselPermissionResponse getShopCarouselPermission() throws ApiException {
+        ApiResponse<GetShopCarouselPermissionResponse> localVarResp = getShopCarouselPermissionWithHttpInfo();
         return localVarResp.getData();
     }
 
     /**
-     * Get Seller Carousel Permission
-     * Retrieve the carousel-related permissions for the currently authorized seller, including auto-post permission and photo mode permission.
-     * @return ApiResponse&lt;GetSellerCarouselPermissionResponse&gt;
+     * Get Shop Carousel Permission
+     * Retrieve the carousel-related permissions for the currently authorized shop, including auto-post permission and photo mode permission.
+     * @return ApiResponse&lt;GetShopCarouselPermissionResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -404,15 +404,15 @@ public class SellerApi {
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<GetSellerCarouselPermissionResponse> getSellerCarouselPermissionWithHttpInfo() throws ApiException {
-        okhttp3.Call localVarCall = getSellerCarouselPermissionValidateBeforeCall(null);
-        Type localVarReturnType = new TypeToken<GetSellerCarouselPermissionResponse>(){}.getType();
+    public ApiResponse<GetShopCarouselPermissionResponse> getShopCarouselPermissionWithHttpInfo() throws ApiException {
+        okhttp3.Call localVarCall = getShopCarouselPermissionValidateBeforeCall(null);
+        Type localVarReturnType = new TypeToken<GetShopCarouselPermissionResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * Get Seller Carousel Permission (asynchronously)
-     * Retrieve the carousel-related permissions for the currently authorized seller, including auto-post permission and photo mode permission.
+     * Get Shop Carousel Permission (asynchronously)
+     * Retrieve the carousel-related permissions for the currently authorized shop, including auto-post permission and photo mode permission.
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -423,10 +423,10 @@ public class SellerApi {
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call getSellerCarouselPermissionAsync(final ApiCallback<GetSellerCarouselPermissionResponse> _callback) throws ApiException {
+    public okhttp3.Call getShopCarouselPermissionAsync(final ApiCallback<GetShopCarouselPermissionResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = getSellerCarouselPermissionValidateBeforeCall(_callback);
-        Type localVarReturnType = new TypeToken<GetSellerCarouselPermissionResponse>(){}.getType();
+        okhttp3.Call localVarCall = getShopCarouselPermissionValidateBeforeCall(_callback);
+        Type localVarReturnType = new TypeToken<GetShopCarouselPermissionResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
@@ -548,7 +548,7 @@ public class SellerApi {
         return localVarCall;
     }
     /**
-     * Build call for uploadSellerImage
+     * Build call for uploadShopImage
      * @param imageData The local image file to upload to TOS.  Requirements: - Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP. - Zero-byte files are rejected. - Maximum file size: 10 MiB (10,485,760 bytes). (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
@@ -560,7 +560,7 @@ public class SellerApi {
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call uploadSellerImageCall(@javax.annotation.Nonnull File imageData, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call uploadShopImageCall(@javax.annotation.Nonnull File imageData, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -610,21 +610,21 @@ public class SellerApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call uploadSellerImageValidateBeforeCall(@javax.annotation.Nonnull File imageData, final ApiCallback _callback) throws ApiException {
+    private okhttp3.Call uploadShopImageValidateBeforeCall(@javax.annotation.Nonnull File imageData, final ApiCallback _callback) throws ApiException {
         // verify the required parameter 'imageData' is set
         if (imageData == null) {
-            throw new ApiException("Missing the required parameter 'imageData' when calling uploadSellerImage(Async)");
+            throw new ApiException("Missing the required parameter 'imageData' when calling uploadShopImage(Async)");
         }
 
-        return uploadSellerImageCall(imageData, _callback);
+        return uploadShopImageCall(imageData, _callback);
 
     }
 
     /**
-     * Upload Seller Image
-     * Upload an image material up to 10 MiB to TOS for the current seller.
+     * Upload Shop Image
+     * Upload an image material up to 10 MiB to TOS for the current shop.
      * @param imageData The local image file to upload to TOS.  Requirements: - Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP. - Zero-byte files are rejected. - Maximum file size: 10 MiB (10,485,760 bytes). (required)
-     * @return UploadSellerImageResponse
+     * @return UploadShopImageResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -633,16 +633,16 @@ public class SellerApi {
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
      </table>
      */
-    public UploadSellerImageResponse uploadSellerImage(@javax.annotation.Nonnull File imageData) throws ApiException {
-        ApiResponse<UploadSellerImageResponse> localVarResp = uploadSellerImageWithHttpInfo(imageData);
+    public UploadShopImageResponse uploadShopImage(@javax.annotation.Nonnull File imageData) throws ApiException {
+        ApiResponse<UploadShopImageResponse> localVarResp = uploadShopImageWithHttpInfo(imageData);
         return localVarResp.getData();
     }
 
     /**
-     * Upload Seller Image
-     * Upload an image material up to 10 MiB to TOS for the current seller.
+     * Upload Shop Image
+     * Upload an image material up to 10 MiB to TOS for the current shop.
      * @param imageData The local image file to upload to TOS.  Requirements: - Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP. - Zero-byte files are rejected. - Maximum file size: 10 MiB (10,485,760 bytes). (required)
-     * @return ApiResponse&lt;UploadSellerImageResponse&gt;
+     * @return ApiResponse&lt;UploadShopImageResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -651,15 +651,15 @@ public class SellerApi {
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<UploadSellerImageResponse> uploadSellerImageWithHttpInfo(@javax.annotation.Nonnull File imageData) throws ApiException {
-        okhttp3.Call localVarCall = uploadSellerImageValidateBeforeCall(imageData, null);
-        Type localVarReturnType = new TypeToken<UploadSellerImageResponse>(){}.getType();
+    public ApiResponse<UploadShopImageResponse> uploadShopImageWithHttpInfo(@javax.annotation.Nonnull File imageData) throws ApiException {
+        okhttp3.Call localVarCall = uploadShopImageValidateBeforeCall(imageData, null);
+        Type localVarReturnType = new TypeToken<UploadShopImageResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * Upload Seller Image (asynchronously)
-     * Upload an image material up to 10 MiB to TOS for the current seller.
+     * Upload Shop Image (asynchronously)
+     * Upload an image material up to 10 MiB to TOS for the current shop.
      * @param imageData The local image file to upload to TOS.  Requirements: - Supported formats: JPG, JPEG, PNG, WEBP, HEIC, BMP. - Zero-byte files are rejected. - Maximum file size: 10 MiB (10,485,760 bytes). (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
@@ -671,16 +671,16 @@ public class SellerApi {
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call uploadSellerImageAsync(@javax.annotation.Nonnull File imageData, final ApiCallback<UploadSellerImageResponse> _callback) throws ApiException {
+    public okhttp3.Call uploadShopImageAsync(@javax.annotation.Nonnull File imageData, final ApiCallback<UploadShopImageResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = uploadSellerImageValidateBeforeCall(imageData, _callback);
-        Type localVarReturnType = new TypeToken<UploadSellerImageResponse>(){}.getType();
+        okhttp3.Call localVarCall = uploadShopImageValidateBeforeCall(imageData, _callback);
+        Type localVarReturnType = new TypeToken<UploadShopImageResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
     /**
-     * Build call for uploadSellerMaterials
-     * @param uploadSellerMaterialsRequest  (required)
+     * Build call for uploadShopMaterials
+     * @param uploadShopMaterialsRequest  (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -691,7 +691,7 @@ public class SellerApi {
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call uploadSellerMaterialsCall(@javax.annotation.Nonnull UploadSellerMaterialsRequest uploadSellerMaterialsRequest, final ApiCallback _callback) throws ApiException {
+    public okhttp3.Call uploadShopMaterialsCall(@javax.annotation.Nonnull UploadShopMaterialsRequest uploadShopMaterialsRequest, final ApiCallback _callback) throws ApiException {
         String basePath = null;
         // Operation Servers
         String[] localBasePaths = new String[] {  };
@@ -705,7 +705,7 @@ public class SellerApi {
             basePath = null;
         }
 
-        Object localVarPostBody = uploadSellerMaterialsRequest;
+        Object localVarPostBody = uploadShopMaterialsRequest;
 
         // create path and map variables
         String localVarPath = "/seller/202611/materials/upload";
@@ -737,21 +737,21 @@ public class SellerApi {
     }
 
     @SuppressWarnings("rawtypes")
-    private okhttp3.Call uploadSellerMaterialsValidateBeforeCall(@javax.annotation.Nonnull UploadSellerMaterialsRequest uploadSellerMaterialsRequest, final ApiCallback _callback) throws ApiException {
-        // verify the required parameter 'uploadSellerMaterialsRequest' is set
-        if (uploadSellerMaterialsRequest == null) {
-            throw new ApiException("Missing the required parameter 'uploadSellerMaterialsRequest' when calling uploadSellerMaterials(Async)");
+    private okhttp3.Call uploadShopMaterialsValidateBeforeCall(@javax.annotation.Nonnull UploadShopMaterialsRequest uploadShopMaterialsRequest, final ApiCallback _callback) throws ApiException {
+        // verify the required parameter 'uploadShopMaterialsRequest' is set
+        if (uploadShopMaterialsRequest == null) {
+            throw new ApiException("Missing the required parameter 'uploadShopMaterialsRequest' when calling uploadShopMaterials(Async)");
         }
 
-        return uploadSellerMaterialsCall(uploadSellerMaterialsRequest, _callback);
+        return uploadShopMaterialsCall(uploadShopMaterialsRequest, _callback);
 
     }
 
     /**
-     * Upload Seller Materials
+     * Upload Shop Materials
      * Upload image materials for the current shop. Use &#x60;materials&#x60; for &#x60;ONE_PRODUCT_ONE_IMAGE&#x60; and &#x60;material_groups&#x60; for &#x60;ONE_PRODUCT_MULTIPLE_IMAGES&#x60;. Provide exactly one mode payload per request.
-     * @param uploadSellerMaterialsRequest  (required)
-     * @return UploadSellerMaterialsResponse
+     * @param uploadShopMaterialsRequest  (required)
+     * @return UploadShopMaterialsResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -760,16 +760,16 @@ public class SellerApi {
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
      </table>
      */
-    public UploadSellerMaterialsResponse uploadSellerMaterials(@javax.annotation.Nonnull UploadSellerMaterialsRequest uploadSellerMaterialsRequest) throws ApiException {
-        ApiResponse<UploadSellerMaterialsResponse> localVarResp = uploadSellerMaterialsWithHttpInfo(uploadSellerMaterialsRequest);
+    public UploadShopMaterialsResponse uploadShopMaterials(@javax.annotation.Nonnull UploadShopMaterialsRequest uploadShopMaterialsRequest) throws ApiException {
+        ApiResponse<UploadShopMaterialsResponse> localVarResp = uploadShopMaterialsWithHttpInfo(uploadShopMaterialsRequest);
         return localVarResp.getData();
     }
 
     /**
-     * Upload Seller Materials
+     * Upload Shop Materials
      * Upload image materials for the current shop. Use &#x60;materials&#x60; for &#x60;ONE_PRODUCT_ONE_IMAGE&#x60; and &#x60;material_groups&#x60; for &#x60;ONE_PRODUCT_MULTIPLE_IMAGES&#x60;. Provide exactly one mode payload per request.
-     * @param uploadSellerMaterialsRequest  (required)
-     * @return ApiResponse&lt;UploadSellerMaterialsResponse&gt;
+     * @param uploadShopMaterialsRequest  (required)
+     * @return ApiResponse&lt;UploadShopMaterialsResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
      <table border="1">
@@ -778,16 +778,16 @@ public class SellerApi {
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
      </table>
      */
-    public ApiResponse<UploadSellerMaterialsResponse> uploadSellerMaterialsWithHttpInfo(@javax.annotation.Nonnull UploadSellerMaterialsRequest uploadSellerMaterialsRequest) throws ApiException {
-        okhttp3.Call localVarCall = uploadSellerMaterialsValidateBeforeCall(uploadSellerMaterialsRequest, null);
-        Type localVarReturnType = new TypeToken<UploadSellerMaterialsResponse>(){}.getType();
+    public ApiResponse<UploadShopMaterialsResponse> uploadShopMaterialsWithHttpInfo(@javax.annotation.Nonnull UploadShopMaterialsRequest uploadShopMaterialsRequest) throws ApiException {
+        okhttp3.Call localVarCall = uploadShopMaterialsValidateBeforeCall(uploadShopMaterialsRequest, null);
+        Type localVarReturnType = new TypeToken<UploadShopMaterialsResponse>(){}.getType();
         return localVarApiClient.execute(localVarCall, localVarReturnType);
     }
 
     /**
-     * Upload Seller Materials (asynchronously)
+     * Upload Shop Materials (asynchronously)
      * Upload image materials for the current shop. Use &#x60;materials&#x60; for &#x60;ONE_PRODUCT_ONE_IMAGE&#x60; and &#x60;material_groups&#x60; for &#x60;ONE_PRODUCT_MULTIPLE_IMAGES&#x60;. Provide exactly one mode payload per request.
-     * @param uploadSellerMaterialsRequest  (required)
+     * @param uploadShopMaterialsRequest  (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -798,10 +798,10 @@ public class SellerApi {
         <tr><td> 200 </td><td> Success </td><td>  -  </td></tr>
      </table>
      */
-    public okhttp3.Call uploadSellerMaterialsAsync(@javax.annotation.Nonnull UploadSellerMaterialsRequest uploadSellerMaterialsRequest, final ApiCallback<UploadSellerMaterialsResponse> _callback) throws ApiException {
+    public okhttp3.Call uploadShopMaterialsAsync(@javax.annotation.Nonnull UploadShopMaterialsRequest uploadShopMaterialsRequest, final ApiCallback<UploadShopMaterialsResponse> _callback) throws ApiException {
 
-        okhttp3.Call localVarCall = uploadSellerMaterialsValidateBeforeCall(uploadSellerMaterialsRequest, _callback);
-        Type localVarReturnType = new TypeToken<UploadSellerMaterialsResponse>(){}.getType();
+        okhttp3.Call localVarCall = uploadShopMaterialsValidateBeforeCall(uploadShopMaterialsRequest, _callback);
+        Type localVarReturnType = new TypeToken<UploadShopMaterialsResponse>(){}.getType();
         localVarApiClient.executeAsync(localVarCall, localVarReturnType, _callback);
         return localVarCall;
     }
