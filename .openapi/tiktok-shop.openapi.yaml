@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: TikTok Shop Partner API
-  version: 2026.11.13
+  version: 2026.11.17
   description: Generated from the TikTok Shop Partner Center documentation (https://partner.tiktokshop.com/docv2). Do not edit by hand.
 externalDocs:
   url: https://partner.tiktokshop.com/docv2
@@ -1487,110 +1487,6 @@ paths:
         - code: "36009003"
           message: Internal error. Please try again. If the issue persists after multiple attempts, please contact platform support.
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-shoppable-video-precheck-result-202601
-  /affiliate_creator/202603/videos:
-    post:
-      operationId: postShoppableVideo
-      summary: Post Shoppable Video
-      description: "Use this API to submit a shoppable video for publishing. When the submission succeeds, pass the returned video ID as the `video_id` path parameter to Get Shoppable Video Status (`GET /affiliate_creator/202509/videos/{video_id}/status`) to retrieve the posting status: `PROCESSING`, `SUCCESS`, or `FAIL`. If the status is `PROCESSING`, call the status API again later to check for a terminal status."
-      tags:
-        - Affiliate creator
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: "#/components/schemas/PostShoppableVideoRequest"
-            example:
-              video_info:
-                file_id: v12d00gd0024d3nfqr7og65
-                title: Sample video title
-                cover_uri: v12d00gd0024d3nfqr7og65oooiuuyy
-                cover_timestamp_ms: 1000
-                music_id: "717294069642063456"
-              product_link_info:
-                product_id: "17294069642063424"
-                title: Sample product anchor title
-      responses:
-        "200":
-          description: Success
-          content:
-            application/json:
-              schema:
-                $ref: "#/components/schemas/PostShoppableVideoResponse"
-              example:
-                code: 0
-                data:
-                  video:
-                    id: "7548431509997292816"
-                message: Success
-                request_id: 202203070749000101890810281E8C70B7
-      x-tts-scenario: 4
-      x-tts-scopes:
-        - Content Posting
-      x-tts-error-codes:
-        - code: "16011007"
-          message: Product link title should be no longer than 30 characters.
-        - code: "16011009"
-          message: Product link title contains offensive language.
-        - code: "16011069"
-          message: Product link title contains punctuation or emoji.
-        - code: "170001002"
-          message: Creator TikTok Shop permission check failed.
-        - code: "170001003"
-          message: Creator Tiktok Shop permission temporarily banned.
-        - code: "170001004"
-          message: Creator TikTok Shop permission is permanently banned.
-        - code: "170001005"
-          message: Creator terms of service not signed. Please contact TikTok for more details.
-        - code: "170001006"
-          message: GKA terms not signed. Please try again after signing GKA term.
-        - code: "170001007"
-          message: Creator did not sign the EU data share agreement.
-        - code: "170001008"
-          message: Creator Age verification failed. Please verify age first.
-        - code: "170001009"
-          message: The product belongs to unsupported category.
-        - code: "170001010"
-          message: The commission plan gets failed or rejected.
-        - code: "170001011"
-          message: The product doesn't exist.
-        - code: "170001012"
-          message: The product is not available.
-        - code: "170001013"
-          message: Showcase SPU exceeds limit.
-        - code: "170001014"
-          message: Blocked by spam check.
-        - code: "170001015"
-          message: Blocked by TikTok Shop risk control.
-        - code: "170001018"
-          message: Get creator pay account error. Please verify the pay account first.
-        - code: "170001020"
-          message: You have exceeded the frequency to post EC short videos. Please take a rest.
-        - code: "170001024"
-          message: cover_timestamp_ms must be a non-negative integer within the video duration.
-        - code: "170001025"
-          message: cover_timestamp_ms exceeds the video duration.
-        - code: "170001030"
-          message: Creator account banned. Please contact TikTok agent for your account.
-        - code: "170001031"
-          message: Creator forbidden to post content.
-        - code: "170001040"
-          message: Please use valid video file id to post TikTok Shop short video.
-        - code: "170001050"
-          message: Getting errors during video posting workflow. Please try again or contact TikTok.
-        - code: "170001060"
-          message: "Posting quota exceeded: the creator is under violation control, resulting in a reduced posting limit."
-        - code: "170001061"
-          message: "Posting quota exceeded: creator is in the newbie period."
-        - code: "170001062"
-          message: "Posting quota exceeded: platform-level posting limit reached."
-        - code: "170001063"
-          message: The product you added only supports auction sales and cannot be used in shoppable videos or Carousels.
-        - code: "36009003"
-          message: Internal error. Please try again. If the issue persists after multiple attempts, please contact platform support.
-        - code: "38007001"
-          message: System Error
-      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/post-shoppable-video-202603
   /affiliate_creator/202606/toko_product_mappers:
     get:
       operationId: mapTokopediaToTikTokShopProductIDs
@@ -1664,6 +1560,112 @@ paths:
         - Read Affiliate Share Link
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-tokopedia-and-tiktok-shop-product-id-mappings-202607
+  /affiliate_creator/202607/videos:
+    post:
+      operationId: postShoppableVideo
+      summary: Post Shoppable Video
+      description: Use this API to post the shoppable video.
+      tags:
+        - Affiliate creator
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PostShoppableVideoRequest"
+            example:
+              video_info:
+                file_id: v12d00gd0024d3nfqr7og65
+                title: Sample video title
+                cover_uri: v12d00gd0024d3nfqr7og65oooiuuyy
+                cover_timestamp_ms: 1000
+                music_id: "717294069642063456"
+                is_ai_generated: false
+              product_link_info:
+                product_id: "17294069642063424"
+                title: Sample product anchor title
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PostShoppableVideoResponse"
+              example:
+                code: 0
+                data:
+                  video:
+                    id: "7548431509997292816"
+                  quota: 3/day
+                message: Success
+                request_id: 202203070749000101890810281E8C70B7
+      x-tts-scenario: 4
+      x-tts-scopes:
+        - Content Posting
+      x-tts-error-codes:
+        - code: "16011007"
+          message: Product link title should be no longer than 30 characters.
+        - code: "16011009"
+          message: Product link title contains offensive language.
+        - code: "16011069"
+          message: Product link title contains punctuation or emoji.
+        - code: "170001002"
+          message: Creator TikTok Shop permission check failed.
+        - code: "170001003"
+          message: Creator Tiktok Shop permission temporarily banned.
+        - code: "170001004"
+          message: Creator TikTok Shop permission is permanently banned.
+        - code: "170001005"
+          message: Creator terms of service not signed. Please contact TikTok for more details.
+        - code: "170001006"
+          message: GKA terms not signed. Please try again after signing GKA term.
+        - code: "170001007"
+          message: Creator did not sign the EU data share agreement.
+        - code: "170001008"
+          message: Creator Age verification failed. Please verify age first.
+        - code: "170001009"
+          message: The product belongs to unsupported category.
+        - code: "170001010"
+          message: The commission plan gets failed or rejected.
+        - code: "170001011"
+          message: The product doesn't exist.
+        - code: "170001012"
+          message: The product is not available.
+        - code: "170001013"
+          message: Showcase SPU exceeds limit.
+        - code: "170001014"
+          message: Blocked by spam check.
+        - code: "170001015"
+          message: Blocked by TikTok Shop risk control.
+        - code: "170001018"
+          message: Get creator pay account error. Please verify the pay account first.
+        - code: "170001020"
+          message: You have exceeded the frequency to post EC short videos. Please take a rest.
+        - code: "170001024"
+          message: cover_timestamp_ms must be a non-negative integer within the video duration.
+        - code: "170001025"
+          message: cover_timestamp_ms exceeds the video duration.
+        - code: "170001030"
+          message: Creator account banned. Please contact TikTok agent for your account.
+        - code: "170001031"
+          message: Creator forbidden to post content.
+        - code: "170001040"
+          message: Please use valid video file id to post TikTok Shop short video.
+        - code: "170001050"
+          message: Getting errors during video posting workflow. Please try again or contact TikTok.
+        - code: "170001060"
+          message: "Posting quota exceeded: the creator is under violation control, resulting in a reduced posting limit."
+        - code: "170001061"
+          message: "Posting quota exceeded: creator is in the newbie period."
+        - code: "170001062"
+          message: "Posting quota exceeded: platform-level posting limit reached."
+        - code: "170001063"
+          message: The product you added only supports auction sales and cannot be used in shoppable videos or Carousels.
+        - code: "36009003"
+          message: Internal error. Please try again. If the issue persists after multiple attempts, please contact platform support.
+        - code: "38007001"
+          message: System Error
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/post-shoppable-video-202607
   /affiliate_creator/202610/photos:
     post:
       operationId: postShoppablePhotos
@@ -13857,6 +13859,7 @@ paths:
                           store_gmv_growth_package_fee: "0"
                           auto_post_shoppable_video_commission_fee: "0"
                           seller_funded_user_spoint_service_fee: "0"
+                          smart_shipping_fee_amount: "0"
                         tax:
                           vat_amount: "0"
                           import_vat_amount: "0"
@@ -14093,6 +14096,7 @@ paths:
                           store_gmv_growth_package_fee: "0"
                           auto_post_shoppable_video_commission_fee: "0"
                           seller_funded_user_spoint_service_fee: "0"
+                          smart_shipping_fee_amount: "0"
                         tax:
                           vat_amount: "30"
                           import_vat_amount: "10"
@@ -14322,6 +14326,7 @@ paths:
                           auto_post_shoppable_video_commission_fee: "0"
                           seller_funded_user_spoint_service_fee: "0"
                           flash_sales_service_fee_amount: "0"
+                          smart_shipping_fee_amount: "0"
                         tax:
                           sales_tax_amount: "-10"
                           sales_tax_payment_amount: "10"
@@ -27284,6 +27289,457 @@ paths:
         - Product Basic
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/edit-size-chart-v2-202610
+  /product/202611/search_videos:
+    get:
+      operationId: listPostViewSearchVideos
+      summary: List Post-view Search Videos
+      description: Only US shops are supported. Returns videos in the authorized shop's available data. ALL sorts by video views descending, then video ID descending. INPUTS_ADDED follows most-recent operation order; videos absent from the selected data period are omitted. Both modes support only the first 10,000 source records. Collections can change between requests; pagination is not a snapshot. Use the returned start_date and end_date on subsequent pages to keep the period fixed.
+      tags:
+        - Products
+      parameters:
+        - $ref: "#/components/parameters/ShopCipher"
+        - name: author_type
+          in: query
+          required: false
+          description: "SELF: shop-posted videos; CREATOR: creator-posted videos. Omit to include both."
+          schema:
+            type: string
+        - name: optimization_inputs
+          in: query
+          required: false
+          description: "ALL: all eligible videos; INPUTS_ADDED: videos with an operation record, including videos whose configuration was subsequently cleared."
+          schema:
+            type: string
+        - name: video_id
+          in: query
+          required: false
+          description: Optional exact-match video ID filter.
+          schema:
+            type: string
+        - name: page_size
+          in: query
+          required: false
+          description: Number of source records per page. Keep the same value for subsequent pages.
+          schema:
+            type: integer
+            format: int64
+        - name: page_token
+          in: query
+          required: false
+          description: Token from the preceding response. Omit for the first page; keep the shop, filters, effective dates and page size unchanged.
+          schema:
+            type: string
+        - name: start_date_ge
+          in: query
+          required: false
+          description: Inclusive start date. Supply both start_date_ge and end_date_le, or omit both for the latest 90 calendar days ending on the latest available warehouse date, including both endpoints.
+          schema:
+            type: string
+        - name: end_date_le
+          in: query
+          required: false
+          description: Inclusive end date. Must be on or after start_date_ge. Returned dates identify the effective metric period.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListPostViewSearchVideosResponse"
+              example:
+                code: 0
+                data:
+                  end_date: 2026-11-11
+                  next_page_token: ""
+                  start_date: 2026-08-14
+                  videos: []
+                message: Success
+                request_id: 202203070749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes:
+        - Product Optimization
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/list-post-view-search-videos-202611
+  /product/202611/search_videos/{video_id}:
+    get:
+      operationId: getPostViewSearchVideo
+      summary: Get Post-view Search Video
+      description: Only US shops are supported. Returns video metadata, period metrics and current configuration for a video found in the authorized shop's data. Missing video data or a failed access check fails the request. Self-posted video detail also requires the author to be resolved for comment retrieval.
+      tags:
+        - Products
+      parameters:
+        - name: video_id
+          in: path
+          required: true
+          description: Unique video ID.
+          schema:
+            type: string
+        - $ref: "#/components/parameters/ShopCipher"
+        - name: start_date_ge
+          in: query
+          required: false
+          description: Inclusive start date. Supply both start_date_ge and end_date_le, or omit both for the latest 90 calendar days ending on the latest available warehouse date, including both endpoints.
+          schema:
+            type: string
+        - name: end_date_le
+          in: query
+          required: false
+          description: Inclusive end date. Must be on or after start_date_ge. Returned dates identify the effective metric period.
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetPostViewSearchVideoResponse"
+              example:
+                code: 0
+                data:
+                  comments: []
+                  end_date: 2026-11-11
+                  keywords:
+                    - summer shoes
+                  products:
+                    - product_id: "7612345678901234570"
+                  start_date: 2026-08-14
+                  video:
+                    author_type: SELF
+                    cover_url: https://example.com/video-cover.jpg
+                    has_optimization_inputs: true
+                    metrics:
+                      search_count: 320
+                      search_gmv:
+                        amount: "240.50"
+                        currency: USD
+                      search_order_count: 12
+                      search_product_impression_count: 180
+                      video_view_count: 12500
+                    title: Summer shoe styling
+                    top_keywords:
+                      - summer shoes
+                    video_id: "7612345678901234567"
+                message: Success
+                request_id: 202203070749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes:
+        - Product Optimization
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-post-view-search-video-202611
+  /product/202611/search_videos/{video_id}/comments:
+    get:
+      operationId: getPostViewSearchVideoComments
+      summary: Get Post-view Search Video Comments
+      description: |-
+        Only US shops are supported. The video must be present in the authorized shop's warehouse data for the
+        latest 90 calendar days ending on the latest available data date, including both endpoints. Only self-
+        posted shop videos are supported. Business policy permits access only to the latest 50 comments published through post-view search
+        by the video author for one video. This is the accessible query window, not a limit on the total
+        number of published comments. Results are ordered by creation time descending. Missing or invalid times sort last; equal times preserve source order. Earlier comments are outside the API access scope; pagination is not supported. Other user comments are excluded. An empty array
+        means no matching comments were returned; it does not prove an earlier timed-out submission failed. If
+        any underlying read fails or the 10-second budget expires, the request fails.
+      tags:
+        - Products
+      parameters:
+        - name: video_id
+          in: path
+          required: true
+          description: Unique video id.
+          schema:
+            type: string
+        - $ref: "#/components/parameters/ShopCipher"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetPostViewSearchVideoCommentsResponse"
+              example:
+                code: 0
+                data:
+                  comments:
+                    - comment_id: "7612345678901234567"
+                      content: Find more summer styles in our shop.
+                      create_time: 2026-11-12T01:00:00Z
+                  video_id: "7612345678901234567"
+                message: Success
+                request_id: 202203070749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes:
+        - Product Optimization
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-post-view-search-video-comments-202611
+    post:
+      operationId: addPostViewSearchVideoComment
+      summary: Add Post-view Search Video Comment
+      description: |-
+        Only US shops are supported. The video must be present in the authorized shop's warehouse data for the
+        latest 90 calendar days ending on the latest available data date, including both endpoints. The
+        request changes one video. Inspect the business result even when the response code is zero. The
+        request timeout is 10 seconds; a timeout or request-level error does not prove that nothing changed.
+        Do not automatically retry writes. Each invocation has a new server-generated submission ID and cannot
+        resume an earlier request. Only self-posted shop videos are supported. Adds one nonblank comment of at
+        most 500 Unicode characters; existing comments are preserved. Repeating a request may publish a
+        duplicate comment. Existing downstream publication and frequency rules apply. After an unknown
+        outcome, inspect recent comments, but absence from that limited view or matching text cannot identify
+        this request conclusively. If the result remains uncertain, contact support with the request log ID
+        instead of resubmitting. Concurrent changes to the same video may overwrite keyword updates. Avoid
+        simultaneous writes for one video.
+      tags:
+        - Products
+      parameters:
+        - name: video_id
+          in: path
+          required: true
+          description: Unique video id.
+          schema:
+            type: string
+        - $ref: "#/components/parameters/ShopCipher"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AddPostViewSearchVideoCommentRequest"
+            example:
+              content: Find more summer styles in our shop.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AddPostViewSearchVideoCommentResponse"
+              example:
+                code: 0
+                data:
+                  comment_result:
+                    error_code: COMMENT_PUBLISH_FAILED
+                    error_message: Comment publication could not be confirmed. Check recent comments; do not automatically submit again.
+                    status: FAILED
+                  request_id: openapi-5d11ae37-c140-4fd6-94f5-7e3c4697973b
+                message: Success
+                request_id: 202203070749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes:
+        - Product Optimization
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/add-post-view-search-video-comment-202611
+  /product/202611/search_videos/{video_id}/keywords:
+    get:
+      operationId: getPostViewSearchVideoKeywords
+      summary: Get Post-view Search Video Keywords
+      description: |-
+        Only US shops are supported. The video must be present in the authorized shop's warehouse data for the
+        latest 90 calendar days ending on the latest available data date, including both endpoints. Returns
+        the current configured keyword set; an empty array means none are configured. Popular search keywords
+        are separate observation data.
+      tags:
+        - Products
+      parameters:
+        - name: video_id
+          in: path
+          required: true
+          description: Unique video id.
+          schema:
+            type: string
+        - $ref: "#/components/parameters/ShopCipher"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetPostViewSearchVideoKeywordsResponse"
+              example:
+                code: 0
+                data:
+                  keywords:
+                    - summer shoes
+                  video_id: "7612345678901234567"
+                message: Success
+                request_id: 202203070749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes:
+        - Product Optimization
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-post-view-search-video-keywords-202611
+    put:
+      operationId: updatePostViewSearchVideoKeywords
+      summary: Update Post-view Search Video Keywords
+      description: |-
+        Only US shops are supported. The video must be present in the authorized shop's warehouse data for the
+        latest 90 calendar days ending on the latest available data date, including both endpoints. The
+        request changes one video. Inspect the business result even when the response code is zero. The
+        request timeout is 10 seconds; a timeout or request-level error does not prove that nothing changed.
+        Do not automatically retry writes. Each invocation has a new server-generated submission ID and cannot
+        resume an earlier request. Replaces the complete keyword set with at most 5 entries; an empty array
+        clears it. Products and comments are unchanged. Concurrent updates can overwrite each other. After an
+        unknown outcome, query the current keywords and reconcile the complete desired set before deciding
+        whether to submit again; the query does not identify which request wrote the state.
+      tags:
+        - Products
+      parameters:
+        - name: video_id
+          in: path
+          required: true
+          description: Unique video id.
+          schema:
+            type: string
+        - $ref: "#/components/parameters/ShopCipher"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdatePostViewSearchVideoKeywordsRequest"
+            example:
+              keywords:
+                - summer shoes
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UpdatePostViewSearchVideoKeywordsResponse"
+              example:
+                code: 0
+                data:
+                  keyword_result:
+                    error_code: INVALID_FORMAT
+                    error_message: Use nonempty keywords without leading or trailing whitespace, commas, or control characters.
+                    status: FAILED
+                  request_id: openapi-5d11ae37-c140-4fd6-94f5-7e3c4697973b
+                message: Success
+                request_id: 202203070749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes:
+        - Product Optimization
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/update-post-view-search-video-keywords-202611
+  /product/202611/search_videos/{video_id}/products:
+    get:
+      operationId: getPostViewSearchVideoProducts
+      summary: Get Post-view Search Video Products
+      description: |-
+        Only US shops are supported. The video must be present in the authorized shop's warehouse data for the
+        latest 90 calendar days ending on the latest available data date, including both endpoints. Returns
+        the current product associations supplied by the relation service, without truncating the response to
+        five. An empty array means none are associated. Product IDs identify associations, not product details
+        or a guarantee of exposure.
+      tags:
+        - Products
+      parameters:
+        - name: video_id
+          in: path
+          required: true
+          description: Unique video id.
+          schema:
+            type: string
+        - $ref: "#/components/parameters/ShopCipher"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GetPostViewSearchVideoProductsResponse"
+              example:
+                code: 0
+                data:
+                  products:
+                    - product_id: "7612345678901234567"
+                  video_id: "7612345678901234567"
+                message: Success
+                request_id: 202203070749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes:
+        - Product Optimization
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/get-post-view-search-video-products-202611
+    post:
+      operationId: changePostViewSearchVideoProducts
+      summary: Change Post-view Search Video Products
+      description: |-
+        Only US shops are supported. The video must be present in the authorized shop's warehouse data for the
+        latest 90 calendar days ending on the latest available data date, including both endpoints. The
+        request changes one video. Inspect the business result even when the response code is zero. The
+        request timeout is 10 seconds; a timeout or request-level error does not prove that nothing changed.
+        Do not automatically retry writes. Each invocation has a new server-generated submission ID and cannot
+        resume an earlier request. Binds or unbinds multiple products for one video. Each product ID must
+        occur once. The estimated final association count must not exceed 5, consistent with the seller-facing
+        configuration limit; this is not a per-request operation-count limit. Concurrent changes or failed
+        removals can exceed that estimate. Operations may partially succeed and are not transactional. Inspect
+        each item status and data.errors. Query current associations after an unknown outcome and reconcile
+        only the remaining changes; the query does not prove a particular request succeeded. Concurrent
+        changes to the same video may overwrite keyword updates. Avoid simultaneous writes for one video.
+        Comments are unchanged.
+      tags:
+        - Products
+      parameters:
+        - name: video_id
+          in: path
+          required: true
+          description: Unique video id.
+          schema:
+            type: string
+        - $ref: "#/components/parameters/ShopCipher"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ChangePostViewSearchVideoProductsRequest"
+            example:
+              operations:
+                - operation: BIND
+                  product_id: "7612345678901234567"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ChangePostViewSearchVideoProductsResponse"
+              example:
+                code: 0
+                data:
+                  errors:
+                    - code: 100
+                      detail:
+                        operation: BIND
+                        product_id: "7612345678901234570"
+                      message: The product is not relevant to the video. Choose a relevant product.
+                  product_result:
+                    items:
+                      - operation: BIND
+                        product_id: "7612345678901234567"
+                        status: SUCCEEDED
+                      - operation: BIND
+                        product_id: "7612345678901234570"
+                        status: FAILED
+                    status: PARTIAL_FAILED
+                  request_id: openapi-5d11ae37-c140-4fd6-94f5-7e3c4697973b
+                message: Success
+                request_id: 202203070749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes:
+        - Product Optimization
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/change-post-view-search-video-products-202611
   /promotion/202309/activities:
     post:
       operationId: createPromotionActivity
@@ -33320,6 +33776,63 @@ components:
         platform:
           type: string
           description: The alias of your OMS.
+    AddPostViewSearchVideoCommentRequest:
+      type: object
+      properties:
+        content:
+          type: string
+          description: Nonblank comment text, at most 500 Unicode characters.
+      required:
+        - content
+    AddPostViewSearchVideoCommentResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/AddPostViewSearchVideoCommentResponseData"
+    AddPostViewSearchVideoCommentResponseData:
+      type: object
+      properties:
+        comment_result:
+          $ref: "#/components/schemas/AddPostViewSearchVideoCommentResponseDataCommentResult"
+          description: Result of adding the comment. The comment ID is included when available.
+        request_id:
+          type: string
+          description: Server-generated submission identifier, in openapi-<UUID v4> format. A new value is generated for every invocation; it is not an idempotency key. Distinct from the request log ID in the response envelope.
+    AddPostViewSearchVideoCommentResponseDataCommentResult:
+      type: object
+      properties:
+        comment_id:
+          type: string
+          description: Unique comment id.
+        error_code:
+          type: string
+          enum:
+            - COMMENT_PUBLISH_FAILED
+            - COMMENT_PUBLISHER_USER_ID_REQUIRED
+            - VIDEO_RELATION_LOCK_LOST
+            - OPERATION_UNCONFIRMED
+          x-enum-descriptions:
+            - publication could not be confirmed; inspect recent comments without automatically resubmitting.
+            - author resolution failed; contact support with the request log ID.
+            - the outcome is uncertain; do not automatically resubmit.
+            - no more specific public reason is available; inspect recent comments and contact support with the request log ID without automatically retrying.
+          description: "Omitted on success. Possible values: COMMENT_PUBLISH_FAILED: publication could not be confirmed; inspect recent comments without automatically resubmitting. COMMENT_PUBLISHER_USER_ID_REQUIRED: author resolution failed; contact support with the request log ID. VIDEO_RELATION_LOCK_LOST: the outcome is uncertain; do not automatically resubmit. OPERATION_UNCONFIRMED: no more specific public reason is available; inspect recent comments and contact support with the request log ID without automatically retrying."
+        error_message:
+          type: string
+          description: Human-readable failure explanation and suggested action. Omitted on success. Use error_code for programmatic decisions.
+        status:
+          type: string
+          description: "Business result: UNSPECIFIED means no known outcome; SUCCEEDED means completed; PARTIAL_FAILED means some changes failed; FAILED means the requested change failed."
     AddShowcaseProductsRequest:
       type: object
       properties:
@@ -34582,6 +35095,109 @@ components:
             This field may be required for certain certifications. Use the [Get Category Rules API](https://partner.tiktokshop.com/docv2/page/6509c0febace3e02b74594a9) to find out the requirements.
       required:
         - id
+    ChangePostViewSearchVideoProductsRequest:
+      type: object
+      properties:
+        operations:
+          type: array
+          items:
+            $ref: "#/components/schemas/ChangePostViewSearchVideoProductsRequestOperation"
+          description: Product association changes. Each product must occur only once.
+      required:
+        - operations
+    ChangePostViewSearchVideoProductsRequestOperation:
+      type: object
+      properties:
+        operation:
+          type: string
+          description: BIND adds this product association; UNBIND removes it. Products not listed remain unchanged.
+        product_id:
+          type: string
+          description: Unique product id.
+      required:
+        - operation
+        - product_id
+    ChangePostViewSearchVideoProductsResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/ChangePostViewSearchVideoProductsResponseData"
+    ChangePostViewSearchVideoProductsResponseData:
+      type: object
+      properties:
+        errors:
+          type: array
+          items:
+            $ref: "#/components/schemas/ChangePostViewSearchVideoProductsResponseDataError"
+          description: Failed product operations only; empty when all operations succeed.
+        product_result:
+          $ref: "#/components/schemas/ChangePostViewSearchVideoProductsResponseDataProductResult"
+          description: Result of the requested product association changes. Failure details are returned in errors.
+        request_id:
+          type: string
+          description: Server-generated submission identifier, in openapi-<UUID v4> format. A new value is generated for every invocation; it is not an idempotency key. Distinct from the request log ID in the response envelope.
+    ChangePostViewSearchVideoProductsResponseDataError:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: "100: choose a product relevant to the video. 200: the association update could not be confirmed; query current associations before deciding whether to retry. Do not replay successful items."
+        detail:
+          $ref: "#/components/schemas/ChangePostViewSearchVideoProductsResponseDataErrorDetail"
+          description: Identifies the failed product operation.
+        message:
+          type: string
+          description: English failure explanation and corrective action.
+      required:
+        - code
+        - detail
+        - message
+    ChangePostViewSearchVideoProductsResponseDataErrorDetail:
+      type: object
+      properties:
+        operation:
+          type: string
+          description: UNSPECIFIED means the action is unavailable; BIND adds the association; UNBIND removes it.
+        product_id:
+          type: string
+          description: Unique product id.
+      required:
+        - operation
+        - product_id
+    ChangePostViewSearchVideoProductsResponseDataProductResult:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/ChangePostViewSearchVideoProductsResponseDataProductResultItem"
+          description: One result for each submitted product.
+        status:
+          type: string
+          description: "Business result: UNSPECIFIED means no known outcome; SUCCEEDED means completed; PARTIAL_FAILED means some changes failed; FAILED means the requested change failed."
+    ChangePostViewSearchVideoProductsResponseDataProductResultItem:
+      type: object
+      properties:
+        operation:
+          type: string
+          description: UNSPECIFIED means the action is unavailable; BIND adds the association; UNBIND removes it.
+        product_id:
+          type: string
+          description: Unique product id.
+        status:
+          type: string
+          description: "Business result: UNSPECIFIED means no known outcome; SUCCEEDED means completed; PARTIAL_FAILED means some changes failed; FAILED means the requested change failed."
     CheckCreatorOutreachEligibilityRequest:
       type: object
       properties:
@@ -39880,6 +40496,8 @@ components:
             - INVOICE_STATUS_CHANGE
             - PRODUCT_AUDIT_STATUS_CHANGE
             - REVERSE_STATUS_UPDATE
+            - AFTERSALES_REQUEST_STATUS_UPDATE
+            - RMA_STATUS_UPDATE
           x-enum-descriptions:
             - Triggers on each order status update, from new order placement through all subsequent status changes. See [Order Status change](650300b8a57708028b430b4a).
             - Triggers when the recipient's address is updated. See [Receipient address update](650301af5a12ff0294ea3bf9).
@@ -39898,6 +40516,8 @@ components:
             - Triggers when the status of an invoice upload changes after using the [POST Upload Invoice](67b542559a140004b343984f) endpoint. See [Invoice Status Change](67b68ca185619104a6772e5d).
             - Triggers when the product audit status changes. See [Product audit status change](67b5c6cba42623049abe5062).
             - Triggers when buyer raises cancellation, refund only, or return & refund requests that need the seller to accept or reject. See [Reverse Status Update](https://partner.tiktokshop.com/doc/page/63fd7459715d622a338c5437).
+            - Triggers when an aftersales request status changes (webhook type 64).
+            - Triggers when a return merchandise authorization (RMA) status changes (webhook type 65).
           description: |-
             The topic of the webhook event.
             Possible values:
@@ -39918,6 +40538,8 @@ components:
             - `INVOICE_STATUS_CHANGE`: Triggers when the status of an invoice upload changes after using the [POST Upload Invoice](67b542559a140004b343984f) endpoint. See [Invoice Status Change](67b68ca185619104a6772e5d).
             - `PRODUCT_AUDIT_STATUS_CHANGE`: Triggers when the product audit status changes. See [Product audit status change](67b5c6cba42623049abe5062).
             - `REVERSE_STATUS_UPDATE`: Triggers when buyer raises cancellation, refund only, or return & refund requests that need the seller to accept or reject. See [Reverse Status Update](https://partner.tiktokshop.com/doc/page/63fd7459715d622a338c5437).
+            - `AFTERSALES_REQUEST_STATUS_UPDATE`: Triggers when an aftersales request status changes (webhook type 64).
+            - `RMA_STATUS_UPDATE`: Triggers when a return merchandise authorization (RMA) status changes (webhook type 65).
       required:
         - event_type
     DeleteWebhookForAnEventResponse:
@@ -55635,6 +56257,223 @@ components:
         currency:
           type: string
           description: The original currency code in ISO 4217 format.
+    GetPostViewSearchVideoCommentsResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/GetPostViewSearchVideoCommentsResponseData"
+    GetPostViewSearchVideoCommentsResponseData:
+      type: object
+      properties:
+        comments:
+          type: array
+          items:
+            $ref: "#/components/schemas/GetPostViewSearchVideoCommentsResponseDataComment"
+          description: Business access is limited to the latest 50 matching comments per video, newest first. Earlier comments cannot be retrieved through this API. Duplicate comment IDs are removed.
+        video_id:
+          type: string
+          description: Unique video id.
+    GetPostViewSearchVideoCommentsResponseDataComment:
+      type: object
+      properties:
+        comment_id:
+          type: string
+          description: Unique comment id.
+        content:
+          type: string
+          description: Comment text.
+        create_time:
+          type: string
+          format: date-time
+          description: Time the comment was created, in UTC. Omitted when unavailable, nonpositive, or outside the supported date-time range.
+    GetPostViewSearchVideoKeywordsResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/GetPostViewSearchVideoKeywordsResponseData"
+    GetPostViewSearchVideoKeywordsResponseData:
+      type: object
+      properties:
+        keywords:
+          type: array
+          items:
+            type: string
+          description: Current keywords; empty when none are configured.
+        video_id:
+          type: string
+          description: Unique video id.
+    GetPostViewSearchVideoProductsResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/GetPostViewSearchVideoProductsResponseData"
+    GetPostViewSearchVideoProductsResponseData:
+      type: object
+      properties:
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/GetPostViewSearchVideoProductsResponseDataProduct"
+          description: Currently associated products; empty when none are associated.
+        video_id:
+          type: string
+          description: Unique video id.
+    GetPostViewSearchVideoProductsResponseDataProduct:
+      type: object
+      properties:
+        product_id:
+          type: string
+          description: Unique product id.
+      required:
+        - product_id
+    GetPostViewSearchVideoResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/GetPostViewSearchVideoResponseData"
+    GetPostViewSearchVideoResponseData:
+      type: object
+      properties:
+        comments:
+          type: array
+          items:
+            $ref: "#/components/schemas/GetPostViewSearchVideoResponseDataComment"
+          description: Business policy permits access only to the latest 50 comments created through this tool by the video author for one video. Earlier comments are outside the API access scope; pagination is not supported. Newest first; unknown timestamps sort last. Self-posted videos only; omitted for creator videos. Empty when no matching comments are returned.
+        end_date:
+          type: string
+          format: date
+          description: Effective inclusive end date.
+        keywords:
+          type: array
+          items:
+            type: string
+          description: Currently configured keywords; empty when none are configured.
+        products:
+          type: array
+          items:
+            $ref: "#/components/schemas/GetPostViewSearchVideoResponseDataProduct"
+          description: Currently associated products; empty when none are configured.
+        start_date:
+          type: string
+          format: date
+          description: Effective inclusive start date.
+        video:
+          $ref: "#/components/schemas/GetPostViewSearchVideoResponseDataVideo"
+          description: A shop-associated video with period metrics and an operation-record indicator.
+      required:
+        - video
+    GetPostViewSearchVideoResponseDataComment:
+      type: object
+      properties:
+        comment_id:
+          type: string
+          description: Unique comment ID.
+        content:
+          type: string
+          description: Comment text.
+        create_time:
+          type: string
+          description: Creation time in UTC; omitted when unavailable.
+    GetPostViewSearchVideoResponseDataProduct:
+      type: object
+      properties:
+        product_id:
+          type: string
+          description: Product ID.
+      required:
+        - product_id
+    GetPostViewSearchVideoResponseDataVideo:
+      type: object
+      properties:
+        author_type:
+          type: string
+          description: "SELF: posted by the shop; CREATOR: posted by a creator."
+        cover_url:
+          type: string
+          description: Video cover URL; omitted when unavailable.
+        has_optimization_inputs:
+          type: boolean
+          description: Whether an operation record exists for this video and shop. Does not indicate current configuration, keyword approval or effectiveness.
+        metrics:
+          $ref: "#/components/schemas/GetPostViewSearchVideoResponseDataVideoMetric"
+          description: Aggregated metrics for the returned inclusive date range. These statistics are refreshed independently of current configuration; a successful change does not imply an immediate metric increase.
+        title:
+          type: string
+          description: Video caption; omitted when video metadata is unavailable.
+        top_keywords:
+          type: array
+          items:
+            type: string
+          description: Up to two popular search keywords from warehouse data, in the returned order; empty when none are available. These are not shop-configured keywords.
+        video_id:
+          type: string
+          description: Unique video ID.
+      required:
+        - metrics
+    GetPostViewSearchVideoResponseDataVideoMetric:
+      type: object
+      properties:
+        search_count:
+          type: integer
+          format: int64
+          description: Post-view search page views (PV), not unique search users.
+        search_gmv:
+          $ref: "#/components/schemas/SearchGmv"
+          description: Post-view search gross merchandise value in USD.
+        search_order_count:
+          type: integer
+          format: int64
+          description: Post-view search SKU order count, not a deduplicated parent-order count.
+        search_product_impression_count:
+          type: integer
+          format: int64
+          description: Product impressions from post-view searches.
+        video_view_count:
+          type: integer
+          format: int64
+          description: Video view count using the same measure as the seller-facing video views metric. This is not a separate impression count.
+      required:
+        - search_gmv
     GetProductCampaignResponse:
       type: object
       properties:
@@ -63212,6 +64051,8 @@ components:
             - INVOICE_STATUS_CHANGE
             - PRODUCT_AUDIT_STATUS_CHANGE
             - REVERSE_STATUS_UPDATE
+            - AFTERSALES_REQUEST_STATUS_UPDATE
+            - RMA_STATUS_UPDATE
           x-enum-descriptions:
             - Triggers on each order status update, from new order placement through all subsequent status changes. See [Order Status change](650300b8a57708028b430b4a).
             - Triggers when the recipient's address is updated. See [Receipient address update](650301af5a12ff0294ea3bf9).
@@ -63230,6 +64071,8 @@ components:
             - Triggers when the status of an invoice upload changes after using the [POST Upload Invoice](67b542559a140004b343984f) endpoint. See [Invoice Status Change](67b68ca185619104a6772e5d).
             - Triggers when the product audit status changes. See [Product audit status change](67b5c6cba42623049abe5062).
             - Triggers when buyer raises cancellation, refund only, or return & refund requests that need the seller to accept or reject. See [Reverse Status Update](https://partner.tiktokshop.com/doc/page/63fd7459715d622a338c5437).
+            - Triggers when an aftersales request status changes (webhook type 64).
+            - Triggers when a return merchandise authorization (RMA) status changes (webhook type 65).
           description: |-
             The topic of the webhook event.
             Possible values:
@@ -63250,6 +64093,8 @@ components:
             - `INVOICE_STATUS_CHANGE`: Triggers when the status of an invoice upload changes after using the [POST Upload Invoice](67b542559a140004b343984f) endpoint. See [Invoice Status Change](67b68ca185619104a6772e5d).
             - `PRODUCT_AUDIT_STATUS_CHANGE`: Triggers when the product audit status changes. See [Product audit status change](67b5c6cba42623049abe5062).
             - `REVERSE_STATUS_UPDATE`: Triggers when buyer raises cancellation, refund only, or return & refund requests that need the seller to accept or reject. See [Reverse Status Update](https://partner.tiktokshop.com/doc/page/63fd7459715d622a338c5437).
+            - `AFTERSALES_REQUEST_STATUS_UPDATE`: Triggers when an aftersales request status changes (webhook type 64).
+            - `RMA_STATUS_UPDATE`: Triggers when a return merchandise authorization (RMA) status changes (webhook type 65).
         address:
           type: string
           description: The webhook URL used to receive the event data.
@@ -64372,6 +65217,9 @@ components:
         seller_funded_user_spoint_service_fee:
           type: string
           description: Service fee charged for seller-funded user S-Points issued to shoppers. Calculated based on the order's actual payment amount and refunded if the order is later returned.
+        smart_shipping_fee_amount:
+          type: string
+          description: The service fee for participating in the Smart Shipping program.
     GetTransactionsByOrderResponseDataSkuTransactionFeeTaxBreakdownTax:
       type: object
       properties:
@@ -64988,6 +65836,9 @@ components:
         seller_funded_user_spoint_service_fee:
           type: string
           description: Service fee charged for seller-funded user S-Points issued to shoppers. Calculated based on the order's actual payment amount and refunded if the order is later returned.
+        smart_shipping_fee_amount:
+          type: string
+          description: The service fee for participating in the Smart Shipping program.
     GetTransactionsByStatementResponseDataTransactionRevenueBreakdown:
       type: object
       properties:
@@ -65497,6 +66348,9 @@ components:
         flash_sales_service_fee_amount:
           type: string
           description: The service fee charged for participation in flash sales.
+        smart_shipping_fee_amount:
+          type: string
+          description: The service fee for participating in the Smart Shipping program.
     GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownTax:
       type: object
       properties:
@@ -67923,6 +68777,72 @@ components:
             - `20`: ALLEGRO
             - `21`: BOL
             - `22`: DTC
+    ListPostViewSearchVideosResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/ListPostViewSearchVideosResponseData"
+    ListPostViewSearchVideosResponseData:
+      type: object
+      properties:
+        end_date:
+          type: string
+          format: date
+          description: Effective inclusive end date.
+        next_page_token:
+          type: string
+          description: Pass unchanged to retrieve the next page. Empty means the end of the available result window.
+        start_date:
+          type: string
+          format: date
+          description: Effective inclusive start date.
+        videos:
+          type: array
+          items:
+            $ref: "#/components/schemas/ListPostViewSearchVideosResponseDataVideo"
+          description: Videos in this page. A page can be empty while next_page_token is nonempty when no eligible videos remain in that source page.
+      required:
+        - next_page_token
+    ListPostViewSearchVideosResponseDataVideo:
+      type: object
+      properties:
+        author_type:
+          type: string
+          description: "SELF: posted by the shop; CREATOR: posted by a creator."
+        cover_url:
+          type: string
+          description: Video cover URL; omitted when unavailable.
+        has_optimization_inputs:
+          type: boolean
+          description: Whether an operation record exists for this video and shop. Does not indicate current configuration, keyword approval or effectiveness.
+        metrics:
+          $ref: "#/components/schemas/GetPostViewSearchVideoResponseDataVideoMetric"
+          description: Aggregated metrics for the returned inclusive date range. These statistics are refreshed independently of current configuration; a successful change does not imply an immediate metric increase.
+        title:
+          type: string
+          description: Video caption; omitted when video metadata is unavailable.
+        top_keywords:
+          type: array
+          items:
+            type: string
+          description: Up to two popular search keywords from warehouse data, in the returned order; empty when none are available. These are not shop-configured keywords.
+        video_id:
+          type: string
+          description: Unique video ID.
+      required:
+        - author_type
+        - metrics
+        - video_id
     ListPrice:
       type: object
       properties:
@@ -71350,23 +72270,26 @@ components:
       properties:
         file_id:
           type: string
-          description: The video file ID returned by Upload Shoppable Video File (`POST /affiliate_creator/202505/videos/video_files`).
+          description: Video file_id from [Upload Shoppable Video File]
         title:
           type: string
           description: |-
             The video caption. 
-            The maximum length is 2200 in UTF-16 runes.
+            The maximum length is 4000 in UTF-16 runes.
             If not specified, the ticket post will not have any captions.
         cover_uri:
           type: string
-          description: The video cover image URI returned by Upload Shoppable Photo File (`POST /affiliate_creator/202511/photos/photo_files`).
+          description: Video cover image URI, which is returned after uploading the image via the Upload Shoppable Photo File API.
         cover_timestamp_ms:
           type: integer
           format: int64
           description: The input parameter is a timestamp, which specifies a particular moment in the video. The frame at that timestamp will be used as the video cover. If cover_uri and cover_timestamp_ms are both not provided, the cover will default to the first frame of the uploaded video. Only one of cover_uri or cover_timestamp_ms can be provided. If both parameters are passed, cover_uri will take precedence.
         music_id:
           type: string
-          description: The music ID for the video's background music. Obtain it from Search Music (`GET /affiliate_creator/202602/music/search`). If not provided, no music will be associated with the video.
+          description: The music ID for the video BGM. If not provided, no music will be associated with the video. The music ID must be obtained via Search Music Library.
+        is_ai_generated:
+          type: boolean
+          description: Field to indicate whether the content was AI generated. Marking this field as true will display a tag indicating this post as an AI generated post.
       required:
         - file_id
         - title
@@ -71390,7 +72313,10 @@ components:
       properties:
         video:
           $ref: "#/components/schemas/PostShoppableVideoResponseDataVideo"
-          description: Submitted shoppable video information.
+          description: Published video information
+        quota:
+          type: string
+          description: Content posting quota for the creator. Returned on successful publish; included in the error message on failure; omitted if no quota restriction applies.
     PostShoppableVideoResponseDataVideo:
       type: object
       properties:
@@ -78043,6 +78969,17 @@ components:
         seller_sku:
           type: string
           description: An internal code/name for managing SKUs, not visible to buyers.
+    SearchGmv:
+      type: object
+      properties:
+        amount:
+          type: string
+          description: Decimal amount in the specified currency.
+        currency:
+          type: string
+          description: ISO 4217 currency code. Amounts are converted to US dollars (USD).
+      required:
+        - currency
     SearchGoodsHazmatAndExpirationInfoRequest:
       type: object
       properties:
@@ -85928,6 +86865,66 @@ components:
     UpdatePackageShippingInfoResponseData:
       type: object
       properties: {}
+    UpdatePostViewSearchVideoKeywordsRequest:
+      type: object
+      properties:
+        keywords:
+          type: array
+          items:
+            type: string
+          description: Complete keyword set. An empty array clears all configured keywords.
+      required:
+        - keywords
+    UpdatePostViewSearchVideoKeywordsResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/UpdatePostViewSearchVideoKeywordsResponseData"
+    UpdatePostViewSearchVideoKeywordsResponseData:
+      type: object
+      properties:
+        keyword_result:
+          $ref: "#/components/schemas/UpdatePostViewSearchVideoKeywordsResponseDataKeywordResult"
+          description: Result of the requested change.
+        request_id:
+          type: string
+          description: Server-generated submission identifier, in openapi-<UUID v4> format. A new value is generated for every invocation; it is not an idempotency key. Distinct from the request log ID in the response envelope.
+    UpdatePostViewSearchVideoKeywordsResponseDataKeywordResult:
+      type: object
+      properties:
+        error_code:
+          type: string
+          enum:
+            - INVALID_FORMAT
+            - SENSITIVE_KEYWORD
+            - TOO_MANY_KEYWORDS
+            - VALIDATION_UNAVAILABLE
+            - VIDEO_RELATION_LOCK_LOST
+            - OPERATION_UNCONFIRMED
+          x-enum-descriptions:
+            - remove surrounding whitespace, commas and control characters.
+            - choose compliant keywords.
+            - use at most 5.
+            - "query current keywords before deciding to resubmit. KEYWORD_RELATION_UPDATE_FAILED and STALE_IDEMPOTENT_REPLAY: query and reconcile the complete keyword set before submitting again."
+            - the outcome is uncertain; query current state and do not automatically retry.
+            - no more specific public reason is available; check current state and contact support with the request log ID without automatically retrying.
+          description: "Omitted on success. Possible values: INVALID_FORMAT: remove surrounding whitespace, commas and control characters. SENSITIVE_KEYWORD: choose compliant keywords. TOO_MANY_KEYWORDS: use at most 5. VALIDATION_UNAVAILABLE: query current keywords before deciding to resubmit. KEYWORD_RELATION_UPDATE_FAILED and STALE_IDEMPOTENT_REPLAY: query and reconcile the complete keyword set before submitting again. VIDEO_RELATION_LOCK_LOST: the outcome is uncertain; query current state and do not automatically retry. OPERATION_UNCONFIRMED: no more specific public reason is available; check current state and contact support with the request log ID without automatically retrying."
+        error_message:
+          type: string
+          description: Human-readable failure explanation and suggested action. Omitted on success. Use error_code for programmatic decisions.
+        status:
+          type: string
+          description: "Business result: UNSPECIFIED means no known outcome; SUCCEEDED means completed; PARTIAL_FAILED means some changes failed; FAILED means the requested change failed."
     UpdatePriceRequest:
       type: object
       properties:
@@ -86278,6 +87275,8 @@ components:
             - INVOICE_STATUS_CHANGE
             - PRODUCT_AUDIT_STATUS_CHANGE
             - REVERSE_STATUS_UPDATE
+            - AFTERSALES_REQUEST_STATUS_UPDATE
+            - RMA_STATUS_UPDATE
           x-enum-descriptions:
             - Triggers on each order status update, from new order placement through all subsequent status changes. See [Order Status change](650300b8a57708028b430b4a).
             - Triggers when the recipient's address is updated. See [Receipient address update](650301af5a12ff0294ea3bf9).
@@ -86296,6 +87295,8 @@ components:
             - Triggers when the status of an invoice upload changes after using the [POST Upload Invoice](67b542559a140004b343984f) endpoint. See [Invoice Status Change](67b68ca185619104a6772e5d).
             - Triggers when the product audit status changes. See [Product audit status change](67b5c6cba42623049abe5062).
             - Triggers when buyer raises cancellation, refund only, or return & refund requests that need the seller to accept or reject. See [Reverse Status Update](https://partner.tiktokshop.com/doc/page/63fd7459715d622a338c5437).
+            - Triggers when an aftersales request status changes (webhook type 64).
+            - Triggers when a return merchandise authorization (RMA) status changes (webhook type 65).
           description: |-
             The topic of the webhook event.
             Possible values:
@@ -86316,6 +87317,8 @@ components:
             - `INVOICE_STATUS_CHANGE`: Triggers when the status of an invoice upload changes after using the [POST Upload Invoice](67b542559a140004b343984f) endpoint. See [Invoice Status Change](67b68ca185619104a6772e5d).
             - `PRODUCT_AUDIT_STATUS_CHANGE`: Triggers when the product audit status changes. See [Product audit status change](67b5c6cba42623049abe5062).
             - `REVERSE_STATUS_UPDATE`: Triggers when buyer raises cancellation, refund only, or return & refund requests that need the seller to accept or reject. See [Reverse Status Update](https://partner.tiktokshop.com/doc/page/63fd7459715d622a338c5437).
+            - `AFTERSALES_REQUEST_STATUS_UPDATE`: Triggers when an aftersales request status changes (webhook type 64).
+            - `RMA_STATUS_UPDATE`: Triggers when a return merchandise authorization (RMA) status changes (webhook type 65).
       required:
         - address
         - event_type
