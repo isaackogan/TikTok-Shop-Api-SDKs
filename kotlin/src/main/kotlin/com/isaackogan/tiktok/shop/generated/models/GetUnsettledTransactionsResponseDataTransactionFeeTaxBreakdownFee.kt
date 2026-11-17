@@ -66,6 +66,7 @@ import com.google.gson.annotations.SerializedName
  * @param autoPostShoppableVideoCommissionFee The commission fee charged to the seller for orders attributed to the AI-generated, auto-post shoppable videos.
  * @param sellerFundedUserSpointServiceFee Service fee charged for seller-funded user S-Points issued to shoppers. Calculated based on the order's actual payment amount and refunded if the order is later returned.
  * @param flashSalesServiceFeeAmount The service fee charged for participation in flash sales.
+ * @param smartShippingFeeAmount The service fee for participating in the Smart Shipping program.
  */
 
 
@@ -217,7 +218,11 @@ data class GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee (
 
     /* The service fee charged for participation in flash sales. */
     @SerializedName("flash_sales_service_fee_amount")
-    val flashSalesServiceFeeAmount: kotlin.String? = null
+    val flashSalesServiceFeeAmount: kotlin.String? = null,
+
+    /* The service fee for participating in the Smart Shipping program. */
+    @SerializedName("smart_shipping_fee_amount")
+    val smartShippingFeeAmount: kotlin.String? = null
 
 ) {
 

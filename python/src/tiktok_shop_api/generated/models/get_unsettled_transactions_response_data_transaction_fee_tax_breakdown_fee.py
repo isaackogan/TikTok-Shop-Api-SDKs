@@ -97,6 +97,7 @@ class GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee:
             seller_funded_user_spoint_service_fee (str | Unset): Service fee charged for seller-funded user S-Points issued
                 to shoppers. Calculated based on the order's actual payment amount and refunded if the order is later returned.
             flash_sales_service_fee_amount (str | Unset): The service fee charged for participation in flash sales.
+            smart_shipping_fee_amount (str | Unset): The service fee for participating in the Smart Shipping program.
      """
 
     platform_commission_amount: str | Unset = UNSET
@@ -136,6 +137,7 @@ class GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee:
     auto_post_shoppable_video_commission_fee: str | Unset = UNSET
     seller_funded_user_spoint_service_fee: str | Unset = UNSET
     flash_sales_service_fee_amount: str | Unset = UNSET
+    smart_shipping_fee_amount: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -217,6 +219,8 @@ class GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee:
 
         flash_sales_service_fee_amount = self.flash_sales_service_fee_amount
 
+        smart_shipping_fee_amount = self.smart_shipping_fee_amount
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -296,6 +300,8 @@ class GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee:
             field_dict["seller_funded_user_spoint_service_fee"] = seller_funded_user_spoint_service_fee
         if flash_sales_service_fee_amount is not UNSET:
             field_dict["flash_sales_service_fee_amount"] = flash_sales_service_fee_amount
+        if smart_shipping_fee_amount is not UNSET:
+            field_dict["smart_shipping_fee_amount"] = smart_shipping_fee_amount
 
         return field_dict
 
@@ -378,6 +384,8 @@ class GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee:
 
         flash_sales_service_fee_amount = d.pop("flash_sales_service_fee_amount", UNSET)
 
+        smart_shipping_fee_amount = d.pop("smart_shipping_fee_amount", UNSET)
+
         get_unsettled_transactions_response_data_transaction_fee_tax_breakdown_fee = cls(
             platform_commission_amount=platform_commission_amount,
             referral_fee_amount=referral_fee_amount,
@@ -416,6 +424,7 @@ class GetUnsettledTransactionsResponseDataTransactionFeeTaxBreakdownFee:
             auto_post_shoppable_video_commission_fee=auto_post_shoppable_video_commission_fee,
             seller_funded_user_spoint_service_fee=seller_funded_user_spoint_service_fee,
             flash_sales_service_fee_amount=flash_sales_service_fee_amount,
+            smart_shipping_fee_amount=smart_shipping_fee_amount,
         )
 
 

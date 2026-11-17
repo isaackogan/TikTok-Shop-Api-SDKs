@@ -30,15 +30,20 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param video Submitted shoppable video information.
+ * @param video Published video information
+ * @param quota Content posting quota for the creator. Returned on successful publish; included in the error message on failure; omitted if no quota restriction applies.
  */
 
 
 data class PostShoppableVideoResponseData (
 
-    /* Submitted shoppable video information. */
+    /* Published video information */
     @SerializedName("video")
-    val video: PostShoppableVideoResponseDataVideo? = null
+    val video: PostShoppableVideoResponseDataVideo? = null,
+
+    /* Content posting quota for the creator. Returned on successful publish; included in the error message on failure; omitted if no quota restriction applies. */
+    @SerializedName("quota")
+    val quota: kotlin.String? = null
 
 ) {
 

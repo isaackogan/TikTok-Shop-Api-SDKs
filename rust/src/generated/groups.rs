@@ -304,16 +304,6 @@ impl AffiliateCreatorApi {
             .map_err(Error::from)
     }
 
-    /// Use this API to submit a shoppable video for publishing. When the submission succeeds, pass the returned video ID as the `video_id` path parameter to Get Shoppable Video Status (`GET /affiliate_creator/202509/videos/{video_id}/status`) to retrieve the posting status: `PROCESSING`, `SUCCESS`, or `FAIL`. If the status is `PROCESSING`, call the status API again later to check for a terminal status.
-    pub async fn post_shoppable_video(
-        &self,
-        post_shoppable_video_request: models::PostShoppableVideoRequest,
-    ) -> Result<models::PostShoppableVideoResponse, Error> {
-        apis::affiliate_creator_api::post_shoppable_video(&self.config, post_shoppable_video_request)
-            .await
-            .map_err(Error::from)
-    }
-
     /// Returns mappings from the specified Tokopedia product IDs to the corresponding TikTok Shop product IDs.
     pub async fn map_tokopedia_to_tik_tok_shop_product_ids(
         &self,
@@ -340,6 +330,16 @@ impl AffiliateCreatorApi {
         )
         .await
         .map_err(Error::from)
+    }
+
+    /// Use this API to post the shoppable video.
+    pub async fn post_shoppable_video(
+        &self,
+        post_shoppable_video_request: models::PostShoppableVideoRequest,
+    ) -> Result<models::PostShoppableVideoResponse, Error> {
+        apis::affiliate_creator_api::post_shoppable_video(&self.config, post_shoppable_video_request)
+            .await
+            .map_err(Error::from)
     }
 
     /// Use this API to post the shoppable photos with uris and metadata.
@@ -4148,6 +4148,112 @@ impl ProductsApi {
         edit_size_chart_v2_request: models::EditSizeChartV2Request,
     ) -> Result<models::EditSizeChartV2Response, Error> {
         apis::products_api::edit_size_chart_v2(&self.config, edit_size_chart_v2_request).await.map_err(Error::from)
+    }
+
+    /// Only US shops are supported. Returns videos in the authorized shop's available data. ALL sorts by video views descending, then video ID descending. INPUTS_ADDED follows most-recent operation order; videos absent from the selected data period are omitted. Both modes support only the first 10,000 source records. Collections can change between requests; pagination is not a snapshot. Use the returned start_date and end_date on subsequent pages to keep the period fixed.
+    pub async fn list_post_view_search_videos(
+        &self,
+        author_type: Option<&str>,
+        optimization_inputs: Option<&str>,
+        video_id: Option<&str>,
+        page_size: Option<i64>,
+        page_token: Option<&str>,
+        start_date_ge: Option<&str>,
+        end_date_le: Option<&str>,
+    ) -> Result<models::ListPostViewSearchVideosResponse, Error> {
+        apis::products_api::list_post_view_search_videos(
+            &self.config,
+            author_type,
+            optimization_inputs,
+            video_id,
+            page_size,
+            page_token,
+            start_date_ge,
+            end_date_le,
+        )
+        .await
+        .map_err(Error::from)
+    }
+
+    /// Only US shops are supported. Returns video metadata, period metrics and current configuration for a video found in the authorized shop's data. Missing video data or a failed access check fails the request. Self-posted video detail also requires the author to be resolved for comment retrieval.
+    pub async fn get_post_view_search_video(
+        &self,
+        video_id: &str,
+        start_date_ge: Option<&str>,
+        end_date_le: Option<&str>,
+    ) -> Result<models::GetPostViewSearchVideoResponse, Error> {
+        apis::products_api::get_post_view_search_video(&self.config, video_id, start_date_ge, end_date_le)
+            .await
+            .map_err(Error::from)
+    }
+
+    /// Only US shops are supported. The video must be present in the authorized shop's warehouse data for the latest 90 calendar days ending on the latest available data date, including both endpoints. Only self- posted shop videos are supported. Business policy permits access only to the latest 50 comments published through post-view search by the video author for one video. This is the accessible query window, not a limit on the total number of published comments. Results are ordered by creation time descending. Missing or invalid times sort last; equal times preserve source order. Earlier comments are outside the API access scope; pagination is not supported. Other user comments are excluded. An empty array means no matching comments were returned; it does not prove an earlier timed-out submission failed. If any underlying read fails or the 10-second budget expires, the request fails.
+    pub async fn get_post_view_search_video_comments(
+        &self,
+        video_id: &str,
+    ) -> Result<models::GetPostViewSearchVideoCommentsResponse, Error> {
+        apis::products_api::get_post_view_search_video_comments(&self.config, video_id).await.map_err(Error::from)
+    }
+
+    /// Only US shops are supported. The video must be present in the authorized shop's warehouse data for the latest 90 calendar days ending on the latest available data date, including both endpoints. The request changes one video. Inspect the business result even when the response code is zero. The request timeout is 10 seconds; a timeout or request-level error does not prove that nothing changed. Do not automatically retry writes. Each invocation has a new server-generated submission ID and cannot resume an earlier request. Only self-posted shop videos are supported. Adds one nonblank comment of at most 500 Unicode characters; existing comments are preserved. Repeating a request may publish a duplicate comment. Existing downstream publication and frequency rules apply. After an unknown outcome, inspect recent comments, but absence from that limited view or matching text cannot identify this request conclusively. If the result remains uncertain, contact support with the request log ID instead of resubmitting. Concurrent changes to the same video may overwrite keyword updates. Avoid simultaneous writes for one video.
+    pub async fn add_post_view_search_video_comment(
+        &self,
+        video_id: &str,
+        add_post_view_search_video_comment_request: models::AddPostViewSearchVideoCommentRequest,
+    ) -> Result<models::AddPostViewSearchVideoCommentResponse, Error> {
+        apis::products_api::add_post_view_search_video_comment(
+            &self.config,
+            video_id,
+            add_post_view_search_video_comment_request,
+        )
+        .await
+        .map_err(Error::from)
+    }
+
+    /// Only US shops are supported. The video must be present in the authorized shop's warehouse data for the latest 90 calendar days ending on the latest available data date, including both endpoints. Returns the current configured keyword set; an empty array means none are configured. Popular search keywords are separate observation data.
+    pub async fn get_post_view_search_video_keywords(
+        &self,
+        video_id: &str,
+    ) -> Result<models::GetPostViewSearchVideoKeywordsResponse, Error> {
+        apis::products_api::get_post_view_search_video_keywords(&self.config, video_id).await.map_err(Error::from)
+    }
+
+    /// Only US shops are supported. The video must be present in the authorized shop's warehouse data for the latest 90 calendar days ending on the latest available data date, including both endpoints. The request changes one video. Inspect the business result even when the response code is zero. The request timeout is 10 seconds; a timeout or request-level error does not prove that nothing changed. Do not automatically retry writes. Each invocation has a new server-generated submission ID and cannot resume an earlier request. Replaces the complete keyword set with at most 5 entries; an empty array clears it. Products and comments are unchanged. Concurrent updates can overwrite each other. After an unknown outcome, query the current keywords and reconcile the complete desired set before deciding whether to submit again; the query does not identify which request wrote the state.
+    pub async fn update_post_view_search_video_keywords(
+        &self,
+        video_id: &str,
+        update_post_view_search_video_keywords_request: models::UpdatePostViewSearchVideoKeywordsRequest,
+    ) -> Result<models::UpdatePostViewSearchVideoKeywordsResponse, Error> {
+        apis::products_api::update_post_view_search_video_keywords(
+            &self.config,
+            video_id,
+            update_post_view_search_video_keywords_request,
+        )
+        .await
+        .map_err(Error::from)
+    }
+
+    /// Only US shops are supported. The video must be present in the authorized shop's warehouse data for the latest 90 calendar days ending on the latest available data date, including both endpoints. Returns the current product associations supplied by the relation service, without truncating the response to five. An empty array means none are associated. Product IDs identify associations, not product details or a guarantee of exposure.
+    pub async fn get_post_view_search_video_products(
+        &self,
+        video_id: &str,
+    ) -> Result<models::GetPostViewSearchVideoProductsResponse, Error> {
+        apis::products_api::get_post_view_search_video_products(&self.config, video_id).await.map_err(Error::from)
+    }
+
+    /// Only US shops are supported. The video must be present in the authorized shop's warehouse data for the latest 90 calendar days ending on the latest available data date, including both endpoints. The request changes one video. Inspect the business result even when the response code is zero. The request timeout is 10 seconds; a timeout or request-level error does not prove that nothing changed. Do not automatically retry writes. Each invocation has a new server-generated submission ID and cannot resume an earlier request. Binds or unbinds multiple products for one video. Each product ID must occur once. The estimated final association count must not exceed 5, consistent with the seller-facing configuration limit; this is not a per-request operation-count limit. Concurrent changes or failed removals can exceed that estimate. Operations may partially succeed and are not transactional. Inspect each item status and data.errors. Query current associations after an unknown outcome and reconcile only the remaining changes; the query does not prove a particular request succeeded. Concurrent changes to the same video may overwrite keyword updates. Avoid simultaneous writes for one video. Comments are unchanged.
+    pub async fn change_post_view_search_video_products(
+        &self,
+        video_id: &str,
+        change_post_view_search_video_products_request: models::ChangePostViewSearchVideoProductsRequest,
+    ) -> Result<models::ChangePostViewSearchVideoProductsResponse, Error> {
+        apis::products_api::change_post_view_search_video_products(
+            &self.config,
+            video_id,
+            change_post_view_search_video_products_request,
+        )
+        .await
+        .map_err(Error::from)
     }
 }
 

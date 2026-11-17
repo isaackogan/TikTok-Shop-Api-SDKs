@@ -23,19 +23,20 @@ T = TypeVar("T", bound="PostShoppableVideoRequestVideoInfo")
 class PostShoppableVideoRequestVideoInfo:
     """ 
         Attributes:
-            file_id (str): The video file ID returned by Upload Shoppable Video File (`POST
-                /affiliate_creator/202505/videos/video_files`).
+            file_id (str): Video file_id from [Upload Shoppable Video File]
             title (str): The video caption.
-                The maximum length is 2200 in UTF-16 runes.
+                The maximum length is 4000 in UTF-16 runes.
                 If not specified, the ticket post will not have any captions.
-            cover_uri (str | Unset): The video cover image URI returned by Upload Shoppable Photo File (`POST
-                /affiliate_creator/202511/photos/photo_files`).
+            cover_uri (str | Unset): Video cover image URI, which is returned after uploading the image via the Upload
+                Shoppable Photo File API.
             cover_timestamp_ms (int | Unset): The input parameter is a timestamp, which specifies a particular moment in the
                 video. The frame at that timestamp will be used as the video cover. If cover_uri and cover_timestamp_ms are both
                 not provided, the cover will default to the first frame of the uploaded video. Only one of cover_uri or
                 cover_timestamp_ms can be provided. If both parameters are passed, cover_uri will take precedence.
-            music_id (str | Unset): The music ID for the video's background music. Obtain it from Search Music (`GET
-                /affiliate_creator/202602/music/search`). If not provided, no music will be associated with the video.
+            music_id (str | Unset): The music ID for the video BGM. If not provided, no music will be associated with the
+                video. The music ID must be obtained via Search Music Library.
+            is_ai_generated (bool | Unset): Field to indicate whether the content was AI generated. Marking this field as
+                true will display a tag indicating this post as an AI generated post.
      """
 
     file_id: str
@@ -43,6 +44,7 @@ class PostShoppableVideoRequestVideoInfo:
     cover_uri: str | Unset = UNSET
     cover_timestamp_ms: int | Unset = UNSET
     music_id: str | Unset = UNSET
+    is_ai_generated: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -60,6 +62,8 @@ class PostShoppableVideoRequestVideoInfo:
 
         music_id = self.music_id
 
+        is_ai_generated = self.is_ai_generated
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -73,6 +77,8 @@ class PostShoppableVideoRequestVideoInfo:
             field_dict["cover_timestamp_ms"] = cover_timestamp_ms
         if music_id is not UNSET:
             field_dict["music_id"] = music_id
+        if is_ai_generated is not UNSET:
+            field_dict["is_ai_generated"] = is_ai_generated
 
         return field_dict
 
@@ -91,12 +97,15 @@ class PostShoppableVideoRequestVideoInfo:
 
         music_id = d.pop("music_id", UNSET)
 
+        is_ai_generated = d.pop("is_ai_generated", UNSET)
+
         post_shoppable_video_request_video_info = cls(
             file_id=file_id,
             title=title,
             cover_uri=cover_uri,
             cover_timestamp_ms=cover_timestamp_ms,
             music_id=music_id,
+            is_ai_generated=is_ai_generated,
         )
 
 

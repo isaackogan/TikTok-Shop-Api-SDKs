@@ -31,6 +31,10 @@ from .add_external_order_references_response_data import AddExternalOrderReferen
 from .add_external_order_references_response_data_error import AddExternalOrderReferencesResponseDataError
 from .add_external_order_references_response_data_error_detail import AddExternalOrderReferencesResponseDataErrorDetail
 from .add_external_order_references_response_data_error_detail_external_order import AddExternalOrderReferencesResponseDataErrorDetailExternalOrder
+from .add_post_view_search_video_comment_request import AddPostViewSearchVideoCommentRequest
+from .add_post_view_search_video_comment_response import AddPostViewSearchVideoCommentResponse
+from .add_post_view_search_video_comment_response_data import AddPostViewSearchVideoCommentResponseData
+from .add_post_view_search_video_comment_response_data_comment_result import AddPostViewSearchVideoCommentResponseDataCommentResult
 from .add_showcase_products_request import AddShowcaseProductsRequest
 from .add_showcase_products_response import AddShowcaseProductsResponse
 from .add_showcase_products_response_data import AddShowcaseProductsResponseData
@@ -106,6 +110,14 @@ from .carton_carton_type import CartonCartonType
 from .category import Category
 from .category_chain import CategoryChain
 from .certification import Certification
+from .change_post_view_search_video_products_request import ChangePostViewSearchVideoProductsRequest
+from .change_post_view_search_video_products_request_operation import ChangePostViewSearchVideoProductsRequestOperation
+from .change_post_view_search_video_products_response import ChangePostViewSearchVideoProductsResponse
+from .change_post_view_search_video_products_response_data import ChangePostViewSearchVideoProductsResponseData
+from .change_post_view_search_video_products_response_data_error import ChangePostViewSearchVideoProductsResponseDataError
+from .change_post_view_search_video_products_response_data_error_detail import ChangePostViewSearchVideoProductsResponseDataErrorDetail
+from .change_post_view_search_video_products_response_data_product_result import ChangePostViewSearchVideoProductsResponseDataProductResult
+from .change_post_view_search_video_products_response_data_product_result_item import ChangePostViewSearchVideoProductsResponseDataProductResultItem
 from .check_creator_outreach_eligibility_request import CheckCreatorOutreachEligibilityRequest
 from .check_creator_outreach_eligibility_request_creator_info import CheckCreatorOutreachEligibilityRequestCreatorInfo
 from .check_creator_outreach_eligibility_response import CheckCreatorOutreachEligibilityResponse
@@ -1032,6 +1044,20 @@ from .get_pod_customization_details_request import GetPODCustomizationDetailsReq
 from .get_pod_customization_details_response import GetPODCustomizationDetailsResponse
 from .get_pod_customization_details_response_data import GetPODCustomizationDetailsResponseData
 from .get_pod_customization_details_response_data_pod_detail import GetPODCustomizationDetailsResponseDataPodDetail
+from .get_post_view_search_video_comments_response import GetPostViewSearchVideoCommentsResponse
+from .get_post_view_search_video_comments_response_data import GetPostViewSearchVideoCommentsResponseData
+from .get_post_view_search_video_comments_response_data_comment import GetPostViewSearchVideoCommentsResponseDataComment
+from .get_post_view_search_video_keywords_response import GetPostViewSearchVideoKeywordsResponse
+from .get_post_view_search_video_keywords_response_data import GetPostViewSearchVideoKeywordsResponseData
+from .get_post_view_search_video_products_response import GetPostViewSearchVideoProductsResponse
+from .get_post_view_search_video_products_response_data import GetPostViewSearchVideoProductsResponseData
+from .get_post_view_search_video_products_response_data_product import GetPostViewSearchVideoProductsResponseDataProduct
+from .get_post_view_search_video_response import GetPostViewSearchVideoResponse
+from .get_post_view_search_video_response_data import GetPostViewSearchVideoResponseData
+from .get_post_view_search_video_response_data_comment import GetPostViewSearchVideoResponseDataComment
+from .get_post_view_search_video_response_data_product import GetPostViewSearchVideoResponseDataProduct
+from .get_post_view_search_video_response_data_video import GetPostViewSearchVideoResponseDataVideo
+from .get_post_view_search_video_response_data_video_metric import GetPostViewSearchVideoResponseDataVideoMetric
 from .get_product_campaign_response import GetProductCampaignResponse
 from .get_product_campaign_response_data import GetProductCampaignResponseData
 from .get_product_campaign_response_data_product_campaign import GetProductCampaignResponseDataProductCampaign
@@ -1594,6 +1620,9 @@ from .list_opportunities_response import ListOpportunitiesResponse
 from .list_opportunities_response_data import ListOpportunitiesResponseData
 from .list_opportunities_response_data_data import ListOpportunitiesResponseDataData
 from .list_opportunities_response_data_data_opportunity import ListOpportunitiesResponseDataDataOpportunity
+from .list_post_view_search_videos_response import ListPostViewSearchVideosResponse
+from .list_post_view_search_videos_response_data import ListPostViewSearchVideosResponseData
+from .list_post_view_search_videos_response_data_video import ListPostViewSearchVideosResponseDataVideo
 from .list_price import ListPrice
 from .list_price_currency import ListPriceCurrency
 from .list_product_skpp_statuses_request import ListProductSKPPStatusesRequest
@@ -2067,6 +2096,7 @@ from .search_global_products_response import SearchGlobalProductsResponse
 from .search_global_products_response_data import SearchGlobalProductsResponseData
 from .search_global_products_response_data_global_product import SearchGlobalProductsResponseDataGlobalProduct
 from .search_global_products_response_data_global_product_sku import SearchGlobalProductsResponseDataGlobalProductSku
+from .search_gmv import SearchGmv
 from .search_goods_hazmat_and_expiration_info_request import SearchGoodsHazmatAndExpirationInfoRequest
 from .search_goods_hazmat_and_expiration_info_response import SearchGoodsHazmatAndExpirationInfoResponse
 from .search_goods_hazmat_and_expiration_info_response_data import SearchGoodsHazmatAndExpirationInfoResponseData
@@ -2460,6 +2490,10 @@ from .update_package_delivery_status_response_data import UpdatePackageDeliveryS
 from .update_package_shipping_info_request import UpdatePackageShippingInfoRequest
 from .update_package_shipping_info_response import UpdatePackageShippingInfoResponse
 from .update_package_shipping_info_response_data import UpdatePackageShippingInfoResponseData
+from .update_post_view_search_video_keywords_request import UpdatePostViewSearchVideoKeywordsRequest
+from .update_post_view_search_video_keywords_response import UpdatePostViewSearchVideoKeywordsResponse
+from .update_post_view_search_video_keywords_response_data import UpdatePostViewSearchVideoKeywordsResponseData
+from .update_post_view_search_video_keywords_response_data_keyword_result import UpdatePostViewSearchVideoKeywordsResponseDataKeywordResult
 from .update_price_request import UpdatePriceRequest
 from .update_price_request_sku import UpdatePriceRequestSku
 from .update_price_response import UpdatePriceResponse
@@ -2599,6 +2633,10 @@ __all__ = (
     "AddExternalOrderReferencesResponseDataError",
     "AddExternalOrderReferencesResponseDataErrorDetail",
     "AddExternalOrderReferencesResponseDataErrorDetailExternalOrder",
+    "AddPostViewSearchVideoCommentRequest",
+    "AddPostViewSearchVideoCommentResponse",
+    "AddPostViewSearchVideoCommentResponseData",
+    "AddPostViewSearchVideoCommentResponseDataCommentResult",
     "Address",
     "AddShowcaseProductsRequest",
     "AddShowcaseProductsResponse",
@@ -2674,6 +2712,14 @@ __all__ = (
     "Category",
     "CategoryChain",
     "Certification",
+    "ChangePostViewSearchVideoProductsRequest",
+    "ChangePostViewSearchVideoProductsRequestOperation",
+    "ChangePostViewSearchVideoProductsResponse",
+    "ChangePostViewSearchVideoProductsResponseData",
+    "ChangePostViewSearchVideoProductsResponseDataError",
+    "ChangePostViewSearchVideoProductsResponseDataErrorDetail",
+    "ChangePostViewSearchVideoProductsResponseDataProductResult",
+    "ChangePostViewSearchVideoProductsResponseDataProductResultItem",
     "CheckCreatorOutreachEligibilityRequest",
     "CheckCreatorOutreachEligibilityRequestCreatorInfo",
     "CheckCreatorOutreachEligibilityResponse",
@@ -3600,6 +3646,20 @@ __all__ = (
     "GetPODCustomizationDetailsResponse",
     "GetPODCustomizationDetailsResponseData",
     "GetPODCustomizationDetailsResponseDataPodDetail",
+    "GetPostViewSearchVideoCommentsResponse",
+    "GetPostViewSearchVideoCommentsResponseData",
+    "GetPostViewSearchVideoCommentsResponseDataComment",
+    "GetPostViewSearchVideoKeywordsResponse",
+    "GetPostViewSearchVideoKeywordsResponseData",
+    "GetPostViewSearchVideoProductsResponse",
+    "GetPostViewSearchVideoProductsResponseData",
+    "GetPostViewSearchVideoProductsResponseDataProduct",
+    "GetPostViewSearchVideoResponse",
+    "GetPostViewSearchVideoResponseData",
+    "GetPostViewSearchVideoResponseDataComment",
+    "GetPostViewSearchVideoResponseDataProduct",
+    "GetPostViewSearchVideoResponseDataVideo",
+    "GetPostViewSearchVideoResponseDataVideoMetric",
     "GetProductCampaignResponse",
     "GetProductCampaignResponseData",
     "GetProductCampaignResponseDataProductCampaign",
@@ -4163,6 +4223,9 @@ __all__ = (
     "ListOpportunitiesResponseData",
     "ListOpportunitiesResponseDataData",
     "ListOpportunitiesResponseDataDataOpportunity",
+    "ListPostViewSearchVideosResponse",
+    "ListPostViewSearchVideosResponseData",
+    "ListPostViewSearchVideosResponseDataVideo",
     "ListPrice",
     "ListPriceCurrency",
     "ListProductSKPPStatusesRequest",
@@ -4635,6 +4698,7 @@ __all__ = (
     "SearchGlobalProductsResponseData",
     "SearchGlobalProductsResponseDataGlobalProduct",
     "SearchGlobalProductsResponseDataGlobalProductSku",
+    "SearchGmv",
     "SearchGoodsHazmatAndExpirationInfoRequest",
     "SearchGoodsHazmatAndExpirationInfoResponse",
     "SearchGoodsHazmatAndExpirationInfoResponseData",
@@ -5028,6 +5092,10 @@ __all__ = (
     "UpdatePackageShippingInfoRequest",
     "UpdatePackageShippingInfoResponse",
     "UpdatePackageShippingInfoResponseData",
+    "UpdatePostViewSearchVideoKeywordsRequest",
+    "UpdatePostViewSearchVideoKeywordsResponse",
+    "UpdatePostViewSearchVideoKeywordsResponseData",
+    "UpdatePostViewSearchVideoKeywordsResponseDataKeywordResult",
     "UpdatePriceRequest",
     "UpdatePriceRequestSku",
     "UpdatePriceResponse",

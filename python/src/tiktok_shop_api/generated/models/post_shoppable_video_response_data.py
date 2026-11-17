@@ -27,9 +27,12 @@ class PostShoppableVideoResponseData:
     """ 
         Attributes:
             video (PostShoppableVideoResponseDataVideo | Unset):
+            quota (str | Unset): Content posting quota for the creator. Returned on successful publish; included in the
+                error message on failure; omitted if no quota restriction applies.
      """
 
     video: PostShoppableVideoResponseDataVideo | Unset = UNSET
+    quota: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -42,6 +45,8 @@ class PostShoppableVideoResponseData:
         if not isinstance(self.video, Unset):
             video = self.video.to_dict()
 
+        quota = self.quota
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -49,6 +54,8 @@ class PostShoppableVideoResponseData:
         })
         if video is not UNSET:
             field_dict["video"] = video
+        if quota is not UNSET:
+            field_dict["quota"] = quota
 
         return field_dict
 
@@ -68,8 +75,11 @@ class PostShoppableVideoResponseData:
 
 
 
+        quota = d.pop("quota", UNSET)
+
         post_shoppable_video_response_data = cls(
             video=video,
+            quota=quota,
         )
 
 

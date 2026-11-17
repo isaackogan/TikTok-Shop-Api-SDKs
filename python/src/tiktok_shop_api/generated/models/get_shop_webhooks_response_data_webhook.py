@@ -60,6 +60,8 @@ class GetShopWebhooksResponseDataWebhook:
                 - `REVERSE_STATUS_UPDATE`: Triggers when buyer raises cancellation, refund only, or return & refund requests
                 that need the seller to accept or reject. See [Reverse Status
                 Update](https://partner.tiktokshop.com/doc/page/63fd7459715d622a338c5437).
+                - `AFTERSALES_REQUEST_STATUS_UPDATE`: Triggers when an aftersales request status changes (webhook type 64).
+                - `RMA_STATUS_UPDATE`: Triggers when a return merchandise authorization (RMA) status changes (webhook type 65).
             address (str | Unset): The webhook URL used to receive the event data.
             create_time (int | Unset): The time when the webhook was created, represented as a Unix timestamp in
                 milliseconds.

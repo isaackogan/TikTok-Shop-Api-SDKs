@@ -29,6 +29,10 @@ import okhttp3.HttpUrl
 
 import com.isaackogan.tiktok.shop.generated.models.ActivateProductsRequest
 import com.isaackogan.tiktok.shop.generated.models.ActivateProductsResponse
+import com.isaackogan.tiktok.shop.generated.models.AddPostViewSearchVideoCommentRequest
+import com.isaackogan.tiktok.shop.generated.models.AddPostViewSearchVideoCommentResponse
+import com.isaackogan.tiktok.shop.generated.models.ChangePostViewSearchVideoProductsRequest
+import com.isaackogan.tiktok.shop.generated.models.ChangePostViewSearchVideoProductsResponse
 import com.isaackogan.tiktok.shop.generated.models.CheckListingPrerequisitesResponse
 import com.isaackogan.tiktok.shop.generated.models.CheckProductListingRequest
 import com.isaackogan.tiktok.shop.generated.models.CheckProductListingResponse
@@ -76,6 +80,10 @@ import com.isaackogan.tiktok.shop.generated.models.GetGlobalProductResponse
 import com.isaackogan.tiktok.shop.generated.models.GetGlobalReplicatedProductsResponse
 import com.isaackogan.tiktok.shop.generated.models.GetImageTranslationTasksResponse
 import com.isaackogan.tiktok.shop.generated.models.GetOpportunityDetailResponse
+import com.isaackogan.tiktok.shop.generated.models.GetPostViewSearchVideoCommentsResponse
+import com.isaackogan.tiktok.shop.generated.models.GetPostViewSearchVideoKeywordsResponse
+import com.isaackogan.tiktok.shop.generated.models.GetPostViewSearchVideoProductsResponse
+import com.isaackogan.tiktok.shop.generated.models.GetPostViewSearchVideoResponse
 import com.isaackogan.tiktok.shop.generated.models.GetProductDiagnosesResponse
 import com.isaackogan.tiktok.shop.generated.models.GetProductPackageRecommendationsRequest
 import com.isaackogan.tiktok.shop.generated.models.GetProductPackageRecommendationsResponse
@@ -90,6 +98,7 @@ import com.isaackogan.tiktok.shop.generated.models.InventorySearchRequest
 import com.isaackogan.tiktok.shop.generated.models.InventorySearchResponse
 import com.isaackogan.tiktok.shop.generated.models.ListOpportunitiesRequest
 import com.isaackogan.tiktok.shop.generated.models.ListOpportunitiesResponse
+import com.isaackogan.tiktok.shop.generated.models.ListPostViewSearchVideosResponse
 import com.isaackogan.tiktok.shop.generated.models.ListProductSKPPStatusesRequest
 import com.isaackogan.tiktok.shop.generated.models.ListProductSKPPStatusesResponse
 import com.isaackogan.tiktok.shop.generated.models.OptimizeImagesRequest
@@ -140,6 +149,8 @@ import com.isaackogan.tiktok.shop.generated.models.UpdateGlobalInventoryRequest
 import com.isaackogan.tiktok.shop.generated.models.UpdateGlobalInventoryResponse
 import com.isaackogan.tiktok.shop.generated.models.UpdateInventoryRequest
 import com.isaackogan.tiktok.shop.generated.models.UpdateInventoryResponse
+import com.isaackogan.tiktok.shop.generated.models.UpdatePostViewSearchVideoKeywordsRequest
+import com.isaackogan.tiktok.shop.generated.models.UpdatePostViewSearchVideoKeywordsResponse
 import com.isaackogan.tiktok.shop.generated.models.UpdatePriceRequest
 import com.isaackogan.tiktok.shop.generated.models.UpdatePriceResponse
 import com.isaackogan.tiktok.shop.generated.models.UpdateStockOperationSettingsRequest
@@ -238,6 +249,160 @@ open class ProductsApi(basePath: kotlin.String = defaultBasePath, client: Call.F
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/product/202309/products/activate",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /product/202611/search_videos/{video_id}/comments
+     * Add Post-view Search Video Comment
+     * Only US shops are supported. The video must be present in the authorized shop&#39;s warehouse data for the latest 90 calendar days ending on the latest available data date, including both endpoints. The request changes one video. Inspect the business result even when the response code is zero. The request timeout is 10 seconds; a timeout or request-level error does not prove that nothing changed. Do not automatically retry writes. Each invocation has a new server-generated submission ID and cannot resume an earlier request. Only self-posted shop videos are supported. Adds one nonblank comment of at most 500 Unicode characters; existing comments are preserved. Repeating a request may publish a duplicate comment. Existing downstream publication and frequency rules apply. After an unknown outcome, inspect recent comments, but absence from that limited view or matching text cannot identify this request conclusively. If the result remains uncertain, contact support with the request log ID instead of resubmitting. Concurrent changes to the same video may overwrite keyword updates. Avoid simultaneous writes for one video.
+     * @param videoId Unique video id.
+     * @param addPostViewSearchVideoCommentRequest 
+     * @return AddPostViewSearchVideoCommentResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun addPostViewSearchVideoComment(videoId: kotlin.String, addPostViewSearchVideoCommentRequest: AddPostViewSearchVideoCommentRequest) : AddPostViewSearchVideoCommentResponse {
+        val localVarResponse = addPostViewSearchVideoCommentWithHttpInfo(videoId = videoId, addPostViewSearchVideoCommentRequest = addPostViewSearchVideoCommentRequest)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as AddPostViewSearchVideoCommentResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /product/202611/search_videos/{video_id}/comments
+     * Add Post-view Search Video Comment
+     * Only US shops are supported. The video must be present in the authorized shop&#39;s warehouse data for the latest 90 calendar days ending on the latest available data date, including both endpoints. The request changes one video. Inspect the business result even when the response code is zero. The request timeout is 10 seconds; a timeout or request-level error does not prove that nothing changed. Do not automatically retry writes. Each invocation has a new server-generated submission ID and cannot resume an earlier request. Only self-posted shop videos are supported. Adds one nonblank comment of at most 500 Unicode characters; existing comments are preserved. Repeating a request may publish a duplicate comment. Existing downstream publication and frequency rules apply. After an unknown outcome, inspect recent comments, but absence from that limited view or matching text cannot identify this request conclusively. If the result remains uncertain, contact support with the request log ID instead of resubmitting. Concurrent changes to the same video may overwrite keyword updates. Avoid simultaneous writes for one video.
+     * @param videoId Unique video id.
+     * @param addPostViewSearchVideoCommentRequest 
+     * @return ApiResponse<AddPostViewSearchVideoCommentResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun addPostViewSearchVideoCommentWithHttpInfo(videoId: kotlin.String, addPostViewSearchVideoCommentRequest: AddPostViewSearchVideoCommentRequest) : ApiResponse<AddPostViewSearchVideoCommentResponse?> {
+        val localVariableConfig = addPostViewSearchVideoCommentRequestConfig(videoId = videoId, addPostViewSearchVideoCommentRequest = addPostViewSearchVideoCommentRequest)
+
+        return request<AddPostViewSearchVideoCommentRequest, AddPostViewSearchVideoCommentResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation addPostViewSearchVideoComment
+     *
+     * @param videoId Unique video id.
+     * @param addPostViewSearchVideoCommentRequest 
+     * @return RequestConfig
+     */
+    fun addPostViewSearchVideoCommentRequestConfig(videoId: kotlin.String, addPostViewSearchVideoCommentRequest: AddPostViewSearchVideoCommentRequest) : RequestConfig<AddPostViewSearchVideoCommentRequest> {
+        val localVariableBody = addPostViewSearchVideoCommentRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/product/202611/search_videos/{video_id}/comments".replace("{"+"video_id"+"}", encodeURIComponent(videoId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /product/202611/search_videos/{video_id}/products
+     * Change Post-view Search Video Products
+     * Only US shops are supported. The video must be present in the authorized shop&#39;s warehouse data for the latest 90 calendar days ending on the latest available data date, including both endpoints. The request changes one video. Inspect the business result even when the response code is zero. The request timeout is 10 seconds; a timeout or request-level error does not prove that nothing changed. Do not automatically retry writes. Each invocation has a new server-generated submission ID and cannot resume an earlier request. Binds or unbinds multiple products for one video. Each product ID must occur once. The estimated final association count must not exceed 5, consistent with the seller-facing configuration limit; this is not a per-request operation-count limit. Concurrent changes or failed removals can exceed that estimate. Operations may partially succeed and are not transactional. Inspect each item status and data.errors. Query current associations after an unknown outcome and reconcile only the remaining changes; the query does not prove a particular request succeeded. Concurrent changes to the same video may overwrite keyword updates. Avoid simultaneous writes for one video. Comments are unchanged.
+     * @param videoId Unique video id.
+     * @param changePostViewSearchVideoProductsRequest 
+     * @return ChangePostViewSearchVideoProductsResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun changePostViewSearchVideoProducts(videoId: kotlin.String, changePostViewSearchVideoProductsRequest: ChangePostViewSearchVideoProductsRequest) : ChangePostViewSearchVideoProductsResponse {
+        val localVarResponse = changePostViewSearchVideoProductsWithHttpInfo(videoId = videoId, changePostViewSearchVideoProductsRequest = changePostViewSearchVideoProductsRequest)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ChangePostViewSearchVideoProductsResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /product/202611/search_videos/{video_id}/products
+     * Change Post-view Search Video Products
+     * Only US shops are supported. The video must be present in the authorized shop&#39;s warehouse data for the latest 90 calendar days ending on the latest available data date, including both endpoints. The request changes one video. Inspect the business result even when the response code is zero. The request timeout is 10 seconds; a timeout or request-level error does not prove that nothing changed. Do not automatically retry writes. Each invocation has a new server-generated submission ID and cannot resume an earlier request. Binds or unbinds multiple products for one video. Each product ID must occur once. The estimated final association count must not exceed 5, consistent with the seller-facing configuration limit; this is not a per-request operation-count limit. Concurrent changes or failed removals can exceed that estimate. Operations may partially succeed and are not transactional. Inspect each item status and data.errors. Query current associations after an unknown outcome and reconcile only the remaining changes; the query does not prove a particular request succeeded. Concurrent changes to the same video may overwrite keyword updates. Avoid simultaneous writes for one video. Comments are unchanged.
+     * @param videoId Unique video id.
+     * @param changePostViewSearchVideoProductsRequest 
+     * @return ApiResponse<ChangePostViewSearchVideoProductsResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun changePostViewSearchVideoProductsWithHttpInfo(videoId: kotlin.String, changePostViewSearchVideoProductsRequest: ChangePostViewSearchVideoProductsRequest) : ApiResponse<ChangePostViewSearchVideoProductsResponse?> {
+        val localVariableConfig = changePostViewSearchVideoProductsRequestConfig(videoId = videoId, changePostViewSearchVideoProductsRequest = changePostViewSearchVideoProductsRequest)
+
+        return request<ChangePostViewSearchVideoProductsRequest, ChangePostViewSearchVideoProductsResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation changePostViewSearchVideoProducts
+     *
+     * @param videoId Unique video id.
+     * @param changePostViewSearchVideoProductsRequest 
+     * @return RequestConfig
+     */
+    fun changePostViewSearchVideoProductsRequestConfig(videoId: kotlin.String, changePostViewSearchVideoProductsRequest: ChangePostViewSearchVideoProductsRequest) : RequestConfig<ChangePostViewSearchVideoProductsRequest> {
+        val localVariableBody = changePostViewSearchVideoProductsRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/product/202611/search_videos/{video_id}/products".replace("{"+"video_id"+"}", encodeURIComponent(videoId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -2952,6 +3117,312 @@ open class ProductsApi(basePath: kotlin.String = defaultBasePath, client: Call.F
     }
 
     /**
+     * GET /product/202611/search_videos/{video_id}
+     * Get Post-view Search Video
+     * Only US shops are supported. Returns video metadata, period metrics and current configuration for a video found in the authorized shop&#39;s data. Missing video data or a failed access check fails the request. Self-posted video detail also requires the author to be resolved for comment retrieval.
+     * @param videoId Unique video ID.
+     * @param startDateGe Inclusive start date. Supply both start_date_ge and end_date_le, or omit both for the latest 90 calendar days ending on the latest available warehouse date, including both endpoints. (optional)
+     * @param endDateLe Inclusive end date. Must be on or after start_date_ge. Returned dates identify the effective metric period. (optional)
+     * @return GetPostViewSearchVideoResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getPostViewSearchVideo(videoId: kotlin.String, startDateGe: kotlin.String? = null, endDateLe: kotlin.String? = null) : GetPostViewSearchVideoResponse {
+        val localVarResponse = getPostViewSearchVideoWithHttpInfo(videoId = videoId, startDateGe = startDateGe, endDateLe = endDateLe)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetPostViewSearchVideoResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /product/202611/search_videos/{video_id}
+     * Get Post-view Search Video
+     * Only US shops are supported. Returns video metadata, period metrics and current configuration for a video found in the authorized shop&#39;s data. Missing video data or a failed access check fails the request. Self-posted video detail also requires the author to be resolved for comment retrieval.
+     * @param videoId Unique video ID.
+     * @param startDateGe Inclusive start date. Supply both start_date_ge and end_date_le, or omit both for the latest 90 calendar days ending on the latest available warehouse date, including both endpoints. (optional)
+     * @param endDateLe Inclusive end date. Must be on or after start_date_ge. Returned dates identify the effective metric period. (optional)
+     * @return ApiResponse<GetPostViewSearchVideoResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getPostViewSearchVideoWithHttpInfo(videoId: kotlin.String, startDateGe: kotlin.String?, endDateLe: kotlin.String?) : ApiResponse<GetPostViewSearchVideoResponse?> {
+        val localVariableConfig = getPostViewSearchVideoRequestConfig(videoId = videoId, startDateGe = startDateGe, endDateLe = endDateLe)
+
+        return request<Unit, GetPostViewSearchVideoResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getPostViewSearchVideo
+     *
+     * @param videoId Unique video ID.
+     * @param startDateGe Inclusive start date. Supply both start_date_ge and end_date_le, or omit both for the latest 90 calendar days ending on the latest available warehouse date, including both endpoints. (optional)
+     * @param endDateLe Inclusive end date. Must be on or after start_date_ge. Returned dates identify the effective metric period. (optional)
+     * @return RequestConfig
+     */
+    fun getPostViewSearchVideoRequestConfig(videoId: kotlin.String, startDateGe: kotlin.String?, endDateLe: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (startDateGe != null) {
+                    put("start_date_ge", listOf(startDateGe.toString()))
+                }
+                if (endDateLe != null) {
+                    put("end_date_le", listOf(endDateLe.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/product/202611/search_videos/{video_id}".replace("{"+"video_id"+"}", encodeURIComponent(videoId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /product/202611/search_videos/{video_id}/comments
+     * Get Post-view Search Video Comments
+     * Only US shops are supported. The video must be present in the authorized shop&#39;s warehouse data for the latest 90 calendar days ending on the latest available data date, including both endpoints. Only self- posted shop videos are supported. Business policy permits access only to the latest 50 comments published through post-view search by the video author for one video. This is the accessible query window, not a limit on the total number of published comments. Results are ordered by creation time descending. Missing or invalid times sort last; equal times preserve source order. Earlier comments are outside the API access scope; pagination is not supported. Other user comments are excluded. An empty array means no matching comments were returned; it does not prove an earlier timed-out submission failed. If any underlying read fails or the 10-second budget expires, the request fails.
+     * @param videoId Unique video id.
+     * @return GetPostViewSearchVideoCommentsResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getPostViewSearchVideoComments(videoId: kotlin.String) : GetPostViewSearchVideoCommentsResponse {
+        val localVarResponse = getPostViewSearchVideoCommentsWithHttpInfo(videoId = videoId)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetPostViewSearchVideoCommentsResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /product/202611/search_videos/{video_id}/comments
+     * Get Post-view Search Video Comments
+     * Only US shops are supported. The video must be present in the authorized shop&#39;s warehouse data for the latest 90 calendar days ending on the latest available data date, including both endpoints. Only self- posted shop videos are supported. Business policy permits access only to the latest 50 comments published through post-view search by the video author for one video. This is the accessible query window, not a limit on the total number of published comments. Results are ordered by creation time descending. Missing or invalid times sort last; equal times preserve source order. Earlier comments are outside the API access scope; pagination is not supported. Other user comments are excluded. An empty array means no matching comments were returned; it does not prove an earlier timed-out submission failed. If any underlying read fails or the 10-second budget expires, the request fails.
+     * @param videoId Unique video id.
+     * @return ApiResponse<GetPostViewSearchVideoCommentsResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getPostViewSearchVideoCommentsWithHttpInfo(videoId: kotlin.String) : ApiResponse<GetPostViewSearchVideoCommentsResponse?> {
+        val localVariableConfig = getPostViewSearchVideoCommentsRequestConfig(videoId = videoId)
+
+        return request<Unit, GetPostViewSearchVideoCommentsResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getPostViewSearchVideoComments
+     *
+     * @param videoId Unique video id.
+     * @return RequestConfig
+     */
+    fun getPostViewSearchVideoCommentsRequestConfig(videoId: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/product/202611/search_videos/{video_id}/comments".replace("{"+"video_id"+"}", encodeURIComponent(videoId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /product/202611/search_videos/{video_id}/keywords
+     * Get Post-view Search Video Keywords
+     * Only US shops are supported. The video must be present in the authorized shop&#39;s warehouse data for the latest 90 calendar days ending on the latest available data date, including both endpoints. Returns the current configured keyword set; an empty array means none are configured. Popular search keywords are separate observation data.
+     * @param videoId Unique video id.
+     * @return GetPostViewSearchVideoKeywordsResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getPostViewSearchVideoKeywords(videoId: kotlin.String) : GetPostViewSearchVideoKeywordsResponse {
+        val localVarResponse = getPostViewSearchVideoKeywordsWithHttpInfo(videoId = videoId)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetPostViewSearchVideoKeywordsResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /product/202611/search_videos/{video_id}/keywords
+     * Get Post-view Search Video Keywords
+     * Only US shops are supported. The video must be present in the authorized shop&#39;s warehouse data for the latest 90 calendar days ending on the latest available data date, including both endpoints. Returns the current configured keyword set; an empty array means none are configured. Popular search keywords are separate observation data.
+     * @param videoId Unique video id.
+     * @return ApiResponse<GetPostViewSearchVideoKeywordsResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getPostViewSearchVideoKeywordsWithHttpInfo(videoId: kotlin.String) : ApiResponse<GetPostViewSearchVideoKeywordsResponse?> {
+        val localVariableConfig = getPostViewSearchVideoKeywordsRequestConfig(videoId = videoId)
+
+        return request<Unit, GetPostViewSearchVideoKeywordsResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getPostViewSearchVideoKeywords
+     *
+     * @param videoId Unique video id.
+     * @return RequestConfig
+     */
+    fun getPostViewSearchVideoKeywordsRequestConfig(videoId: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/product/202611/search_videos/{video_id}/keywords".replace("{"+"video_id"+"}", encodeURIComponent(videoId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /product/202611/search_videos/{video_id}/products
+     * Get Post-view Search Video Products
+     * Only US shops are supported. The video must be present in the authorized shop&#39;s warehouse data for the latest 90 calendar days ending on the latest available data date, including both endpoints. Returns the current product associations supplied by the relation service, without truncating the response to five. An empty array means none are associated. Product IDs identify associations, not product details or a guarantee of exposure.
+     * @param videoId Unique video id.
+     * @return GetPostViewSearchVideoProductsResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getPostViewSearchVideoProducts(videoId: kotlin.String) : GetPostViewSearchVideoProductsResponse {
+        val localVarResponse = getPostViewSearchVideoProductsWithHttpInfo(videoId = videoId)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetPostViewSearchVideoProductsResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /product/202611/search_videos/{video_id}/products
+     * Get Post-view Search Video Products
+     * Only US shops are supported. The video must be present in the authorized shop&#39;s warehouse data for the latest 90 calendar days ending on the latest available data date, including both endpoints. Returns the current product associations supplied by the relation service, without truncating the response to five. An empty array means none are associated. Product IDs identify associations, not product details or a guarantee of exposure.
+     * @param videoId Unique video id.
+     * @return ApiResponse<GetPostViewSearchVideoProductsResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getPostViewSearchVideoProductsWithHttpInfo(videoId: kotlin.String) : ApiResponse<GetPostViewSearchVideoProductsResponse?> {
+        val localVariableConfig = getPostViewSearchVideoProductsRequestConfig(videoId = videoId)
+
+        return request<Unit, GetPostViewSearchVideoProductsResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getPostViewSearchVideoProducts
+     *
+     * @param videoId Unique video id.
+     * @return RequestConfig
+     */
+    fun getPostViewSearchVideoProductsRequestConfig(videoId: kotlin.String) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/product/202611/search_videos/{video_id}/products".replace("{"+"video_id"+"}", encodeURIComponent(videoId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
      * enum for parameter locale
      */
      enum class LocaleGetProduct(val value: kotlin.String) {
@@ -3925,6 +4396,120 @@ open class ProductsApi(basePath: kotlin.String = defaultBasePath, client: Call.F
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/product/202604/opportunities/query",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /product/202611/search_videos
+     * List Post-view Search Videos
+     * Only US shops are supported. Returns videos in the authorized shop&#39;s available data. ALL sorts by video views descending, then video ID descending. INPUTS_ADDED follows most-recent operation order; videos absent from the selected data period are omitted. Both modes support only the first 10,000 source records. Collections can change between requests; pagination is not a snapshot. Use the returned start_date and end_date on subsequent pages to keep the period fixed.
+     * @param authorType SELF: shop-posted videos; CREATOR: creator-posted videos. Omit to include both. (optional)
+     * @param optimizationInputs ALL: all eligible videos; INPUTS_ADDED: videos with an operation record, including videos whose configuration was subsequently cleared. (optional)
+     * @param videoId Optional exact-match video ID filter. (optional)
+     * @param pageSize Number of source records per page. Keep the same value for subsequent pages. (optional)
+     * @param pageToken Token from the preceding response. Omit for the first page; keep the shop, filters, effective dates and page size unchanged. (optional)
+     * @param startDateGe Inclusive start date. Supply both start_date_ge and end_date_le, or omit both for the latest 90 calendar days ending on the latest available warehouse date, including both endpoints. (optional)
+     * @param endDateLe Inclusive end date. Must be on or after start_date_ge. Returned dates identify the effective metric period. (optional)
+     * @return ListPostViewSearchVideosResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun listPostViewSearchVideos(authorType: kotlin.String? = null, optimizationInputs: kotlin.String? = null, videoId: kotlin.String? = null, pageSize: kotlin.Long? = null, pageToken: kotlin.String? = null, startDateGe: kotlin.String? = null, endDateLe: kotlin.String? = null) : ListPostViewSearchVideosResponse {
+        val localVarResponse = listPostViewSearchVideosWithHttpInfo(authorType = authorType, optimizationInputs = optimizationInputs, videoId = videoId, pageSize = pageSize, pageToken = pageToken, startDateGe = startDateGe, endDateLe = endDateLe)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ListPostViewSearchVideosResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /product/202611/search_videos
+     * List Post-view Search Videos
+     * Only US shops are supported. Returns videos in the authorized shop&#39;s available data. ALL sorts by video views descending, then video ID descending. INPUTS_ADDED follows most-recent operation order; videos absent from the selected data period are omitted. Both modes support only the first 10,000 source records. Collections can change between requests; pagination is not a snapshot. Use the returned start_date and end_date on subsequent pages to keep the period fixed.
+     * @param authorType SELF: shop-posted videos; CREATOR: creator-posted videos. Omit to include both. (optional)
+     * @param optimizationInputs ALL: all eligible videos; INPUTS_ADDED: videos with an operation record, including videos whose configuration was subsequently cleared. (optional)
+     * @param videoId Optional exact-match video ID filter. (optional)
+     * @param pageSize Number of source records per page. Keep the same value for subsequent pages. (optional)
+     * @param pageToken Token from the preceding response. Omit for the first page; keep the shop, filters, effective dates and page size unchanged. (optional)
+     * @param startDateGe Inclusive start date. Supply both start_date_ge and end_date_le, or omit both for the latest 90 calendar days ending on the latest available warehouse date, including both endpoints. (optional)
+     * @param endDateLe Inclusive end date. Must be on or after start_date_ge. Returned dates identify the effective metric period. (optional)
+     * @return ApiResponse<ListPostViewSearchVideosResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun listPostViewSearchVideosWithHttpInfo(authorType: kotlin.String?, optimizationInputs: kotlin.String?, videoId: kotlin.String?, pageSize: kotlin.Long?, pageToken: kotlin.String?, startDateGe: kotlin.String?, endDateLe: kotlin.String?) : ApiResponse<ListPostViewSearchVideosResponse?> {
+        val localVariableConfig = listPostViewSearchVideosRequestConfig(authorType = authorType, optimizationInputs = optimizationInputs, videoId = videoId, pageSize = pageSize, pageToken = pageToken, startDateGe = startDateGe, endDateLe = endDateLe)
+
+        return request<Unit, ListPostViewSearchVideosResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation listPostViewSearchVideos
+     *
+     * @param authorType SELF: shop-posted videos; CREATOR: creator-posted videos. Omit to include both. (optional)
+     * @param optimizationInputs ALL: all eligible videos; INPUTS_ADDED: videos with an operation record, including videos whose configuration was subsequently cleared. (optional)
+     * @param videoId Optional exact-match video ID filter. (optional)
+     * @param pageSize Number of source records per page. Keep the same value for subsequent pages. (optional)
+     * @param pageToken Token from the preceding response. Omit for the first page; keep the shop, filters, effective dates and page size unchanged. (optional)
+     * @param startDateGe Inclusive start date. Supply both start_date_ge and end_date_le, or omit both for the latest 90 calendar days ending on the latest available warehouse date, including both endpoints. (optional)
+     * @param endDateLe Inclusive end date. Must be on or after start_date_ge. Returned dates identify the effective metric period. (optional)
+     * @return RequestConfig
+     */
+    fun listPostViewSearchVideosRequestConfig(authorType: kotlin.String?, optimizationInputs: kotlin.String?, videoId: kotlin.String?, pageSize: kotlin.Long?, pageToken: kotlin.String?, startDateGe: kotlin.String?, endDateLe: kotlin.String?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (authorType != null) {
+                    put("author_type", listOf(authorType.toString()))
+                }
+                if (optimizationInputs != null) {
+                    put("optimization_inputs", listOf(optimizationInputs.toString()))
+                }
+                if (videoId != null) {
+                    put("video_id", listOf(videoId.toString()))
+                }
+                if (pageSize != null) {
+                    put("page_size", listOf(pageSize.toString()))
+                }
+                if (pageToken != null) {
+                    put("page_token", listOf(pageToken.toString()))
+                }
+                if (startDateGe != null) {
+                    put("start_date_ge", listOf(startDateGe.toString()))
+                }
+                if (endDateLe != null) {
+                    put("end_date_le", listOf(endDateLe.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/product/202611/search_videos",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -5933,6 +6518,83 @@ open class ProductsApi(basePath: kotlin.String = defaultBasePath, client: Call.F
         return RequestConfig(
             method = RequestMethod.POST,
             path = "/product/202309/products/{product_id}/inventory/update".replace("{"+"product_id"+"}", encodeURIComponent(productId.toString())),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * PUT /product/202611/search_videos/{video_id}/keywords
+     * Update Post-view Search Video Keywords
+     * Only US shops are supported. The video must be present in the authorized shop&#39;s warehouse data for the latest 90 calendar days ending on the latest available data date, including both endpoints. The request changes one video. Inspect the business result even when the response code is zero. The request timeout is 10 seconds; a timeout or request-level error does not prove that nothing changed. Do not automatically retry writes. Each invocation has a new server-generated submission ID and cannot resume an earlier request. Replaces the complete keyword set with at most 5 entries; an empty array clears it. Products and comments are unchanged. Concurrent updates can overwrite each other. After an unknown outcome, query the current keywords and reconcile the complete desired set before deciding whether to submit again; the query does not identify which request wrote the state.
+     * @param videoId Unique video id.
+     * @param updatePostViewSearchVideoKeywordsRequest 
+     * @return UpdatePostViewSearchVideoKeywordsResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun updatePostViewSearchVideoKeywords(videoId: kotlin.String, updatePostViewSearchVideoKeywordsRequest: UpdatePostViewSearchVideoKeywordsRequest) : UpdatePostViewSearchVideoKeywordsResponse {
+        val localVarResponse = updatePostViewSearchVideoKeywordsWithHttpInfo(videoId = videoId, updatePostViewSearchVideoKeywordsRequest = updatePostViewSearchVideoKeywordsRequest)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as UpdatePostViewSearchVideoKeywordsResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * PUT /product/202611/search_videos/{video_id}/keywords
+     * Update Post-view Search Video Keywords
+     * Only US shops are supported. The video must be present in the authorized shop&#39;s warehouse data for the latest 90 calendar days ending on the latest available data date, including both endpoints. The request changes one video. Inspect the business result even when the response code is zero. The request timeout is 10 seconds; a timeout or request-level error does not prove that nothing changed. Do not automatically retry writes. Each invocation has a new server-generated submission ID and cannot resume an earlier request. Replaces the complete keyword set with at most 5 entries; an empty array clears it. Products and comments are unchanged. Concurrent updates can overwrite each other. After an unknown outcome, query the current keywords and reconcile the complete desired set before deciding whether to submit again; the query does not identify which request wrote the state.
+     * @param videoId Unique video id.
+     * @param updatePostViewSearchVideoKeywordsRequest 
+     * @return ApiResponse<UpdatePostViewSearchVideoKeywordsResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun updatePostViewSearchVideoKeywordsWithHttpInfo(videoId: kotlin.String, updatePostViewSearchVideoKeywordsRequest: UpdatePostViewSearchVideoKeywordsRequest) : ApiResponse<UpdatePostViewSearchVideoKeywordsResponse?> {
+        val localVariableConfig = updatePostViewSearchVideoKeywordsRequestConfig(videoId = videoId, updatePostViewSearchVideoKeywordsRequest = updatePostViewSearchVideoKeywordsRequest)
+
+        return request<UpdatePostViewSearchVideoKeywordsRequest, UpdatePostViewSearchVideoKeywordsResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation updatePostViewSearchVideoKeywords
+     *
+     * @param videoId Unique video id.
+     * @param updatePostViewSearchVideoKeywordsRequest 
+     * @return RequestConfig
+     */
+    fun updatePostViewSearchVideoKeywordsRequestConfig(videoId: kotlin.String, updatePostViewSearchVideoKeywordsRequest: UpdatePostViewSearchVideoKeywordsRequest) : RequestConfig<UpdatePostViewSearchVideoKeywordsRequest> {
+        val localVariableBody = updatePostViewSearchVideoKeywordsRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.PUT,
+            path = "/product/202611/search_videos/{video_id}/keywords".replace("{"+"video_id"+"}", encodeURIComponent(videoId.toString())),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

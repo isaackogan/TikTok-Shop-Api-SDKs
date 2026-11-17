@@ -28,7 +28,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "post",
-        "url": "/affiliate_creator/202603/videos",
+        "url": "/affiliate_creator/202607/videos",
     }
 
     _kwargs["json"] = body.to_dict()
@@ -71,11 +71,7 @@ def sync_detailed(
 ) -> Response[PostShoppableVideoResponse]:
     """ Post Shoppable Video
 
-     Use this API to submit a shoppable video for publishing. When the submission succeeds, pass the
-    returned video ID as the `video_id` path parameter to Get Shoppable Video Status (`GET
-    /affiliate_creator/202509/videos/{video_id}/status`) to retrieve the posting status: `PROCESSING`,
-    `SUCCESS`, or `FAIL`. If the status is `PROCESSING`, call the status API again later to check for a
-    terminal status.
+     Use this API to post the shoppable video.
 
     Args:
         body (PostShoppableVideoRequest):
@@ -108,11 +104,7 @@ def sync(
 ) -> PostShoppableVideoResponse | None:
     """ Post Shoppable Video
 
-     Use this API to submit a shoppable video for publishing. When the submission succeeds, pass the
-    returned video ID as the `video_id` path parameter to Get Shoppable Video Status (`GET
-    /affiliate_creator/202509/videos/{video_id}/status`) to retrieve the posting status: `PROCESSING`,
-    `SUCCESS`, or `FAIL`. If the status is `PROCESSING`, call the status API again later to check for a
-    terminal status.
+     Use this API to post the shoppable video.
 
     Args:
         body (PostShoppableVideoRequest):
@@ -140,11 +132,7 @@ async def asyncio_detailed(
 ) -> Response[PostShoppableVideoResponse]:
     """ Post Shoppable Video
 
-     Use this API to submit a shoppable video for publishing. When the submission succeeds, pass the
-    returned video ID as the `video_id` path parameter to Get Shoppable Video Status (`GET
-    /affiliate_creator/202509/videos/{video_id}/status`) to retrieve the posting status: `PROCESSING`,
-    `SUCCESS`, or `FAIL`. If the status is `PROCESSING`, call the status API again later to check for a
-    terminal status.
+     Use this API to post the shoppable video.
 
     Args:
         body (PostShoppableVideoRequest):
@@ -177,11 +165,7 @@ async def asyncio(
 ) -> PostShoppableVideoResponse | None:
     """ Post Shoppable Video
 
-     Use this API to submit a shoppable video for publishing. When the submission succeeds, pass the
-    returned video ID as the `video_id` path parameter to Get Shoppable Video Status (`GET
-    /affiliate_creator/202509/videos/{video_id}/status`) to retrieve the posting status: `PROCESSING`,
-    `SUCCESS`, or `FAIL`. If the status is `PROCESSING`, call the status API again later to check for a
-    terminal status.
+     Use this API to post the shoppable video.
 
     Args:
         body (PostShoppableVideoRequest):

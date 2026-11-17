@@ -29,25 +29,26 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param fileId The video file ID returned by Upload Shoppable Video File (`POST /affiliate_creator/202505/videos/video_files`).
- * @param title The video caption.  The maximum length is 2200 in UTF-16 runes. If not specified, the ticket post will not have any captions.
- * @param coverUri The video cover image URI returned by Upload Shoppable Photo File (`POST /affiliate_creator/202511/photos/photo_files`).
+ * @param fileId Video file_id from [Upload Shoppable Video File]
+ * @param title The video caption.  The maximum length is 4000 in UTF-16 runes. If not specified, the ticket post will not have any captions.
+ * @param coverUri Video cover image URI, which is returned after uploading the image via the Upload Shoppable Photo File API.
  * @param coverTimestampMs The input parameter is a timestamp, which specifies a particular moment in the video. The frame at that timestamp will be used as the video cover. If cover_uri and cover_timestamp_ms are both not provided, the cover will default to the first frame of the uploaded video. Only one of cover_uri or cover_timestamp_ms can be provided. If both parameters are passed, cover_uri will take precedence.
- * @param musicId The music ID for the video's background music. Obtain it from Search Music (`GET /affiliate_creator/202602/music/search`). If not provided, no music will be associated with the video.
+ * @param musicId The music ID for the video BGM. If not provided, no music will be associated with the video. The music ID must be obtained via Search Music Library.
+ * @param isAiGenerated Field to indicate whether the content was AI generated. Marking this field as true will display a tag indicating this post as an AI generated post.
  */
 
 
 data class PostShoppableVideoRequestVideoInfo (
 
-    /* The video file ID returned by Upload Shoppable Video File (`POST /affiliate_creator/202505/videos/video_files`). */
+    /* Video file_id from [Upload Shoppable Video File] */
     @SerializedName("file_id")
     val fileId: kotlin.String,
 
-    /* The video caption.  The maximum length is 2200 in UTF-16 runes. If not specified, the ticket post will not have any captions. */
+    /* The video caption.  The maximum length is 4000 in UTF-16 runes. If not specified, the ticket post will not have any captions. */
     @SerializedName("title")
     val title: kotlin.String,
 
-    /* The video cover image URI returned by Upload Shoppable Photo File (`POST /affiliate_creator/202511/photos/photo_files`). */
+    /* Video cover image URI, which is returned after uploading the image via the Upload Shoppable Photo File API. */
     @SerializedName("cover_uri")
     val coverUri: kotlin.String? = null,
 
@@ -55,9 +56,13 @@ data class PostShoppableVideoRequestVideoInfo (
     @SerializedName("cover_timestamp_ms")
     val coverTimestampMs: kotlin.Long? = null,
 
-    /* The music ID for the video's background music. Obtain it from Search Music (`GET /affiliate_creator/202602/music/search`). If not provided, no music will be associated with the video. */
+    /* The music ID for the video BGM. If not provided, no music will be associated with the video. The music ID must be obtained via Search Music Library. */
     @SerializedName("music_id")
-    val musicId: kotlin.String? = null
+    val musicId: kotlin.String? = null,
+
+    /* Field to indicate whether the content was AI generated. Marking this field as true will display a tag indicating this post as an AI generated post. */
+    @SerializedName("is_ai_generated")
+    val isAiGenerated: kotlin.Boolean? = null
 
 ) {
 

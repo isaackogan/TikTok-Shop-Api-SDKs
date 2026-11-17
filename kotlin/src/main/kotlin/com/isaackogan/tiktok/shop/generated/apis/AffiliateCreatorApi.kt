@@ -1465,9 +1465,9 @@ open class AffiliateCreatorApi(basePath: kotlin.String = defaultBasePath, client
     }
 
     /**
-     * POST /affiliate_creator/202603/videos
+     * POST /affiliate_creator/202607/videos
      * Post Shoppable Video
-     * Use this API to submit a shoppable video for publishing. When the submission succeeds, pass the returned video ID as the &#x60;video_id&#x60; path parameter to Get Shoppable Video Status (&#x60;GET /affiliate_creator/202509/videos/{video_id}/status&#x60;) to retrieve the posting status: &#x60;PROCESSING&#x60;, &#x60;SUCCESS&#x60;, or &#x60;FAIL&#x60;. If the status is &#x60;PROCESSING&#x60;, call the status API again later to check for a terminal status.
+     * Use this API to post the shoppable video.
      * @param postShoppableVideoRequest 
      * @return PostShoppableVideoResponse
      * @throws IllegalStateException If the request is not correctly configured
@@ -1497,9 +1497,9 @@ open class AffiliateCreatorApi(basePath: kotlin.String = defaultBasePath, client
     }
 
     /**
-     * POST /affiliate_creator/202603/videos
+     * POST /affiliate_creator/202607/videos
      * Post Shoppable Video
-     * Use this API to submit a shoppable video for publishing. When the submission succeeds, pass the returned video ID as the &#x60;video_id&#x60; path parameter to Get Shoppable Video Status (&#x60;GET /affiliate_creator/202509/videos/{video_id}/status&#x60;) to retrieve the posting status: &#x60;PROCESSING&#x60;, &#x60;SUCCESS&#x60;, or &#x60;FAIL&#x60;. If the status is &#x60;PROCESSING&#x60;, call the status API again later to check for a terminal status.
+     * Use this API to post the shoppable video.
      * @param postShoppableVideoRequest 
      * @return ApiResponse<PostShoppableVideoResponse?>
      * @throws IllegalStateException If the request is not correctly configured
@@ -1530,7 +1530,7 @@ open class AffiliateCreatorApi(basePath: kotlin.String = defaultBasePath, client
 
         return RequestConfig(
             method = RequestMethod.POST,
-            path = "/affiliate_creator/202603/videos",
+            path = "/affiliate_creator/202607/videos",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

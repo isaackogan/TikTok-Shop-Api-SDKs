@@ -14,6 +14,8 @@ if TYPE_CHECKING:
     from .models.activate_products_response import ActivateProductsResponse
     from .models.add_external_order_references_request import AddExternalOrderReferencesRequest
     from .models.add_external_order_references_response import AddExternalOrderReferencesResponse
+    from .models.add_post_view_search_video_comment_request import AddPostViewSearchVideoCommentRequest
+    from .models.add_post_view_search_video_comment_response import AddPostViewSearchVideoCommentResponse
     from .models.add_showcase_products_request import AddShowcaseProductsRequest
     from .models.add_showcase_products_response import AddShowcaseProductsResponse
     from .models.approve_cancellation_request import ApproveCancellationRequest
@@ -30,6 +32,8 @@ if TYPE_CHECKING:
     from .models.cancel_inbound_order_response import CancelInboundOrderResponse
     from .models.cancel_order_request import CancelOrderRequest
     from .models.cancel_order_response import CancelOrderResponse
+    from .models.change_post_view_search_video_products_request import ChangePostViewSearchVideoProductsRequest
+    from .models.change_post_view_search_video_products_response import ChangePostViewSearchVideoProductsResponse
     from .models.check_creator_outreach_eligibility_request import CheckCreatorOutreachEligibilityRequest
     from .models.check_creator_outreach_eligibility_response import CheckCreatorOutreachEligibilityResponse
     from .models.check_creator_sample_eligibility_response import CheckCreatorSampleEligibilityResponse
@@ -280,6 +284,10 @@ if TYPE_CHECKING:
     from .models.get_payments_sort_order import GetPaymentsSortOrder
     from .models.get_pod_customization_details_request import GetPODCustomizationDetailsRequest
     from .models.get_pod_customization_details_response import GetPODCustomizationDetailsResponse
+    from .models.get_post_view_search_video_comments_response import GetPostViewSearchVideoCommentsResponse
+    from .models.get_post_view_search_video_keywords_response import GetPostViewSearchVideoKeywordsResponse
+    from .models.get_post_view_search_video_products_response import GetPostViewSearchVideoProductsResponse
+    from .models.get_post_view_search_video_response import GetPostViewSearchVideoResponse
     from .models.get_product_campaign_response import GetProductCampaignResponse
     from .models.get_product_diagnoses_response import GetProductDiagnosesResponse
     from .models.get_product_locale import GetProductLocale
@@ -400,6 +408,7 @@ if TYPE_CHECKING:
     from .models.list_campaign_response import ListCampaignResponse
     from .models.list_opportunities_request import ListOpportunitiesRequest
     from .models.list_opportunities_response import ListOpportunitiesResponse
+    from .models.list_post_view_search_videos_response import ListPostViewSearchVideosResponse
     from .models.list_product_skpp_statuses_request import ListProductSKPPStatusesRequest
     from .models.list_product_skpp_statuses_response import ListProductSKPPStatusesResponse
     from .models.list_registered_campaign_response import ListRegisteredCampaignResponse
@@ -606,6 +615,8 @@ if TYPE_CHECKING:
     from .models.update_package_delivery_status_response import UpdatePackageDeliveryStatusResponse
     from .models.update_package_shipping_info_request import UpdatePackageShippingInfoRequest
     from .models.update_package_shipping_info_response import UpdatePackageShippingInfoResponse
+    from .models.update_post_view_search_video_keywords_request import UpdatePostViewSearchVideoKeywordsRequest
+    from .models.update_post_view_search_video_keywords_response import UpdatePostViewSearchVideoKeywordsResponse
     from .models.update_price_request import UpdatePriceRequest
     from .models.update_price_response import UpdatePriceResponse
     from .models.update_promotion_activity_products_request import UpdatePromotionActivityProductsRequest
@@ -1036,11 +1047,7 @@ class AffiliateCreatorApi(SyncGroup):
     ) -> PostShoppableVideoResponse | None:
         """Post Shoppable Video
 
-         Use this API to submit a shoppable video for publishing. When the submission succeeds, pass the
-        returned video ID as the `video_id` path parameter to Get Shoppable Video Status (`GET
-        /affiliate_creator/202509/videos/{video_id}/status`) to retrieve the posting status: `PROCESSING`,
-        `SUCCESS`, or `FAIL`. If the status is `PROCESSING`, call the status API again later to check for a
-        terminal status.
+         Use this API to post the shoppable video.
 
         Args:
             body (PostShoppableVideoRequest):
@@ -1636,11 +1643,7 @@ class AsyncAffiliateCreatorApi(AsyncGroup):
     ) -> PostShoppableVideoResponse | None:
         """Post Shoppable Video
 
-         Use this API to submit a shoppable video for publishing. When the submission succeeds, pass the
-        returned video ID as the `video_id` path parameter to Get Shoppable Video Status (`GET
-        /affiliate_creator/202509/videos/{video_id}/status`) to retrieve the posting status: `PROCESSING`,
-        `SUCCESS`, or `FAIL`. If the status is `PROCESSING`, call the status API again later to check for a
-        terminal status.
+         Use this API to post the shoppable video.
 
         Args:
             body (PostShoppableVideoRequest):
@@ -12340,6 +12343,81 @@ class ProductsApi(SyncGroup):
 
         return self._run(_op.sync_detailed, body=body)
 
+    def add_post_view_search_video_comment(
+        self,
+        video_id: str,
+        *,
+        body: AddPostViewSearchVideoCommentRequest,
+    ) -> AddPostViewSearchVideoCommentResponse | None:
+        """Add Post-view Search Video Comment
+
+         Only US shops are supported. The video must be present in the authorized shop's warehouse data for
+        the
+        latest 90 calendar days ending on the latest available data date, including both endpoints. The
+        request changes one video. Inspect the business result even when the response code is zero. The
+        request timeout is 10 seconds; a timeout or request-level error does not prove that nothing changed.
+        Do not automatically retry writes. Each invocation has a new server-generated submission ID and
+        cannot
+        resume an earlier request. Only self-posted shop videos are supported. Adds one nonblank comment of
+        at
+        most 500 Unicode characters; existing comments are preserved. Repeating a request may publish a
+        duplicate comment. Existing downstream publication and frequency rules apply. After an unknown
+        outcome, inspect recent comments, but absence from that limited view or matching text cannot
+        identify
+        this request conclusively. If the result remains uncertain, contact support with the request log ID
+        instead of resubmitting. Concurrent changes to the same video may overwrite keyword updates. Avoid
+        simultaneous writes for one video.
+
+        Args:
+            video_id (str):
+            body (AddPostViewSearchVideoCommentRequest):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.products import add_post_view_search_video_comment as _op
+
+        return self._run(_op.sync_detailed, video_id=video_id, body=body)
+
+    def change_post_view_search_video_products(
+        self,
+        video_id: str,
+        *,
+        body: ChangePostViewSearchVideoProductsRequest,
+    ) -> ChangePostViewSearchVideoProductsResponse | None:
+        """Change Post-view Search Video Products
+
+         Only US shops are supported. The video must be present in the authorized shop's warehouse data for
+        the
+        latest 90 calendar days ending on the latest available data date, including both endpoints. The
+        request changes one video. Inspect the business result even when the response code is zero. The
+        request timeout is 10 seconds; a timeout or request-level error does not prove that nothing changed.
+        Do not automatically retry writes. Each invocation has a new server-generated submission ID and
+        cannot
+        resume an earlier request. Binds or unbinds multiple products for one video. Each product ID must
+        occur once. The estimated final association count must not exceed 5, consistent with the seller-
+        facing
+        configuration limit; this is not a per-request operation-count limit. Concurrent changes or failed
+        removals can exceed that estimate. Operations may partially succeed and are not transactional.
+        Inspect
+        each item status and data.errors. Query current associations after an unknown outcome and reconcile
+        only the remaining changes; the query does not prove a particular request succeeded. Concurrent
+        changes to the same video may overwrite keyword updates. Avoid simultaneous writes for one video.
+        Comments are unchanged.
+
+        Args:
+            video_id (str):
+            body (ChangePostViewSearchVideoProductsRequest):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.products import change_post_view_search_video_products as _op
+
+        return self._run(_op.sync_detailed, video_id=video_id, body=body)
+
     def check_listing_prerequisites(
         self,
     ) -> CheckListingPrerequisitesResponse | None:
@@ -13260,6 +13338,113 @@ class ProductsApi(SyncGroup):
 
         return self._run(_op.sync_detailed, opportunity_id=opportunity_id, locale=locale)
 
+    def get_post_view_search_video(
+        self,
+        video_id: str,
+        *,
+        start_date_ge: str | Unset = UNSET,
+        end_date_le: str | Unset = UNSET,
+    ) -> GetPostViewSearchVideoResponse | None:
+        """Get Post-view Search Video
+
+         Only US shops are supported. Returns video metadata, period metrics and current configuration for a
+        video found in the authorized shop's data. Missing video data or a failed access check fails the
+        request. Self-posted video detail also requires the author to be resolved for comment retrieval.
+
+        Args:
+            video_id (str):
+            start_date_ge (str | Unset):
+            end_date_le (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.products import get_post_view_search_video as _op
+
+        return self._run(_op.sync_detailed, video_id=video_id, start_date_ge=start_date_ge, end_date_le=end_date_le)
+
+    def get_post_view_search_video_comments(
+        self,
+        video_id: str,
+    ) -> GetPostViewSearchVideoCommentsResponse | None:
+        """Get Post-view Search Video Comments
+
+         Only US shops are supported. The video must be present in the authorized shop's warehouse data for
+        the
+        latest 90 calendar days ending on the latest available data date, including both endpoints. Only
+        self-
+        posted shop videos are supported. Business policy permits access only to the latest 50 comments
+        published through post-view search
+        by the video author for one video. This is the accessible query window, not a limit on the total
+        number of published comments. Results are ordered by creation time descending. Missing or invalid
+        times sort last; equal times preserve source order. Earlier comments are outside the API access
+        scope; pagination is not supported. Other user comments are excluded. An empty array
+        means no matching comments were returned; it does not prove an earlier timed-out submission failed.
+        If
+        any underlying read fails or the 10-second budget expires, the request fails.
+
+        Args:
+            video_id (str):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.products import get_post_view_search_video_comments as _op
+
+        return self._run(_op.sync_detailed, video_id=video_id)
+
+    def get_post_view_search_video_keywords(
+        self,
+        video_id: str,
+    ) -> GetPostViewSearchVideoKeywordsResponse | None:
+        """Get Post-view Search Video Keywords
+
+         Only US shops are supported. The video must be present in the authorized shop's warehouse data for
+        the
+        latest 90 calendar days ending on the latest available data date, including both endpoints. Returns
+        the current configured keyword set; an empty array means none are configured. Popular search
+        keywords
+        are separate observation data.
+
+        Args:
+            video_id (str):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.products import get_post_view_search_video_keywords as _op
+
+        return self._run(_op.sync_detailed, video_id=video_id)
+
+    def get_post_view_search_video_products(
+        self,
+        video_id: str,
+    ) -> GetPostViewSearchVideoProductsResponse | None:
+        """Get Post-view Search Video Products
+
+         Only US shops are supported. The video must be present in the authorized shop's warehouse data for
+        the
+        latest 90 calendar days ending on the latest available data date, including both endpoints. Returns
+        the current product associations supplied by the relation service, without truncating the response
+        to
+        five. An empty array means none are associated. Product IDs identify associations, not product
+        details
+        or a guarantee of exposure.
+
+        Args:
+            video_id (str):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.products import get_post_view_search_video_products as _op
+
+        return self._run(_op.sync_detailed, video_id=video_id)
+
     def get_product(
         self,
         product_id: str,
@@ -13532,6 +13717,42 @@ class ProductsApi(SyncGroup):
         from .api.products import list_opportunities as _op
 
         return self._run(_op.sync_detailed, body=body, page_size=page_size, page_token=page_token, locale=locale)
+
+    def list_post_view_search_videos(
+        self,
+        *,
+        author_type: str | Unset = UNSET,
+        optimization_inputs: str | Unset = UNSET,
+        video_id: str | Unset = UNSET,
+        page_size: int | Unset = UNSET,
+        page_token: str | Unset = UNSET,
+        start_date_ge: str | Unset = UNSET,
+        end_date_le: str | Unset = UNSET,
+    ) -> ListPostViewSearchVideosResponse | None:
+        """List Post-view Search Videos
+
+         Only US shops are supported. Returns videos in the authorized shop's available data. ALL sorts by
+        video views descending, then video ID descending. INPUTS_ADDED follows most-recent operation order;
+        videos absent from the selected data period are omitted. Both modes support only the first 10,000
+        source records. Collections can change between requests; pagination is not a snapshot. Use the
+        returned start_date and end_date on subsequent pages to keep the period fixed.
+
+        Args:
+            author_type (str | Unset):
+            optimization_inputs (str | Unset):
+            video_id (str | Unset):
+            page_size (int | Unset):
+            page_token (str | Unset):
+            start_date_ge (str | Unset):
+            end_date_le (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.products import list_post_view_search_videos as _op
+
+        return self._run(_op.sync_detailed, author_type=author_type, optimization_inputs=optimization_inputs, video_id=video_id, page_size=page_size, page_token=page_token, start_date_ge=start_date_ge, end_date_le=end_date_le)
 
     def list_product_skpp_statuses(
         self,
@@ -14261,6 +14482,39 @@ class ProductsApi(SyncGroup):
 
         return self._run(_op.sync_detailed, product_id=product_id, body=body)
 
+    def update_post_view_search_video_keywords(
+        self,
+        video_id: str,
+        *,
+        body: UpdatePostViewSearchVideoKeywordsRequest,
+    ) -> UpdatePostViewSearchVideoKeywordsResponse | None:
+        """Update Post-view Search Video Keywords
+
+         Only US shops are supported. The video must be present in the authorized shop's warehouse data for
+        the
+        latest 90 calendar days ending on the latest available data date, including both endpoints. The
+        request changes one video. Inspect the business result even when the response code is zero. The
+        request timeout is 10 seconds; a timeout or request-level error does not prove that nothing changed.
+        Do not automatically retry writes. Each invocation has a new server-generated submission ID and
+        cannot
+        resume an earlier request. Replaces the complete keyword set with at most 5 entries; an empty array
+        clears it. Products and comments are unchanged. Concurrent updates can overwrite each other. After
+        an
+        unknown outcome, query the current keywords and reconcile the complete desired set before deciding
+        whether to submit again; the query does not identify which request wrote the state.
+
+        Args:
+            video_id (str):
+            body (UpdatePostViewSearchVideoKeywordsRequest):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.products import update_post_view_search_video_keywords as _op
+
+        return self._run(_op.sync_detailed, video_id=video_id, body=body)
+
     def update_price(
         self,
         product_id: str,
@@ -14387,6 +14641,81 @@ class AsyncProductsApi(AsyncGroup):
         from .api.products import activate_products as _op
 
         return await self._run(_op.asyncio_detailed, body=body)
+
+    async def add_post_view_search_video_comment(
+        self,
+        video_id: str,
+        *,
+        body: AddPostViewSearchVideoCommentRequest,
+    ) -> AddPostViewSearchVideoCommentResponse | None:
+        """Add Post-view Search Video Comment
+
+         Only US shops are supported. The video must be present in the authorized shop's warehouse data for
+        the
+        latest 90 calendar days ending on the latest available data date, including both endpoints. The
+        request changes one video. Inspect the business result even when the response code is zero. The
+        request timeout is 10 seconds; a timeout or request-level error does not prove that nothing changed.
+        Do not automatically retry writes. Each invocation has a new server-generated submission ID and
+        cannot
+        resume an earlier request. Only self-posted shop videos are supported. Adds one nonblank comment of
+        at
+        most 500 Unicode characters; existing comments are preserved. Repeating a request may publish a
+        duplicate comment. Existing downstream publication and frequency rules apply. After an unknown
+        outcome, inspect recent comments, but absence from that limited view or matching text cannot
+        identify
+        this request conclusively. If the result remains uncertain, contact support with the request log ID
+        instead of resubmitting. Concurrent changes to the same video may overwrite keyword updates. Avoid
+        simultaneous writes for one video.
+
+        Args:
+            video_id (str):
+            body (AddPostViewSearchVideoCommentRequest):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.products import add_post_view_search_video_comment as _op
+
+        return await self._run(_op.asyncio_detailed, video_id=video_id, body=body)
+
+    async def change_post_view_search_video_products(
+        self,
+        video_id: str,
+        *,
+        body: ChangePostViewSearchVideoProductsRequest,
+    ) -> ChangePostViewSearchVideoProductsResponse | None:
+        """Change Post-view Search Video Products
+
+         Only US shops are supported. The video must be present in the authorized shop's warehouse data for
+        the
+        latest 90 calendar days ending on the latest available data date, including both endpoints. The
+        request changes one video. Inspect the business result even when the response code is zero. The
+        request timeout is 10 seconds; a timeout or request-level error does not prove that nothing changed.
+        Do not automatically retry writes. Each invocation has a new server-generated submission ID and
+        cannot
+        resume an earlier request. Binds or unbinds multiple products for one video. Each product ID must
+        occur once. The estimated final association count must not exceed 5, consistent with the seller-
+        facing
+        configuration limit; this is not a per-request operation-count limit. Concurrent changes or failed
+        removals can exceed that estimate. Operations may partially succeed and are not transactional.
+        Inspect
+        each item status and data.errors. Query current associations after an unknown outcome and reconcile
+        only the remaining changes; the query does not prove a particular request succeeded. Concurrent
+        changes to the same video may overwrite keyword updates. Avoid simultaneous writes for one video.
+        Comments are unchanged.
+
+        Args:
+            video_id (str):
+            body (ChangePostViewSearchVideoProductsRequest):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.products import change_post_view_search_video_products as _op
+
+        return await self._run(_op.asyncio_detailed, video_id=video_id, body=body)
 
     async def check_listing_prerequisites(
         self,
@@ -15308,6 +15637,113 @@ class AsyncProductsApi(AsyncGroup):
 
         return await self._run(_op.asyncio_detailed, opportunity_id=opportunity_id, locale=locale)
 
+    async def get_post_view_search_video(
+        self,
+        video_id: str,
+        *,
+        start_date_ge: str | Unset = UNSET,
+        end_date_le: str | Unset = UNSET,
+    ) -> GetPostViewSearchVideoResponse | None:
+        """Get Post-view Search Video
+
+         Only US shops are supported. Returns video metadata, period metrics and current configuration for a
+        video found in the authorized shop's data. Missing video data or a failed access check fails the
+        request. Self-posted video detail also requires the author to be resolved for comment retrieval.
+
+        Args:
+            video_id (str):
+            start_date_ge (str | Unset):
+            end_date_le (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.products import get_post_view_search_video as _op
+
+        return await self._run(_op.asyncio_detailed, video_id=video_id, start_date_ge=start_date_ge, end_date_le=end_date_le)
+
+    async def get_post_view_search_video_comments(
+        self,
+        video_id: str,
+    ) -> GetPostViewSearchVideoCommentsResponse | None:
+        """Get Post-view Search Video Comments
+
+         Only US shops are supported. The video must be present in the authorized shop's warehouse data for
+        the
+        latest 90 calendar days ending on the latest available data date, including both endpoints. Only
+        self-
+        posted shop videos are supported. Business policy permits access only to the latest 50 comments
+        published through post-view search
+        by the video author for one video. This is the accessible query window, not a limit on the total
+        number of published comments. Results are ordered by creation time descending. Missing or invalid
+        times sort last; equal times preserve source order. Earlier comments are outside the API access
+        scope; pagination is not supported. Other user comments are excluded. An empty array
+        means no matching comments were returned; it does not prove an earlier timed-out submission failed.
+        If
+        any underlying read fails or the 10-second budget expires, the request fails.
+
+        Args:
+            video_id (str):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.products import get_post_view_search_video_comments as _op
+
+        return await self._run(_op.asyncio_detailed, video_id=video_id)
+
+    async def get_post_view_search_video_keywords(
+        self,
+        video_id: str,
+    ) -> GetPostViewSearchVideoKeywordsResponse | None:
+        """Get Post-view Search Video Keywords
+
+         Only US shops are supported. The video must be present in the authorized shop's warehouse data for
+        the
+        latest 90 calendar days ending on the latest available data date, including both endpoints. Returns
+        the current configured keyword set; an empty array means none are configured. Popular search
+        keywords
+        are separate observation data.
+
+        Args:
+            video_id (str):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.products import get_post_view_search_video_keywords as _op
+
+        return await self._run(_op.asyncio_detailed, video_id=video_id)
+
+    async def get_post_view_search_video_products(
+        self,
+        video_id: str,
+    ) -> GetPostViewSearchVideoProductsResponse | None:
+        """Get Post-view Search Video Products
+
+         Only US shops are supported. The video must be present in the authorized shop's warehouse data for
+        the
+        latest 90 calendar days ending on the latest available data date, including both endpoints. Returns
+        the current product associations supplied by the relation service, without truncating the response
+        to
+        five. An empty array means none are associated. Product IDs identify associations, not product
+        details
+        or a guarantee of exposure.
+
+        Args:
+            video_id (str):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.products import get_post_view_search_video_products as _op
+
+        return await self._run(_op.asyncio_detailed, video_id=video_id)
+
     async def get_product(
         self,
         product_id: str,
@@ -15580,6 +16016,42 @@ class AsyncProductsApi(AsyncGroup):
         from .api.products import list_opportunities as _op
 
         return await self._run(_op.asyncio_detailed, body=body, page_size=page_size, page_token=page_token, locale=locale)
+
+    async def list_post_view_search_videos(
+        self,
+        *,
+        author_type: str | Unset = UNSET,
+        optimization_inputs: str | Unset = UNSET,
+        video_id: str | Unset = UNSET,
+        page_size: int | Unset = UNSET,
+        page_token: str | Unset = UNSET,
+        start_date_ge: str | Unset = UNSET,
+        end_date_le: str | Unset = UNSET,
+    ) -> ListPostViewSearchVideosResponse | None:
+        """List Post-view Search Videos
+
+         Only US shops are supported. Returns videos in the authorized shop's available data. ALL sorts by
+        video views descending, then video ID descending. INPUTS_ADDED follows most-recent operation order;
+        videos absent from the selected data period are omitted. Both modes support only the first 10,000
+        source records. Collections can change between requests; pagination is not a snapshot. Use the
+        returned start_date and end_date on subsequent pages to keep the period fixed.
+
+        Args:
+            author_type (str | Unset):
+            optimization_inputs (str | Unset):
+            video_id (str | Unset):
+            page_size (int | Unset):
+            page_token (str | Unset):
+            start_date_ge (str | Unset):
+            end_date_le (str | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.products import list_post_view_search_videos as _op
+
+        return await self._run(_op.asyncio_detailed, author_type=author_type, optimization_inputs=optimization_inputs, video_id=video_id, page_size=page_size, page_token=page_token, start_date_ge=start_date_ge, end_date_le=end_date_le)
 
     async def list_product_skpp_statuses(
         self,
@@ -16308,6 +16780,39 @@ class AsyncProductsApi(AsyncGroup):
         from .api.products import update_inventory as _op
 
         return await self._run(_op.asyncio_detailed, product_id=product_id, body=body)
+
+    async def update_post_view_search_video_keywords(
+        self,
+        video_id: str,
+        *,
+        body: UpdatePostViewSearchVideoKeywordsRequest,
+    ) -> UpdatePostViewSearchVideoKeywordsResponse | None:
+        """Update Post-view Search Video Keywords
+
+         Only US shops are supported. The video must be present in the authorized shop's warehouse data for
+        the
+        latest 90 calendar days ending on the latest available data date, including both endpoints. The
+        request changes one video. Inspect the business result even when the response code is zero. The
+        request timeout is 10 seconds; a timeout or request-level error does not prove that nothing changed.
+        Do not automatically retry writes. Each invocation has a new server-generated submission ID and
+        cannot
+        resume an earlier request. Replaces the complete keyword set with at most 5 entries; an empty array
+        clears it. Products and comments are unchanged. Concurrent updates can overwrite each other. After
+        an
+        unknown outcome, query the current keywords and reconcile the complete desired set before deciding
+        whether to submit again; the query does not identify which request wrote the state.
+
+        Args:
+            video_id (str):
+            body (UpdatePostViewSearchVideoKeywordsRequest):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.products import update_post_view_search_video_keywords as _op
+
+        return await self._run(_op.asyncio_detailed, video_id=video_id, body=body)
 
     async def update_price(
         self,

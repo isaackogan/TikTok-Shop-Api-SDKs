@@ -193,14 +193,6 @@ export const OPERATIONS: readonly OperationMeta[] = [
     "requiresShopCipher": false
   },
   {
-    "operationId": "postShoppableVideo",
-    "tag": "Affiliate creator",
-    "group": "affiliateCreator",
-    "method": "post",
-    "path": "/affiliate_creator/202603/videos",
-    "requiresShopCipher": false
-  },
-  {
     "operationId": "mapTokopediaToTikTokShopProductIDs",
     "tag": "Affiliate creator",
     "group": "affiliateCreator",
@@ -214,6 +206,14 @@ export const OPERATIONS: readonly OperationMeta[] = [
     "group": "affiliateCreator",
     "method": "post",
     "path": "/affiliate_creator/202607/map_toko_product",
+    "requiresShopCipher": false
+  },
+  {
+    "operationId": "postShoppableVideo",
+    "tag": "Affiliate creator",
+    "group": "affiliateCreator",
+    "method": "post",
+    "path": "/affiliate_creator/202607/videos",
     "requiresShopCipher": false
   },
   {
@@ -2446,6 +2446,70 @@ export const OPERATIONS: readonly OperationMeta[] = [
     "group": "products",
     "method": "post",
     "path": "/product/202610/size_charts/edit",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "listPostViewSearchVideos",
+    "tag": "Products",
+    "group": "products",
+    "method": "get",
+    "path": "/product/202611/search_videos",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getPostViewSearchVideo",
+    "tag": "Products",
+    "group": "products",
+    "method": "get",
+    "path": "/product/202611/search_videos/{video_id}",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getPostViewSearchVideoComments",
+    "tag": "Products",
+    "group": "products",
+    "method": "get",
+    "path": "/product/202611/search_videos/{video_id}/comments",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "addPostViewSearchVideoComment",
+    "tag": "Products",
+    "group": "products",
+    "method": "post",
+    "path": "/product/202611/search_videos/{video_id}/comments",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getPostViewSearchVideoKeywords",
+    "tag": "Products",
+    "group": "products",
+    "method": "get",
+    "path": "/product/202611/search_videos/{video_id}/keywords",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "updatePostViewSearchVideoKeywords",
+    "tag": "Products",
+    "group": "products",
+    "method": "put",
+    "path": "/product/202611/search_videos/{video_id}/keywords",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getPostViewSearchVideoProducts",
+    "tag": "Products",
+    "group": "products",
+    "method": "get",
+    "path": "/product/202611/search_videos/{video_id}/products",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "changePostViewSearchVideoProducts",
+    "tag": "Products",
+    "group": "products",
+    "method": "post",
+    "path": "/product/202611/search_videos/{video_id}/products",
     "requiresShopCipher": true
   },
   {

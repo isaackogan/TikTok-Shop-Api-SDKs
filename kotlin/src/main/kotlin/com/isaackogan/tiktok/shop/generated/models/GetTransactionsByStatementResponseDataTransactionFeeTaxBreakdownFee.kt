@@ -88,6 +88,7 @@ import com.google.gson.annotations.SerializedName
  * @param storeGmvGrowthPackageFee Fee for using the Shop GMV Growth Package to offer store-wide discounts and grow your overall sales.
  * @param autoPostShoppableVideoCommissionFee The commission fee charged to the seller for orders attributed to the AI-generated, auto-post shoppable videos.
  * @param sellerFundedUserSpointServiceFee Service fee charged for seller-funded user S-Points issued to shoppers. Calculated based on the order's actual payment amount and refunded if the order is later returned.
+ * @param smartShippingFeeAmount The service fee for participating in the Smart Shipping program.
  */
 
 
@@ -327,7 +328,11 @@ data class GetTransactionsByStatementResponseDataTransactionFeeTaxBreakdownFee (
 
     /* Service fee charged for seller-funded user S-Points issued to shoppers. Calculated based on the order's actual payment amount and refunded if the order is later returned. */
     @SerializedName("seller_funded_user_spoint_service_fee")
-    val sellerFundedUserSpointServiceFee: kotlin.String? = null
+    val sellerFundedUserSpointServiceFee: kotlin.String? = null,
+
+    /* The service fee for participating in the Smart Shipping program. */
+    @SerializedName("smart_shipping_fee_amount")
+    val smartShippingFeeAmount: kotlin.String? = null
 
 ) {
 
