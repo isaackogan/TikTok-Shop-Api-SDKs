@@ -236,6 +236,15 @@ class GetOrderDetailResponseDataOrder:
                 only. Unix timestamp
             fast_collection_sla_time (int | Unset): Indicate fast fulfillment SLA for collection action. Applicable for SEA
                 market only. Unix timestamp
+            order_tag (list[str] | Unset): The order tag.
+                Possible values based on region:
+                **All regions**
+                - `TEAM_BREAK`: An order tag placed for a Team Break event in a LIVE auction. The buyer purchases a slot/team
+                spot, and the final item is determined by the break outcome; the SKU name may be assigned or updated by the
+                seller after the break.
+                -`SURPRISE_SET`:  An order tag placed for a Surprise Set event in a LIVE auction. The buyer purchases a
+                surprise/mystery set, and the final items are determined by the platform's Surprise/Randomizer result during the
+                LIVE session.
      """
 
     id: str | Unset = UNSET
@@ -313,6 +322,7 @@ class GetOrderDetailResponseDataOrder:
     instore_pickup_sla_time: int | Unset = UNSET
     fast_rts_sla_time: int | Unset = UNSET
     fast_collection_sla_time: int | Unset = UNSET
+    order_tag: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -499,6 +509,12 @@ class GetOrderDetailResponseDataOrder:
 
         fast_collection_sla_time = self.fast_collection_sla_time
 
+        order_tag: list[str] | Unset = UNSET
+        if not isinstance(self.order_tag, Unset):
+            order_tag = self.order_tag
+
+
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -654,6 +670,8 @@ class GetOrderDetailResponseDataOrder:
             field_dict["fast_rts_sla_time"] = fast_rts_sla_time
         if fast_collection_sla_time is not UNSET:
             field_dict["fast_collection_sla_time"] = fast_collection_sla_time
+        if order_tag is not UNSET:
+            field_dict["order_tag"] = order_tag
 
         return field_dict
 
@@ -862,6 +880,9 @@ class GetOrderDetailResponseDataOrder:
 
         fast_collection_sla_time = d.pop("fast_collection_sla_time", UNSET)
 
+        order_tag = cast(list[str], d.pop("order_tag", UNSET))
+
+
         get_order_detail_response_data_order = cls(
             id=id,
             cancellation_initiator=cancellation_initiator,
@@ -938,6 +959,7 @@ class GetOrderDetailResponseDataOrder:
             instore_pickup_sla_time=instore_pickup_sla_time,
             fast_rts_sla_time=fast_rts_sla_time,
             fast_collection_sla_time=fast_collection_sla_time,
+            order_tag=order_tag,
         )
 
 

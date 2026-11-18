@@ -369,6 +369,9 @@ final class Meta
         ['getShopGroupAndRelatedShops', 'seller', 'GET', '/seller/202601/shop_groups', false],
         ['getShopCarouselPermission', 'seller', 'GET', '/seller/202611/carousel_permission', true],
         ['uploadShopImage', 'seller', 'POST', '/seller/202611/images/upload', true],
+        ['checkMaterialStatuses', 'seller', 'GET', '/seller/202611/material_statuses', true],
+        ['listShopMaterials', 'seller', 'GET', '/seller/202611/materials', true],
+        ['deleteShopMaterial', 'seller', 'DELETE', '/seller/202611/materials', true],
         ['uploadShopMaterials', 'seller', 'POST', '/seller/202611/materials/upload', true],
         ['confirmPackageShipment', 'supplyChain', 'POST', '/supply_chain/202309/packages/sync', false],
     ];

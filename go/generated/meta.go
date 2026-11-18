@@ -390,6 +390,9 @@ var Operations = []OperationMeta{
 	{OperationID: "getShopGroupAndRelatedShops", Tag: "Seller", Group: "seller", Service: "SellerAPIService", Method: "GetShopGroupAndRelatedShops", HTTPMethod: "GET", Path: "/seller/202601/shop_groups", RequiresShopCipher: false},
 	{OperationID: "getShopCarouselPermission", Tag: "Seller", Group: "seller", Service: "SellerAPIService", Method: "GetShopCarouselPermission", HTTPMethod: "GET", Path: "/seller/202611/carousel_permission", RequiresShopCipher: true},
 	{OperationID: "uploadShopImage", Tag: "Seller", Group: "seller", Service: "SellerAPIService", Method: "UploadShopImage", HTTPMethod: "POST", Path: "/seller/202611/images/upload", RequiresShopCipher: true},
+	{OperationID: "checkMaterialStatuses", Tag: "Seller", Group: "seller", Service: "SellerAPIService", Method: "CheckMaterialStatuses", HTTPMethod: "GET", Path: "/seller/202611/material_statuses", RequiresShopCipher: true},
+	{OperationID: "listShopMaterials", Tag: "Seller", Group: "seller", Service: "SellerAPIService", Method: "ListShopMaterials", HTTPMethod: "GET", Path: "/seller/202611/materials", RequiresShopCipher: true},
+	{OperationID: "deleteShopMaterial", Tag: "Seller", Group: "seller", Service: "SellerAPIService", Method: "DeleteShopMaterial", HTTPMethod: "DELETE", Path: "/seller/202611/materials", RequiresShopCipher: true},
 	{OperationID: "uploadShopMaterials", Tag: "Seller", Group: "seller", Service: "SellerAPIService", Method: "UploadShopMaterials", HTTPMethod: "POST", Path: "/seller/202611/materials/upload", RequiresShopCipher: true},
 	{OperationID: "confirmPackageShipment", Tag: "Supply chain", Group: "supplyChain", Service: "SupplyChainAPIService", Method: "ConfirmPackageShipment", HTTPMethod: "POST", Path: "/supply_chain/202309/packages/sync", RequiresShopCipher: false},
 }

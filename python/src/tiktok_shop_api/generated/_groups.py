@@ -38,6 +38,7 @@ if TYPE_CHECKING:
     from .models.check_creator_outreach_eligibility_response import CheckCreatorOutreachEligibilityResponse
     from .models.check_creator_sample_eligibility_response import CheckCreatorSampleEligibilityResponse
     from .models.check_listing_prerequisites_response import CheckListingPrerequisitesResponse
+    from .models.check_material_statuses_response import CheckMaterialStatusesResponse
     from .models.check_product_listing_request import CheckProductListingRequest
     from .models.check_product_listing_response import CheckProductListingResponse
     from .models.check_shipping_template_existence_response import CheckShippingTemplateExistenceResponse
@@ -115,6 +116,8 @@ if TYPE_CHECKING:
     from .models.delete_global_products_response import DeleteGlobalProductsResponse
     from .models.delete_products_request import DeleteProductsRequest
     from .models.delete_products_response import DeleteProductsResponse
+    from .models.delete_shop_material_request import DeleteShopMaterialRequest
+    from .models.delete_shop_material_response import DeleteShopMaterialResponse
     from .models.delete_webhook_for_an_event_request import DeleteWebhookForAnEventRequest
     from .models.delete_webhook_for_an_event_response import DeleteWebhookForAnEventResponse
     from .models.diagnose_and_optimize_product_request import DiagnoseAndOptimizeProductRequest
@@ -412,6 +415,8 @@ if TYPE_CHECKING:
     from .models.list_product_skpp_statuses_request import ListProductSKPPStatusesRequest
     from .models.list_product_skpp_statuses_response import ListProductSKPPStatusesResponse
     from .models.list_registered_campaign_response import ListRegisteredCampaignResponse
+    from .models.list_shop_materials_material_status import ListShopMaterialsMaterialStatus
+    from .models.list_shop_materials_response import ListShopMaterialsResponse
     from .models.map_tokopedia_to_tik_tok_shop_product_i_ds_request import MapTokopediaToTikTokShopProductIDsRequest
     from .models.map_tokopedia_to_tik_tok_shop_product_i_ds_response import MapTokopediaToTikTokShopProductIDsResponse
     from .models.mark_buyer_messages_as_read_request import MarkBuyerMessagesAsReadRequest
@@ -19657,6 +19662,48 @@ class AsyncReturnAndRefundApi(AsyncGroup):
 class SellerApi(SyncGroup):
     """Operations tagged \"Seller\"."""
 
+    def check_material_statuses(
+        self,
+        *,
+        pending_material_ids: list[str],
+    ) -> CheckMaterialStatusesResponse | None:
+        """Check Material Statuses
+
+         Query the review statuses of pending material IDs for the currently authorized shop. The response
+        order matches the input order of `pending_material_ids`.
+
+        Args:
+            pending_material_ids (list[str]):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.seller import check_material_statuses as _op
+
+        return self._run(_op.sync_detailed, pending_material_ids=pending_material_ids)
+
+    def delete_shop_material(
+        self,
+        *,
+        body: DeleteShopMaterialRequest,
+    ) -> DeleteShopMaterialResponse | None:
+        """Delete Shop Material
+
+         Delete a seller material for the currently authorized shop. Provide `material_id` for
+        `ONE_PRODUCT_ONE_IMAGE` deletion or `image_group_id` for `ONE_PRODUCT_MULTIPLE_IMAGES` deletion.
+
+        Args:
+            body (DeleteShopMaterialRequest):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.seller import delete_shop_material as _op
+
+        return self._run(_op.sync_detailed, body=body)
+
     def get_active_shops(
         self,
     ) -> GetActiveShopsResponse | None:
@@ -19723,6 +19770,28 @@ class SellerApi(SyncGroup):
 
         return self._run(_op.sync_detailed)
 
+    def list_shop_materials(
+        self,
+        *,
+        product_id: str,
+        material_status: ListShopMaterialsMaterialStatus | Unset = UNSET,
+    ) -> ListShopMaterialsResponse | None:
+        """List Shop Materials
+
+         List image material groups for the currently authorized shop under one product.
+
+        Args:
+            product_id (str):
+            material_status (ListShopMaterialsMaterialStatus | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.seller import list_shop_materials as _op
+
+        return self._run(_op.sync_detailed, product_id=product_id, material_status=material_status)
+
     def upload_shop_image(
         self,
         *,
@@ -19767,6 +19836,48 @@ class SellerApi(SyncGroup):
 
 class AsyncSellerApi(AsyncGroup):
     """Operations tagged \"Seller\"."""
+
+    async def check_material_statuses(
+        self,
+        *,
+        pending_material_ids: list[str],
+    ) -> CheckMaterialStatusesResponse | None:
+        """Check Material Statuses
+
+         Query the review statuses of pending material IDs for the currently authorized shop. The response
+        order matches the input order of `pending_material_ids`.
+
+        Args:
+            pending_material_ids (list[str]):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.seller import check_material_statuses as _op
+
+        return await self._run(_op.asyncio_detailed, pending_material_ids=pending_material_ids)
+
+    async def delete_shop_material(
+        self,
+        *,
+        body: DeleteShopMaterialRequest,
+    ) -> DeleteShopMaterialResponse | None:
+        """Delete Shop Material
+
+         Delete a seller material for the currently authorized shop. Provide `material_id` for
+        `ONE_PRODUCT_ONE_IMAGE` deletion or `image_group_id` for `ONE_PRODUCT_MULTIPLE_IMAGES` deletion.
+
+        Args:
+            body (DeleteShopMaterialRequest):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.seller import delete_shop_material as _op
+
+        return await self._run(_op.asyncio_detailed, body=body)
 
     async def get_active_shops(
         self,
@@ -19833,6 +19944,28 @@ class AsyncSellerApi(AsyncGroup):
         from .api.seller import get_shop_group_and_related_shops as _op
 
         return await self._run(_op.asyncio_detailed)
+
+    async def list_shop_materials(
+        self,
+        *,
+        product_id: str,
+        material_status: ListShopMaterialsMaterialStatus | Unset = UNSET,
+    ) -> ListShopMaterialsResponse | None:
+        """List Shop Materials
+
+         List image material groups for the currently authorized shop under one product.
+
+        Args:
+            product_id (str):
+            material_status (ListShopMaterialsMaterialStatus | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.seller import list_shop_materials as _op
+
+        return await self._run(_op.asyncio_detailed, product_id=product_id, material_status=material_status)
 
     async def upload_shop_image(
         self,

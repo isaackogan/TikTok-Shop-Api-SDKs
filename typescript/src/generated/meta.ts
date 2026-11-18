@@ -2849,6 +2849,30 @@ export const OPERATIONS: readonly OperationMeta[] = [
     "requiresShopCipher": true
   },
   {
+    "operationId": "checkMaterialStatuses",
+    "tag": "Seller",
+    "group": "seller",
+    "method": "get",
+    "path": "/seller/202611/material_statuses",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "listShopMaterials",
+    "tag": "Seller",
+    "group": "seller",
+    "method": "get",
+    "path": "/seller/202611/materials",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "deleteShopMaterial",
+    "tag": "Seller",
+    "group": "seller",
+    "method": "delete",
+    "path": "/seller/202611/materials",
+    "requiresShopCipher": true
+  },
+  {
     "operationId": "uploadShopMaterials",
     "tag": "Seller",
     "group": "seller",

@@ -27,10 +27,14 @@ import java.io.IOException
 import okhttp3.Call
 import okhttp3.HttpUrl
 
+import com.isaackogan.tiktok.shop.generated.models.CheckMaterialStatusesResponse
+import com.isaackogan.tiktok.shop.generated.models.DeleteShopMaterialRequest
+import com.isaackogan.tiktok.shop.generated.models.DeleteShopMaterialResponse
 import com.isaackogan.tiktok.shop.generated.models.GetActiveShopsResponse
 import com.isaackogan.tiktok.shop.generated.models.GetGlobalProductPermissionResponse
 import com.isaackogan.tiktok.shop.generated.models.GetShopCarouselPermissionResponse
 import com.isaackogan.tiktok.shop.generated.models.GetShopGroupAndRelatedShopsResponse
+import com.isaackogan.tiktok.shop.generated.models.ListShopMaterialsResponse
 import com.isaackogan.tiktok.shop.generated.models.UploadShopImageResponse
 import com.isaackogan.tiktok.shop.generated.models.UploadShopMaterialsRequest
 import com.isaackogan.tiktok.shop.generated.models.UploadShopMaterialsResponse
@@ -57,6 +61,156 @@ open class SellerApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
         val defaultBasePath: String by lazy {
             System.getProperties().getProperty(ApiClient.BASE_URL_KEY, "https://open-api.tiktokglobalshop.com")
         }
+    }
+
+    /**
+     * GET /seller/202611/material_statuses
+     * Check Material Statuses
+     * Query the review statuses of pending material IDs for the currently authorized shop. The response order matches the input order of &#x60;pending_material_ids&#x60;.
+     * @param pendingMaterialIds The pending material IDs to query. Repeat this query parameter to pass multiple IDs, and the response list preserves the same order.
+     * @return CheckMaterialStatusesResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun checkMaterialStatuses(pendingMaterialIds: kotlin.collections.List<kotlin.String>) : CheckMaterialStatusesResponse {
+        val localVarResponse = checkMaterialStatusesWithHttpInfo(pendingMaterialIds = pendingMaterialIds)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as CheckMaterialStatusesResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /seller/202611/material_statuses
+     * Check Material Statuses
+     * Query the review statuses of pending material IDs for the currently authorized shop. The response order matches the input order of &#x60;pending_material_ids&#x60;.
+     * @param pendingMaterialIds The pending material IDs to query. Repeat this query parameter to pass multiple IDs, and the response list preserves the same order.
+     * @return ApiResponse<CheckMaterialStatusesResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun checkMaterialStatusesWithHttpInfo(pendingMaterialIds: kotlin.collections.List<kotlin.String>) : ApiResponse<CheckMaterialStatusesResponse?> {
+        val localVariableConfig = checkMaterialStatusesRequestConfig(pendingMaterialIds = pendingMaterialIds)
+
+        return request<Unit, CheckMaterialStatusesResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation checkMaterialStatuses
+     *
+     * @param pendingMaterialIds The pending material IDs to query. Repeat this query parameter to pass multiple IDs, and the response list preserves the same order.
+     * @return RequestConfig
+     */
+    fun checkMaterialStatusesRequestConfig(pendingMaterialIds: kotlin.collections.List<kotlin.String>) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("pending_material_ids", toMultiValue(pendingMaterialIds.toList(), "csv"))
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/seller/202611/material_statuses",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * DELETE /seller/202611/materials
+     * Delete Shop Material
+     * Delete a seller material for the currently authorized shop. Provide &#x60;material_id&#x60; for &#x60;ONE_PRODUCT_ONE_IMAGE&#x60; deletion or &#x60;image_group_id&#x60; for &#x60;ONE_PRODUCT_MULTIPLE_IMAGES&#x60; deletion.
+     * @param deleteShopMaterialRequest 
+     * @return DeleteShopMaterialResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun deleteShopMaterial(deleteShopMaterialRequest: DeleteShopMaterialRequest) : DeleteShopMaterialResponse {
+        val localVarResponse = deleteShopMaterialWithHttpInfo(deleteShopMaterialRequest = deleteShopMaterialRequest)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as DeleteShopMaterialResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * DELETE /seller/202611/materials
+     * Delete Shop Material
+     * Delete a seller material for the currently authorized shop. Provide &#x60;material_id&#x60; for &#x60;ONE_PRODUCT_ONE_IMAGE&#x60; deletion or &#x60;image_group_id&#x60; for &#x60;ONE_PRODUCT_MULTIPLE_IMAGES&#x60; deletion.
+     * @param deleteShopMaterialRequest 
+     * @return ApiResponse<DeleteShopMaterialResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun deleteShopMaterialWithHttpInfo(deleteShopMaterialRequest: DeleteShopMaterialRequest) : ApiResponse<DeleteShopMaterialResponse?> {
+        val localVariableConfig = deleteShopMaterialRequestConfig(deleteShopMaterialRequest = deleteShopMaterialRequest)
+
+        return request<DeleteShopMaterialRequest, DeleteShopMaterialResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation deleteShopMaterial
+     *
+     * @param deleteShopMaterialRequest 
+     * @return RequestConfig
+     */
+    fun deleteShopMaterialRequestConfig(deleteShopMaterialRequest: DeleteShopMaterialRequest) : RequestConfig<DeleteShopMaterialRequest> {
+        val localVariableBody = deleteShopMaterialRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.DELETE,
+            path = "/seller/202611/materials",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
     }
 
     /**
@@ -332,6 +486,106 @@ open class SellerApi(basePath: kotlin.String = defaultBasePath, client: Call.Fac
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/seller/202601/shop_groups",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * enum for parameter materialStatus
+     */
+     enum class MaterialStatusListShopMaterials(val value: kotlin.String) {
+         @SerializedName(value = "LIVE") LIVE("LIVE"),
+         @SerializedName(value = "UNDER_REVIEW") UNDER_REVIEW("UNDER_REVIEW"),
+         @SerializedName(value = "REJECTED") REJECTED("REJECTED");
+
+        /**
+         * Override [toString()] to avoid using the enum variable name as the value, and instead use
+         * the actual value defined in the API spec file.
+         *
+         * This solves a problem when the variable name and its value are different, and ensures that
+         * the client sends the correct enum values to the server always.
+         */
+        override fun toString(): kotlin.String = "$value"
+     }
+
+    /**
+     * GET /seller/202611/materials
+     * List Shop Materials
+     * List image material groups for the currently authorized shop under one product.
+     * @param productId The product ID whose image materials are listed.
+     * @param materialStatus The business status of the materials to list. Possible values: - LIVE: List effective online materials. - UNDER_REVIEW: List materials that are still under review. - REJECTED: List materials that were rejected.  Default value: LIVE. (optional)
+     * @return ListShopMaterialsResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun listShopMaterials(productId: kotlin.String, materialStatus: MaterialStatusListShopMaterials? = null) : ListShopMaterialsResponse {
+        val localVarResponse = listShopMaterialsWithHttpInfo(productId = productId, materialStatus = materialStatus)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ListShopMaterialsResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /seller/202611/materials
+     * List Shop Materials
+     * List image material groups for the currently authorized shop under one product.
+     * @param productId The product ID whose image materials are listed.
+     * @param materialStatus The business status of the materials to list. Possible values: - LIVE: List effective online materials. - UNDER_REVIEW: List materials that are still under review. - REJECTED: List materials that were rejected.  Default value: LIVE. (optional)
+     * @return ApiResponse<ListShopMaterialsResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun listShopMaterialsWithHttpInfo(productId: kotlin.String, materialStatus: MaterialStatusListShopMaterials?) : ApiResponse<ListShopMaterialsResponse?> {
+        val localVariableConfig = listShopMaterialsRequestConfig(productId = productId, materialStatus = materialStatus)
+
+        return request<Unit, ListShopMaterialsResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation listShopMaterials
+     *
+     * @param productId The product ID whose image materials are listed.
+     * @param materialStatus The business status of the materials to list. Possible values: - LIVE: List effective online materials. - UNDER_REVIEW: List materials that are still under review. - REJECTED: List materials that were rejected.  Default value: LIVE. (optional)
+     * @return RequestConfig
+     */
+    fun listShopMaterialsRequestConfig(productId: kotlin.String, materialStatus: MaterialStatusListShopMaterials?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                put("product_id", listOf(productId.toString()))
+                if (materialStatus != null) {
+                    put("material_status", listOf(materialStatus.value))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/seller/202611/materials",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

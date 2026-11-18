@@ -109,6 +109,7 @@ import com.google.gson.annotations.SerializedName
  * @param instorePickupSlaTime The latest buyer pickup time for instore pickup method specified by the platform. Currently applicable for SEA market. Unix timestamp.
  * @param fastRtsSlaTime Indicate fast fulfillment SLA for shipping action. Applicable for SEA market only. Unix timestamp
  * @param fastCollectionSlaTime Indicate fast fulfillment SLA for collection action. Applicable for SEA market only. Unix timestamp
+ * @param orderTag The order tag. Possible values based on region: **All regions** - `TEAM_BREAK`: An order tag placed for a Team Break event in a LIVE auction. The buyer purchases a slot/team spot, and the final item is determined by the break outcome; the SKU name may be assigned or updated by the seller after the break. -`SURPRISE_SET`:  An order tag placed for a Surprise Set event in a LIVE auction. The buyer purchases a surprise/mystery set, and the final items are determined by the platform's Surprise/Randomizer result during the LIVE session.
  */
 
 
@@ -412,7 +413,11 @@ data class GetOrderDetailResponseDataOrder (
 
     /* Indicate fast fulfillment SLA for collection action. Applicable for SEA market only. Unix timestamp */
     @SerializedName("fast_collection_sla_time")
-    val fastCollectionSlaTime: kotlin.Long? = null
+    val fastCollectionSlaTime: kotlin.Long? = null,
+
+    /* The order tag. Possible values based on region: **All regions** - `TEAM_BREAK`: An order tag placed for a Team Break event in a LIVE auction. The buyer purchases a slot/team spot, and the final item is determined by the break outcome; the SKU name may be assigned or updated by the seller after the break. -`SURPRISE_SET`:  An order tag placed for a Surprise Set event in a LIVE auction. The buyer purchases a surprise/mystery set, and the final items are determined by the platform's Surprise/Randomizer result during the LIVE session. */
+    @SerializedName("order_tag")
+    val orderTag: kotlin.collections.List<kotlin.String>? = null
 
 ) {
 

@@ -29,7 +29,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param expireTime The expiration time in RFC 3339 format. This field is omitted when the material never expires.
+ * @param expireTime The expiration time in RFC 3339 format. This field is omitted when the material never expires. `1970-01-01T00:00:00Z` also means the material never expires.
  * @param imageDescription The seller-provided description of the material.
  * @param materialId The generated material ID.
  * @param uri The TOS URI of the uploaded image material.
@@ -38,7 +38,7 @@ import com.google.gson.annotations.SerializedName
 
 data class UploadShopMaterialsResponseDataMaterialGroupMaterial (
 
-    /* The expiration time in RFC 3339 format. This field is omitted when the material never expires. */
+    /* The expiration time in RFC 3339 format. This field is omitted when the material never expires. `1970-01-01T00:00:00Z` also means the material never expires. */
     @SerializedName("expire_time")
     val expireTime: java.time.OffsetDateTime? = null,
 

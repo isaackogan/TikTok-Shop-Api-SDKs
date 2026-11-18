@@ -30,7 +30,7 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param uri The TOS URI of the uploaded image material.
- * @param expireTime The expiration time in RFC 3339 format. Omit this field when the material never expires.
+ * @param expireTime The expiration time in RFC 3339 format. Omit this field when the material never expires. `1970-01-01T00:00:00Z` also means the material never expires.
  * @param imageDescription The seller-provided description of the material.
  */
 
@@ -41,7 +41,7 @@ data class Material (
     @SerializedName("uri")
     val uri: kotlin.String,
 
-    /* The expiration time in RFC 3339 format. Omit this field when the material never expires. */
+    /* The expiration time in RFC 3339 format. Omit this field when the material never expires. `1970-01-01T00:00:00Z` also means the material never expires. */
     @SerializedName("expire_time")
     val expireTime: java.time.OffsetDateTime? = null,
 

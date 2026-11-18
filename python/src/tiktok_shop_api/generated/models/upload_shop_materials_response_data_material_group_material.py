@@ -26,7 +26,7 @@ class UploadShopMaterialsResponseDataMaterialGroupMaterial:
     """ 
         Attributes:
             expire_time (datetime.datetime | Unset): The expiration time in RFC 3339 format. This field is omitted when the
-                material never expires.
+                material never expires. `1970-01-01T00:00:00Z` also means the material never expires.
             image_description (str | Unset): The seller-provided description of the material.
             material_id (str | Unset): The generated material ID.
             uri (str | Unset): The TOS URI of the uploaded image material.

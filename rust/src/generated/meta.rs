@@ -389,6 +389,9 @@ pub const OPERATIONS: &[OperationMeta] = &[
     OperationMeta { operation_id: "getShopGroupAndRelatedShops", tag: "Seller", group: "seller", method: "get_shop_group_and_related_shops", http_method: "GET", path: "/seller/202601/shop_groups", requires_shop_cipher: false },
     OperationMeta { operation_id: "getShopCarouselPermission", tag: "Seller", group: "seller", method: "get_shop_carousel_permission", http_method: "GET", path: "/seller/202611/carousel_permission", requires_shop_cipher: true },
     OperationMeta { operation_id: "uploadShopImage", tag: "Seller", group: "seller", method: "upload_shop_image", http_method: "POST", path: "/seller/202611/images/upload", requires_shop_cipher: true },
+    OperationMeta { operation_id: "checkMaterialStatuses", tag: "Seller", group: "seller", method: "check_material_statuses", http_method: "GET", path: "/seller/202611/material_statuses", requires_shop_cipher: true },
+    OperationMeta { operation_id: "listShopMaterials", tag: "Seller", group: "seller", method: "list_shop_materials", http_method: "GET", path: "/seller/202611/materials", requires_shop_cipher: true },
+    OperationMeta { operation_id: "deleteShopMaterial", tag: "Seller", group: "seller", method: "delete_shop_material", http_method: "DELETE", path: "/seller/202611/materials", requires_shop_cipher: true },
     OperationMeta { operation_id: "uploadShopMaterials", tag: "Seller", group: "seller", method: "upload_shop_materials", http_method: "POST", path: "/seller/202611/materials/upload", requires_shop_cipher: true },
     OperationMeta { operation_id: "confirmPackageShipment", tag: "Supply chain", group: "supply_chain", method: "confirm_package_shipment", http_method: "POST", path: "/supply_chain/202309/packages/sync", requires_shop_cipher: false },
 ];

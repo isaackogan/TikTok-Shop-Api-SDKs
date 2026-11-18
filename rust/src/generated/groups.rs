@@ -4830,6 +4830,31 @@ impl SellerApi {
         apis::seller_api::upload_shop_image(&self.config, image_data).await.map_err(Error::from)
     }
 
+    /// Query the review statuses of pending material IDs for the currently authorized shop. The response order matches the input order of `pending_material_ids`.
+    pub async fn check_material_statuses(
+        &self,
+        pending_material_ids: Vec<String>,
+    ) -> Result<models::CheckMaterialStatusesResponse, Error> {
+        apis::seller_api::check_material_statuses(&self.config, pending_material_ids).await.map_err(Error::from)
+    }
+
+    /// List image material groups for the currently authorized shop under one product.
+    pub async fn list_shop_materials(
+        &self,
+        product_id: &str,
+        material_status: Option<&str>,
+    ) -> Result<models::ListShopMaterialsResponse, Error> {
+        apis::seller_api::list_shop_materials(&self.config, product_id, material_status).await.map_err(Error::from)
+    }
+
+    /// Delete a seller material for the currently authorized shop. Provide `material_id` for `ONE_PRODUCT_ONE_IMAGE` deletion or `image_group_id` for `ONE_PRODUCT_MULTIPLE_IMAGES` deletion.
+    pub async fn delete_shop_material(
+        &self,
+        delete_shop_material_request: models::DeleteShopMaterialRequest,
+    ) -> Result<models::DeleteShopMaterialResponse, Error> {
+        apis::seller_api::delete_shop_material(&self.config, delete_shop_material_request).await.map_err(Error::from)
+    }
+
     /// Upload image materials for the current shop. Use `materials` for `ONE_PRODUCT_ONE_IMAGE` and `material_groups` for `ONE_PRODUCT_MULTIPLE_IMAGES`. Provide exactly one mode payload per request.
     pub async fn upload_shop_materials(
         &self,

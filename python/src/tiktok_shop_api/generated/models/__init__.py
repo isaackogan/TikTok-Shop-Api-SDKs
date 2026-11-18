@@ -132,6 +132,8 @@ from .check_creator_sample_eligibility_response_data_label_sample_product_sample
 from .check_listing_prerequisites_response import CheckListingPrerequisitesResponse
 from .check_listing_prerequisites_response_data import CheckListingPrerequisitesResponseData
 from .check_listing_prerequisites_response_data_check_result import CheckListingPrerequisitesResponseDataCheckResult
+from .check_material_statuses_response import CheckMaterialStatusesResponse
+from .check_material_statuses_response_data import CheckMaterialStatusesResponseData
 from .check_product_listing_request import CheckProductListingRequest
 from .check_product_listing_request_listing_platforms_item import CheckProductListingRequestListingPlatformsItem
 from .check_product_listing_request_locale import CheckProductListingRequestLocale
@@ -370,6 +372,10 @@ from .delete_global_products_response_data_error_detail import DeleteGlobalProdu
 from .delete_products_request import DeleteProductsRequest
 from .delete_products_response import DeleteProductsResponse
 from .delete_products_response_data import DeleteProductsResponseData
+from .delete_shop_material_request import DeleteShopMaterialRequest
+from .delete_shop_material_request_delete_type import DeleteShopMaterialRequestDeleteType
+from .delete_shop_material_response import DeleteShopMaterialResponse
+from .delete_shop_material_response_data import DeleteShopMaterialResponseData
 from .delete_webhook_for_an_event_request import DeleteWebhookForAnEventRequest
 from .delete_webhook_for_an_event_request_event_type import DeleteWebhookForAnEventRequestEventType
 from .delete_webhook_for_an_event_response import DeleteWebhookForAnEventResponse
@@ -1635,6 +1641,11 @@ from .list_registered_campaign_response_data import ListRegisteredCampaignRespon
 from .list_registered_campaign_response_data_campaign import ListRegisteredCampaignResponseDataCampaign
 from .list_registered_campaign_response_data_campaign_bargain_statistic import ListRegisteredCampaignResponseDataCampaignBargainStatistic
 from .list_registered_campaign_response_data_campaign_registration_statistic import ListRegisteredCampaignResponseDataCampaignRegistrationStatistic
+from .list_shop_materials_material_status import ListShopMaterialsMaterialStatus
+from .list_shop_materials_response import ListShopMaterialsResponse
+from .list_shop_materials_response_data import ListShopMaterialsResponseData
+from .list_shop_materials_response_data_material_group import ListShopMaterialsResponseDataMaterialGroup
+from .list_shop_materials_response_data_material_group_material import ListShopMaterialsResponseDataMaterialGroupMaterial
 from .listing_quality import ListingQuality
 from .live_attributed_gmv import LiveAttributedGmv
 from .live_auction_attributed_gmv import LiveAuctionAttributedGmv
@@ -2734,6 +2745,8 @@ __all__ = (
     "CheckListingPrerequisitesResponse",
     "CheckListingPrerequisitesResponseData",
     "CheckListingPrerequisitesResponseDataCheckResult",
+    "CheckMaterialStatusesResponse",
+    "CheckMaterialStatusesResponseData",
     "CheckProductListingRequest",
     "CheckProductListingRequestListingPlatformsItem",
     "CheckProductListingRequestLocale",
@@ -2972,6 +2985,10 @@ __all__ = (
     "DeleteProductsRequest",
     "DeleteProductsResponse",
     "DeleteProductsResponseData",
+    "DeleteShopMaterialRequest",
+    "DeleteShopMaterialRequestDeleteType",
+    "DeleteShopMaterialResponse",
+    "DeleteShopMaterialResponseData",
     "DeleteWebhookForAnEventRequest",
     "DeleteWebhookForAnEventRequestEventType",
     "DeleteWebhookForAnEventResponse",
@@ -4238,6 +4255,11 @@ __all__ = (
     "ListRegisteredCampaignResponseDataCampaign",
     "ListRegisteredCampaignResponseDataCampaignBargainStatistic",
     "ListRegisteredCampaignResponseDataCampaignRegistrationStatistic",
+    "ListShopMaterialsMaterialStatus",
+    "ListShopMaterialsResponse",
+    "ListShopMaterialsResponseData",
+    "ListShopMaterialsResponseDataMaterialGroup",
+    "ListShopMaterialsResponseDataMaterialGroupMaterial",
     "LiveAttributedGmv",
     "LiveAuctionAttributedGmv",
     "LiveGmv",

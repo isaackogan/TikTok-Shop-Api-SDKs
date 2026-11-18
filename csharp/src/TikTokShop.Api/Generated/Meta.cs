@@ -376,6 +376,9 @@ public static class Meta
         new("GetShopGroupAndRelatedShops", "Seller", "GET", "/seller/202601/shop_groups", false),
         new("GetShopCarouselPermission", "Seller", "GET", "/seller/202611/carousel_permission", true),
         new("UploadShopImage", "Seller", "POST", "/seller/202611/images/upload", true),
+        new("CheckMaterialStatuses", "Seller", "GET", "/seller/202611/material_statuses", true),
+        new("ListShopMaterials", "Seller", "GET", "/seller/202611/materials", true),
+        new("DeleteShopMaterial", "Seller", "DELETE", "/seller/202611/materials", true),
         new("UploadShopMaterials", "Seller", "POST", "/seller/202611/materials/upload", true),
         new("ConfirmPackageShipment", "SupplyChain", "POST", "/supply_chain/202309/packages/sync", false),
     };

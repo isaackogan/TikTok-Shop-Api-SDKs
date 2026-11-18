@@ -384,6 +384,9 @@ object Meta {
         Operation("getShopGroupAndRelatedShops", "Seller", "seller", "SellerApi", "GET", "/seller/202601/shop_groups", false),
         Operation("getShopCarouselPermission", "Seller", "seller", "SellerApi", "GET", "/seller/202611/carousel_permission", true),
         Operation("uploadShopImage", "Seller", "seller", "SellerApi", "POST", "/seller/202611/images/upload", true),
+        Operation("checkMaterialStatuses", "Seller", "seller", "SellerApi", "GET", "/seller/202611/material_statuses", true),
+        Operation("listShopMaterials", "Seller", "seller", "SellerApi", "GET", "/seller/202611/materials", true),
+        Operation("deleteShopMaterial", "Seller", "seller", "SellerApi", "DELETE", "/seller/202611/materials", true),
         Operation("uploadShopMaterials", "Seller", "seller", "SellerApi", "POST", "/seller/202611/materials/upload", true),
         Operation("confirmPackageShipment", "Supply chain", "supplyChain", "SupplyChainApi", "POST", "/supply_chain/202309/packages/sync", false),
     )
