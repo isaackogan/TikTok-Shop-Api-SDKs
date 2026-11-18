@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: TikTok Shop Partner API
-  version: 2026.11.17
+  version: 2026.11.18
   description: Generated from the TikTok Shop Partner Center documentation (https://partner.tiktokshop.com/docv2). Do not edit by hand.
 externalDocs:
   url: https://partner.tiktokshop.com/docv2
@@ -17540,6 +17540,8 @@ paths:
                       instore_pickup_sla_time: 1784090976
                       fast_rts_sla_time: 1784090976
                       fast_collection_sla_time: 1784090976
+                      order_tag:
+                        - SURPRISE_SET
                 message: Success
                 request_id: 202203070749000101890810281E8C70B7
       x-tts-requires-shop-cipher: true
@@ -18084,6 +18086,8 @@ paths:
                       instore_pickup_sla_time: 1784090976
                       fast_rts_sla_time: 1784090976
                       fast_collection_sla_time: 1784090976
+                      order_tag:
+                        - SURPRISE_SET
                 message: Success
                 request_id: 202203070749000101890810281E8C70B7
       x-tts-requires-shop-cipher: true
@@ -31721,6 +31725,149 @@ paths:
         - Product Optimization
       x-tts-error-codes: []
       x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/upload-shop-image-202611
+  /seller/202611/material_statuses:
+    get:
+      operationId: checkMaterialStatuses
+      summary: Check Material Statuses
+      description: Query the review statuses of pending material IDs for the currently authorized shop. The response order matches the input order of `pending_material_ids`.
+      tags:
+        - Seller
+      parameters:
+        - $ref: "#/components/parameters/ShopCipher"
+        - name: pending_material_ids
+          in: query
+          required: true
+          description: The pending material IDs to query. Repeat this query parameter to pass multiple IDs, and the response list preserves the same order.
+          explode: false
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CheckMaterialStatusesResponse"
+              example:
+                code: 0
+                data:
+                  material_statuses:
+                    - UNDER_REVIEW
+                    - REJECTED
+                message: Success
+                request_id: 202203070749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes:
+        - Product Optimization
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/check-material-statuses-202611
+  /seller/202611/materials:
+    get:
+      operationId: listShopMaterials
+      summary: List Shop Materials
+      description: List image material groups for the currently authorized shop under one product.
+      tags:
+        - Seller
+      parameters:
+        - $ref: "#/components/parameters/ShopCipher"
+        - name: product_id
+          in: query
+          required: true
+          description: The product ID whose image materials are listed.
+          schema:
+            type: string
+        - name: material_status
+          in: query
+          required: false
+          description: |-
+            The business status of the materials to list.
+            Possible values:
+            - LIVE: List effective online materials.
+            - UNDER_REVIEW: List materials that are still under review.
+            - REJECTED: List materials that were rejected.
+
+            Default value: LIVE.
+          schema:
+            type: string
+            enum:
+              - LIVE
+              - UNDER_REVIEW
+              - REJECTED
+            x-enum-descriptions:
+              - List effective online materials.
+              - List materials that are still under review.
+              - List materials that were rejected.
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ListShopMaterialsResponse"
+              example:
+                code: 0
+                data:
+                  material_groups:
+                    - image_group_id: "0"
+                      material_status: LIVE
+                      materials:
+                        - expire_time: 2025-01-01T00:00:00Z
+                          image_description: Front view image
+                          image_order: 1
+                          material_id: "7812233445566778899"
+                          material_status: LIVE
+                          source: USER_UPLOADED
+                          uri: https://p16-oec-va.ibyteimg.com/tos-maliva-i-o3syd03w52-us/9f6f2d3ab1c94b75a12345
+                      post_type: ONE_PRODUCT_ONE_IMAGE
+                message: Success
+                request_id: 202203070749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes:
+        - Product Optimization
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/list-shop-materials-202611
+    delete:
+      operationId: deleteShopMaterial
+      summary: Delete Shop Material
+      description: Delete a seller material for the currently authorized shop. Provide `material_id` for `ONE_PRODUCT_ONE_IMAGE` deletion or `image_group_id` for `ONE_PRODUCT_MULTIPLE_IMAGES` deletion.
+      tags:
+        - Seller
+      parameters:
+        - $ref: "#/components/parameters/ShopCipher"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeleteShopMaterialRequest"
+            example:
+              delete_type: ONE_PRODUCT_ONE_IMAGE
+              image_group_id: "90010001"
+              material_id: "7812233445566778899"
+      responses:
+        "200":
+          description: Success
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeleteShopMaterialResponse"
+              example:
+                code: 0
+                data:
+                  failed_reason: ""
+                  is_deleted: true
+                message: Success
+                request_id: 202203070749000101890810281E8C70B7
+      x-tts-requires-shop-cipher: true
+      x-tts-scenario: 1
+      x-tts-scopes:
+        - Product Optimization
+      x-tts-error-codes: []
+      x-tts-docs-url: https://partner.tiktokshop.com/docv2/page/delete-shop-material-202611
   /seller/202611/materials/upload:
     post:
       operationId: uploadShopMaterials
@@ -35447,6 +35594,29 @@ components:
           items:
             type: string
           description: The specific reasons for failing a certain `check_item`.
+    CheckMaterialStatusesResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/CheckMaterialStatusesResponseData"
+    CheckMaterialStatusesResponseData:
+      type: object
+      properties:
+        material_statuses:
+          type: array
+          items:
+            type: string
+          description: The material statuses returned in the same order as the requested `pending_material_ids`.
     CheckProductListingRequest:
       type: object
       properties:
@@ -40473,6 +40643,54 @@ components:
           items:
             $ref: "#/components/schemas/Error"
           description: The errors for individual products that could not be deleted. Check this list even when the top-level `code` is `0`.
+    DeleteShopMaterialRequest:
+      type: object
+      properties:
+        delete_type:
+          type: string
+          enum:
+            - ONE_PRODUCT_MULTIPLE_IMAGES
+            - ONE_PRODUCT_ONE_IMAGE
+          x-enum-descriptions:
+            - Delete a grouped material set by `image_group_id`.
+            - Delete one standalone material by `material_id`.
+          description: |-
+            The deletion mode for the material.
+            Possible values:
+            - ONE_PRODUCT_MULTIPLE_IMAGES: Delete a grouped material set by `image_group_id`.
+            - ONE_PRODUCT_ONE_IMAGE: Delete one standalone material by `material_id`.
+        image_group_id:
+          type: string
+          description: The image group ID to delete when `delete_type` is `ONE_PRODUCT_MULTIPLE_IMAGES`.
+        material_id:
+          type: string
+          description: The material ID to delete when `delete_type` is `ONE_PRODUCT_ONE_IMAGE`.
+      required:
+        - delete_type
+    DeleteShopMaterialResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/DeleteShopMaterialResponseData"
+    DeleteShopMaterialResponseData:
+      type: object
+      properties:
+        failed_reason:
+          type: string
+          description: The failure reason when `is_deleted` is `false`.
+        is_deleted:
+          type: boolean
+          description: Whether the requested material deletion succeeded.
     DeleteWebhookForAnEventRequest:
       type: object
       properties:
@@ -54161,6 +54379,22 @@ components:
           type: integer
           format: int64
           description: Indicate fast fulfillment SLA for collection action. Applicable for SEA market only. Unix timestamp
+        order_tag:
+          type: array
+          items:
+            type: string
+            enum:
+              - TEAM_BREAK
+              - SURPRISE_SET
+            x-enum-descriptions:
+              - An order tag placed for a Team Break event in a LIVE auction. The buyer purchases a slot/team spot, and the final item is determined by the break outcome; the SKU name may be assigned or updated by the seller after the break.
+              - An order tag placed for a Surprise Set event in a LIVE auction. The buyer purchases a surprise/mystery set, and the final items are determined by the platform's Surprise/Randomizer result during the LIVE session.
+          description: |-
+            The order tag.
+            Possible values based on region:
+            **All regions**
+            - `TEAM_BREAK`: An order tag placed for a Team Break event in a LIVE auction. The buyer purchases a slot/team spot, and the final item is determined by the break outcome; the SKU name may be assigned or updated by the seller after the break.
+            -`SURPRISE_SET`:  An order tag placed for a Surprise Set event in a LIVE auction. The buyer purchases a surprise/mystery set, and the final items are determined by the platform's Surprise/Randomizer result during the LIVE session.
     GetOrderDetailResponseDataOrderLineItem:
       type: object
       properties:
@@ -55031,6 +55265,22 @@ components:
           type: integer
           format: int64
           description: Indicate fast fulfillment SLA for collection action. Applicable for SEA market only. Unix timestamp
+        order_tag:
+          type: array
+          items:
+            type: string
+            enum:
+              - TEAM_BREAK
+              - SURPRISE_SET
+            x-enum-descriptions:
+              - An order tag placed for a Team Break event in a LIVE auction. The buyer purchases a slot/team spot, and the final item is determined by the break outcome; the SKU name may be assigned or updated by the seller after the break.
+              - An order tag placed for a Surprise Set event in a LIVE auction. The buyer purchases a surprise/mystery set, and the final items are determined by the platform's Surprise/Randomizer result during the LIVE session.
+          description: |-
+            The order tag.
+            Possible values based on region:
+            **All regions**
+            - `TEAM_BREAK`: An order tag placed for a Team Break event in a LIVE auction. The buyer purchases a slot/team spot, and the final item is determined by the break outcome; the SKU name may be assigned or updated by the seller after the break.
+            -`SURPRISE_SET`:  An order tag placed for a Surprise Set event in a LIVE auction. The buyer purchases a surprise/mystery set, and the final items are determined by the platform's Surprise/Randomizer result during the LIVE session.
     GetOrderListResponseDataOrderLineItem:
       type: object
       properties:
@@ -69102,6 +69352,165 @@ components:
           type: integer
           format: int64
           description: Withdrawal requests under review. Does not mean withdrawal is complete.
+    ListShopMaterialsResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int64
+          description: Status code; 0 means success.
+        message:
+          type: string
+          description: Success or failure message.
+        request_id:
+          type: string
+          description: Request log ID.
+        data:
+          $ref: "#/components/schemas/ListShopMaterialsResponseData"
+    ListShopMaterialsResponseData:
+      type: object
+      properties:
+        material_groups:
+          type: array
+          items:
+            $ref: "#/components/schemas/ListShopMaterialsResponseDataMaterialGroup"
+          description: Material groups for the specified product after the requested status filter is applied.
+    ListShopMaterialsResponseDataMaterialGroup:
+      type: object
+      properties:
+        image_group_id:
+          type: string
+          description: The image group ID. The value is `0` for a single-image material.
+        material_status:
+          type: string
+          enum:
+            - MATERIAL_STATUS_UNSPECIFIED
+            - LIVE
+            - UNDER_REVIEW
+            - REJECTED
+            - PENDING_SELLER_REVIEW
+          x-enum-descriptions:
+            - The business status is not specified.
+            - The material group is effective online.
+            - The material group is still under review.
+            - The material group was rejected.
+            - The material group is waiting for seller review.
+          description: |-
+            The business status shared by the material group.
+            Possible values:
+            - MATERIAL_STATUS_UNSPECIFIED: The business status is not specified.
+            - LIVE: The material group is effective online.
+            - UNDER_REVIEW: The material group is still under review.
+            - REJECTED: The material group was rejected.
+            - PENDING_SELLER_REVIEW: The material group is waiting for seller review.
+        materials:
+          type: array
+          items:
+            $ref: "#/components/schemas/ListShopMaterialsResponseDataMaterialGroupMaterial"
+          description: Materials contained in this group. Single-image groups contain one item.
+        post_type:
+          type: string
+          enum:
+            - POST_TYPE_UNSPECIFIED
+            - ONE_PRODUCT_MULTIPLE_IMAGES
+            - ONE_PRODUCT_ONE_IMAGE
+          x-enum-descriptions:
+            - The posting mode is not specified.
+            - One product is associated with multiple ordered images in the same group.
+            - One product is associated with one standalone image.
+          description: |-
+            The posting mode of the material group.
+            Possible values:
+            - POST_TYPE_UNSPECIFIED: The posting mode is not specified.
+            - ONE_PRODUCT_MULTIPLE_IMAGES: One product is associated with multiple ordered images in the same group.
+            - ONE_PRODUCT_ONE_IMAGE: One product is associated with one standalone image.
+      required:
+        - post_type
+    ListShopMaterialsResponseDataMaterialGroupMaterial:
+      type: object
+      properties:
+        expire_time:
+          type: string
+          format: date-time
+          description: The expiration time in RFC 3339 format. This field is omitted when the material never expires. `1970-01-01T00:00:00Z` also means the material never expires.
+        image_description:
+          type: string
+          description: The seller-provided description of the material.
+        image_order:
+          type: integer
+          format: int64
+          description: The order of the material within its group. The first item starts at `1`.
+        material_id:
+          type: string
+          description: The system-generated material ID.
+        material_status:
+          type: string
+          enum:
+            - MATERIAL_STATUS_UNSPECIFIED
+            - LIVE
+            - UNDER_REVIEW
+            - REJECTED
+            - PENDING_SELLER_REVIEW
+          x-enum-descriptions:
+            - The business status is not specified.
+            - The material is effective online.
+            - The material is still under review.
+            - The material was rejected.
+            - The material is waiting for seller review.
+          description: |-
+            The business status of the material.
+            Possible values:
+            - MATERIAL_STATUS_UNSPECIFIED: The business status is not specified.
+            - LIVE: The material is effective online.
+            - UNDER_REVIEW: The material is still under review.
+            - REJECTED: The material was rejected.
+            - PENDING_SELLER_REVIEW: The material is waiting for seller review.
+        source:
+          type: string
+          enum:
+            - SOURCE_UNSPECIFIED
+            - AIGC_ENHANCED
+            - AIGC_GENERATED
+            - PROD
+            - USER_UPLOADED
+            - USER_SELECTED_AI_GENERATED
+            - USER_SELECTED_PRODUCT_LISTING
+            - USER_SELECTED_POST
+            - USER_SELECTED_LIVE_HIGHLIGHT
+            - OPEN_API
+            - GOOGLE_DRIVE
+            - META
+          x-enum-descriptions:
+            - The source is not specified.
+            - The material was enhanced by an AIGC workflow.
+            - The material was generated by an AIGC workflow.
+            - The material originated from a product detail source.
+            - The seller uploaded the material directly.
+            - The seller selected an AI-generated material.
+            - The seller selected a product listing image.
+            - The seller selected an existing post image.
+            - The seller selected a live highlight image.
+            - The material was imported through an Open API integration.
+            - The material was imported from Google Drive.
+            - The material was imported from Meta.
+          description: |-
+            The source from which the material originated.
+            Possible values:
+            - SOURCE_UNSPECIFIED: The source is not specified.
+            - AIGC_ENHANCED: The material was enhanced by an AIGC workflow.
+            - AIGC_GENERATED: The material was generated by an AIGC workflow.
+            - PROD: The material originated from a product detail source.
+            - USER_UPLOADED: The seller uploaded the material directly.
+            - USER_SELECTED_AI_GENERATED: The seller selected an AI-generated material.
+            - USER_SELECTED_PRODUCT_LISTING: The seller selected a product listing image.
+            - USER_SELECTED_POST: The seller selected an existing post image.
+            - USER_SELECTED_LIVE_HIGHLIGHT: The seller selected a live highlight image.
+            - OPEN_API: The material was imported through an Open API integration.
+            - GOOGLE_DRIVE: The material was imported from Google Drive.
+            - META: The material was imported from Meta.
+        uri:
+          type: string
+          description: The material image URI or accessible URL returned by the seller material service.
     ListingQuality:
       type: object
       properties:
@@ -69355,7 +69764,7 @@ components:
         expire_time:
           type: string
           format: date-time
-          description: The expiration time in RFC 3339 format. Omit this field when the material never expires.
+          description: The expiration time in RFC 3339 format. Omit this field when the material never expires. `1970-01-01T00:00:00Z` also means the material never expires.
         image_description:
           type: string
           description: The seller-provided description of the material.
@@ -88361,7 +88770,7 @@ components:
         expire_time:
           type: string
           format: date-time
-          description: The expiration time in RFC 3339 format. This field is omitted when the material never expires.
+          description: The expiration time in RFC 3339 format. This field is omitted when the material never expires. `1970-01-01T00:00:00Z` also means the material never expires.
         image_description:
           type: string
           description: The seller-provided description of the material.
