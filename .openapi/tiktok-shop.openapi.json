@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "TikTok Shop Partner API",
-    "version": "2026.11.18",
+    "version": "2026.11.19",
     "description": "Generated from the TikTok Shop Partner Center documentation (https://partner.tiktokshop.com/docv2). Do not edit by hand."
   },
   "externalDocs": {
@@ -15028,6 +15028,412 @@
         ],
         "x-tts-error-codes": [],
         "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-sps-overview-202610"
+      }
+    },
+    "/analytics/202611/ai_report/campaigns": {
+      "get": {
+        "operationId": "getAIReportCampaignPeriods",
+        "summary": "Get AI Report Campaign Periods",
+        "description": "Retrieve the authorized shop's campaigns for the current year that have started by today. The server determines today using the shop region's configured local timezone. Campaign start_date and end_date are local calendar dates in that timezone, not UTC. Default order: start_date ascending, end_date ascending, then internal campaign ID descending for equal date pairs. Pass returned dates to data queries; a campaign ID is not required.",
+        "tags": [
+          "Analytics"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ShopCipher"
+          },
+          {
+            "name": "page_token",
+            "in": "query",
+            "required": false,
+            "description": "Token identifying the page to retrieve. Omit it for the first page. For subsequent pages, use next_page_token from the preceding response and keep the other query conditions and page_size unchanged.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of results to return per page. Allowed range: 1–100. Default: 50.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAIReportCampaignPeriodsResponse"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "campaigns": [],
+                    "next_page_token": "",
+                    "total_count": 8
+                  },
+                  "message": "Success",
+                  "request_id": "202203070749000101890810281E8C70B7"
+                }
+              }
+            }
+          }
+        },
+        "x-tts-requires-shop-cipher": true,
+        "x-tts-scenario": 1,
+        "x-tts-scopes": [
+          "TikTok Shop Analytics"
+        ],
+        "x-tts-error-codes": [],
+        "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-ai-report-campaign-periods-202611"
+      }
+    },
+    "/analytics/202611/ai_report/catalog": {
+      "get": {
+        "operationId": "getAIReportCatalog",
+        "summary": "Get AI Report Catalog",
+        "description": "Retrieve the complete configured catalog of metrics, dimensions, time buckets and row details for the authorized shop. The available configuration may change. Fetch the catalog when preparing a query instead of caching it for long periods. This is a finite configuration snapshot, not an entity list. Use rules for combinations, candidate search for entity values, and validation before querying.",
+        "tags": [
+          "Analytics"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ShopCipher"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAIReportCatalogResponse"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "detail_fields": [],
+                    "dimensions": [],
+                    "metrics": [],
+                    "time_granularities": [
+                      "DAY",
+                      "WEEK",
+                      "MONTH",
+                      "YEAR"
+                    ]
+                  },
+                  "message": "Success",
+                  "request_id": "202203070749000101890810281E8C70B7"
+                }
+              }
+            }
+          }
+        },
+        "x-tts-requires-shop-cipher": true,
+        "x-tts-scenario": 1,
+        "x-tts-scopes": [
+          "TikTok Shop Analytics"
+        ],
+        "x-tts-error-codes": [],
+        "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-ai-report-catalog-202611"
+      }
+    },
+    "/analytics/202611/ai_report/data/query": {
+      "post": {
+        "operationId": "queryAIReportData",
+        "summary": "Query AI Report Data",
+        "description": "Query grouped metric values and optional row details for one authorized shop. Use catalog codes and query rules, and validate the final configuration. Dates are inclusive in the shop timezone. Rows are keyed by returned dimension values and bucket dates; match cells to columns by code and kind. This API returns table data, not metric-card comparisons or chart-specific calculations. Keep conditions unchanged while paging. Default sorting is the first selected metric descending. Time-bucketed queries append time ascending unless explicitly sorted by time, followed by remaining grouping keys ascending.",
+        "tags": [
+          "Analytics"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ShopCipher"
+          },
+          {
+            "name": "page_token",
+            "in": "query",
+            "required": false,
+            "description": "Token identifying the page to retrieve. Omit it for the first page. For subsequent pages, use next_page_token from the preceding response and keep the other query conditions and page_size unchanged.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "description": "Maximum number of results to return per page. Allowed range: 1–100. Default: 50.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/QueryAIReportDataRequest"
+              },
+              "example": {
+                "detail_fields": [
+                  "pay_ts"
+                ],
+                "end_date": "2026-10-31",
+                "filters": [],
+                "group_dimensions": [
+                  "product_id"
+                ],
+                "metric_codes": [
+                  "pay_amt"
+                ],
+                "sort_rules": [],
+                "start_date": "2026-10-25",
+                "time_granularity": "DAY"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QueryAIReportDataResponse"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "columns": [],
+                    "end_date": "2026-10-31",
+                    "next_page_token": "",
+                    "rows": [],
+                    "start_date": "2026-10-25",
+                    "total_count": 8
+                  },
+                  "message": "Success",
+                  "request_id": "202203070749000101890810281E8C70B7"
+                }
+              }
+            }
+          }
+        },
+        "x-tts-requires-shop-cipher": true,
+        "x-tts-scenario": 1,
+        "x-tts-scopes": [
+          "TikTok Shop Analytics"
+        ],
+        "x-tts-error-codes": [],
+        "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/query-ai-report-data-202611"
+      }
+    },
+    "/analytics/202611/ai_report/dimension_options/search": {
+      "post": {
+        "operationId": "searchAIReportDimensionOptions",
+        "summary": "Search AI Report Dimension Options",
+        "description": "Find filter values for a dimension returned by the catalog. Fixed attribute options are returned together in configured order; keyword, dates, metrics and pagination do not restrict this finite list. For product_id with a nonempty keyword, search product text and return matches by product ID descending; for sku_id with a nonempty keyword, look up an exact numeric SKU ID and return at most one match. These two lookup modes do not use dates or metric_codes. Other entity searches, including product_id or sku_id without a keyword, require start_date and end_date and use metric data. They aggregate metric data over the requested date range and sort by the first supplied metric descending, with grouping keys ascending to break ties. When metric_codes is omitted or empty, they sort by grouping keys ascending. These searches do not group or sort by time buckets. Entity results use pagination. Creator searches accept an application-scoped creator.creator_open_id, not keyword; an unknown Creator candidate has no selectable identity. main_order_id candidate lookup is unsupported.",
+        "tags": [
+          "Analytics"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ShopCipher"
+          },
+          {
+            "name": "page_token",
+            "in": "query",
+            "required": false,
+            "description": "For entity candidates, omit this token for the first page; use the preceding next_page_token for later pages and keep conditions and page_size unchanged. Fixed attribute options are not paginated: omit page_token and expect an empty next_page_token.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "description": "Maximum entity candidates to return per page. Allowed range: 1–100. Default: 50. Fixed attribute options are returned as one complete list and are not limited by page_size; this parameter must still be within the allowed range.",
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SearchAIReportDimensionOptionsRequest"
+              },
+              "example": {
+                "creator": {
+                  "creator_open_id": "749d22aedd1646c59f196083e5c61651"
+                },
+                "dimension_code": "product_id",
+                "end_date": "2026-10-31",
+                "keyword": "example product",
+                "metric_codes": [
+                  "pay_amt"
+                ],
+                "start_date": "2026-10-25"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchAIReportDimensionOptionsResponse"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "dimension_code": "product_id",
+                    "next_page_token": "",
+                    "options": [],
+                    "total_count": 8
+                  },
+                  "message": "Success",
+                  "request_id": "202203070749000101890810281E8C70B7"
+                }
+              }
+            }
+          }
+        },
+        "x-tts-requires-shop-cipher": true,
+        "x-tts-scenario": 1,
+        "x-tts-scopes": [
+          "TikTok Shop Analytics"
+        ],
+        "x-tts-error-codes": [],
+        "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/search-ai-report-dimension-options-202611"
+      }
+    },
+    "/analytics/202611/ai_report/query_config/validate": {
+      "post": {
+        "operationId": "validateAIReportQueryConfiguration",
+        "summary": "Validate AI Report Query Configuration",
+        "description": "Validate the query configuration without fetching report rows. Invalid request parameters, such as malformed dates or unknown catalog codes, return a nonzero response code. When request parameters are accepted but the metric, dimension, filter or detail-field combination is rejected, the response has code=0 and data.is_valid=false with reason_code and reason_message. A valid combination returns data.is_valid=true and omits reason_code and reason_message. Only one rejection is returned; this API does not list every conflict. Validation does not reserve a data snapshot or guarantee that a later query will succeed if configuration or data availability changes. Sorting defaults match Data Query.",
+        "tags": [
+          "Analytics"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ShopCipher"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ValidateAIReportQueryConfigurationRequest"
+              },
+              "example": {
+                "detail_fields": [
+                  "pay_ts"
+                ],
+                "end_date": "2026-10-31",
+                "filters": [],
+                "group_dimensions": [
+                  "product_id"
+                ],
+                "metric_codes": [
+                  "pay_amt"
+                ],
+                "sort_rules": [],
+                "start_date": "2026-10-25",
+                "time_granularity": "DAY"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidateAIReportQueryConfigurationResponse"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "is_valid": false,
+                    "reason_code": "DIMENSION_CONFLICT",
+                    "reason_message": "The selected metrics and dimensions cannot be combined. Review the query rules."
+                  },
+                  "message": "Success",
+                  "request_id": "202203070749000101890810281E8C70B7"
+                }
+              }
+            }
+          }
+        },
+        "x-tts-requires-shop-cipher": true,
+        "x-tts-scenario": 1,
+        "x-tts-scopes": [
+          "TikTok Shop Analytics"
+        ],
+        "x-tts-error-codes": [],
+        "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/validate-ai-report-query-configuration-202611"
+      }
+    },
+    "/analytics/202611/ai_report/rules": {
+      "get": {
+        "operationId": "getAIReportQueryRules",
+        "summary": "Get AI Report Query Rules",
+        "description": "Retrieve the complete finite configuration snapshot of main query constraints. A query must match at least one capability group and all applicable global restrictions. Rules do not replace server validation of data readiness and other runtime conditions.",
+        "tags": [
+          "Analytics"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/ShopCipher"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GetAIReportQueryRulesResponse"
+                },
+                "example": {
+                  "code": 0,
+                  "data": {
+                    "detail_requirements": [],
+                    "exclusions": [],
+                    "groups": [],
+                    "version": "rules-example-v1"
+                  },
+                  "message": "Success",
+                  "request_id": "202203070749000101890810281E8C70B7"
+                }
+              }
+            }
+          }
+        },
+        "x-tts-requires-shop-cipher": true,
+        "x-tts-scenario": 1,
+        "x-tts-scopes": [
+          "TikTok Shop Analytics"
+        ],
+        "x-tts-error-codes": [],
+        "x-tts-docs-url": "https://partner.tiktokshop.com/docv2/page/get-ai-report-query-rules-202611"
       }
     },
     "/authorization/202309/shops": {
@@ -56224,6 +56630,15 @@
           }
         }
       },
+      "Creator": {
+        "type": "object",
+        "properties": {
+          "creator_open_id": {
+            "type": "string",
+            "description": "Creator OpenID for this application. Obtain it from a Creator candidate or query result returned to the same application."
+          }
+        }
+      },
       "CreatorDeauthorizationWebhook": {
         "type": "object",
         "properties": {
@@ -58843,6 +59258,40 @@
           "format"
         ]
       },
+      "Filter": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Catalog code of the filter target. Currently this must be a dimensions[].code from the catalog; metric filters are not supported. For author_id, supply creators; for other dimensions, supply values."
+          },
+          "creators": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Creator"
+            },
+            "description": "Creators to include when code is author_id. Each entry contains a creator_open_id returned to this application. Do not also supply values."
+          },
+          "operator": {
+            "type": "string",
+            "description": "Filter operator. IN: Include records whose field value is in values, or whose Creator is in creators. Currently only IN is supported. Defaults to IN when omitted."
+          },
+          "type": {
+            "type": "string",
+            "description": "Filter target type. DIMENSION: Filter a dimension. Currently only DIMENSION is supported. Defaults to DIMENSION when omitted."
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Values to include for this dimension. Use dimensions[].values[].value from the catalog or options[].value from dimension candidate search. For author_id, use creators instead."
+          }
+        },
+        "required": [
+          "code"
+        ]
+      },
       "FlammableLiquidsExtraInfo": {
         "type": "object",
         "properties": {
@@ -60574,6 +61023,414 @@
           "metrics": {
             "$ref": "#/components/schemas/Metric",
             "description": "Sales metrics reported for this level-3 category and the selected audience, scope and date window."
+          }
+        }
+      },
+      "GetAIReportCampaignPeriodsResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Status code; 0 means success."
+          },
+          "message": {
+            "type": "string",
+            "description": "Success or failure message."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Request log ID."
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetAIReportCampaignPeriodsResponseData"
+          }
+        }
+      },
+      "GetAIReportCampaignPeriodsResponseData": {
+        "type": "object",
+        "properties": {
+          "campaigns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetAIReportCampaignPeriodsResponseDataCampaign"
+            },
+            "description": "Campaigns sorted by start_date ascending, then end_date ascending, then numeric campaign ID descending. The internal campaign ID is used only to resolve date ties and is not returned."
+          },
+          "next_page_token": {
+            "type": "string",
+            "description": "Pass this token as page_token to retrieve the next page. An empty string means there are no more results."
+          },
+          "total_count": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total number of matching results across all pages. Returned when the total is available."
+          }
+        },
+        "required": [
+          "next_page_token"
+        ]
+      },
+      "GetAIReportCampaignPeriodsResponseDataCampaign": {
+        "type": "object",
+        "properties": {
+          "end_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Last day of the campaign, inclusive, in YYYY-MM-DD format and the shop region's configured local timezone, not UTC. Use it as end_date to query campaign data."
+          },
+          "is_ended": {
+            "type": "boolean",
+            "description": "Current campaign status returned by the campaign service. True means the campaign has ended; false means it is ongoing."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name of the promotional campaign."
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date",
+            "description": "First day of the campaign, inclusive, in YYYY-MM-DD format and the shop region's configured local timezone, not UTC. Use it as start_date to query campaign data."
+          }
+        }
+      },
+      "GetAIReportCatalogResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Status code; 0 means success."
+          },
+          "message": {
+            "type": "string",
+            "description": "Success or failure message."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Request log ID."
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetAIReportCatalogResponseData"
+          }
+        }
+      },
+      "GetAIReportCatalogResponseData": {
+        "type": "object",
+        "properties": {
+          "detail_fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetAIReportCatalogResponseDataDetailField"
+            },
+            "description": "Additional fields that can be returned on each result row, such as payment time. Select their codes in detail_fields and include any grouping dimensions required by the query rules."
+          },
+          "dimensions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetAIReportCatalogResponseDataDimension"
+            },
+            "description": "Dimensions available for grouping or filtering. Use code in group_dimensions or filters[].code. The query rules specify which dimensions can be combined with your selected metrics."
+          },
+          "metrics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetAIReportCatalogResponseDataMetric"
+            },
+            "description": "Metrics available for selection. Use each metric code in metric_codes when validating or querying data. This list describes metrics; it does not contain measured values."
+          },
+          "time_granularities": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Time unit used to split query results in the shop timezone. DAY: Calendar day. WEEK: Calendar week. MONTH: Calendar month. YEAR: Calendar year. Select a value returned by catalog.time_granularities for this shop. Only DAY, WEEK, MONTH and YEAR are supported."
+          }
+        }
+      },
+      "GetAIReportCatalogResponseDataDetailField": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Detail field code to include in the request detail_fields."
+          },
+          "description": {
+            "type": "string",
+            "description": "Business meaning of this detail field."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of this detail field."
+          },
+          "value_type": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Format of the returned value. Current types: CURRENCY — Monetary value; read currency in the query result for its currency code; DATETIME — UTC date-time string in RFC 3339 format; DECIMAL — Decimal value represented as a string; DURATION — Duration; the metric or detail field description specifies its unit; ENUM — Coded value; read the field definition or candidate values for its meaning; INT — Integer value represented as a string; RATIO — Raw ratio: 0.1234 represents 12.34%; STRING — Text value. New types may be added."
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetAIReportCatalogResponseDataDetailFieldValue"
+            },
+            "description": "Fixed values defined for this detail field, when configured. Each entry provides a value and its display information."
+          }
+        }
+      },
+      "GetAIReportCatalogResponseDataDetailFieldValue": {
+        "type": "object",
+        "properties": {
+          "creator": {
+            "$ref": "#/components/schemas/Creator",
+            "description": "Creator identified by an application-scoped OpenID. Use an OpenID returned to the application making this request."
+          },
+          "image_url": {
+            "type": "string",
+            "description": "Image for the candidate, when available."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display label; may be absent for an unknown entity."
+          },
+          "value": {
+            "type": "string",
+            "description": "Canonical code of this fixed option. Use name for its display label."
+          }
+        }
+      },
+      "GetAIReportCatalogResponseDataDimension": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Dimension code to use in group_dimensions or filters[].code, according to the query rules."
+          },
+          "description": {
+            "type": "string",
+            "description": "Business meaning of this dimension."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of this dimension."
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetAIReportCatalogResponseDataDetailFieldValue"
+            },
+            "description": "Fixed filter options for this dimension, such as LIVE, VIDEO and PRODUCT_CARD for content_type. Use option.value in filters[].values. Use Search AI Report Dimension Options to find products, Creators and other entities."
+          }
+        }
+      },
+      "GetAIReportCatalogResponseDataMetric": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string",
+            "description": "Category used to organize the metric catalog. TRANSACTIONS: sales and transaction metrics. TRAFFIC_EFFICIENCY: traffic and conversion efficiency metrics. Query rules determine which metrics can be combined."
+          },
+          "code": {
+            "type": "string",
+            "description": "Metric code to include in the request metric_codes."
+          },
+          "description": {
+            "type": "string",
+            "description": "What the metric measures and how it is calculated."
+          },
+          "formula": {
+            "type": "string",
+            "description": "Formula explaining how this metric is calculated. Returned when a formula is configured."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of this metric."
+          },
+          "value_type": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Format of the returned value. Current types: CURRENCY — Monetary value; read currency in the query result for its currency code; DATETIME — UTC date-time string in RFC 3339 format; DECIMAL — Decimal value represented as a string; DURATION — Duration; the metric or detail field description specifies its unit; ENUM — Coded value; read the field definition or candidate values for its meaning; INT — Integer value represented as a string; RATIO — Raw ratio: 0.1234 represents 12.34%; STRING — Text value. New types may be added."
+          }
+        }
+      },
+      "GetAIReportQueryRulesResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Status code; 0 means success."
+          },
+          "message": {
+            "type": "string",
+            "description": "Success or failure message."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Request log ID."
+          },
+          "data": {
+            "$ref": "#/components/schemas/GetAIReportQueryRulesResponseData"
+          }
+        }
+      },
+      "GetAIReportQueryRulesResponseData": {
+        "type": "object",
+        "properties": {
+          "detail_requirements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetAIReportQueryRulesResponseDataDetailRequirement"
+            },
+            "description": "Grouping dimensions that must be selected when a particular detail field is requested."
+          },
+          "exclusions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetAIReportQueryRulesResponseDataExclusion"
+            },
+            "description": "Metric and dimension combinations that are prohibited in every group."
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetAIReportQueryRulesResponseDataGroup"
+            },
+            "description": "Supported combinations of metrics, grouping dimensions, filters, dates and detail fields. A query must satisfy all conditions in at least one group, as well as exclusions and detail_requirements."
+          },
+          "version": {
+            "type": "string",
+            "description": "Version of the returned rule set. Compare it with a previously retrieved version to detect rule changes."
+          }
+        }
+      },
+      "GetAIReportQueryRulesResponseDataDetailRequirement": {
+        "type": "object",
+        "properties": {
+          "detail_field": {
+            "type": "string",
+            "description": "Detail field code that activates this requirement when included in the request detail_fields."
+          },
+          "required_group_dimensions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Every dimension in this list must appear in the request group_dimensions when the specified detail field is selected. These are grouping dimensions, not metric codes."
+          }
+        }
+      },
+      "GetAIReportQueryRulesResponseDataExclusion": {
+        "type": "object",
+        "properties": {
+          "forbidden_filter_dimensions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Dimensions that cannot appear in filters when this restriction is active. Filtering is prohibited even when the dimension is not used for grouping."
+          },
+          "forbidden_group_dimensions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Dimensions that cannot appear in group_dimensions when this restriction is active."
+          },
+          "trigger_metric_codes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Selecting at least one of these metric codes activates this restriction."
+          }
+        }
+      },
+      "GetAIReportQueryRulesResponseDataGroup": {
+        "type": "object",
+        "properties": {
+          "detail_fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Detail field codes allowed in this group. Requested details must also satisfy detail_requirements."
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetAIReportQueryRulesResponseDataGroupFilter"
+            },
+            "description": "Dimensions allowed in filters for this group, with the maximum number of values allowed for each dimension."
+          },
+          "group_dimensions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Dimension codes allowed in group_dimensions for this group. You can select a subset; the global exclusions still apply."
+          },
+          "id": {
+            "type": "string",
+            "description": "Identifier of this rule group. Use it to distinguish groups when reading the rules; it is not a query parameter."
+          },
+          "max_days": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Maximum number of calendar dates in one query, counting both start_date and end_date. This limits the length of a single query, not how far back it can start. For example, a limit of 7 allows October 25 through October 31. Omitted when this group has no configured limit."
+          },
+          "metric_codes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Metric codes that this group can query together. Every code in the request metric_codes must appear in the same matching group."
+          },
+          "metric_start_dates": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/GetAIReportQueryRulesResponseDataGroupMetricStartDate"
+            },
+            "description": "Earliest supported query date for individual metrics. For each selected metric listed here, start_date must be on or after its specified date."
+          },
+          "required_any_filter_dimensions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "If this list is nonempty, at least one listed dimension must have a nonempty filter in the request. An empty list means this group does not require a filter."
+          },
+          "retention_days": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Maximum lookback in calendar days, measured from the current date used by server validation. This limits how far back a query can start, independently of max_days. start_date must be on or after that date minus retention_days, and must also satisfy each selected metric's start_date in metric_start_dates."
+          }
+        }
+      },
+      "GetAIReportQueryRulesResponseDataGroupFilter": {
+        "type": "object",
+        "properties": {
+          "dimension_code": {
+            "type": "string",
+            "description": "Dimension code that may be used in filters[].code for this group."
+          },
+          "max_value_count": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Maximum number of values allowed in one filter for this dimension. A value of -1 means the group does not set a per-dimension limit; request array limits still apply."
+          }
+        }
+      },
+      "GetAIReportQueryRulesResponseDataGroupMetricStartDate": {
+        "type": "object",
+        "properties": {
+          "metric_code": {
+            "type": "string",
+            "description": "Metric code whose earliest query start date is specified by this entry."
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Earliest query start_date allowed for this metric, in YYYY-MM-DD format."
           }
         }
       },
@@ -94892,6 +95749,286 @@
           }
         }
       },
+      "QueryAIReportDataRequest": {
+        "type": "object",
+        "properties": {
+          "detail_fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Additional fields to return for each row, such as payment time. Select codes from the catalog and include the grouping dimensions required by the query rules."
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Last date to query, in YYYY-MM-DD format and the shop timezone. Data for this date is included."
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter"
+            },
+            "description": "Conditions that restrict which data is included. Values within one dimension are combined with IN; different dimensions are combined with AND."
+          },
+          "group_dimensions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Dimensions that split metric values into separate rows. For example, product_id returns separate values for each product. Select dimension codes supported with your metrics by the query rules."
+          },
+          "metric_codes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Metrics to calculate, such as pay_amt for GMV. Select at least one metric code from the catalog. All selected metrics must be supported together by the query rules."
+          },
+          "sort_rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SortRule"
+            },
+            "description": "Sort rules in order of priority. If omitted or empty, sort by the first selected metric in descending order. When time_granularity splits results into time buckets and no time sort is specified, append time ascending after the selected sort rules. Any remaining grouping keys are then appended in ascending order. An explicit time sort keeps its position and direction."
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date",
+            "description": "First date to query, in YYYY-MM-DD format and the shop timezone. Data for this date is included."
+          },
+          "time_granularity": {
+            "type": "string",
+            "description": "Time unit used to split query results in the shop timezone. DAY: Calendar day. WEEK: Calendar week. MONTH: Calendar month. YEAR: Calendar year. Select a value returned by catalog.time_granularities for this shop. Only DAY, WEEK, MONTH and YEAR are supported."
+          }
+        },
+        "required": [
+          "end_date",
+          "metric_codes",
+          "start_date",
+          "time_granularity"
+        ]
+      },
+      "QueryAIReportDataResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Status code; 0 means success."
+          },
+          "message": {
+            "type": "string",
+            "description": "Success or failure message."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Request log ID."
+          },
+          "data": {
+            "$ref": "#/components/schemas/QueryAIReportDataResponseData"
+          }
+        }
+      },
+      "QueryAIReportDataResponseData": {
+        "type": "object",
+        "properties": {
+          "columns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QueryAIReportDataResponseDataColumn"
+            },
+            "description": "Definitions of the returned columns, including their codes, display names, roles and value types."
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Last date included in this query, in the shop timezone."
+          },
+          "next_page_token": {
+            "type": "string",
+            "description": "Pass this token as page_token to retrieve the next page. An empty string means there are no more results."
+          },
+          "rows": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QueryAIReportDataResponseDataRow"
+            },
+            "description": "Result rows; an empty list means no matching data."
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date",
+            "description": "First date included in this query, in the shop timezone."
+          },
+          "total_count": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total number of matching results across all pages. Returned when the total is available."
+          }
+        },
+        "required": [
+          "next_page_token"
+        ]
+      },
+      "QueryAIReportDataResponseDataColumn": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Catalog code used by row cells."
+          },
+          "kind": {
+            "type": "string",
+            "description": "Role of this column. DIMENSION: row values are in dimensions. METRIC: row values are in metrics. DETAIL: row values are in detail_fields."
+          },
+          "name": {
+            "type": "string",
+            "description": "Name to display for this column."
+          },
+          "value_type": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Format of the returned value. Current types: CURRENCY — Monetary value; read currency in the query result for its currency code; DATETIME — UTC date-time string in RFC 3339 format; DECIMAL — Decimal value represented as a string; DURATION — Duration; the metric or detail field description specifies its unit; ENUM — Coded value; read the field definition or candidate values for its meaning; INT — Integer value represented as a string; RATIO — Raw ratio: 0.1234 represents 12.34%; STRING — Text value. New types may be added."
+          }
+        }
+      },
+      "QueryAIReportDataResponseDataRow": {
+        "type": "object",
+        "properties": {
+          "detail_fields": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QueryAIReportDataResponseDataRowDetailField"
+            },
+            "description": "Additional information requested in detail_fields for this row, such as payment time."
+          },
+          "dimensions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QueryAIReportDataResponseDataRowDimension"
+            },
+            "description": "Dimension values identifying this row, such as the product or content type."
+          },
+          "end_date": {
+            "type": "string",
+            "description": "Last date covered by this result row, in the shop timezone."
+          },
+          "metrics": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QueryAIReportDataResponseDataRowMetric"
+            },
+            "description": "Measured values for the metrics selected in metric_codes."
+          },
+          "start_date": {
+            "type": "string",
+            "description": "First date covered by this result row, in the shop timezone."
+          }
+        }
+      },
+      "QueryAIReportDataResponseDataRowDetailField": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Column code from the catalog."
+          },
+          "creator": {
+            "$ref": "#/components/schemas/Creator",
+            "description": "Creator identified by an application-scoped OpenID. Use an OpenID returned to the application making this request."
+          },
+          "currency": {
+            "type": "string",
+            "description": "ISO 4217 currency code, present for currency values."
+          },
+          "display_value": {
+            "type": "string",
+            "description": "Optional display text for value, such as an enum label, a formatted amount or a percentage. Display text may be empty or absent; it is not a calculation or filtering value. Enum dimensions use value for the option code and display_value for its display label when available. Enum detail fields may repeat the code when no display label is available. Creator identities and DATETIME values do not include display_value."
+          },
+          "image_url": {
+            "type": "string",
+            "description": "Image for the entity represented by this value, when available."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the product, Creator or other entity represented by this value, when available."
+          },
+          "value": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Value represented as a string. Enum dimensions and enum detail fields return the catalog option code, such as PRODUCT_CARD. Numeric strings preserve precision; parse them only when nonempty. RATIO uses 0.1234 for 12.34%; DATETIME uses UTC RFC 3339. An absent or empty string means unavailable, not zero. For Creator identities, this field is omitted; read creator.creator_open_id instead. An unknown Creator may have no creator identity."
+          }
+        }
+      },
+      "QueryAIReportDataResponseDataRowDimension": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Column code from the catalog."
+          },
+          "creator": {
+            "$ref": "#/components/schemas/Creator",
+            "description": "Creator identified by an application-scoped OpenID. Use an OpenID returned to the application making this request."
+          },
+          "currency": {
+            "type": "string",
+            "description": "ISO 4217 currency code, present for currency values."
+          },
+          "display_value": {
+            "type": "string",
+            "description": "Optional display text for value, such as an enum label, a formatted amount or a percentage. Display text may be empty or absent; it is not a calculation or filtering value. Enum dimensions use value for the option code and display_value for its display label when available. Enum detail fields may repeat the code when no display label is available. Creator identities and DATETIME values do not include display_value."
+          },
+          "image_url": {
+            "type": "string",
+            "description": "Image for the entity represented by this value, when available."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the product, Creator or other entity represented by this value, when available."
+          },
+          "value": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Value represented as a string. Enum dimensions and enum detail fields return the catalog option code, such as PRODUCT_CARD. Numeric strings preserve precision; parse them only when nonempty. RATIO uses 0.1234 for 12.34%; DATETIME uses UTC RFC 3339. An absent or empty string means unavailable, not zero. For Creator identities, this field is omitted; read creator.creator_open_id instead. An unknown Creator may have no creator identity."
+          }
+        }
+      },
+      "QueryAIReportDataResponseDataRowMetric": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string",
+            "description": "Column code from the catalog."
+          },
+          "creator": {
+            "$ref": "#/components/schemas/Creator",
+            "description": "Creator identified by an application-scoped OpenID. Use an OpenID returned to the application making this request."
+          },
+          "currency": {
+            "type": "string",
+            "description": "ISO 4217 currency code, present for currency values."
+          },
+          "display_value": {
+            "type": "string",
+            "description": "Optional display text for value, such as an enum label, a formatted amount or a percentage. Display text may be empty or absent; it is not a calculation or filtering value. Enum dimensions use value for the option code and display_value for its display label when available. Enum detail fields may repeat the code when no display label is available. Creator identities and DATETIME values do not include display_value."
+          },
+          "image_url": {
+            "type": "string",
+            "description": "Image for the entity represented by this value, when available."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display name of the product, Creator or other entity represented by this value, when available."
+          },
+          "value": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Value represented as a string. Enum dimensions and enum detail fields return the catalog option code, such as PRODUCT_CARD. Numeric strings preserve precision; parse them only when nonempty. RATIO uses 0.1234 for 12.34%; DATETIME uses UTC RFC 3339. An absent or empty string means unavailable, not zero. For Creator identities, this field is omitted; read creator.creator_open_id instead. An unknown Creator may have no creator identity."
+          }
+        }
+      },
       "QueryCreatorPromotionDetailsInTargetCollaborationRequest": {
         "type": "object",
         "properties": {
@@ -96100,7 +97237,6 @@
           }
         },
         "required": [
-          "id",
           "name"
         ]
       },
@@ -98101,6 +99237,113 @@
           "is_enabled_scheduled_sale",
           "schedule_sale_time"
         ]
+      },
+      "SearchAIReportDimensionOptionsRequest": {
+        "type": "object",
+        "properties": {
+          "creator": {
+            "$ref": "#/components/schemas/Creator",
+            "description": "Creator identified by an application-scoped OpenID. Use an OpenID returned to the application making this request."
+          },
+          "dimension_code": {
+            "type": "string",
+            "description": "Code of the dimension whose filter values you want to find. Select it from the catalog. Candidate lookup is not available for main_order_id (order ID)."
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Last included date of the metric data used to find entity candidates, in YYYY-MM-DD format and the shop timezone. Required with start_date for all entity searches except product_id or sku_id with a nonempty keyword. It must not be earlier than start_date. Fixed attribute options and those two keyword lookup modes ignore dates."
+          },
+          "keyword": {
+            "type": "string",
+            "description": "Search condition for an entity dimension. product_id: Product search text. sku_id: Exact numeric SKU ID, not a SKU name or partial ID. room_id: Exact numeric LIVE ID. item_id: Exact numeric video ID. author_id: Do not supply keyword; use creator.creator_open_id. Omit keyword to list candidates from metric data, which requires both dates. Nonempty product_id and sku_id lookups do not require dates. Fixed attribute dimensions ignore keyword."
+          },
+          "metric_codes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Metric codes for entity searches based on metric data. The first metric determines descending candidate order; pay_amt ranks by GMV. If omitted or empty, candidates are ordered by time descending. Fixed attribute options and product_id/sku_id lookups with a nonempty keyword ignore this field."
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date",
+            "description": "First included date of the metric data used to find entity candidates, in YYYY-MM-DD format and the shop timezone. Required with end_date for all entity searches except product_id or sku_id with a nonempty keyword. Fixed attribute options and those two keyword lookup modes ignore dates."
+          }
+        },
+        "required": [
+          "dimension_code"
+        ]
+      },
+      "SearchAIReportDimensionOptionsResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Status code; 0 means success."
+          },
+          "message": {
+            "type": "string",
+            "description": "Success or failure message."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Request log ID."
+          },
+          "data": {
+            "$ref": "#/components/schemas/SearchAIReportDimensionOptionsResponseData"
+          }
+        }
+      },
+      "SearchAIReportDimensionOptionsResponseData": {
+        "type": "object",
+        "properties": {
+          "dimension_code": {
+            "type": "string",
+            "description": "Dimension code these options belong to. Use it as filters[].code when building a query."
+          },
+          "next_page_token": {
+            "type": "string",
+            "description": "For entity candidates, pass a nonempty token as page_token to retrieve the next page. An empty string means there are no more results. Fixed attribute options always return an empty token because the complete list is returned together."
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SearchAIReportDimensionOptionsResponseDataOption"
+            },
+            "description": "Filter values for the requested dimension. Fixed attribute options contain the complete configured list regardless of page_size; entity options contain the current page. Use a non-Creator option value in filters[].values, or a Creator option creator in filters[].creators. An unknown Creator without an identity cannot be selected as a Creator filter."
+          },
+          "total_count": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Total number of matching results across all pages. Returned when the total is available."
+          }
+        },
+        "required": [
+          "next_page_token"
+        ]
+      },
+      "SearchAIReportDimensionOptionsResponseDataOption": {
+        "type": "object",
+        "properties": {
+          "creator": {
+            "$ref": "#/components/schemas/Creator",
+            "description": "Creator identified by an application-scoped OpenID. Use an OpenID returned to the application making this request."
+          },
+          "image_url": {
+            "type": "string",
+            "description": "Image for the candidate, when available."
+          },
+          "name": {
+            "type": "string",
+            "description": "Display label; may be absent for an unknown entity."
+          },
+          "value": {
+            "type": "string",
+            "description": "Value to send in filters[].values, such as LIVE or a product ID. Creator options use creator.creator_open_id instead."
+          }
+        }
       },
       "SearchAffiliateOrdersByCreatorRequest": {
         "type": "object",
@@ -107825,6 +109068,22 @@
           }
         }
       },
+      "SortRule": {
+        "type": "object",
+        "properties": {
+          "sort_field": {
+            "type": "string",
+            "description": "Field to sort by: a selected metric code, a selected dimension code, or time to sort chronologically by the calendar time bucket in the shop timezone. A row's start_date and end_date are clipped to the requested date range; time refers to the bucket, not a payment or order timestamp."
+          },
+          "sort_order": {
+            "type": "string",
+            "description": "Sort direction. ASC sorts from smallest to largest; DESC sorts from largest to smallest. Default: ASC."
+          }
+        },
+        "required": [
+          "sort_field"
+        ]
+      },
       "Stat": {
         "type": "object",
         "properties": {
@@ -112041,6 +113300,142 @@
             "type": "integer",
             "format": "int64",
             "description": "The number of times that a claimed coupon can be redeemed across all buyers. (Only available in ID, MY, PH, TH, SG, VN regions.)"
+          }
+        }
+      },
+      "ValidateAIReportQueryConfigurationRequest": {
+        "type": "object",
+        "properties": {
+          "detail_fields": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Additional fields to return for each row, such as payment time. Select codes from the catalog and include the grouping dimensions required by the query rules."
+          },
+          "end_date": {
+            "type": "string",
+            "format": "date",
+            "description": "Last date to query, in YYYY-MM-DD format and the shop timezone. Data for this date is included."
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Filter"
+            },
+            "description": "Conditions that restrict which data is included. Values within one dimension are combined with IN; different dimensions are combined with AND."
+          },
+          "group_dimensions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Dimensions that split metric values into separate rows. For example, product_id returns separate values for each product. Select dimension codes supported with your metrics by the query rules."
+          },
+          "metric_codes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Metrics to calculate, such as pay_amt for GMV. Select at least one metric code from the catalog. All selected metrics must be supported together by the query rules."
+          },
+          "sort_rules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SortRule"
+            },
+            "description": "Sort rules in order of priority. If omitted or empty, sort by the first selected metric in descending order. When time_granularity splits results into time buckets and no time sort is specified, append time ascending after the selected sort rules. Any remaining grouping keys are then appended in ascending order. An explicit time sort keeps its position and direction."
+          },
+          "start_date": {
+            "type": "string",
+            "format": "date",
+            "description": "First date to query, in YYYY-MM-DD format and the shop timezone. Data for this date is included."
+          },
+          "time_granularity": {
+            "type": "string",
+            "description": "Time unit used to split query results in the shop timezone. DAY: Calendar day. WEEK: Calendar week. MONTH: Calendar month. YEAR: Calendar year. Select a value returned by catalog.time_granularities for this shop. Only DAY, WEEK, MONTH and YEAR are supported."
+          }
+        },
+        "required": [
+          "end_date",
+          "metric_codes",
+          "start_date",
+          "time_granularity"
+        ]
+      },
+      "ValidateAIReportQueryConfigurationResponse": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Status code; 0 means success."
+          },
+          "message": {
+            "type": "string",
+            "description": "Success or failure message."
+          },
+          "request_id": {
+            "type": "string",
+            "description": "Request log ID."
+          },
+          "data": {
+            "$ref": "#/components/schemas/ValidateAIReportQueryConfigurationResponseData"
+          }
+        }
+      },
+      "ValidateAIReportQueryConfigurationResponseData": {
+        "type": "object",
+        "properties": {
+          "is_valid": {
+            "type": "boolean",
+            "description": "Whether the accepted request passed the business configuration checks. True means the checked combination passed; false means it was rejected, with reason_code and reason_message. This field is part of a successful validation response (code=0); malformed parameters or unknown catalog codes instead return a nonzero response code."
+          },
+          "reason_code": {
+            "type": "string",
+            "enum": [
+              "INVALID_METRIC",
+              "DISABLED_METRIC",
+              "EMPTY_METRICS",
+              "INVALID_DIMENSION",
+              "DUPLICATE_GROUP_BY",
+              "INVALID_TIME_RANGE",
+              "INVALID_ORDER_BY",
+              "INVALID_QUERY_CONFIG",
+              "DIMENSION_CONFLICT",
+              "FILTER_REQUIRED",
+              "TIME_LOOKBACK",
+              "TIME_WINDOW",
+              "METRIC_DIM_BLOCKED",
+              "INVALID_DETAIL_FIELD",
+              "DETAIL_FIELD_UNAVAILABLE",
+              "EXTERNAL_LIMIT_EXCEEDED",
+              "UNKNOWN_REASON"
+            ],
+            "x-enum-descriptions": [
+              "A metric code is not supported. Select a code from the catalog.",
+              "A selected metric is currently unavailable. Remove it or choose another metric.",
+              "No metrics were selected. Include at least one metric code.",
+              "A dimension code is not supported. Select a code from the catalog.",
+              "A grouping dimension appears more than once. Include each grouping dimension only once.",
+              "The date range is invalid. Check the date format and the order of the start and end dates.",
+              "A sort rule is invalid. Use a selected metric, a selected dimension or time with a supported sort order.",
+              "The query configuration is invalid. Review reason_message and correct the configuration.",
+              "The selected metrics and dimensions cannot be combined. Choose a combination supported by the query rules.",
+              "A required dimension filter is missing. Add a filter required by the matching rule group.",
+              "The requested dates fall outside the supported lookback range. Choose a more recent date range.",
+              "The date range exceeds the allowed number of days. Shorten the range.",
+              "A selected metric prohibits a grouping or filter dimension. Remove the prohibited combination.",
+              "A detail field code is not supported. Select a detail field from the catalog.",
+              "A detail field is unavailable for this configuration. Check the supported fields and required grouping dimensions.",
+              "The selection exceeds an allowed limit. Reduce the number of selected items as described in reason_message.",
+              "Validation was rejected for a reason not covered by the other codes. Use reason_message to identify the issue."
+            ],
+            "description": "Reason the configuration was rejected. Returned when is_valid is false. Possible values: INVALID_METRIC: A metric code is not supported. Select a code from the catalog. DISABLED_METRIC: A selected metric is currently unavailable. Remove it or choose another metric. EMPTY_METRICS: No metrics were selected. Include at least one metric code. INVALID_DIMENSION: A dimension code is not supported. Select a code from the catalog. DUPLICATE_GROUP_BY: A grouping dimension appears more than once. Include each grouping dimension only once. INVALID_TIME_RANGE: The date range is invalid. Check the date format and the order of the start and end dates. INVALID_ORDER_BY: A sort rule is invalid. Use a selected metric, a selected dimension or time with a supported sort order. INVALID_QUERY_CONFIG: The query configuration is invalid. Review reason_message and correct the configuration. DIMENSION_CONFLICT: The selected metrics and dimensions cannot be combined. Choose a combination supported by the query rules. FILTER_REQUIRED: A required dimension filter is missing. Add a filter required by the matching rule group. TIME_LOOKBACK: The requested dates fall outside the supported lookback range. Choose a more recent date range. TIME_WINDOW: The date range exceeds the allowed number of days. Shorten the range. METRIC_DIM_BLOCKED: A selected metric prohibits a grouping or filter dimension. Remove the prohibited combination. INVALID_DETAIL_FIELD: A detail field code is not supported. Select a detail field from the catalog. DETAIL_FIELD_UNAVAILABLE: A detail field is unavailable for this configuration. Check the supported fields and required grouping dimensions. EXTERNAL_LIMIT_EXCEEDED: The selection exceeds an allowed limit. Reduce the number of selected items as described in reason_message. UNKNOWN_REASON: Validation was rejected for a reason not covered by the other codes. Use reason_message to identify the issue."
+          },
+          "reason_message": {
+            "type": "string",
+            "description": "Explanation of why the query configuration was rejected and how to correct it. Returned when is_valid is false."
           }
         }
       },
