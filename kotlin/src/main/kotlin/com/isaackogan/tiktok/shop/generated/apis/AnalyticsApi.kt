@@ -34,6 +34,9 @@ import com.isaackogan.tiktok.shop.generated.models.GetACCAudiencePreferenceSumma
 import com.isaackogan.tiktok.shop.generated.models.GetACCBrandsResponse
 import com.isaackogan.tiktok.shop.generated.models.GetACCLIVESalesFactorsResponse
 import com.isaackogan.tiktok.shop.generated.models.GetACCTopSalesCategoriesResponse
+import com.isaackogan.tiktok.shop.generated.models.GetAIReportCampaignPeriodsResponse
+import com.isaackogan.tiktok.shop.generated.models.GetAIReportCatalogResponse
+import com.isaackogan.tiktok.shop.generated.models.GetAIReportQueryRulesResponse
 import com.isaackogan.tiktok.shop.generated.models.GetBestsellingCreatorsResponse
 import com.isaackogan.tiktok.shop.generated.models.GetBestsellingLIVESessionsResponse
 import com.isaackogan.tiktok.shop.generated.models.GetBestsellingProductsResponse
@@ -71,6 +74,12 @@ import com.isaackogan.tiktok.shop.generated.models.GetShopVideoPerformanceOvervi
 import com.isaackogan.tiktok.shop.generated.models.GetShopVideoProductPerformanceListResponse
 import com.isaackogan.tiktok.shop.generated.models.GetShopVideosPerformanceDetailsResponse
 import com.isaackogan.tiktok.shop.generated.models.GetVideoPerformancesResponse
+import com.isaackogan.tiktok.shop.generated.models.QueryAIReportDataRequest
+import com.isaackogan.tiktok.shop.generated.models.QueryAIReportDataResponse
+import com.isaackogan.tiktok.shop.generated.models.SearchAIReportDimensionOptionsRequest
+import com.isaackogan.tiktok.shop.generated.models.SearchAIReportDimensionOptionsResponse
+import com.isaackogan.tiktok.shop.generated.models.ValidateAIReportQueryConfigurationRequest
+import com.isaackogan.tiktok.shop.generated.models.ValidateAIReportQueryConfigurationResponse
 
 import com.google.gson.annotations.SerializedName
 
@@ -990,6 +999,230 @@ open class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/analytics/202610/acc/preferences/product/categories",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /analytics/202611/ai_report/campaigns
+     * Get AI Report Campaign Periods
+     * Retrieve the authorized shop&#39;s campaigns for the current year that have started by today. The server determines today using the shop region&#39;s configured local timezone. Campaign start_date and end_date are local calendar dates in that timezone, not UTC. Default order: start_date ascending, end_date ascending, then internal campaign ID descending for equal date pairs. Pass returned dates to data queries; a campaign ID is not required.
+     * @param pageToken Token identifying the page to retrieve. Omit it for the first page. For subsequent pages, use next_page_token from the preceding response and keep the other query conditions and page_size unchanged. (optional)
+     * @param pageSize Maximum number of results to return per page. Allowed range: 1–100. Default: 50. (optional)
+     * @return GetAIReportCampaignPeriodsResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getAIReportCampaignPeriods(pageToken: kotlin.String? = null, pageSize: kotlin.Long? = null) : GetAIReportCampaignPeriodsResponse {
+        val localVarResponse = getAIReportCampaignPeriodsWithHttpInfo(pageToken = pageToken, pageSize = pageSize)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAIReportCampaignPeriodsResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /analytics/202611/ai_report/campaigns
+     * Get AI Report Campaign Periods
+     * Retrieve the authorized shop&#39;s campaigns for the current year that have started by today. The server determines today using the shop region&#39;s configured local timezone. Campaign start_date and end_date are local calendar dates in that timezone, not UTC. Default order: start_date ascending, end_date ascending, then internal campaign ID descending for equal date pairs. Pass returned dates to data queries; a campaign ID is not required.
+     * @param pageToken Token identifying the page to retrieve. Omit it for the first page. For subsequent pages, use next_page_token from the preceding response and keep the other query conditions and page_size unchanged. (optional)
+     * @param pageSize Maximum number of results to return per page. Allowed range: 1–100. Default: 50. (optional)
+     * @return ApiResponse<GetAIReportCampaignPeriodsResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getAIReportCampaignPeriodsWithHttpInfo(pageToken: kotlin.String?, pageSize: kotlin.Long?) : ApiResponse<GetAIReportCampaignPeriodsResponse?> {
+        val localVariableConfig = getAIReportCampaignPeriodsRequestConfig(pageToken = pageToken, pageSize = pageSize)
+
+        return request<Unit, GetAIReportCampaignPeriodsResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getAIReportCampaignPeriods
+     *
+     * @param pageToken Token identifying the page to retrieve. Omit it for the first page. For subsequent pages, use next_page_token from the preceding response and keep the other query conditions and page_size unchanged. (optional)
+     * @param pageSize Maximum number of results to return per page. Allowed range: 1–100. Default: 50. (optional)
+     * @return RequestConfig
+     */
+    fun getAIReportCampaignPeriodsRequestConfig(pageToken: kotlin.String?, pageSize: kotlin.Long?) : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (pageToken != null) {
+                    put("page_token", listOf(pageToken.toString()))
+                }
+                if (pageSize != null) {
+                    put("page_size", listOf(pageSize.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/analytics/202611/ai_report/campaigns",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /analytics/202611/ai_report/catalog
+     * Get AI Report Catalog
+     * Retrieve the complete configured catalog of metrics, dimensions, time buckets and row details for the authorized shop. The available configuration may change. Fetch the catalog when preparing a query instead of caching it for long periods. This is a finite configuration snapshot, not an entity list. Use rules for combinations, candidate search for entity values, and validation before querying.
+     * @return GetAIReportCatalogResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getAIReportCatalog() : GetAIReportCatalogResponse {
+        val localVarResponse = getAIReportCatalogWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAIReportCatalogResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /analytics/202611/ai_report/catalog
+     * Get AI Report Catalog
+     * Retrieve the complete configured catalog of metrics, dimensions, time buckets and row details for the authorized shop. The available configuration may change. Fetch the catalog when preparing a query instead of caching it for long periods. This is a finite configuration snapshot, not an entity list. Use rules for combinations, candidate search for entity values, and validation before querying.
+     * @return ApiResponse<GetAIReportCatalogResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getAIReportCatalogWithHttpInfo() : ApiResponse<GetAIReportCatalogResponse?> {
+        val localVariableConfig = getAIReportCatalogRequestConfig()
+
+        return request<Unit, GetAIReportCatalogResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getAIReportCatalog
+     *
+     * @return RequestConfig
+     */
+    fun getAIReportCatalogRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/analytics/202611/ai_report/catalog",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * GET /analytics/202611/ai_report/rules
+     * Get AI Report Query Rules
+     * Retrieve the complete finite configuration snapshot of main query constraints. A query must match at least one capability group and all applicable global restrictions. Rules do not replace server validation of data readiness and other runtime conditions.
+     * @return GetAIReportQueryRulesResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun getAIReportQueryRules() : GetAIReportQueryRulesResponse {
+        val localVarResponse = getAIReportQueryRulesWithHttpInfo()
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as GetAIReportQueryRulesResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * GET /analytics/202611/ai_report/rules
+     * Get AI Report Query Rules
+     * Retrieve the complete finite configuration snapshot of main query constraints. A query must match at least one capability group and all applicable global restrictions. Rules do not replace server validation of data readiness and other runtime conditions.
+     * @return ApiResponse<GetAIReportQueryRulesResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun getAIReportQueryRulesWithHttpInfo() : ApiResponse<GetAIReportQueryRulesResponse?> {
+        val localVariableConfig = getAIReportQueryRulesRequestConfig()
+
+        return request<Unit, GetAIReportQueryRulesResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation getAIReportQueryRules
+     *
+     * @return RequestConfig
+     */
+    fun getAIReportQueryRulesRequestConfig() : RequestConfig<Unit> {
+        val localVariableBody = null
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.GET,
+            path = "/analytics/202611/ai_report/rules",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,
@@ -5111,6 +5344,256 @@ open class AnalyticsApi(basePath: kotlin.String = defaultBasePath, client: Call.
         return RequestConfig(
             method = RequestMethod.GET,
             path = "/analytics/202403/videos/performances",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /analytics/202611/ai_report/data/query
+     * Query AI Report Data
+     * Query grouped metric values and optional row details for one authorized shop. Use catalog codes and query rules, and validate the final configuration. Dates are inclusive in the shop timezone. Rows are keyed by returned dimension values and bucket dates; match cells to columns by code and kind. This API returns table data, not metric-card comparisons or chart-specific calculations. Keep conditions unchanged while paging. Default sorting is the first selected metric descending. Time-bucketed queries append time ascending unless explicitly sorted by time, followed by remaining grouping keys ascending.
+     * @param queryAIReportDataRequest 
+     * @param pageToken Token identifying the page to retrieve. Omit it for the first page. For subsequent pages, use next_page_token from the preceding response and keep the other query conditions and page_size unchanged. (optional)
+     * @param pageSize Maximum number of results to return per page. Allowed range: 1–100. Default: 50. (optional)
+     * @return QueryAIReportDataResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun queryAIReportData(queryAIReportDataRequest: QueryAIReportDataRequest, pageToken: kotlin.String? = null, pageSize: kotlin.Long? = null) : QueryAIReportDataResponse {
+        val localVarResponse = queryAIReportDataWithHttpInfo(queryAIReportDataRequest = queryAIReportDataRequest, pageToken = pageToken, pageSize = pageSize)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as QueryAIReportDataResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /analytics/202611/ai_report/data/query
+     * Query AI Report Data
+     * Query grouped metric values and optional row details for one authorized shop. Use catalog codes and query rules, and validate the final configuration. Dates are inclusive in the shop timezone. Rows are keyed by returned dimension values and bucket dates; match cells to columns by code and kind. This API returns table data, not metric-card comparisons or chart-specific calculations. Keep conditions unchanged while paging. Default sorting is the first selected metric descending. Time-bucketed queries append time ascending unless explicitly sorted by time, followed by remaining grouping keys ascending.
+     * @param queryAIReportDataRequest 
+     * @param pageToken Token identifying the page to retrieve. Omit it for the first page. For subsequent pages, use next_page_token from the preceding response and keep the other query conditions and page_size unchanged. (optional)
+     * @param pageSize Maximum number of results to return per page. Allowed range: 1–100. Default: 50. (optional)
+     * @return ApiResponse<QueryAIReportDataResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun queryAIReportDataWithHttpInfo(queryAIReportDataRequest: QueryAIReportDataRequest, pageToken: kotlin.String?, pageSize: kotlin.Long?) : ApiResponse<QueryAIReportDataResponse?> {
+        val localVariableConfig = queryAIReportDataRequestConfig(queryAIReportDataRequest = queryAIReportDataRequest, pageToken = pageToken, pageSize = pageSize)
+
+        return request<QueryAIReportDataRequest, QueryAIReportDataResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation queryAIReportData
+     *
+     * @param queryAIReportDataRequest 
+     * @param pageToken Token identifying the page to retrieve. Omit it for the first page. For subsequent pages, use next_page_token from the preceding response and keep the other query conditions and page_size unchanged. (optional)
+     * @param pageSize Maximum number of results to return per page. Allowed range: 1–100. Default: 50. (optional)
+     * @return RequestConfig
+     */
+    fun queryAIReportDataRequestConfig(queryAIReportDataRequest: QueryAIReportDataRequest, pageToken: kotlin.String?, pageSize: kotlin.Long?) : RequestConfig<QueryAIReportDataRequest> {
+        val localVariableBody = queryAIReportDataRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (pageToken != null) {
+                    put("page_token", listOf(pageToken.toString()))
+                }
+                if (pageSize != null) {
+                    put("page_size", listOf(pageSize.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/analytics/202611/ai_report/data/query",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /analytics/202611/ai_report/dimension_options/search
+     * Search AI Report Dimension Options
+     * Find filter values for a dimension returned by the catalog. Fixed attribute options are returned together in configured order; keyword, dates, metrics and pagination do not restrict this finite list. For product_id with a nonempty keyword, search product text and return matches by product ID descending; for sku_id with a nonempty keyword, look up an exact numeric SKU ID and return at most one match. These two lookup modes do not use dates or metric_codes. Other entity searches, including product_id or sku_id without a keyword, require start_date and end_date and use metric data. They aggregate metric data over the requested date range and sort by the first supplied metric descending, with grouping keys ascending to break ties. When metric_codes is omitted or empty, they sort by grouping keys ascending. These searches do not group or sort by time buckets. Entity results use pagination. Creator searches accept an application-scoped creator.creator_open_id, not keyword; an unknown Creator candidate has no selectable identity. main_order_id candidate lookup is unsupported.
+     * @param searchAIReportDimensionOptionsRequest 
+     * @param pageToken For entity candidates, omit this token for the first page; use the preceding next_page_token for later pages and keep conditions and page_size unchanged. Fixed attribute options are not paginated: omit page_token and expect an empty next_page_token. (optional)
+     * @param pageSize Maximum entity candidates to return per page. Allowed range: 1–100. Default: 50. Fixed attribute options are returned as one complete list and are not limited by page_size; this parameter must still be within the allowed range. (optional)
+     * @return SearchAIReportDimensionOptionsResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun searchAIReportDimensionOptions(searchAIReportDimensionOptionsRequest: SearchAIReportDimensionOptionsRequest, pageToken: kotlin.String? = null, pageSize: kotlin.Long? = null) : SearchAIReportDimensionOptionsResponse {
+        val localVarResponse = searchAIReportDimensionOptionsWithHttpInfo(searchAIReportDimensionOptionsRequest = searchAIReportDimensionOptionsRequest, pageToken = pageToken, pageSize = pageSize)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as SearchAIReportDimensionOptionsResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /analytics/202611/ai_report/dimension_options/search
+     * Search AI Report Dimension Options
+     * Find filter values for a dimension returned by the catalog. Fixed attribute options are returned together in configured order; keyword, dates, metrics and pagination do not restrict this finite list. For product_id with a nonempty keyword, search product text and return matches by product ID descending; for sku_id with a nonempty keyword, look up an exact numeric SKU ID and return at most one match. These two lookup modes do not use dates or metric_codes. Other entity searches, including product_id or sku_id without a keyword, require start_date and end_date and use metric data. They aggregate metric data over the requested date range and sort by the first supplied metric descending, with grouping keys ascending to break ties. When metric_codes is omitted or empty, they sort by grouping keys ascending. These searches do not group or sort by time buckets. Entity results use pagination. Creator searches accept an application-scoped creator.creator_open_id, not keyword; an unknown Creator candidate has no selectable identity. main_order_id candidate lookup is unsupported.
+     * @param searchAIReportDimensionOptionsRequest 
+     * @param pageToken For entity candidates, omit this token for the first page; use the preceding next_page_token for later pages and keep conditions and page_size unchanged. Fixed attribute options are not paginated: omit page_token and expect an empty next_page_token. (optional)
+     * @param pageSize Maximum entity candidates to return per page. Allowed range: 1–100. Default: 50. Fixed attribute options are returned as one complete list and are not limited by page_size; this parameter must still be within the allowed range. (optional)
+     * @return ApiResponse<SearchAIReportDimensionOptionsResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun searchAIReportDimensionOptionsWithHttpInfo(searchAIReportDimensionOptionsRequest: SearchAIReportDimensionOptionsRequest, pageToken: kotlin.String?, pageSize: kotlin.Long?) : ApiResponse<SearchAIReportDimensionOptionsResponse?> {
+        val localVariableConfig = searchAIReportDimensionOptionsRequestConfig(searchAIReportDimensionOptionsRequest = searchAIReportDimensionOptionsRequest, pageToken = pageToken, pageSize = pageSize)
+
+        return request<SearchAIReportDimensionOptionsRequest, SearchAIReportDimensionOptionsResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation searchAIReportDimensionOptions
+     *
+     * @param searchAIReportDimensionOptionsRequest 
+     * @param pageToken For entity candidates, omit this token for the first page; use the preceding next_page_token for later pages and keep conditions and page_size unchanged. Fixed attribute options are not paginated: omit page_token and expect an empty next_page_token. (optional)
+     * @param pageSize Maximum entity candidates to return per page. Allowed range: 1–100. Default: 50. Fixed attribute options are returned as one complete list and are not limited by page_size; this parameter must still be within the allowed range. (optional)
+     * @return RequestConfig
+     */
+    fun searchAIReportDimensionOptionsRequestConfig(searchAIReportDimensionOptionsRequest: SearchAIReportDimensionOptionsRequest, pageToken: kotlin.String?, pageSize: kotlin.Long?) : RequestConfig<SearchAIReportDimensionOptionsRequest> {
+        val localVariableBody = searchAIReportDimensionOptionsRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf<kotlin.String, kotlin.collections.List<kotlin.String>>()
+            .apply {
+                if (pageToken != null) {
+                    put("page_token", listOf(pageToken.toString()))
+                }
+                if (pageSize != null) {
+                    put("page_size", listOf(pageSize.toString()))
+                }
+            }
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/analytics/202611/ai_report/dimension_options/search",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = true,
+            body = localVariableBody
+        )
+    }
+
+    /**
+     * POST /analytics/202611/ai_report/query_config/validate
+     * Validate AI Report Query Configuration
+     * Validate the query configuration without fetching report rows. Invalid request parameters, such as malformed dates or unknown catalog codes, return a nonzero response code. When request parameters are accepted but the metric, dimension, filter or detail-field combination is rejected, the response has code&#x3D;0 and data.is_valid&#x3D;false with reason_code and reason_message. A valid combination returns data.is_valid&#x3D;true and omits reason_code and reason_message. Only one rejection is returned; this API does not list every conflict. Validation does not reserve a data snapshot or guarantee that a later query will succeed if configuration or data availability changes. Sorting defaults match Data Query.
+     * @param validateAIReportQueryConfigurationRequest 
+     * @return ValidateAIReportQueryConfigurationResponse
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     * @throws UnsupportedOperationException If the API returns an informational or redirection response
+     * @throws ClientException If the API returns a client error response
+     * @throws ServerException If the API returns a server error response
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class, UnsupportedOperationException::class, ClientException::class, ServerException::class)
+    fun validateAIReportQueryConfiguration(validateAIReportQueryConfigurationRequest: ValidateAIReportQueryConfigurationRequest) : ValidateAIReportQueryConfigurationResponse {
+        val localVarResponse = validateAIReportQueryConfigurationWithHttpInfo(validateAIReportQueryConfigurationRequest = validateAIReportQueryConfigurationRequest)
+
+        return when (localVarResponse.responseType) {
+            ResponseType.Success -> (localVarResponse as Success<*>).data as ValidateAIReportQueryConfigurationResponse
+            ResponseType.Informational -> throw UnsupportedOperationException("Client does not support Informational responses.")
+            ResponseType.Redirection -> throw UnsupportedOperationException("Client does not support Redirection responses.")
+            ResponseType.ClientError -> {
+                val localVarError = localVarResponse as ClientError<*>
+                throw ClientException("Client error : ${localVarError.statusCode} ${localVarError.message.orEmpty()}", localVarError.statusCode, localVarResponse)
+            }
+            ResponseType.ServerError -> {
+                val localVarError = localVarResponse as ServerError<*>
+                throw ServerException("Server error : ${localVarError.statusCode} ${localVarError.message.orEmpty()} ${localVarError.body}", localVarError.statusCode, localVarResponse)
+            }
+        }
+    }
+
+    /**
+     * POST /analytics/202611/ai_report/query_config/validate
+     * Validate AI Report Query Configuration
+     * Validate the query configuration without fetching report rows. Invalid request parameters, such as malformed dates or unknown catalog codes, return a nonzero response code. When request parameters are accepted but the metric, dimension, filter or detail-field combination is rejected, the response has code&#x3D;0 and data.is_valid&#x3D;false with reason_code and reason_message. A valid combination returns data.is_valid&#x3D;true and omits reason_code and reason_message. Only one rejection is returned; this API does not list every conflict. Validation does not reserve a data snapshot or guarantee that a later query will succeed if configuration or data availability changes. Sorting defaults match Data Query.
+     * @param validateAIReportQueryConfigurationRequest 
+     * @return ApiResponse<ValidateAIReportQueryConfigurationResponse?>
+     * @throws IllegalStateException If the request is not correctly configured
+     * @throws IOException Rethrows the OkHttp execute method exception
+     */
+    @Suppress("UNCHECKED_CAST")
+    @Throws(IllegalStateException::class, IOException::class)
+    fun validateAIReportQueryConfigurationWithHttpInfo(validateAIReportQueryConfigurationRequest: ValidateAIReportQueryConfigurationRequest) : ApiResponse<ValidateAIReportQueryConfigurationResponse?> {
+        val localVariableConfig = validateAIReportQueryConfigurationRequestConfig(validateAIReportQueryConfigurationRequest = validateAIReportQueryConfigurationRequest)
+
+        return request<ValidateAIReportQueryConfigurationRequest, ValidateAIReportQueryConfigurationResponse>(
+            localVariableConfig
+        )
+    }
+
+    /**
+     * To obtain the request config of the operation validateAIReportQueryConfiguration
+     *
+     * @param validateAIReportQueryConfigurationRequest 
+     * @return RequestConfig
+     */
+    fun validateAIReportQueryConfigurationRequestConfig(validateAIReportQueryConfigurationRequest: ValidateAIReportQueryConfigurationRequest) : RequestConfig<ValidateAIReportQueryConfigurationRequest> {
+        val localVariableBody = validateAIReportQueryConfigurationRequest
+        val localVariableQuery: MultiValueMap = mutableMapOf()
+        val localVariableHeaders: MutableMap<String, String> = mutableMapOf()
+        localVariableHeaders["Content-Type"] = "application/json"
+        localVariableHeaders["Accept"] = "application/json"
+
+        return RequestConfig(
+            method = RequestMethod.POST,
+            path = "/analytics/202611/ai_report/query_config/validate",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = true,

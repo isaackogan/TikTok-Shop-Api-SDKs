@@ -170,6 +170,9 @@ if TYPE_CHECKING:
     from .models.get_aftersale_eligibility_request_types_item import GetAftersaleEligibilityRequestTypesItem
     from .models.get_aftersale_eligibility_response import GetAftersaleEligibilityResponse
     from .models.get_agent_settings_response import GetAgentSettingsResponse
+    from .models.get_ai_report_campaign_periods_response import GetAIReportCampaignPeriodsResponse
+    from .models.get_ai_report_catalog_response import GetAIReportCatalogResponse
+    from .models.get_ai_report_query_rules_response import GetAIReportQueryRulesResponse
     from .models.get_authorized_category_assets_response import GetAuthorizedCategoryAssetsResponse
     from .models.get_authorized_shops_response import GetAuthorizedShopsResponse
     from .models.get_available_review_decisions_check_decisions_item import GetAvailableReviewDecisionsCheckDecisionsItem
@@ -449,6 +452,8 @@ if TYPE_CHECKING:
     from .models.publish_affiliate_partner_campaign_response import PublishAffiliatePartnerCampaignResponse
     from .models.publish_global_product_request import PublishGlobalProductRequest
     from .models.publish_global_product_response import PublishGlobalProductResponse
+    from .models.query_ai_report_data_request import QueryAIReportDataRequest
+    from .models.query_ai_report_data_response import QueryAIReportDataResponse
     from .models.query_creator_promotion_details_in_target_collaboration_request import QueryCreatorPromotionDetailsInTargetCollaborationRequest
     from .models.query_creator_promotion_details_in_target_collaboration_response import QueryCreatorPromotionDetailsInTargetCollaborationResponse
     from .models.query_goods_inventory_for_mcf_request import QueryGoodsInventoryForMCFRequest
@@ -494,6 +499,8 @@ if TYPE_CHECKING:
     from .models.search_affiliate_orders_by_creator_response import SearchAffiliateOrdersByCreatorResponse
     from .models.search_aftersales_requests_request import SearchAftersalesRequestsRequest
     from .models.search_aftersales_requests_response import SearchAftersalesRequestsResponse
+    from .models.search_ai_report_dimension_options_request import SearchAIReportDimensionOptionsRequest
+    from .models.search_ai_report_dimension_options_response import SearchAIReportDimensionOptionsResponse
     from .models.search_cancellations_request import SearchCancellationsRequest
     from .models.search_cancellations_response import SearchCancellationsResponse
     from .models.search_cancellations_sort_field import SearchCancellationsSortField
@@ -665,6 +672,8 @@ if TYPE_CHECKING:
     from .models.upload_shoppable_photo_file_response import UploadShoppablePhotoFileResponse
     from .models.upload_shoppable_video_file_request import UploadShoppableVideoFileRequest
     from .models.upload_shoppable_video_file_response import UploadShoppableVideoFileResponse
+    from .models.validate_ai_report_query_configuration_request import ValidateAIReportQueryConfigurationRequest
+    from .models.validate_ai_report_query_configuration_response import ValidateAIReportQueryConfigurationResponse
 
 
 class AffiliateCreatorApi(SyncGroup):
@@ -5240,6 +5249,68 @@ class AnalyticsApi(SyncGroup):
 
         return self._run(_op.sync_detailed, brand_id=brand_id, industry_id=industry_id, date=date, trend_days=trend_days, audience_type=audience_type, scope=scope, category_id=category_id, keyword=keyword, sort_field=sort_field, sort_order=sort_order, page_size=page_size, page_token=page_token)
 
+    def get_ai_report_campaign_periods(
+        self,
+        *,
+        page_token: str | Unset = UNSET,
+        page_size: int | Unset = UNSET,
+    ) -> GetAIReportCampaignPeriodsResponse | None:
+        """Get AI Report Campaign Periods
+
+         Retrieve the authorized shop's campaigns for the current year that have started by today. The server
+        determines today using the shop region's configured local timezone. Campaign start_date and end_date
+        are local calendar dates in that timezone, not UTC. Default order: start_date ascending, end_date
+        ascending, then internal campaign ID descending for equal date pairs. Pass returned dates to data
+        queries; a campaign ID is not required.
+
+        Args:
+            page_token (str | Unset):
+            page_size (int | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_ai_report_campaign_periods as _op
+
+        return self._run(_op.sync_detailed, page_token=page_token, page_size=page_size)
+
+    def get_ai_report_catalog(
+        self,
+    ) -> GetAIReportCatalogResponse | None:
+        """Get AI Report Catalog
+
+         Retrieve the complete configured catalog of metrics, dimensions, time buckets and row details for
+        the authorized shop. The available configuration may change. Fetch the catalog when preparing a
+        query instead of caching it for long periods. This is a finite configuration snapshot, not an entity
+        list. Use rules for combinations, candidate search for entity values, and validation before
+        querying.
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_ai_report_catalog as _op
+
+        return self._run(_op.sync_detailed)
+
+    def get_ai_report_query_rules(
+        self,
+    ) -> GetAIReportQueryRulesResponse | None:
+        """Get AI Report Query Rules
+
+         Retrieve the complete finite configuration snapshot of main query constraints. A query must match at
+        least one capability group and all applicable global restrictions. Rules do not replace server
+        validation of data readiness and other runtime conditions.
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_ai_report_query_rules as _op
+
+        return self._run(_op.sync_detailed)
+
     def get_bestselling_creators(
         self,
         *,
@@ -6249,6 +6320,98 @@ class AnalyticsApi(SyncGroup):
 
         return self._run(_op.sync_detailed, video_ids=video_ids, start_time_ge=start_time_ge, end_time_le=end_time_le)
 
+    def query_ai_report_data(
+        self,
+        *,
+        body: QueryAIReportDataRequest,
+        page_token: str | Unset = UNSET,
+        page_size: int | Unset = UNSET,
+    ) -> QueryAIReportDataResponse | None:
+        """Query AI Report Data
+
+         Query grouped metric values and optional row details for one authorized shop. Use catalog codes and
+        query rules, and validate the final configuration. Dates are inclusive in the shop timezone. Rows
+        are keyed by returned dimension values and bucket dates; match cells to columns by code and kind.
+        This API returns table data, not metric-card comparisons or chart-specific calculations. Keep
+        conditions unchanged while paging. Default sorting is the first selected metric descending. Time-
+        bucketed queries append time ascending unless explicitly sorted by time, followed by remaining
+        grouping keys ascending.
+
+        Args:
+            page_token (str | Unset):
+            page_size (int | Unset):
+            body (QueryAIReportDataRequest):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import query_ai_report_data as _op
+
+        return self._run(_op.sync_detailed, body=body, page_token=page_token, page_size=page_size)
+
+    def search_ai_report_dimension_options(
+        self,
+        *,
+        body: SearchAIReportDimensionOptionsRequest,
+        page_token: str | Unset = UNSET,
+        page_size: int | Unset = UNSET,
+    ) -> SearchAIReportDimensionOptionsResponse | None:
+        """Search AI Report Dimension Options
+
+         Find filter values for a dimension returned by the catalog. Fixed attribute options are returned
+        together in configured order; keyword, dates, metrics and pagination do not restrict this finite
+        list. For product_id with a nonempty keyword, search product text and return matches by product ID
+        descending; for sku_id with a nonempty keyword, look up an exact numeric SKU ID and return at most
+        one match. These two lookup modes do not use dates or metric_codes. Other entity searches, including
+        product_id or sku_id without a keyword, require start_date and end_date and use metric data. They
+        aggregate metric data over the requested date range and sort by the first supplied metric
+        descending, with grouping keys ascending to break ties. When metric_codes is omitted or empty, they
+        sort by grouping keys ascending. These searches do not group or sort by time buckets. Entity results
+        use pagination. Creator searches accept an application-scoped creator.creator_open_id, not keyword;
+        an unknown Creator candidate has no selectable identity. main_order_id candidate lookup is
+        unsupported.
+
+        Args:
+            page_token (str | Unset):
+            page_size (int | Unset):
+            body (SearchAIReportDimensionOptionsRequest):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import search_ai_report_dimension_options as _op
+
+        return self._run(_op.sync_detailed, body=body, page_token=page_token, page_size=page_size)
+
+    def validate_ai_report_query_configuration(
+        self,
+        *,
+        body: ValidateAIReportQueryConfigurationRequest,
+    ) -> ValidateAIReportQueryConfigurationResponse | None:
+        """Validate AI Report Query Configuration
+
+         Validate the query configuration without fetching report rows. Invalid request parameters, such as
+        malformed dates or unknown catalog codes, return a nonzero response code. When request parameters
+        are accepted but the metric, dimension, filter or detail-field combination is rejected, the response
+        has code=0 and data.is_valid=false with reason_code and reason_message. A valid combination returns
+        data.is_valid=true and omits reason_code and reason_message. Only one rejection is returned; this
+        API does not list every conflict. Validation does not reserve a data snapshot or guarantee that a
+        later query will succeed if configuration or data availability changes. Sorting defaults match Data
+        Query.
+
+        Args:
+            body (ValidateAIReportQueryConfigurationRequest):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import validate_ai_report_query_configuration as _op
+
+        return self._run(_op.sync_detailed, body=body)
+
 
 class AsyncAnalyticsApi(AsyncGroup):
     """Operations tagged \"Analytics\"."""
@@ -6504,6 +6667,68 @@ class AsyncAnalyticsApi(AsyncGroup):
         from .api.analytics import get_acclive_sales_factors as _op
 
         return await self._run(_op.asyncio_detailed, brand_id=brand_id, industry_id=industry_id, date=date, trend_days=trend_days, audience_type=audience_type, scope=scope, category_id=category_id, keyword=keyword, sort_field=sort_field, sort_order=sort_order, page_size=page_size, page_token=page_token)
+
+    async def get_ai_report_campaign_periods(
+        self,
+        *,
+        page_token: str | Unset = UNSET,
+        page_size: int | Unset = UNSET,
+    ) -> GetAIReportCampaignPeriodsResponse | None:
+        """Get AI Report Campaign Periods
+
+         Retrieve the authorized shop's campaigns for the current year that have started by today. The server
+        determines today using the shop region's configured local timezone. Campaign start_date and end_date
+        are local calendar dates in that timezone, not UTC. Default order: start_date ascending, end_date
+        ascending, then internal campaign ID descending for equal date pairs. Pass returned dates to data
+        queries; a campaign ID is not required.
+
+        Args:
+            page_token (str | Unset):
+            page_size (int | Unset):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_ai_report_campaign_periods as _op
+
+        return await self._run(_op.asyncio_detailed, page_token=page_token, page_size=page_size)
+
+    async def get_ai_report_catalog(
+        self,
+    ) -> GetAIReportCatalogResponse | None:
+        """Get AI Report Catalog
+
+         Retrieve the complete configured catalog of metrics, dimensions, time buckets and row details for
+        the authorized shop. The available configuration may change. Fetch the catalog when preparing a
+        query instead of caching it for long periods. This is a finite configuration snapshot, not an entity
+        list. Use rules for combinations, candidate search for entity values, and validation before
+        querying.
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_ai_report_catalog as _op
+
+        return await self._run(_op.asyncio_detailed)
+
+    async def get_ai_report_query_rules(
+        self,
+    ) -> GetAIReportQueryRulesResponse | None:
+        """Get AI Report Query Rules
+
+         Retrieve the complete finite configuration snapshot of main query constraints. A query must match at
+        least one capability group and all applicable global restrictions. Rules do not replace server
+        validation of data readiness and other runtime conditions.
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import get_ai_report_query_rules as _op
+
+        return await self._run(_op.asyncio_detailed)
 
     async def get_bestselling_creators(
         self,
@@ -7513,6 +7738,98 @@ class AsyncAnalyticsApi(AsyncGroup):
         from .api.analytics import get_video_performances as _op
 
         return await self._run(_op.asyncio_detailed, video_ids=video_ids, start_time_ge=start_time_ge, end_time_le=end_time_le)
+
+    async def query_ai_report_data(
+        self,
+        *,
+        body: QueryAIReportDataRequest,
+        page_token: str | Unset = UNSET,
+        page_size: int | Unset = UNSET,
+    ) -> QueryAIReportDataResponse | None:
+        """Query AI Report Data
+
+         Query grouped metric values and optional row details for one authorized shop. Use catalog codes and
+        query rules, and validate the final configuration. Dates are inclusive in the shop timezone. Rows
+        are keyed by returned dimension values and bucket dates; match cells to columns by code and kind.
+        This API returns table data, not metric-card comparisons or chart-specific calculations. Keep
+        conditions unchanged while paging. Default sorting is the first selected metric descending. Time-
+        bucketed queries append time ascending unless explicitly sorted by time, followed by remaining
+        grouping keys ascending.
+
+        Args:
+            page_token (str | Unset):
+            page_size (int | Unset):
+            body (QueryAIReportDataRequest):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import query_ai_report_data as _op
+
+        return await self._run(_op.asyncio_detailed, body=body, page_token=page_token, page_size=page_size)
+
+    async def search_ai_report_dimension_options(
+        self,
+        *,
+        body: SearchAIReportDimensionOptionsRequest,
+        page_token: str | Unset = UNSET,
+        page_size: int | Unset = UNSET,
+    ) -> SearchAIReportDimensionOptionsResponse | None:
+        """Search AI Report Dimension Options
+
+         Find filter values for a dimension returned by the catalog. Fixed attribute options are returned
+        together in configured order; keyword, dates, metrics and pagination do not restrict this finite
+        list. For product_id with a nonempty keyword, search product text and return matches by product ID
+        descending; for sku_id with a nonempty keyword, look up an exact numeric SKU ID and return at most
+        one match. These two lookup modes do not use dates or metric_codes. Other entity searches, including
+        product_id or sku_id without a keyword, require start_date and end_date and use metric data. They
+        aggregate metric data over the requested date range and sort by the first supplied metric
+        descending, with grouping keys ascending to break ties. When metric_codes is omitted or empty, they
+        sort by grouping keys ascending. These searches do not group or sort by time buckets. Entity results
+        use pagination. Creator searches accept an application-scoped creator.creator_open_id, not keyword;
+        an unknown Creator candidate has no selectable identity. main_order_id candidate lookup is
+        unsupported.
+
+        Args:
+            page_token (str | Unset):
+            page_size (int | Unset):
+            body (SearchAIReportDimensionOptionsRequest):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import search_ai_report_dimension_options as _op
+
+        return await self._run(_op.asyncio_detailed, body=body, page_token=page_token, page_size=page_size)
+
+    async def validate_ai_report_query_configuration(
+        self,
+        *,
+        body: ValidateAIReportQueryConfigurationRequest,
+    ) -> ValidateAIReportQueryConfigurationResponse | None:
+        """Validate AI Report Query Configuration
+
+         Validate the query configuration without fetching report rows. Invalid request parameters, such as
+        malformed dates or unknown catalog codes, return a nonzero response code. When request parameters
+        are accepted but the metric, dimension, filter or detail-field combination is rejected, the response
+        has code=0 and data.is_valid=false with reason_code and reason_message. A valid combination returns
+        data.is_valid=true and omits reason_code and reason_message. Only one rejection is returned; this
+        API does not list every conflict. Validation does not reserve a data snapshot or guarantee that a
+        later query will succeed if configuration or data availability changes. Sorting defaults match Data
+        Query.
+
+        Args:
+            body (ValidateAIReportQueryConfigurationRequest):
+
+        Raises:
+            TikTokShopError: for a TikTok error code, a non-2xx status,
+                an unparseable response, a network error or a timeout.
+        """
+        from .api.analytics import validate_ai_report_query_configuration as _op
+
+        return await self._run(_op.asyncio_detailed, body=body)
 
 
 class AuthorizationApi(SyncGroup):

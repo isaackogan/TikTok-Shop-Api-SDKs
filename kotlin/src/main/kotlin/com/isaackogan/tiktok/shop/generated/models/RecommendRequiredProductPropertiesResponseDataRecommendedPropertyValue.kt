@@ -29,20 +29,20 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param id ID of the recommended property value.
  * @param name Display name of the recommended property value for the shop's region.
+ * @param id ID of the recommended property value.
  */
 
 
 data class RecommendRequiredProductPropertiesResponseDataRecommendedPropertyValue (
 
-    /* ID of the recommended property value. */
-    @SerializedName("id")
-    val id: kotlin.String,
-
     /* Display name of the recommended property value for the shop's region. */
     @SerializedName("name")
-    val name: kotlin.String
+    val name: kotlin.String,
+
+    /* ID of the recommended property value. */
+    @SerializedName("id")
+    val id: kotlin.String? = null
 
 ) {
 

@@ -1081,6 +1081,54 @@ export const OPERATIONS: readonly OperationMeta[] = [
     "requiresShopCipher": true
   },
   {
+    "operationId": "getAIReportCampaignPeriods",
+    "tag": "Analytics",
+    "group": "analytics",
+    "method": "get",
+    "path": "/analytics/202611/ai_report/campaigns",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getAIReportCatalog",
+    "tag": "Analytics",
+    "group": "analytics",
+    "method": "get",
+    "path": "/analytics/202611/ai_report/catalog",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "queryAIReportData",
+    "tag": "Analytics",
+    "group": "analytics",
+    "method": "post",
+    "path": "/analytics/202611/ai_report/data/query",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "searchAIReportDimensionOptions",
+    "tag": "Analytics",
+    "group": "analytics",
+    "method": "post",
+    "path": "/analytics/202611/ai_report/dimension_options/search",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "validateAIReportQueryConfiguration",
+    "tag": "Analytics",
+    "group": "analytics",
+    "method": "post",
+    "path": "/analytics/202611/ai_report/query_config/validate",
+    "requiresShopCipher": true
+  },
+  {
+    "operationId": "getAIReportQueryRules",
+    "tag": "Analytics",
+    "group": "analytics",
+    "method": "get",
+    "path": "/analytics/202611/ai_report/rules",
+    "requiresShopCipher": true
+  },
+  {
     "operationId": "getAuthorizedShops",
     "tag": "Authorization",
     "group": "authorization",

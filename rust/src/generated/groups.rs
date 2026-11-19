@@ -2063,6 +2063,69 @@ impl AnalyticsApi {
     pub async fn get_sps_overview(&self, locale: Option<&str>) -> Result<models::GetSpsOverviewResponse, Error> {
         apis::analytics_api::get_sps_overview(&self.config, locale).await.map_err(Error::from)
     }
+
+    /// Retrieve the authorized shop's campaigns for the current year that have started by today. The server determines today using the shop region's configured local timezone. Campaign start_date and end_date are local calendar dates in that timezone, not UTC. Default order: start_date ascending, end_date ascending, then internal campaign ID descending for equal date pairs. Pass returned dates to data queries; a campaign ID is not required.
+    pub async fn get_ai_report_campaign_periods(
+        &self,
+        page_token: Option<&str>,
+        page_size: Option<i64>,
+    ) -> Result<models::GetAiReportCampaignPeriodsResponse, Error> {
+        apis::analytics_api::get_ai_report_campaign_periods(&self.config, page_token, page_size)
+            .await
+            .map_err(Error::from)
+    }
+
+    /// Retrieve the complete configured catalog of metrics, dimensions, time buckets and row details for the authorized shop. The available configuration may change. Fetch the catalog when preparing a query instead of caching it for long periods. This is a finite configuration snapshot, not an entity list. Use rules for combinations, candidate search for entity values, and validation before querying.
+    pub async fn get_ai_report_catalog(&self) -> Result<models::GetAiReportCatalogResponse, Error> {
+        apis::analytics_api::get_ai_report_catalog(&self.config).await.map_err(Error::from)
+    }
+
+    /// Query grouped metric values and optional row details for one authorized shop. Use catalog codes and query rules, and validate the final configuration. Dates are inclusive in the shop timezone. Rows are keyed by returned dimension values and bucket dates; match cells to columns by code and kind. This API returns table data, not metric-card comparisons or chart-specific calculations. Keep conditions unchanged while paging. Default sorting is the first selected metric descending. Time-bucketed queries append time ascending unless explicitly sorted by time, followed by remaining grouping keys ascending.
+    pub async fn query_ai_report_data(
+        &self,
+        query_ai_report_data_request: models::QueryAiReportDataRequest,
+        page_token: Option<&str>,
+        page_size: Option<i64>,
+    ) -> Result<models::QueryAiReportDataResponse, Error> {
+        apis::analytics_api::query_ai_report_data(&self.config, query_ai_report_data_request, page_token, page_size)
+            .await
+            .map_err(Error::from)
+    }
+
+    /// Find filter values for a dimension returned by the catalog. Fixed attribute options are returned together in configured order; keyword, dates, metrics and pagination do not restrict this finite list. For product_id with a nonempty keyword, search product text and return matches by product ID descending; for sku_id with a nonempty keyword, look up an exact numeric SKU ID and return at most one match. These two lookup modes do not use dates or metric_codes. Other entity searches, including product_id or sku_id without a keyword, require start_date and end_date and use metric data. They aggregate metric data over the requested date range and sort by the first supplied metric descending, with grouping keys ascending to break ties. When metric_codes is omitted or empty, they sort by grouping keys ascending. These searches do not group or sort by time buckets. Entity results use pagination. Creator searches accept an application-scoped creator.creator_open_id, not keyword; an unknown Creator candidate has no selectable identity. main_order_id candidate lookup is unsupported.
+    pub async fn search_ai_report_dimension_options(
+        &self,
+        search_ai_report_dimension_options_request: models::SearchAiReportDimensionOptionsRequest,
+        page_token: Option<&str>,
+        page_size: Option<i64>,
+    ) -> Result<models::SearchAiReportDimensionOptionsResponse, Error> {
+        apis::analytics_api::search_ai_report_dimension_options(
+            &self.config,
+            search_ai_report_dimension_options_request,
+            page_token,
+            page_size,
+        )
+        .await
+        .map_err(Error::from)
+    }
+
+    /// Validate the query configuration without fetching report rows. Invalid request parameters, such as malformed dates or unknown catalog codes, return a nonzero response code. When request parameters are accepted but the metric, dimension, filter or detail-field combination is rejected, the response has code=0 and data.is_valid=false with reason_code and reason_message. A valid combination returns data.is_valid=true and omits reason_code and reason_message. Only one rejection is returned; this API does not list every conflict. Validation does not reserve a data snapshot or guarantee that a later query will succeed if configuration or data availability changes. Sorting defaults match Data Query.
+    pub async fn validate_ai_report_query_configuration(
+        &self,
+        validate_ai_report_query_configuration_request: models::ValidateAiReportQueryConfigurationRequest,
+    ) -> Result<models::ValidateAiReportQueryConfigurationResponse, Error> {
+        apis::analytics_api::validate_ai_report_query_configuration(
+            &self.config,
+            validate_ai_report_query_configuration_request,
+        )
+        .await
+        .map_err(Error::from)
+    }
+
+    /// Retrieve the complete finite configuration snapshot of main query constraints. A query must match at least one capability group and all applicable global restrictions. Rules do not replace server validation of data readiness and other runtime conditions.
+    pub async fn get_ai_report_query_rules(&self) -> Result<models::GetAiReportQueryRulesResponse, Error> {
+        apis::analytics_api::get_ai_report_query_rules(&self.config).await.map_err(Error::from)
+    }
 }
 
 impl fmt::Debug for AnalyticsApi {

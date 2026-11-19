@@ -346,6 +346,7 @@ from .create_video_precheck_task_request_video_info import CreateVideoPrecheckTa
 from .create_video_precheck_task_response import CreateVideoPrecheckTaskResponse
 from .create_video_precheck_task_response_data import CreateVideoPrecheckTaskResponseData
 from .create_video_precheck_task_response_data_precheck import CreateVideoPrecheckTaskResponseDataPrecheck
+from .creator import Creator
 from .creator_deauthorization_webhook import CreatorDeauthorizationWebhook
 from .creator_deauthorization_webhook_data import CreatorDeauthorizationWebhookData
 from .creator_preference import CreatorPreference
@@ -470,6 +471,7 @@ from .fbt_merchant_onboarding_webhook_data import FBTMerchantOnboardingWebhookDa
 from .fbt_merchant_onboarding_webhook_data_onboarded_region import FBTMerchantOnboardingWebhookDataOnboardedRegion
 from .fee import Fee
 from .file import File
+from .filter_ import Filter
 from .flammable_liquids_extra_info import FlammableLiquidsExtraInfo
 from .flammable_liquids_extra_info_flammable_liquids_type import FlammableLiquidsExtraInfoFlammableLiquidsType
 from .free_sample_rule import FreeSampleRule
@@ -597,6 +599,22 @@ from .get_aftersale_eligibility_response_data_sku_eligibility import GetAftersal
 from .get_aftersale_eligibility_response_data_sku_eligibility_line_item_eligibility import GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility
 from .get_agent_settings_response import GetAgentSettingsResponse
 from .get_agent_settings_response_data import GetAgentSettingsResponseData
+from .get_ai_report_campaign_periods_response import GetAIReportCampaignPeriodsResponse
+from .get_ai_report_campaign_periods_response_data import GetAIReportCampaignPeriodsResponseData
+from .get_ai_report_campaign_periods_response_data_campaign import GetAIReportCampaignPeriodsResponseDataCampaign
+from .get_ai_report_catalog_response import GetAIReportCatalogResponse
+from .get_ai_report_catalog_response_data import GetAIReportCatalogResponseData
+from .get_ai_report_catalog_response_data_detail_field import GetAIReportCatalogResponseDataDetailField
+from .get_ai_report_catalog_response_data_detail_field_value import GetAIReportCatalogResponseDataDetailFieldValue
+from .get_ai_report_catalog_response_data_dimension import GetAIReportCatalogResponseDataDimension
+from .get_ai_report_catalog_response_data_metric import GetAIReportCatalogResponseDataMetric
+from .get_ai_report_query_rules_response import GetAIReportQueryRulesResponse
+from .get_ai_report_query_rules_response_data import GetAIReportQueryRulesResponseData
+from .get_ai_report_query_rules_response_data_detail_requirement import GetAIReportQueryRulesResponseDataDetailRequirement
+from .get_ai_report_query_rules_response_data_exclusion import GetAIReportQueryRulesResponseDataExclusion
+from .get_ai_report_query_rules_response_data_group import GetAIReportQueryRulesResponseDataGroup
+from .get_ai_report_query_rules_response_data_group_filter import GetAIReportQueryRulesResponseDataGroupFilter
+from .get_ai_report_query_rules_response_data_group_metric_start_date import GetAIReportQueryRulesResponseDataGroupMetricStartDate
 from .get_authorized_category_assets_response import GetAuthorizedCategoryAssetsResponse
 from .get_authorized_category_assets_response_data import GetAuthorizedCategoryAssetsResponseData
 from .get_authorized_category_assets_response_data_category_asset import GetAuthorizedCategoryAssetsResponseDataCategoryAsset
@@ -1843,6 +1861,14 @@ from .publish_global_product_response_data_product_sku import PublishGlobalProdu
 from .publish_global_product_response_data_product_sku_sale_attribute import PublishGlobalProductResponseDataProductSkuSaleAttribute
 from .publish_result import PublishResult
 from .purchase_order_quantity_limit import PurchaseOrderQuantityLimit
+from .query_ai_report_data_request import QueryAIReportDataRequest
+from .query_ai_report_data_response import QueryAIReportDataResponse
+from .query_ai_report_data_response_data import QueryAIReportDataResponseData
+from .query_ai_report_data_response_data_column import QueryAIReportDataResponseDataColumn
+from .query_ai_report_data_response_data_row import QueryAIReportDataResponseDataRow
+from .query_ai_report_data_response_data_row_detail_field import QueryAIReportDataResponseDataRowDetailField
+from .query_ai_report_data_response_data_row_dimension import QueryAIReportDataResponseDataRowDimension
+from .query_ai_report_data_response_data_row_metric import QueryAIReportDataResponseDataRowMetric
 from .query_creator_promotion_details_in_target_collaboration_request import QueryCreatorPromotionDetailsInTargetCollaborationRequest
 from .query_creator_promotion_details_in_target_collaboration_request_product_filter import QueryCreatorPromotionDetailsInTargetCollaborationRequestProductFilter
 from .query_creator_promotion_details_in_target_collaboration_request_query_type import QueryCreatorPromotionDetailsInTargetCollaborationRequestQueryType
@@ -2012,6 +2038,10 @@ from .search_aftersales_requests_response_data_aftersales_request import SearchA
 from .search_aftersales_requests_response_data_aftersales_request_return_merchandise_authorization import SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization
 from .search_aftersales_requests_response_data_aftersales_request_sku_return_request_discount import SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestDiscount
 from .search_aftersales_requests_response_data_aftersales_request_sku_return_request_shipping_fee import SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestShippingFee
+from .search_ai_report_dimension_options_request import SearchAIReportDimensionOptionsRequest
+from .search_ai_report_dimension_options_response import SearchAIReportDimensionOptionsResponse
+from .search_ai_report_dimension_options_response_data import SearchAIReportDimensionOptionsResponseData
+from .search_ai_report_dimension_options_response_data_option import SearchAIReportDimensionOptionsResponseDataOption
 from .search_cancellations_request import SearchCancellationsRequest
 from .search_cancellations_request_cancel_status_item import SearchCancellationsRequestCancelStatusItem
 from .search_cancellations_request_cancel_types_item import SearchCancellationsRequestCancelTypesItem
@@ -2380,6 +2410,7 @@ from .sku_status_change_webhook_data_sku import SKUStatusChangeWebhookDataSku
 from .sku_weight import SkuWeight
 from .smart_text import SmartText
 from .sort import Sort
+from .sort_rule import SortRule
 from .sort_sort_field import SortSortField
 from .sort_sort_order import SortSortOrder
 from .stat import Stat
@@ -2601,6 +2632,9 @@ from .upload_shoppable_video_file_response import UploadShoppableVideoFileRespon
 from .upload_shoppable_video_file_response_data import UploadShoppableVideoFileResponseData
 from .upload_shoppable_video_file_response_data_video_file import UploadShoppableVideoFileResponseDataVideoFile
 from .usage_limit import UsageLimit
+from .validate_ai_report_query_configuration_request import ValidateAIReportQueryConfigurationRequest
+from .validate_ai_report_query_configuration_response import ValidateAIReportQueryConfigurationResponse
+from .validate_ai_report_query_configuration_response_data import ValidateAIReportQueryConfigurationResponseData
 from .value import Value
 from .video import Video
 from .video_attributed_gmv import VideoAttributedGmv
@@ -2959,6 +2993,7 @@ __all__ = (
     "CreateVideoPrecheckTaskResponse",
     "CreateVideoPrecheckTaskResponseData",
     "CreateVideoPrecheckTaskResponseDataPrecheck",
+    "Creator",
     "CreatorDeauthorizationWebhook",
     "CreatorDeauthorizationWebhookData",
     "CreatorPreference",
@@ -3083,6 +3118,7 @@ __all__ = (
     "FBTMerchantOnboardingWebhookDataOnboardedRegion",
     "Fee",
     "File",
+    "Filter",
     "FlammableLiquidsExtraInfo",
     "FlammableLiquidsExtraInfoFlammableLiquidsType",
     "FreeSampleRule",
@@ -3210,6 +3246,22 @@ __all__ = (
     "GetAftersaleEligibilityResponseDataSkuEligibilityLineItemEligibility",
     "GetAgentSettingsResponse",
     "GetAgentSettingsResponseData",
+    "GetAIReportCampaignPeriodsResponse",
+    "GetAIReportCampaignPeriodsResponseData",
+    "GetAIReportCampaignPeriodsResponseDataCampaign",
+    "GetAIReportCatalogResponse",
+    "GetAIReportCatalogResponseData",
+    "GetAIReportCatalogResponseDataDetailField",
+    "GetAIReportCatalogResponseDataDetailFieldValue",
+    "GetAIReportCatalogResponseDataDimension",
+    "GetAIReportCatalogResponseDataMetric",
+    "GetAIReportQueryRulesResponse",
+    "GetAIReportQueryRulesResponseData",
+    "GetAIReportQueryRulesResponseDataDetailRequirement",
+    "GetAIReportQueryRulesResponseDataExclusion",
+    "GetAIReportQueryRulesResponseDataGroup",
+    "GetAIReportQueryRulesResponseDataGroupFilter",
+    "GetAIReportQueryRulesResponseDataGroupMetricStartDate",
     "GetAuthorizedCategoryAssetsResponse",
     "GetAuthorizedCategoryAssetsResponseData",
     "GetAuthorizedCategoryAssetsResponseDataCategoryAsset",
@@ -4456,6 +4508,14 @@ __all__ = (
     "PublishGlobalProductResponseDataProductSkuSaleAttribute",
     "PublishResult",
     "PurchaseOrderQuantityLimit",
+    "QueryAIReportDataRequest",
+    "QueryAIReportDataResponse",
+    "QueryAIReportDataResponseData",
+    "QueryAIReportDataResponseDataColumn",
+    "QueryAIReportDataResponseDataRow",
+    "QueryAIReportDataResponseDataRowDetailField",
+    "QueryAIReportDataResponseDataRowDimension",
+    "QueryAIReportDataResponseDataRowMetric",
     "QueryCreatorPromotionDetailsInTargetCollaborationRequest",
     "QueryCreatorPromotionDetailsInTargetCollaborationRequestProductFilter",
     "QueryCreatorPromotionDetailsInTargetCollaborationRequestQueryType",
@@ -4625,6 +4685,10 @@ __all__ = (
     "SearchAftersalesRequestsResponseDataAftersalesRequestReturnMerchandiseAuthorization",
     "SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestDiscount",
     "SearchAftersalesRequestsResponseDataAftersalesRequestSkuReturnRequestShippingFee",
+    "SearchAIReportDimensionOptionsRequest",
+    "SearchAIReportDimensionOptionsResponse",
+    "SearchAIReportDimensionOptionsResponseData",
+    "SearchAIReportDimensionOptionsResponseDataOption",
     "SearchCancellationsRequest",
     "SearchCancellationsRequestCancelStatusItem",
     "SearchCancellationsRequestCancelTypesItem",
@@ -4993,6 +5057,7 @@ __all__ = (
     "SkuWeight",
     "SmartText",
     "Sort",
+    "SortRule",
     "SortSortField",
     "SortSortOrder",
     "Stat",
@@ -5214,6 +5279,9 @@ __all__ = (
     "UploadShoppableVideoFileResponseData",
     "UploadShoppableVideoFileResponseDataVideoFile",
     "UsageLimit",
+    "ValidateAIReportQueryConfigurationRequest",
+    "ValidateAIReportQueryConfigurationResponse",
+    "ValidateAIReportQueryConfigurationResponseData",
     "Value",
     "Video",
     "VideoAttributedGmv",
