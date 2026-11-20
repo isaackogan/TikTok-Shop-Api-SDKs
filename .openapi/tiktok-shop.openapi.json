@@ -25022,7 +25022,7 @@
       "post": {
         "operationId": "getOrderList",
         "summary": "Get Order List",
-        "description": "Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID.",
+        "description": "Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID. A response is successful when `code` is `0`, including when no orders match the request.",
         "tags": [
           "Orders"
         ],
@@ -25034,7 +25034,7 @@
             "name": "page_size",
             "in": "query",
             "required": true,
-            "description": "The number of results to be returned per page. Default: 20. Valid range: [1-100].",
+            "description": "The number of results to be returned per page. Valid range: [1-100].",
             "schema": {
               "type": "integer",
               "format": "int64",
@@ -25046,7 +25046,7 @@
             "name": "sort_order",
             "in": "query",
             "required": false,
-            "description": "The sort order for the `sort_field` parameter. Default: DESC\nPossible values:\n- ASC: Ascending order\n- DESC: Descending order",
+            "description": "The sort order for the `sort_field` parameter. Default: ASC\nPossible values:\n- ASC: Ascending order\n- DESC: Descending order",
             "schema": {
               "type": "string",
               "enum": [
@@ -25091,9 +25091,9 @@
               "example": {
                 "order_status": "UNPAID",
                 "create_time_ge": 1623812664,
-                "create_time_lt": 1623812664,
+                "create_time_lt": 1623816264,
                 "update_time_ge": 1623812664,
-                "update_time_lt": 1623812664,
+                "update_time_lt": 1623816264,
                 "shipping_type": "TIKTOK",
                 "buyer_user_id": "7213489962827123654",
                 "is_buyer_request_cancel": false,
@@ -25252,7 +25252,7 @@
                               }
                             ],
                             "tracking_number": "JX12345",
-                            "package_id": "1153132168123859123",
+                            "package_id": "1152321127278713123",
                             "retail_delivery_fee": "1.28",
                             "buyer_service_fee": "1000",
                             "small_order_fee": "5000",
@@ -25272,13 +25272,13 @@
                             "sub_item_info": [
                               {
                                 "id": "577086512123755123",
-                                "sku_id": "2729382476852921560",
+                                "sku_id": "2729382476852921999",
                                 "display_status": "UNPAID",
                                 "product_name": "Women's Winter Crochet Clothes",
                                 "seller_sku": "red_iphone_256",
                                 "sku_image": "https://p16-oec-va.itexeitg.com/tos-maliva-d-o5syd03w52-us/46123e87d14f40b69b839",
                                 "sku_name": "Iphone",
-                                "product_id": "1729582718312380123",
+                                "product_id": "1729582718312380999",
                                 "sale_price": "0.01",
                                 "platform_discount": "0",
                                 "seller_discount": "0",
@@ -25298,7 +25298,7 @@
                                   }
                                 ],
                                 "tracking_number": "JX12345",
-                                "package_id": "1153132168123859123",
+                                "package_id": "1152321127278713123",
                                 "retail_delivery_fee": "1.28",
                                 "is_dangerous_good": false,
                                 "warehouse_id": "6955005333819123123"
@@ -25777,7 +25777,7 @@
       "get": {
         "operationId": "getOrderDetail",
         "summary": "Get Order Detail",
-        "description": "Get the detailed order information of an order, including important attributes such as order status, shipping addresses, payment details, price and tax info, and package information.",
+        "description": "Get detailed information for up to 50 TikTok Shop orders specified by their IDs, including order status, payment details, price and tax information, package information, and shipping address information when available.",
         "tags": [
           "Orders"
         ],
@@ -25789,14 +25789,13 @@
             "name": "ids",
             "in": "query",
             "required": true,
-            "description": "A list of TikTok Shop order ID values.\nMax count: 50",
+            "description": "TikTok Shop order IDs to retrieve. Specify 1 to 50 IDs as a comma-separated list.",
             "explode": false,
             "schema": {
               "type": "array",
               "items": {
                 "type": "string"
-              },
-              "maxItems": 50
+              }
             }
           }
         ],
@@ -25932,7 +25931,7 @@
                             "shipping_provider_id": "6617675021119438849",
                             "seller_discount": "0",
                             "currency": "IDR",
-                            "package_id": "1153132168123859123",
+                            "package_id": "1152321127278713123",
                             "rts_time": 1678389618,
                             "item_tax": [
                               {
@@ -25990,7 +25989,7 @@
                                   }
                                 ],
                                 "tracking_number": "JX12345",
-                                "package_id": "1153132168123859123",
+                                "package_id": "1152321127278713123",
                                 "retail_delivery_fee": "1.28",
                                 "is_dangerous_good": false,
                                 "warehouse_id": "6955005333819123123"
@@ -26760,7 +26759,13 @@
                         ]
                       }
                     ],
-                    "leaf_category_id": "605254"
+                    "leaf_category_id": "605254",
+                    "none_category_rec_reasons": [
+                      "NON_MAIN_CATEGORY",
+                      "PROHIBITED_CATEGORY",
+                      "PROHIBITED_PUBLISH_CATEGORY",
+                      "RECOMMEND_CATEGORY_RPC_ERROR"
+                    ]
                   },
                   "message": "Success",
                   "request_id": "202203070749000101890810281E8C70B7"
@@ -57615,11 +57620,11 @@
         "properties": {
           "address_level_name": {
             "type": "string",
-            "description": "The name of administrative division that can be used by seller for ship. e.g. state/county/city/district/town etc."
+            "description": "The label of this administrative division level, such as country, state, county, city, district, or town."
           },
           "address_name": {
             "type": "string",
-            "description": "Administrative area name. eg: London"
+            "description": "The name of the administrative area at this level, such as London or United Kingdom."
           },
           "address_level": {
             "type": "string",
@@ -72651,7 +72656,7 @@
           "create_time": {
             "type": "integer",
             "format": "int64",
-            "description": "The date and time that the order was created. Unix timestamp."
+            "description": "The date and time that the order was created. Unix timestamp in seconds."
           },
           "tracking_number": {
             "type": "string",
@@ -72664,12 +72669,12 @@
           "rts_sla_time": {
             "type": "integer",
             "format": "int64",
-            "description": "The latest shipping time specified by the platform. Unix timestamp."
+            "description": "The latest shipping time specified by the platform, as a Unix timestamp in seconds."
           },
           "paid_time": {
             "type": "integer",
             "format": "int64",
-            "description": "The date and time that the order was paid. Unix timestamp."
+            "description": "The date and time that the order was paid, as a Unix timestamp in seconds."
           },
           "fulfillment_type": {
             "type": "string",
@@ -72692,7 +72697,7 @@
           "tts_sla_time": {
             "type": "integer",
             "format": "int64",
-            "description": "The latest collection time specified by the platform.\nUnix timestamp."
+            "description": "The latest collection time specified by the platform, as a Unix timestamp in seconds."
           },
           "cancel_order_sla_time": {
             "type": "integer",
@@ -72733,7 +72738,7 @@
           },
           "cpf": {
             "type": "string",
-            "description": "CPF (invoice number), used to issue an invoice. Exclusive for the Brazil market."
+            "description": "The buyer's CPF tax identification number, used to issue an invoice. Available only in Brazil."
           },
           "delivery_option_id": {
             "type": "string",
@@ -72742,7 +72747,7 @@
           "delivery_sla_time": {
             "type": "integer",
             "format": "int64",
-            "description": "Order should arrive by this date to be considered on-time and to avoid late delivery penalties."
+            "description": "The Unix timestamp, in seconds, by which the order should arrive to be considered on time and avoid late-delivery penalties."
           },
           "payment_method_name": {
             "type": "string",
@@ -72755,7 +72760,7 @@
               "Credit",
               "Prepaid"
             ],
-            "description": "Code to distinguish different payment method. Only assigned when the payment method is using bank card. Possible values are: Debit, Credit, Prepaid"
+            "description": "Card type for bank card payments.\nPossible values:\n- `Debit`\n- `Credit`\n- `Prepaid`"
           },
           "channel_entity_national_registry_id": {
             "type": "string",
@@ -72772,7 +72777,7 @@
           "shipping_due_time": {
             "type": "integer",
             "format": "int64",
-            "description": "If the order hasn't updated its status to `AWAITING_COLLECTION` before this time, the order will be automatically canceled by TikTok Shop."
+            "description": "The Unix timestamp, in seconds, by which the order must reach `AWAITING_COLLECTION`; otherwise, TikTok Shop automatically cancels the order."
           },
           "line_items": {
             "type": "array",
@@ -72792,7 +72797,7 @@
           "delivery_time": {
             "type": "integer",
             "format": "int64",
-            "description": "The timestamp of the order's status update to `DELIVERED`."
+            "description": "The Unix timestamp, in seconds, when the order status changed to `DELIVERED`."
           },
           "need_upload_invoice": {
             "type": "string",
@@ -72800,17 +72805,17 @@
           },
           "is_cod": {
             "type": "boolean",
-            "description": "This option is for sellers that accept cash payment on delivery which is rare. Buyers will pay in cash upon receipt of package. Default value is `FALSE`. Only applicable to countries where Cash on Delivery (COD) is supported."
+            "description": "Whether the order uses cash on delivery (COD). When returned, `true` means the buyer pays cash upon receipt and `false` means the order uses another payment method. The field may be omitted when payment type is unavailable. Available only in countries where COD is supported."
           },
           "request_cancel_time": {
             "type": "integer",
             "format": "int64",
-            "description": "Buyer request cancel time."
+            "description": "The Unix timestamp, in seconds, when the buyer submitted the pending cancellation request. Returned when is_buyer_request_cancel is true."
           },
           "delivery_option_required_delivery_time": {
             "type": "integer",
             "format": "int64",
-            "description": "Order should be delivered before this time."
+            "description": "The Unix timestamp, in seconds, by which the order should be delivered."
           },
           "delivery_option_name": {
             "type": "string",
@@ -72823,21 +72828,21 @@
           "delivery_due_time": {
             "type": "integer",
             "format": "int64",
-            "description": "If the order hasn't updated its status to `DELIVERED` before this time, the order will be automatically canceled by TikTok Shop."
+            "description": "The Unix timestamp, in seconds, by which the order must reach `DELIVERED`; otherwise, TikTok Shop automatically cancels the order."
           },
           "collection_time": {
             "type": "integer",
             "format": "int64",
-            "description": "The timestamp of the order's status update to `IN_TRANSIT`."
+            "description": "The Unix timestamp, in seconds, when the order status changed to `IN_TRANSIT`."
           },
           "is_on_hold_order": {
             "type": "boolean",
-            "description": "Indicates whether the order experienced or will be experienced `ON_HOLD` status."
+            "description": "Whether the order has entered or will enter an `ON_HOLD` period after buyer payment. This does not indicate that the order's current `status` is `ON_HOLD`."
           },
           "cancel_time": {
             "type": "integer",
             "format": "int64",
-            "description": "The timestamp of the order's status update to `CANCELLED`."
+            "description": "The Unix timestamp, in seconds, when the order status changed to CANCELLED."
           },
           "is_replacement_order": {
             "type": "boolean",
@@ -72850,7 +72855,7 @@
           "collection_due_time": {
             "type": "integer",
             "format": "int64",
-            "description": "If the order hasn't updated its status to `IN_TRANSIT` before this time, the order will be automatically canceled by TikTok Shop"
+            "description": "The Unix timestamp, in seconds, by which the order must reach `IN_TRANSIT`; otherwise, TikTok Shop automatically cancels the order."
           },
           "pick_up_cut_off_time": {
             "type": "integer",
@@ -72860,7 +72865,7 @@
           "fast_dispatch_sla_time": {
             "type": "integer",
             "format": "int64",
-            "description": "The latest collection time to gain incentives of NDD (Next Day Delivery) project. Unix timestamp\nOnly available in Thailand and Philippines."
+            "description": "The latest collection time for the order to qualify for Next Day Delivery (NDD) incentives. Unix timestamp, in seconds."
           },
           "commerce_platform": {
             "type": "string",
@@ -72945,19 +72950,27 @@
           },
           "buyer_nickname": {
             "type": "string",
-            "description": "The nickname of the TikTok buyer, which is defined by the TikTok user. The buyer_nickname can be used to identify the buyer when displaying the unboxing results within the TikTok Live Session."
+            "description": "The nickname of the TikTok buyer, as defined by the TikTok user. This field is populated only for supported virtual unboxing orders and can be displayed with `buyer_avatar` in TikTok LIVE unboxing results. Use `user_id`, not this display name, for programmatic buyer identification."
           },
           "buyer_avatar": {
             "type": "string",
-            "description": "The avatar of the TikTok buyer, which is defined by the TikTok user. The buyer_avatar can be used in conjunction with the buyer_nickname when displaying the unboxing results within the TikTok Live Session."
+            "description": "The avatar of the TikTok buyer, as defined by the TikTok user. This field is populated only for supported virtual unboxing orders and can be used with `buyer_nickname` when displaying unboxing results in a TikTok LIVE session."
           },
           "order_rights": {
             "type": "array",
             "items": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "enum": [
+                1,
+                2
+              ],
+              "x-enum-descriptions": [
+                "Shipping Fee Reimbursement Program",
+                "Horizon+ Program"
+              ]
             },
-            "description": "Order tag identifier if has certain rights within the order based on the program subscribed by sellers.\n1 = Shipping Fee Reimbursement Program\n2 = Horizon+ Program \nApplicable for SEA market only"
+            "description": "Order rights associated with seller programs. Multiple values can be returned together, and the field is omitted when no right applies.\nPossible values:\n- `1`: Shipping Fee Reimbursement Program\n- `2`: Horizon+ Program\nApplicable only in SEA markets."
           },
           "fulfillment_priority_level": {
             "type": "integer",
@@ -72972,7 +72985,7 @@
           "instore_pickup_sla_time": {
             "type": "integer",
             "format": "int64",
-            "description": "The latest buyer pickup time for instore pickup method specified by the platform. Currently applicable for SEA market. Unix timestamp."
+            "description": "The latest buyer pickup time for in-store pickup, as a Unix timestamp in seconds. Currently available in SEA markets."
           },
           "fast_rts_sla_time": {
             "type": "integer",
@@ -73010,7 +73023,7 @@
           },
           "sku_id": {
             "type": "string",
-            "description": "SKU ID."
+            "description": "The SKU ID for the line item. For a gift line item with gift information, the original SKU ID is returned when available."
           },
           "combined_listing_skus": {
             "type": "array",
@@ -73021,7 +73034,7 @@
           },
           "product_id": {
             "type": "string",
-            "description": "Product ID."
+            "description": "The product ID for the line item. For a gift line item with gift information, the original product ID is returned when available."
           },
           "product_name": {
             "type": "string",
@@ -73037,7 +73050,7 @@
           },
           "original_price": {
             "type": "string",
-            "description": "Item original price, please refer to the currency of `payment_info`."
+            "description": "The line item's original price in the currency specified by `currency`."
           },
           "sale_price": {
             "type": "string",
@@ -73049,7 +73062,7 @@
           },
           "platform_discount": {
             "type": "string",
-            "description": "Platform discount amount, please refer to the currency of `payment_info`."
+            "description": "The platform discount amount for the line item, in the currency specified by `currency`."
           },
           "display_status": {
             "type": "string",
@@ -73088,20 +73101,20 @@
           },
           "seller_discount": {
             "type": "string",
-            "description": "Seller discount amount. Please refer to the currency of `payment_info`."
+            "description": "The seller discount amount for the line item, in the currency specified by `currency`."
           },
           "currency": {
             "type": "string",
-            "description": "Currency for payment."
+            "description": "The ISO 4217 currency code for monetary amounts in this line item."
           },
           "package_id": {
             "type": "string",
-            "description": "An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique `package_id` (and also a `tracking_id`, which is used to track the progress of the package as it is shipped). For local sellers in the US and UK markets, the `package_id` and `package_status` property will not be returned before the package is shipped"
+            "description": "An order can contain one or more packages based on how the seller chooses to ship, and each package has a unique `package_id`. This field matches the `id` of the package in `orders[].packages[]` that contains this line item. Read the package-specific tracking value from this line item's `tracking_number`. For local sellers in the US and UK markets, `package_id` and `package_status` are not returned before the package is shipped."
           },
           "rts_time": {
             "type": "integer",
             "format": "int64",
-            "description": "The time seller shipped line order (call Ship Order endpoint successfully).\nUnix timestamp."
+            "description": "The Unix timestamp, in seconds, when the seller successfully submitted this line item for shipment through the Ship Order API."
           },
           "item_tax": {
             "type": "array",
@@ -73227,7 +73240,7 @@
           },
           "tax_amount": {
             "type": "string",
-            "description": "Tax amount."
+            "description": "The tax amount for the line item, in the currency specified by `currency`."
           },
           "tax_rate": {
             "type": "string",
@@ -73249,7 +73262,7 @@
         "properties": {
           "full_address": {
             "type": "string",
-            "description": "The complete recipient addresses information."
+            "description": "The complete recipient address composed from the administrative-area names and detailed address lines."
           },
           "phone_number": {
             "type": "string",
@@ -73316,7 +73329,7 @@
           },
           "address_detail": {
             "type": "string",
-            "description": "Full buyer detail address."
+            "description": "Detailed street address of the recipient."
           }
         }
       },
@@ -73361,22 +73374,22 @@
           "create_time_ge": {
             "type": "integer",
             "format": "int64",
-            "description": "Filter orders to show only those that are created on or after the specified date and time. Unix timestamp.\n\nNote:\n`create_time_ge` and `create_time_lt` together constitute the creation time filter condition.\n- If `create_time_ge` is filled but `create_time_lt` is empty, `create_time_lt` will default to the current time.\n- If `create_time_lt` is filled but `create_time_ge` is empty, `create_time_ge` will default to the earliest shop time."
+            "description": "Filter orders to show only those that are created on or after the specified date and time. Unix timestamp in seconds.\n\nNote:\n`create_time_ge` and `create_time_lt` together constitute the creation time filter condition.\n- If `create_time_ge` is filled but `create_time_lt` is empty, `create_time_lt` will default to the current time.\n- If `create_time_lt` is filled but `create_time_ge` is empty, `create_time_ge` will default to the earliest shop time."
           },
           "create_time_lt": {
             "type": "integer",
             "format": "int64",
-            "description": "Filter orders to show only those that are created before the specified date and time. Unix timestamp.\nRefer to notes in `create_time_ge` for more usage information."
+            "description": "Filter orders to show only those that are created before the specified date and time. Unix timestamp in seconds.\nRefer to notes in `create_time_ge` for more usage information."
           },
           "update_time_ge": {
             "type": "integer",
             "format": "int64",
-            "description": "Filter orders to show only those that are updated on or after the specified date and time. Unix timestamp.\n\nNote:\n`update_time_ge` and `update_time_lt` together define the update time filter condition.\n- If `update_time_ge` is filled but `update_time_lt` is empty, `update_time_lt` will default to the current time.\n- If `update_time_lt` is filled but `update_time_ge` is empty, `update_time_ge` will default to the earliest shop time.\n\nUpdate times may exceed the selected search range due to ongoing data refreshes during the search process."
+            "description": "Filter orders to show only those that are updated on or after the specified date and time. Unix timestamp in seconds.\n\nNote:\n`update_time_ge` and `update_time_lt` together define the update time filter condition.\n- If `update_time_ge` is filled but `update_time_lt` is empty, `update_time_lt` will default to the current time.\n- If `update_time_lt` is filled but `update_time_ge` is empty, `update_time_ge` will default to the earliest shop time.\n\nUpdate times may exceed the selected search range due to ongoing data refreshes during the search process."
           },
           "update_time_lt": {
             "type": "integer",
             "format": "int64",
-            "description": "Filter orders to show only those that are updated before the specified date and time. Unix timestamp.\nRefer to notes in `update_time_ge` for more usage information.\n\nUpdate times may exceed the selected search range due to ongoing data refreshes during the search process."
+            "description": "Filter orders to show only those that are updated before the specified date and time. Unix timestamp in seconds.\nRefer to notes in `update_time_ge` for more usage information.\n\nUpdate times may exceed the selected search range due to ongoing data refreshes during the search process."
           },
           "shipping_type": {
             "type": "string",
@@ -73469,7 +73482,7 @@
           "create_time": {
             "type": "integer",
             "format": "int64",
-            "description": "The date and time that the order was created. Unix timestamp."
+            "description": "The date and time that the order was created. Unix timestamp, in seconds."
           },
           "shipping_provider": {
             "type": "string",
@@ -73488,7 +73501,7 @@
           },
           "recipient_address": {
             "$ref": "#/components/schemas/GetOrderListResponseDataOrderRecipientAddress",
-            "description": "`recipient_address` is not available under `UNPAID` and `ON_HOLD` statuses."
+            "description": "Recipient address information is unavailable for orders with `UNPAID`, `ON_HOLD`, or `CANCELLED` status."
           },
           "status": {
             "type": "string",
@@ -73528,7 +73541,7 @@
               "a service offered by TikTok where sellers can send their products to TikTok's fulfillment centers. TikTok then takes care of storing, picking, packing, and shipping the products to customers.",
               "a method where Tokopedia GoTo Logistics provides warehousing and logistics services to sellers and charges a fee for the service."
             ],
-            "description": "Fulfillment type. Only orders with fulfillment type can be shipped by sellers.\nAvailable values:\n- `FULFILLMENT_BY_SELLER`: a method where sellers fulfill orders directly from their own inventory, without using TikTok's fulfillment centers. In this model, the seller is responsible for storing, packaging, and shipping the products to customers.\n- `FULFILLMENT_BY_TIKTOK`: a service offered by TikTok where sellers can send their products to TikTok's fulfillment centers. TikTok then takes care of storing, picking, packing, and shipping the products to customers.\n- `FULFILLMENT_BY_DILAYANI_TOKOPEDIA`: a method where Tokopedia GoTo Logistics provides warehousing and logistics services to sellers and charges a fee for the service."
+            "description": "The order fulfillment model.\nAvailable values:\n- `FULFILLMENT_BY_SELLER`: a method where sellers fulfill orders directly from their own inventory, without using TikTok's fulfillment centers. In this model, the seller is responsible for storing, packaging, and shipping the products to customers.\n- `FULFILLMENT_BY_TIKTOK`: a service offered by TikTok where sellers can send their products to TikTok's fulfillment centers. TikTok then takes care of storing, picking, packing, and shipping the products to customers.\n- `FULFILLMENT_BY_DILAYANI_TOKOPEDIA`: a method where Tokopedia GoTo Logistics provides warehousing and logistics services to sellers and charges a fee for the service."
           },
           "delivery_type": {
             "type": "string",
@@ -73564,7 +73577,7 @@
           "update_time": {
             "type": "integer",
             "format": "int64",
-            "description": "Time of order status change. Unix timestamp."
+            "description": "The date and time when the order was last updated. Unix timestamp in seconds."
           },
           "payment_method_name": {
             "type": "string",
@@ -73599,7 +73612,7 @@
           "request_cancel_time": {
             "type": "integer",
             "format": "int64",
-            "description": "Buyer request cancellation time. Unix timestamp."
+            "description": "The time when the buyer submitted the pending cancellation request. Unix timestamp in seconds."
           },
           "shipping_type": {
             "type": "string",
@@ -73617,7 +73630,7 @@
           },
           "user_id": {
             "type": "string",
-            "description": "Buyer user ID."
+            "description": "The ID of the buyer who placed the order. This is the value matched by the `buyer_user_id` request filter."
           },
           "seller_note": {
             "type": "string",
@@ -73626,11 +73639,11 @@
           "delivery_sla_time": {
             "type": "integer",
             "format": "int64",
-            "description": "Order should arrive by this date to be considered on-time and to avoid late delivery penalties."
+            "description": "The time by which the order should arrive to be considered on time and avoid late-delivery penalties. Unix timestamp in seconds."
           },
           "is_cod": {
             "type": "boolean",
-            "description": "This option is for sellers that accept cash payment on delivery (COD). Buyers will pay in cash upon receiving the package. \n\nDefault: FALSE\n\nOnly applicable to countries where COD is supported."
+            "description": "Whether the order uses cash on delivery (COD). If `true`, the buyer pays in cash when the package is delivered.\n\nOnly applicable to countries where COD is supported."
           },
           "delivery_option_id": {
             "type": "string",
@@ -73639,7 +73652,7 @@
           "cancel_time": {
             "type": "integer",
             "format": "int64",
-            "description": "The time an order's status was updated to `CANCELLED`. Unix timestamp."
+            "description": "The time an order's status was updated to `CANCELLED`. Unix timestamp in seconds."
           },
           "need_upload_invoice": {
             "type": "string",
@@ -73647,7 +73660,7 @@
           },
           "delivery_option_name": {
             "type": "string",
-            "description": "Delivery option name. For display purposes only.\nAvailable values:\n- `Economy Shipping`\n- `Standard Shipping`\n- `Express Shipping`"
+            "description": "The name of the delivery option. For display purposes only."
           },
           "cpf": {
             "type": "string",
@@ -73690,7 +73703,7 @@
           },
           "is_on_hold_order": {
             "type": "boolean",
-            "description": "Indicates whether the order has been changed to or will be updated to `ON_HOLD` status."
+            "description": "Whether the order entered an ON_HOLD period after the buyer completed payment. This does not indicate that the order's current status is ON_HOLD."
           },
           "delivery_time": {
             "type": "integer",
@@ -73707,7 +73720,7 @@
           },
           "is_refundable_sample": {
             "type": "boolean",
-            "description": "This indicates if an order is a refundable sample. Refundable samples lets sellers collaborate with creators by refunding product costs only when creators meet sales thresholds."
+            "description": "Whether the order is a refundable sample. This flag is independent of `is_sample_order`; a refundable-sample order can have `is_sample_order` set to `false`. Refundable samples let sellers collaborate with creators by refunding product costs only when creators meet sales thresholds."
           },
           "authentication_required": {
             "type": "boolean",
@@ -73827,14 +73840,22 @@
             "type": "array",
             "items": {
               "type": "integer",
-              "format": "int64"
+              "format": "int64",
+              "enum": [
+                1,
+                2
+              ],
+              "x-enum-descriptions": [
+                "Shipping Fee Reimbursement Program",
+                "Horizon+ Program"
+              ]
             },
-            "description": "Order tag identifier if has certain rights within the order based on the program subscribed by sellers.\n1 = Shipping Fee Reimbursement Program\n2 = Horizon+ Program \nApplicable for SEA market only"
+            "description": "Order rights granted through programs joined by the seller. Multiple values can be returned together; the field is omitted when none of the listed rights apply.\nPossible values:\n- `1`: Shipping Fee Reimbursement Program\n- `2`: Horizon+ Program\n\n**Note**: Available only in the SEA market."
           },
           "instore_pickup_sla_time": {
             "type": "integer",
             "format": "int64",
-            "description": "The latest buyer pickup time for instore pickup method specified by the platform. Currently applicable for SEA market. Unix timestamp."
+            "description": "The latest buyer pickup time for instore pickup method specified by the platform. Currently applicable for SEA market. Unix timestamp in seconds."
           },
           "fast_rts_sla_time": {
             "type": "integer",
@@ -73925,7 +73946,7 @@
           },
           "sale_price": {
             "type": "string",
-            "description": "Item sale price. Please refer to the currency of `payment_info`."
+            "description": "Sale price of the line item, in the currency specified by `currency`."
           },
           "pfand_fee": {
             "type": "string",
@@ -73933,11 +73954,11 @@
           },
           "platform_discount": {
             "type": "string",
-            "description": "Platform discount amount. Please refer to the currency of `payment_info`."
+            "description": "Platform-funded discount amount for the line item, in the currency specified by `currency`."
           },
           "seller_discount": {
             "type": "string",
-            "description": "Seller discount amount. Please refer to the currency of `payment_info`."
+            "description": "Seller-funded discount amount for the line item, in the currency specified by `currency`."
           },
           "sku_type": {
             "type": "string",
@@ -73964,12 +73985,12 @@
           },
           "original_price": {
             "type": "string",
-            "description": "Item original price. Please refer to the currency of `payment_info`."
+            "description": "Original price of the line item, in the currency specified by `currency`."
           },
           "rts_time": {
             "type": "integer",
             "format": "int64",
-            "description": "The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp."
+            "description": "The time the package containing this line item was shipped by a successful call to the [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1). Unix timestamp in seconds."
           },
           "package_status": {
             "type": "string",
@@ -73991,7 +74012,7 @@
           },
           "currency": {
             "type": "string",
-            "description": "Currency for payment."
+            "description": "The ISO 4217 currency code for monetary amounts in this line item."
           },
           "shipping_provider_name": {
             "type": "string",
@@ -74024,11 +74045,11 @@
           },
           "tracking_number": {
             "type": "string",
-            "description": "Tracking number. Available after package has been shipped."
+            "description": "The tracking number for the package containing this line item. Available after the package has been shipped."
           },
           "package_id": {
             "type": "string",
-            "description": "An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique `package_id` and `tracking_id`."
+            "description": "The ID of the package that contains this line item. Match this value to `packages[].id` when package information is available."
           },
           "retail_delivery_fee": {
             "type": "string",
@@ -74111,7 +74132,13 @@
           },
           "product_listing_type": {
             "type": "string",
-            "description": "This describes the product listing type of the SKU. \nPossible values:\n- `TEMPORARY LISTING`"
+            "enum": [
+              "TEMPORARY_LISTING"
+            ],
+            "x-enum-descriptions": [
+              "The SKU is a temporary listing."
+            ],
+            "description": "The product listing type of the SKU. This field is returned only for a temporary listing.\nPossible values:\n- `TEMPORARY_LISTING`: The SKU is a temporary listing."
           }
         }
       },
@@ -74157,7 +74184,7 @@
           },
           "address_detail": {
             "type": "string",
-            "description": "Full recipient detailed address."
+            "description": "The detailed street-address portion of the recipient address, combined from the address detail lines."
           },
           "address_line1": {
             "type": "string",
@@ -74180,7 +74207,7 @@
             "items": {
               "$ref": "#/components/schemas/DistrictInfo"
             },
-            "description": "`district_info` is unavailable under `UNPAID` and `ON_HOLD` statuses."
+            "description": "`district_info` is unavailable for orders with `UNPAID`, `ON_HOLD`, or `CANCELLED` status."
           },
           "delivery_preferences": {
             "$ref": "#/components/schemas/GetOrderListResponseDataOrderRecipientAddressDeliveryPreference",
@@ -90094,7 +90121,7 @@
           },
           "tax_amount": {
             "type": "string",
-            "description": "Tax amount."
+            "description": "The tax amount for the sub-item, in the currency specified by `currency`."
           },
           "tax_rate": {
             "type": "string",
@@ -94026,7 +94053,7 @@
         "properties": {
           "currency": {
             "type": "string",
-            "description": "Currency for payment."
+            "description": "The ISO 4217 currency code for monetary amounts in this payment object."
           },
           "sub_total": {
             "type": "string",
@@ -94046,7 +94073,7 @@
           },
           "payment_platform_discount": {
             "type": "string",
-            "description": "Discount applied to the order funded by a payment platform"
+            "description": "The portion of `platform_discount` funded by a payment platform. This amount is already included in `platform_discount`."
           },
           "payment_discount_service_fee": {
             "type": "string",
@@ -96921,6 +96948,25 @@
           "leaf_category_id": {
             "type": "string",
             "description": "The recommended category ID. This is always a leaf category."
+          },
+          "none_category_rec_reasons": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "NON_MAIN_CATEGORY",
+                "PROHIBITED_CATEGORY",
+                "PROHIBITED_PUBLISH_CATEGORY",
+                "RECOMMEND_CATEGORY_RPC_ERROR"
+              ],
+              "x-enum-descriptions": [
+                "recommended category not main categories of merchants",
+                "recommended category",
+                "recommended category",
+                "There is a problem with downstream services."
+              ]
+            },
+            "description": "No category recommended reason description\nPossible values:\n- NON_MAIN_CATEGORY：recommended category not main categories of merchants\n- PROHIBITED_CATEGORY: recommended category \nProhibition of sale\n- PROHIBITED_PUBLISH_CATEGORY：recommended category \nProhibition of  publish\n- RECOMMEND_CATEGORY_RPC_ERROR: There is a problem with downstream services."
           }
         }
       },
@@ -109152,7 +109198,7 @@
           },
           "sku_id": {
             "type": "string",
-            "description": "SKU ID."
+            "description": "The SKU ID of the sub-item in the virtual bundle."
           },
           "display_status": {
             "type": "string",
@@ -109194,19 +109240,19 @@
           },
           "product_id": {
             "type": "string",
-            "description": "Product ID."
+            "description": "The product ID of the sub-item in the virtual bundle."
           },
           "sale_price": {
             "type": "string",
-            "description": "Item sale price. Please refer to the currency of `payment_info`."
+            "description": "The sub-item's sale price in the currency specified by `currency`."
           },
           "platform_discount": {
             "type": "string",
-            "description": "Platform discount amount. Please refer to the currency of `payment_info`."
+            "description": "The platform discount amount for the sub-item, in the currency specified by `currency`."
           },
           "seller_discount": {
             "type": "string",
-            "description": "Seller discount amount. Please refer to the currency of `payment_info`."
+            "description": "The seller discount amount for the sub-item, in the currency specified by `currency`."
           },
           "cancel_reason": {
             "type": "string",
@@ -109214,12 +109260,12 @@
           },
           "original_price": {
             "type": "string",
-            "description": "Item original price. Please refer to the currency of `payment_info`."
+            "description": "The sub-item's original price in the currency specified by `currency`."
           },
           "rts_time": {
             "type": "integer",
             "format": "int64",
-            "description": "The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp."
+            "description": "The Unix timestamp, in seconds, when the seller successfully called the [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) for this sub-item."
           },
           "package_status": {
             "type": "string",
@@ -109241,7 +109287,7 @@
           },
           "currency": {
             "type": "string",
-            "description": "Currency for payment."
+            "description": "The ISO 4217 currency code for monetary amounts in this sub-item."
           },
           "shipping_provider_name": {
             "type": "string",
@@ -109274,11 +109320,11 @@
           },
           "package_id": {
             "type": "string",
-            "description": "An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique `package_id` and `tracking_id`."
+            "description": "An order can contain one or more packages based on how the seller chooses to ship, and each package has a unique `package_id`. This field identifies the package that contains this sub-item. Use the sub-item's `tracking_number` for its package-specific tracking value."
           },
           "retail_delivery_fee": {
             "type": "string",
-            "description": "Retail delivery fee (RDF).\n**Note**: Only available in the US market."
+            "description": "Retail delivery fee (RDF) for the sub-item, in the currency specified by `currency`.\n**Note**: Only available in the US market."
           },
           "is_dangerous_good": {
             "type": "boolean",
@@ -109286,7 +109332,7 @@
           },
           "warehouse_id": {
             "type": "string",
-            "description": "Seller warehouse ID."
+            "description": "The ID of the seller warehouse assigned to fulfill this sub-item."
           }
         }
       },
