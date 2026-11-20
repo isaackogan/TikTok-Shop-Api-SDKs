@@ -21,7 +21,7 @@ var _ MappedNullable = &ItemTax{}
 type ItemTax struct {
 	// Tax type. Available values: - `SALES_TAX` (US market sales tax)  **Note**: Currently only sales tax is available.
 	TaxType *string `json:"tax_type,omitempty"`
-	// Tax amount.
+	// The tax amount for the sub-item, in the currency specified by `currency`.
 	TaxAmount *string `json:"tax_amount,omitempty"`
 	// Tax rate.
 	TaxRate *string `json:"tax_rate,omitempty"`

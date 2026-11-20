@@ -55,7 +55,7 @@ export interface GetOrderDetailResponseDataOrderLineItem {
      */
     id?: string;
     /**
-     * SKU ID.
+     * The SKU ID for the line item. For a gift line item with gift information, the original SKU ID is returned when available.
      * @type {string}
      * @memberof GetOrderDetailResponseDataOrderLineItem
      */
@@ -67,7 +67,7 @@ export interface GetOrderDetailResponseDataOrderLineItem {
      */
     combinedListingSkus?: Array<CombinedListingSku>;
     /**
-     * Product ID.
+     * The product ID for the line item. For a gift line item with gift information, the original product ID is returned when available.
      * @type {string}
      * @memberof GetOrderDetailResponseDataOrderLineItem
      */
@@ -91,7 +91,7 @@ export interface GetOrderDetailResponseDataOrderLineItem {
      */
     skuImage?: string;
     /**
-     * Item original price, please refer to the currency of `payment_info`.
+     * The line item's original price in the currency specified by `currency`.
      * @type {string}
      * @memberof GetOrderDetailResponseDataOrderLineItem
      */
@@ -110,7 +110,7 @@ export interface GetOrderDetailResponseDataOrderLineItem {
      */
     pfandFee?: string;
     /**
-     * Platform discount amount, please refer to the currency of `payment_info`.
+     * The platform discount amount for the line item, in the currency specified by `currency`.
      * @type {string}
      * @memberof GetOrderDetailResponseDataOrderLineItem
      */
@@ -166,26 +166,25 @@ export interface GetOrderDetailResponseDataOrderLineItem {
      */
     shippingProviderId?: string;
     /**
-     * Seller discount amount. Please refer to the currency of `payment_info`.
+     * The seller discount amount for the line item, in the currency specified by `currency`.
      * @type {string}
      * @memberof GetOrderDetailResponseDataOrderLineItem
      */
     sellerDiscount?: string;
     /**
-     * Currency for payment.
+     * The ISO 4217 currency code for monetary amounts in this line item.
      * @type {string}
      * @memberof GetOrderDetailResponseDataOrderLineItem
      */
     currency?: string;
     /**
-     * An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique `package_id` (and also a `tracking_id`, which is used to track the progress of the package as it is shipped). For local sellers in the US and UK markets, the `package_id` and `package_status` property will not be returned before the package is shipped
+     * An order can contain one or more packages based on how the seller chooses to ship, and each package has a unique `package_id`. This field matches the `id` of the package in `orders[].packages[]` that contains this line item. Read the package-specific tracking value from this line item's `tracking_number`. For local sellers in the US and UK markets, `package_id` and `package_status` are not returned before the package is shipped.
      * @type {string}
      * @memberof GetOrderDetailResponseDataOrderLineItem
      */
     packageId?: string;
     /**
-     * The time seller shipped line order (call Ship Order endpoint successfully).
-     * Unix timestamp.
+     * The Unix timestamp, in seconds, when the seller successfully submitted this line item for shipment through the Ship Order API.
      * @type {number}
      * @memberof GetOrderDetailResponseDataOrderLineItem
      */

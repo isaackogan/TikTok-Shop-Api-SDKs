@@ -414,7 +414,7 @@ class GetOrderDetailResponseDataOrderRecipientAddress implements ModelInterface,
     /**
      * Sets full_address
      *
-     * @param string|null $full_address The complete recipient addresses information.
+     * @param string|null $full_address The complete recipient address composed from the administrative-area names and detailed address lines.
      *
      * @return self
      */
@@ -846,7 +846,7 @@ class GetOrderDetailResponseDataOrderRecipientAddress implements ModelInterface,
     /**
      * Sets address_detail
      *
-     * @param string|null $address_detail Full buyer detail address.
+     * @param string|null $address_detail Detailed street address of the recipient.
      *
      * @return self
      */

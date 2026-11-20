@@ -471,7 +471,7 @@ public class GetOrderListResponseDataOrderLineItem {
   }
 
   /**
-   * Item sale price. Please refer to the currency of &#x60;payment_info&#x60;.
+   * Sale price of the line item, in the currency specified by &#x60;currency&#x60;.
    * @return salePrice
    */
   @javax.annotation.Nullable
@@ -509,7 +509,7 @@ public class GetOrderListResponseDataOrderLineItem {
   }
 
   /**
-   * Platform discount amount. Please refer to the currency of &#x60;payment_info&#x60;.
+   * Platform-funded discount amount for the line item, in the currency specified by &#x60;currency&#x60;.
    * @return platformDiscount
    */
   @javax.annotation.Nullable
@@ -528,7 +528,7 @@ public class GetOrderListResponseDataOrderLineItem {
   }
 
   /**
-   * Seller discount amount. Please refer to the currency of &#x60;payment_info&#x60;.
+   * Seller-funded discount amount for the line item, in the currency specified by &#x60;currency&#x60;.
    * @return sellerDiscount
    */
   @javax.annotation.Nullable
@@ -589,7 +589,7 @@ public class GetOrderListResponseDataOrderLineItem {
   }
 
   /**
-   * Item original price. Please refer to the currency of &#x60;payment_info&#x60;.
+   * Original price of the line item, in the currency specified by &#x60;currency&#x60;.
    * @return originalPrice
    */
   @javax.annotation.Nullable
@@ -608,7 +608,7 @@ public class GetOrderListResponseDataOrderLineItem {
   }
 
   /**
-   * The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp.
+   * The time the package containing this line item was shipped by a successful call to the [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1). Unix timestamp in seconds.
    * @return rtsTime
    */
   @javax.annotation.Nullable
@@ -646,7 +646,7 @@ public class GetOrderListResponseDataOrderLineItem {
   }
 
   /**
-   * Currency for payment.
+   * The ISO 4217 currency code for monetary amounts in this line item.
    * @return currency
    */
   @javax.annotation.Nullable
@@ -768,7 +768,7 @@ public class GetOrderListResponseDataOrderLineItem {
   }
 
   /**
-   * Tracking number. Available after package has been shipped.
+   * The tracking number for the package containing this line item. Available after the package has been shipped.
    * @return trackingNumber
    */
   @javax.annotation.Nullable
@@ -787,7 +787,7 @@ public class GetOrderListResponseDataOrderLineItem {
   }
 
   /**
-   * An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique &#x60;package_id&#x60; and &#x60;tracking_id&#x60;.
+   * The ID of the package that contains this line item. Match this value to &#x60;packages[].id&#x60; when package information is available.
    * @return packageId
    */
   @javax.annotation.Nullable
@@ -1168,7 +1168,7 @@ public class GetOrderListResponseDataOrderLineItem {
   }
 
   /**
-   * This describes the product listing type of the SKU.  Possible values: - &#x60;TEMPORARY LISTING&#x60;
+   * The product listing type of the SKU. This field is returned only for a temporary listing. Possible values: - &#x60;TEMPORARY_LISTING&#x60;: The SKU is a temporary listing.
    * @return productListingType
    */
   @javax.annotation.Nullable

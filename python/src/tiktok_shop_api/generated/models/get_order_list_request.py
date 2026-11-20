@@ -39,7 +39,7 @@ class GetOrderListRequest:
                 - `COMPLETED`: The order has been completed, and no further returns or refunds are allowed.
                 - `CANCELLED`: The order has been cancelled.
             create_time_ge (int | Unset): Filter orders to show only those that are created on or after the specified date
-                and time. Unix timestamp.
+                and time. Unix timestamp in seconds.
 
                 Note:
                 `create_time_ge` and `create_time_lt` together constitute the creation time filter condition.
@@ -48,10 +48,10 @@ class GetOrderListRequest:
                 - If `create_time_lt` is filled but `create_time_ge` is empty, `create_time_ge` will default to the earliest
                 shop time.
             create_time_lt (int | Unset): Filter orders to show only those that are created before the specified date and
-                time. Unix timestamp.
+                time. Unix timestamp in seconds.
                 Refer to notes in `create_time_ge` for more usage information.
             update_time_ge (int | Unset): Filter orders to show only those that are updated on or after the specified date
-                and time. Unix timestamp.
+                and time. Unix timestamp in seconds.
 
                 Note:
                 `update_time_ge` and `update_time_lt` together define the update time filter condition.
@@ -62,7 +62,7 @@ class GetOrderListRequest:
 
                 Update times may exceed the selected search range due to ongoing data refreshes during the search process.
             update_time_lt (int | Unset): Filter orders to show only those that are updated before the specified date and
-                time. Unix timestamp.
+                time. Unix timestamp in seconds.
                 Refer to notes in `update_time_ge` for more usage information.
 
                 Update times may exceed the selected search range due to ongoing data refreshes during the search process.

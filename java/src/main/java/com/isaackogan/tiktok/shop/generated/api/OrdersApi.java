@@ -352,7 +352,7 @@ public class OrdersApi {
     }
     /**
      * Build call for getOrderDetail
-     * @param ids A list of TikTok Shop order ID values. Max count: 50 (required)
+     * @param ids TikTok Shop order IDs to retrieve. Specify 1 to 50 IDs as a comma-separated list. (required)
      * @param _callback Callback for upload/download progress
      * @return Call to execute
      * @throws ApiException If fail to serialize the request body object
@@ -424,8 +424,8 @@ public class OrdersApi {
 
     /**
      * Get Order Detail
-     * Get the detailed order information of an order, including important attributes such as order status, shipping addresses, payment details, price and tax info, and package information.
-     * @param ids A list of TikTok Shop order ID values. Max count: 50 (required)
+     * Get detailed information for up to 50 TikTok Shop orders specified by their IDs, including order status, payment details, price and tax information, package information, and shipping address information when available.
+     * @param ids TikTok Shop order IDs to retrieve. Specify 1 to 50 IDs as a comma-separated list. (required)
      * @return GetOrderDetailResponse
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -442,8 +442,8 @@ public class OrdersApi {
 
     /**
      * Get Order Detail
-     * Get the detailed order information of an order, including important attributes such as order status, shipping addresses, payment details, price and tax info, and package information.
-     * @param ids A list of TikTok Shop order ID values. Max count: 50 (required)
+     * Get detailed information for up to 50 TikTok Shop orders specified by their IDs, including order status, payment details, price and tax information, package information, and shipping address information when available.
+     * @param ids TikTok Shop order IDs to retrieve. Specify 1 to 50 IDs as a comma-separated list. (required)
      * @return ApiResponse&lt;GetOrderDetailResponse&gt;
      * @throws ApiException If fail to call the API, e.g. server error or cannot deserialize the response body
      * @http.response.details
@@ -461,8 +461,8 @@ public class OrdersApi {
 
     /**
      * Get Order Detail (asynchronously)
-     * Get the detailed order information of an order, including important attributes such as order status, shipping addresses, payment details, price and tax info, and package information.
-     * @param ids A list of TikTok Shop order ID values. Max count: 50 (required)
+     * Get detailed information for up to 50 TikTok Shop orders specified by their IDs, including order status, payment details, price and tax information, package information, and shipping address information when available.
+     * @param ids TikTok Shop order IDs to retrieve. Specify 1 to 50 IDs as a comma-separated list. (required)
      * @param _callback The callback to be executed when the API call finishes
      * @return The request call
      * @throws ApiException If fail to process the API call, e.g. serializing the request body object
@@ -482,8 +482,8 @@ public class OrdersApi {
     }
     /**
      * Build call for getOrderList
-     * @param pageSize The number of results to be returned per page. Default: 20. Valid range: [1-100]. (required)
-     * @param sortOrder The sort order for the &#x60;sort_field&#x60; parameter. Default: DESC Possible values: - ASC: Ascending order - DESC: Descending order (optional)
+     * @param pageSize The number of results to be returned per page. Valid range: [1-100]. (required)
+     * @param sortOrder The sort order for the &#x60;sort_field&#x60; parameter. Default: ASC Possible values: - ASC: Ascending order - DESC: Descending order (optional)
      * @param pageToken An opaque token used to retrieve the next page of a paginated result set. Retrieve this value from the result of the &#x60;next_page_token&#x60; from a previous response. It is not needed for the first page. (optional)
      * @param sortField The returned results will be sorted by the specified field.  Default: &#x60;create_time&#x60; Possible values: - &#x60;create_time&#x60; - &#x60;update_time&#x60;  Specify the order for sorting the returned results by using the &#x60;sort_order&#x60; parameter. (optional)
      * @param getOrderListRequest  (optional)
@@ -571,9 +571,9 @@ public class OrdersApi {
 
     /**
      * Get Order List
-     * Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID.
-     * @param pageSize The number of results to be returned per page. Default: 20. Valid range: [1-100]. (required)
-     * @param sortOrder The sort order for the &#x60;sort_field&#x60; parameter. Default: DESC Possible values: - ASC: Ascending order - DESC: Descending order (optional)
+     * Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID. A response is successful when &#x60;code&#x60; is &#x60;0&#x60;, including when no orders match the request.
+     * @param pageSize The number of results to be returned per page. Valid range: [1-100]. (required)
+     * @param sortOrder The sort order for the &#x60;sort_field&#x60; parameter. Default: ASC Possible values: - ASC: Ascending order - DESC: Descending order (optional)
      * @param pageToken An opaque token used to retrieve the next page of a paginated result set. Retrieve this value from the result of the &#x60;next_page_token&#x60; from a previous response. It is not needed for the first page. (optional)
      * @param sortField The returned results will be sorted by the specified field.  Default: &#x60;create_time&#x60; Possible values: - &#x60;create_time&#x60; - &#x60;update_time&#x60;  Specify the order for sorting the returned results by using the &#x60;sort_order&#x60; parameter. (optional)
      * @param getOrderListRequest  (optional)
@@ -593,9 +593,9 @@ public class OrdersApi {
 
     /**
      * Get Order List
-     * Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID.
-     * @param pageSize The number of results to be returned per page. Default: 20. Valid range: [1-100]. (required)
-     * @param sortOrder The sort order for the &#x60;sort_field&#x60; parameter. Default: DESC Possible values: - ASC: Ascending order - DESC: Descending order (optional)
+     * Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID. A response is successful when &#x60;code&#x60; is &#x60;0&#x60;, including when no orders match the request.
+     * @param pageSize The number of results to be returned per page. Valid range: [1-100]. (required)
+     * @param sortOrder The sort order for the &#x60;sort_field&#x60; parameter. Default: ASC Possible values: - ASC: Ascending order - DESC: Descending order (optional)
      * @param pageToken An opaque token used to retrieve the next page of a paginated result set. Retrieve this value from the result of the &#x60;next_page_token&#x60; from a previous response. It is not needed for the first page. (optional)
      * @param sortField The returned results will be sorted by the specified field.  Default: &#x60;create_time&#x60; Possible values: - &#x60;create_time&#x60; - &#x60;update_time&#x60;  Specify the order for sorting the returned results by using the &#x60;sort_order&#x60; parameter. (optional)
      * @param getOrderListRequest  (optional)
@@ -616,9 +616,9 @@ public class OrdersApi {
 
     /**
      * Get Order List (asynchronously)
-     * Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID.
-     * @param pageSize The number of results to be returned per page. Default: 20. Valid range: [1-100]. (required)
-     * @param sortOrder The sort order for the &#x60;sort_field&#x60; parameter. Default: DESC Possible values: - ASC: Ascending order - DESC: Descending order (optional)
+     * Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID. A response is successful when &#x60;code&#x60; is &#x60;0&#x60;, including when no orders match the request.
+     * @param pageSize The number of results to be returned per page. Valid range: [1-100]. (required)
+     * @param sortOrder The sort order for the &#x60;sort_field&#x60; parameter. Default: ASC Possible values: - ASC: Ascending order - DESC: Descending order (optional)
      * @param pageToken An opaque token used to retrieve the next page of a paginated result set. Retrieve this value from the result of the &#x60;next_page_token&#x60; from a previous response. It is not needed for the first page. (optional)
      * @param sortField The returned results will be sorted by the specified field.  Default: &#x60;create_time&#x60; Possible values: - &#x60;create_time&#x60; - &#x60;update_time&#x60;  Specify the order for sorting the returned results by using the &#x60;sort_order&#x60; parameter. (optional)
      * @param getOrderListRequest  (optional)

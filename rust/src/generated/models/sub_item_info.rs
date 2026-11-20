@@ -16,7 +16,7 @@ pub struct SubItemInfo {
     /// Line item id of the sub_item. This unique identifier can be used when performing split/line-level fulfillment events.
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
-    /// SKU ID.
+    /// The SKU ID of the sub-item in the virtual bundle.
     #[serde(rename = "sku_id", skip_serializing_if = "Option::is_none")]
     pub sku_id: Option<String>,
     /// Available values: - `UNPAID`: The order has been placed, but payment has not yet completed. - `AWAITING_SHIPMENT`: The order is ready for shipment, but no items have been shipped yet. - `AWAITING_COLLECTION`: Shipping has been arranged, but the package is waiting to be collected by the carrier. - `IN_TRANSIT`: The package has been collected by the carrier and delivery is in progress. - `DELIVERED`: The package has been delivered to the buyer. - `COMPLETED`: The order has been completed, and no further returns or refunds are allowed. - `CANCELLED`: The order has been cancelled.
@@ -34,31 +34,31 @@ pub struct SubItemInfo {
     /// The name of the SKU, combined by product SKU attribute like size or color. e.g. \"Black, 26\"
     #[serde(rename = "sku_name", skip_serializing_if = "Option::is_none")]
     pub sku_name: Option<String>,
-    /// Product ID.
+    /// The product ID of the sub-item in the virtual bundle.
     #[serde(rename = "product_id", skip_serializing_if = "Option::is_none")]
     pub product_id: Option<String>,
-    /// Item sale price. Please refer to the currency of `payment_info`.
+    /// The sub-item's sale price in the currency specified by `currency`.
     #[serde(rename = "sale_price", skip_serializing_if = "Option::is_none")]
     pub sale_price: Option<String>,
-    /// Platform discount amount. Please refer to the currency of `payment_info`.
+    /// The platform discount amount for the sub-item, in the currency specified by `currency`.
     #[serde(rename = "platform_discount", skip_serializing_if = "Option::is_none")]
     pub platform_discount: Option<String>,
-    /// Seller discount amount. Please refer to the currency of `payment_info`.
+    /// The seller discount amount for the sub-item, in the currency specified by `currency`.
     #[serde(rename = "seller_discount", skip_serializing_if = "Option::is_none")]
     pub seller_discount: Option<String>,
     /// The cancellation reason. Please visit [our list of cancel reasons](https://partner.tiktokshop.com/docv2/page/67e61eee427345048595487d) for more information.
     #[serde(rename = "cancel_reason", skip_serializing_if = "Option::is_none")]
     pub cancel_reason: Option<String>,
-    /// Item original price. Please refer to the currency of `payment_info`.
+    /// The sub-item's original price in the currency specified by `currency`.
     #[serde(rename = "original_price", skip_serializing_if = "Option::is_none")]
     pub original_price: Option<String>,
-    /// The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp.
+    /// The Unix timestamp, in seconds, when the seller successfully called the [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) for this sub-item.
     #[serde(rename = "rts_time", skip_serializing_if = "Option::is_none")]
     pub rts_time: Option<i64>,
     /// The package status of the item. Available values: - `TO_FULFILL`: Package awaiting seller to arrange shipment. - `PROCESSING`: Shipping has been arranged by the seller. Awaiting carrier collection. - `FULFILLING`: Package has been collected by carrier and is in transit. - `COMPLETED`: Package has been delivered. - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged.
     #[serde(rename = "package_status", skip_serializing_if = "Option::is_none")]
     pub package_status: Option<String>,
-    /// Currency for payment.
+    /// The ISO 4217 currency code for monetary amounts in this sub-item.
     #[serde(rename = "currency", skip_serializing_if = "Option::is_none")]
     pub currency: Option<String>,
     /// The shipping provider name.
@@ -76,16 +76,16 @@ pub struct SubItemInfo {
     /// Tracking number. Available after package has been shipped.
     #[serde(rename = "tracking_number", skip_serializing_if = "Option::is_none")]
     pub tracking_number: Option<String>,
-    /// An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique `package_id` and `tracking_id`.
+    /// An order can contain one or more packages based on how the seller chooses to ship, and each package has a unique `package_id`. This field identifies the package that contains this sub-item. Use the sub-item's `tracking_number` for its package-specific tracking value.
     #[serde(rename = "package_id", skip_serializing_if = "Option::is_none")]
     pub package_id: Option<String>,
-    /// Retail delivery fee (RDF). **Note**: Only available in the US market.
+    /// Retail delivery fee (RDF) for the sub-item, in the currency specified by `currency`. **Note**: Only available in the US market.
     #[serde(rename = "retail_delivery_fee", skip_serializing_if = "Option::is_none")]
     pub retail_delivery_fee: Option<String>,
     /// Whether the SKU is a hazmat item. When creating the label for a hazmat item, you must follow the platform rules to put certain items into one package. Please refer to the relationship between `sku_id` and `package_id` to determine how to follow platform rules.
     #[serde(rename = "is_dangerous_good", skip_serializing_if = "Option::is_none")]
     pub is_dangerous_good: Option<bool>,
-    /// Seller warehouse ID.
+    /// The ID of the seller warehouse assigned to fulfill this sub-item.
     #[serde(rename = "warehouse_id", skip_serializing_if = "Option::is_none")]
     pub warehouse_id: Option<String>,
 }

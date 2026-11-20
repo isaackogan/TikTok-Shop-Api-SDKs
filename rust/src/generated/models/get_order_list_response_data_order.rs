@@ -25,7 +25,7 @@ pub struct GetOrderListResponseDataOrder {
     /// The ID of the current shipping provider.
     #[serde(rename = "shipping_provider_id", skip_serializing_if = "Option::is_none")]
     pub shipping_provider_id: Option<String>,
-    /// The date and time that the order was created. Unix timestamp.
+    /// The date and time that the order was created. Unix timestamp, in seconds.
     #[serde(rename = "create_time", skip_serializing_if = "Option::is_none")]
     pub create_time: Option<i64>,
     /// The name of the current shipping provider.
@@ -37,13 +37,13 @@ pub struct GetOrderListResponseDataOrder {
     /// Payment info about this order.
     #[serde(rename = "payment", skip_serializing_if = "Option::is_none")]
     pub payment: Option<Box<models::Payment>>,
-    /// `recipient_address` is not available under `UNPAID` and `ON_HOLD` statuses.
+    /// Recipient address information is unavailable for orders with `UNPAID`, `ON_HOLD`, or `CANCELLED` status.
     #[serde(rename = "recipient_address", skip_serializing_if = "Option::is_none")]
     pub recipient_address: Option<Box<models::GetOrderListResponseDataOrderRecipientAddress>>,
     /// Specific order status. Available values: - `UNPAID`: The order has been placed, but payment has not been completed. - `ON_HOLD`: The order has been accepted and is awaiting fulfillment. The buyer may still cancel without the seller’s approval. If `order_type=PRE_ORDER`, the product is still awaiting release so payment will only be authorized 1 day before the release, but the seller should start preparing for the release. - `AWAITING_SHIPMENT`: The order is ready to be shipped, but no items have been shipped yet. - `PARTIALLY_SHIPPING`: Some items in the order have been shipped, but not all. - `AWAITING_COLLECTION`: Shipping has been arranged, but the package is waiting to be collected by the carrier. - `IN_TRANSIT`: The package has been collected by the carrier and delivery is in progress. - `DELIVERED`: The package has been delivered to the buyer. - `COMPLETED`: The order has been completed, and no further returns or refunds are allowed. - `CANCELLED`: The order has been cancelled.
     #[serde(rename = "status", skip_serializing_if = "Option::is_none")]
     pub status: Option<String>,
-    /// Fulfillment type. Only orders with fulfillment type can be shipped by sellers. Available values: - `FULFILLMENT_BY_SELLER`: a method where sellers fulfill orders directly from their own inventory, without using TikTok's fulfillment centers. In this model, the seller is responsible for storing, packaging, and shipping the products to customers. - `FULFILLMENT_BY_TIKTOK`: a service offered by TikTok where sellers can send their products to TikTok's fulfillment centers. TikTok then takes care of storing, picking, packing, and shipping the products to customers. - `FULFILLMENT_BY_DILAYANI_TOKOPEDIA`: a method where Tokopedia GoTo Logistics provides warehousing and logistics services to sellers and charges a fee for the service.
+    /// The order fulfillment model. Available values: - `FULFILLMENT_BY_SELLER`: a method where sellers fulfill orders directly from their own inventory, without using TikTok's fulfillment centers. In this model, the seller is responsible for storing, packaging, and shipping the products to customers. - `FULFILLMENT_BY_TIKTOK`: a service offered by TikTok where sellers can send their products to TikTok's fulfillment centers. TikTok then takes care of storing, picking, packing, and shipping the products to customers. - `FULFILLMENT_BY_DILAYANI_TOKOPEDIA`: a method where Tokopedia GoTo Logistics provides warehousing and logistics services to sellers and charges a fee for the service.
     #[serde(rename = "fulfillment_type", skip_serializing_if = "Option::is_none")]
     pub fulfillment_type: Option<String>,
     /// Indicates whether it is a Pick-Up Drop-Off (PUDO) location. The PUDO location is selected by the buyer when placing orders. Available values: - `HOME_DELIVERY`: not a PUDO location - `COLLECTION_POINT`: a PUDO location
@@ -61,7 +61,7 @@ pub struct GetOrderListResponseDataOrder {
     /// The cancellation reason. Please visit [our list of cancel reasons](https://partner.tiktokshop.com/docv2/page/67e61eee427345048595487d) for more information.
     #[serde(rename = "cancel_reason", skip_serializing_if = "Option::is_none")]
     pub cancel_reason: Option<String>,
-    /// Time of order status change. Unix timestamp.
+    /// The date and time when the order was last updated. Unix timestamp in seconds.
     #[serde(rename = "update_time", skip_serializing_if = "Option::is_none")]
     pub update_time: Option<i64>,
     /// Payment method name, for display purposes.
@@ -85,34 +85,34 @@ pub struct GetOrderListResponseDataOrder {
     /// Seller warehouse ID.
     #[serde(rename = "warehouse_id", skip_serializing_if = "Option::is_none")]
     pub warehouse_id: Option<String>,
-    /// Buyer request cancellation time. Unix timestamp.
+    /// The time when the buyer submitted the pending cancellation request. Unix timestamp in seconds.
     #[serde(rename = "request_cancel_time", skip_serializing_if = "Option::is_none")]
     pub request_cancel_time: Option<i64>,
     /// Delivery method. Available values: - `TIKTOK`: Shipping service provided by TikTok. The seller should obtain shipping label from TikTok. - `SELLER`: Seller provides shipping, including through 3rd party fulfillment providers on behalf of the seller. - `TIKTOK_DIGITAL`: Tiktok delivers virtual goods directly to buyers. There is no action needed.
     #[serde(rename = "shipping_type", skip_serializing_if = "Option::is_none")]
     pub shipping_type: Option<String>,
-    /// Buyer user ID.
+    /// The ID of the buyer who placed the order. This is the value matched by the `buyer_user_id` request filter.
     #[serde(rename = "user_id", skip_serializing_if = "Option::is_none")]
     pub user_id: Option<String>,
     /// The seller note from TikTok Shop Seller Center.
     #[serde(rename = "seller_note", skip_serializing_if = "Option::is_none")]
     pub seller_note: Option<String>,
-    /// Order should arrive by this date to be considered on-time and to avoid late delivery penalties.
+    /// The time by which the order should arrive to be considered on time and avoid late-delivery penalties. Unix timestamp in seconds.
     #[serde(rename = "delivery_sla_time", skip_serializing_if = "Option::is_none")]
     pub delivery_sla_time: Option<i64>,
-    /// This option is for sellers that accept cash payment on delivery (COD). Buyers will pay in cash upon receiving the package.   Default: FALSE  Only applicable to countries where COD is supported.
+    /// Whether the order uses cash on delivery (COD). If `true`, the buyer pays in cash when the package is delivered.  Only applicable to countries where COD is supported.
     #[serde(rename = "is_cod", skip_serializing_if = "Option::is_none")]
     pub is_cod: Option<bool>,
     /// Delivery option ID is mapped to seller configured logistics templates ID.
     #[serde(rename = "delivery_option_id", skip_serializing_if = "Option::is_none")]
     pub delivery_option_id: Option<String>,
-    /// The time an order's status was updated to `CANCELLED`. Unix timestamp.
+    /// The time an order's status was updated to `CANCELLED`. Unix timestamp in seconds.
     #[serde(rename = "cancel_time", skip_serializing_if = "Option::is_none")]
     pub cancel_time: Option<i64>,
     /// Whether an invoice needs to be uploaded and uploaded status (only for Brazil market). - UNKNOWN:  Currently unable to confirm whether an invoice is needed - NEED_INVOICE: This order requires an invoice and the invoice has not been uploaded yet - NO_NEED：This order does not require an invoice - INVOICE_UPLOADED: The invoice for this order has been uploaded and verified. If the order is split, it will be marked as \"uploaded\" once any sub-order's invoice is uploaded. - INVOICE_PROCESSING: The invoice for this order is currently being uploaded/cancelled. Please wait for the final result and do not repeat the operation
     #[serde(rename = "need_upload_invoice", skip_serializing_if = "Option::is_none")]
     pub need_upload_invoice: Option<String>,
-    /// Delivery option name. For display purposes only. Available values: - `Economy Shipping` - `Standard Shipping` - `Express Shipping`
+    /// The name of the delivery option. For display purposes only.
     #[serde(rename = "delivery_option_name", skip_serializing_if = "Option::is_none")]
     pub delivery_option_name: Option<String>,
     /// CPF (invoice number), used to issue an invoice.  **Note**: Only available in the Brazil market.
@@ -139,7 +139,7 @@ pub struct GetOrderListResponseDataOrder {
     /// Order should be delivered before this time. Unix timestamp.
     #[serde(rename = "delivery_option_required_delivery_time", skip_serializing_if = "Option::is_none")]
     pub delivery_option_required_delivery_time: Option<i64>,
-    /// Indicates whether the order has been changed to or will be updated to `ON_HOLD` status.
+    /// Whether the order entered an ON_HOLD period after the buyer completed payment. This does not indicate that the order's current status is ON_HOLD.
     #[serde(rename = "is_on_hold_order", skip_serializing_if = "Option::is_none")]
     pub is_on_hold_order: Option<bool>,
     /// The time an order's status changed to `DELIVERED`. Unix timestamp.
@@ -151,7 +151,7 @@ pub struct GetOrderListResponseDataOrder {
     /// Subscription orders are recurring orders set up by customers. If TRUE, this order is generated from a subscription order
     #[serde(rename = "is_subscription_order", skip_serializing_if = "Option::is_none")]
     pub is_subscription_order: Option<bool>,
-    /// This indicates if an order is a refundable sample. Refundable samples lets sellers collaborate with creators by refunding product costs only when creators meet sales thresholds.
+    /// Whether the order is a refundable sample. This flag is independent of `is_sample_order`; a refundable-sample order can have `is_sample_order` set to `false`. Refundable samples let sellers collaborate with creators by refunding product costs only when creators meet sales thresholds.
     #[serde(rename = "is_refundable_sample", skip_serializing_if = "Option::is_none")]
     pub is_refundable_sample: Option<bool>,
     /// If true, order requires authentication. Use an approved in-house authentication service after an order has been placed for verification. This must be completed before shipment.
@@ -214,10 +214,10 @@ pub struct GetOrderListResponseDataOrder {
     /// The avatar of the TikTok buyer, which is defined by the TikTok user. The buyer_avatar can be used in conjunction with the buyer_nickname when displaying the unboxing results within the TikTok Live Session.
     #[serde(rename = "buyer_avatar", skip_serializing_if = "Option::is_none")]
     pub buyer_avatar: Option<String>,
-    /// Order tag identifier if has certain rights within the order based on the program subscribed by sellers. 1 = Shipping Fee Reimbursement Program 2 = Horizon+ Program  Applicable for SEA market only
+    /// Order rights granted through programs joined by the seller. Multiple values can be returned together; the field is omitted when none of the listed rights apply. Possible values: - `1`: Shipping Fee Reimbursement Program - `2`: Horizon+ Program  **Note**: Available only in the SEA market.
     #[serde(rename = "order_rights", skip_serializing_if = "Option::is_none")]
     pub order_rights: Option<Vec<i64>>,
-    /// The latest buyer pickup time for instore pickup method specified by the platform. Currently applicable for SEA market. Unix timestamp.
+    /// The latest buyer pickup time for instore pickup method specified by the platform. Currently applicable for SEA market. Unix timestamp in seconds.
     #[serde(rename = "instore_pickup_sla_time", skip_serializing_if = "Option::is_none")]
     pub instore_pickup_sla_time: Option<i64>,
     /// Indicate fast fulfillment SLA for shipping action. Applicable for SEA market only. Unix timestamp

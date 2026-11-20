@@ -281,7 +281,7 @@ public class GetOrderListResponseDataOrderRecipientAddress {
   }
 
   /**
-   * Full recipient detailed address.
+   * The detailed street-address portion of the recipient address, combined from the address detail lines.
    * @return addressDetail
    */
   @javax.annotation.Nullable
@@ -384,7 +384,7 @@ public class GetOrderListResponseDataOrderRecipientAddress {
   }
 
   /**
-   * &#x60;district_info&#x60; is unavailable under &#x60;UNPAID&#x60; and &#x60;ON_HOLD&#x60; statuses.
+   * &#x60;district_info&#x60; is unavailable for orders with &#x60;UNPAID&#x60;, &#x60;ON_HOLD&#x60;, or &#x60;CANCELLED&#x60; status.
    * @return districtInfo
    */
   @javax.annotation.Nullable

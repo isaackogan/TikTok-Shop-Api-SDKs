@@ -19,6 +19,9 @@ pub struct RecommendCategoryResponseData {
     /// The recommended category ID. This is always a leaf category.
     #[serde(rename = "leaf_category_id", skip_serializing_if = "Option::is_none")]
     pub leaf_category_id: Option<String>,
+    /// No category recommended reason description Possible values: - NON_MAIN_CATEGORY：recommended category not main categories of merchants - PROHIBITED_CATEGORY: recommended category  Prohibition of sale - PROHIBITED_PUBLISH_CATEGORY：recommended category  Prohibition of  publish - RECOMMEND_CATEGORY_RPC_ERROR: There is a problem with downstream services.
+    #[serde(rename = "none_category_rec_reasons", skip_serializing_if = "Option::is_none")]
+    pub none_category_rec_reasons: Option<Vec<String>>,
 }
 
 impl RecommendCategoryResponseData {
@@ -26,6 +29,7 @@ impl RecommendCategoryResponseData {
         RecommendCategoryResponseData {
             categories: None,
             leaf_category_id: None,
+            none_category_rec_reasons: None,
         }
     }
 }

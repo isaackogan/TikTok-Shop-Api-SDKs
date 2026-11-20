@@ -497,7 +497,7 @@ class SubItemInfo implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets sku_id
      *
-     * @param string|null $sku_id SKU ID.
+     * @param string|null $sku_id The SKU ID of the sub-item in the virtual bundle.
      *
      * @return self
      */
@@ -659,7 +659,7 @@ class SubItemInfo implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets product_id
      *
-     * @param string|null $product_id Product ID.
+     * @param string|null $product_id The product ID of the sub-item in the virtual bundle.
      *
      * @return self
      */
@@ -686,7 +686,7 @@ class SubItemInfo implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets sale_price
      *
-     * @param string|null $sale_price Item sale price. Please refer to the currency of `payment_info`.
+     * @param string|null $sale_price The sub-item's sale price in the currency specified by `currency`.
      *
      * @return self
      */
@@ -713,7 +713,7 @@ class SubItemInfo implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets platform_discount
      *
-     * @param string|null $platform_discount Platform discount amount. Please refer to the currency of `payment_info`.
+     * @param string|null $platform_discount The platform discount amount for the sub-item, in the currency specified by `currency`.
      *
      * @return self
      */
@@ -740,7 +740,7 @@ class SubItemInfo implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets seller_discount
      *
-     * @param string|null $seller_discount Seller discount amount. Please refer to the currency of `payment_info`.
+     * @param string|null $seller_discount The seller discount amount for the sub-item, in the currency specified by `currency`.
      *
      * @return self
      */
@@ -794,7 +794,7 @@ class SubItemInfo implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets original_price
      *
-     * @param string|null $original_price Item original price. Please refer to the currency of `payment_info`.
+     * @param string|null $original_price The sub-item's original price in the currency specified by `currency`.
      *
      * @return self
      */
@@ -821,7 +821,7 @@ class SubItemInfo implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets rts_time
      *
-     * @param int|null $rts_time The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp.
+     * @param int|null $rts_time The Unix timestamp, in seconds, when the seller successfully called the [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) for this sub-item.
      *
      * @return self
      */
@@ -875,7 +875,7 @@ class SubItemInfo implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets currency
      *
-     * @param string|null $currency Currency for payment.
+     * @param string|null $currency The ISO 4217 currency code for monetary amounts in this sub-item.
      *
      * @return self
      */
@@ -1037,7 +1037,7 @@ class SubItemInfo implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets package_id
      *
-     * @param string|null $package_id An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique `package_id` and `tracking_id`.
+     * @param string|null $package_id An order can contain one or more packages based on how the seller chooses to ship, and each package has a unique `package_id`. This field identifies the package that contains this sub-item. Use the sub-item's `tracking_number` for its package-specific tracking value.
      *
      * @return self
      */
@@ -1064,7 +1064,7 @@ class SubItemInfo implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets retail_delivery_fee
      *
-     * @param string|null $retail_delivery_fee Retail delivery fee (RDF). **Note**: Only available in the US market.
+     * @param string|null $retail_delivery_fee Retail delivery fee (RDF) for the sub-item, in the currency specified by `currency`. **Note**: Only available in the US market.
      *
      * @return self
      */
@@ -1118,7 +1118,7 @@ class SubItemInfo implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets warehouse_id
      *
-     * @param string|null $warehouse_id Seller warehouse ID.
+     * @param string|null $warehouse_id The ID of the seller warehouse assigned to fulfill this sub-item.
      *
      * @return self
      */

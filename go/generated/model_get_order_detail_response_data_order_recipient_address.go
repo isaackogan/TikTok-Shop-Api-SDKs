@@ -19,7 +19,7 @@ var _ MappedNullable = &GetOrderDetailResponseDataOrderRecipientAddress{}
 
 // GetOrderDetailResponseDataOrderRecipientAddress struct for GetOrderDetailResponseDataOrderRecipientAddress
 type GetOrderDetailResponseDataOrderRecipientAddress struct {
-	// The complete recipient addresses information.
+	// The complete recipient address composed from the administrative-area names and detailed address lines.
 	FullAddress *string `json:"full_address,omitempty"`
 	// The telephone number of the buyer. Please notice, if this order uses platform logistics, phone number will be desensitized.
 	PhoneNumber *string `json:"phone_number,omitempty"`
@@ -51,7 +51,7 @@ type GetOrderDetailResponseDataOrderRecipientAddress struct {
 	DistrictInfo []DistrictInfo `json:"district_info,omitempty"`
 	// Contains all of the delivery instructions provided by the buyer for the shipping address. Currently, only available in the US market.
 	DeliveryPreferences *GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference `json:"delivery_preferences,omitempty"`
-	// Full buyer detail address.
+	// Detailed street address of the recipient.
 	AddressDetail *string `json:"address_detail,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

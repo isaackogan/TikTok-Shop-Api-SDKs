@@ -502,7 +502,7 @@ public class GetOrderListResponseDataOrder {
   }
 
   /**
-   * The date and time that the order was created. Unix timestamp.
+   * The date and time that the order was created. Unix timestamp, in seconds.
    * @return createTime
    */
   @javax.annotation.Nullable
@@ -586,7 +586,7 @@ public class GetOrderListResponseDataOrder {
   }
 
   /**
-   * &#x60;recipient_address&#x60; is not available under &#x60;UNPAID&#x60; and &#x60;ON_HOLD&#x60; statuses.
+   * Recipient address information is unavailable for orders with &#x60;UNPAID&#x60;, &#x60;ON_HOLD&#x60;, or &#x60;CANCELLED&#x60; status.
    * @return recipientAddress
    */
   @javax.annotation.Nullable
@@ -624,7 +624,7 @@ public class GetOrderListResponseDataOrder {
   }
 
   /**
-   * Fulfillment type. Only orders with fulfillment type can be shipped by sellers. Available values: - &#x60;FULFILLMENT_BY_SELLER&#x60;: a method where sellers fulfill orders directly from their own inventory, without using TikTok&#39;s fulfillment centers. In this model, the seller is responsible for storing, packaging, and shipping the products to customers. - &#x60;FULFILLMENT_BY_TIKTOK&#x60;: a service offered by TikTok where sellers can send their products to TikTok&#39;s fulfillment centers. TikTok then takes care of storing, picking, packing, and shipping the products to customers. - &#x60;FULFILLMENT_BY_DILAYANI_TOKOPEDIA&#x60;: a method where Tokopedia GoTo Logistics provides warehousing and logistics services to sellers and charges a fee for the service.
+   * The order fulfillment model. Available values: - &#x60;FULFILLMENT_BY_SELLER&#x60;: a method where sellers fulfill orders directly from their own inventory, without using TikTok&#39;s fulfillment centers. In this model, the seller is responsible for storing, packaging, and shipping the products to customers. - &#x60;FULFILLMENT_BY_TIKTOK&#x60;: a service offered by TikTok where sellers can send their products to TikTok&#39;s fulfillment centers. TikTok then takes care of storing, picking, packing, and shipping the products to customers. - &#x60;FULFILLMENT_BY_DILAYANI_TOKOPEDIA&#x60;: a method where Tokopedia GoTo Logistics provides warehousing and logistics services to sellers and charges a fee for the service.
    * @return fulfillmentType
    */
   @javax.annotation.Nullable
@@ -738,7 +738,7 @@ public class GetOrderListResponseDataOrder {
   }
 
   /**
-   * Time of order status change. Unix timestamp.
+   * The date and time when the order was last updated. Unix timestamp in seconds.
    * @return updateTime
    */
   @javax.annotation.Nullable
@@ -890,7 +890,7 @@ public class GetOrderListResponseDataOrder {
   }
 
   /**
-   * Buyer request cancellation time. Unix timestamp.
+   * The time when the buyer submitted the pending cancellation request. Unix timestamp in seconds.
    * @return requestCancelTime
    */
   @javax.annotation.Nullable
@@ -928,7 +928,7 @@ public class GetOrderListResponseDataOrder {
   }
 
   /**
-   * Buyer user ID.
+   * The ID of the buyer who placed the order. This is the value matched by the &#x60;buyer_user_id&#x60; request filter.
    * @return userId
    */
   @javax.annotation.Nullable
@@ -966,7 +966,7 @@ public class GetOrderListResponseDataOrder {
   }
 
   /**
-   * Order should arrive by this date to be considered on-time and to avoid late delivery penalties.
+   * The time by which the order should arrive to be considered on time and avoid late-delivery penalties. Unix timestamp in seconds.
    * @return deliverySlaTime
    */
   @javax.annotation.Nullable
@@ -985,7 +985,7 @@ public class GetOrderListResponseDataOrder {
   }
 
   /**
-   * This option is for sellers that accept cash payment on delivery (COD). Buyers will pay in cash upon receiving the package.   Default: FALSE  Only applicable to countries where COD is supported.
+   * Whether the order uses cash on delivery (COD). If &#x60;true&#x60;, the buyer pays in cash when the package is delivered.  Only applicable to countries where COD is supported.
    * @return isCod
    */
   @javax.annotation.Nullable
@@ -1023,7 +1023,7 @@ public class GetOrderListResponseDataOrder {
   }
 
   /**
-   * The time an order&#39;s status was updated to &#x60;CANCELLED&#x60;. Unix timestamp.
+   * The time an order&#39;s status was updated to &#x60;CANCELLED&#x60;. Unix timestamp in seconds.
    * @return cancelTime
    */
   @javax.annotation.Nullable
@@ -1061,7 +1061,7 @@ public class GetOrderListResponseDataOrder {
   }
 
   /**
-   * Delivery option name. For display purposes only. Available values: - &#x60;Economy Shipping&#x60; - &#x60;Standard Shipping&#x60; - &#x60;Express Shipping&#x60;
+   * The name of the delivery option. For display purposes only.
    * @return deliveryOptionName
    */
   @javax.annotation.Nullable
@@ -1240,7 +1240,7 @@ public class GetOrderListResponseDataOrder {
   }
 
   /**
-   * Indicates whether the order has been changed to or will be updated to &#x60;ON_HOLD&#x60; status.
+   * Whether the order entered an ON_HOLD period after the buyer completed payment. This does not indicate that the order&#39;s current status is ON_HOLD.
    * @return isOnHoldOrder
    */
   @javax.annotation.Nullable
@@ -1316,7 +1316,7 @@ public class GetOrderListResponseDataOrder {
   }
 
   /**
-   * This indicates if an order is a refundable sample. Refundable samples lets sellers collaborate with creators by refunding product costs only when creators meet sales thresholds.
+   * Whether the order is a refundable sample. This flag is independent of &#x60;is_sample_order&#x60;; a refundable-sample order can have &#x60;is_sample_order&#x60; set to &#x60;false&#x60;. Refundable samples let sellers collaborate with creators by refunding product costs only when creators meet sales thresholds.
    * @return isRefundableSample
    */
   @javax.annotation.Nullable
@@ -1723,7 +1723,7 @@ public class GetOrderListResponseDataOrder {
   }
 
   /**
-   * Order tag identifier if has certain rights within the order based on the program subscribed by sellers. 1 &#x3D; Shipping Fee Reimbursement Program 2 &#x3D; Horizon+ Program  Applicable for SEA market only
+   * Order rights granted through programs joined by the seller. Multiple values can be returned together; the field is omitted when none of the listed rights apply. Possible values: - &#x60;1&#x60;: Shipping Fee Reimbursement Program - &#x60;2&#x60;: Horizon+ Program  **Note**: Available only in the SEA market.
    * @return orderRights
    */
   @javax.annotation.Nullable
@@ -1742,7 +1742,7 @@ public class GetOrderListResponseDataOrder {
   }
 
   /**
-   * The latest buyer pickup time for instore pickup method specified by the platform. Currently applicable for SEA market. Unix timestamp.
+   * The latest buyer pickup time for instore pickup method specified by the platform. Currently applicable for SEA market. Unix timestamp in seconds.
    * @return instorePickupSlaTime
    */
   @javax.annotation.Nullable

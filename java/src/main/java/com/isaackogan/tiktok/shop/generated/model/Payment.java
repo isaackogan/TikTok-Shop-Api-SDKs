@@ -184,7 +184,7 @@ public class Payment {
   }
 
   /**
-   * Currency for payment.
+   * The ISO 4217 currency code for monetary amounts in this payment object.
    * @return currency
    */
   @javax.annotation.Nullable
@@ -279,7 +279,7 @@ public class Payment {
   }
 
   /**
-   * Discount applied to the order funded by a payment platform
+   * The portion of &#x60;platform_discount&#x60; funded by a payment platform. This amount is already included in &#x60;platform_discount&#x60;.
    * @return paymentPlatformDiscount
    */
   @javax.annotation.Nullable

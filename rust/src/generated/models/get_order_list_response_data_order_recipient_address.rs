@@ -34,7 +34,7 @@ pub struct GetOrderListResponseDataOrderRecipientAddress {
     /// Recipient last name in katakana. **Note**: Applicable only for the JP market.
     #[serde(rename = "last_name_local_script", skip_serializing_if = "Option::is_none")]
     pub last_name_local_script: Option<String>,
-    /// Full recipient detailed address.
+    /// The detailed street-address portion of the recipient address, combined from the address detail lines.
     #[serde(rename = "address_detail", skip_serializing_if = "Option::is_none")]
     pub address_detail: Option<String>,
     /// The first line of the street address.
@@ -49,7 +49,7 @@ pub struct GetOrderListResponseDataOrderRecipientAddress {
     /// The fourth line of the street address.
     #[serde(rename = "address_line4", skip_serializing_if = "Option::is_none")]
     pub address_line4: Option<String>,
-    /// `district_info` is unavailable under `UNPAID` and `ON_HOLD` statuses.
+    /// `district_info` is unavailable for orders with `UNPAID`, `ON_HOLD`, or `CANCELLED` status.
     #[serde(rename = "district_info", skip_serializing_if = "Option::is_none")]
     pub district_info: Option<Vec<models::DistrictInfo>>,
     /// Contains all of the delivery instructions provided by the recipient for the shipping address. Currently, only available in the US market.

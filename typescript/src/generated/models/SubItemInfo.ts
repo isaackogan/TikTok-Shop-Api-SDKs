@@ -34,7 +34,7 @@ export interface SubItemInfo {
      */
     id?: string;
     /**
-     * SKU ID.
+     * The SKU ID of the sub-item in the virtual bundle.
      * @type {string}
      * @memberof SubItemInfo
      */
@@ -77,25 +77,25 @@ export interface SubItemInfo {
      */
     skuName?: string;
     /**
-     * Product ID.
+     * The product ID of the sub-item in the virtual bundle.
      * @type {string}
      * @memberof SubItemInfo
      */
     productId?: string;
     /**
-     * Item sale price. Please refer to the currency of `payment_info`.
+     * The sub-item's sale price in the currency specified by `currency`.
      * @type {string}
      * @memberof SubItemInfo
      */
     salePrice?: string;
     /**
-     * Platform discount amount. Please refer to the currency of `payment_info`.
+     * The platform discount amount for the sub-item, in the currency specified by `currency`.
      * @type {string}
      * @memberof SubItemInfo
      */
     platformDiscount?: string;
     /**
-     * Seller discount amount. Please refer to the currency of `payment_info`.
+     * The seller discount amount for the sub-item, in the currency specified by `currency`.
      * @type {string}
      * @memberof SubItemInfo
      */
@@ -107,13 +107,13 @@ export interface SubItemInfo {
      */
     cancelReason?: string;
     /**
-     * Item original price. Please refer to the currency of `payment_info`.
+     * The sub-item's original price in the currency specified by `currency`.
      * @type {string}
      * @memberof SubItemInfo
      */
     originalPrice?: string;
     /**
-     * The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp.
+     * The Unix timestamp, in seconds, when the seller successfully called the [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) for this sub-item.
      * @type {number}
      * @memberof SubItemInfo
      */
@@ -131,7 +131,7 @@ export interface SubItemInfo {
      */
     packageStatus?: string;
     /**
-     * Currency for payment.
+     * The ISO 4217 currency code for monetary amounts in this sub-item.
      * @type {string}
      * @memberof SubItemInfo
      */
@@ -172,13 +172,13 @@ export interface SubItemInfo {
      */
     trackingNumber?: string;
     /**
-     * An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique `package_id` and `tracking_id`.
+     * An order can contain one or more packages based on how the seller chooses to ship, and each package has a unique `package_id`. This field identifies the package that contains this sub-item. Use the sub-item's `tracking_number` for its package-specific tracking value.
      * @type {string}
      * @memberof SubItemInfo
      */
     packageId?: string;
     /**
-     * Retail delivery fee (RDF).
+     * Retail delivery fee (RDF) for the sub-item, in the currency specified by `currency`.
      * **Note**: Only available in the US market.
      * @type {string}
      * @memberof SubItemInfo
@@ -191,7 +191,7 @@ export interface SubItemInfo {
      */
     isDangerousGood?: boolean;
     /**
-     * Seller warehouse ID.
+     * The ID of the seller warehouse assigned to fulfill this sub-item.
      * @type {string}
      * @memberof SubItemInfo
      */

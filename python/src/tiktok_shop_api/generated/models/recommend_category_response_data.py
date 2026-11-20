@@ -29,10 +29,19 @@ class RecommendCategoryResponseData:
             categories (list[RecommendCategoryResponseDataCategory] | Unset): The category hierarchy for the recommended
                 leaf category, ordered from the top-level category to the leaf category.
             leaf_category_id (str | Unset): The recommended category ID. This is always a leaf category.
+            none_category_rec_reasons (list[str] | Unset): No category recommended reason description
+                Possible values:
+                - NON_MAIN_CATEGORY：recommended category not main categories of merchants
+                - PROHIBITED_CATEGORY: recommended category
+                Prohibition of sale
+                - PROHIBITED_PUBLISH_CATEGORY：recommended category
+                Prohibition of  publish
+                - RECOMMEND_CATEGORY_RPC_ERROR: There is a problem with downstream services.
      """
 
     categories: list[RecommendCategoryResponseDataCategory] | Unset = UNSET
     leaf_category_id: str | Unset = UNSET
+    none_category_rec_reasons: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
 
@@ -52,6 +61,12 @@ class RecommendCategoryResponseData:
 
         leaf_category_id = self.leaf_category_id
 
+        none_category_rec_reasons: list[str] | Unset = UNSET
+        if not isinstance(self.none_category_rec_reasons, Unset):
+            none_category_rec_reasons = self.none_category_rec_reasons
+
+
+
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -61,6 +76,8 @@ class RecommendCategoryResponseData:
             field_dict["categories"] = categories
         if leaf_category_id is not UNSET:
             field_dict["leaf_category_id"] = leaf_category_id
+        if none_category_rec_reasons is not UNSET:
+            field_dict["none_category_rec_reasons"] = none_category_rec_reasons
 
         return field_dict
 
@@ -84,9 +101,13 @@ class RecommendCategoryResponseData:
 
         leaf_category_id = d.pop("leaf_category_id", UNSET)
 
+        none_category_rec_reasons = cast(list[str], d.pop("none_category_rec_reasons", UNSET))
+
+
         recommend_category_response_data = cls(
             categories=categories,
             leaf_category_id=leaf_category_id,
+            none_category_rec_reasons=none_category_rec_reasons,
         )
 
 

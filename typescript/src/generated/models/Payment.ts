@@ -20,7 +20,7 @@ import { mapValues } from '../runtime';
  */
 export interface Payment {
     /**
-     * Currency for payment.
+     * The ISO 4217 currency code for monetary amounts in this payment object.
      * @type {string}
      * @memberof Payment
      */
@@ -53,7 +53,7 @@ export interface Payment {
      */
     platformDiscount?: string;
     /**
-     * Discount applied to the order funded by a payment platform
+     * The portion of `platform_discount` funded by a payment platform. This amount is already included in `platform_discount`.
      * @type {string}
      * @memberof Payment
      */

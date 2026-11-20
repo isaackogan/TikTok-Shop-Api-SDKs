@@ -40,16 +40,16 @@ pub struct GetOrderListResponseDataOrderLineItem {
     /// Product ID.
     #[serde(rename = "product_id", skip_serializing_if = "Option::is_none")]
     pub product_id: Option<String>,
-    /// Item sale price. Please refer to the currency of `payment_info`.
+    /// Sale price of the line item, in the currency specified by `currency`.
     #[serde(rename = "sale_price", skip_serializing_if = "Option::is_none")]
     pub sale_price: Option<String>,
     /// Deposit fee that is applied to certain products, typically beverage containers such as bottles or cans. **Note** Only available in Germany market
     #[serde(rename = "pfand_fee", skip_serializing_if = "Option::is_none")]
     pub pfand_fee: Option<String>,
-    /// Platform discount amount. Please refer to the currency of `payment_info`.
+    /// Platform-funded discount amount for the line item, in the currency specified by `currency`.
     #[serde(rename = "platform_discount", skip_serializing_if = "Option::is_none")]
     pub platform_discount: Option<String>,
-    /// Seller discount amount. Please refer to the currency of `payment_info`.
+    /// Seller-funded discount amount for the line item, in the currency specified by `currency`.
     #[serde(rename = "seller_discount", skip_serializing_if = "Option::is_none")]
     pub seller_discount: Option<String>,
     /// [**Deprecated**: This field is deprecated and will be removed in a future API version. Use `order_type` instead.]  The order line type. Possible values based on region:  **All regions** - `NORMAL`: An item that is in stock and available for immediate purchase and fulfillment. - `ZERO_LOTTERY`: An item purchased during a lottery event in TikTok LIVE. - `SHOP_PARTNER`: An item purchased from a TikTok Shop partner store.  **US** - `PRE_ORDER`: An item that is not yet available or released. Fulfillment starts on a specific date in the future. - `MADE_TO_ORDER`: An item that is produced only after the order is received. Fulfillment starts after the product is produced.
@@ -58,16 +58,16 @@ pub struct GetOrderListResponseDataOrderLineItem {
     /// The cancellation reason. Please visit [our list of cancel reasons](https://partner.tiktokshop.com/docv2/page/67e61eee427345048595487d) for more information.
     #[serde(rename = "cancel_reason", skip_serializing_if = "Option::is_none")]
     pub cancel_reason: Option<String>,
-    /// Item original price. Please refer to the currency of `payment_info`.
+    /// Original price of the line item, in the currency specified by `currency`.
     #[serde(rename = "original_price", skip_serializing_if = "Option::is_none")]
     pub original_price: Option<String>,
-    /// The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp.
+    /// The time the package containing this line item was shipped by a successful call to the [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1). Unix timestamp in seconds.
     #[serde(rename = "rts_time", skip_serializing_if = "Option::is_none")]
     pub rts_time: Option<i64>,
     /// The package status of the item. Available values: - `TO_FULFILL`: Package awaiting seller to arrange shipment. - `PROCESSING`: Shipping has been arranged by the seller. Awaiting carrier collection. - `FULFILLING`: Package has been collected by carrier and is in transit. - `COMPLETED`: Package has been delivered. - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged.
     #[serde(rename = "package_status", skip_serializing_if = "Option::is_none")]
     pub package_status: Option<String>,
-    /// Currency for payment.
+    /// The ISO 4217 currency code for monetary amounts in this line item.
     #[serde(rename = "currency", skip_serializing_if = "Option::is_none")]
     pub currency: Option<String>,
     /// The shipping provider name.
@@ -85,10 +85,10 @@ pub struct GetOrderListResponseDataOrderLineItem {
     /// Item tax detail.
     #[serde(rename = "item_tax", skip_serializing_if = "Option::is_none")]
     pub item_tax: Option<Vec<models::ItemTax>>,
-    /// Tracking number. Available after package has been shipped.
+    /// The tracking number for the package containing this line item. Available after the package has been shipped.
     #[serde(rename = "tracking_number", skip_serializing_if = "Option::is_none")]
     pub tracking_number: Option<String>,
-    /// An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique `package_id` and `tracking_id`.
+    /// The ID of the package that contains this line item. Match this value to `packages[].id` when package information is available.
     #[serde(rename = "package_id", skip_serializing_if = "Option::is_none")]
     pub package_id: Option<String>,
     /// Retail delivery fee (RDF).   **Note**: Only available in the US market.
@@ -145,7 +145,7 @@ pub struct GetOrderListResponseDataOrderLineItem {
     /// ID of the print on demand customization details. This ID can be used to query for the exact details of the customization
     #[serde(rename = "pod_info_id", skip_serializing_if = "Option::is_none")]
     pub pod_info_id: Option<String>,
-    /// This describes the product listing type of the SKU.  Possible values: - `TEMPORARY LISTING`
+    /// The product listing type of the SKU. This field is returned only for a temporary listing. Possible values: - `TEMPORARY_LISTING`: The SKU is a temporary listing.
     #[serde(rename = "product_listing_type", skip_serializing_if = "Option::is_none")]
     pub product_listing_type: Option<String>,
 }

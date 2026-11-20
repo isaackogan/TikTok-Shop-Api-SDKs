@@ -206,7 +206,7 @@ public class SubItemInfo {
   }
 
   /**
-   * SKU ID.
+   * The SKU ID of the sub-item in the virtual bundle.
    * @return skuId
    */
   @javax.annotation.Nullable
@@ -320,7 +320,7 @@ public class SubItemInfo {
   }
 
   /**
-   * Product ID.
+   * The product ID of the sub-item in the virtual bundle.
    * @return productId
    */
   @javax.annotation.Nullable
@@ -339,7 +339,7 @@ public class SubItemInfo {
   }
 
   /**
-   * Item sale price. Please refer to the currency of &#x60;payment_info&#x60;.
+   * The sub-item&#39;s sale price in the currency specified by &#x60;currency&#x60;.
    * @return salePrice
    */
   @javax.annotation.Nullable
@@ -358,7 +358,7 @@ public class SubItemInfo {
   }
 
   /**
-   * Platform discount amount. Please refer to the currency of &#x60;payment_info&#x60;.
+   * The platform discount amount for the sub-item, in the currency specified by &#x60;currency&#x60;.
    * @return platformDiscount
    */
   @javax.annotation.Nullable
@@ -377,7 +377,7 @@ public class SubItemInfo {
   }
 
   /**
-   * Seller discount amount. Please refer to the currency of &#x60;payment_info&#x60;.
+   * The seller discount amount for the sub-item, in the currency specified by &#x60;currency&#x60;.
    * @return sellerDiscount
    */
   @javax.annotation.Nullable
@@ -415,7 +415,7 @@ public class SubItemInfo {
   }
 
   /**
-   * Item original price. Please refer to the currency of &#x60;payment_info&#x60;.
+   * The sub-item&#39;s original price in the currency specified by &#x60;currency&#x60;.
    * @return originalPrice
    */
   @javax.annotation.Nullable
@@ -434,7 +434,7 @@ public class SubItemInfo {
   }
 
   /**
-   * The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp.
+   * The Unix timestamp, in seconds, when the seller successfully called the [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) for this sub-item.
    * @return rtsTime
    */
   @javax.annotation.Nullable
@@ -472,7 +472,7 @@ public class SubItemInfo {
   }
 
   /**
-   * Currency for payment.
+   * The ISO 4217 currency code for monetary amounts in this sub-item.
    * @return currency
    */
   @javax.annotation.Nullable
@@ -594,7 +594,7 @@ public class SubItemInfo {
   }
 
   /**
-   * An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique &#x60;package_id&#x60; and &#x60;tracking_id&#x60;.
+   * An order can contain one or more packages based on how the seller chooses to ship, and each package has a unique &#x60;package_id&#x60;. This field identifies the package that contains this sub-item. Use the sub-item&#39;s &#x60;tracking_number&#x60; for its package-specific tracking value.
    * @return packageId
    */
   @javax.annotation.Nullable
@@ -613,7 +613,7 @@ public class SubItemInfo {
   }
 
   /**
-   * Retail delivery fee (RDF). **Note**: Only available in the US market.
+   * Retail delivery fee (RDF) for the sub-item, in the currency specified by &#x60;currency&#x60;. **Note**: Only available in the US market.
    * @return retailDeliveryFee
    */
   @javax.annotation.Nullable
@@ -651,7 +651,7 @@ public class SubItemInfo {
   }
 
   /**
-   * Seller warehouse ID.
+   * The ID of the seller warehouse assigned to fulfill this sub-item.
    * @return warehouseId
    */
   @javax.annotation.Nullable

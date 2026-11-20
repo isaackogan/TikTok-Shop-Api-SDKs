@@ -470,7 +470,7 @@ class Payment implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets currency
      *
-     * @param string|null $currency Currency for payment.
+     * @param string|null $currency The ISO 4217 currency code for monetary amounts in this payment object.
      *
      * @return self
      */
@@ -605,7 +605,7 @@ class Payment implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets payment_platform_discount
      *
-     * @param string|null $payment_platform_discount Discount applied to the order funded by a payment platform
+     * @param string|null $payment_platform_discount The portion of `platform_discount` funded by a payment platform. This amount is already included in `platform_discount`.
      *
      * @return self
      */

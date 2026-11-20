@@ -47,12 +47,14 @@ class GetOrderListResponseDataOrderLineItem:
             sku_name (str | Unset): The name of the SKU, combined by product SKU attribute like size or color. e.g. "Black,
                 26"
             product_id (str | Unset): Product ID.
-            sale_price (str | Unset): Item sale price. Please refer to the currency of `payment_info`.
+            sale_price (str | Unset): Sale price of the line item, in the currency specified by `currency`.
             pfand_fee (str | Unset): Deposit fee that is applied to certain products, typically beverage containers such as
                 bottles or cans.
                 **Note** Only available in Germany market
-            platform_discount (str | Unset): Platform discount amount. Please refer to the currency of `payment_info`.
-            seller_discount (str | Unset): Seller discount amount. Please refer to the currency of `payment_info`.
+            platform_discount (str | Unset): Platform-funded discount amount for the line item, in the currency specified by
+                `currency`.
+            seller_discount (str | Unset): Seller-funded discount amount for the line item, in the currency specified by
+                `currency`.
             sku_type (str | Unset): [**Deprecated**: This field is deprecated and will be removed in a future API version.
                 Use `order_type` instead.]
 
@@ -71,9 +73,10 @@ class GetOrderListResponseDataOrderLineItem:
                 product is produced.
             cancel_reason (str | Unset): The cancellation reason. Please visit [our list of cancel
                 reasons](https://partner.tiktokshop.com/docv2/page/67e61eee427345048595487d) for more information.
-            original_price (str | Unset): Item original price. Please refer to the currency of `payment_info`.
-            rts_time (int | Unset): The time sellers shipped the order (called [Ship Package
-                API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp.
+            original_price (str | Unset): Original price of the line item, in the currency specified by `currency`.
+            rts_time (int | Unset): The time the package containing this line item was shipped by a successful call to the
+                [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1). Unix timestamp in
+                seconds.
             package_status (str | Unset): The package status of the item.
                 Available values:
                 - `TO_FULFILL`: Package awaiting seller to arrange shipment.
@@ -82,7 +85,7 @@ class GetOrderListResponseDataOrderLineItem:
                 - `COMPLETED`: Package has been delivered.
                 - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or
                 damaged.
-            currency (str | Unset): Currency for payment.
+            currency (str | Unset): The ISO 4217 currency code for monetary amounts in this line item.
             shipping_provider_name (str | Unset): The shipping provider name.
             cancel_user (str | Unset): Cancellation request initiator.
                 Available values:
@@ -93,9 +96,10 @@ class GetOrderListResponseDataOrderLineItem:
             shipping_provider_id (str | Unset): The shipping provider ID of the item.
             is_gift (bool | Unset): Indicates whether the current order line item is a gift.
             item_tax (list[ItemTax] | Unset): Item tax detail.
-            tracking_number (str | Unset): Tracking number. Available after package has been shipped.
-            package_id (str | Unset): An order can contain one or more packages based on how the seller chooses to ship.
-                Each package has a unique `package_id` and `tracking_id`.
+            tracking_number (str | Unset): The tracking number for the package containing this line item. Available after
+                the package has been shipped.
+            package_id (str | Unset): The ID of the package that contains this line item. Match this value to
+                `packages[].id` when package information is available.
             retail_delivery_fee (str | Unset): Retail delivery fee (RDF).
 
                 **Note**: Only available in the US market.
@@ -148,9 +152,10 @@ class GetOrderListResponseDataOrderLineItem:
             is_pod_customized (bool | Unset): Identifies if this SKU contains print on demand customization
             pod_info_id (str | Unset): ID of the print on demand customization details. This ID can be used to query for the
                 exact details of the customization
-            product_listing_type (str | Unset): This describes the product listing type of the SKU.
+            product_listing_type (str | Unset): The product listing type of the SKU. This field is returned only for a
+                temporary listing.
                 Possible values:
-                - `TEMPORARY LISTING`
+                - `TEMPORARY_LISTING`: The SKU is a temporary listing.
      """
 
     id: str | Unset = UNSET

@@ -148,7 +148,7 @@ public class GetOrderDetailResponseDataOrderRecipientAddress {
   }
 
   /**
-   * The complete recipient addresses information.
+   * The complete recipient address composed from the administrative-area names and detailed address lines.
    * @return fullAddress
    */
   @javax.annotation.Nullable
@@ -460,7 +460,7 @@ public class GetOrderDetailResponseDataOrderRecipientAddress {
   }
 
   /**
-   * Full buyer detail address.
+   * Detailed street address of the recipient.
    * @return addressDetail
    */
   @javax.annotation.Nullable

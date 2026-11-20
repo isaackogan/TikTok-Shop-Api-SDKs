@@ -30,20 +30,23 @@ class GetOrderDetailResponseDataOrderLineItem:
     """ 
         Attributes:
             id (str | Unset): Line item ID.
-            sku_id (str | Unset): SKU ID.
+            sku_id (str | Unset): The SKU ID for the line item. For a gift line item with gift information, the original SKU
+                ID is returned when available.
             combined_listing_skus (list[CombinedListingSku] | Unset): For a virtual bundle SKU, returns an array of related
                 product SKUs that compose the virtual bundle SKU.
-            product_id (str | Unset): Product ID.
+            product_id (str | Unset): The product ID for the line item. For a gift line item with gift information, the
+                original product ID is returned when available.
             product_name (str | Unset): Product name.
             sku_name (str | Unset): The name of the SKU, combined by product SKU attribute like size or color. For example,
                 "Black, 26."
             sku_image (str | Unset): SKU image.
-            original_price (str | Unset): Item original price, please refer to the currency of `payment_info`.
+            original_price (str | Unset): The line item's original price in the currency specified by `currency`.
             sale_price (str | Unset): Item sale price, please refer to the currency of `payment_info`.
             pfand_fee (str | Unset): Deposit fee that is applied to certain products, typically beverage containers such as
                 bottles or cans.
                 **Note** Only available in Germany market
-            platform_discount (str | Unset): Platform discount amount, please refer to the currency of `payment_info`.
+            platform_discount (str | Unset): The platform discount amount for the line item, in the currency specified by
+                `currency`.
             display_status (str | Unset): - `UNPAID`: The order is placed, but payment is not yet completed.
                 - `AWAITING_SHIPMENT`: The order is ready for shipment, but no items are shipped yet.
                 - `AWAITING_COLLECTION`:  The shipment is arranged, but the package is waiting to be collected by the carrier.
@@ -71,14 +74,16 @@ class GetOrderDetailResponseDataOrderLineItem:
                 product is produced.
             seller_sku (str | Unset): The seller stock keeping unit (SKU) of the item.
             shipping_provider_id (str | Unset): The shipping provider ID of the item.
-            seller_discount (str | Unset): Seller discount amount. Please refer to the currency of `payment_info`.
-            currency (str | Unset): Currency for payment.
-            package_id (str | Unset): An order can contain one or more packages based on how the seller chooses to ship.
-                Each package has a unique `package_id` (and also a `tracking_id`, which is used to track the progress of the
-                package as it is shipped). For local sellers in the US and UK markets, the `package_id` and `package_status`
-                property will not be returned before the package is shipped
-            rts_time (int | Unset): The time seller shipped line order (call Ship Order endpoint successfully).
-                Unix timestamp.
+            seller_discount (str | Unset): The seller discount amount for the line item, in the currency specified by
+                `currency`.
+            currency (str | Unset): The ISO 4217 currency code for monetary amounts in this line item.
+            package_id (str | Unset): An order can contain one or more packages based on how the seller chooses to ship, and
+                each package has a unique `package_id`. This field matches the `id` of the package in `orders[].packages[]` that
+                contains this line item. Read the package-specific tracking value from this line item's `tracking_number`. For
+                local sellers in the US and UK markets, `package_id` and `package_status` are not returned before the package is
+                shipped.
+            rts_time (int | Unset): The Unix timestamp, in seconds, when the seller successfully submitted this line item
+                for shipment through the Ship Order API.
             item_tax (list[GetOrderDetailResponseDataOrderLineItemItemTax] | Unset): Item tax detail.
             package_status (str | Unset): The package status of the item:
                 - `TO_FULFILL`: package waiting seller to arrange shipment.

@@ -36,7 +36,7 @@ export interface GetOrderListRequest {
      */
     orderStatus?: GetOrderListRequestOrderStatusEnum;
     /**
-     * Filter orders to show only those that are created on or after the specified date and time. Unix timestamp.
+     * Filter orders to show only those that are created on or after the specified date and time. Unix timestamp in seconds.
      * 
      * Note:
      * `create_time_ge` and `create_time_lt` together constitute the creation time filter condition.
@@ -47,14 +47,14 @@ export interface GetOrderListRequest {
      */
     createTimeGe?: number;
     /**
-     * Filter orders to show only those that are created before the specified date and time. Unix timestamp.
+     * Filter orders to show only those that are created before the specified date and time. Unix timestamp in seconds.
      * Refer to notes in `create_time_ge` for more usage information.
      * @type {number}
      * @memberof GetOrderListRequest
      */
     createTimeLt?: number;
     /**
-     * Filter orders to show only those that are updated on or after the specified date and time. Unix timestamp.
+     * Filter orders to show only those that are updated on or after the specified date and time. Unix timestamp in seconds.
      * 
      * Note:
      * `update_time_ge` and `update_time_lt` together define the update time filter condition.
@@ -67,7 +67,7 @@ export interface GetOrderListRequest {
      */
     updateTimeGe?: number;
     /**
-     * Filter orders to show only those that are updated before the specified date and time. Unix timestamp.
+     * Filter orders to show only those that are updated before the specified date and time. Unix timestamp in seconds.
      * Refer to notes in `update_time_ge` for more usage information.
      * 
      * Update times may exceed the selected search range due to ongoing data refreshes during the search process.

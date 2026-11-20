@@ -343,7 +343,7 @@ class ItemTax implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets tax_amount
      *
-     * @param string|null $tax_amount Tax amount.
+     * @param string|null $tax_amount The tax amount for the sub-item, in the currency specified by `currency`.
      *
      * @return self
      */

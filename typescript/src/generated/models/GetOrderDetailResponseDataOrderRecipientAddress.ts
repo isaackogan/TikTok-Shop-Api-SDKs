@@ -35,7 +35,7 @@ import {
  */
 export interface GetOrderDetailResponseDataOrderRecipientAddress {
     /**
-     * The complete recipient addresses information.
+     * The complete recipient address composed from the administrative-area names and detailed address lines.
      * @type {string}
      * @memberof GetOrderDetailResponseDataOrderRecipientAddress
      */
@@ -134,7 +134,7 @@ export interface GetOrderDetailResponseDataOrderRecipientAddress {
      */
     deliveryPreferences?: GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference;
     /**
-     * Full buyer detail address.
+     * Detailed street address of the recipient.
      * @type {string}
      * @memberof GetOrderDetailResponseDataOrderRecipientAddress
      */

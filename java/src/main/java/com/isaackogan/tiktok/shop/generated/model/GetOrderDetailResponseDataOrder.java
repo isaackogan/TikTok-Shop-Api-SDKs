@@ -636,7 +636,7 @@ public class GetOrderDetailResponseDataOrder {
   }
 
   /**
-   * The date and time that the order was created. Unix timestamp.
+   * The date and time that the order was created. Unix timestamp in seconds.
    * @return createTime
    */
   @javax.annotation.Nullable
@@ -693,7 +693,7 @@ public class GetOrderDetailResponseDataOrder {
   }
 
   /**
-   * The latest shipping time specified by the platform. Unix timestamp.
+   * The latest shipping time specified by the platform, as a Unix timestamp in seconds.
    * @return rtsSlaTime
    */
   @javax.annotation.Nullable
@@ -712,7 +712,7 @@ public class GetOrderDetailResponseDataOrder {
   }
 
   /**
-   * The date and time that the order was paid. Unix timestamp.
+   * The date and time that the order was paid, as a Unix timestamp in seconds.
    * @return paidTime
    */
   @javax.annotation.Nullable
@@ -769,7 +769,7 @@ public class GetOrderDetailResponseDataOrder {
   }
 
   /**
-   * The latest collection time specified by the platform. Unix timestamp.
+   * The latest collection time specified by the platform, as a Unix timestamp in seconds.
    * @return ttsSlaTime
    */
   @javax.annotation.Nullable
@@ -948,7 +948,7 @@ public class GetOrderDetailResponseDataOrder {
   }
 
   /**
-   * CPF (invoice number), used to issue an invoice. Exclusive for the Brazil market.
+   * The buyer&#39;s CPF tax identification number, used to issue an invoice. Available only in Brazil.
    * @return cpf
    */
   @javax.annotation.Nullable
@@ -986,7 +986,7 @@ public class GetOrderDetailResponseDataOrder {
   }
 
   /**
-   * Order should arrive by this date to be considered on-time and to avoid late delivery penalties.
+   * The Unix timestamp, in seconds, by which the order should arrive to be considered on time and avoid late-delivery penalties.
    * @return deliverySlaTime
    */
   @javax.annotation.Nullable
@@ -1024,7 +1024,7 @@ public class GetOrderDetailResponseDataOrder {
   }
 
   /**
-   * Code to distinguish different payment method. Only assigned when the payment method is using bank card. Possible values are: Debit, Credit, Prepaid
+   * Card type for bank card payments. Possible values: - &#x60;Debit&#x60; - &#x60;Credit&#x60; - &#x60;Prepaid&#x60;
    * @return paymentCardType
    */
   @javax.annotation.Nullable
@@ -1100,7 +1100,7 @@ public class GetOrderDetailResponseDataOrder {
   }
 
   /**
-   * If the order hasn&#39;t updated its status to &#x60;AWAITING_COLLECTION&#x60; before this time, the order will be automatically canceled by TikTok Shop.
+   * The Unix timestamp, in seconds, by which the order must reach &#x60;AWAITING_COLLECTION&#x60;; otherwise, TikTok Shop automatically cancels the order.
    * @return shippingDueTime
    */
   @javax.annotation.Nullable
@@ -1184,7 +1184,7 @@ public class GetOrderDetailResponseDataOrder {
   }
 
   /**
-   * The timestamp of the order&#39;s status update to &#x60;DELIVERED&#x60;.
+   * The Unix timestamp, in seconds, when the order status changed to &#x60;DELIVERED&#x60;.
    * @return deliveryTime
    */
   @javax.annotation.Nullable
@@ -1222,7 +1222,7 @@ public class GetOrderDetailResponseDataOrder {
   }
 
   /**
-   * This option is for sellers that accept cash payment on delivery which is rare. Buyers will pay in cash upon receipt of package. Default value is &#x60;FALSE&#x60;. Only applicable to countries where Cash on Delivery (COD) is supported.
+   * Whether the order uses cash on delivery (COD). When returned, &#x60;true&#x60; means the buyer pays cash upon receipt and &#x60;false&#x60; means the order uses another payment method. The field may be omitted when payment type is unavailable. Available only in countries where COD is supported.
    * @return isCod
    */
   @javax.annotation.Nullable
@@ -1241,7 +1241,7 @@ public class GetOrderDetailResponseDataOrder {
   }
 
   /**
-   * Buyer request cancel time.
+   * The Unix timestamp, in seconds, when the buyer submitted the pending cancellation request. Returned when is_buyer_request_cancel is true.
    * @return requestCancelTime
    */
   @javax.annotation.Nullable
@@ -1260,7 +1260,7 @@ public class GetOrderDetailResponseDataOrder {
   }
 
   /**
-   * Order should be delivered before this time.
+   * The Unix timestamp, in seconds, by which the order should be delivered.
    * @return deliveryOptionRequiredDeliveryTime
    */
   @javax.annotation.Nullable
@@ -1317,7 +1317,7 @@ public class GetOrderDetailResponseDataOrder {
   }
 
   /**
-   * If the order hasn&#39;t updated its status to &#x60;DELIVERED&#x60; before this time, the order will be automatically canceled by TikTok Shop.
+   * The Unix timestamp, in seconds, by which the order must reach &#x60;DELIVERED&#x60;; otherwise, TikTok Shop automatically cancels the order.
    * @return deliveryDueTime
    */
   @javax.annotation.Nullable
@@ -1336,7 +1336,7 @@ public class GetOrderDetailResponseDataOrder {
   }
 
   /**
-   * The timestamp of the order&#39;s status update to &#x60;IN_TRANSIT&#x60;.
+   * The Unix timestamp, in seconds, when the order status changed to &#x60;IN_TRANSIT&#x60;.
    * @return collectionTime
    */
   @javax.annotation.Nullable
@@ -1355,7 +1355,7 @@ public class GetOrderDetailResponseDataOrder {
   }
 
   /**
-   * Indicates whether the order experienced or will be experienced &#x60;ON_HOLD&#x60; status.
+   * Whether the order has entered or will enter an &#x60;ON_HOLD&#x60; period after buyer payment. This does not indicate that the order&#39;s current &#x60;status&#x60; is &#x60;ON_HOLD&#x60;.
    * @return isOnHoldOrder
    */
   @javax.annotation.Nullable
@@ -1374,7 +1374,7 @@ public class GetOrderDetailResponseDataOrder {
   }
 
   /**
-   * The timestamp of the order&#39;s status update to &#x60;CANCELLED&#x60;.
+   * The Unix timestamp, in seconds, when the order status changed to CANCELLED.
    * @return cancelTime
    */
   @javax.annotation.Nullable
@@ -1431,7 +1431,7 @@ public class GetOrderDetailResponseDataOrder {
   }
 
   /**
-   * If the order hasn&#39;t updated its status to &#x60;IN_TRANSIT&#x60; before this time, the order will be automatically canceled by TikTok Shop
+   * The Unix timestamp, in seconds, by which the order must reach &#x60;IN_TRANSIT&#x60;; otherwise, TikTok Shop automatically cancels the order.
    * @return collectionDueTime
    */
   @javax.annotation.Nullable
@@ -1469,7 +1469,7 @@ public class GetOrderDetailResponseDataOrder {
   }
 
   /**
-   * The latest collection time to gain incentives of NDD (Next Day Delivery) project. Unix timestamp Only available in Thailand and Philippines.
+   * The latest collection time for the order to qualify for Next Day Delivery (NDD) incentives. Unix timestamp, in seconds.
    * @return fastDispatchSlaTime
    */
   @javax.annotation.Nullable
@@ -1735,7 +1735,7 @@ public class GetOrderDetailResponseDataOrder {
   }
 
   /**
-   * The nickname of the TikTok buyer, which is defined by the TikTok user. The buyer_nickname can be used to identify the buyer when displaying the unboxing results within the TikTok Live Session.
+   * The nickname of the TikTok buyer, as defined by the TikTok user. This field is populated only for supported virtual unboxing orders and can be displayed with &#x60;buyer_avatar&#x60; in TikTok LIVE unboxing results. Use &#x60;user_id&#x60;, not this display name, for programmatic buyer identification.
    * @return buyerNickname
    */
   @javax.annotation.Nullable
@@ -1754,7 +1754,7 @@ public class GetOrderDetailResponseDataOrder {
   }
 
   /**
-   * The avatar of the TikTok buyer, which is defined by the TikTok user. The buyer_avatar can be used in conjunction with the buyer_nickname when displaying the unboxing results within the TikTok Live Session.
+   * The avatar of the TikTok buyer, as defined by the TikTok user. This field is populated only for supported virtual unboxing orders and can be used with &#x60;buyer_nickname&#x60; when displaying unboxing results in a TikTok LIVE session.
    * @return buyerAvatar
    */
   @javax.annotation.Nullable
@@ -1781,7 +1781,7 @@ public class GetOrderDetailResponseDataOrder {
   }
 
   /**
-   * Order tag identifier if has certain rights within the order based on the program subscribed by sellers. 1 &#x3D; Shipping Fee Reimbursement Program 2 &#x3D; Horizon+ Program  Applicable for SEA market only
+   * Order rights associated with seller programs. Multiple values can be returned together, and the field is omitted when no right applies. Possible values: - &#x60;1&#x60;: Shipping Fee Reimbursement Program - &#x60;2&#x60;: Horizon+ Program Applicable only in SEA markets.
    * @return orderRights
    */
   @javax.annotation.Nullable
@@ -1838,7 +1838,7 @@ public class GetOrderDetailResponseDataOrder {
   }
 
   /**
-   * The latest buyer pickup time for instore pickup method specified by the platform. Currently applicable for SEA market. Unix timestamp.
+   * The latest buyer pickup time for in-store pickup, as a Unix timestamp in seconds. Currently available in SEA markets.
    * @return instorePickupSlaTime
    */
   @javax.annotation.Nullable

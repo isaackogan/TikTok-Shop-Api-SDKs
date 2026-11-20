@@ -39,6 +39,19 @@ export interface RecommendCategoryResponseData {
      * @memberof RecommendCategoryResponseData
      */
     leafCategoryId?: string;
+    /**
+     * No category recommended reason description
+     * Possible values:
+     * - NON_MAIN_CATEGORY：recommended category not main categories of merchants
+     * - PROHIBITED_CATEGORY: recommended category 
+     * Prohibition of sale
+     * - PROHIBITED_PUBLISH_CATEGORY：recommended category 
+     * Prohibition of  publish
+     * - RECOMMEND_CATEGORY_RPC_ERROR: There is a problem with downstream services.
+     * @type {Array<string>}
+     * @memberof RecommendCategoryResponseData
+     */
+    noneCategoryRecReasons?: Array<string>;
 }
 
 /**
@@ -63,6 +76,7 @@ export function RecommendCategoryResponseDataFromJSONTyped(json: any, ignoreDisc
         
         'categories': json['categories'] == null ? undefined : ((json['categories'] as Array<any>).map(RecommendCategoryResponseDataCategoryFromJSON)),
         'leafCategoryId': json['leaf_category_id'] == null ? undefined : json['leaf_category_id'],
+        'noneCategoryRecReasons': json['none_category_rec_reasons'] == null ? undefined : json['none_category_rec_reasons'],
     };
 }
 
@@ -79,6 +93,7 @@ export function RecommendCategoryResponseDataToJSONTyped(value?: RecommendCatego
         
         'categories': value['categories'] == null ? undefined : ((value['categories'] as Array<any>).map(RecommendCategoryResponseDataCategoryToJSON)),
         'leaf_category_id': value['leafCategoryId'],
+        'none_category_rec_reasons': value['noneCategoryRecReasons'],
     };
 }
 

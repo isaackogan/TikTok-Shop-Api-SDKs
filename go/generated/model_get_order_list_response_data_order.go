@@ -27,7 +27,7 @@ type GetOrderListResponseDataOrder struct {
 	CancellationInitiator *string `json:"cancellation_initiator,omitempty"`
 	// The ID of the current shipping provider.
 	ShippingProviderId *string `json:"shipping_provider_id,omitempty"`
-	// The date and time that the order was created. Unix timestamp.
+	// The date and time that the order was created. Unix timestamp, in seconds.
 	CreateTime *int64 `json:"create_time,omitempty"`
 	// The name of the current shipping provider.
 	ShippingProvider *string `json:"shipping_provider,omitempty"`
@@ -35,11 +35,11 @@ type GetOrderListResponseDataOrder struct {
 	Packages []GetOrderListResponseDataOrderPackage `json:"packages,omitempty"`
 	// Payment info about this order.
 	Payment *Payment `json:"payment,omitempty"`
-	// `recipient_address` is not available under `UNPAID` and `ON_HOLD` statuses.
+	// Recipient address information is unavailable for orders with `UNPAID`, `ON_HOLD`, or `CANCELLED` status.
 	RecipientAddress *GetOrderListResponseDataOrderRecipientAddress `json:"recipient_address,omitempty"`
 	// Specific order status. Available values: - `UNPAID`: The order has been placed, but payment has not been completed. - `ON_HOLD`: The order has been accepted and is awaiting fulfillment. The buyer may still cancel without the seller’s approval. If `order_type=PRE_ORDER`, the product is still awaiting release so payment will only be authorized 1 day before the release, but the seller should start preparing for the release. - `AWAITING_SHIPMENT`: The order is ready to be shipped, but no items have been shipped yet. - `PARTIALLY_SHIPPING`: Some items in the order have been shipped, but not all. - `AWAITING_COLLECTION`: Shipping has been arranged, but the package is waiting to be collected by the carrier. - `IN_TRANSIT`: The package has been collected by the carrier and delivery is in progress. - `DELIVERED`: The package has been delivered to the buyer. - `COMPLETED`: The order has been completed, and no further returns or refunds are allowed. - `CANCELLED`: The order has been cancelled.
 	Status *string `json:"status,omitempty"`
-	// Fulfillment type. Only orders with fulfillment type can be shipped by sellers. Available values: - `FULFILLMENT_BY_SELLER`: a method where sellers fulfill orders directly from their own inventory, without using TikTok's fulfillment centers. In this model, the seller is responsible for storing, packaging, and shipping the products to customers. - `FULFILLMENT_BY_TIKTOK`: a service offered by TikTok where sellers can send their products to TikTok's fulfillment centers. TikTok then takes care of storing, picking, packing, and shipping the products to customers. - `FULFILLMENT_BY_DILAYANI_TOKOPEDIA`: a method where Tokopedia GoTo Logistics provides warehousing and logistics services to sellers and charges a fee for the service.
+	// The order fulfillment model. Available values: - `FULFILLMENT_BY_SELLER`: a method where sellers fulfill orders directly from their own inventory, without using TikTok's fulfillment centers. In this model, the seller is responsible for storing, packaging, and shipping the products to customers. - `FULFILLMENT_BY_TIKTOK`: a service offered by TikTok where sellers can send their products to TikTok's fulfillment centers. TikTok then takes care of storing, picking, packing, and shipping the products to customers. - `FULFILLMENT_BY_DILAYANI_TOKOPEDIA`: a method where Tokopedia GoTo Logistics provides warehousing and logistics services to sellers and charges a fee for the service.
 	FulfillmentType *string `json:"fulfillment_type,omitempty"`
 	// Indicates whether it is a Pick-Up Drop-Off (PUDO) location. The PUDO location is selected by the buyer when placing orders. Available values: - `HOME_DELIVERY`: not a PUDO location - `COLLECTION_POINT`: a PUDO location
 	DeliveryType *string `json:"delivery_type,omitempty"`
@@ -51,7 +51,7 @@ type GetOrderListResponseDataOrder struct {
 	TtsSlaTime *int64 `json:"tts_sla_time,omitempty"`
 	// The cancellation reason. Please visit [our list of cancel reasons](https://partner.tiktokshop.com/docv2/page/67e61eee427345048595487d) for more information.
 	CancelReason *string `json:"cancel_reason,omitempty"`
-	// Time of order status change. Unix timestamp.
+	// The date and time when the order was last updated. Unix timestamp in seconds.
 	UpdateTime *int64 `json:"update_time,omitempty"`
 	// Payment method name, for display purposes.
 	PaymentMethodName *string `json:"payment_method_name,omitempty"`
@@ -67,25 +67,25 @@ type GetOrderListResponseDataOrder struct {
 	CancelOrderSlaTime *int64 `json:"cancel_order_sla_time,omitempty"`
 	// Seller warehouse ID.
 	WarehouseId *string `json:"warehouse_id,omitempty"`
-	// Buyer request cancellation time. Unix timestamp.
+	// The time when the buyer submitted the pending cancellation request. Unix timestamp in seconds.
 	RequestCancelTime *int64 `json:"request_cancel_time,omitempty"`
 	// Delivery method. Available values: - `TIKTOK`: Shipping service provided by TikTok. The seller should obtain shipping label from TikTok. - `SELLER`: Seller provides shipping, including through 3rd party fulfillment providers on behalf of the seller. - `TIKTOK_DIGITAL`: Tiktok delivers virtual goods directly to buyers. There is no action needed.
 	ShippingType *string `json:"shipping_type,omitempty"`
-	// Buyer user ID.
+	// The ID of the buyer who placed the order. This is the value matched by the `buyer_user_id` request filter.
 	UserId *string `json:"user_id,omitempty"`
 	// The seller note from TikTok Shop Seller Center.
 	SellerNote *string `json:"seller_note,omitempty"`
-	// Order should arrive by this date to be considered on-time and to avoid late delivery penalties.
+	// The time by which the order should arrive to be considered on time and avoid late-delivery penalties. Unix timestamp in seconds.
 	DeliverySlaTime *int64 `json:"delivery_sla_time,omitempty"`
-	// This option is for sellers that accept cash payment on delivery (COD). Buyers will pay in cash upon receiving the package.   Default: FALSE  Only applicable to countries where COD is supported.
+	// Whether the order uses cash on delivery (COD). If `true`, the buyer pays in cash when the package is delivered.  Only applicable to countries where COD is supported.
 	IsCod *bool `json:"is_cod,omitempty"`
 	// Delivery option ID is mapped to seller configured logistics templates ID.
 	DeliveryOptionId *string `json:"delivery_option_id,omitempty"`
-	// The time an order's status was updated to `CANCELLED`. Unix timestamp.
+	// The time an order's status was updated to `CANCELLED`. Unix timestamp in seconds.
 	CancelTime *int64 `json:"cancel_time,omitempty"`
 	// Whether an invoice needs to be uploaded and uploaded status (only for Brazil market). - UNKNOWN:  Currently unable to confirm whether an invoice is needed - NEED_INVOICE: This order requires an invoice and the invoice has not been uploaded yet - NO_NEED：This order does not require an invoice - INVOICE_UPLOADED: The invoice for this order has been uploaded and verified. If the order is split, it will be marked as \"uploaded\" once any sub-order's invoice is uploaded. - INVOICE_PROCESSING: The invoice for this order is currently being uploaded/cancelled. Please wait for the final result and do not repeat the operation
 	NeedUploadInvoice *string `json:"need_upload_invoice,omitempty"`
-	// Delivery option name. For display purposes only. Available values: - `Economy Shipping` - `Standard Shipping` - `Express Shipping`
+	// The name of the delivery option. For display purposes only.
 	DeliveryOptionName *string `json:"delivery_option_name,omitempty"`
 	// CPF (invoice number), used to issue an invoice.  **Note**: Only available in the Brazil market.
 	Cpf *string `json:"cpf,omitempty"`
@@ -103,7 +103,7 @@ type GetOrderListResponseDataOrder struct {
 	CollectionDueTime *int64 `json:"collection_due_time,omitempty"`
 	// Order should be delivered before this time. Unix timestamp.
 	DeliveryOptionRequiredDeliveryTime *int64 `json:"delivery_option_required_delivery_time,omitempty"`
-	// Indicates whether the order has been changed to or will be updated to `ON_HOLD` status.
+	// Whether the order entered an ON_HOLD period after the buyer completed payment. This does not indicate that the order's current status is ON_HOLD.
 	IsOnHoldOrder *bool `json:"is_on_hold_order,omitempty"`
 	// The time an order's status changed to `DELIVERED`. Unix timestamp.
 	DeliveryTime *int64 `json:"delivery_time,omitempty"`
@@ -111,7 +111,7 @@ type GetOrderListResponseDataOrder struct {
 	IsReplacementOrder *bool `json:"is_replacement_order,omitempty"`
 	// Subscription orders are recurring orders set up by customers. If TRUE, this order is generated from a subscription order
 	IsSubscriptionOrder *bool `json:"is_subscription_order,omitempty"`
-	// This indicates if an order is a refundable sample. Refundable samples lets sellers collaborate with creators by refunding product costs only when creators meet sales thresholds.
+	// Whether the order is a refundable sample. This flag is independent of `is_sample_order`; a refundable-sample order can have `is_sample_order` set to `false`. Refundable samples let sellers collaborate with creators by refunding product costs only when creators meet sales thresholds.
 	IsRefundableSample *bool `json:"is_refundable_sample,omitempty"`
 	// If true, order requires authentication. Use an approved in-house authentication service after an order has been placed for verification. This must be completed before shipment.
 	AuthenticationRequired *bool `json:"authentication_required,omitempty"`
@@ -153,9 +153,9 @@ type GetOrderListResponseDataOrder struct {
 	BuyerNickname *string `json:"buyer_nickname,omitempty"`
 	// The avatar of the TikTok buyer, which is defined by the TikTok user. The buyer_avatar can be used in conjunction with the buyer_nickname when displaying the unboxing results within the TikTok Live Session.
 	BuyerAvatar *string `json:"buyer_avatar,omitempty"`
-	// Order tag identifier if has certain rights within the order based on the program subscribed by sellers. 1 = Shipping Fee Reimbursement Program 2 = Horizon+ Program  Applicable for SEA market only
+	// Order rights granted through programs joined by the seller. Multiple values can be returned together; the field is omitted when none of the listed rights apply. Possible values: - `1`: Shipping Fee Reimbursement Program - `2`: Horizon+ Program  **Note**: Available only in the SEA market.
 	OrderRights []int64 `json:"order_rights,omitempty"`
-	// The latest buyer pickup time for instore pickup method specified by the platform. Currently applicable for SEA market. Unix timestamp.
+	// The latest buyer pickup time for instore pickup method specified by the platform. Currently applicable for SEA market. Unix timestamp in seconds.
 	InstorePickupSlaTime *int64 `json:"instore_pickup_sla_time,omitempty"`
 	// Indicate fast fulfillment SLA for shipping action. Applicable for SEA market only. Unix timestamp
 	FastRtsSlaTime *int64 `json:"fast_rts_sla_time,omitempty"`

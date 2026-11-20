@@ -30,7 +30,7 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param taxType Tax type. Available values: - `SALES_TAX` (US market sales tax)  **Note**: Currently only sales tax is available.
- * @param taxAmount Tax amount.
+ * @param taxAmount The tax amount for the sub-item, in the currency specified by `currency`.
  * @param taxRate Tax rate.
  */
 
@@ -41,7 +41,7 @@ data class ItemTax (
     @SerializedName("tax_type")
     val taxType: kotlin.String? = null,
 
-    /* Tax amount. */
+    /* The tax amount for the sub-item, in the currency specified by `currency`. */
     @SerializedName("tax_amount")
     val taxAmount: kotlin.String? = null,
 

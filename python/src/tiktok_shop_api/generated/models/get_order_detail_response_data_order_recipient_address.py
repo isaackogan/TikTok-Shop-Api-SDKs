@@ -27,7 +27,8 @@ T = TypeVar("T", bound="GetOrderDetailResponseDataOrderRecipientAddress")
 class GetOrderDetailResponseDataOrderRecipientAddress:
     """ 
         Attributes:
-            full_address (str | Unset): The complete recipient addresses information.
+            full_address (str | Unset): The complete recipient address composed from the administrative-area names and
+                detailed address lines.
             phone_number (str | Unset): The telephone number of the buyer. Please notice, if this order uses platform
                 logistics, phone number will be desensitized.
             name (str | Unset): The name of the recipient. Please note, if this order uses platform logistics, recipient
@@ -51,7 +52,7 @@ class GetOrderDetailResponseDataOrderRecipientAddress:
             address_line4 (str | Unset): The fourth line of the street address.
             district_info (list[DistrictInfo] | Unset): District information list.
             delivery_preferences (GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference | Unset):
-            address_detail (str | Unset): Full buyer detail address.
+            address_detail (str | Unset): Detailed street address of the recipient.
      """
 
     full_address: str | Unset = UNSET

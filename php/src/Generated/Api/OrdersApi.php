@@ -723,7 +723,7 @@ class OrdersApi
      *
      * Get Order Detail
      *
-     * @param  string[] $ids A list of TikTok Shop order ID values. Max count: 50 (required)
+     * @param  string[] $ids TikTok Shop order IDs to retrieve. Specify 1 to 50 IDs as a comma-separated list. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOrderDetail'] to see the possible values for this operation
      *
      * @throws \TikTokShop\Api\Generated\ApiException on non-2xx response or if the response body is not in the expected format
@@ -741,7 +741,7 @@ class OrdersApi
      *
      * Get Order Detail
      *
-     * @param  string[] $ids A list of TikTok Shop order ID values. Max count: 50 (required)
+     * @param  string[] $ids TikTok Shop order IDs to retrieve. Specify 1 to 50 IDs as a comma-separated list. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOrderDetail'] to see the possible values for this operation
      *
      * @throws \TikTokShop\Api\Generated\ApiException on non-2xx response or if the response body is not in the expected format
@@ -826,7 +826,7 @@ class OrdersApi
      *
      * Get Order Detail
      *
-     * @param  string[] $ids A list of TikTok Shop order ID values. Max count: 50 (required)
+     * @param  string[] $ids TikTok Shop order IDs to retrieve. Specify 1 to 50 IDs as a comma-separated list. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOrderDetail'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -847,7 +847,7 @@ class OrdersApi
      *
      * Get Order Detail
      *
-     * @param  string[] $ids A list of TikTok Shop order ID values. Max count: 50 (required)
+     * @param  string[] $ids TikTok Shop order IDs to retrieve. Specify 1 to 50 IDs as a comma-separated list. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOrderDetail'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -900,7 +900,7 @@ class OrdersApi
     /**
      * Create request for operation 'getOrderDetail'
      *
-     * @param  string[] $ids A list of TikTok Shop order ID values. Max count: 50 (required)
+     * @param  string[] $ids TikTok Shop order IDs to retrieve. Specify 1 to 50 IDs as a comma-separated list. (required)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['getOrderDetail'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
@@ -915,10 +915,7 @@ class OrdersApi
                 'Missing the required parameter $ids when calling getOrderDetail'
             );
         }
-        if (count($ids) > 50) {
-            throw new \InvalidArgumentException('invalid value for "$ids" when calling OrdersApi.getOrderDetail, number of items must be less than or equal to 50.');
-        }
-        
+
 
         $resourcePath = '/order/202507/orders';
         $formParams = [];
@@ -1003,8 +1000,8 @@ class OrdersApi
      *
      * Get Order List
      *
-     * @param  int $page_size The number of results to be returned per page. Default: 20. Valid range: [1-100]. (required)
-     * @param  string|null $sort_order The sort order for the &#x60;sort_field&#x60; parameter. Default: DESC Possible values: - ASC: Ascending order - DESC: Descending order (optional)
+     * @param  int $page_size The number of results to be returned per page. Valid range: [1-100]. (required)
+     * @param  string|null $sort_order The sort order for the &#x60;sort_field&#x60; parameter. Default: ASC Possible values: - ASC: Ascending order - DESC: Descending order (optional)
      * @param  string|null $page_token An opaque token used to retrieve the next page of a paginated result set. Retrieve this value from the result of the &#x60;next_page_token&#x60; from a previous response. It is not needed for the first page. (optional)
      * @param  string|null $sort_field The returned results will be sorted by the specified field.  Default: &#x60;create_time&#x60; Possible values: - &#x60;create_time&#x60; - &#x60;update_time&#x60;  Specify the order for sorting the returned results by using the &#x60;sort_order&#x60; parameter. (optional)
      * @param  \TikTokShop\Api\Generated\Model\GetOrderListRequest|null $get_order_list_request get_order_list_request (optional)
@@ -1025,8 +1022,8 @@ class OrdersApi
      *
      * Get Order List
      *
-     * @param  int $page_size The number of results to be returned per page. Default: 20. Valid range: [1-100]. (required)
-     * @param  string|null $sort_order The sort order for the &#x60;sort_field&#x60; parameter. Default: DESC Possible values: - ASC: Ascending order - DESC: Descending order (optional)
+     * @param  int $page_size The number of results to be returned per page. Valid range: [1-100]. (required)
+     * @param  string|null $sort_order The sort order for the &#x60;sort_field&#x60; parameter. Default: ASC Possible values: - ASC: Ascending order - DESC: Descending order (optional)
      * @param  string|null $page_token An opaque token used to retrieve the next page of a paginated result set. Retrieve this value from the result of the &#x60;next_page_token&#x60; from a previous response. It is not needed for the first page. (optional)
      * @param  string|null $sort_field The returned results will be sorted by the specified field.  Default: &#x60;create_time&#x60; Possible values: - &#x60;create_time&#x60; - &#x60;update_time&#x60;  Specify the order for sorting the returned results by using the &#x60;sort_order&#x60; parameter. (optional)
      * @param  \TikTokShop\Api\Generated\Model\GetOrderListRequest|null $get_order_list_request (optional)
@@ -1114,8 +1111,8 @@ class OrdersApi
      *
      * Get Order List
      *
-     * @param  int $page_size The number of results to be returned per page. Default: 20. Valid range: [1-100]. (required)
-     * @param  string|null $sort_order The sort order for the &#x60;sort_field&#x60; parameter. Default: DESC Possible values: - ASC: Ascending order - DESC: Descending order (optional)
+     * @param  int $page_size The number of results to be returned per page. Valid range: [1-100]. (required)
+     * @param  string|null $sort_order The sort order for the &#x60;sort_field&#x60; parameter. Default: ASC Possible values: - ASC: Ascending order - DESC: Descending order (optional)
      * @param  string|null $page_token An opaque token used to retrieve the next page of a paginated result set. Retrieve this value from the result of the &#x60;next_page_token&#x60; from a previous response. It is not needed for the first page. (optional)
      * @param  string|null $sort_field The returned results will be sorted by the specified field.  Default: &#x60;create_time&#x60; Possible values: - &#x60;create_time&#x60; - &#x60;update_time&#x60;  Specify the order for sorting the returned results by using the &#x60;sort_order&#x60; parameter. (optional)
      * @param  \TikTokShop\Api\Generated\Model\GetOrderListRequest|null $get_order_list_request (optional)
@@ -1139,8 +1136,8 @@ class OrdersApi
      *
      * Get Order List
      *
-     * @param  int $page_size The number of results to be returned per page. Default: 20. Valid range: [1-100]. (required)
-     * @param  string|null $sort_order The sort order for the &#x60;sort_field&#x60; parameter. Default: DESC Possible values: - ASC: Ascending order - DESC: Descending order (optional)
+     * @param  int $page_size The number of results to be returned per page. Valid range: [1-100]. (required)
+     * @param  string|null $sort_order The sort order for the &#x60;sort_field&#x60; parameter. Default: ASC Possible values: - ASC: Ascending order - DESC: Descending order (optional)
      * @param  string|null $page_token An opaque token used to retrieve the next page of a paginated result set. Retrieve this value from the result of the &#x60;next_page_token&#x60; from a previous response. It is not needed for the first page. (optional)
      * @param  string|null $sort_field The returned results will be sorted by the specified field.  Default: &#x60;create_time&#x60; Possible values: - &#x60;create_time&#x60; - &#x60;update_time&#x60;  Specify the order for sorting the returned results by using the &#x60;sort_order&#x60; parameter. (optional)
      * @param  \TikTokShop\Api\Generated\Model\GetOrderListRequest|null $get_order_list_request (optional)
@@ -1196,8 +1193,8 @@ class OrdersApi
     /**
      * Create request for operation 'getOrderList'
      *
-     * @param  int $page_size The number of results to be returned per page. Default: 20. Valid range: [1-100]. (required)
-     * @param  string|null $sort_order The sort order for the &#x60;sort_field&#x60; parameter. Default: DESC Possible values: - ASC: Ascending order - DESC: Descending order (optional)
+     * @param  int $page_size The number of results to be returned per page. Valid range: [1-100]. (required)
+     * @param  string|null $sort_order The sort order for the &#x60;sort_field&#x60; parameter. Default: ASC Possible values: - ASC: Ascending order - DESC: Descending order (optional)
      * @param  string|null $page_token An opaque token used to retrieve the next page of a paginated result set. Retrieve this value from the result of the &#x60;next_page_token&#x60; from a previous response. It is not needed for the first page. (optional)
      * @param  string|null $sort_field The returned results will be sorted by the specified field.  Default: &#x60;create_time&#x60; Possible values: - &#x60;create_time&#x60; - &#x60;update_time&#x60;  Specify the order for sorting the returned results by using the &#x60;sort_order&#x60; parameter. (optional)
      * @param  \TikTokShop\Api\Generated\Model\GetOrderListRequest|null $get_order_list_request (optional)

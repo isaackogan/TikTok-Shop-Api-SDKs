@@ -13,7 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct Payment {
-    /// Currency for payment.
+    /// The ISO 4217 currency code for monetary amounts in this payment object.
     #[serde(rename = "currency", skip_serializing_if = "Option::is_none")]
     pub currency: Option<String>,
     /// Buyer paid subtotal of all the SKUs in the order. For the US market, this is pre-tax total amount. `sub_total` = `original_total_product_price` - `seller_discount` - `platform_discount`
@@ -28,7 +28,7 @@ pub struct Payment {
     /// Product discount by platform.
     #[serde(rename = "platform_discount", skip_serializing_if = "Option::is_none")]
     pub platform_discount: Option<String>,
-    /// Discount applied to the order funded by a payment platform
+    /// The portion of `platform_discount` funded by a payment platform. This amount is already included in `platform_discount`.
     #[serde(rename = "payment_platform_discount", skip_serializing_if = "Option::is_none")]
     pub payment_platform_discount: Option<String>,
     /// Service fee as paid by the buyer to apply payment platform discount

@@ -31,30 +31,30 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param id Line item id of the sub_item. This unique identifier can be used when performing split/line-level fulfillment events.
- * @param skuId SKU ID.
+ * @param skuId The SKU ID of the sub-item in the virtual bundle.
  * @param displayStatus Available values: - `UNPAID`: The order has been placed, but payment has not yet completed. - `AWAITING_SHIPMENT`: The order is ready for shipment, but no items have been shipped yet. - `AWAITING_COLLECTION`: Shipping has been arranged, but the package is waiting to be collected by the carrier. - `IN_TRANSIT`: The package has been collected by the carrier and delivery is in progress. - `DELIVERED`: The package has been delivered to the buyer. - `COMPLETED`: The order has been completed, and no further returns or refunds are allowed. - `CANCELLED`: The order has been cancelled.
  * @param productName Product name.
  * @param sellerSku The seller stock keeping unit (SKU) of the item.
  * @param skuImage SKU image.
  * @param skuName The name of the SKU, combined by product SKU attribute like size or color. e.g. \"Black, 26\"
- * @param productId Product ID.
- * @param salePrice Item sale price. Please refer to the currency of `payment_info`.
- * @param platformDiscount Platform discount amount. Please refer to the currency of `payment_info`.
- * @param sellerDiscount Seller discount amount. Please refer to the currency of `payment_info`.
+ * @param productId The product ID of the sub-item in the virtual bundle.
+ * @param salePrice The sub-item's sale price in the currency specified by `currency`.
+ * @param platformDiscount The platform discount amount for the sub-item, in the currency specified by `currency`.
+ * @param sellerDiscount The seller discount amount for the sub-item, in the currency specified by `currency`.
  * @param cancelReason The cancellation reason. Please visit [our list of cancel reasons](https://partner.tiktokshop.com/docv2/page/67e61eee427345048595487d) for more information.
- * @param originalPrice Item original price. Please refer to the currency of `payment_info`.
- * @param rtsTime The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp.
+ * @param originalPrice The sub-item's original price in the currency specified by `currency`.
+ * @param rtsTime The Unix timestamp, in seconds, when the seller successfully called the [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) for this sub-item.
  * @param packageStatus The package status of the item. Available values: - `TO_FULFILL`: Package awaiting seller to arrange shipment. - `PROCESSING`: Shipping has been arranged by the seller. Awaiting carrier collection. - `FULFILLING`: Package has been collected by carrier and is in transit. - `COMPLETED`: Package has been delivered. - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged.
- * @param currency Currency for payment.
+ * @param currency The ISO 4217 currency code for monetary amounts in this sub-item.
  * @param shippingProviderName The shipping provider name.
  * @param cancelUser Cancellation request initiator. Available values: - `BUYER` - `SELLER` - `OPERATOR` - `SYSTEM`
  * @param shippingProviderId The shipping provider ID of the item.
  * @param itemTax Item tax detail.
  * @param trackingNumber Tracking number. Available after package has been shipped.
- * @param packageId An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique `package_id` and `tracking_id`.
- * @param retailDeliveryFee Retail delivery fee (RDF). **Note**: Only available in the US market.
+ * @param packageId An order can contain one or more packages based on how the seller chooses to ship, and each package has a unique `package_id`. This field identifies the package that contains this sub-item. Use the sub-item's `tracking_number` for its package-specific tracking value.
+ * @param retailDeliveryFee Retail delivery fee (RDF) for the sub-item, in the currency specified by `currency`. **Note**: Only available in the US market.
  * @param isDangerousGood Whether the SKU is a hazmat item. When creating the label for a hazmat item, you must follow the platform rules to put certain items into one package. Please refer to the relationship between `sku_id` and `package_id` to determine how to follow platform rules.
- * @param warehouseId Seller warehouse ID.
+ * @param warehouseId The ID of the seller warehouse assigned to fulfill this sub-item.
  */
 
 
@@ -64,7 +64,7 @@ data class SubItemInfo (
     @SerializedName("id")
     val id: kotlin.String? = null,
 
-    /* SKU ID. */
+    /* The SKU ID of the sub-item in the virtual bundle. */
     @SerializedName("sku_id")
     val skuId: kotlin.String? = null,
 
@@ -88,19 +88,19 @@ data class SubItemInfo (
     @SerializedName("sku_name")
     val skuName: kotlin.String? = null,
 
-    /* Product ID. */
+    /* The product ID of the sub-item in the virtual bundle. */
     @SerializedName("product_id")
     val productId: kotlin.String? = null,
 
-    /* Item sale price. Please refer to the currency of `payment_info`. */
+    /* The sub-item's sale price in the currency specified by `currency`. */
     @SerializedName("sale_price")
     val salePrice: kotlin.String? = null,
 
-    /* Platform discount amount. Please refer to the currency of `payment_info`. */
+    /* The platform discount amount for the sub-item, in the currency specified by `currency`. */
     @SerializedName("platform_discount")
     val platformDiscount: kotlin.String? = null,
 
-    /* Seller discount amount. Please refer to the currency of `payment_info`. */
+    /* The seller discount amount for the sub-item, in the currency specified by `currency`. */
     @SerializedName("seller_discount")
     val sellerDiscount: kotlin.String? = null,
 
@@ -108,11 +108,11 @@ data class SubItemInfo (
     @SerializedName("cancel_reason")
     val cancelReason: kotlin.String? = null,
 
-    /* Item original price. Please refer to the currency of `payment_info`. */
+    /* The sub-item's original price in the currency specified by `currency`. */
     @SerializedName("original_price")
     val originalPrice: kotlin.String? = null,
 
-    /* The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp. */
+    /* The Unix timestamp, in seconds, when the seller successfully called the [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) for this sub-item. */
     @SerializedName("rts_time")
     val rtsTime: kotlin.Long? = null,
 
@@ -120,7 +120,7 @@ data class SubItemInfo (
     @SerializedName("package_status")
     val packageStatus: kotlin.String? = null,
 
-    /* Currency for payment. */
+    /* The ISO 4217 currency code for monetary amounts in this sub-item. */
     @SerializedName("currency")
     val currency: kotlin.String? = null,
 
@@ -144,11 +144,11 @@ data class SubItemInfo (
     @SerializedName("tracking_number")
     val trackingNumber: kotlin.String? = null,
 
-    /* An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique `package_id` and `tracking_id`. */
+    /* An order can contain one or more packages based on how the seller chooses to ship, and each package has a unique `package_id`. This field identifies the package that contains this sub-item. Use the sub-item's `tracking_number` for its package-specific tracking value. */
     @SerializedName("package_id")
     val packageId: kotlin.String? = null,
 
-    /* Retail delivery fee (RDF). **Note**: Only available in the US market. */
+    /* Retail delivery fee (RDF) for the sub-item, in the currency specified by `currency`. **Note**: Only available in the US market. */
     @SerializedName("retail_delivery_fee")
     val retailDeliveryFee: kotlin.String? = null,
 
@@ -156,7 +156,7 @@ data class SubItemInfo (
     @SerializedName("is_dangerous_good")
     val isDangerousGood: kotlin.Boolean? = null,
 
-    /* Seller warehouse ID. */
+    /* The ID of the seller warehouse assigned to fulfill this sub-item. */
     @SerializedName("warehouse_id")
     val warehouseId: kotlin.String? = null
 

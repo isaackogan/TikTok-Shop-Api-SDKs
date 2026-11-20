@@ -93,7 +93,7 @@ public class GetOrderDetailResponseDataOrderLineItemItemTax {
   }
 
   /**
-   * Tax amount.
+   * The tax amount for the line item, in the currency specified by &#x60;currency&#x60;.
    * @return taxAmount
    */
   @javax.annotation.Nullable

@@ -853,7 +853,7 @@ class GetOrderListResponseDataOrderLineItem implements ModelInterface, ArrayAcce
     /**
      * Sets sale_price
      *
-     * @param string|null $sale_price Item sale price. Please refer to the currency of `payment_info`.
+     * @param string|null $sale_price Sale price of the line item, in the currency specified by `currency`.
      *
      * @return self
      */
@@ -907,7 +907,7 @@ class GetOrderListResponseDataOrderLineItem implements ModelInterface, ArrayAcce
     /**
      * Sets platform_discount
      *
-     * @param string|null $platform_discount Platform discount amount. Please refer to the currency of `payment_info`.
+     * @param string|null $platform_discount Platform-funded discount amount for the line item, in the currency specified by `currency`.
      *
      * @return self
      */
@@ -934,7 +934,7 @@ class GetOrderListResponseDataOrderLineItem implements ModelInterface, ArrayAcce
     /**
      * Sets seller_discount
      *
-     * @param string|null $seller_discount Seller discount amount. Please refer to the currency of `payment_info`.
+     * @param string|null $seller_discount Seller-funded discount amount for the line item, in the currency specified by `currency`.
      *
      * @return self
      */
@@ -1017,7 +1017,7 @@ class GetOrderListResponseDataOrderLineItem implements ModelInterface, ArrayAcce
     /**
      * Sets original_price
      *
-     * @param string|null $original_price Item original price. Please refer to the currency of `payment_info`.
+     * @param string|null $original_price Original price of the line item, in the currency specified by `currency`.
      *
      * @return self
      */
@@ -1044,7 +1044,7 @@ class GetOrderListResponseDataOrderLineItem implements ModelInterface, ArrayAcce
     /**
      * Sets rts_time
      *
-     * @param int|null $rts_time The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp.
+     * @param int|null $rts_time The time the package containing this line item was shipped by a successful call to the [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1). Unix timestamp in seconds.
      *
      * @return self
      */
@@ -1098,7 +1098,7 @@ class GetOrderListResponseDataOrderLineItem implements ModelInterface, ArrayAcce
     /**
      * Sets currency
      *
-     * @param string|null $currency Currency for payment.
+     * @param string|null $currency The ISO 4217 currency code for monetary amounts in this line item.
      *
      * @return self
      */
@@ -1260,7 +1260,7 @@ class GetOrderListResponseDataOrderLineItem implements ModelInterface, ArrayAcce
     /**
      * Sets tracking_number
      *
-     * @param string|null $tracking_number Tracking number. Available after package has been shipped.
+     * @param string|null $tracking_number The tracking number for the package containing this line item. Available after the package has been shipped.
      *
      * @return self
      */
@@ -1287,7 +1287,7 @@ class GetOrderListResponseDataOrderLineItem implements ModelInterface, ArrayAcce
     /**
      * Sets package_id
      *
-     * @param string|null $package_id An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique `package_id` and `tracking_id`.
+     * @param string|null $package_id The ID of the package that contains this line item. Match this value to `packages[].id` when package information is available.
      *
      * @return self
      */
@@ -1802,7 +1802,7 @@ class GetOrderListResponseDataOrderLineItem implements ModelInterface, ArrayAcce
     /**
      * Sets product_listing_type
      *
-     * @param string|null $product_listing_type This describes the product listing type of the SKU.  Possible values: - `TEMPORARY LISTING`
+     * @param string|null $product_listing_type The product listing type of the SKU. This field is returned only for a temporary listing. Possible values: - `TEMPORARY_LISTING`: The SKU is a temporary listing.
      *
      * @return self
      */

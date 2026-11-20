@@ -13,10 +13,10 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct DistrictInfo {
-    /// The name of administrative division that can be used by seller for ship. e.g. state/county/city/district/town etc.
+    /// The label of this administrative division level, such as country, state, county, city, district, or town.
     #[serde(rename = "address_level_name", skip_serializing_if = "Option::is_none")]
     pub address_level_name: Option<String>,
-    /// Administrative area name. eg: London
+    /// The name of the administrative area at this level, such as London or United Kingdom.
     #[serde(rename = "address_name", skip_serializing_if = "Option::is_none")]
     pub address_name: Option<String>,
     /// Administrative district level code. Value can be L0/L1/L2/L3/L4. eg. US is L0

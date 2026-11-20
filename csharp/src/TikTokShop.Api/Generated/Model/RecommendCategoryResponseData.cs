@@ -37,10 +37,12 @@ namespace TikTokShop.Api.Generated.Model
         /// </summary>
         /// <param name="categories">The category hierarchy for the recommended leaf category, ordered from the top-level category to the leaf category..</param>
         /// <param name="leafCategoryId">The recommended category ID. This is always a leaf category..</param>
-        public RecommendCategoryResponseData(List<RecommendCategoryResponseDataCategory> categories = default, string leafCategoryId = default)
+        /// <param name="noneCategoryRecReasons">No category recommended reason description Possible values: - NON_MAIN_CATEGORY：recommended category not main categories of merchants - PROHIBITED_CATEGORY: recommended category  Prohibition of sale - PROHIBITED_PUBLISH_CATEGORY：recommended category  Prohibition of  publish - RECOMMEND_CATEGORY_RPC_ERROR: There is a problem with downstream services..</param>
+        public RecommendCategoryResponseData(List<RecommendCategoryResponseDataCategory> categories = default, string leafCategoryId = default, List<string> noneCategoryRecReasons = default)
         {
             this.Categories = categories;
             this.LeafCategoryId = leafCategoryId;
+            this.NoneCategoryRecReasons = noneCategoryRecReasons;
             this.AdditionalProperties = new Dictionary<string, object>();
         }
 
@@ -59,6 +61,13 @@ namespace TikTokShop.Api.Generated.Model
         public string LeafCategoryId { get; set; }
 
         /// <summary>
+        /// No category recommended reason description Possible values: - NON_MAIN_CATEGORY：recommended category not main categories of merchants - PROHIBITED_CATEGORY: recommended category  Prohibition of sale - PROHIBITED_PUBLISH_CATEGORY：recommended category  Prohibition of  publish - RECOMMEND_CATEGORY_RPC_ERROR: There is a problem with downstream services.
+        /// </summary>
+        /// <value>No category recommended reason description Possible values: - NON_MAIN_CATEGORY：recommended category not main categories of merchants - PROHIBITED_CATEGORY: recommended category  Prohibition of sale - PROHIBITED_PUBLISH_CATEGORY：recommended category  Prohibition of  publish - RECOMMEND_CATEGORY_RPC_ERROR: There is a problem with downstream services.</value>
+        [DataMember(Name = "none_category_rec_reasons", EmitDefaultValue = false)]
+        public List<string> NoneCategoryRecReasons { get; set; }
+
+        /// <summary>
         /// Gets or Sets additional properties
         /// </summary>
         [JsonExtensionData]
@@ -74,6 +83,7 @@ namespace TikTokShop.Api.Generated.Model
             sb.Append("class RecommendCategoryResponseData {\n");
             sb.Append("  Categories: ").Append(Categories).Append("\n");
             sb.Append("  LeafCategoryId: ").Append(LeafCategoryId).Append("\n");
+            sb.Append("  NoneCategoryRecReasons: ").Append(NoneCategoryRecReasons).Append("\n");
             sb.Append("  AdditionalProperties: ").Append(AdditionalProperties).Append("\n");
             sb.Append("}\n");
             return sb.ToString();

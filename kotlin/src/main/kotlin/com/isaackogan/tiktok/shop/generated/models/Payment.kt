@@ -29,12 +29,12 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param currency Currency for payment.
+ * @param currency The ISO 4217 currency code for monetary amounts in this payment object.
  * @param subTotal Buyer paid subtotal of all the SKUs in the order. For the US market, this is pre-tax total amount. `sub_total` = `original_total_product_price` - `seller_discount` - `platform_discount`
  * @param shippingFee Buyer paid shipping fee.  `shipping_fee` = `original_shipping_fee` - `shipping_fee_seller_discount` - `shipping_fee_platform_discount` For the US market, this is pre-tax total amount.
  * @param sellerDiscount Product discount by seller.
  * @param platformDiscount Product discount by platform.
- * @param paymentPlatformDiscount Discount applied to the order funded by a payment platform
+ * @param paymentPlatformDiscount The portion of `platform_discount` funded by a payment platform. This amount is already included in `platform_discount`.
  * @param paymentDiscountServiceFee Service fee as paid by the buyer to apply payment platform discount
  * @param totalAmount Buyer paid total amount. `total_amount` = `sub_total` + `shipping_fee` + `taxes` + `retail_delivery_fee`
  * @param originalTotalProductPrice Total original price of products (VAT included for crossborder shop). For the US market, this is pre-tax total amount.
@@ -59,7 +59,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Payment (
 
-    /* Currency for payment. */
+    /* The ISO 4217 currency code for monetary amounts in this payment object. */
     @SerializedName("currency")
     val currency: kotlin.String? = null,
 
@@ -79,7 +79,7 @@ data class Payment (
     @SerializedName("platform_discount")
     val platformDiscount: kotlin.String? = null,
 
-    /* Discount applied to the order funded by a payment platform */
+    /* The portion of `platform_discount` funded by a payment platform. This amount is already included in `platform_discount`. */
     @SerializedName("payment_platform_discount")
     val paymentPlatformDiscount: kotlin.String? = null,
 

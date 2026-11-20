@@ -42,23 +42,23 @@ import com.google.gson.annotations.SerializedName
  * @param skuImage SKU image.
  * @param skuName The name of the SKU, combined by product SKU attribute like size or color. e.g. \"Black, 26\"
  * @param productId Product ID.
- * @param salePrice Item sale price. Please refer to the currency of `payment_info`.
+ * @param salePrice Sale price of the line item, in the currency specified by `currency`.
  * @param pfandFee Deposit fee that is applied to certain products, typically beverage containers such as bottles or cans. **Note** Only available in Germany market
- * @param platformDiscount Platform discount amount. Please refer to the currency of `payment_info`.
- * @param sellerDiscount Seller discount amount. Please refer to the currency of `payment_info`.
+ * @param platformDiscount Platform-funded discount amount for the line item, in the currency specified by `currency`.
+ * @param sellerDiscount Seller-funded discount amount for the line item, in the currency specified by `currency`.
  * @param skuType [**Deprecated**: This field is deprecated and will be removed in a future API version. Use `order_type` instead.]  The order line type. Possible values based on region:  **All regions** - `NORMAL`: An item that is in stock and available for immediate purchase and fulfillment. - `ZERO_LOTTERY`: An item purchased during a lottery event in TikTok LIVE. - `SHOP_PARTNER`: An item purchased from a TikTok Shop partner store.  **US** - `PRE_ORDER`: An item that is not yet available or released. Fulfillment starts on a specific date in the future. - `MADE_TO_ORDER`: An item that is produced only after the order is received. Fulfillment starts after the product is produced.
  * @param cancelReason The cancellation reason. Please visit [our list of cancel reasons](https://partner.tiktokshop.com/docv2/page/67e61eee427345048595487d) for more information.
- * @param originalPrice Item original price. Please refer to the currency of `payment_info`.
- * @param rtsTime The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp.
+ * @param originalPrice Original price of the line item, in the currency specified by `currency`.
+ * @param rtsTime The time the package containing this line item was shipped by a successful call to the [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1). Unix timestamp in seconds.
  * @param packageStatus The package status of the item. Available values: - `TO_FULFILL`: Package awaiting seller to arrange shipment. - `PROCESSING`: Shipping has been arranged by the seller. Awaiting carrier collection. - `FULFILLING`: Package has been collected by carrier and is in transit. - `COMPLETED`: Package has been delivered. - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged.
- * @param currency Currency for payment.
+ * @param currency The ISO 4217 currency code for monetary amounts in this line item.
  * @param shippingProviderName The shipping provider name.
  * @param cancelUser Cancellation request initiator. Available values: - `BUYER` - `SELLER` - `OPERATOR` - `SYSTEM`
  * @param shippingProviderId The shipping provider ID of the item.
  * @param isGift Indicates whether the current order line item is a gift.
  * @param itemTax Item tax detail.
- * @param trackingNumber Tracking number. Available after package has been shipped.
- * @param packageId An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique `package_id` and `tracking_id`.
+ * @param trackingNumber The tracking number for the package containing this line item. Available after the package has been shipped.
+ * @param packageId The ID of the package that contains this line item. Match this value to `packages[].id` when package information is available.
  * @param retailDeliveryFee Retail delivery fee (RDF).   **Note**: Only available in the US market.
  * @param buyerServiceFee A service fee is charged on every transaction made. The charge is applied from the fifth order onwards and collected directly from customers during checkout.   **Note**: Only available in the Indonesia market.
  * @param smallOrderFee Small order fee for Thailand (TH).
@@ -77,7 +77,7 @@ import com.google.gson.annotations.SerializedName
  * @param shippingVatRate Shipping vat rate Available in EU market
  * @param isPodCustomized Identifies if this SKU contains print on demand customization
  * @param podInfoId ID of the print on demand customization details. This ID can be used to query for the exact details of the customization
- * @param productListingType This describes the product listing type of the SKU.  Possible values: - `TEMPORARY LISTING`
+ * @param productListingType The product listing type of the SKU. This field is returned only for a temporary listing. Possible values: - `TEMPORARY_LISTING`: The SKU is a temporary listing.
  */
 
 
@@ -119,7 +119,7 @@ data class GetOrderListResponseDataOrderLineItem (
     @SerializedName("product_id")
     val productId: kotlin.String? = null,
 
-    /* Item sale price. Please refer to the currency of `payment_info`. */
+    /* Sale price of the line item, in the currency specified by `currency`. */
     @SerializedName("sale_price")
     val salePrice: kotlin.String? = null,
 
@@ -127,11 +127,11 @@ data class GetOrderListResponseDataOrderLineItem (
     @SerializedName("pfand_fee")
     val pfandFee: kotlin.String? = null,
 
-    /* Platform discount amount. Please refer to the currency of `payment_info`. */
+    /* Platform-funded discount amount for the line item, in the currency specified by `currency`. */
     @SerializedName("platform_discount")
     val platformDiscount: kotlin.String? = null,
 
-    /* Seller discount amount. Please refer to the currency of `payment_info`. */
+    /* Seller-funded discount amount for the line item, in the currency specified by `currency`. */
     @SerializedName("seller_discount")
     val sellerDiscount: kotlin.String? = null,
 
@@ -144,11 +144,11 @@ data class GetOrderListResponseDataOrderLineItem (
     @SerializedName("cancel_reason")
     val cancelReason: kotlin.String? = null,
 
-    /* Item original price. Please refer to the currency of `payment_info`. */
+    /* Original price of the line item, in the currency specified by `currency`. */
     @SerializedName("original_price")
     val originalPrice: kotlin.String? = null,
 
-    /* The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp. */
+    /* The time the package containing this line item was shipped by a successful call to the [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1). Unix timestamp in seconds. */
     @SerializedName("rts_time")
     val rtsTime: kotlin.Long? = null,
 
@@ -156,7 +156,7 @@ data class GetOrderListResponseDataOrderLineItem (
     @SerializedName("package_status")
     val packageStatus: kotlin.String? = null,
 
-    /* Currency for payment. */
+    /* The ISO 4217 currency code for monetary amounts in this line item. */
     @SerializedName("currency")
     val currency: kotlin.String? = null,
 
@@ -180,11 +180,11 @@ data class GetOrderListResponseDataOrderLineItem (
     @SerializedName("item_tax")
     val itemTax: kotlin.collections.List<ItemTax>? = null,
 
-    /* Tracking number. Available after package has been shipped. */
+    /* The tracking number for the package containing this line item. Available after the package has been shipped. */
     @SerializedName("tracking_number")
     val trackingNumber: kotlin.String? = null,
 
-    /* An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique `package_id` and `tracking_id`. */
+    /* The ID of the package that contains this line item. Match this value to `packages[].id` when package information is available. */
     @SerializedName("package_id")
     val packageId: kotlin.String? = null,
 
@@ -261,7 +261,7 @@ data class GetOrderListResponseDataOrderLineItem (
     @SerializedName("pod_info_id")
     val podInfoId: kotlin.String? = null,
 
-    /* This describes the product listing type of the SKU.  Possible values: - `TEMPORARY LISTING` */
+    /* The product listing type of the SKU. This field is returned only for a temporary listing. Possible values: - `TEMPORARY_LISTING`: The SKU is a temporary listing. */
     @SerializedName("product_listing_type")
     val productListingType: kotlin.String? = null
 

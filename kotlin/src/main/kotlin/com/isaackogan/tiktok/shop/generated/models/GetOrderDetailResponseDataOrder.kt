@@ -44,14 +44,14 @@ import com.google.gson.annotations.SerializedName
  * @param payment Payment info about a TikTok Shop order.
  * @param recipientAddress `recipient_address` is not available under `UNPAID` and `ON_HOLD` status.
  * @param buyerMessage The note from buyer.
- * @param createTime The date and time that the order was created. Unix timestamp.
+ * @param createTime The date and time that the order was created. Unix timestamp in seconds.
  * @param trackingNumber Tracking number. Available after ship package.
  * @param cancelReason The order level cancellation reason. **Note**: A multi-line order may have different `cancel_reason` across the multiple items. If this occurs, the order-level `cancel_reason` will surface the `cancel_reason` from the first line item. [See here](https://partner.tiktokshop.com/docv2/page/cancel-reasons) for more details on cancellation reasons.
- * @param rtsSlaTime The latest shipping time specified by the platform. Unix timestamp.
- * @param paidTime The date and time that the order was paid. Unix timestamp.
+ * @param rtsSlaTime The latest shipping time specified by the platform, as a Unix timestamp in seconds.
+ * @param paidTime The date and time that the order was paid, as a Unix timestamp in seconds.
  * @param fulfillmentType Fulfillment type.  Only orders with fulfillment type can be shipped by sellers. Possible values: - `FULFILLMENT_BY_SELLER`: a method where sellers fulfill orders directly from their own inventory, without using TikTok's fulfillment centers. In this model, the seller is responsible for storing, packaging, and shipping the product to customers. - `FULFILLMENT_BY_TIKTOK`: a service offered by TikTok that enables sellers to send their products to TikTok's fulfillment centers. TikTok then takes care of storing, picking, packing, and shipping the products to customers. - `FULFILLMENT_BY_DILAYANI_TOKOPEDIA`: a method where Tokopedia GoTo Logistics provides warehousing and logistics services to sellers and charges a fee for the service.
  * @param sellerNote This field return the note, which seller notes in TikTok Seller Center.
- * @param ttsSlaTime The latest collection time specified by the platform. Unix timestamp.
+ * @param ttsSlaTime The latest collection time specified by the platform, as a Unix timestamp in seconds.
  * @param cancelOrderSlaTime The automatic cancellation time for orders specified by the platform. Unix timestamp.
  * @param updateTime Time of order status changes. Unix timestamp.
  * @param packages List of packages included in this order
@@ -60,34 +60,34 @@ import com.google.gson.annotations.SerializedName
  * @param warehouseId seller warehouse ID.
  * @param splitOrCombineTag Indicate whether the order is combined or split. - `COMBINED` - `SPLIT` This field will be used in future fulfillment apis.
  * @param hasUpdatedRecipientAddress Whether the recipient address has been updated. - `false`: no update - `true`: updated
- * @param cpf CPF (invoice number), used to issue an invoice. Exclusive for the Brazil market.
+ * @param cpf The buyer's CPF tax identification number, used to issue an invoice. Available only in Brazil.
  * @param deliveryOptionId Order delivery option ID.
- * @param deliverySlaTime Order should arrive by this date to be considered on-time and to avoid late delivery penalties.
+ * @param deliverySlaTime The Unix timestamp, in seconds, by which the order should arrive to be considered on time and avoid late-delivery penalties.
  * @param paymentMethodName Payment method name, only for display
- * @param paymentCardType Code to distinguish different payment method. Only assigned when the payment method is using bank card. Possible values are: Debit, Credit, Prepaid
+ * @param paymentCardType Card type for bank card payments. Possible values: - `Debit` - `Credit` - `Prepaid`
  * @param channelEntityNationalRegistryId The national channel entity registration ID  of payment institution/creditor. In Brazil, it is the CNPJ of payment instituion.
  * @param paymentMethodCode Payment method code identifying current transaction. It will contains payment method and card brand if it is card transaction.
  * @param paymentAuthCode Authorization code of current transaction (only for the Brazilian market). For card transactions (credit/debit card), this field will be transaction authorization code. For PIX transactions, this field will be E2E ID.
- * @param shippingDueTime If the order hasn't updated its status to `AWAITING_COLLECTION` before this time, the order will be automatically canceled by TikTok Shop.
+ * @param shippingDueTime The Unix timestamp, in seconds, by which the order must reach `AWAITING_COLLECTION`; otherwise, TikTok Shop automatically cancels the order.
  * @param lineItems Line item info list.
  * @param shippingType The method of delivery. - `TIKTOK`: shipping service provided by TikTok. The seller should obtain shipping label from TikTok. - `SELLER`: seller provides shipping, including through 3rd party fulfillment providers on behalf of the seller. - `TIKTOK_DIGITAL`: Tiktok delivers virtual goods directly to buyers. There is no action needed.
  * @param buyerEmail The anonymized email address of the buyer. It is not recommended to send messages directly to this email address. If you need to contact the buyer, please go to Seller Center - Buyer Messages page.
- * @param deliveryTime The timestamp of the order's status update to `DELIVERED`.
+ * @param deliveryTime The Unix timestamp, in seconds, when the order status changed to `DELIVERED`.
  * @param needUploadInvoice Whether an invoice needs to be uploaded and uploaded status (only for Brazil market). - UNKNOWN: Currently unable to confirm whether an invoice is needed - NEED_INVOICE: This order requires an invoice and the invoice has not been uploaded yet - NO_NEED：This order does not require an invoice - INVOICE_UPLOADED: The invoice for this order has been uploaded and verified. If the order is split, it will be marked as \"uploaded\" once any sub-order's invoice is uploaded. - INVOICE_PROCESSING: The invoice for this order is currently being uploaded/cancelled. Please wait for the final result and do not repeat the operation
- * @param isCod This option is for sellers that accept cash payment on delivery which is rare. Buyers will pay in cash upon receipt of package. Default value is `FALSE`. Only applicable to countries where Cash on Delivery (COD) is supported.
- * @param requestCancelTime Buyer request cancel time.
- * @param deliveryOptionRequiredDeliveryTime Order should be delivered before this time.
+ * @param isCod Whether the order uses cash on delivery (COD). When returned, `true` means the buyer pays cash upon receipt and `false` means the order uses another payment method. The field may be omitted when payment type is unavailable. Available only in countries where COD is supported.
+ * @param requestCancelTime The Unix timestamp, in seconds, when the buyer submitted the pending cancellation request. Returned when is_buyer_request_cancel is true.
+ * @param deliveryOptionRequiredDeliveryTime The Unix timestamp, in seconds, by which the order should be delivered.
  * @param deliveryOptionName Delivery option name. For display purposes only.
  * @param isBuyerRequestCancel True when the buyer has a pending cancellation request
- * @param deliveryDueTime If the order hasn't updated its status to `DELIVERED` before this time, the order will be automatically canceled by TikTok Shop.
- * @param collectionTime The timestamp of the order's status update to `IN_TRANSIT`.
- * @param isOnHoldOrder Indicates whether the order experienced or will be experienced `ON_HOLD` status.
- * @param cancelTime The timestamp of the order's status update to `CANCELLED`.
+ * @param deliveryDueTime The Unix timestamp, in seconds, by which the order must reach `DELIVERED`; otherwise, TikTok Shop automatically cancels the order.
+ * @param collectionTime The Unix timestamp, in seconds, when the order status changed to `IN_TRANSIT`.
+ * @param isOnHoldOrder Whether the order has entered or will enter an `ON_HOLD` period after buyer payment. This does not indicate that the order's current `status` is `ON_HOLD`.
+ * @param cancelTime The Unix timestamp, in seconds, when the order status changed to CANCELLED.
  * @param isReplacementOrder When true, this is a replacement order.
  * @param replacedOrderId The order ID for the order that is being replaced. Returned only if `is_replacement_order` = `true`
- * @param collectionDueTime If the order hasn't updated its status to `IN_TRANSIT` before this time, the order will be automatically canceled by TikTok Shop
+ * @param collectionDueTime The Unix timestamp, in seconds, by which the order must reach `IN_TRANSIT`; otherwise, TikTok Shop automatically cancels the order.
  * @param pickUpCutOffTime To avoid LDR, you must ensure the package is picked up by this time. Only applicable in Southeast Asia regions.
- * @param fastDispatchSlaTime The latest collection time to gain incentives of NDD (Next Day Delivery) project. Unix timestamp Only available in Thailand and Philippines.
+ * @param fastDispatchSlaTime The latest collection time for the order to qualify for Next Day Delivery (NDD) incentives. Unix timestamp, in seconds.
  * @param commercePlatform The platform where the order was placed. Possible values: - `TIKTOK_SHOP` - `TOKOPEDIA` - `TIKTOK_SHOP_APP` **Note**: `Tokopedia` and `Tiktok Shop App` available only in the SEA market.
  * @param orderType The order type. Possible values based on region: **All regions** - `NORMAL`: An item that is in stock and available for immediate purchase and fulfillment. - `ZERO_LOTTERY`: An order placed during a lottery event in TikTok LIVE. - `AUCTION`: An order placed during auction, where the price of the product is not fixed. **US** - `PRE_ORDER`: An advance order for items that are not yet available or released. Fulfillment starts on a specific date in the future. - `MADE_TO_ORDER`: An order for items that are produced only after the order is received. Fulfillment starts after the product is produced. - `BACK_ORDER`: An order for items that are out of stock but expected to be restocked. Fulfillment starts after the product is restocked. - `VIRTUAL_ORDER`: An order for items that are digital goods, requiring no physical delivery. Fulfillment is immediate or automated upon payment confirmation. Returns an empty value for standard orders or other types that don't fall into the above categories.
  * @param releaseDate The date on which order handling starts and the status of the order changes to [`AWAITING_SHIPMENT`](https://partner.tiktokshop.com/docv2/page/650b1b4bbace3e02b76d1011). Applicable only if the `order_type` is `PRE_ORDER`.
@@ -101,12 +101,12 @@ import com.google.gson.annotations.SerializedName
  * @param authenticationRequired If true, order requires authentication. Use an approved in-house authentication service after an order has been placed for verification. This must be completed before shipment.
  * @param consultationId An ID to identify the corresponding ePharmacy consultation.  Applicable only if an ePharmacy consultation was initiated. Not applicable if the prescription was provided by the customer through an image upload.
  * @param fastDeliveryProgram A badge presented on the merchandise to tell the buyer that the seller participates in the fast delivery program, such that the order should arrive in a promised time period. Possible values: - `3_DAY_DELIVERY` - `3_DAY_POTENTIAL_SHIPPING` - `3_DAY_POTENTIAL_TRANSIT` Not returned if order did not meet fast delivery program requirements. Note: Applicable only for the US market.
- * @param buyerNickname The nickname of the TikTok buyer, which is defined by the TikTok user. The buyer_nickname can be used to identify the buyer when displaying the unboxing results within the TikTok Live Session.
- * @param buyerAvatar The avatar of the TikTok buyer, which is defined by the TikTok user. The buyer_avatar can be used in conjunction with the buyer_nickname when displaying the unboxing results within the TikTok Live Session.
- * @param orderRights Order tag identifier if has certain rights within the order based on the program subscribed by sellers. 1 = Shipping Fee Reimbursement Program 2 = Horizon+ Program  Applicable for SEA market only
+ * @param buyerNickname The nickname of the TikTok buyer, as defined by the TikTok user. This field is populated only for supported virtual unboxing orders and can be displayed with `buyer_avatar` in TikTok LIVE unboxing results. Use `user_id`, not this display name, for programmatic buyer identification.
+ * @param buyerAvatar The avatar of the TikTok buyer, as defined by the TikTok user. This field is populated only for supported virtual unboxing orders and can be used with `buyer_nickname` when displaying unboxing results in a TikTok LIVE session.
+ * @param orderRights Order rights associated with seller programs. Multiple values can be returned together, and the field is omitted when no right applies. Possible values: - `1`: Shipping Fee Reimbursement Program - `2`: Horizon+ Program Applicable only in SEA markets.
  * @param fulfillmentPriorityLevel Fulfillment priority value that can be used to prioritize shipping (only available in SEA) 100 = Instant 200 = Sameday 8 Hours 300 = Sameday 400 = Next Day Delivery 500 = Express 600 = Standard 700 = Economy 800 = Cargo
  * @param recommendedShippingTime Recommended time to ship based on the each LSP service type (only available in SEA)
- * @param instorePickupSlaTime The latest buyer pickup time for instore pickup method specified by the platform. Currently applicable for SEA market. Unix timestamp.
+ * @param instorePickupSlaTime The latest buyer pickup time for in-store pickup, as a Unix timestamp in seconds. Currently available in SEA markets.
  * @param fastRtsSlaTime Indicate fast fulfillment SLA for shipping action. Applicable for SEA market only. Unix timestamp
  * @param fastCollectionSlaTime Indicate fast fulfillment SLA for collection action. Applicable for SEA market only. Unix timestamp
  * @param orderTag The order tag. Possible values based on region: **All regions** - `TEAM_BREAK`: An order tag placed for a Team Break event in a LIVE auction. The buyer purchases a slot/team spot, and the final item is determined by the break outcome; the SKU name may be assigned or updated by the seller after the break. -`SURPRISE_SET`:  An order tag placed for a Surprise Set event in a LIVE auction. The buyer purchases a surprise/mystery set, and the final items are determined by the platform's Surprise/Randomizer result during the LIVE session.
@@ -155,7 +155,7 @@ data class GetOrderDetailResponseDataOrder (
     @SerializedName("buyer_message")
     val buyerMessage: kotlin.String? = null,
 
-    /* The date and time that the order was created. Unix timestamp. */
+    /* The date and time that the order was created. Unix timestamp in seconds. */
     @SerializedName("create_time")
     val createTime: kotlin.Long? = null,
 
@@ -167,11 +167,11 @@ data class GetOrderDetailResponseDataOrder (
     @SerializedName("cancel_reason")
     val cancelReason: kotlin.String? = null,
 
-    /* The latest shipping time specified by the platform. Unix timestamp. */
+    /* The latest shipping time specified by the platform, as a Unix timestamp in seconds. */
     @SerializedName("rts_sla_time")
     val rtsSlaTime: kotlin.Long? = null,
 
-    /* The date and time that the order was paid. Unix timestamp. */
+    /* The date and time that the order was paid, as a Unix timestamp in seconds. */
     @SerializedName("paid_time")
     val paidTime: kotlin.Long? = null,
 
@@ -183,7 +183,7 @@ data class GetOrderDetailResponseDataOrder (
     @SerializedName("seller_note")
     val sellerNote: kotlin.String? = null,
 
-    /* The latest collection time specified by the platform. Unix timestamp. */
+    /* The latest collection time specified by the platform, as a Unix timestamp in seconds. */
     @SerializedName("tts_sla_time")
     val ttsSlaTime: kotlin.Long? = null,
 
@@ -219,7 +219,7 @@ data class GetOrderDetailResponseDataOrder (
     @SerializedName("has_updated_recipient_address")
     val hasUpdatedRecipientAddress: kotlin.Boolean? = null,
 
-    /* CPF (invoice number), used to issue an invoice. Exclusive for the Brazil market. */
+    /* The buyer's CPF tax identification number, used to issue an invoice. Available only in Brazil. */
     @SerializedName("cpf")
     val cpf: kotlin.String? = null,
 
@@ -227,7 +227,7 @@ data class GetOrderDetailResponseDataOrder (
     @SerializedName("delivery_option_id")
     val deliveryOptionId: kotlin.String? = null,
 
-    /* Order should arrive by this date to be considered on-time and to avoid late delivery penalties. */
+    /* The Unix timestamp, in seconds, by which the order should arrive to be considered on time and avoid late-delivery penalties. */
     @SerializedName("delivery_sla_time")
     val deliverySlaTime: kotlin.Long? = null,
 
@@ -235,7 +235,7 @@ data class GetOrderDetailResponseDataOrder (
     @SerializedName("payment_method_name")
     val paymentMethodName: kotlin.String? = null,
 
-    /* Code to distinguish different payment method. Only assigned when the payment method is using bank card. Possible values are: Debit, Credit, Prepaid */
+    /* Card type for bank card payments. Possible values: - `Debit` - `Credit` - `Prepaid` */
     @SerializedName("payment_card_type")
     val paymentCardType: kotlin.String? = null,
 
@@ -251,7 +251,7 @@ data class GetOrderDetailResponseDataOrder (
     @SerializedName("payment_auth_code")
     val paymentAuthCode: kotlin.String? = null,
 
-    /* If the order hasn't updated its status to `AWAITING_COLLECTION` before this time, the order will be automatically canceled by TikTok Shop. */
+    /* The Unix timestamp, in seconds, by which the order must reach `AWAITING_COLLECTION`; otherwise, TikTok Shop automatically cancels the order. */
     @SerializedName("shipping_due_time")
     val shippingDueTime: kotlin.Long? = null,
 
@@ -267,7 +267,7 @@ data class GetOrderDetailResponseDataOrder (
     @SerializedName("buyer_email")
     val buyerEmail: kotlin.String? = null,
 
-    /* The timestamp of the order's status update to `DELIVERED`. */
+    /* The Unix timestamp, in seconds, when the order status changed to `DELIVERED`. */
     @SerializedName("delivery_time")
     val deliveryTime: kotlin.Long? = null,
 
@@ -275,15 +275,15 @@ data class GetOrderDetailResponseDataOrder (
     @SerializedName("need_upload_invoice")
     val needUploadInvoice: kotlin.String? = null,
 
-    /* This option is for sellers that accept cash payment on delivery which is rare. Buyers will pay in cash upon receipt of package. Default value is `FALSE`. Only applicable to countries where Cash on Delivery (COD) is supported. */
+    /* Whether the order uses cash on delivery (COD). When returned, `true` means the buyer pays cash upon receipt and `false` means the order uses another payment method. The field may be omitted when payment type is unavailable. Available only in countries where COD is supported. */
     @SerializedName("is_cod")
     val isCod: kotlin.Boolean? = null,
 
-    /* Buyer request cancel time. */
+    /* The Unix timestamp, in seconds, when the buyer submitted the pending cancellation request. Returned when is_buyer_request_cancel is true. */
     @SerializedName("request_cancel_time")
     val requestCancelTime: kotlin.Long? = null,
 
-    /* Order should be delivered before this time. */
+    /* The Unix timestamp, in seconds, by which the order should be delivered. */
     @SerializedName("delivery_option_required_delivery_time")
     val deliveryOptionRequiredDeliveryTime: kotlin.Long? = null,
 
@@ -295,19 +295,19 @@ data class GetOrderDetailResponseDataOrder (
     @SerializedName("is_buyer_request_cancel")
     val isBuyerRequestCancel: kotlin.Boolean? = null,
 
-    /* If the order hasn't updated its status to `DELIVERED` before this time, the order will be automatically canceled by TikTok Shop. */
+    /* The Unix timestamp, in seconds, by which the order must reach `DELIVERED`; otherwise, TikTok Shop automatically cancels the order. */
     @SerializedName("delivery_due_time")
     val deliveryDueTime: kotlin.Long? = null,
 
-    /* The timestamp of the order's status update to `IN_TRANSIT`. */
+    /* The Unix timestamp, in seconds, when the order status changed to `IN_TRANSIT`. */
     @SerializedName("collection_time")
     val collectionTime: kotlin.Long? = null,
 
-    /* Indicates whether the order experienced or will be experienced `ON_HOLD` status. */
+    /* Whether the order has entered or will enter an `ON_HOLD` period after buyer payment. This does not indicate that the order's current `status` is `ON_HOLD`. */
     @SerializedName("is_on_hold_order")
     val isOnHoldOrder: kotlin.Boolean? = null,
 
-    /* The timestamp of the order's status update to `CANCELLED`. */
+    /* The Unix timestamp, in seconds, when the order status changed to CANCELLED. */
     @SerializedName("cancel_time")
     val cancelTime: kotlin.Long? = null,
 
@@ -319,7 +319,7 @@ data class GetOrderDetailResponseDataOrder (
     @SerializedName("replaced_order_id")
     val replacedOrderId: kotlin.String? = null,
 
-    /* If the order hasn't updated its status to `IN_TRANSIT` before this time, the order will be automatically canceled by TikTok Shop */
+    /* The Unix timestamp, in seconds, by which the order must reach `IN_TRANSIT`; otherwise, TikTok Shop automatically cancels the order. */
     @SerializedName("collection_due_time")
     val collectionDueTime: kotlin.Long? = null,
 
@@ -327,7 +327,7 @@ data class GetOrderDetailResponseDataOrder (
     @SerializedName("pick_up_cut_off_time")
     val pickUpCutOffTime: kotlin.Long? = null,
 
-    /* The latest collection time to gain incentives of NDD (Next Day Delivery) project. Unix timestamp Only available in Thailand and Philippines. */
+    /* The latest collection time for the order to qualify for Next Day Delivery (NDD) incentives. Unix timestamp, in seconds. */
     @SerializedName("fast_dispatch_sla_time")
     val fastDispatchSlaTime: kotlin.Long? = null,
 
@@ -383,15 +383,15 @@ data class GetOrderDetailResponseDataOrder (
     @SerializedName("fast_delivery_program")
     val fastDeliveryProgram: kotlin.String? = null,
 
-    /* The nickname of the TikTok buyer, which is defined by the TikTok user. The buyer_nickname can be used to identify the buyer when displaying the unboxing results within the TikTok Live Session. */
+    /* The nickname of the TikTok buyer, as defined by the TikTok user. This field is populated only for supported virtual unboxing orders and can be displayed with `buyer_avatar` in TikTok LIVE unboxing results. Use `user_id`, not this display name, for programmatic buyer identification. */
     @SerializedName("buyer_nickname")
     val buyerNickname: kotlin.String? = null,
 
-    /* The avatar of the TikTok buyer, which is defined by the TikTok user. The buyer_avatar can be used in conjunction with the buyer_nickname when displaying the unboxing results within the TikTok Live Session. */
+    /* The avatar of the TikTok buyer, as defined by the TikTok user. This field is populated only for supported virtual unboxing orders and can be used with `buyer_nickname` when displaying unboxing results in a TikTok LIVE session. */
     @SerializedName("buyer_avatar")
     val buyerAvatar: kotlin.String? = null,
 
-    /* Order tag identifier if has certain rights within the order based on the program subscribed by sellers. 1 = Shipping Fee Reimbursement Program 2 = Horizon+ Program  Applicable for SEA market only */
+    /* Order rights associated with seller programs. Multiple values can be returned together, and the field is omitted when no right applies. Possible values: - `1`: Shipping Fee Reimbursement Program - `2`: Horizon+ Program Applicable only in SEA markets. */
     @SerializedName("order_rights")
     val orderRights: kotlin.collections.List<kotlin.Long>? = null,
 
@@ -403,7 +403,7 @@ data class GetOrderDetailResponseDataOrder (
     @SerializedName("recommended_shipping_time")
     val recommendedShippingTime: kotlin.Long? = null,
 
-    /* The latest buyer pickup time for instore pickup method specified by the platform. Currently applicable for SEA market. Unix timestamp. */
+    /* The latest buyer pickup time for in-store pickup, as a Unix timestamp in seconds. Currently available in SEA markets. */
     @SerializedName("instore_pickup_sla_time")
     val instorePickupSlaTime: kotlin.Long? = null,
 

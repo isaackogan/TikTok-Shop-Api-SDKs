@@ -34,25 +34,25 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param id Line item ID.
- * @param skuId SKU ID.
+ * @param skuId The SKU ID for the line item. For a gift line item with gift information, the original SKU ID is returned when available.
  * @param combinedListingSkus For a virtual bundle SKU, returns an array of related product SKUs that compose the virtual bundle SKU.
- * @param productId Product ID.
+ * @param productId The product ID for the line item. For a gift line item with gift information, the original product ID is returned when available.
  * @param productName Product name.
  * @param skuName The name of the SKU, combined by product SKU attribute like size or color. For example, \"Black, 26.\"
  * @param skuImage SKU image.
- * @param originalPrice Item original price, please refer to the currency of `payment_info`.
+ * @param originalPrice The line item's original price in the currency specified by `currency`.
  * @param salePrice Item sale price, please refer to the currency of `payment_info`.
  * @param pfandFee Deposit fee that is applied to certain products, typically beverage containers such as bottles or cans. **Note** Only available in Germany market
- * @param platformDiscount Platform discount amount, please refer to the currency of `payment_info`.
+ * @param platformDiscount The platform discount amount for the line item, in the currency specified by `currency`.
  * @param displayStatus - `UNPAID`: The order is placed, but payment is not yet completed. - `AWAITING_SHIPMENT`: The order is ready for shipment, but no items are shipped yet. - `AWAITING_COLLECTION`:  The shipment is arranged, but the package is waiting to be collected by the carrier. - `IN_TRANSIT`: The package is collected by the carrier and delivery is in progress. - `DELIVERED`: The package is delivered to buyer. - `COMPLETED`: The order is completed, and no further returns or refunds are allowed. - `CANCELLED`: The order is canceled.
  * @param cancelUser The initiator of a cancellation request: - `BUYER` - `SELLER` - `OPERATOR` - `SYSTEM`
  * @param skuType [**Deprecated**: This field is deprecated and will be removed in a future API version. Use `order_type` instead.] The order line type: Possible values based on region: **All regions** - `NORMAL`: An item that is in stock and available for immediate purchase and fulfillment. - `ZERO_LOTTERY:` An item purchased during a lottery event in TikTok LIVE. - `SHOP_PARTNER`: An item purchased from a TikTok Shop partner store. **US** - `PRE_ORDER`: An item that is not yet available or released. Fulfillment starts on a specific date in the future. - `MADE_TO_ORDER`: An item that is produced only after the order is received. Fulfillment starts after the product is produced.
  * @param sellerSku The seller stock keeping unit (SKU) of the item.
  * @param shippingProviderId The shipping provider ID of the item.
- * @param sellerDiscount Seller discount amount. Please refer to the currency of `payment_info`.
- * @param currency Currency for payment.
- * @param packageId An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique `package_id` (and also a `tracking_id`, which is used to track the progress of the package as it is shipped). For local sellers in the US and UK markets, the `package_id` and `package_status` property will not be returned before the package is shipped
- * @param rtsTime The time seller shipped line order (call Ship Order endpoint successfully). Unix timestamp.
+ * @param sellerDiscount The seller discount amount for the line item, in the currency specified by `currency`.
+ * @param currency The ISO 4217 currency code for monetary amounts in this line item.
+ * @param packageId An order can contain one or more packages based on how the seller chooses to ship, and each package has a unique `package_id`. This field matches the `id` of the package in `orders[].packages[]` that contains this line item. Read the package-specific tracking value from this line item's `tracking_number`. For local sellers in the US and UK markets, `package_id` and `package_status` are not returned before the package is shipped.
+ * @param rtsTime The Unix timestamp, in seconds, when the seller successfully submitted this line item for shipment through the Ship Order API.
  * @param itemTax Item tax detail.
  * @param packageStatus The package status of the item: - `TO_FULFILL`: package waiting seller to arrange shipment. - `PROCESSING`: package shipment has been arranged by seller. Waiting carrier to collect the parcel. - `FULFILLING`: package has been collected by carrier and in transit. - `COMPLETED`: package has been delivered. - `CANCELLED`: package has been canceled. Normally, the package is canceled due to the package being lost or damaged.
  * @param shippingProviderName The shipping provider name of the item.
@@ -87,7 +87,7 @@ data class GetOrderDetailResponseDataOrderLineItem (
     @SerializedName("id")
     val id: kotlin.String? = null,
 
-    /* SKU ID. */
+    /* The SKU ID for the line item. For a gift line item with gift information, the original SKU ID is returned when available. */
     @SerializedName("sku_id")
     val skuId: kotlin.String? = null,
 
@@ -95,7 +95,7 @@ data class GetOrderDetailResponseDataOrderLineItem (
     @SerializedName("combined_listing_skus")
     val combinedListingSkus: kotlin.collections.List<CombinedListingSku>? = null,
 
-    /* Product ID. */
+    /* The product ID for the line item. For a gift line item with gift information, the original product ID is returned when available. */
     @SerializedName("product_id")
     val productId: kotlin.String? = null,
 
@@ -111,7 +111,7 @@ data class GetOrderDetailResponseDataOrderLineItem (
     @SerializedName("sku_image")
     val skuImage: kotlin.String? = null,
 
-    /* Item original price, please refer to the currency of `payment_info`. */
+    /* The line item's original price in the currency specified by `currency`. */
     @SerializedName("original_price")
     val originalPrice: kotlin.String? = null,
 
@@ -123,7 +123,7 @@ data class GetOrderDetailResponseDataOrderLineItem (
     @SerializedName("pfand_fee")
     val pfandFee: kotlin.String? = null,
 
-    /* Platform discount amount, please refer to the currency of `payment_info`. */
+    /* The platform discount amount for the line item, in the currency specified by `currency`. */
     @SerializedName("platform_discount")
     val platformDiscount: kotlin.String? = null,
 
@@ -148,19 +148,19 @@ data class GetOrderDetailResponseDataOrderLineItem (
     @SerializedName("shipping_provider_id")
     val shippingProviderId: kotlin.String? = null,
 
-    /* Seller discount amount. Please refer to the currency of `payment_info`. */
+    /* The seller discount amount for the line item, in the currency specified by `currency`. */
     @SerializedName("seller_discount")
     val sellerDiscount: kotlin.String? = null,
 
-    /* Currency for payment. */
+    /* The ISO 4217 currency code for monetary amounts in this line item. */
     @SerializedName("currency")
     val currency: kotlin.String? = null,
 
-    /* An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique `package_id` (and also a `tracking_id`, which is used to track the progress of the package as it is shipped). For local sellers in the US and UK markets, the `package_id` and `package_status` property will not be returned before the package is shipped */
+    /* An order can contain one or more packages based on how the seller chooses to ship, and each package has a unique `package_id`. This field matches the `id` of the package in `orders[].packages[]` that contains this line item. Read the package-specific tracking value from this line item's `tracking_number`. For local sellers in the US and UK markets, `package_id` and `package_status` are not returned before the package is shipped. */
     @SerializedName("package_id")
     val packageId: kotlin.String? = null,
 
-    /* The time seller shipped line order (call Ship Order endpoint successfully). Unix timestamp. */
+    /* The Unix timestamp, in seconds, when the seller successfully submitted this line item for shipment through the Ship Order API. */
     @SerializedName("rts_time")
     val rtsTime: kotlin.Long? = null,
 

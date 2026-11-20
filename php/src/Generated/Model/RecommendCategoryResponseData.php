@@ -58,7 +58,8 @@ class RecommendCategoryResponseData implements ModelInterface, ArrayAccess, \Jso
      */
     protected static $openAPITypes = [
         'categories' => '\TikTokShop\Api\Generated\Model\RecommendCategoryResponseDataCategory[]',
-        'leaf_category_id' => 'string'
+        'leaf_category_id' => 'string',
+        'none_category_rec_reasons' => 'string[]'
     ];
 
     /**
@@ -70,7 +71,8 @@ class RecommendCategoryResponseData implements ModelInterface, ArrayAccess, \Jso
      */
     protected static $openAPIFormats = [
         'categories' => null,
-        'leaf_category_id' => null
+        'leaf_category_id' => null,
+        'none_category_rec_reasons' => null
     ];
 
     /**
@@ -80,7 +82,8 @@ class RecommendCategoryResponseData implements ModelInterface, ArrayAccess, \Jso
      */
     protected static array $openAPINullables = [
         'categories' => false,
-        'leaf_category_id' => false
+        'leaf_category_id' => false,
+        'none_category_rec_reasons' => false
     ];
 
     /**
@@ -170,7 +173,8 @@ class RecommendCategoryResponseData implements ModelInterface, ArrayAccess, \Jso
      */
     protected static $attributeMap = [
         'categories' => 'categories',
-        'leaf_category_id' => 'leaf_category_id'
+        'leaf_category_id' => 'leaf_category_id',
+        'none_category_rec_reasons' => 'none_category_rec_reasons'
     ];
 
     /**
@@ -180,7 +184,8 @@ class RecommendCategoryResponseData implements ModelInterface, ArrayAccess, \Jso
      */
     protected static $setters = [
         'categories' => 'setCategories',
-        'leaf_category_id' => 'setLeafCategoryId'
+        'leaf_category_id' => 'setLeafCategoryId',
+        'none_category_rec_reasons' => 'setNoneCategoryRecReasons'
     ];
 
     /**
@@ -190,7 +195,8 @@ class RecommendCategoryResponseData implements ModelInterface, ArrayAccess, \Jso
      */
     protected static $getters = [
         'categories' => 'getCategories',
-        'leaf_category_id' => 'getLeafCategoryId'
+        'leaf_category_id' => 'getLeafCategoryId',
+        'none_category_rec_reasons' => 'getNoneCategoryRecReasons'
     ];
 
     /**
@@ -252,6 +258,7 @@ class RecommendCategoryResponseData implements ModelInterface, ArrayAccess, \Jso
     {
         $this->setIfExists('categories', $data ?? [], null);
         $this->setIfExists('leaf_category_id', $data ?? [], null);
+        $this->setIfExists('none_category_rec_reasons', $data ?? [], null);
     }
 
     /**
@@ -346,6 +353,33 @@ class RecommendCategoryResponseData implements ModelInterface, ArrayAccess, \Jso
             throw new \InvalidArgumentException('non-nullable leaf_category_id cannot be null');
         }
         $this->container['leaf_category_id'] = $leaf_category_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets none_category_rec_reasons
+     *
+     * @return string[]|null
+     */
+    public function getNoneCategoryRecReasons()
+    {
+        return $this->container['none_category_rec_reasons'];
+    }
+
+    /**
+     * Sets none_category_rec_reasons
+     *
+     * @param string[]|null $none_category_rec_reasons No category recommended reason description Possible values: - NON_MAIN_CATEGORY：recommended category not main categories of merchants - PROHIBITED_CATEGORY: recommended category  Prohibition of sale - PROHIBITED_PUBLISH_CATEGORY：recommended category  Prohibition of  publish - RECOMMEND_CATEGORY_RPC_ERROR: There is a problem with downstream services.
+     *
+     * @return self
+     */
+    public function setNoneCategoryRecReasons($none_category_rec_reasons)
+    {
+        if (is_null($none_category_rec_reasons)) {
+            throw new \InvalidArgumentException('non-nullable none_category_rec_reasons cannot be null');
+        }
+        $this->container['none_category_rec_reasons'] = $none_category_rec_reasons;
 
         return $this;
     }

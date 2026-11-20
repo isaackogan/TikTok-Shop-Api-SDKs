@@ -28,7 +28,7 @@ export interface GetOrderDetailResponseDataOrderLineItemItemTax {
      */
     taxType?: string;
     /**
-     * Tax amount.
+     * The tax amount for the line item, in the currency specified by `currency`.
      * @type {string}
      * @memberof GetOrderDetailResponseDataOrderLineItemItemTax
      */

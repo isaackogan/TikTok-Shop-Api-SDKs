@@ -57,14 +57,14 @@ class GetOrderDetailResponseDataOrder:
             payment (Payment | Unset):
             recipient_address (GetOrderDetailResponseDataOrderRecipientAddress | Unset):
             buyer_message (str | Unset): The note from buyer.
-            create_time (int | Unset): The date and time that the order was created. Unix timestamp.
+            create_time (int | Unset): The date and time that the order was created. Unix timestamp in seconds.
             tracking_number (str | Unset): Tracking number. Available after ship package.
             cancel_reason (str | Unset): The order level cancellation reason.
                 **Note**: A multi-line order may have different `cancel_reason` across the multiple items.
                 If this occurs, the order-level `cancel_reason` will surface the `cancel_reason` from the first line item.
                 [See here](https://partner.tiktokshop.com/docv2/page/cancel-reasons) for more details on cancellation reasons.
-            rts_sla_time (int | Unset): The latest shipping time specified by the platform. Unix timestamp.
-            paid_time (int | Unset): The date and time that the order was paid. Unix timestamp.
+            rts_sla_time (int | Unset): The latest shipping time specified by the platform, as a Unix timestamp in seconds.
+            paid_time (int | Unset): The date and time that the order was paid, as a Unix timestamp in seconds.
             fulfillment_type (str | Unset): Fulfillment type.
                 Only orders with fulfillment type can be shipped by sellers.
                 Possible values:
@@ -77,8 +77,8 @@ class GetOrderDetailResponseDataOrder:
                 - `FULFILLMENT_BY_DILAYANI_TOKOPEDIA`: a method where Tokopedia GoTo Logistics provides warehousing and
                 logistics services to sellers and charges a fee for the service.
             seller_note (str | Unset): This field return the note, which seller notes in TikTok Seller Center.
-            tts_sla_time (int | Unset): The latest collection time specified by the platform.
-                Unix timestamp.
+            tts_sla_time (int | Unset): The latest collection time specified by the platform, as a Unix timestamp in
+                seconds.
             cancel_order_sla_time (int | Unset): The automatic cancellation time for orders specified by the platform.
                 Unix timestamp.
             update_time (int | Unset): Time of order status changes.
@@ -97,13 +97,17 @@ class GetOrderDetailResponseDataOrder:
             has_updated_recipient_address (bool | Unset): Whether the recipient address has been updated.
                 - `false`: no update
                 - `true`: updated
-            cpf (str | Unset): CPF (invoice number), used to issue an invoice. Exclusive for the Brazil market.
+            cpf (str | Unset): The buyer's CPF tax identification number, used to issue an invoice. Available only in
+                Brazil.
             delivery_option_id (str | Unset): Order delivery option ID.
-            delivery_sla_time (int | Unset): Order should arrive by this date to be considered on-time and to avoid late
-                delivery penalties.
+            delivery_sla_time (int | Unset): The Unix timestamp, in seconds, by which the order should arrive to be
+                considered on time and avoid late-delivery penalties.
             payment_method_name (str | Unset): Payment method name, only for display
-            payment_card_type (str | Unset): Code to distinguish different payment method. Only assigned when the payment
-                method is using bank card. Possible values are: Debit, Credit, Prepaid
+            payment_card_type (str | Unset): Card type for bank card payments.
+                Possible values:
+                - `Debit`
+                - `Credit`
+                - `Prepaid`
             channel_entity_national_registry_id (str | Unset): The national channel entity registration ID  of payment
                 institution/creditor. In Brazil, it is the CNPJ of payment instituion.
             payment_method_code (str | Unset): Payment method code identifying current transaction. It will contains payment
@@ -111,8 +115,8 @@ class GetOrderDetailResponseDataOrder:
             payment_auth_code (str | Unset): Authorization code of current transaction (only for the Brazilian market).
                 For card transactions (credit/debit card), this field will be transaction authorization code. For PIX
                 transactions, this field will be E2E ID.
-            shipping_due_time (int | Unset): If the order hasn't updated its status to `AWAITING_COLLECTION` before this
-                time, the order will be automatically canceled by TikTok Shop.
+            shipping_due_time (int | Unset): The Unix timestamp, in seconds, by which the order must reach
+                `AWAITING_COLLECTION`; otherwise, TikTok Shop automatically cancels the order.
             line_items (list[GetOrderDetailResponseDataOrderLineItem] | Unset): Line item info list.
             shipping_type (str | Unset): The method of delivery.
                 - `TIKTOK`: shipping service provided by TikTok. The seller should obtain shipping label from TikTok.
@@ -121,7 +125,7 @@ class GetOrderDetailResponseDataOrder:
             buyer_email (str | Unset): The anonymized email address of the buyer. It is not recommended to send messages
                 directly to this email address. If you need to contact the buyer, please go to Seller Center - Buyer Messages
                 page.
-            delivery_time (int | Unset): The timestamp of the order's status update to `DELIVERED`.
+            delivery_time (int | Unset): The Unix timestamp, in seconds, when the order status changed to `DELIVERED`.
             need_upload_invoice (str | Unset): Whether an invoice needs to be uploaded and uploaded status (only for Brazil
                 market).
                 - UNKNOWN: Currently unable to confirm whether an invoice is needed
@@ -131,29 +135,30 @@ class GetOrderDetailResponseDataOrder:
                 marked as "uploaded" once any sub-order's invoice is uploaded.
                 - INVOICE_PROCESSING: The invoice for this order is currently being uploaded/cancelled. Please wait for the
                 final result and do not repeat the operation
-            is_cod (bool | Unset): This option is for sellers that accept cash payment on delivery which is rare. Buyers
-                will pay in cash upon receipt of package. Default value is `FALSE`. Only applicable to countries where Cash on
-                Delivery (COD) is supported.
-            request_cancel_time (int | Unset): Buyer request cancel time.
-            delivery_option_required_delivery_time (int | Unset): Order should be delivered before this time.
+            is_cod (bool | Unset): Whether the order uses cash on delivery (COD). When returned, `true` means the buyer pays
+                cash upon receipt and `false` means the order uses another payment method. The field may be omitted when payment
+                type is unavailable. Available only in countries where COD is supported.
+            request_cancel_time (int | Unset): The Unix timestamp, in seconds, when the buyer submitted the pending
+                cancellation request. Returned when is_buyer_request_cancel is true.
+            delivery_option_required_delivery_time (int | Unset): The Unix timestamp, in seconds, by which the order should
+                be delivered.
             delivery_option_name (str | Unset): Delivery option name. For display purposes only.
             is_buyer_request_cancel (bool | Unset): True when the buyer has a pending cancellation request
-            delivery_due_time (int | Unset): If the order hasn't updated its status to `DELIVERED` before this time, the
-                order will be automatically canceled by TikTok Shop.
-            collection_time (int | Unset): The timestamp of the order's status update to `IN_TRANSIT`.
-            is_on_hold_order (bool | Unset): Indicates whether the order experienced or will be experienced `ON_HOLD`
-                status.
-            cancel_time (int | Unset): The timestamp of the order's status update to `CANCELLED`.
+            delivery_due_time (int | Unset): The Unix timestamp, in seconds, by which the order must reach `DELIVERED`;
+                otherwise, TikTok Shop automatically cancels the order.
+            collection_time (int | Unset): The Unix timestamp, in seconds, when the order status changed to `IN_TRANSIT`.
+            is_on_hold_order (bool | Unset): Whether the order has entered or will enter an `ON_HOLD` period after buyer
+                payment. This does not indicate that the order's current `status` is `ON_HOLD`.
+            cancel_time (int | Unset): The Unix timestamp, in seconds, when the order status changed to CANCELLED.
             is_replacement_order (bool | Unset): When true, this is a replacement order.
             replaced_order_id (str | Unset): The order ID for the order that is being replaced. Returned only if
                 `is_replacement_order` = `true`
-            collection_due_time (int | Unset): If the order hasn't updated its status to `IN_TRANSIT` before this time, the
-                order will be automatically canceled by TikTok Shop
+            collection_due_time (int | Unset): The Unix timestamp, in seconds, by which the order must reach `IN_TRANSIT`;
+                otherwise, TikTok Shop automatically cancels the order.
             pick_up_cut_off_time (int | Unset): To avoid LDR, you must ensure the package is picked up by this time. Only
                 applicable in Southeast Asia regions.
-            fast_dispatch_sla_time (int | Unset): The latest collection time to gain incentives of NDD (Next Day Delivery)
-                project. Unix timestamp
-                Only available in Thailand and Philippines.
+            fast_dispatch_sla_time (int | Unset): The latest collection time for the order to qualify for Next Day Delivery
+                (NDD) incentives. Unix timestamp, in seconds.
             commerce_platform (str | Unset): The platform where the order was placed.
                 Possible values:
                 - `TIKTOK_SHOP`
@@ -207,17 +212,18 @@ class GetOrderDetailResponseDataOrder:
                 Not returned if order did not meet fast delivery
                 program requirements.
                 Note: Applicable only for the US market.
-            buyer_nickname (str | Unset): The nickname of the TikTok buyer, which is defined by the TikTok user. The
-                buyer_nickname can be used to identify the buyer when displaying the unboxing results within the TikTok Live
-                Session.
-            buyer_avatar (str | Unset): The avatar of the TikTok buyer, which is defined by the TikTok user. The
-                buyer_avatar can be used in conjunction with the buyer_nickname when displaying the unboxing results within the
-                TikTok Live Session.
-            order_rights (list[int] | Unset): Order tag identifier if has certain rights within the order based on the
-                program subscribed by sellers.
-                1 = Shipping Fee Reimbursement Program
-                2 = Horizon+ Program
-                Applicable for SEA market only
+            buyer_nickname (str | Unset): The nickname of the TikTok buyer, as defined by the TikTok user. This field is
+                populated only for supported virtual unboxing orders and can be displayed with `buyer_avatar` in TikTok LIVE
+                unboxing results. Use `user_id`, not this display name, for programmatic buyer identification.
+            buyer_avatar (str | Unset): The avatar of the TikTok buyer, as defined by the TikTok user. This field is
+                populated only for supported virtual unboxing orders and can be used with `buyer_nickname` when displaying
+                unboxing results in a TikTok LIVE session.
+            order_rights (list[int] | Unset): Order rights associated with seller programs. Multiple values can be returned
+                together, and the field is omitted when no right applies.
+                Possible values:
+                - `1`: Shipping Fee Reimbursement Program
+                - `2`: Horizon+ Program
+                Applicable only in SEA markets.
             fulfillment_priority_level (int | Unset): Fulfillment priority value that can be used to prioritize shipping
                 (only available in SEA)
                 100 = Instant
@@ -230,8 +236,8 @@ class GetOrderDetailResponseDataOrder:
                 800 = Cargo
             recommended_shipping_time (int | Unset): Recommended time to ship based on the each LSP service type (only
                 available in SEA)
-            instore_pickup_sla_time (int | Unset): The latest buyer pickup time for instore pickup method specified by the
-                platform. Currently applicable for SEA market. Unix timestamp.
+            instore_pickup_sla_time (int | Unset): The latest buyer pickup time for in-store pickup, as a Unix timestamp in
+                seconds. Currently available in SEA markets.
             fast_rts_sla_time (int | Unset): Indicate fast fulfillment SLA for shipping action. Applicable for SEA market
                 only. Unix timestamp
             fast_collection_sla_time (int | Unset): Indicate fast fulfillment SLA for collection action. Applicable for SEA

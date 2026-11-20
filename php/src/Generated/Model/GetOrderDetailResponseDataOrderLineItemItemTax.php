@@ -343,7 +343,7 @@ class GetOrderDetailResponseDataOrderLineItemItemTax implements ModelInterface, 
     /**
      * Sets tax_amount
      *
-     * @param string|null $tax_amount Tax amount.
+     * @param string|null $tax_amount The tax amount for the line item, in the currency specified by `currency`.
      *
      * @return self
      */

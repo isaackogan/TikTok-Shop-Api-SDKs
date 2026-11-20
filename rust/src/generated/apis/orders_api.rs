@@ -165,7 +165,7 @@ pub async fn get_external_order_references(configuration: &configuration::Config
     }
 }
 
-/// Get the detailed order information of an order, including important attributes such as order status, shipping addresses, payment details, price and tax info, and package information.
+/// Get detailed information for up to 50 TikTok Shop orders specified by their IDs, including order status, payment details, price and tax information, package information, and shipping address information when available.
 pub async fn get_order_detail(configuration: &configuration::Configuration, ids: Vec<String>) -> Result<models::GetOrderDetailResponse, Error<GetOrderDetailError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_query_ids = ids;
@@ -214,7 +214,7 @@ pub async fn get_order_detail(configuration: &configuration::Configuration, ids:
     }
 }
 
-/// Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID.
+/// Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID. A response is successful when `code` is `0`, including when no orders match the request.
 pub async fn get_order_list(configuration: &configuration::Configuration, page_size: i64, sort_order: Option<&str>, page_token: Option<&str>, sort_field: Option<&str>, get_order_list_request: Option<models::GetOrderListRequest>) -> Result<models::GetOrderListResponse, Error<GetOrderListError>> {
     // add a prefix to parameters to efficiently prevent name collisions
     let p_query_page_size = page_size;

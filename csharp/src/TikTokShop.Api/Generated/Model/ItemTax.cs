@@ -36,7 +36,7 @@ namespace TikTokShop.Api.Generated.Model
         /// Initializes a new instance of the <see cref="ItemTax" /> class.
         /// </summary>
         /// <param name="taxType">Tax type. Available values: - &#x60;SALES_TAX&#x60; (US market sales tax)  **Note**: Currently only sales tax is available..</param>
-        /// <param name="taxAmount">Tax amount..</param>
+        /// <param name="taxAmount">The tax amount for the sub-item, in the currency specified by &#x60;currency&#x60;..</param>
         /// <param name="taxRate">Tax rate..</param>
         public ItemTax(string taxType = default, string taxAmount = default, string taxRate = default)
         {
@@ -54,9 +54,9 @@ namespace TikTokShop.Api.Generated.Model
         public string TaxType { get; set; }
 
         /// <summary>
-        /// Tax amount.
+        /// The tax amount for the sub-item, in the currency specified by &#x60;currency&#x60;.
         /// </summary>
-        /// <value>Tax amount.</value>
+        /// <value>The tax amount for the sub-item, in the currency specified by &#x60;currency&#x60;.</value>
         [DataMember(Name = "tax_amount", EmitDefaultValue = false)]
         public string TaxAmount { get; set; }
 

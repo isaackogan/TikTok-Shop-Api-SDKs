@@ -1097,7 +1097,7 @@ class GetOrderDetailResponseDataOrder implements ModelInterface, ArrayAccess, \J
     /**
      * Sets create_time
      *
-     * @param int|null $create_time The date and time that the order was created. Unix timestamp.
+     * @param int|null $create_time The date and time that the order was created. Unix timestamp in seconds.
      *
      * @return self
      */
@@ -1178,7 +1178,7 @@ class GetOrderDetailResponseDataOrder implements ModelInterface, ArrayAccess, \J
     /**
      * Sets rts_sla_time
      *
-     * @param int|null $rts_sla_time The latest shipping time specified by the platform. Unix timestamp.
+     * @param int|null $rts_sla_time The latest shipping time specified by the platform, as a Unix timestamp in seconds.
      *
      * @return self
      */
@@ -1205,7 +1205,7 @@ class GetOrderDetailResponseDataOrder implements ModelInterface, ArrayAccess, \J
     /**
      * Sets paid_time
      *
-     * @param int|null $paid_time The date and time that the order was paid. Unix timestamp.
+     * @param int|null $paid_time The date and time that the order was paid, as a Unix timestamp in seconds.
      *
      * @return self
      */
@@ -1286,7 +1286,7 @@ class GetOrderDetailResponseDataOrder implements ModelInterface, ArrayAccess, \J
     /**
      * Sets tts_sla_time
      *
-     * @param int|null $tts_sla_time The latest collection time specified by the platform. Unix timestamp.
+     * @param int|null $tts_sla_time The latest collection time specified by the platform, as a Unix timestamp in seconds.
      *
      * @return self
      */
@@ -1529,7 +1529,7 @@ class GetOrderDetailResponseDataOrder implements ModelInterface, ArrayAccess, \J
     /**
      * Sets cpf
      *
-     * @param string|null $cpf CPF (invoice number), used to issue an invoice. Exclusive for the Brazil market.
+     * @param string|null $cpf The buyer's CPF tax identification number, used to issue an invoice. Available only in Brazil.
      *
      * @return self
      */
@@ -1583,7 +1583,7 @@ class GetOrderDetailResponseDataOrder implements ModelInterface, ArrayAccess, \J
     /**
      * Sets delivery_sla_time
      *
-     * @param int|null $delivery_sla_time Order should arrive by this date to be considered on-time and to avoid late delivery penalties.
+     * @param int|null $delivery_sla_time The Unix timestamp, in seconds, by which the order should arrive to be considered on time and avoid late-delivery penalties.
      *
      * @return self
      */
@@ -1637,7 +1637,7 @@ class GetOrderDetailResponseDataOrder implements ModelInterface, ArrayAccess, \J
     /**
      * Sets payment_card_type
      *
-     * @param string|null $payment_card_type Code to distinguish different payment method. Only assigned when the payment method is using bank card. Possible values are: Debit, Credit, Prepaid
+     * @param string|null $payment_card_type Card type for bank card payments. Possible values: - `Debit` - `Credit` - `Prepaid`
      *
      * @return self
      */
@@ -1745,7 +1745,7 @@ class GetOrderDetailResponseDataOrder implements ModelInterface, ArrayAccess, \J
     /**
      * Sets shipping_due_time
      *
-     * @param int|null $shipping_due_time If the order hasn't updated its status to `AWAITING_COLLECTION` before this time, the order will be automatically canceled by TikTok Shop.
+     * @param int|null $shipping_due_time The Unix timestamp, in seconds, by which the order must reach `AWAITING_COLLECTION`; otherwise, TikTok Shop automatically cancels the order.
      *
      * @return self
      */
@@ -1853,7 +1853,7 @@ class GetOrderDetailResponseDataOrder implements ModelInterface, ArrayAccess, \J
     /**
      * Sets delivery_time
      *
-     * @param int|null $delivery_time The timestamp of the order's status update to `DELIVERED`.
+     * @param int|null $delivery_time The Unix timestamp, in seconds, when the order status changed to `DELIVERED`.
      *
      * @return self
      */
@@ -1907,7 +1907,7 @@ class GetOrderDetailResponseDataOrder implements ModelInterface, ArrayAccess, \J
     /**
      * Sets is_cod
      *
-     * @param bool|null $is_cod This option is for sellers that accept cash payment on delivery which is rare. Buyers will pay in cash upon receipt of package. Default value is `FALSE`. Only applicable to countries where Cash on Delivery (COD) is supported.
+     * @param bool|null $is_cod Whether the order uses cash on delivery (COD). When returned, `true` means the buyer pays cash upon receipt and `false` means the order uses another payment method. The field may be omitted when payment type is unavailable. Available only in countries where COD is supported.
      *
      * @return self
      */
@@ -1934,7 +1934,7 @@ class GetOrderDetailResponseDataOrder implements ModelInterface, ArrayAccess, \J
     /**
      * Sets request_cancel_time
      *
-     * @param int|null $request_cancel_time Buyer request cancel time.
+     * @param int|null $request_cancel_time The Unix timestamp, in seconds, when the buyer submitted the pending cancellation request. Returned when is_buyer_request_cancel is true.
      *
      * @return self
      */
@@ -1961,7 +1961,7 @@ class GetOrderDetailResponseDataOrder implements ModelInterface, ArrayAccess, \J
     /**
      * Sets delivery_option_required_delivery_time
      *
-     * @param int|null $delivery_option_required_delivery_time Order should be delivered before this time.
+     * @param int|null $delivery_option_required_delivery_time The Unix timestamp, in seconds, by which the order should be delivered.
      *
      * @return self
      */
@@ -2042,7 +2042,7 @@ class GetOrderDetailResponseDataOrder implements ModelInterface, ArrayAccess, \J
     /**
      * Sets delivery_due_time
      *
-     * @param int|null $delivery_due_time If the order hasn't updated its status to `DELIVERED` before this time, the order will be automatically canceled by TikTok Shop.
+     * @param int|null $delivery_due_time The Unix timestamp, in seconds, by which the order must reach `DELIVERED`; otherwise, TikTok Shop automatically cancels the order.
      *
      * @return self
      */
@@ -2069,7 +2069,7 @@ class GetOrderDetailResponseDataOrder implements ModelInterface, ArrayAccess, \J
     /**
      * Sets collection_time
      *
-     * @param int|null $collection_time The timestamp of the order's status update to `IN_TRANSIT`.
+     * @param int|null $collection_time The Unix timestamp, in seconds, when the order status changed to `IN_TRANSIT`.
      *
      * @return self
      */
@@ -2096,7 +2096,7 @@ class GetOrderDetailResponseDataOrder implements ModelInterface, ArrayAccess, \J
     /**
      * Sets is_on_hold_order
      *
-     * @param bool|null $is_on_hold_order Indicates whether the order experienced or will be experienced `ON_HOLD` status.
+     * @param bool|null $is_on_hold_order Whether the order has entered or will enter an `ON_HOLD` period after buyer payment. This does not indicate that the order's current `status` is `ON_HOLD`.
      *
      * @return self
      */
@@ -2123,7 +2123,7 @@ class GetOrderDetailResponseDataOrder implements ModelInterface, ArrayAccess, \J
     /**
      * Sets cancel_time
      *
-     * @param int|null $cancel_time The timestamp of the order's status update to `CANCELLED`.
+     * @param int|null $cancel_time The Unix timestamp, in seconds, when the order status changed to CANCELLED.
      *
      * @return self
      */
@@ -2204,7 +2204,7 @@ class GetOrderDetailResponseDataOrder implements ModelInterface, ArrayAccess, \J
     /**
      * Sets collection_due_time
      *
-     * @param int|null $collection_due_time If the order hasn't updated its status to `IN_TRANSIT` before this time, the order will be automatically canceled by TikTok Shop
+     * @param int|null $collection_due_time The Unix timestamp, in seconds, by which the order must reach `IN_TRANSIT`; otherwise, TikTok Shop automatically cancels the order.
      *
      * @return self
      */
@@ -2258,7 +2258,7 @@ class GetOrderDetailResponseDataOrder implements ModelInterface, ArrayAccess, \J
     /**
      * Sets fast_dispatch_sla_time
      *
-     * @param int|null $fast_dispatch_sla_time The latest collection time to gain incentives of NDD (Next Day Delivery) project. Unix timestamp Only available in Thailand and Philippines.
+     * @param int|null $fast_dispatch_sla_time The latest collection time for the order to qualify for Next Day Delivery (NDD) incentives. Unix timestamp, in seconds.
      *
      * @return self
      */
@@ -2636,7 +2636,7 @@ class GetOrderDetailResponseDataOrder implements ModelInterface, ArrayAccess, \J
     /**
      * Sets buyer_nickname
      *
-     * @param string|null $buyer_nickname The nickname of the TikTok buyer, which is defined by the TikTok user. The buyer_nickname can be used to identify the buyer when displaying the unboxing results within the TikTok Live Session.
+     * @param string|null $buyer_nickname The nickname of the TikTok buyer, as defined by the TikTok user. This field is populated only for supported virtual unboxing orders and can be displayed with `buyer_avatar` in TikTok LIVE unboxing results. Use `user_id`, not this display name, for programmatic buyer identification.
      *
      * @return self
      */
@@ -2663,7 +2663,7 @@ class GetOrderDetailResponseDataOrder implements ModelInterface, ArrayAccess, \J
     /**
      * Sets buyer_avatar
      *
-     * @param string|null $buyer_avatar The avatar of the TikTok buyer, which is defined by the TikTok user. The buyer_avatar can be used in conjunction with the buyer_nickname when displaying the unboxing results within the TikTok Live Session.
+     * @param string|null $buyer_avatar The avatar of the TikTok buyer, as defined by the TikTok user. This field is populated only for supported virtual unboxing orders and can be used with `buyer_nickname` when displaying unboxing results in a TikTok LIVE session.
      *
      * @return self
      */
@@ -2690,7 +2690,7 @@ class GetOrderDetailResponseDataOrder implements ModelInterface, ArrayAccess, \J
     /**
      * Sets order_rights
      *
-     * @param int[]|null $order_rights Order tag identifier if has certain rights within the order based on the program subscribed by sellers. 1 = Shipping Fee Reimbursement Program 2 = Horizon+ Program  Applicable for SEA market only
+     * @param int[]|null $order_rights Order rights associated with seller programs. Multiple values can be returned together, and the field is omitted when no right applies. Possible values: - `1`: Shipping Fee Reimbursement Program - `2`: Horizon+ Program Applicable only in SEA markets.
      *
      * @return self
      */
@@ -2771,7 +2771,7 @@ class GetOrderDetailResponseDataOrder implements ModelInterface, ArrayAccess, \J
     /**
      * Sets instore_pickup_sla_time
      *
-     * @param int|null $instore_pickup_sla_time The latest buyer pickup time for instore pickup method specified by the platform. Currently applicable for SEA market. Unix timestamp.
+     * @param int|null $instore_pickup_sla_time The latest buyer pickup time for in-store pickup, as a Unix timestamp in seconds. Currently available in SEA markets.
      *
      * @return self
      */

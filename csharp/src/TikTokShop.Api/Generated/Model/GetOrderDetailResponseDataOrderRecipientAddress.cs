@@ -35,7 +35,7 @@ namespace TikTokShop.Api.Generated.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="GetOrderDetailResponseDataOrderRecipientAddress" /> class.
         /// </summary>
-        /// <param name="fullAddress">The complete recipient addresses information..</param>
+        /// <param name="fullAddress">The complete recipient address composed from the administrative-area names and detailed address lines..</param>
         /// <param name="phoneNumber">The telephone number of the buyer. Please notice, if this order uses platform logistics, phone number will be desensitized..</param>
         /// <param name="name">The name of the recipient. Please note, if this order uses platform logistics, recipient name will be desensitized.</param>
         /// <param name="firstName">The first name of the recipient. If the buyer does not provide their first and last name separately, this parameter will have the same value as the \&quot;name\&quot; parameter..</param>
@@ -51,7 +51,7 @@ namespace TikTokShop.Api.Generated.Model
         /// <param name="addressLine4">The fourth line of the street address..</param>
         /// <param name="districtInfo">District information list..</param>
         /// <param name="deliveryPreferences">Contains all of the delivery instructions provided by the buyer for the shipping address. Currently, only available in the US market..</param>
-        /// <param name="addressDetail">Full buyer detail address..</param>
+        /// <param name="addressDetail">Detailed street address of the recipient..</param>
         public GetOrderDetailResponseDataOrderRecipientAddress(string fullAddress = default, string phoneNumber = default, string name = default, string firstName = default, string lastName = default, string firstNameLocalScript = default, string lastNameLocalScript = default, string regionCode = default, string postalCode = default, string postTown = default, string addressLine1 = default, string addressLine2 = default, string addressLine3 = default, string addressLine4 = default, List<DistrictInfo> districtInfo = default, GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference deliveryPreferences = default, string addressDetail = default)
         {
             this.FullAddress = fullAddress;
@@ -75,9 +75,9 @@ namespace TikTokShop.Api.Generated.Model
         }
 
         /// <summary>
-        /// The complete recipient addresses information.
+        /// The complete recipient address composed from the administrative-area names and detailed address lines.
         /// </summary>
-        /// <value>The complete recipient addresses information.</value>
+        /// <value>The complete recipient address composed from the administrative-area names and detailed address lines.</value>
         [DataMember(Name = "full_address", EmitDefaultValue = false)]
         public string FullAddress { get; set; }
 
@@ -187,9 +187,9 @@ namespace TikTokShop.Api.Generated.Model
         public GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference DeliveryPreferences { get; set; }
 
         /// <summary>
-        /// Full buyer detail address.
+        /// Detailed street address of the recipient.
         /// </summary>
-        /// <value>Full buyer detail address.</value>
+        /// <value>Detailed street address of the recipient.</value>
         [DataMember(Name = "address_detail", EmitDefaultValue = false)]
         public string AddressDetail { get; set; }
 

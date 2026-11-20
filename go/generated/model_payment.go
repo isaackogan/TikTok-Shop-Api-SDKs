@@ -19,7 +19,7 @@ var _ MappedNullable = &Payment{}
 
 // Payment struct for Payment
 type Payment struct {
-	// Currency for payment.
+	// The ISO 4217 currency code for monetary amounts in this payment object.
 	Currency *string `json:"currency,omitempty"`
 	// Buyer paid subtotal of all the SKUs in the order. For the US market, this is pre-tax total amount. `sub_total` = `original_total_product_price` - `seller_discount` - `platform_discount`
 	SubTotal *string `json:"sub_total,omitempty"`
@@ -29,7 +29,7 @@ type Payment struct {
 	SellerDiscount *string `json:"seller_discount,omitempty"`
 	// Product discount by platform.
 	PlatformDiscount *string `json:"platform_discount,omitempty"`
-	// Discount applied to the order funded by a payment platform
+	// The portion of `platform_discount` funded by a payment platform. This amount is already included in `platform_discount`.
 	PaymentPlatformDiscount *string `json:"payment_platform_discount,omitempty"`
 	// Service fee as paid by the buyer to apply payment platform discount
 	PaymentDiscountServiceFee *string `json:"payment_discount_service_fee,omitempty"`

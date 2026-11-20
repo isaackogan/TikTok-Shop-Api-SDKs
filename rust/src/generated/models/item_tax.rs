@@ -16,7 +16,7 @@ pub struct ItemTax {
     /// Tax type. Available values: - `SALES_TAX` (US market sales tax)  **Note**: Currently only sales tax is available.
     #[serde(rename = "tax_type", skip_serializing_if = "Option::is_none")]
     pub tax_type: Option<String>,
-    /// Tax amount.
+    /// The tax amount for the sub-item, in the currency specified by `currency`.
     #[serde(rename = "tax_amount", skip_serializing_if = "Option::is_none")]
     pub tax_amount: Option<String>,
     /// Tax rate.

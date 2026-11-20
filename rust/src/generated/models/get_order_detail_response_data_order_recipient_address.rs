@@ -13,7 +13,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Clone, Default, Debug, PartialEq, Serialize, Deserialize)]
 pub struct GetOrderDetailResponseDataOrderRecipientAddress {
-    /// The complete recipient addresses information.
+    /// The complete recipient address composed from the administrative-area names and detailed address lines.
     #[serde(rename = "full_address", skip_serializing_if = "Option::is_none")]
     pub full_address: Option<String>,
     /// The telephone number of the buyer. Please notice, if this order uses platform logistics, phone number will be desensitized.
@@ -61,7 +61,7 @@ pub struct GetOrderDetailResponseDataOrderRecipientAddress {
     /// Contains all of the delivery instructions provided by the buyer for the shipping address. Currently, only available in the US market.
     #[serde(rename = "delivery_preferences", skip_serializing_if = "Option::is_none")]
     pub delivery_preferences: Option<Box<models::GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference>>,
-    /// Full buyer detail address.
+    /// Detailed street address of the recipient.
     #[serde(rename = "address_detail", skip_serializing_if = "Option::is_none")]
     pub address_detail: Option<String>,
 }

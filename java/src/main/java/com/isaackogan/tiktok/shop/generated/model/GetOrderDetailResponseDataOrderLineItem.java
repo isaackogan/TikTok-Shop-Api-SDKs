@@ -311,7 +311,7 @@ public class GetOrderDetailResponseDataOrderLineItem {
   }
 
   /**
-   * SKU ID.
+   * The SKU ID for the line item. For a gift line item with gift information, the original SKU ID is returned when available.
    * @return skuId
    */
   @javax.annotation.Nullable
@@ -357,7 +357,7 @@ public class GetOrderDetailResponseDataOrderLineItem {
   }
 
   /**
-   * Product ID.
+   * The product ID for the line item. For a gift line item with gift information, the original product ID is returned when available.
    * @return productId
    */
   @javax.annotation.Nullable
@@ -433,7 +433,7 @@ public class GetOrderDetailResponseDataOrderLineItem {
   }
 
   /**
-   * Item original price, please refer to the currency of &#x60;payment_info&#x60;.
+   * The line item&#39;s original price in the currency specified by &#x60;currency&#x60;.
    * @return originalPrice
    */
   @javax.annotation.Nullable
@@ -490,7 +490,7 @@ public class GetOrderDetailResponseDataOrderLineItem {
   }
 
   /**
-   * Platform discount amount, please refer to the currency of &#x60;payment_info&#x60;.
+   * The platform discount amount for the line item, in the currency specified by &#x60;currency&#x60;.
    * @return platformDiscount
    */
   @javax.annotation.Nullable
@@ -608,7 +608,7 @@ public class GetOrderDetailResponseDataOrderLineItem {
   }
 
   /**
-   * Seller discount amount. Please refer to the currency of &#x60;payment_info&#x60;.
+   * The seller discount amount for the line item, in the currency specified by &#x60;currency&#x60;.
    * @return sellerDiscount
    */
   @javax.annotation.Nullable
@@ -627,7 +627,7 @@ public class GetOrderDetailResponseDataOrderLineItem {
   }
 
   /**
-   * Currency for payment.
+   * The ISO 4217 currency code for monetary amounts in this line item.
    * @return currency
    */
   @javax.annotation.Nullable
@@ -646,7 +646,7 @@ public class GetOrderDetailResponseDataOrderLineItem {
   }
 
   /**
-   * An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique &#x60;package_id&#x60; (and also a &#x60;tracking_id&#x60;, which is used to track the progress of the package as it is shipped). For local sellers in the US and UK markets, the &#x60;package_id&#x60; and &#x60;package_status&#x60; property will not be returned before the package is shipped
+   * An order can contain one or more packages based on how the seller chooses to ship, and each package has a unique &#x60;package_id&#x60;. This field matches the &#x60;id&#x60; of the package in &#x60;orders[].packages[]&#x60; that contains this line item. Read the package-specific tracking value from this line item&#39;s &#x60;tracking_number&#x60;. For local sellers in the US and UK markets, &#x60;package_id&#x60; and &#x60;package_status&#x60; are not returned before the package is shipped.
    * @return packageId
    */
   @javax.annotation.Nullable
@@ -665,7 +665,7 @@ public class GetOrderDetailResponseDataOrderLineItem {
   }
 
   /**
-   * The time seller shipped line order (call Ship Order endpoint successfully). Unix timestamp.
+   * The Unix timestamp, in seconds, when the seller successfully submitted this line item for shipment through the Ship Order API.
    * @return rtsTime
    */
   @javax.annotation.Nullable

@@ -21,7 +21,7 @@ var _ MappedNullable = &SubItemInfo{}
 type SubItemInfo struct {
 	// Line item id of the sub_item. This unique identifier can be used when performing split/line-level fulfillment events.
 	Id *string `json:"id,omitempty"`
-	// SKU ID.
+	// The SKU ID of the sub-item in the virtual bundle.
 	SkuId *string `json:"sku_id,omitempty"`
 	// Available values: - `UNPAID`: The order has been placed, but payment has not yet completed. - `AWAITING_SHIPMENT`: The order is ready for shipment, but no items have been shipped yet. - `AWAITING_COLLECTION`: Shipping has been arranged, but the package is waiting to be collected by the carrier. - `IN_TRANSIT`: The package has been collected by the carrier and delivery is in progress. - `DELIVERED`: The package has been delivered to the buyer. - `COMPLETED`: The order has been completed, and no further returns or refunds are allowed. - `CANCELLED`: The order has been cancelled.
 	DisplayStatus *string `json:"display_status,omitempty"`
@@ -33,23 +33,23 @@ type SubItemInfo struct {
 	SkuImage *string `json:"sku_image,omitempty"`
 	// The name of the SKU, combined by product SKU attribute like size or color. e.g. \"Black, 26\"
 	SkuName *string `json:"sku_name,omitempty"`
-	// Product ID.
+	// The product ID of the sub-item in the virtual bundle.
 	ProductId *string `json:"product_id,omitempty"`
-	// Item sale price. Please refer to the currency of `payment_info`.
+	// The sub-item's sale price in the currency specified by `currency`.
 	SalePrice *string `json:"sale_price,omitempty"`
-	// Platform discount amount. Please refer to the currency of `payment_info`.
+	// The platform discount amount for the sub-item, in the currency specified by `currency`.
 	PlatformDiscount *string `json:"platform_discount,omitempty"`
-	// Seller discount amount. Please refer to the currency of `payment_info`.
+	// The seller discount amount for the sub-item, in the currency specified by `currency`.
 	SellerDiscount *string `json:"seller_discount,omitempty"`
 	// The cancellation reason. Please visit [our list of cancel reasons](https://partner.tiktokshop.com/docv2/page/67e61eee427345048595487d) for more information.
 	CancelReason *string `json:"cancel_reason,omitempty"`
-	// Item original price. Please refer to the currency of `payment_info`.
+	// The sub-item's original price in the currency specified by `currency`.
 	OriginalPrice *string `json:"original_price,omitempty"`
-	// The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp.
+	// The Unix timestamp, in seconds, when the seller successfully called the [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) for this sub-item.
 	RtsTime *int64 `json:"rts_time,omitempty"`
 	// The package status of the item. Available values: - `TO_FULFILL`: Package awaiting seller to arrange shipment. - `PROCESSING`: Shipping has been arranged by the seller. Awaiting carrier collection. - `FULFILLING`: Package has been collected by carrier and is in transit. - `COMPLETED`: Package has been delivered. - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged.
 	PackageStatus *string `json:"package_status,omitempty"`
-	// Currency for payment.
+	// The ISO 4217 currency code for monetary amounts in this sub-item.
 	Currency *string `json:"currency,omitempty"`
 	// The shipping provider name.
 	ShippingProviderName *string `json:"shipping_provider_name,omitempty"`
@@ -61,13 +61,13 @@ type SubItemInfo struct {
 	ItemTax []ItemTax `json:"item_tax,omitempty"`
 	// Tracking number. Available after package has been shipped.
 	TrackingNumber *string `json:"tracking_number,omitempty"`
-	// An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique `package_id` and `tracking_id`.
+	// An order can contain one or more packages based on how the seller chooses to ship, and each package has a unique `package_id`. This field identifies the package that contains this sub-item. Use the sub-item's `tracking_number` for its package-specific tracking value.
 	PackageId *string `json:"package_id,omitempty"`
-	// Retail delivery fee (RDF). **Note**: Only available in the US market.
+	// Retail delivery fee (RDF) for the sub-item, in the currency specified by `currency`. **Note**: Only available in the US market.
 	RetailDeliveryFee *string `json:"retail_delivery_fee,omitempty"`
 	// Whether the SKU is a hazmat item. When creating the label for a hazmat item, you must follow the platform rules to put certain items into one package. Please refer to the relationship between `sku_id` and `package_id` to determine how to follow platform rules.
 	IsDangerousGood *bool `json:"is_dangerous_good,omitempty"`
-	// Seller warehouse ID.
+	// The ID of the seller warehouse assigned to fulfill this sub-item.
 	WarehouseId *string `json:"warehouse_id,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

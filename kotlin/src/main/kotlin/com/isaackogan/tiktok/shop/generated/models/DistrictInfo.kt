@@ -29,8 +29,8 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param addressLevelName The name of administrative division that can be used by seller for ship. e.g. state/county/city/district/town etc.
- * @param addressName Administrative area name. eg: London
+ * @param addressLevelName The label of this administrative division level, such as country, state, county, city, district, or town.
+ * @param addressName The name of the administrative area at this level, such as London or United Kingdom.
  * @param addressLevel Administrative district level code. Value can be L0/L1/L2/L3/L4. eg. US is L0
  * @param isoCode ISO code of the administrative district level
  */
@@ -38,11 +38,11 @@ import com.google.gson.annotations.SerializedName
 
 data class DistrictInfo (
 
-    /* The name of administrative division that can be used by seller for ship. e.g. state/county/city/district/town etc. */
+    /* The label of this administrative division level, such as country, state, county, city, district, or town. */
     @SerializedName("address_level_name")
     val addressLevelName: kotlin.String? = null,
 
-    /* Administrative area name. eg: London */
+    /* The name of the administrative area at this level, such as London or United Kingdom. */
     @SerializedName("address_name")
     val addressName: kotlin.String? = null,
 

@@ -35,8 +35,8 @@ namespace TikTokShop.Api.Generated.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="DistrictInfo" /> class.
         /// </summary>
-        /// <param name="addressLevelName">The name of administrative division that can be used by seller for ship. e.g. state/county/city/district/town etc..</param>
-        /// <param name="addressName">Administrative area name. eg: London.</param>
+        /// <param name="addressLevelName">The label of this administrative division level, such as country, state, county, city, district, or town..</param>
+        /// <param name="addressName">The name of the administrative area at this level, such as London or United Kingdom..</param>
         /// <param name="addressLevel">Administrative district level code. Value can be L0/L1/L2/L3/L4. eg. US is L0.</param>
         /// <param name="isoCode">ISO code of the administrative district level.</param>
         public DistrictInfo(string addressLevelName = default, string addressName = default, string addressLevel = default, string isoCode = default)
@@ -49,16 +49,16 @@ namespace TikTokShop.Api.Generated.Model
         }
 
         /// <summary>
-        /// The name of administrative division that can be used by seller for ship. e.g. state/county/city/district/town etc.
+        /// The label of this administrative division level, such as country, state, county, city, district, or town.
         /// </summary>
-        /// <value>The name of administrative division that can be used by seller for ship. e.g. state/county/city/district/town etc.</value>
+        /// <value>The label of this administrative division level, such as country, state, county, city, district, or town.</value>
         [DataMember(Name = "address_level_name", EmitDefaultValue = false)]
         public string AddressLevelName { get; set; }
 
         /// <summary>
-        /// Administrative area name. eg: London
+        /// The name of the administrative area at this level, such as London or United Kingdom.
         /// </summary>
-        /// <value>Administrative area name. eg: London</value>
+        /// <value>The name of the administrative area at this level, such as London or United Kingdom.</value>
         [DataMember(Name = "address_name", EmitDefaultValue = false)]
         public string AddressName { get; set; }
 

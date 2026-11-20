@@ -637,7 +637,7 @@ class GetOrderDetailResponseDataOrderLineItem implements ModelInterface, ArrayAc
     /**
      * Sets sku_id
      *
-     * @param string|null $sku_id SKU ID.
+     * @param string|null $sku_id The SKU ID for the line item. For a gift line item with gift information, the original SKU ID is returned when available.
      *
      * @return self
      */
@@ -691,7 +691,7 @@ class GetOrderDetailResponseDataOrderLineItem implements ModelInterface, ArrayAc
     /**
      * Sets product_id
      *
-     * @param string|null $product_id Product ID.
+     * @param string|null $product_id The product ID for the line item. For a gift line item with gift information, the original product ID is returned when available.
      *
      * @return self
      */
@@ -799,7 +799,7 @@ class GetOrderDetailResponseDataOrderLineItem implements ModelInterface, ArrayAc
     /**
      * Sets original_price
      *
-     * @param string|null $original_price Item original price, please refer to the currency of `payment_info`.
+     * @param string|null $original_price The line item's original price in the currency specified by `currency`.
      *
      * @return self
      */
@@ -880,7 +880,7 @@ class GetOrderDetailResponseDataOrderLineItem implements ModelInterface, ArrayAc
     /**
      * Sets platform_discount
      *
-     * @param string|null $platform_discount Platform discount amount, please refer to the currency of `payment_info`.
+     * @param string|null $platform_discount The platform discount amount for the line item, in the currency specified by `currency`.
      *
      * @return self
      */
@@ -1044,7 +1044,7 @@ class GetOrderDetailResponseDataOrderLineItem implements ModelInterface, ArrayAc
     /**
      * Sets seller_discount
      *
-     * @param string|null $seller_discount Seller discount amount. Please refer to the currency of `payment_info`.
+     * @param string|null $seller_discount The seller discount amount for the line item, in the currency specified by `currency`.
      *
      * @return self
      */
@@ -1071,7 +1071,7 @@ class GetOrderDetailResponseDataOrderLineItem implements ModelInterface, ArrayAc
     /**
      * Sets currency
      *
-     * @param string|null $currency Currency for payment.
+     * @param string|null $currency The ISO 4217 currency code for monetary amounts in this line item.
      *
      * @return self
      */
@@ -1098,7 +1098,7 @@ class GetOrderDetailResponseDataOrderLineItem implements ModelInterface, ArrayAc
     /**
      * Sets package_id
      *
-     * @param string|null $package_id An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique `package_id` (and also a `tracking_id`, which is used to track the progress of the package as it is shipped). For local sellers in the US and UK markets, the `package_id` and `package_status` property will not be returned before the package is shipped
+     * @param string|null $package_id An order can contain one or more packages based on how the seller chooses to ship, and each package has a unique `package_id`. This field matches the `id` of the package in `orders[].packages[]` that contains this line item. Read the package-specific tracking value from this line item's `tracking_number`. For local sellers in the US and UK markets, `package_id` and `package_status` are not returned before the package is shipped.
      *
      * @return self
      */
@@ -1125,7 +1125,7 @@ class GetOrderDetailResponseDataOrderLineItem implements ModelInterface, ArrayAc
     /**
      * Sets rts_time
      *
-     * @param int|null $rts_time The time seller shipped line order (call Ship Order endpoint successfully). Unix timestamp.
+     * @param int|null $rts_time The Unix timestamp, in seconds, when the seller successfully submitted this line item for shipment through the Ship Order API.
      *
      * @return self
      */

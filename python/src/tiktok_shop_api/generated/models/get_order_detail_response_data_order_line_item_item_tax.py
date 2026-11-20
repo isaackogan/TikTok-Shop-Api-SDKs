@@ -26,7 +26,7 @@ class GetOrderDetailResponseDataOrderLineItemItemTax:
             tax_type (str | Unset): Tax type.
                 - `SALES_TAX` (US market sales tax)
                 Currently only sales tax is available.
-            tax_amount (str | Unset): Tax amount.
+            tax_amount (str | Unset): The tax amount for the line item, in the currency specified by `currency`.
             tax_rate (str | Unset): Tax rate.
      """
 

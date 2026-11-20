@@ -323,7 +323,7 @@ class DistrictInfo implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets address_level_name
      *
-     * @param string|null $address_level_name The name of administrative division that can be used by seller for ship. e.g. state/county/city/district/town etc.
+     * @param string|null $address_level_name The label of this administrative division level, such as country, state, county, city, district, or town.
      *
      * @return self
      */
@@ -350,7 +350,7 @@ class DistrictInfo implements ModelInterface, ArrayAccess, \JsonSerializable
     /**
      * Sets address_name
      *
-     * @param string|null $address_name Administrative area name. eg: London
+     * @param string|null $address_name The name of the administrative area at this level, such as London or United Kingdom.
      *
      * @return self
      */

@@ -75,10 +75,10 @@ namespace TikTokShop.Api.Generated.Api
         /// Get Order Detail
         /// </summary>
         /// <remarks>
-        /// Get the detailed order information of an order, including important attributes such as order status, shipping addresses, payment details, price and tax info, and package information.
+        /// Get detailed information for up to 50 TikTok Shop orders specified by their IDs, including order status, payment details, price and tax information, package information, and shipping address information when available.
         /// </remarks>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ids">A list of TikTok Shop order ID values. Max count: 50</param>
+        /// <param name="ids">TikTok Shop order IDs to retrieve. Specify 1 to 50 IDs as a comma-separated list.</param>
         /// <returns>GetOrderDetailResponse</returns>
         GetOrderDetailResponse GetOrderDetail(List<string> ids);
 
@@ -86,21 +86,21 @@ namespace TikTokShop.Api.Generated.Api
         /// Get Order Detail
         /// </summary>
         /// <remarks>
-        /// Get the detailed order information of an order, including important attributes such as order status, shipping addresses, payment details, price and tax info, and package information.
+        /// Get detailed information for up to 50 TikTok Shop orders specified by their IDs, including order status, payment details, price and tax information, package information, and shipping address information when available.
         /// </remarks>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ids">A list of TikTok Shop order ID values. Max count: 50</param>
+        /// <param name="ids">TikTok Shop order IDs to retrieve. Specify 1 to 50 IDs as a comma-separated list.</param>
         /// <returns>ApiResponse of GetOrderDetailResponse</returns>
         ApiResponse<GetOrderDetailResponse> GetOrderDetailWithHttpInfo(List<string> ids);
         /// <summary>
         /// Get Order List
         /// </summary>
         /// <remarks>
-        /// Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID.
+        /// Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID. A response is successful when &#x60;code&#x60; is &#x60;0&#x60;, including when no orders match the request.
         /// </remarks>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="pageSize">The number of results to be returned per page. Default: 20. Valid range: [1-100].</param>
-        /// <param name="sortOrder">The sort order for the &#x60;sort_field&#x60; parameter. Default: DESC Possible values: - ASC: Ascending order - DESC: Descending order (optional)</param>
+        /// <param name="pageSize">The number of results to be returned per page. Valid range: [1-100].</param>
+        /// <param name="sortOrder">The sort order for the &#x60;sort_field&#x60; parameter. Default: ASC Possible values: - ASC: Ascending order - DESC: Descending order (optional)</param>
         /// <param name="pageToken">An opaque token used to retrieve the next page of a paginated result set. Retrieve this value from the result of the &#x60;next_page_token&#x60; from a previous response. It is not needed for the first page. (optional)</param>
         /// <param name="sortField">The returned results will be sorted by the specified field.  Default: &#x60;create_time&#x60; Possible values: - &#x60;create_time&#x60; - &#x60;update_time&#x60;  Specify the order for sorting the returned results by using the &#x60;sort_order&#x60; parameter. (optional)</param>
         /// <param name="getOrderListRequest"> (optional)</param>
@@ -111,11 +111,11 @@ namespace TikTokShop.Api.Generated.Api
         /// Get Order List
         /// </summary>
         /// <remarks>
-        /// Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID.
+        /// Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID. A response is successful when &#x60;code&#x60; is &#x60;0&#x60;, including when no orders match the request.
         /// </remarks>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="pageSize">The number of results to be returned per page. Default: 20. Valid range: [1-100].</param>
-        /// <param name="sortOrder">The sort order for the &#x60;sort_field&#x60; parameter. Default: DESC Possible values: - ASC: Ascending order - DESC: Descending order (optional)</param>
+        /// <param name="pageSize">The number of results to be returned per page. Valid range: [1-100].</param>
+        /// <param name="sortOrder">The sort order for the &#x60;sort_field&#x60; parameter. Default: ASC Possible values: - ASC: Ascending order - DESC: Descending order (optional)</param>
         /// <param name="pageToken">An opaque token used to retrieve the next page of a paginated result set. Retrieve this value from the result of the &#x60;next_page_token&#x60; from a previous response. It is not needed for the first page. (optional)</param>
         /// <param name="sortField">The returned results will be sorted by the specified field.  Default: &#x60;create_time&#x60; Possible values: - &#x60;create_time&#x60; - &#x60;update_time&#x60;  Specify the order for sorting the returned results by using the &#x60;sort_order&#x60; parameter. (optional)</param>
         /// <param name="getOrderListRequest"> (optional)</param>
@@ -270,10 +270,10 @@ namespace TikTokShop.Api.Generated.Api
         /// Get Order Detail
         /// </summary>
         /// <remarks>
-        /// Get the detailed order information of an order, including important attributes such as order status, shipping addresses, payment details, price and tax info, and package information.
+        /// Get detailed information for up to 50 TikTok Shop orders specified by their IDs, including order status, payment details, price and tax information, package information, and shipping address information when available.
         /// </remarks>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ids">A list of TikTok Shop order ID values. Max count: 50</param>
+        /// <param name="ids">TikTok Shop order IDs to retrieve. Specify 1 to 50 IDs as a comma-separated list.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetOrderDetailResponse</returns>
         System.Threading.Tasks.Task<GetOrderDetailResponse> GetOrderDetailAsync(List<string> ids, System.Threading.CancellationToken cancellationToken = default);
@@ -282,10 +282,10 @@ namespace TikTokShop.Api.Generated.Api
         /// Get Order Detail
         /// </summary>
         /// <remarks>
-        /// Get the detailed order information of an order, including important attributes such as order status, shipping addresses, payment details, price and tax info, and package information.
+        /// Get detailed information for up to 50 TikTok Shop orders specified by their IDs, including order status, payment details, price and tax information, package information, and shipping address information when available.
         /// </remarks>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ids">A list of TikTok Shop order ID values. Max count: 50</param>
+        /// <param name="ids">TikTok Shop order IDs to retrieve. Specify 1 to 50 IDs as a comma-separated list.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetOrderDetailResponse)</returns>
         System.Threading.Tasks.Task<ApiResponse<GetOrderDetailResponse>> GetOrderDetailWithHttpInfoAsync(List<string> ids, System.Threading.CancellationToken cancellationToken = default);
@@ -293,11 +293,11 @@ namespace TikTokShop.Api.Generated.Api
         /// Get Order List
         /// </summary>
         /// <remarks>
-        /// Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID.
+        /// Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID. A response is successful when &#x60;code&#x60; is &#x60;0&#x60;, including when no orders match the request.
         /// </remarks>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="pageSize">The number of results to be returned per page. Default: 20. Valid range: [1-100].</param>
-        /// <param name="sortOrder">The sort order for the &#x60;sort_field&#x60; parameter. Default: DESC Possible values: - ASC: Ascending order - DESC: Descending order (optional)</param>
+        /// <param name="pageSize">The number of results to be returned per page. Valid range: [1-100].</param>
+        /// <param name="sortOrder">The sort order for the &#x60;sort_field&#x60; parameter. Default: ASC Possible values: - ASC: Ascending order - DESC: Descending order (optional)</param>
         /// <param name="pageToken">An opaque token used to retrieve the next page of a paginated result set. Retrieve this value from the result of the &#x60;next_page_token&#x60; from a previous response. It is not needed for the first page. (optional)</param>
         /// <param name="sortField">The returned results will be sorted by the specified field.  Default: &#x60;create_time&#x60; Possible values: - &#x60;create_time&#x60; - &#x60;update_time&#x60;  Specify the order for sorting the returned results by using the &#x60;sort_order&#x60; parameter. (optional)</param>
         /// <param name="getOrderListRequest"> (optional)</param>
@@ -309,11 +309,11 @@ namespace TikTokShop.Api.Generated.Api
         /// Get Order List
         /// </summary>
         /// <remarks>
-        /// Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID.
+        /// Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID. A response is successful when &#x60;code&#x60; is &#x60;0&#x60;, including when no orders match the request.
         /// </remarks>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="pageSize">The number of results to be returned per page. Default: 20. Valid range: [1-100].</param>
-        /// <param name="sortOrder">The sort order for the &#x60;sort_field&#x60; parameter. Default: DESC Possible values: - ASC: Ascending order - DESC: Descending order (optional)</param>
+        /// <param name="pageSize">The number of results to be returned per page. Valid range: [1-100].</param>
+        /// <param name="sortOrder">The sort order for the &#x60;sort_field&#x60; parameter. Default: ASC Possible values: - ASC: Ascending order - DESC: Descending order (optional)</param>
         /// <param name="pageToken">An opaque token used to retrieve the next page of a paginated result set. Retrieve this value from the result of the &#x60;next_page_token&#x60; from a previous response. It is not needed for the first page. (optional)</param>
         /// <param name="sortField">The returned results will be sorted by the specified field.  Default: &#x60;create_time&#x60; Possible values: - &#x60;create_time&#x60; - &#x60;update_time&#x60;  Specify the order for sorting the returned results by using the &#x60;sort_order&#x60; parameter. (optional)</param>
         /// <param name="getOrderListRequest"> (optional)</param>
@@ -896,10 +896,10 @@ namespace TikTokShop.Api.Generated.Api
         }
 
         /// <summary>
-        /// Get Order Detail Get the detailed order information of an order, including important attributes such as order status, shipping addresses, payment details, price and tax info, and package information.
+        /// Get Order Detail Get detailed information for up to 50 TikTok Shop orders specified by their IDs, including order status, payment details, price and tax information, package information, and shipping address information when available.
         /// </summary>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ids">A list of TikTok Shop order ID values. Max count: 50</param>
+        /// <param name="ids">TikTok Shop order IDs to retrieve. Specify 1 to 50 IDs as a comma-separated list.</param>
         /// <returns>GetOrderDetailResponse</returns>
         public GetOrderDetailResponse GetOrderDetail(List<string> ids)
         {
@@ -908,10 +908,10 @@ namespace TikTokShop.Api.Generated.Api
         }
 
         /// <summary>
-        /// Get Order Detail Get the detailed order information of an order, including important attributes such as order status, shipping addresses, payment details, price and tax info, and package information.
+        /// Get Order Detail Get detailed information for up to 50 TikTok Shop orders specified by their IDs, including order status, payment details, price and tax information, package information, and shipping address information when available.
         /// </summary>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ids">A list of TikTok Shop order ID values. Max count: 50</param>
+        /// <param name="ids">TikTok Shop order IDs to retrieve. Specify 1 to 50 IDs as a comma-separated list.</param>
         /// <returns>ApiResponse of GetOrderDetailResponse</returns>
         public TikTokShop.Api.Generated.Client.ApiResponse<GetOrderDetailResponse> GetOrderDetailWithHttpInfo(List<string> ids)
         {
@@ -956,10 +956,10 @@ namespace TikTokShop.Api.Generated.Api
         }
 
         /// <summary>
-        /// Get Order Detail Get the detailed order information of an order, including important attributes such as order status, shipping addresses, payment details, price and tax info, and package information.
+        /// Get Order Detail Get detailed information for up to 50 TikTok Shop orders specified by their IDs, including order status, payment details, price and tax information, package information, and shipping address information when available.
         /// </summary>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ids">A list of TikTok Shop order ID values. Max count: 50</param>
+        /// <param name="ids">TikTok Shop order IDs to retrieve. Specify 1 to 50 IDs as a comma-separated list.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of GetOrderDetailResponse</returns>
         public async System.Threading.Tasks.Task<GetOrderDetailResponse> GetOrderDetailAsync(List<string> ids, System.Threading.CancellationToken cancellationToken = default)
@@ -969,10 +969,10 @@ namespace TikTokShop.Api.Generated.Api
         }
 
         /// <summary>
-        /// Get Order Detail Get the detailed order information of an order, including important attributes such as order status, shipping addresses, payment details, price and tax info, and package information.
+        /// Get Order Detail Get detailed information for up to 50 TikTok Shop orders specified by their IDs, including order status, payment details, price and tax information, package information, and shipping address information when available.
         /// </summary>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="ids">A list of TikTok Shop order ID values. Max count: 50</param>
+        /// <param name="ids">TikTok Shop order IDs to retrieve. Specify 1 to 50 IDs as a comma-separated list.</param>
         /// <param name="cancellationToken">Cancellation Token to cancel the request.</param>
         /// <returns>Task of ApiResponse (GetOrderDetailResponse)</returns>
         public async System.Threading.Tasks.Task<TikTokShop.Api.Generated.Client.ApiResponse<GetOrderDetailResponse>> GetOrderDetailWithHttpInfoAsync(List<string> ids, System.Threading.CancellationToken cancellationToken = default)
@@ -1021,11 +1021,11 @@ namespace TikTokShop.Api.Generated.Api
         }
 
         /// <summary>
-        /// Get Order List Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID.
+        /// Get Order List Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID. A response is successful when &#x60;code&#x60; is &#x60;0&#x60;, including when no orders match the request.
         /// </summary>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="pageSize">The number of results to be returned per page. Default: 20. Valid range: [1-100].</param>
-        /// <param name="sortOrder">The sort order for the &#x60;sort_field&#x60; parameter. Default: DESC Possible values: - ASC: Ascending order - DESC: Descending order (optional)</param>
+        /// <param name="pageSize">The number of results to be returned per page. Valid range: [1-100].</param>
+        /// <param name="sortOrder">The sort order for the &#x60;sort_field&#x60; parameter. Default: ASC Possible values: - ASC: Ascending order - DESC: Descending order (optional)</param>
         /// <param name="pageToken">An opaque token used to retrieve the next page of a paginated result set. Retrieve this value from the result of the &#x60;next_page_token&#x60; from a previous response. It is not needed for the first page. (optional)</param>
         /// <param name="sortField">The returned results will be sorted by the specified field.  Default: &#x60;create_time&#x60; Possible values: - &#x60;create_time&#x60; - &#x60;update_time&#x60;  Specify the order for sorting the returned results by using the &#x60;sort_order&#x60; parameter. (optional)</param>
         /// <param name="getOrderListRequest"> (optional)</param>
@@ -1037,11 +1037,11 @@ namespace TikTokShop.Api.Generated.Api
         }
 
         /// <summary>
-        /// Get Order List Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID.
+        /// Get Order List Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID. A response is successful when &#x60;code&#x60; is &#x60;0&#x60;, including when no orders match the request.
         /// </summary>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="pageSize">The number of results to be returned per page. Default: 20. Valid range: [1-100].</param>
-        /// <param name="sortOrder">The sort order for the &#x60;sort_field&#x60; parameter. Default: DESC Possible values: - ASC: Ascending order - DESC: Descending order (optional)</param>
+        /// <param name="pageSize">The number of results to be returned per page. Valid range: [1-100].</param>
+        /// <param name="sortOrder">The sort order for the &#x60;sort_field&#x60; parameter. Default: ASC Possible values: - ASC: Ascending order - DESC: Descending order (optional)</param>
         /// <param name="pageToken">An opaque token used to retrieve the next page of a paginated result set. Retrieve this value from the result of the &#x60;next_page_token&#x60; from a previous response. It is not needed for the first page. (optional)</param>
         /// <param name="sortField">The returned results will be sorted by the specified field.  Default: &#x60;create_time&#x60; Possible values: - &#x60;create_time&#x60; - &#x60;update_time&#x60;  Specify the order for sorting the returned results by using the &#x60;sort_order&#x60; parameter. (optional)</param>
         /// <param name="getOrderListRequest"> (optional)</param>
@@ -1099,11 +1099,11 @@ namespace TikTokShop.Api.Generated.Api
         }
 
         /// <summary>
-        /// Get Order List Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID.
+        /// Get Order List Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID. A response is successful when &#x60;code&#x60; is &#x60;0&#x60;, including when no orders match the request.
         /// </summary>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="pageSize">The number of results to be returned per page. Default: 20. Valid range: [1-100].</param>
-        /// <param name="sortOrder">The sort order for the &#x60;sort_field&#x60; parameter. Default: DESC Possible values: - ASC: Ascending order - DESC: Descending order (optional)</param>
+        /// <param name="pageSize">The number of results to be returned per page. Valid range: [1-100].</param>
+        /// <param name="sortOrder">The sort order for the &#x60;sort_field&#x60; parameter. Default: ASC Possible values: - ASC: Ascending order - DESC: Descending order (optional)</param>
         /// <param name="pageToken">An opaque token used to retrieve the next page of a paginated result set. Retrieve this value from the result of the &#x60;next_page_token&#x60; from a previous response. It is not needed for the first page. (optional)</param>
         /// <param name="sortField">The returned results will be sorted by the specified field.  Default: &#x60;create_time&#x60; Possible values: - &#x60;create_time&#x60; - &#x60;update_time&#x60;  Specify the order for sorting the returned results by using the &#x60;sort_order&#x60; parameter. (optional)</param>
         /// <param name="getOrderListRequest"> (optional)</param>
@@ -1116,11 +1116,11 @@ namespace TikTokShop.Api.Generated.Api
         }
 
         /// <summary>
-        /// Get Order List Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID.
+        /// Get Order List Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID. A response is successful when &#x60;code&#x60; is &#x60;0&#x60;, including when no orders match the request.
         /// </summary>
         /// <exception cref="TikTokShop.Api.Generated.Client.ApiException">Thrown when fails to make API call</exception>
-        /// <param name="pageSize">The number of results to be returned per page. Default: 20. Valid range: [1-100].</param>
-        /// <param name="sortOrder">The sort order for the &#x60;sort_field&#x60; parameter. Default: DESC Possible values: - ASC: Ascending order - DESC: Descending order (optional)</param>
+        /// <param name="pageSize">The number of results to be returned per page. Valid range: [1-100].</param>
+        /// <param name="sortOrder">The sort order for the &#x60;sort_field&#x60; parameter. Default: ASC Possible values: - ASC: Ascending order - DESC: Descending order (optional)</param>
         /// <param name="pageToken">An opaque token used to retrieve the next page of a paginated result set. Retrieve this value from the result of the &#x60;next_page_token&#x60; from a previous response. It is not needed for the first page. (optional)</param>
         /// <param name="sortField">The returned results will be sorted by the specified field.  Default: &#x60;create_time&#x60; Possible values: - &#x60;create_time&#x60; - &#x60;update_time&#x60;  Specify the order for sorting the returned results by using the &#x60;sort_order&#x60; parameter. (optional)</param>
         /// <param name="getOrderListRequest"> (optional)</param>

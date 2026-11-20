@@ -38,12 +38,12 @@ import com.google.gson.annotations.SerializedName
  * @param lastName Recipient last name.   If the recipient first and last names are not provided separately, this parameter will be empty.
  * @param firstNameLocalScript Recipient first name in katakana. **Note**: Applicable only for the JP market.
  * @param lastNameLocalScript Recipient last name in katakana. **Note**: Applicable only for the JP market.
- * @param addressDetail Full recipient detailed address.
+ * @param addressDetail The detailed street-address portion of the recipient address, combined from the address detail lines.
  * @param addressLine1 The first line of the street address.
  * @param addressLine2 The second line of the street address.
  * @param addressLine3 The third line of the street address.
  * @param addressLine4 The fourth line of the street address.
- * @param districtInfo `district_info` is unavailable under `UNPAID` and `ON_HOLD` statuses.
+ * @param districtInfo `district_info` is unavailable for orders with `UNPAID`, `ON_HOLD`, or `CANCELLED` status.
  * @param deliveryPreferences Contains all of the delivery instructions provided by the recipient for the shipping address. Currently, only available in the US market.
  * @param postalCode The postal code that can be used by seller for shipping. For the US market, this refers to the ZIP Code.
  * @param regionCode Region code.
@@ -81,7 +81,7 @@ data class GetOrderListResponseDataOrderRecipientAddress (
     @SerializedName("last_name_local_script")
     val lastNameLocalScript: kotlin.String? = null,
 
-    /* Full recipient detailed address. */
+    /* The detailed street-address portion of the recipient address, combined from the address detail lines. */
     @SerializedName("address_detail")
     val addressDetail: kotlin.String? = null,
 
@@ -101,7 +101,7 @@ data class GetOrderListResponseDataOrderRecipientAddress (
     @SerializedName("address_line4")
     val addressLine4: kotlin.String? = null,
 
-    /* `district_info` is unavailable under `UNPAID` and `ON_HOLD` statuses. */
+    /* `district_info` is unavailable for orders with `UNPAID`, `ON_HOLD`, or `CANCELLED` status. */
     @SerializedName("district_info")
     val districtInfo: kotlin.collections.List<DistrictInfo>? = null,
 

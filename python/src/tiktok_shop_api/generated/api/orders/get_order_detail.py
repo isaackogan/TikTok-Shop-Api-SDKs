@@ -75,8 +75,9 @@ def sync_detailed(
 ) -> Response[GetOrderDetailResponse]:
     """ Get Order Detail
 
-     Get the detailed order information of an order, including important attributes such as order status,
-    shipping addresses, payment details, price and tax info, and package information.
+     Get detailed information for up to 50 TikTok Shop orders specified by their IDs, including order
+    status, payment details, price and tax information, package information, and shipping address
+    information when available.
 
     Args:
         ids (list[str]):
@@ -109,8 +110,9 @@ def sync(
 ) -> GetOrderDetailResponse | None:
     """ Get Order Detail
 
-     Get the detailed order information of an order, including important attributes such as order status,
-    shipping addresses, payment details, price and tax info, and package information.
+     Get detailed information for up to 50 TikTok Shop orders specified by their IDs, including order
+    status, payment details, price and tax information, package information, and shipping address
+    information when available.
 
     Args:
         ids (list[str]):
@@ -138,8 +140,9 @@ async def asyncio_detailed(
 ) -> Response[GetOrderDetailResponse]:
     """ Get Order Detail
 
-     Get the detailed order information of an order, including important attributes such as order status,
-    shipping addresses, payment details, price and tax info, and package information.
+     Get detailed information for up to 50 TikTok Shop orders specified by their IDs, including order
+    status, payment details, price and tax information, package information, and shipping address
+    information when available.
 
     Args:
         ids (list[str]):
@@ -172,8 +175,9 @@ async def asyncio(
 ) -> GetOrderDetailResponse | None:
     """ Get Order Detail
 
-     Get the detailed order information of an order, including important attributes such as order status,
-    shipping addresses, payment details, price and tax info, and package information.
+     Get detailed information for up to 50 TikTok Shop orders specified by their IDs, including order
+    status, payment details, price and tax information, package information, and shipping address
+    information when available.
 
     Args:
         ids (list[str]):

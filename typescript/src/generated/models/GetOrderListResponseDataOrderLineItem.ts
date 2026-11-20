@@ -110,7 +110,7 @@ export interface GetOrderListResponseDataOrderLineItem {
      */
     productId?: string;
     /**
-     * Item sale price. Please refer to the currency of `payment_info`.
+     * Sale price of the line item, in the currency specified by `currency`.
      * @type {string}
      * @memberof GetOrderListResponseDataOrderLineItem
      */
@@ -123,13 +123,13 @@ export interface GetOrderListResponseDataOrderLineItem {
      */
     pfandFee?: string;
     /**
-     * Platform discount amount. Please refer to the currency of `payment_info`.
+     * Platform-funded discount amount for the line item, in the currency specified by `currency`.
      * @type {string}
      * @memberof GetOrderListResponseDataOrderLineItem
      */
     platformDiscount?: string;
     /**
-     * Seller discount amount. Please refer to the currency of `payment_info`.
+     * Seller-funded discount amount for the line item, in the currency specified by `currency`.
      * @type {string}
      * @memberof GetOrderListResponseDataOrderLineItem
      */
@@ -160,13 +160,13 @@ export interface GetOrderListResponseDataOrderLineItem {
      */
     cancelReason?: string;
     /**
-     * Item original price. Please refer to the currency of `payment_info`.
+     * Original price of the line item, in the currency specified by `currency`.
      * @type {string}
      * @memberof GetOrderListResponseDataOrderLineItem
      */
     originalPrice?: string;
     /**
-     * The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp.
+     * The time the package containing this line item was shipped by a successful call to the [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1). Unix timestamp in seconds.
      * @type {number}
      * @memberof GetOrderListResponseDataOrderLineItem
      */
@@ -184,7 +184,7 @@ export interface GetOrderListResponseDataOrderLineItem {
      */
     packageStatus?: string;
     /**
-     * Currency for payment.
+     * The ISO 4217 currency code for monetary amounts in this line item.
      * @type {string}
      * @memberof GetOrderListResponseDataOrderLineItem
      */
@@ -225,13 +225,13 @@ export interface GetOrderListResponseDataOrderLineItem {
      */
     itemTax?: Array<ItemTax>;
     /**
-     * Tracking number. Available after package has been shipped.
+     * The tracking number for the package containing this line item. Available after the package has been shipped.
      * @type {string}
      * @memberof GetOrderListResponseDataOrderLineItem
      */
     trackingNumber?: string;
     /**
-     * An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique `package_id` and `tracking_id`.
+     * The ID of the package that contains this line item. Match this value to `packages[].id` when package information is available.
      * @type {string}
      * @memberof GetOrderListResponseDataOrderLineItem
      */
@@ -364,9 +364,9 @@ export interface GetOrderListResponseDataOrderLineItem {
      */
     podInfoId?: string;
     /**
-     * This describes the product listing type of the SKU. 
+     * The product listing type of the SKU. This field is returned only for a temporary listing.
      * Possible values:
-     * - `TEMPORARY LISTING`
+     * - `TEMPORARY_LISTING`: The SKU is a temporary listing.
      * @type {string}
      * @memberof GetOrderListResponseDataOrderLineItem
      */

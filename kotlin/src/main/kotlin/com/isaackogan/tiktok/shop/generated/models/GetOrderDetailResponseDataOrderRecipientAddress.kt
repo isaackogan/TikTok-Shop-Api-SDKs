@@ -31,7 +31,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param fullAddress The complete recipient addresses information.
+ * @param fullAddress The complete recipient address composed from the administrative-area names and detailed address lines.
  * @param phoneNumber The telephone number of the buyer. Please notice, if this order uses platform logistics, phone number will be desensitized.
  * @param name The name of the recipient. Please note, if this order uses platform logistics, recipient name will be desensitized
  * @param firstName The first name of the recipient. If the buyer does not provide their first and last name separately, this parameter will have the same value as the \"name\" parameter.
@@ -47,13 +47,13 @@ import com.google.gson.annotations.SerializedName
  * @param addressLine4 The fourth line of the street address.
  * @param districtInfo District information list.
  * @param deliveryPreferences Contains all of the delivery instructions provided by the buyer for the shipping address. Currently, only available in the US market.
- * @param addressDetail Full buyer detail address.
+ * @param addressDetail Detailed street address of the recipient.
  */
 
 
 data class GetOrderDetailResponseDataOrderRecipientAddress (
 
-    /* The complete recipient addresses information. */
+    /* The complete recipient address composed from the administrative-area names and detailed address lines. */
     @SerializedName("full_address")
     val fullAddress: kotlin.String? = null,
 
@@ -117,7 +117,7 @@ data class GetOrderDetailResponseDataOrderRecipientAddress (
     @SerializedName("delivery_preferences")
     val deliveryPreferences: GetOrderDetailResponseDataOrderRecipientAddressDeliveryPreference? = null,
 
-    /* Full buyer detail address. */
+    /* Detailed street address of the recipient. */
     @SerializedName("address_detail")
     val addressDetail: kotlin.String? = null
 

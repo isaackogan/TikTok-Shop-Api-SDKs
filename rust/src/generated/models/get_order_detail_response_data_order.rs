@@ -43,7 +43,7 @@ pub struct GetOrderDetailResponseDataOrder {
     /// The note from buyer.
     #[serde(rename = "buyer_message", skip_serializing_if = "Option::is_none")]
     pub buyer_message: Option<String>,
-    /// The date and time that the order was created. Unix timestamp.
+    /// The date and time that the order was created. Unix timestamp in seconds.
     #[serde(rename = "create_time", skip_serializing_if = "Option::is_none")]
     pub create_time: Option<i64>,
     /// Tracking number. Available after ship package.
@@ -52,10 +52,10 @@ pub struct GetOrderDetailResponseDataOrder {
     /// The order level cancellation reason. **Note**: A multi-line order may have different `cancel_reason` across the multiple items. If this occurs, the order-level `cancel_reason` will surface the `cancel_reason` from the first line item. [See here](https://partner.tiktokshop.com/docv2/page/cancel-reasons) for more details on cancellation reasons.
     #[serde(rename = "cancel_reason", skip_serializing_if = "Option::is_none")]
     pub cancel_reason: Option<String>,
-    /// The latest shipping time specified by the platform. Unix timestamp.
+    /// The latest shipping time specified by the platform, as a Unix timestamp in seconds.
     #[serde(rename = "rts_sla_time", skip_serializing_if = "Option::is_none")]
     pub rts_sla_time: Option<i64>,
-    /// The date and time that the order was paid. Unix timestamp.
+    /// The date and time that the order was paid, as a Unix timestamp in seconds.
     #[serde(rename = "paid_time", skip_serializing_if = "Option::is_none")]
     pub paid_time: Option<i64>,
     /// Fulfillment type.  Only orders with fulfillment type can be shipped by sellers. Possible values: - `FULFILLMENT_BY_SELLER`: a method where sellers fulfill orders directly from their own inventory, without using TikTok's fulfillment centers. In this model, the seller is responsible for storing, packaging, and shipping the product to customers. - `FULFILLMENT_BY_TIKTOK`: a service offered by TikTok that enables sellers to send their products to TikTok's fulfillment centers. TikTok then takes care of storing, picking, packing, and shipping the products to customers. - `FULFILLMENT_BY_DILAYANI_TOKOPEDIA`: a method where Tokopedia GoTo Logistics provides warehousing and logistics services to sellers and charges a fee for the service.
@@ -64,7 +64,7 @@ pub struct GetOrderDetailResponseDataOrder {
     /// This field return the note, which seller notes in TikTok Seller Center.
     #[serde(rename = "seller_note", skip_serializing_if = "Option::is_none")]
     pub seller_note: Option<String>,
-    /// The latest collection time specified by the platform. Unix timestamp.
+    /// The latest collection time specified by the platform, as a Unix timestamp in seconds.
     #[serde(rename = "tts_sla_time", skip_serializing_if = "Option::is_none")]
     pub tts_sla_time: Option<i64>,
     /// The automatic cancellation time for orders specified by the platform. Unix timestamp.
@@ -91,19 +91,19 @@ pub struct GetOrderDetailResponseDataOrder {
     /// Whether the recipient address has been updated. - `false`: no update - `true`: updated
     #[serde(rename = "has_updated_recipient_address", skip_serializing_if = "Option::is_none")]
     pub has_updated_recipient_address: Option<bool>,
-    /// CPF (invoice number), used to issue an invoice. Exclusive for the Brazil market.
+    /// The buyer's CPF tax identification number, used to issue an invoice. Available only in Brazil.
     #[serde(rename = "cpf", skip_serializing_if = "Option::is_none")]
     pub cpf: Option<String>,
     /// Order delivery option ID.
     #[serde(rename = "delivery_option_id", skip_serializing_if = "Option::is_none")]
     pub delivery_option_id: Option<String>,
-    /// Order should arrive by this date to be considered on-time and to avoid late delivery penalties.
+    /// The Unix timestamp, in seconds, by which the order should arrive to be considered on time and avoid late-delivery penalties.
     #[serde(rename = "delivery_sla_time", skip_serializing_if = "Option::is_none")]
     pub delivery_sla_time: Option<i64>,
     /// Payment method name, only for display
     #[serde(rename = "payment_method_name", skip_serializing_if = "Option::is_none")]
     pub payment_method_name: Option<String>,
-    /// Code to distinguish different payment method. Only assigned when the payment method is using bank card. Possible values are: Debit, Credit, Prepaid
+    /// Card type for bank card payments. Possible values: - `Debit` - `Credit` - `Prepaid`
     #[serde(rename = "payment_card_type", skip_serializing_if = "Option::is_none")]
     pub payment_card_type: Option<String>,
     /// The national channel entity registration ID  of payment institution/creditor. In Brazil, it is the CNPJ of payment instituion.
@@ -115,7 +115,7 @@ pub struct GetOrderDetailResponseDataOrder {
     /// Authorization code of current transaction (only for the Brazilian market). For card transactions (credit/debit card), this field will be transaction authorization code. For PIX transactions, this field will be E2E ID.
     #[serde(rename = "payment_auth_code", skip_serializing_if = "Option::is_none")]
     pub payment_auth_code: Option<String>,
-    /// If the order hasn't updated its status to `AWAITING_COLLECTION` before this time, the order will be automatically canceled by TikTok Shop.
+    /// The Unix timestamp, in seconds, by which the order must reach `AWAITING_COLLECTION`; otherwise, TikTok Shop automatically cancels the order.
     #[serde(rename = "shipping_due_time", skip_serializing_if = "Option::is_none")]
     pub shipping_due_time: Option<i64>,
     /// Line item info list.
@@ -127,19 +127,19 @@ pub struct GetOrderDetailResponseDataOrder {
     /// The anonymized email address of the buyer. It is not recommended to send messages directly to this email address. If you need to contact the buyer, please go to Seller Center - Buyer Messages page.
     #[serde(rename = "buyer_email", skip_serializing_if = "Option::is_none")]
     pub buyer_email: Option<String>,
-    /// The timestamp of the order's status update to `DELIVERED`.
+    /// The Unix timestamp, in seconds, when the order status changed to `DELIVERED`.
     #[serde(rename = "delivery_time", skip_serializing_if = "Option::is_none")]
     pub delivery_time: Option<i64>,
     /// Whether an invoice needs to be uploaded and uploaded status (only for Brazil market). - UNKNOWN: Currently unable to confirm whether an invoice is needed - NEED_INVOICE: This order requires an invoice and the invoice has not been uploaded yet - NO_NEED：This order does not require an invoice - INVOICE_UPLOADED: The invoice for this order has been uploaded and verified. If the order is split, it will be marked as \"uploaded\" once any sub-order's invoice is uploaded. - INVOICE_PROCESSING: The invoice for this order is currently being uploaded/cancelled. Please wait for the final result and do not repeat the operation
     #[serde(rename = "need_upload_invoice", skip_serializing_if = "Option::is_none")]
     pub need_upload_invoice: Option<String>,
-    /// This option is for sellers that accept cash payment on delivery which is rare. Buyers will pay in cash upon receipt of package. Default value is `FALSE`. Only applicable to countries where Cash on Delivery (COD) is supported.
+    /// Whether the order uses cash on delivery (COD). When returned, `true` means the buyer pays cash upon receipt and `false` means the order uses another payment method. The field may be omitted when payment type is unavailable. Available only in countries where COD is supported.
     #[serde(rename = "is_cod", skip_serializing_if = "Option::is_none")]
     pub is_cod: Option<bool>,
-    /// Buyer request cancel time.
+    /// The Unix timestamp, in seconds, when the buyer submitted the pending cancellation request. Returned when is_buyer_request_cancel is true.
     #[serde(rename = "request_cancel_time", skip_serializing_if = "Option::is_none")]
     pub request_cancel_time: Option<i64>,
-    /// Order should be delivered before this time.
+    /// The Unix timestamp, in seconds, by which the order should be delivered.
     #[serde(rename = "delivery_option_required_delivery_time", skip_serializing_if = "Option::is_none")]
     pub delivery_option_required_delivery_time: Option<i64>,
     /// Delivery option name. For display purposes only.
@@ -148,16 +148,16 @@ pub struct GetOrderDetailResponseDataOrder {
     /// True when the buyer has a pending cancellation request
     #[serde(rename = "is_buyer_request_cancel", skip_serializing_if = "Option::is_none")]
     pub is_buyer_request_cancel: Option<bool>,
-    /// If the order hasn't updated its status to `DELIVERED` before this time, the order will be automatically canceled by TikTok Shop.
+    /// The Unix timestamp, in seconds, by which the order must reach `DELIVERED`; otherwise, TikTok Shop automatically cancels the order.
     #[serde(rename = "delivery_due_time", skip_serializing_if = "Option::is_none")]
     pub delivery_due_time: Option<i64>,
-    /// The timestamp of the order's status update to `IN_TRANSIT`.
+    /// The Unix timestamp, in seconds, when the order status changed to `IN_TRANSIT`.
     #[serde(rename = "collection_time", skip_serializing_if = "Option::is_none")]
     pub collection_time: Option<i64>,
-    /// Indicates whether the order experienced or will be experienced `ON_HOLD` status.
+    /// Whether the order has entered or will enter an `ON_HOLD` period after buyer payment. This does not indicate that the order's current `status` is `ON_HOLD`.
     #[serde(rename = "is_on_hold_order", skip_serializing_if = "Option::is_none")]
     pub is_on_hold_order: Option<bool>,
-    /// The timestamp of the order's status update to `CANCELLED`.
+    /// The Unix timestamp, in seconds, when the order status changed to CANCELLED.
     #[serde(rename = "cancel_time", skip_serializing_if = "Option::is_none")]
     pub cancel_time: Option<i64>,
     /// When true, this is a replacement order.
@@ -166,13 +166,13 @@ pub struct GetOrderDetailResponseDataOrder {
     /// The order ID for the order that is being replaced. Returned only if `is_replacement_order` = `true`
     #[serde(rename = "replaced_order_id", skip_serializing_if = "Option::is_none")]
     pub replaced_order_id: Option<String>,
-    /// If the order hasn't updated its status to `IN_TRANSIT` before this time, the order will be automatically canceled by TikTok Shop
+    /// The Unix timestamp, in seconds, by which the order must reach `IN_TRANSIT`; otherwise, TikTok Shop automatically cancels the order.
     #[serde(rename = "collection_due_time", skip_serializing_if = "Option::is_none")]
     pub collection_due_time: Option<i64>,
     /// To avoid LDR, you must ensure the package is picked up by this time. Only applicable in Southeast Asia regions.
     #[serde(rename = "pick_up_cut_off_time", skip_serializing_if = "Option::is_none")]
     pub pick_up_cut_off_time: Option<i64>,
-    /// The latest collection time to gain incentives of NDD (Next Day Delivery) project. Unix timestamp Only available in Thailand and Philippines.
+    /// The latest collection time for the order to qualify for Next Day Delivery (NDD) incentives. Unix timestamp, in seconds.
     #[serde(rename = "fast_dispatch_sla_time", skip_serializing_if = "Option::is_none")]
     pub fast_dispatch_sla_time: Option<i64>,
     /// The platform where the order was placed. Possible values: - `TIKTOK_SHOP` - `TOKOPEDIA` - `TIKTOK_SHOP_APP` **Note**: `Tokopedia` and `Tiktok Shop App` available only in the SEA market.
@@ -214,13 +214,13 @@ pub struct GetOrderDetailResponseDataOrder {
     /// A badge presented on the merchandise to tell the buyer that the seller participates in the fast delivery program, such that the order should arrive in a promised time period. Possible values: - `3_DAY_DELIVERY` - `3_DAY_POTENTIAL_SHIPPING` - `3_DAY_POTENTIAL_TRANSIT` Not returned if order did not meet fast delivery program requirements. Note: Applicable only for the US market.
     #[serde(rename = "fast_delivery_program", skip_serializing_if = "Option::is_none")]
     pub fast_delivery_program: Option<String>,
-    /// The nickname of the TikTok buyer, which is defined by the TikTok user. The buyer_nickname can be used to identify the buyer when displaying the unboxing results within the TikTok Live Session.
+    /// The nickname of the TikTok buyer, as defined by the TikTok user. This field is populated only for supported virtual unboxing orders and can be displayed with `buyer_avatar` in TikTok LIVE unboxing results. Use `user_id`, not this display name, for programmatic buyer identification.
     #[serde(rename = "buyer_nickname", skip_serializing_if = "Option::is_none")]
     pub buyer_nickname: Option<String>,
-    /// The avatar of the TikTok buyer, which is defined by the TikTok user. The buyer_avatar can be used in conjunction with the buyer_nickname when displaying the unboxing results within the TikTok Live Session.
+    /// The avatar of the TikTok buyer, as defined by the TikTok user. This field is populated only for supported virtual unboxing orders and can be used with `buyer_nickname` when displaying unboxing results in a TikTok LIVE session.
     #[serde(rename = "buyer_avatar", skip_serializing_if = "Option::is_none")]
     pub buyer_avatar: Option<String>,
-    /// Order tag identifier if has certain rights within the order based on the program subscribed by sellers. 1 = Shipping Fee Reimbursement Program 2 = Horizon+ Program  Applicable for SEA market only
+    /// Order rights associated with seller programs. Multiple values can be returned together, and the field is omitted when no right applies. Possible values: - `1`: Shipping Fee Reimbursement Program - `2`: Horizon+ Program Applicable only in SEA markets.
     #[serde(rename = "order_rights", skip_serializing_if = "Option::is_none")]
     pub order_rights: Option<Vec<i64>>,
     /// Fulfillment priority value that can be used to prioritize shipping (only available in SEA) 100 = Instant 200 = Sameday 8 Hours 300 = Sameday 400 = Next Day Delivery 500 = Express 600 = Standard 700 = Economy 800 = Cargo
@@ -229,7 +229,7 @@ pub struct GetOrderDetailResponseDataOrder {
     /// Recommended time to ship based on the each LSP service type (only available in SEA)
     #[serde(rename = "recommended_shipping_time", skip_serializing_if = "Option::is_none")]
     pub recommended_shipping_time: Option<i64>,
-    /// The latest buyer pickup time for instore pickup method specified by the platform. Currently applicable for SEA market. Unix timestamp.
+    /// The latest buyer pickup time for in-store pickup, as a Unix timestamp in seconds. Currently available in SEA markets.
     #[serde(rename = "instore_pickup_sla_time", skip_serializing_if = "Option::is_none")]
     pub instore_pickup_sla_time: Option<i64>,
     /// Indicate fast fulfillment SLA for shipping action. Applicable for SEA market only. Unix timestamp

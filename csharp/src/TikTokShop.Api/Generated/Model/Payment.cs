@@ -35,12 +35,12 @@ namespace TikTokShop.Api.Generated.Model
         /// <summary>
         /// Initializes a new instance of the <see cref="Payment" /> class.
         /// </summary>
-        /// <param name="currency">Currency for payment..</param>
+        /// <param name="currency">The ISO 4217 currency code for monetary amounts in this payment object..</param>
         /// <param name="subTotal">Buyer paid subtotal of all the SKUs in the order. For the US market, this is pre-tax total amount. &#x60;sub_total&#x60; &#x3D; &#x60;original_total_product_price&#x60; - &#x60;seller_discount&#x60; - &#x60;platform_discount&#x60;.</param>
         /// <param name="shippingFee">Buyer paid shipping fee.  &#x60;shipping_fee&#x60; &#x3D; &#x60;original_shipping_fee&#x60; - &#x60;shipping_fee_seller_discount&#x60; - &#x60;shipping_fee_platform_discount&#x60; For the US market, this is pre-tax total amount..</param>
         /// <param name="sellerDiscount">Product discount by seller..</param>
         /// <param name="platformDiscount">Product discount by platform..</param>
-        /// <param name="paymentPlatformDiscount">Discount applied to the order funded by a payment platform.</param>
+        /// <param name="paymentPlatformDiscount">The portion of &#x60;platform_discount&#x60; funded by a payment platform. This amount is already included in &#x60;platform_discount&#x60;..</param>
         /// <param name="paymentDiscountServiceFee">Service fee as paid by the buyer to apply payment platform discount.</param>
         /// <param name="totalAmount">Buyer paid total amount. &#x60;total_amount&#x60; &#x3D; &#x60;sub_total&#x60; + &#x60;shipping_fee&#x60; + &#x60;taxes&#x60; + &#x60;retail_delivery_fee&#x60;.</param>
         /// <param name="originalTotalProductPrice">Total original price of products (VAT included for crossborder shop). For the US market, this is pre-tax total amount..</param>
@@ -91,9 +91,9 @@ namespace TikTokShop.Api.Generated.Model
         }
 
         /// <summary>
-        /// Currency for payment.
+        /// The ISO 4217 currency code for monetary amounts in this payment object.
         /// </summary>
-        /// <value>Currency for payment.</value>
+        /// <value>The ISO 4217 currency code for monetary amounts in this payment object.</value>
         [DataMember(Name = "currency", EmitDefaultValue = false)]
         public string Currency { get; set; }
 
@@ -126,9 +126,9 @@ namespace TikTokShop.Api.Generated.Model
         public string PlatformDiscount { get; set; }
 
         /// <summary>
-        /// Discount applied to the order funded by a payment platform
+        /// The portion of &#x60;platform_discount&#x60; funded by a payment platform. This amount is already included in &#x60;platform_discount&#x60;.
         /// </summary>
-        /// <value>Discount applied to the order funded by a payment platform</value>
+        /// <value>The portion of &#x60;platform_discount&#x60; funded by a payment platform. This amount is already included in &#x60;platform_discount&#x60;.</value>
         [DataMember(Name = "payment_platform_discount", EmitDefaultValue = false)]
         public string PaymentPlatformDiscount { get; set; }
 

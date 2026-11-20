@@ -16,13 +16,13 @@ pub struct GetOrderDetailResponseDataOrderLineItem {
     /// Line item ID.
     #[serde(rename = "id", skip_serializing_if = "Option::is_none")]
     pub id: Option<String>,
-    /// SKU ID.
+    /// The SKU ID for the line item. For a gift line item with gift information, the original SKU ID is returned when available.
     #[serde(rename = "sku_id", skip_serializing_if = "Option::is_none")]
     pub sku_id: Option<String>,
     /// For a virtual bundle SKU, returns an array of related product SKUs that compose the virtual bundle SKU.
     #[serde(rename = "combined_listing_skus", skip_serializing_if = "Option::is_none")]
     pub combined_listing_skus: Option<Vec<models::CombinedListingSku>>,
-    /// Product ID.
+    /// The product ID for the line item. For a gift line item with gift information, the original product ID is returned when available.
     #[serde(rename = "product_id", skip_serializing_if = "Option::is_none")]
     pub product_id: Option<String>,
     /// Product name.
@@ -34,7 +34,7 @@ pub struct GetOrderDetailResponseDataOrderLineItem {
     /// SKU image.
     #[serde(rename = "sku_image", skip_serializing_if = "Option::is_none")]
     pub sku_image: Option<String>,
-    /// Item original price, please refer to the currency of `payment_info`.
+    /// The line item's original price in the currency specified by `currency`.
     #[serde(rename = "original_price", skip_serializing_if = "Option::is_none")]
     pub original_price: Option<String>,
     /// Item sale price, please refer to the currency of `payment_info`.
@@ -43,7 +43,7 @@ pub struct GetOrderDetailResponseDataOrderLineItem {
     /// Deposit fee that is applied to certain products, typically beverage containers such as bottles or cans. **Note** Only available in Germany market
     #[serde(rename = "pfand_fee", skip_serializing_if = "Option::is_none")]
     pub pfand_fee: Option<String>,
-    /// Platform discount amount, please refer to the currency of `payment_info`.
+    /// The platform discount amount for the line item, in the currency specified by `currency`.
     #[serde(rename = "platform_discount", skip_serializing_if = "Option::is_none")]
     pub platform_discount: Option<String>,
     /// - `UNPAID`: The order is placed, but payment is not yet completed. - `AWAITING_SHIPMENT`: The order is ready for shipment, but no items are shipped yet. - `AWAITING_COLLECTION`:  The shipment is arranged, but the package is waiting to be collected by the carrier. - `IN_TRANSIT`: The package is collected by the carrier and delivery is in progress. - `DELIVERED`: The package is delivered to buyer. - `COMPLETED`: The order is completed, and no further returns or refunds are allowed. - `CANCELLED`: The order is canceled.
@@ -61,16 +61,16 @@ pub struct GetOrderDetailResponseDataOrderLineItem {
     /// The shipping provider ID of the item.
     #[serde(rename = "shipping_provider_id", skip_serializing_if = "Option::is_none")]
     pub shipping_provider_id: Option<String>,
-    /// Seller discount amount. Please refer to the currency of `payment_info`.
+    /// The seller discount amount for the line item, in the currency specified by `currency`.
     #[serde(rename = "seller_discount", skip_serializing_if = "Option::is_none")]
     pub seller_discount: Option<String>,
-    /// Currency for payment.
+    /// The ISO 4217 currency code for monetary amounts in this line item.
     #[serde(rename = "currency", skip_serializing_if = "Option::is_none")]
     pub currency: Option<String>,
-    /// An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique `package_id` (and also a `tracking_id`, which is used to track the progress of the package as it is shipped). For local sellers in the US and UK markets, the `package_id` and `package_status` property will not be returned before the package is shipped
+    /// An order can contain one or more packages based on how the seller chooses to ship, and each package has a unique `package_id`. This field matches the `id` of the package in `orders[].packages[]` that contains this line item. Read the package-specific tracking value from this line item's `tracking_number`. For local sellers in the US and UK markets, `package_id` and `package_status` are not returned before the package is shipped.
     #[serde(rename = "package_id", skip_serializing_if = "Option::is_none")]
     pub package_id: Option<String>,
-    /// The time seller shipped line order (call Ship Order endpoint successfully). Unix timestamp.
+    /// The Unix timestamp, in seconds, when the seller successfully submitted this line item for shipment through the Ship Order API.
     #[serde(rename = "rts_time", skip_serializing_if = "Option::is_none")]
     pub rts_time: Option<i64>,
     /// Item tax detail.

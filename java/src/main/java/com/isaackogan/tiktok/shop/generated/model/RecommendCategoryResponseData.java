@@ -63,6 +63,11 @@ public class RecommendCategoryResponseData {
   @javax.annotation.Nullable
   private String leafCategoryId;
 
+  public static final String SERIALIZED_NAME_NONE_CATEGORY_REC_REASONS = "none_category_rec_reasons";
+  @SerializedName(SERIALIZED_NAME_NONE_CATEGORY_REC_REASONS)
+  @javax.annotation.Nullable
+  private List<String> noneCategoryRecReasons = new ArrayList<>();
+
   public RecommendCategoryResponseData() {
   }
 
@@ -109,6 +114,33 @@ public class RecommendCategoryResponseData {
 
   public void setLeafCategoryId(@javax.annotation.Nullable String leafCategoryId) {
     this.leafCategoryId = leafCategoryId;
+  }
+
+
+  public RecommendCategoryResponseData noneCategoryRecReasons(@javax.annotation.Nullable List<String> noneCategoryRecReasons) {
+    this.noneCategoryRecReasons = noneCategoryRecReasons;
+    return this;
+  }
+
+  public RecommendCategoryResponseData addNoneCategoryRecReasonsItem(String noneCategoryRecReasonsItem) {
+    if (this.noneCategoryRecReasons == null) {
+      this.noneCategoryRecReasons = new ArrayList<>();
+    }
+    this.noneCategoryRecReasons.add(noneCategoryRecReasonsItem);
+    return this;
+  }
+
+  /**
+   * No category recommended reason description Possible values: - NON_MAIN_CATEGORY：recommended category not main categories of merchants - PROHIBITED_CATEGORY: recommended category  Prohibition of sale - PROHIBITED_PUBLISH_CATEGORY：recommended category  Prohibition of  publish - RECOMMEND_CATEGORY_RPC_ERROR: There is a problem with downstream services.
+   * @return noneCategoryRecReasons
+   */
+  @javax.annotation.Nullable
+  public List<String> getNoneCategoryRecReasons() {
+    return noneCategoryRecReasons;
+  }
+
+  public void setNoneCategoryRecReasons(@javax.annotation.Nullable List<String> noneCategoryRecReasons) {
+    this.noneCategoryRecReasons = noneCategoryRecReasons;
   }
 
   /**
@@ -167,13 +199,14 @@ public class RecommendCategoryResponseData {
     }
     RecommendCategoryResponseData recommendCategoryResponseData = (RecommendCategoryResponseData) o;
     return Objects.equals(this.categories, recommendCategoryResponseData.categories) &&
-        Objects.equals(this.leafCategoryId, recommendCategoryResponseData.leafCategoryId)&&
+        Objects.equals(this.leafCategoryId, recommendCategoryResponseData.leafCategoryId) &&
+        Objects.equals(this.noneCategoryRecReasons, recommendCategoryResponseData.noneCategoryRecReasons)&&
         Objects.equals(this.additionalProperties, recommendCategoryResponseData.additionalProperties);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(categories, leafCategoryId, additionalProperties);
+    return Objects.hash(categories, leafCategoryId, noneCategoryRecReasons, additionalProperties);
   }
 
   @Override
@@ -182,6 +215,7 @@ public class RecommendCategoryResponseData {
     sb.append("class RecommendCategoryResponseData {\n");
     sb.append("    categories: ").append(toIndentedString(categories)).append("\n");
     sb.append("    leafCategoryId: ").append(toIndentedString(leafCategoryId)).append("\n");
+    sb.append("    noneCategoryRecReasons: ").append(toIndentedString(noneCategoryRecReasons)).append("\n");
     sb.append("    additionalProperties: ").append(toIndentedString(additionalProperties)).append("\n");
     sb.append("}");
     return sb.toString();
@@ -201,7 +235,7 @@ public class RecommendCategoryResponseData {
 
   static {
     // a set of all properties/fields (JSON key names)
-    openapiFields = new HashSet<String>(Arrays.asList("categories", "leaf_category_id"));
+    openapiFields = new HashSet<String>(Arrays.asList("categories", "leaf_category_id", "none_category_rec_reasons"));
 
     // a set of required properties/fields (JSON key names)
     openapiRequiredFields = new HashSet<String>(0);
@@ -236,6 +270,10 @@ public class RecommendCategoryResponseData {
       }
       if ((jsonObj.get("leaf_category_id") != null && !jsonObj.get("leaf_category_id").isJsonNull()) && !jsonObj.get("leaf_category_id").isJsonPrimitive()) {
         throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `leaf_category_id` to be a primitive type in the JSON string but got `%s`", jsonObj.get("leaf_category_id").toString()));
+      }
+      // ensure the optional json data is an array if present
+      if (jsonObj.get("none_category_rec_reasons") != null && !jsonObj.get("none_category_rec_reasons").isJsonNull() && !jsonObj.get("none_category_rec_reasons").isJsonArray()) {
+        throw new IllegalArgumentException(String.format(java.util.Locale.ROOT, "Expected the field `none_category_rec_reasons` to be an array in the JSON string but got `%s`", jsonObj.get("none_category_rec_reasons").toString()));
       }
   }
 

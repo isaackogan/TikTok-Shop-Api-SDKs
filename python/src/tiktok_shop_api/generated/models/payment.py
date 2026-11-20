@@ -23,7 +23,7 @@ T = TypeVar("T", bound="Payment")
 class Payment:
     """ 
         Attributes:
-            currency (str | Unset): Currency for payment.
+            currency (str | Unset): The ISO 4217 currency code for monetary amounts in this payment object.
             sub_total (str | Unset): Buyer paid subtotal of all the SKUs in the order. For the US market, this is pre-tax
                 total amount.
                 `sub_total` = `original_total_product_price` - `seller_discount` - `platform_discount`
@@ -32,7 +32,8 @@ class Payment:
                 For the US market, this is pre-tax total amount.
             seller_discount (str | Unset): Product discount by seller.
             platform_discount (str | Unset): Product discount by platform.
-            payment_platform_discount (str | Unset): Discount applied to the order funded by a payment platform
+            payment_platform_discount (str | Unset): The portion of `platform_discount` funded by a payment platform. This
+                amount is already included in `platform_discount`.
             payment_discount_service_fee (str | Unset): Service fee as paid by the buyer to apply payment platform discount
             total_amount (str | Unset): Buyer paid total amount.
                 `total_amount` = `sub_total` + `shipping_fee` + `taxes` + `retail_delivery_fee`

@@ -218,7 +218,7 @@ public class GetOrderListRequest {
   }
 
   /**
-   * Filter orders to show only those that are created on or after the specified date and time. Unix timestamp.  Note: &#x60;create_time_ge&#x60; and &#x60;create_time_lt&#x60; together constitute the creation time filter condition. - If &#x60;create_time_ge&#x60; is filled but &#x60;create_time_lt&#x60; is empty, &#x60;create_time_lt&#x60; will default to the current time. - If &#x60;create_time_lt&#x60; is filled but &#x60;create_time_ge&#x60; is empty, &#x60;create_time_ge&#x60; will default to the earliest shop time.
+   * Filter orders to show only those that are created on or after the specified date and time. Unix timestamp in seconds.  Note: &#x60;create_time_ge&#x60; and &#x60;create_time_lt&#x60; together constitute the creation time filter condition. - If &#x60;create_time_ge&#x60; is filled but &#x60;create_time_lt&#x60; is empty, &#x60;create_time_lt&#x60; will default to the current time. - If &#x60;create_time_lt&#x60; is filled but &#x60;create_time_ge&#x60; is empty, &#x60;create_time_ge&#x60; will default to the earliest shop time.
    * @return createTimeGe
    */
   @javax.annotation.Nullable
@@ -237,7 +237,7 @@ public class GetOrderListRequest {
   }
 
   /**
-   * Filter orders to show only those that are created before the specified date and time. Unix timestamp. Refer to notes in &#x60;create_time_ge&#x60; for more usage information.
+   * Filter orders to show only those that are created before the specified date and time. Unix timestamp in seconds. Refer to notes in &#x60;create_time_ge&#x60; for more usage information.
    * @return createTimeLt
    */
   @javax.annotation.Nullable
@@ -256,7 +256,7 @@ public class GetOrderListRequest {
   }
 
   /**
-   * Filter orders to show only those that are updated on or after the specified date and time. Unix timestamp.  Note: &#x60;update_time_ge&#x60; and &#x60;update_time_lt&#x60; together define the update time filter condition. - If &#x60;update_time_ge&#x60; is filled but &#x60;update_time_lt&#x60; is empty, &#x60;update_time_lt&#x60; will default to the current time. - If &#x60;update_time_lt&#x60; is filled but &#x60;update_time_ge&#x60; is empty, &#x60;update_time_ge&#x60; will default to the earliest shop time.  Update times may exceed the selected search range due to ongoing data refreshes during the search process.
+   * Filter orders to show only those that are updated on or after the specified date and time. Unix timestamp in seconds.  Note: &#x60;update_time_ge&#x60; and &#x60;update_time_lt&#x60; together define the update time filter condition. - If &#x60;update_time_ge&#x60; is filled but &#x60;update_time_lt&#x60; is empty, &#x60;update_time_lt&#x60; will default to the current time. - If &#x60;update_time_lt&#x60; is filled but &#x60;update_time_ge&#x60; is empty, &#x60;update_time_ge&#x60; will default to the earliest shop time.  Update times may exceed the selected search range due to ongoing data refreshes during the search process.
    * @return updateTimeGe
    */
   @javax.annotation.Nullable
@@ -275,7 +275,7 @@ public class GetOrderListRequest {
   }
 
   /**
-   * Filter orders to show only those that are updated before the specified date and time. Unix timestamp. Refer to notes in &#x60;update_time_ge&#x60; for more usage information.  Update times may exceed the selected search range due to ongoing data refreshes during the search process.
+   * Filter orders to show only those that are updated before the specified date and time. Unix timestamp in seconds. Refer to notes in &#x60;update_time_ge&#x60; for more usage information.  Update times may exceed the selected search range due to ongoing data refreshes during the search process.
    * @return updateTimeLt
    */
   @javax.annotation.Nullable

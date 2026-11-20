@@ -45,13 +45,14 @@ class GetOrderListResponseDataOrderRecipientAddress:
                 **Note**: Applicable only for the JP market.
             last_name_local_script (str | Unset): Recipient last name in katakana.
                 **Note**: Applicable only for the JP market.
-            address_detail (str | Unset): Full recipient detailed address.
+            address_detail (str | Unset): The detailed street-address portion of the recipient address, combined from the
+                address detail lines.
             address_line1 (str | Unset): The first line of the street address.
             address_line2 (str | Unset): The second line of the street address.
             address_line3 (str | Unset): The third line of the street address.
             address_line4 (str | Unset): The fourth line of the street address.
-            district_info (list[DistrictInfo] | Unset): `district_info` is unavailable under `UNPAID` and `ON_HOLD`
-                statuses.
+            district_info (list[DistrictInfo] | Unset): `district_info` is unavailable for orders with `UNPAID`, `ON_HOLD`,
+                or `CANCELLED` status.
             delivery_preferences (GetOrderListResponseDataOrderRecipientAddressDeliveryPreference | Unset):
             postal_code (str | Unset): The postal code that can be used by seller for shipping. For the US market, this
                 refers to the ZIP Code.

@@ -273,7 +273,7 @@ type ApiGetOrderDetailRequest struct {
 	ids *[]string
 }
 
-// A list of TikTok Shop order ID values. Max count: 50
+// TikTok Shop order IDs to retrieve. Specify 1 to 50 IDs as a comma-separated list.
 func (r ApiGetOrderDetailRequest) Ids(ids []string) ApiGetOrderDetailRequest {
 	r.ids = &ids
 	return r
@@ -286,7 +286,7 @@ func (r ApiGetOrderDetailRequest) Execute() (*GetOrderDetailResponse, *http.Resp
 /*
 GetOrderDetail Get Order Detail
 
-Get the detailed order information of an order, including important attributes such as order status, shipping addresses, payment details, price and tax info, and package information.
+Get detailed information for up to 50 TikTok Shop orders specified by their IDs, including order status, payment details, price and tax information, package information, and shipping address information when available.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetOrderDetailRequest
@@ -320,9 +320,6 @@ func (a *OrdersAPIService) GetOrderDetailExecute(r ApiGetOrderDetailRequest) (*G
 	localVarFormParams := url.Values{}
 	if r.ids == nil {
 		return localVarReturnValue, nil, reportError("ids is required and must be specified")
-	}
-	if len(*r.ids) > 50 {
-		return localVarReturnValue, nil, reportError("ids must have less than 50 elements")
 	}
 
 	parameterAddToHeaderOrQuery(localVarQueryParams, "ids", r.ids, "form", "csv")
@@ -400,13 +397,13 @@ type ApiGetOrderListRequest struct {
 	getOrderListRequest *GetOrderListRequest
 }
 
-// The number of results to be returned per page. Default: 20. Valid range: [1-100].
+// The number of results to be returned per page. Valid range: [1-100].
 func (r ApiGetOrderListRequest) PageSize(pageSize int64) ApiGetOrderListRequest {
 	r.pageSize = &pageSize
 	return r
 }
 
-// The sort order for the &#x60;sort_field&#x60; parameter. Default: DESC Possible values: - ASC: Ascending order - DESC: Descending order
+// The sort order for the &#x60;sort_field&#x60; parameter. Default: ASC Possible values: - ASC: Ascending order - DESC: Descending order
 func (r ApiGetOrderListRequest) SortOrder(sortOrder string) ApiGetOrderListRequest {
 	r.sortOrder = &sortOrder
 	return r
@@ -436,7 +433,7 @@ func (r ApiGetOrderListRequest) Execute() (*GetOrderListResponse, *http.Response
 /*
 GetOrderList Get Order List
 
-Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID.
+Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID. A response is successful when `code` is `0`, including when no orders match the request.
 
  @param ctx context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  @return ApiGetOrderListRequest

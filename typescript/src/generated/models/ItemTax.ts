@@ -30,7 +30,7 @@ export interface ItemTax {
      */
     taxType?: string;
     /**
-     * Tax amount.
+     * The tax amount for the sub-item, in the currency specified by `currency`.
      * @type {string}
      * @memberof ItemTax
      */

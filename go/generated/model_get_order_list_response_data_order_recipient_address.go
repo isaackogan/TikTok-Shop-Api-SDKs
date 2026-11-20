@@ -33,7 +33,7 @@ type GetOrderListResponseDataOrderRecipientAddress struct {
 	FirstNameLocalScript *string `json:"first_name_local_script,omitempty"`
 	// Recipient last name in katakana. **Note**: Applicable only for the JP market.
 	LastNameLocalScript *string `json:"last_name_local_script,omitempty"`
-	// Full recipient detailed address.
+	// The detailed street-address portion of the recipient address, combined from the address detail lines.
 	AddressDetail *string `json:"address_detail,omitempty"`
 	// The first line of the street address.
 	AddressLine1 *string `json:"address_line1,omitempty"`
@@ -43,7 +43,7 @@ type GetOrderListResponseDataOrderRecipientAddress struct {
 	AddressLine3 *string `json:"address_line3,omitempty"`
 	// The fourth line of the street address.
 	AddressLine4 *string `json:"address_line4,omitempty"`
-	// `district_info` is unavailable under `UNPAID` and `ON_HOLD` statuses.
+	// `district_info` is unavailable for orders with `UNPAID`, `ON_HOLD`, or `CANCELLED` status.
 	DistrictInfo []DistrictInfo `json:"district_info,omitempty"`
 	// Contains all of the delivery instructions provided by the recipient for the shipping address. Currently, only available in the US market.
 	DeliveryPreferences *GetOrderListResponseDataOrderRecipientAddressDeliveryPreference `json:"delivery_preferences,omitempty"`

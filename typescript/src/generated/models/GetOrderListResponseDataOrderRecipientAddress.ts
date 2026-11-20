@@ -87,7 +87,7 @@ export interface GetOrderListResponseDataOrderRecipientAddress {
      */
     lastNameLocalScript?: string;
     /**
-     * Full recipient detailed address.
+     * The detailed street-address portion of the recipient address, combined from the address detail lines.
      * @type {string}
      * @memberof GetOrderListResponseDataOrderRecipientAddress
      */
@@ -117,7 +117,7 @@ export interface GetOrderListResponseDataOrderRecipientAddress {
      */
     addressLine4?: string;
     /**
-     * `district_info` is unavailable under `UNPAID` and `ON_HOLD` statuses.
+     * `district_info` is unavailable for orders with `UNPAID`, `ON_HOLD`, or `CANCELLED` status.
      * @type {Array<DistrictInfo>}
      * @memberof GetOrderListResponseDataOrderRecipientAddress
      */

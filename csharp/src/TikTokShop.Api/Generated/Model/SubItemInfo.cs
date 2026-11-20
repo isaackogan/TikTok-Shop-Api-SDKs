@@ -36,30 +36,30 @@ namespace TikTokShop.Api.Generated.Model
         /// Initializes a new instance of the <see cref="SubItemInfo" /> class.
         /// </summary>
         /// <param name="id">Line item id of the sub_item. This unique identifier can be used when performing split/line-level fulfillment events..</param>
-        /// <param name="skuId">SKU ID..</param>
+        /// <param name="skuId">The SKU ID of the sub-item in the virtual bundle..</param>
         /// <param name="displayStatus">Available values: - &#x60;UNPAID&#x60;: The order has been placed, but payment has not yet completed. - &#x60;AWAITING_SHIPMENT&#x60;: The order is ready for shipment, but no items have been shipped yet. - &#x60;AWAITING_COLLECTION&#x60;: Shipping has been arranged, but the package is waiting to be collected by the carrier. - &#x60;IN_TRANSIT&#x60;: The package has been collected by the carrier and delivery is in progress. - &#x60;DELIVERED&#x60;: The package has been delivered to the buyer. - &#x60;COMPLETED&#x60;: The order has been completed, and no further returns or refunds are allowed. - &#x60;CANCELLED&#x60;: The order has been cancelled..</param>
         /// <param name="productName">Product name..</param>
         /// <param name="sellerSku">The seller stock keeping unit (SKU) of the item..</param>
         /// <param name="skuImage">SKU image..</param>
         /// <param name="skuName">The name of the SKU, combined by product SKU attribute like size or color. e.g. \&quot;Black, 26\&quot;.</param>
-        /// <param name="productId">Product ID..</param>
-        /// <param name="salePrice">Item sale price. Please refer to the currency of &#x60;payment_info&#x60;..</param>
-        /// <param name="platformDiscount">Platform discount amount. Please refer to the currency of &#x60;payment_info&#x60;..</param>
-        /// <param name="sellerDiscount">Seller discount amount. Please refer to the currency of &#x60;payment_info&#x60;..</param>
+        /// <param name="productId">The product ID of the sub-item in the virtual bundle..</param>
+        /// <param name="salePrice">The sub-item&#39;s sale price in the currency specified by &#x60;currency&#x60;..</param>
+        /// <param name="platformDiscount">The platform discount amount for the sub-item, in the currency specified by &#x60;currency&#x60;..</param>
+        /// <param name="sellerDiscount">The seller discount amount for the sub-item, in the currency specified by &#x60;currency&#x60;..</param>
         /// <param name="cancelReason">The cancellation reason. Please visit [our list of cancel reasons](https://partner.tiktokshop.com/docv2/page/67e61eee427345048595487d) for more information..</param>
-        /// <param name="originalPrice">Item original price. Please refer to the currency of &#x60;payment_info&#x60;..</param>
-        /// <param name="rtsTime">The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp..</param>
+        /// <param name="originalPrice">The sub-item&#39;s original price in the currency specified by &#x60;currency&#x60;..</param>
+        /// <param name="rtsTime">The Unix timestamp, in seconds, when the seller successfully called the [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) for this sub-item..</param>
         /// <param name="packageStatus">The package status of the item. Available values: - &#x60;TO_FULFILL&#x60;: Package awaiting seller to arrange shipment. - &#x60;PROCESSING&#x60;: Shipping has been arranged by the seller. Awaiting carrier collection. - &#x60;FULFILLING&#x60;: Package has been collected by carrier and is in transit. - &#x60;COMPLETED&#x60;: Package has been delivered. - &#x60;CANCELLED&#x60;: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged..</param>
-        /// <param name="currency">Currency for payment..</param>
+        /// <param name="currency">The ISO 4217 currency code for monetary amounts in this sub-item..</param>
         /// <param name="shippingProviderName">The shipping provider name..</param>
         /// <param name="cancelUser">Cancellation request initiator. Available values: - &#x60;BUYER&#x60; - &#x60;SELLER&#x60; - &#x60;OPERATOR&#x60; - &#x60;SYSTEM&#x60;.</param>
         /// <param name="shippingProviderId">The shipping provider ID of the item..</param>
         /// <param name="itemTax">Item tax detail..</param>
         /// <param name="trackingNumber">Tracking number. Available after package has been shipped..</param>
-        /// <param name="packageId">An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique &#x60;package_id&#x60; and &#x60;tracking_id&#x60;..</param>
-        /// <param name="retailDeliveryFee">Retail delivery fee (RDF). **Note**: Only available in the US market..</param>
+        /// <param name="packageId">An order can contain one or more packages based on how the seller chooses to ship, and each package has a unique &#x60;package_id&#x60;. This field identifies the package that contains this sub-item. Use the sub-item&#39;s &#x60;tracking_number&#x60; for its package-specific tracking value..</param>
+        /// <param name="retailDeliveryFee">Retail delivery fee (RDF) for the sub-item, in the currency specified by &#x60;currency&#x60;. **Note**: Only available in the US market..</param>
         /// <param name="isDangerousGood">Whether the SKU is a hazmat item. When creating the label for a hazmat item, you must follow the platform rules to put certain items into one package. Please refer to the relationship between &#x60;sku_id&#x60; and &#x60;package_id&#x60; to determine how to follow platform rules..</param>
-        /// <param name="warehouseId">Seller warehouse ID..</param>
+        /// <param name="warehouseId">The ID of the seller warehouse assigned to fulfill this sub-item..</param>
         public SubItemInfo(string id = default, string skuId = default, string displayStatus = default, string productName = default, string sellerSku = default, string skuImage = default, string skuName = default, string productId = default, string salePrice = default, string platformDiscount = default, string sellerDiscount = default, string cancelReason = default, string originalPrice = default, long rtsTime = default, string packageStatus = default, string currency = default, string shippingProviderName = default, string cancelUser = default, string shippingProviderId = default, List<ItemTax> itemTax = default, string trackingNumber = default, string packageId = default, string retailDeliveryFee = default, bool isDangerousGood = default, string warehouseId = default)
         {
             this.Id = id;
@@ -98,9 +98,9 @@ namespace TikTokShop.Api.Generated.Model
         public string Id { get; set; }
 
         /// <summary>
-        /// SKU ID.
+        /// The SKU ID of the sub-item in the virtual bundle.
         /// </summary>
-        /// <value>SKU ID.</value>
+        /// <value>The SKU ID of the sub-item in the virtual bundle.</value>
         [DataMember(Name = "sku_id", EmitDefaultValue = false)]
         public string SkuId { get; set; }
 
@@ -140,30 +140,30 @@ namespace TikTokShop.Api.Generated.Model
         public string SkuName { get; set; }
 
         /// <summary>
-        /// Product ID.
+        /// The product ID of the sub-item in the virtual bundle.
         /// </summary>
-        /// <value>Product ID.</value>
+        /// <value>The product ID of the sub-item in the virtual bundle.</value>
         [DataMember(Name = "product_id", EmitDefaultValue = false)]
         public string ProductId { get; set; }
 
         /// <summary>
-        /// Item sale price. Please refer to the currency of &#x60;payment_info&#x60;.
+        /// The sub-item&#39;s sale price in the currency specified by &#x60;currency&#x60;.
         /// </summary>
-        /// <value>Item sale price. Please refer to the currency of &#x60;payment_info&#x60;.</value>
+        /// <value>The sub-item&#39;s sale price in the currency specified by &#x60;currency&#x60;.</value>
         [DataMember(Name = "sale_price", EmitDefaultValue = false)]
         public string SalePrice { get; set; }
 
         /// <summary>
-        /// Platform discount amount. Please refer to the currency of &#x60;payment_info&#x60;.
+        /// The platform discount amount for the sub-item, in the currency specified by &#x60;currency&#x60;.
         /// </summary>
-        /// <value>Platform discount amount. Please refer to the currency of &#x60;payment_info&#x60;.</value>
+        /// <value>The platform discount amount for the sub-item, in the currency specified by &#x60;currency&#x60;.</value>
         [DataMember(Name = "platform_discount", EmitDefaultValue = false)]
         public string PlatformDiscount { get; set; }
 
         /// <summary>
-        /// Seller discount amount. Please refer to the currency of &#x60;payment_info&#x60;.
+        /// The seller discount amount for the sub-item, in the currency specified by &#x60;currency&#x60;.
         /// </summary>
-        /// <value>Seller discount amount. Please refer to the currency of &#x60;payment_info&#x60;.</value>
+        /// <value>The seller discount amount for the sub-item, in the currency specified by &#x60;currency&#x60;.</value>
         [DataMember(Name = "seller_discount", EmitDefaultValue = false)]
         public string SellerDiscount { get; set; }
 
@@ -175,16 +175,16 @@ namespace TikTokShop.Api.Generated.Model
         public string CancelReason { get; set; }
 
         /// <summary>
-        /// Item original price. Please refer to the currency of &#x60;payment_info&#x60;.
+        /// The sub-item&#39;s original price in the currency specified by &#x60;currency&#x60;.
         /// </summary>
-        /// <value>Item original price. Please refer to the currency of &#x60;payment_info&#x60;.</value>
+        /// <value>The sub-item&#39;s original price in the currency specified by &#x60;currency&#x60;.</value>
         [DataMember(Name = "original_price", EmitDefaultValue = false)]
         public string OriginalPrice { get; set; }
 
         /// <summary>
-        /// The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp.
+        /// The Unix timestamp, in seconds, when the seller successfully called the [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) for this sub-item.
         /// </summary>
-        /// <value>The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp.</value>
+        /// <value>The Unix timestamp, in seconds, when the seller successfully called the [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) for this sub-item.</value>
         [DataMember(Name = "rts_time", EmitDefaultValue = false)]
         public long RtsTime { get; set; }
 
@@ -196,9 +196,9 @@ namespace TikTokShop.Api.Generated.Model
         public string PackageStatus { get; set; }
 
         /// <summary>
-        /// Currency for payment.
+        /// The ISO 4217 currency code for monetary amounts in this sub-item.
         /// </summary>
-        /// <value>Currency for payment.</value>
+        /// <value>The ISO 4217 currency code for monetary amounts in this sub-item.</value>
         [DataMember(Name = "currency", EmitDefaultValue = false)]
         public string Currency { get; set; }
 
@@ -238,16 +238,16 @@ namespace TikTokShop.Api.Generated.Model
         public string TrackingNumber { get; set; }
 
         /// <summary>
-        /// An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique &#x60;package_id&#x60; and &#x60;tracking_id&#x60;.
+        /// An order can contain one or more packages based on how the seller chooses to ship, and each package has a unique &#x60;package_id&#x60;. This field identifies the package that contains this sub-item. Use the sub-item&#39;s &#x60;tracking_number&#x60; for its package-specific tracking value.
         /// </summary>
-        /// <value>An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique &#x60;package_id&#x60; and &#x60;tracking_id&#x60;.</value>
+        /// <value>An order can contain one or more packages based on how the seller chooses to ship, and each package has a unique &#x60;package_id&#x60;. This field identifies the package that contains this sub-item. Use the sub-item&#39;s &#x60;tracking_number&#x60; for its package-specific tracking value.</value>
         [DataMember(Name = "package_id", EmitDefaultValue = false)]
         public string PackageId { get; set; }
 
         /// <summary>
-        /// Retail delivery fee (RDF). **Note**: Only available in the US market.
+        /// Retail delivery fee (RDF) for the sub-item, in the currency specified by &#x60;currency&#x60;. **Note**: Only available in the US market.
         /// </summary>
-        /// <value>Retail delivery fee (RDF). **Note**: Only available in the US market.</value>
+        /// <value>Retail delivery fee (RDF) for the sub-item, in the currency specified by &#x60;currency&#x60;. **Note**: Only available in the US market.</value>
         [DataMember(Name = "retail_delivery_fee", EmitDefaultValue = false)]
         public string RetailDeliveryFee { get; set; }
 
@@ -259,9 +259,9 @@ namespace TikTokShop.Api.Generated.Model
         public bool IsDangerousGood { get; set; }
 
         /// <summary>
-        /// Seller warehouse ID.
+        /// The ID of the seller warehouse assigned to fulfill this sub-item.
         /// </summary>
-        /// <value>Seller warehouse ID.</value>
+        /// <value>The ID of the seller warehouse assigned to fulfill this sub-item.</value>
         [DataMember(Name = "warehouse_id", EmitDefaultValue = false)]
         public string WarehouseId { get; set; }
 

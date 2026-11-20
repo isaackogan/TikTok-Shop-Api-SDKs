@@ -84,7 +84,7 @@ export interface GetOrderListResponseDataOrder {
      */
     shippingProviderId?: string;
     /**
-     * The date and time that the order was created. Unix timestamp.
+     * The date and time that the order was created. Unix timestamp, in seconds.
      * @type {number}
      * @memberof GetOrderListResponseDataOrder
      */
@@ -108,7 +108,7 @@ export interface GetOrderListResponseDataOrder {
      */
     payment?: Payment;
     /**
-     * `recipient_address` is not available under `UNPAID` and `ON_HOLD` statuses.
+     * Recipient address information is unavailable for orders with `UNPAID`, `ON_HOLD`, or `CANCELLED` status.
      * @type {GetOrderListResponseDataOrderRecipientAddress}
      * @memberof GetOrderListResponseDataOrder
      */
@@ -130,7 +130,7 @@ export interface GetOrderListResponseDataOrder {
      */
     status?: string;
     /**
-     * Fulfillment type. Only orders with fulfillment type can be shipped by sellers.
+     * The order fulfillment model.
      * Available values:
      * - `FULFILLMENT_BY_SELLER`: a method where sellers fulfill orders directly from their own inventory, without using TikTok's fulfillment centers. In this model, the seller is responsible for storing, packaging, and shipping the products to customers.
      * - `FULFILLMENT_BY_TIKTOK`: a service offered by TikTok where sellers can send their products to TikTok's fulfillment centers. TikTok then takes care of storing, picking, packing, and shipping the products to customers.
@@ -173,7 +173,7 @@ export interface GetOrderListResponseDataOrder {
      */
     cancelReason?: string;
     /**
-     * Time of order status change. Unix timestamp.
+     * The date and time when the order was last updated. Unix timestamp in seconds.
      * @type {number}
      * @memberof GetOrderListResponseDataOrder
      */
@@ -226,7 +226,7 @@ export interface GetOrderListResponseDataOrder {
      */
     warehouseId?: string;
     /**
-     * Buyer request cancellation time. Unix timestamp.
+     * The time when the buyer submitted the pending cancellation request. Unix timestamp in seconds.
      * @type {number}
      * @memberof GetOrderListResponseDataOrder
      */
@@ -242,7 +242,7 @@ export interface GetOrderListResponseDataOrder {
      */
     shippingType?: string;
     /**
-     * Buyer user ID.
+     * The ID of the buyer who placed the order. This is the value matched by the `buyer_user_id` request filter.
      * @type {string}
      * @memberof GetOrderListResponseDataOrder
      */
@@ -254,15 +254,13 @@ export interface GetOrderListResponseDataOrder {
      */
     sellerNote?: string;
     /**
-     * Order should arrive by this date to be considered on-time and to avoid late delivery penalties.
+     * The time by which the order should arrive to be considered on time and avoid late-delivery penalties. Unix timestamp in seconds.
      * @type {number}
      * @memberof GetOrderListResponseDataOrder
      */
     deliverySlaTime?: number;
     /**
-     * This option is for sellers that accept cash payment on delivery (COD). Buyers will pay in cash upon receiving the package. 
-     * 
-     * Default: FALSE
+     * Whether the order uses cash on delivery (COD). If `true`, the buyer pays in cash when the package is delivered.
      * 
      * Only applicable to countries where COD is supported.
      * @type {boolean}
@@ -276,7 +274,7 @@ export interface GetOrderListResponseDataOrder {
      */
     deliveryOptionId?: string;
     /**
-     * The time an order's status was updated to `CANCELLED`. Unix timestamp.
+     * The time an order's status was updated to `CANCELLED`. Unix timestamp in seconds.
      * @type {number}
      * @memberof GetOrderListResponseDataOrder
      */
@@ -293,11 +291,7 @@ export interface GetOrderListResponseDataOrder {
      */
     needUploadInvoice?: string;
     /**
-     * Delivery option name. For display purposes only.
-     * Available values:
-     * - `Economy Shipping`
-     * - `Standard Shipping`
-     * - `Express Shipping`
+     * The name of the delivery option. For display purposes only.
      * @type {string}
      * @memberof GetOrderListResponseDataOrder
      */
@@ -353,7 +347,7 @@ export interface GetOrderListResponseDataOrder {
      */
     deliveryOptionRequiredDeliveryTime?: number;
     /**
-     * Indicates whether the order has been changed to or will be updated to `ON_HOLD` status.
+     * Whether the order entered an ON_HOLD period after the buyer completed payment. This does not indicate that the order's current status is ON_HOLD.
      * @type {boolean}
      * @memberof GetOrderListResponseDataOrder
      */
@@ -377,7 +371,7 @@ export interface GetOrderListResponseDataOrder {
      */
     isSubscriptionOrder?: boolean;
     /**
-     * This indicates if an order is a refundable sample. Refundable samples lets sellers collaborate with creators by refunding product costs only when creators meet sales thresholds.
+     * Whether the order is a refundable sample. This flag is independent of `is_sample_order`; a refundable-sample order can have `is_sample_order` set to `false`. Refundable samples let sellers collaborate with creators by refunding product costs only when creators meet sales thresholds.
      * @type {boolean}
      * @memberof GetOrderListResponseDataOrder
      */
@@ -550,16 +544,18 @@ export interface GetOrderListResponseDataOrder {
      */
     buyerAvatar?: string;
     /**
-     * Order tag identifier if has certain rights within the order based on the program subscribed by sellers.
-     * 1 = Shipping Fee Reimbursement Program
-     * 2 = Horizon+ Program 
-     * Applicable for SEA market only
+     * Order rights granted through programs joined by the seller. Multiple values can be returned together; the field is omitted when none of the listed rights apply.
+     * Possible values:
+     * - `1`: Shipping Fee Reimbursement Program
+     * - `2`: Horizon+ Program
+     * 
+     * **Note**: Available only in the SEA market.
      * @type {Array<number>}
      * @memberof GetOrderListResponseDataOrder
      */
     orderRights?: Array<number>;
     /**
-     * The latest buyer pickup time for instore pickup method specified by the platform. Currently applicable for SEA market. Unix timestamp.
+     * The latest buyer pickup time for instore pickup method specified by the platform. Currently applicable for SEA market. Unix timestamp in seconds.
      * @type {number}
      * @memberof GetOrderListResponseDataOrder
      */

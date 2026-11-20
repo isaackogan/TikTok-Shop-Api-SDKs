@@ -21,7 +21,7 @@ var _ MappedNullable = &GetOrderDetailResponseDataOrderLineItemItemTax{}
 type GetOrderDetailResponseDataOrderLineItemItemTax struct {
 	// Tax type. - `SALES_TAX` (US market sales tax) Currently only sales tax is available.
 	TaxType *string `json:"tax_type,omitempty"`
-	// Tax amount.
+	// The tax amount for the line item, in the currency specified by `currency`.
 	TaxAmount *string `json:"tax_amount,omitempty"`
 	// Tax rate.
 	TaxRate *string `json:"tax_rate,omitempty"`

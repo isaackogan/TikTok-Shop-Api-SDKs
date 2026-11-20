@@ -42,12 +42,12 @@ namespace TikTokShop.Api.Generated.Model
         /// <param name="lastName">Recipient last name.   If the recipient first and last names are not provided separately, this parameter will be empty..</param>
         /// <param name="firstNameLocalScript">Recipient first name in katakana. **Note**: Applicable only for the JP market..</param>
         /// <param name="lastNameLocalScript">Recipient last name in katakana. **Note**: Applicable only for the JP market..</param>
-        /// <param name="addressDetail">Full recipient detailed address..</param>
+        /// <param name="addressDetail">The detailed street-address portion of the recipient address, combined from the address detail lines..</param>
         /// <param name="addressLine1">The first line of the street address..</param>
         /// <param name="addressLine2">The second line of the street address..</param>
         /// <param name="addressLine3">The third line of the street address..</param>
         /// <param name="addressLine4">The fourth line of the street address..</param>
-        /// <param name="districtInfo">&#x60;district_info&#x60; is unavailable under &#x60;UNPAID&#x60; and &#x60;ON_HOLD&#x60; statuses..</param>
+        /// <param name="districtInfo">&#x60;district_info&#x60; is unavailable for orders with &#x60;UNPAID&#x60;, &#x60;ON_HOLD&#x60;, or &#x60;CANCELLED&#x60; status..</param>
         /// <param name="deliveryPreferences">Contains all of the delivery instructions provided by the recipient for the shipping address. Currently, only available in the US market..</param>
         /// <param name="postalCode">The postal code that can be used by seller for shipping. For the US market, this refers to the ZIP Code..</param>
         /// <param name="regionCode">Region code..</param>
@@ -124,9 +124,9 @@ namespace TikTokShop.Api.Generated.Model
         public string LastNameLocalScript { get; set; }
 
         /// <summary>
-        /// Full recipient detailed address.
+        /// The detailed street-address portion of the recipient address, combined from the address detail lines.
         /// </summary>
-        /// <value>Full recipient detailed address.</value>
+        /// <value>The detailed street-address portion of the recipient address, combined from the address detail lines.</value>
         [DataMember(Name = "address_detail", EmitDefaultValue = false)]
         public string AddressDetail { get; set; }
 
@@ -159,9 +159,9 @@ namespace TikTokShop.Api.Generated.Model
         public string AddressLine4 { get; set; }
 
         /// <summary>
-        /// &#x60;district_info&#x60; is unavailable under &#x60;UNPAID&#x60; and &#x60;ON_HOLD&#x60; statuses.
+        /// &#x60;district_info&#x60; is unavailable for orders with &#x60;UNPAID&#x60;, &#x60;ON_HOLD&#x60;, or &#x60;CANCELLED&#x60; status.
         /// </summary>
-        /// <value>&#x60;district_info&#x60; is unavailable under &#x60;UNPAID&#x60; and &#x60;ON_HOLD&#x60; statuses.</value>
+        /// <value>&#x60;district_info&#x60; is unavailable for orders with &#x60;UNPAID&#x60;, &#x60;ON_HOLD&#x60;, or &#x60;CANCELLED&#x60; status.</value>
         [DataMember(Name = "district_info", EmitDefaultValue = false)]
         public List<DistrictInfo> DistrictInfo { get; set; }
 

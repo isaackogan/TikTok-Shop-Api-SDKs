@@ -45,14 +45,14 @@ namespace TikTokShop.Api.Generated.Model
         /// <param name="payment">Payment info about a TikTok Shop order..</param>
         /// <param name="recipientAddress">&#x60;recipient_address&#x60; is not available under &#x60;UNPAID&#x60; and &#x60;ON_HOLD&#x60; status..</param>
         /// <param name="buyerMessage">The note from buyer..</param>
-        /// <param name="createTime">The date and time that the order was created. Unix timestamp..</param>
+        /// <param name="createTime">The date and time that the order was created. Unix timestamp in seconds..</param>
         /// <param name="trackingNumber">Tracking number. Available after ship package..</param>
         /// <param name="cancelReason">The order level cancellation reason. **Note**: A multi-line order may have different &#x60;cancel_reason&#x60; across the multiple items. If this occurs, the order-level &#x60;cancel_reason&#x60; will surface the &#x60;cancel_reason&#x60; from the first line item. [See here](https://partner.tiktokshop.com/docv2/page/cancel-reasons) for more details on cancellation reasons..</param>
-        /// <param name="rtsSlaTime">The latest shipping time specified by the platform. Unix timestamp..</param>
-        /// <param name="paidTime">The date and time that the order was paid. Unix timestamp..</param>
+        /// <param name="rtsSlaTime">The latest shipping time specified by the platform, as a Unix timestamp in seconds..</param>
+        /// <param name="paidTime">The date and time that the order was paid, as a Unix timestamp in seconds..</param>
         /// <param name="fulfillmentType">Fulfillment type.  Only orders with fulfillment type can be shipped by sellers. Possible values: - &#x60;FULFILLMENT_BY_SELLER&#x60;: a method where sellers fulfill orders directly from their own inventory, without using TikTok&#39;s fulfillment centers. In this model, the seller is responsible for storing, packaging, and shipping the product to customers. - &#x60;FULFILLMENT_BY_TIKTOK&#x60;: a service offered by TikTok that enables sellers to send their products to TikTok&#39;s fulfillment centers. TikTok then takes care of storing, picking, packing, and shipping the products to customers. - &#x60;FULFILLMENT_BY_DILAYANI_TOKOPEDIA&#x60;: a method where Tokopedia GoTo Logistics provides warehousing and logistics services to sellers and charges a fee for the service..</param>
         /// <param name="sellerNote">This field return the note, which seller notes in TikTok Seller Center..</param>
-        /// <param name="ttsSlaTime">The latest collection time specified by the platform. Unix timestamp..</param>
+        /// <param name="ttsSlaTime">The latest collection time specified by the platform, as a Unix timestamp in seconds..</param>
         /// <param name="cancelOrderSlaTime">The automatic cancellation time for orders specified by the platform. Unix timestamp..</param>
         /// <param name="updateTime">Time of order status changes. Unix timestamp..</param>
         /// <param name="packages">List of packages included in this order.</param>
@@ -61,34 +61,34 @@ namespace TikTokShop.Api.Generated.Model
         /// <param name="warehouseId">seller warehouse ID..</param>
         /// <param name="splitOrCombineTag">Indicate whether the order is combined or split. - &#x60;COMBINED&#x60; - &#x60;SPLIT&#x60; This field will be used in future fulfillment apis..</param>
         /// <param name="hasUpdatedRecipientAddress">Whether the recipient address has been updated. - &#x60;false&#x60;: no update - &#x60;true&#x60;: updated.</param>
-        /// <param name="cpf">CPF (invoice number), used to issue an invoice. Exclusive for the Brazil market..</param>
+        /// <param name="cpf">The buyer&#39;s CPF tax identification number, used to issue an invoice. Available only in Brazil..</param>
         /// <param name="deliveryOptionId">Order delivery option ID..</param>
-        /// <param name="deliverySlaTime">Order should arrive by this date to be considered on-time and to avoid late delivery penalties..</param>
+        /// <param name="deliverySlaTime">The Unix timestamp, in seconds, by which the order should arrive to be considered on time and avoid late-delivery penalties..</param>
         /// <param name="paymentMethodName">Payment method name, only for display.</param>
-        /// <param name="paymentCardType">Code to distinguish different payment method. Only assigned when the payment method is using bank card. Possible values are: Debit, Credit, Prepaid.</param>
+        /// <param name="paymentCardType">Card type for bank card payments. Possible values: - &#x60;Debit&#x60; - &#x60;Credit&#x60; - &#x60;Prepaid&#x60;.</param>
         /// <param name="channelEntityNationalRegistryId">The national channel entity registration ID  of payment institution/creditor. In Brazil, it is the CNPJ of payment instituion..</param>
         /// <param name="paymentMethodCode">Payment method code identifying current transaction. It will contains payment method and card brand if it is card transaction..</param>
         /// <param name="paymentAuthCode">Authorization code of current transaction (only for the Brazilian market). For card transactions (credit/debit card), this field will be transaction authorization code. For PIX transactions, this field will be E2E ID..</param>
-        /// <param name="shippingDueTime">If the order hasn&#39;t updated its status to &#x60;AWAITING_COLLECTION&#x60; before this time, the order will be automatically canceled by TikTok Shop..</param>
+        /// <param name="shippingDueTime">The Unix timestamp, in seconds, by which the order must reach &#x60;AWAITING_COLLECTION&#x60;; otherwise, TikTok Shop automatically cancels the order..</param>
         /// <param name="lineItems">Line item info list..</param>
         /// <param name="shippingType">The method of delivery. - &#x60;TIKTOK&#x60;: shipping service provided by TikTok. The seller should obtain shipping label from TikTok. - &#x60;SELLER&#x60;: seller provides shipping, including through 3rd party fulfillment providers on behalf of the seller. - &#x60;TIKTOK_DIGITAL&#x60;: Tiktok delivers virtual goods directly to buyers. There is no action needed..</param>
         /// <param name="buyerEmail">The anonymized email address of the buyer. It is not recommended to send messages directly to this email address. If you need to contact the buyer, please go to Seller Center - Buyer Messages page..</param>
-        /// <param name="deliveryTime">The timestamp of the order&#39;s status update to &#x60;DELIVERED&#x60;..</param>
+        /// <param name="deliveryTime">The Unix timestamp, in seconds, when the order status changed to &#x60;DELIVERED&#x60;..</param>
         /// <param name="needUploadInvoice">Whether an invoice needs to be uploaded and uploaded status (only for Brazil market). - UNKNOWN: Currently unable to confirm whether an invoice is needed - NEED_INVOICE: This order requires an invoice and the invoice has not been uploaded yet - NO_NEED：This order does not require an invoice - INVOICE_UPLOADED: The invoice for this order has been uploaded and verified. If the order is split, it will be marked as \&quot;uploaded\&quot; once any sub-order&#39;s invoice is uploaded. - INVOICE_PROCESSING: The invoice for this order is currently being uploaded/cancelled. Please wait for the final result and do not repeat the operation.</param>
-        /// <param name="isCod">This option is for sellers that accept cash payment on delivery which is rare. Buyers will pay in cash upon receipt of package. Default value is &#x60;FALSE&#x60;. Only applicable to countries where Cash on Delivery (COD) is supported..</param>
-        /// <param name="requestCancelTime">Buyer request cancel time..</param>
-        /// <param name="deliveryOptionRequiredDeliveryTime">Order should be delivered before this time..</param>
+        /// <param name="isCod">Whether the order uses cash on delivery (COD). When returned, &#x60;true&#x60; means the buyer pays cash upon receipt and &#x60;false&#x60; means the order uses another payment method. The field may be omitted when payment type is unavailable. Available only in countries where COD is supported..</param>
+        /// <param name="requestCancelTime">The Unix timestamp, in seconds, when the buyer submitted the pending cancellation request. Returned when is_buyer_request_cancel is true..</param>
+        /// <param name="deliveryOptionRequiredDeliveryTime">The Unix timestamp, in seconds, by which the order should be delivered..</param>
         /// <param name="deliveryOptionName">Delivery option name. For display purposes only..</param>
         /// <param name="isBuyerRequestCancel">True when the buyer has a pending cancellation request.</param>
-        /// <param name="deliveryDueTime">If the order hasn&#39;t updated its status to &#x60;DELIVERED&#x60; before this time, the order will be automatically canceled by TikTok Shop..</param>
-        /// <param name="collectionTime">The timestamp of the order&#39;s status update to &#x60;IN_TRANSIT&#x60;..</param>
-        /// <param name="isOnHoldOrder">Indicates whether the order experienced or will be experienced &#x60;ON_HOLD&#x60; status..</param>
-        /// <param name="cancelTime">The timestamp of the order&#39;s status update to &#x60;CANCELLED&#x60;..</param>
+        /// <param name="deliveryDueTime">The Unix timestamp, in seconds, by which the order must reach &#x60;DELIVERED&#x60;; otherwise, TikTok Shop automatically cancels the order..</param>
+        /// <param name="collectionTime">The Unix timestamp, in seconds, when the order status changed to &#x60;IN_TRANSIT&#x60;..</param>
+        /// <param name="isOnHoldOrder">Whether the order has entered or will enter an &#x60;ON_HOLD&#x60; period after buyer payment. This does not indicate that the order&#39;s current &#x60;status&#x60; is &#x60;ON_HOLD&#x60;..</param>
+        /// <param name="cancelTime">The Unix timestamp, in seconds, when the order status changed to CANCELLED..</param>
         /// <param name="isReplacementOrder">When true, this is a replacement order..</param>
         /// <param name="replacedOrderId">The order ID for the order that is being replaced. Returned only if &#x60;is_replacement_order&#x60; &#x3D; &#x60;true&#x60;.</param>
-        /// <param name="collectionDueTime">If the order hasn&#39;t updated its status to &#x60;IN_TRANSIT&#x60; before this time, the order will be automatically canceled by TikTok Shop.</param>
+        /// <param name="collectionDueTime">The Unix timestamp, in seconds, by which the order must reach &#x60;IN_TRANSIT&#x60;; otherwise, TikTok Shop automatically cancels the order..</param>
         /// <param name="pickUpCutOffTime">To avoid LDR, you must ensure the package is picked up by this time. Only applicable in Southeast Asia regions..</param>
-        /// <param name="fastDispatchSlaTime">The latest collection time to gain incentives of NDD (Next Day Delivery) project. Unix timestamp Only available in Thailand and Philippines..</param>
+        /// <param name="fastDispatchSlaTime">The latest collection time for the order to qualify for Next Day Delivery (NDD) incentives. Unix timestamp, in seconds..</param>
         /// <param name="commercePlatform">The platform where the order was placed. Possible values: - &#x60;TIKTOK_SHOP&#x60; - &#x60;TOKOPEDIA&#x60; - &#x60;TIKTOK_SHOP_APP&#x60; **Note**: &#x60;Tokopedia&#x60; and &#x60;Tiktok Shop App&#x60; available only in the SEA market..</param>
         /// <param name="orderType">The order type. Possible values based on region: **All regions** - &#x60;NORMAL&#x60;: An item that is in stock and available for immediate purchase and fulfillment. - &#x60;ZERO_LOTTERY&#x60;: An order placed during a lottery event in TikTok LIVE. - &#x60;AUCTION&#x60;: An order placed during auction, where the price of the product is not fixed. **US** - &#x60;PRE_ORDER&#x60;: An advance order for items that are not yet available or released. Fulfillment starts on a specific date in the future. - &#x60;MADE_TO_ORDER&#x60;: An order for items that are produced only after the order is received. Fulfillment starts after the product is produced. - &#x60;BACK_ORDER&#x60;: An order for items that are out of stock but expected to be restocked. Fulfillment starts after the product is restocked. - &#x60;VIRTUAL_ORDER&#x60;: An order for items that are digital goods, requiring no physical delivery. Fulfillment is immediate or automated upon payment confirmation. Returns an empty value for standard orders or other types that don&#39;t fall into the above categories..</param>
         /// <param name="releaseDate">The date on which order handling starts and the status of the order changes to [&#x60;AWAITING_SHIPMENT&#x60;](https://partner.tiktokshop.com/docv2/page/650b1b4bbace3e02b76d1011). Applicable only if the &#x60;order_type&#x60; is &#x60;PRE_ORDER&#x60;..</param>
@@ -102,12 +102,12 @@ namespace TikTokShop.Api.Generated.Model
         /// <param name="authenticationRequired">If true, order requires authentication. Use an approved in-house authentication service after an order has been placed for verification. This must be completed before shipment..</param>
         /// <param name="consultationId">An ID to identify the corresponding ePharmacy consultation.  Applicable only if an ePharmacy consultation was initiated. Not applicable if the prescription was provided by the customer through an image upload..</param>
         /// <param name="fastDeliveryProgram">A badge presented on the merchandise to tell the buyer that the seller participates in the fast delivery program, such that the order should arrive in a promised time period. Possible values: - &#x60;3_DAY_DELIVERY&#x60; - &#x60;3_DAY_POTENTIAL_SHIPPING&#x60; - &#x60;3_DAY_POTENTIAL_TRANSIT&#x60; Not returned if order did not meet fast delivery program requirements. Note: Applicable only for the US market..</param>
-        /// <param name="buyerNickname">The nickname of the TikTok buyer, which is defined by the TikTok user. The buyer_nickname can be used to identify the buyer when displaying the unboxing results within the TikTok Live Session..</param>
-        /// <param name="buyerAvatar">The avatar of the TikTok buyer, which is defined by the TikTok user. The buyer_avatar can be used in conjunction with the buyer_nickname when displaying the unboxing results within the TikTok Live Session..</param>
-        /// <param name="orderRights">Order tag identifier if has certain rights within the order based on the program subscribed by sellers. 1 &#x3D; Shipping Fee Reimbursement Program 2 &#x3D; Horizon+ Program  Applicable for SEA market only.</param>
+        /// <param name="buyerNickname">The nickname of the TikTok buyer, as defined by the TikTok user. This field is populated only for supported virtual unboxing orders and can be displayed with &#x60;buyer_avatar&#x60; in TikTok LIVE unboxing results. Use &#x60;user_id&#x60;, not this display name, for programmatic buyer identification..</param>
+        /// <param name="buyerAvatar">The avatar of the TikTok buyer, as defined by the TikTok user. This field is populated only for supported virtual unboxing orders and can be used with &#x60;buyer_nickname&#x60; when displaying unboxing results in a TikTok LIVE session..</param>
+        /// <param name="orderRights">Order rights associated with seller programs. Multiple values can be returned together, and the field is omitted when no right applies. Possible values: - &#x60;1&#x60;: Shipping Fee Reimbursement Program - &#x60;2&#x60;: Horizon+ Program Applicable only in SEA markets..</param>
         /// <param name="fulfillmentPriorityLevel">Fulfillment priority value that can be used to prioritize shipping (only available in SEA) 100 &#x3D; Instant 200 &#x3D; Sameday 8 Hours 300 &#x3D; Sameday 400 &#x3D; Next Day Delivery 500 &#x3D; Express 600 &#x3D; Standard 700 &#x3D; Economy 800 &#x3D; Cargo.</param>
         /// <param name="recommendedShippingTime">Recommended time to ship based on the each LSP service type (only available in SEA).</param>
-        /// <param name="instorePickupSlaTime">The latest buyer pickup time for instore pickup method specified by the platform. Currently applicable for SEA market. Unix timestamp..</param>
+        /// <param name="instorePickupSlaTime">The latest buyer pickup time for in-store pickup, as a Unix timestamp in seconds. Currently available in SEA markets..</param>
         /// <param name="fastRtsSlaTime">Indicate fast fulfillment SLA for shipping action. Applicable for SEA market only. Unix timestamp.</param>
         /// <param name="fastCollectionSlaTime">Indicate fast fulfillment SLA for collection action. Applicable for SEA market only. Unix timestamp.</param>
         /// <param name="orderTag">The order tag. Possible values based on region: **All regions** - &#x60;TEAM_BREAK&#x60;: An order tag placed for a Team Break event in a LIVE auction. The buyer purchases a slot/team spot, and the final item is determined by the break outcome; the SKU name may be assigned or updated by the seller after the break. -&#x60;SURPRISE_SET&#x60;:  An order tag placed for a Surprise Set event in a LIVE auction. The buyer purchases a surprise/mystery set, and the final items are determined by the platform&#39;s Surprise/Randomizer result during the LIVE session..</param>
@@ -263,9 +263,9 @@ namespace TikTokShop.Api.Generated.Model
         public string BuyerMessage { get; set; }
 
         /// <summary>
-        /// The date and time that the order was created. Unix timestamp.
+        /// The date and time that the order was created. Unix timestamp in seconds.
         /// </summary>
-        /// <value>The date and time that the order was created. Unix timestamp.</value>
+        /// <value>The date and time that the order was created. Unix timestamp in seconds.</value>
         [DataMember(Name = "create_time", EmitDefaultValue = false)]
         public long CreateTime { get; set; }
 
@@ -284,16 +284,16 @@ namespace TikTokShop.Api.Generated.Model
         public string CancelReason { get; set; }
 
         /// <summary>
-        /// The latest shipping time specified by the platform. Unix timestamp.
+        /// The latest shipping time specified by the platform, as a Unix timestamp in seconds.
         /// </summary>
-        /// <value>The latest shipping time specified by the platform. Unix timestamp.</value>
+        /// <value>The latest shipping time specified by the platform, as a Unix timestamp in seconds.</value>
         [DataMember(Name = "rts_sla_time", EmitDefaultValue = false)]
         public long RtsSlaTime { get; set; }
 
         /// <summary>
-        /// The date and time that the order was paid. Unix timestamp.
+        /// The date and time that the order was paid, as a Unix timestamp in seconds.
         /// </summary>
-        /// <value>The date and time that the order was paid. Unix timestamp.</value>
+        /// <value>The date and time that the order was paid, as a Unix timestamp in seconds.</value>
         [DataMember(Name = "paid_time", EmitDefaultValue = false)]
         public long PaidTime { get; set; }
 
@@ -312,9 +312,9 @@ namespace TikTokShop.Api.Generated.Model
         public string SellerNote { get; set; }
 
         /// <summary>
-        /// The latest collection time specified by the platform. Unix timestamp.
+        /// The latest collection time specified by the platform, as a Unix timestamp in seconds.
         /// </summary>
-        /// <value>The latest collection time specified by the platform. Unix timestamp.</value>
+        /// <value>The latest collection time specified by the platform, as a Unix timestamp in seconds.</value>
         [DataMember(Name = "tts_sla_time", EmitDefaultValue = false)]
         public long TtsSlaTime { get; set; }
 
@@ -375,9 +375,9 @@ namespace TikTokShop.Api.Generated.Model
         public bool HasUpdatedRecipientAddress { get; set; }
 
         /// <summary>
-        /// CPF (invoice number), used to issue an invoice. Exclusive for the Brazil market.
+        /// The buyer&#39;s CPF tax identification number, used to issue an invoice. Available only in Brazil.
         /// </summary>
-        /// <value>CPF (invoice number), used to issue an invoice. Exclusive for the Brazil market.</value>
+        /// <value>The buyer&#39;s CPF tax identification number, used to issue an invoice. Available only in Brazil.</value>
         [DataMember(Name = "cpf", EmitDefaultValue = false)]
         public string Cpf { get; set; }
 
@@ -389,9 +389,9 @@ namespace TikTokShop.Api.Generated.Model
         public string DeliveryOptionId { get; set; }
 
         /// <summary>
-        /// Order should arrive by this date to be considered on-time and to avoid late delivery penalties.
+        /// The Unix timestamp, in seconds, by which the order should arrive to be considered on time and avoid late-delivery penalties.
         /// </summary>
-        /// <value>Order should arrive by this date to be considered on-time and to avoid late delivery penalties.</value>
+        /// <value>The Unix timestamp, in seconds, by which the order should arrive to be considered on time and avoid late-delivery penalties.</value>
         [DataMember(Name = "delivery_sla_time", EmitDefaultValue = false)]
         public long DeliverySlaTime { get; set; }
 
@@ -403,9 +403,9 @@ namespace TikTokShop.Api.Generated.Model
         public string PaymentMethodName { get; set; }
 
         /// <summary>
-        /// Code to distinguish different payment method. Only assigned when the payment method is using bank card. Possible values are: Debit, Credit, Prepaid
+        /// Card type for bank card payments. Possible values: - &#x60;Debit&#x60; - &#x60;Credit&#x60; - &#x60;Prepaid&#x60;
         /// </summary>
-        /// <value>Code to distinguish different payment method. Only assigned when the payment method is using bank card. Possible values are: Debit, Credit, Prepaid</value>
+        /// <value>Card type for bank card payments. Possible values: - &#x60;Debit&#x60; - &#x60;Credit&#x60; - &#x60;Prepaid&#x60;</value>
         [DataMember(Name = "payment_card_type", EmitDefaultValue = false)]
         public string PaymentCardType { get; set; }
 
@@ -431,9 +431,9 @@ namespace TikTokShop.Api.Generated.Model
         public string PaymentAuthCode { get; set; }
 
         /// <summary>
-        /// If the order hasn&#39;t updated its status to &#x60;AWAITING_COLLECTION&#x60; before this time, the order will be automatically canceled by TikTok Shop.
+        /// The Unix timestamp, in seconds, by which the order must reach &#x60;AWAITING_COLLECTION&#x60;; otherwise, TikTok Shop automatically cancels the order.
         /// </summary>
-        /// <value>If the order hasn&#39;t updated its status to &#x60;AWAITING_COLLECTION&#x60; before this time, the order will be automatically canceled by TikTok Shop.</value>
+        /// <value>The Unix timestamp, in seconds, by which the order must reach &#x60;AWAITING_COLLECTION&#x60;; otherwise, TikTok Shop automatically cancels the order.</value>
         [DataMember(Name = "shipping_due_time", EmitDefaultValue = false)]
         public long ShippingDueTime { get; set; }
 
@@ -459,9 +459,9 @@ namespace TikTokShop.Api.Generated.Model
         public string BuyerEmail { get; set; }
 
         /// <summary>
-        /// The timestamp of the order&#39;s status update to &#x60;DELIVERED&#x60;.
+        /// The Unix timestamp, in seconds, when the order status changed to &#x60;DELIVERED&#x60;.
         /// </summary>
-        /// <value>The timestamp of the order&#39;s status update to &#x60;DELIVERED&#x60;.</value>
+        /// <value>The Unix timestamp, in seconds, when the order status changed to &#x60;DELIVERED&#x60;.</value>
         [DataMember(Name = "delivery_time", EmitDefaultValue = false)]
         public long DeliveryTime { get; set; }
 
@@ -473,23 +473,23 @@ namespace TikTokShop.Api.Generated.Model
         public string NeedUploadInvoice { get; set; }
 
         /// <summary>
-        /// This option is for sellers that accept cash payment on delivery which is rare. Buyers will pay in cash upon receipt of package. Default value is &#x60;FALSE&#x60;. Only applicable to countries where Cash on Delivery (COD) is supported.
+        /// Whether the order uses cash on delivery (COD). When returned, &#x60;true&#x60; means the buyer pays cash upon receipt and &#x60;false&#x60; means the order uses another payment method. The field may be omitted when payment type is unavailable. Available only in countries where COD is supported.
         /// </summary>
-        /// <value>This option is for sellers that accept cash payment on delivery which is rare. Buyers will pay in cash upon receipt of package. Default value is &#x60;FALSE&#x60;. Only applicable to countries where Cash on Delivery (COD) is supported.</value>
+        /// <value>Whether the order uses cash on delivery (COD). When returned, &#x60;true&#x60; means the buyer pays cash upon receipt and &#x60;false&#x60; means the order uses another payment method. The field may be omitted when payment type is unavailable. Available only in countries where COD is supported.</value>
         [DataMember(Name = "is_cod", EmitDefaultValue = true)]
         public bool IsCod { get; set; }
 
         /// <summary>
-        /// Buyer request cancel time.
+        /// The Unix timestamp, in seconds, when the buyer submitted the pending cancellation request. Returned when is_buyer_request_cancel is true.
         /// </summary>
-        /// <value>Buyer request cancel time.</value>
+        /// <value>The Unix timestamp, in seconds, when the buyer submitted the pending cancellation request. Returned when is_buyer_request_cancel is true.</value>
         [DataMember(Name = "request_cancel_time", EmitDefaultValue = false)]
         public long RequestCancelTime { get; set; }
 
         /// <summary>
-        /// Order should be delivered before this time.
+        /// The Unix timestamp, in seconds, by which the order should be delivered.
         /// </summary>
-        /// <value>Order should be delivered before this time.</value>
+        /// <value>The Unix timestamp, in seconds, by which the order should be delivered.</value>
         [DataMember(Name = "delivery_option_required_delivery_time", EmitDefaultValue = false)]
         public long DeliveryOptionRequiredDeliveryTime { get; set; }
 
@@ -508,30 +508,30 @@ namespace TikTokShop.Api.Generated.Model
         public bool IsBuyerRequestCancel { get; set; }
 
         /// <summary>
-        /// If the order hasn&#39;t updated its status to &#x60;DELIVERED&#x60; before this time, the order will be automatically canceled by TikTok Shop.
+        /// The Unix timestamp, in seconds, by which the order must reach &#x60;DELIVERED&#x60;; otherwise, TikTok Shop automatically cancels the order.
         /// </summary>
-        /// <value>If the order hasn&#39;t updated its status to &#x60;DELIVERED&#x60; before this time, the order will be automatically canceled by TikTok Shop.</value>
+        /// <value>The Unix timestamp, in seconds, by which the order must reach &#x60;DELIVERED&#x60;; otherwise, TikTok Shop automatically cancels the order.</value>
         [DataMember(Name = "delivery_due_time", EmitDefaultValue = false)]
         public long DeliveryDueTime { get; set; }
 
         /// <summary>
-        /// The timestamp of the order&#39;s status update to &#x60;IN_TRANSIT&#x60;.
+        /// The Unix timestamp, in seconds, when the order status changed to &#x60;IN_TRANSIT&#x60;.
         /// </summary>
-        /// <value>The timestamp of the order&#39;s status update to &#x60;IN_TRANSIT&#x60;.</value>
+        /// <value>The Unix timestamp, in seconds, when the order status changed to &#x60;IN_TRANSIT&#x60;.</value>
         [DataMember(Name = "collection_time", EmitDefaultValue = false)]
         public long CollectionTime { get; set; }
 
         /// <summary>
-        /// Indicates whether the order experienced or will be experienced &#x60;ON_HOLD&#x60; status.
+        /// Whether the order has entered or will enter an &#x60;ON_HOLD&#x60; period after buyer payment. This does not indicate that the order&#39;s current &#x60;status&#x60; is &#x60;ON_HOLD&#x60;.
         /// </summary>
-        /// <value>Indicates whether the order experienced or will be experienced &#x60;ON_HOLD&#x60; status.</value>
+        /// <value>Whether the order has entered or will enter an &#x60;ON_HOLD&#x60; period after buyer payment. This does not indicate that the order&#39;s current &#x60;status&#x60; is &#x60;ON_HOLD&#x60;.</value>
         [DataMember(Name = "is_on_hold_order", EmitDefaultValue = true)]
         public bool IsOnHoldOrder { get; set; }
 
         /// <summary>
-        /// The timestamp of the order&#39;s status update to &#x60;CANCELLED&#x60;.
+        /// The Unix timestamp, in seconds, when the order status changed to CANCELLED.
         /// </summary>
-        /// <value>The timestamp of the order&#39;s status update to &#x60;CANCELLED&#x60;.</value>
+        /// <value>The Unix timestamp, in seconds, when the order status changed to CANCELLED.</value>
         [DataMember(Name = "cancel_time", EmitDefaultValue = false)]
         public long CancelTime { get; set; }
 
@@ -550,9 +550,9 @@ namespace TikTokShop.Api.Generated.Model
         public string ReplacedOrderId { get; set; }
 
         /// <summary>
-        /// If the order hasn&#39;t updated its status to &#x60;IN_TRANSIT&#x60; before this time, the order will be automatically canceled by TikTok Shop
+        /// The Unix timestamp, in seconds, by which the order must reach &#x60;IN_TRANSIT&#x60;; otherwise, TikTok Shop automatically cancels the order.
         /// </summary>
-        /// <value>If the order hasn&#39;t updated its status to &#x60;IN_TRANSIT&#x60; before this time, the order will be automatically canceled by TikTok Shop</value>
+        /// <value>The Unix timestamp, in seconds, by which the order must reach &#x60;IN_TRANSIT&#x60;; otherwise, TikTok Shop automatically cancels the order.</value>
         [DataMember(Name = "collection_due_time", EmitDefaultValue = false)]
         public long CollectionDueTime { get; set; }
 
@@ -564,9 +564,9 @@ namespace TikTokShop.Api.Generated.Model
         public long PickUpCutOffTime { get; set; }
 
         /// <summary>
-        /// The latest collection time to gain incentives of NDD (Next Day Delivery) project. Unix timestamp Only available in Thailand and Philippines.
+        /// The latest collection time for the order to qualify for Next Day Delivery (NDD) incentives. Unix timestamp, in seconds.
         /// </summary>
-        /// <value>The latest collection time to gain incentives of NDD (Next Day Delivery) project. Unix timestamp Only available in Thailand and Philippines.</value>
+        /// <value>The latest collection time for the order to qualify for Next Day Delivery (NDD) incentives. Unix timestamp, in seconds.</value>
         [DataMember(Name = "fast_dispatch_sla_time", EmitDefaultValue = false)]
         public long FastDispatchSlaTime { get; set; }
 
@@ -662,23 +662,23 @@ namespace TikTokShop.Api.Generated.Model
         public string FastDeliveryProgram { get; set; }
 
         /// <summary>
-        /// The nickname of the TikTok buyer, which is defined by the TikTok user. The buyer_nickname can be used to identify the buyer when displaying the unboxing results within the TikTok Live Session.
+        /// The nickname of the TikTok buyer, as defined by the TikTok user. This field is populated only for supported virtual unboxing orders and can be displayed with &#x60;buyer_avatar&#x60; in TikTok LIVE unboxing results. Use &#x60;user_id&#x60;, not this display name, for programmatic buyer identification.
         /// </summary>
-        /// <value>The nickname of the TikTok buyer, which is defined by the TikTok user. The buyer_nickname can be used to identify the buyer when displaying the unboxing results within the TikTok Live Session.</value>
+        /// <value>The nickname of the TikTok buyer, as defined by the TikTok user. This field is populated only for supported virtual unboxing orders and can be displayed with &#x60;buyer_avatar&#x60; in TikTok LIVE unboxing results. Use &#x60;user_id&#x60;, not this display name, for programmatic buyer identification.</value>
         [DataMember(Name = "buyer_nickname", EmitDefaultValue = false)]
         public string BuyerNickname { get; set; }
 
         /// <summary>
-        /// The avatar of the TikTok buyer, which is defined by the TikTok user. The buyer_avatar can be used in conjunction with the buyer_nickname when displaying the unboxing results within the TikTok Live Session.
+        /// The avatar of the TikTok buyer, as defined by the TikTok user. This field is populated only for supported virtual unboxing orders and can be used with &#x60;buyer_nickname&#x60; when displaying unboxing results in a TikTok LIVE session.
         /// </summary>
-        /// <value>The avatar of the TikTok buyer, which is defined by the TikTok user. The buyer_avatar can be used in conjunction with the buyer_nickname when displaying the unboxing results within the TikTok Live Session.</value>
+        /// <value>The avatar of the TikTok buyer, as defined by the TikTok user. This field is populated only for supported virtual unboxing orders and can be used with &#x60;buyer_nickname&#x60; when displaying unboxing results in a TikTok LIVE session.</value>
         [DataMember(Name = "buyer_avatar", EmitDefaultValue = false)]
         public string BuyerAvatar { get; set; }
 
         /// <summary>
-        /// Order tag identifier if has certain rights within the order based on the program subscribed by sellers. 1 &#x3D; Shipping Fee Reimbursement Program 2 &#x3D; Horizon+ Program  Applicable for SEA market only
+        /// Order rights associated with seller programs. Multiple values can be returned together, and the field is omitted when no right applies. Possible values: - &#x60;1&#x60;: Shipping Fee Reimbursement Program - &#x60;2&#x60;: Horizon+ Program Applicable only in SEA markets.
         /// </summary>
-        /// <value>Order tag identifier if has certain rights within the order based on the program subscribed by sellers. 1 &#x3D; Shipping Fee Reimbursement Program 2 &#x3D; Horizon+ Program  Applicable for SEA market only</value>
+        /// <value>Order rights associated with seller programs. Multiple values can be returned together, and the field is omitted when no right applies. Possible values: - &#x60;1&#x60;: Shipping Fee Reimbursement Program - &#x60;2&#x60;: Horizon+ Program Applicable only in SEA markets.</value>
         [DataMember(Name = "order_rights", EmitDefaultValue = false)]
         public List<long> OrderRights { get; set; }
 
@@ -697,9 +697,9 @@ namespace TikTokShop.Api.Generated.Model
         public long RecommendedShippingTime { get; set; }
 
         /// <summary>
-        /// The latest buyer pickup time for instore pickup method specified by the platform. Currently applicable for SEA market. Unix timestamp.
+        /// The latest buyer pickup time for in-store pickup, as a Unix timestamp in seconds. Currently available in SEA markets.
         /// </summary>
-        /// <value>The latest buyer pickup time for instore pickup method specified by the platform. Currently applicable for SEA market. Unix timestamp.</value>
+        /// <value>The latest buyer pickup time for in-store pickup, as a Unix timestamp in seconds. Currently available in SEA markets.</value>
         [DataMember(Name = "instore_pickup_sla_time", EmitDefaultValue = false)]
         public long InstorePickupSlaTime { get; set; }
 

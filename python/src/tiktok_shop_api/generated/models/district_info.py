@@ -23,9 +23,9 @@ T = TypeVar("T", bound="DistrictInfo")
 class DistrictInfo:
     """ 
         Attributes:
-            address_level_name (str | Unset): The name of administrative division that can be used by seller for ship. e.g.
-                state/county/city/district/town etc.
-            address_name (str | Unset): Administrative area name. eg: London
+            address_level_name (str | Unset): The label of this administrative division level, such as country, state,
+                county, city, district, or town.
+            address_name (str | Unset): The name of the administrative area at this level, such as London or United Kingdom.
             address_level (str | Unset): Administrative district level code. Value can be L0/L1/L2/L3/L4. eg. US is L0
             iso_code (str | Unset): ISO code of the administrative district level
      """

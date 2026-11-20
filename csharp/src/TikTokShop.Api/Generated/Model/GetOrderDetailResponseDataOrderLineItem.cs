@@ -36,25 +36,25 @@ namespace TikTokShop.Api.Generated.Model
         /// Initializes a new instance of the <see cref="GetOrderDetailResponseDataOrderLineItem" /> class.
         /// </summary>
         /// <param name="id">Line item ID..</param>
-        /// <param name="skuId">SKU ID..</param>
+        /// <param name="skuId">The SKU ID for the line item. For a gift line item with gift information, the original SKU ID is returned when available..</param>
         /// <param name="combinedListingSkus">For a virtual bundle SKU, returns an array of related product SKUs that compose the virtual bundle SKU..</param>
-        /// <param name="productId">Product ID..</param>
+        /// <param name="productId">The product ID for the line item. For a gift line item with gift information, the original product ID is returned when available..</param>
         /// <param name="productName">Product name..</param>
         /// <param name="skuName">The name of the SKU, combined by product SKU attribute like size or color. For example, \&quot;Black, 26.\&quot;.</param>
         /// <param name="skuImage">SKU image..</param>
-        /// <param name="originalPrice">Item original price, please refer to the currency of &#x60;payment_info&#x60;..</param>
+        /// <param name="originalPrice">The line item&#39;s original price in the currency specified by &#x60;currency&#x60;..</param>
         /// <param name="salePrice">Item sale price, please refer to the currency of &#x60;payment_info&#x60;..</param>
         /// <param name="pfandFee">Deposit fee that is applied to certain products, typically beverage containers such as bottles or cans. **Note** Only available in Germany market.</param>
-        /// <param name="platformDiscount">Platform discount amount, please refer to the currency of &#x60;payment_info&#x60;..</param>
+        /// <param name="platformDiscount">The platform discount amount for the line item, in the currency specified by &#x60;currency&#x60;..</param>
         /// <param name="displayStatus">- &#x60;UNPAID&#x60;: The order is placed, but payment is not yet completed. - &#x60;AWAITING_SHIPMENT&#x60;: The order is ready for shipment, but no items are shipped yet. - &#x60;AWAITING_COLLECTION&#x60;:  The shipment is arranged, but the package is waiting to be collected by the carrier. - &#x60;IN_TRANSIT&#x60;: The package is collected by the carrier and delivery is in progress. - &#x60;DELIVERED&#x60;: The package is delivered to buyer. - &#x60;COMPLETED&#x60;: The order is completed, and no further returns or refunds are allowed. - &#x60;CANCELLED&#x60;: The order is canceled..</param>
         /// <param name="cancelUser">The initiator of a cancellation request: - &#x60;BUYER&#x60; - &#x60;SELLER&#x60; - &#x60;OPERATOR&#x60; - &#x60;SYSTEM&#x60;.</param>
         /// <param name="skuType">[**Deprecated**: This field is deprecated and will be removed in a future API version. Use &#x60;order_type&#x60; instead.] The order line type: Possible values based on region: **All regions** - &#x60;NORMAL&#x60;: An item that is in stock and available for immediate purchase and fulfillment. - &#x60;ZERO_LOTTERY:&#x60; An item purchased during a lottery event in TikTok LIVE. - &#x60;SHOP_PARTNER&#x60;: An item purchased from a TikTok Shop partner store. **US** - &#x60;PRE_ORDER&#x60;: An item that is not yet available or released. Fulfillment starts on a specific date in the future. - &#x60;MADE_TO_ORDER&#x60;: An item that is produced only after the order is received. Fulfillment starts after the product is produced..</param>
         /// <param name="sellerSku">The seller stock keeping unit (SKU) of the item..</param>
         /// <param name="shippingProviderId">The shipping provider ID of the item..</param>
-        /// <param name="sellerDiscount">Seller discount amount. Please refer to the currency of &#x60;payment_info&#x60;..</param>
-        /// <param name="currency">Currency for payment..</param>
-        /// <param name="packageId">An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique &#x60;package_id&#x60; (and also a &#x60;tracking_id&#x60;, which is used to track the progress of the package as it is shipped). For local sellers in the US and UK markets, the &#x60;package_id&#x60; and &#x60;package_status&#x60; property will not be returned before the package is shipped.</param>
-        /// <param name="rtsTime">The time seller shipped line order (call Ship Order endpoint successfully). Unix timestamp..</param>
+        /// <param name="sellerDiscount">The seller discount amount for the line item, in the currency specified by &#x60;currency&#x60;..</param>
+        /// <param name="currency">The ISO 4217 currency code for monetary amounts in this line item..</param>
+        /// <param name="packageId">An order can contain one or more packages based on how the seller chooses to ship, and each package has a unique &#x60;package_id&#x60;. This field matches the &#x60;id&#x60; of the package in &#x60;orders[].packages[]&#x60; that contains this line item. Read the package-specific tracking value from this line item&#39;s &#x60;tracking_number&#x60;. For local sellers in the US and UK markets, &#x60;package_id&#x60; and &#x60;package_status&#x60; are not returned before the package is shipped..</param>
+        /// <param name="rtsTime">The Unix timestamp, in seconds, when the seller successfully submitted this line item for shipment through the Ship Order API..</param>
         /// <param name="itemTax">Item tax detail..</param>
         /// <param name="packageStatus">The package status of the item: - &#x60;TO_FULFILL&#x60;: package waiting seller to arrange shipment. - &#x60;PROCESSING&#x60;: package shipment has been arranged by seller. Waiting carrier to collect the parcel. - &#x60;FULFILLING&#x60;: package has been collected by carrier and in transit. - &#x60;COMPLETED&#x60;: package has been delivered. - &#x60;CANCELLED&#x60;: package has been canceled. Normally, the package is canceled due to the package being lost or damaged..</param>
         /// <param name="shippingProviderName">The shipping provider name of the item..</param>
@@ -138,9 +138,9 @@ namespace TikTokShop.Api.Generated.Model
         public string Id { get; set; }
 
         /// <summary>
-        /// SKU ID.
+        /// The SKU ID for the line item. For a gift line item with gift information, the original SKU ID is returned when available.
         /// </summary>
-        /// <value>SKU ID.</value>
+        /// <value>The SKU ID for the line item. For a gift line item with gift information, the original SKU ID is returned when available.</value>
         [DataMember(Name = "sku_id", EmitDefaultValue = false)]
         public string SkuId { get; set; }
 
@@ -152,9 +152,9 @@ namespace TikTokShop.Api.Generated.Model
         public List<CombinedListingSku> CombinedListingSkus { get; set; }
 
         /// <summary>
-        /// Product ID.
+        /// The product ID for the line item. For a gift line item with gift information, the original product ID is returned when available.
         /// </summary>
-        /// <value>Product ID.</value>
+        /// <value>The product ID for the line item. For a gift line item with gift information, the original product ID is returned when available.</value>
         [DataMember(Name = "product_id", EmitDefaultValue = false)]
         public string ProductId { get; set; }
 
@@ -180,9 +180,9 @@ namespace TikTokShop.Api.Generated.Model
         public string SkuImage { get; set; }
 
         /// <summary>
-        /// Item original price, please refer to the currency of &#x60;payment_info&#x60;.
+        /// The line item&#39;s original price in the currency specified by &#x60;currency&#x60;.
         /// </summary>
-        /// <value>Item original price, please refer to the currency of &#x60;payment_info&#x60;.</value>
+        /// <value>The line item&#39;s original price in the currency specified by &#x60;currency&#x60;.</value>
         [DataMember(Name = "original_price", EmitDefaultValue = false)]
         public string OriginalPrice { get; set; }
 
@@ -201,9 +201,9 @@ namespace TikTokShop.Api.Generated.Model
         public string PfandFee { get; set; }
 
         /// <summary>
-        /// Platform discount amount, please refer to the currency of &#x60;payment_info&#x60;.
+        /// The platform discount amount for the line item, in the currency specified by &#x60;currency&#x60;.
         /// </summary>
-        /// <value>Platform discount amount, please refer to the currency of &#x60;payment_info&#x60;.</value>
+        /// <value>The platform discount amount for the line item, in the currency specified by &#x60;currency&#x60;.</value>
         [DataMember(Name = "platform_discount", EmitDefaultValue = false)]
         public string PlatformDiscount { get; set; }
 
@@ -244,30 +244,30 @@ namespace TikTokShop.Api.Generated.Model
         public string ShippingProviderId { get; set; }
 
         /// <summary>
-        /// Seller discount amount. Please refer to the currency of &#x60;payment_info&#x60;.
+        /// The seller discount amount for the line item, in the currency specified by &#x60;currency&#x60;.
         /// </summary>
-        /// <value>Seller discount amount. Please refer to the currency of &#x60;payment_info&#x60;.</value>
+        /// <value>The seller discount amount for the line item, in the currency specified by &#x60;currency&#x60;.</value>
         [DataMember(Name = "seller_discount", EmitDefaultValue = false)]
         public string SellerDiscount { get; set; }
 
         /// <summary>
-        /// Currency for payment.
+        /// The ISO 4217 currency code for monetary amounts in this line item.
         /// </summary>
-        /// <value>Currency for payment.</value>
+        /// <value>The ISO 4217 currency code for monetary amounts in this line item.</value>
         [DataMember(Name = "currency", EmitDefaultValue = false)]
         public string Currency { get; set; }
 
         /// <summary>
-        /// An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique &#x60;package_id&#x60; (and also a &#x60;tracking_id&#x60;, which is used to track the progress of the package as it is shipped). For local sellers in the US and UK markets, the &#x60;package_id&#x60; and &#x60;package_status&#x60; property will not be returned before the package is shipped
+        /// An order can contain one or more packages based on how the seller chooses to ship, and each package has a unique &#x60;package_id&#x60;. This field matches the &#x60;id&#x60; of the package in &#x60;orders[].packages[]&#x60; that contains this line item. Read the package-specific tracking value from this line item&#39;s &#x60;tracking_number&#x60;. For local sellers in the US and UK markets, &#x60;package_id&#x60; and &#x60;package_status&#x60; are not returned before the package is shipped.
         /// </summary>
-        /// <value>An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique &#x60;package_id&#x60; (and also a &#x60;tracking_id&#x60;, which is used to track the progress of the package as it is shipped). For local sellers in the US and UK markets, the &#x60;package_id&#x60; and &#x60;package_status&#x60; property will not be returned before the package is shipped</value>
+        /// <value>An order can contain one or more packages based on how the seller chooses to ship, and each package has a unique &#x60;package_id&#x60;. This field matches the &#x60;id&#x60; of the package in &#x60;orders[].packages[]&#x60; that contains this line item. Read the package-specific tracking value from this line item&#39;s &#x60;tracking_number&#x60;. For local sellers in the US and UK markets, &#x60;package_id&#x60; and &#x60;package_status&#x60; are not returned before the package is shipped.</value>
         [DataMember(Name = "package_id", EmitDefaultValue = false)]
         public string PackageId { get; set; }
 
         /// <summary>
-        /// The time seller shipped line order (call Ship Order endpoint successfully). Unix timestamp.
+        /// The Unix timestamp, in seconds, when the seller successfully submitted this line item for shipment through the Ship Order API.
         /// </summary>
-        /// <value>The time seller shipped line order (call Ship Order endpoint successfully). Unix timestamp.</value>
+        /// <value>The Unix timestamp, in seconds, when the seller successfully submitted this line item for shipment through the Ship Order API.</value>
         [DataMember(Name = "rts_time", EmitDefaultValue = false)]
         public long RtsTime { get; set; }
 

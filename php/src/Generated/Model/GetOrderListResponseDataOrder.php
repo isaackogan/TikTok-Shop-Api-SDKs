@@ -907,7 +907,7 @@ class GetOrderListResponseDataOrder implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets create_time
      *
-     * @param int|null $create_time The date and time that the order was created. Unix timestamp.
+     * @param int|null $create_time The date and time that the order was created. Unix timestamp, in seconds.
      *
      * @return self
      */
@@ -1015,7 +1015,7 @@ class GetOrderListResponseDataOrder implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets recipient_address
      *
-     * @param \TikTokShop\Api\Generated\Model\GetOrderListResponseDataOrderRecipientAddress|null $recipient_address `recipient_address` is not available under `UNPAID` and `ON_HOLD` statuses.
+     * @param \TikTokShop\Api\Generated\Model\GetOrderListResponseDataOrderRecipientAddress|null $recipient_address Recipient address information is unavailable for orders with `UNPAID`, `ON_HOLD`, or `CANCELLED` status.
      *
      * @return self
      */
@@ -1069,7 +1069,7 @@ class GetOrderListResponseDataOrder implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets fulfillment_type
      *
-     * @param string|null $fulfillment_type Fulfillment type. Only orders with fulfillment type can be shipped by sellers. Available values: - `FULFILLMENT_BY_SELLER`: a method where sellers fulfill orders directly from their own inventory, without using TikTok's fulfillment centers. In this model, the seller is responsible for storing, packaging, and shipping the products to customers. - `FULFILLMENT_BY_TIKTOK`: a service offered by TikTok where sellers can send their products to TikTok's fulfillment centers. TikTok then takes care of storing, picking, packing, and shipping the products to customers. - `FULFILLMENT_BY_DILAYANI_TOKOPEDIA`: a method where Tokopedia GoTo Logistics provides warehousing and logistics services to sellers and charges a fee for the service.
+     * @param string|null $fulfillment_type The order fulfillment model. Available values: - `FULFILLMENT_BY_SELLER`: a method where sellers fulfill orders directly from their own inventory, without using TikTok's fulfillment centers. In this model, the seller is responsible for storing, packaging, and shipping the products to customers. - `FULFILLMENT_BY_TIKTOK`: a service offered by TikTok where sellers can send their products to TikTok's fulfillment centers. TikTok then takes care of storing, picking, packing, and shipping the products to customers. - `FULFILLMENT_BY_DILAYANI_TOKOPEDIA`: a method where Tokopedia GoTo Logistics provides warehousing and logistics services to sellers and charges a fee for the service.
      *
      * @return self
      */
@@ -1231,7 +1231,7 @@ class GetOrderListResponseDataOrder implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets update_time
      *
-     * @param int|null $update_time Time of order status change. Unix timestamp.
+     * @param int|null $update_time The date and time when the order was last updated. Unix timestamp in seconds.
      *
      * @return self
      */
@@ -1447,7 +1447,7 @@ class GetOrderListResponseDataOrder implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets request_cancel_time
      *
-     * @param int|null $request_cancel_time Buyer request cancellation time. Unix timestamp.
+     * @param int|null $request_cancel_time The time when the buyer submitted the pending cancellation request. Unix timestamp in seconds.
      *
      * @return self
      */
@@ -1501,7 +1501,7 @@ class GetOrderListResponseDataOrder implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets user_id
      *
-     * @param string|null $user_id Buyer user ID.
+     * @param string|null $user_id The ID of the buyer who placed the order. This is the value matched by the `buyer_user_id` request filter.
      *
      * @return self
      */
@@ -1555,7 +1555,7 @@ class GetOrderListResponseDataOrder implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets delivery_sla_time
      *
-     * @param int|null $delivery_sla_time Order should arrive by this date to be considered on-time and to avoid late delivery penalties.
+     * @param int|null $delivery_sla_time The time by which the order should arrive to be considered on time and avoid late-delivery penalties. Unix timestamp in seconds.
      *
      * @return self
      */
@@ -1582,7 +1582,7 @@ class GetOrderListResponseDataOrder implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets is_cod
      *
-     * @param bool|null $is_cod This option is for sellers that accept cash payment on delivery (COD). Buyers will pay in cash upon receiving the package.   Default: FALSE  Only applicable to countries where COD is supported.
+     * @param bool|null $is_cod Whether the order uses cash on delivery (COD). If `true`, the buyer pays in cash when the package is delivered.  Only applicable to countries where COD is supported.
      *
      * @return self
      */
@@ -1636,7 +1636,7 @@ class GetOrderListResponseDataOrder implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets cancel_time
      *
-     * @param int|null $cancel_time The time an order's status was updated to `CANCELLED`. Unix timestamp.
+     * @param int|null $cancel_time The time an order's status was updated to `CANCELLED`. Unix timestamp in seconds.
      *
      * @return self
      */
@@ -1690,7 +1690,7 @@ class GetOrderListResponseDataOrder implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets delivery_option_name
      *
-     * @param string|null $delivery_option_name Delivery option name. For display purposes only. Available values: - `Economy Shipping` - `Standard Shipping` - `Express Shipping`
+     * @param string|null $delivery_option_name The name of the delivery option. For display purposes only.
      *
      * @return self
      */
@@ -1933,7 +1933,7 @@ class GetOrderListResponseDataOrder implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets is_on_hold_order
      *
-     * @param bool|null $is_on_hold_order Indicates whether the order has been changed to or will be updated to `ON_HOLD` status.
+     * @param bool|null $is_on_hold_order Whether the order entered an ON_HOLD period after the buyer completed payment. This does not indicate that the order's current status is ON_HOLD.
      *
      * @return self
      */
@@ -2041,7 +2041,7 @@ class GetOrderListResponseDataOrder implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets is_refundable_sample
      *
-     * @param bool|null $is_refundable_sample This indicates if an order is a refundable sample. Refundable samples lets sellers collaborate with creators by refunding product costs only when creators meet sales thresholds.
+     * @param bool|null $is_refundable_sample Whether the order is a refundable sample. This flag is independent of `is_sample_order`; a refundable-sample order can have `is_sample_order` set to `false`. Refundable samples let sellers collaborate with creators by refunding product costs only when creators meet sales thresholds.
      *
      * @return self
      */
@@ -2608,7 +2608,7 @@ class GetOrderListResponseDataOrder implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets order_rights
      *
-     * @param int[]|null $order_rights Order tag identifier if has certain rights within the order based on the program subscribed by sellers. 1 = Shipping Fee Reimbursement Program 2 = Horizon+ Program  Applicable for SEA market only
+     * @param int[]|null $order_rights Order rights granted through programs joined by the seller. Multiple values can be returned together; the field is omitted when none of the listed rights apply. Possible values: - `1`: Shipping Fee Reimbursement Program - `2`: Horizon+ Program  **Note**: Available only in the SEA market.
      *
      * @return self
      */
@@ -2635,7 +2635,7 @@ class GetOrderListResponseDataOrder implements ModelInterface, ArrayAccess, \Jso
     /**
      * Sets instore_pickup_sla_time
      *
-     * @param int|null $instore_pickup_sla_time The latest buyer pickup time for instore pickup method specified by the platform. Currently applicable for SEA market. Unix timestamp.
+     * @param int|null $instore_pickup_sla_time The latest buyer pickup time for instore pickup method specified by the platform. Currently applicable for SEA market. Unix timestamp in seconds.
      *
      * @return self
      */

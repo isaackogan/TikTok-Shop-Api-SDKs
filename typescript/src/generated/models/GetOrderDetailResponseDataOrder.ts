@@ -131,7 +131,7 @@ export interface GetOrderDetailResponseDataOrder {
      */
     buyerMessage?: string;
     /**
-     * The date and time that the order was created. Unix timestamp.
+     * The date and time that the order was created. Unix timestamp in seconds.
      * @type {number}
      * @memberof GetOrderDetailResponseDataOrder
      */
@@ -152,13 +152,13 @@ export interface GetOrderDetailResponseDataOrder {
      */
     cancelReason?: string;
     /**
-     * The latest shipping time specified by the platform. Unix timestamp.
+     * The latest shipping time specified by the platform, as a Unix timestamp in seconds.
      * @type {number}
      * @memberof GetOrderDetailResponseDataOrder
      */
     rtsSlaTime?: number;
     /**
-     * The date and time that the order was paid. Unix timestamp.
+     * The date and time that the order was paid, as a Unix timestamp in seconds.
      * @type {number}
      * @memberof GetOrderDetailResponseDataOrder
      */
@@ -181,8 +181,7 @@ export interface GetOrderDetailResponseDataOrder {
      */
     sellerNote?: string;
     /**
-     * The latest collection time specified by the platform.
-     * Unix timestamp.
+     * The latest collection time specified by the platform, as a Unix timestamp in seconds.
      * @type {number}
      * @memberof GetOrderDetailResponseDataOrder
      */
@@ -245,7 +244,7 @@ export interface GetOrderDetailResponseDataOrder {
      */
     hasUpdatedRecipientAddress?: boolean;
     /**
-     * CPF (invoice number), used to issue an invoice. Exclusive for the Brazil market.
+     * The buyer's CPF tax identification number, used to issue an invoice. Available only in Brazil.
      * @type {string}
      * @memberof GetOrderDetailResponseDataOrder
      */
@@ -257,7 +256,7 @@ export interface GetOrderDetailResponseDataOrder {
      */
     deliveryOptionId?: string;
     /**
-     * Order should arrive by this date to be considered on-time and to avoid late delivery penalties.
+     * The Unix timestamp, in seconds, by which the order should arrive to be considered on time and avoid late-delivery penalties.
      * @type {number}
      * @memberof GetOrderDetailResponseDataOrder
      */
@@ -269,7 +268,11 @@ export interface GetOrderDetailResponseDataOrder {
      */
     paymentMethodName?: string;
     /**
-     * Code to distinguish different payment method. Only assigned when the payment method is using bank card. Possible values are: Debit, Credit, Prepaid
+     * Card type for bank card payments.
+     * Possible values:
+     * - `Debit`
+     * - `Credit`
+     * - `Prepaid`
      * @type {string}
      * @memberof GetOrderDetailResponseDataOrder
      */
@@ -294,7 +297,7 @@ export interface GetOrderDetailResponseDataOrder {
      */
     paymentAuthCode?: string;
     /**
-     * If the order hasn't updated its status to `AWAITING_COLLECTION` before this time, the order will be automatically canceled by TikTok Shop.
+     * The Unix timestamp, in seconds, by which the order must reach `AWAITING_COLLECTION`; otherwise, TikTok Shop automatically cancels the order.
      * @type {number}
      * @memberof GetOrderDetailResponseDataOrder
      */
@@ -321,7 +324,7 @@ export interface GetOrderDetailResponseDataOrder {
      */
     buyerEmail?: string;
     /**
-     * The timestamp of the order's status update to `DELIVERED`.
+     * The Unix timestamp, in seconds, when the order status changed to `DELIVERED`.
      * @type {number}
      * @memberof GetOrderDetailResponseDataOrder
      */
@@ -338,19 +341,19 @@ export interface GetOrderDetailResponseDataOrder {
      */
     needUploadInvoice?: string;
     /**
-     * This option is for sellers that accept cash payment on delivery which is rare. Buyers will pay in cash upon receipt of package. Default value is `FALSE`. Only applicable to countries where Cash on Delivery (COD) is supported.
+     * Whether the order uses cash on delivery (COD). When returned, `true` means the buyer pays cash upon receipt and `false` means the order uses another payment method. The field may be omitted when payment type is unavailable. Available only in countries where COD is supported.
      * @type {boolean}
      * @memberof GetOrderDetailResponseDataOrder
      */
     isCod?: boolean;
     /**
-     * Buyer request cancel time.
+     * The Unix timestamp, in seconds, when the buyer submitted the pending cancellation request. Returned when is_buyer_request_cancel is true.
      * @type {number}
      * @memberof GetOrderDetailResponseDataOrder
      */
     requestCancelTime?: number;
     /**
-     * Order should be delivered before this time.
+     * The Unix timestamp, in seconds, by which the order should be delivered.
      * @type {number}
      * @memberof GetOrderDetailResponseDataOrder
      */
@@ -368,25 +371,25 @@ export interface GetOrderDetailResponseDataOrder {
      */
     isBuyerRequestCancel?: boolean;
     /**
-     * If the order hasn't updated its status to `DELIVERED` before this time, the order will be automatically canceled by TikTok Shop.
+     * The Unix timestamp, in seconds, by which the order must reach `DELIVERED`; otherwise, TikTok Shop automatically cancels the order.
      * @type {number}
      * @memberof GetOrderDetailResponseDataOrder
      */
     deliveryDueTime?: number;
     /**
-     * The timestamp of the order's status update to `IN_TRANSIT`.
+     * The Unix timestamp, in seconds, when the order status changed to `IN_TRANSIT`.
      * @type {number}
      * @memberof GetOrderDetailResponseDataOrder
      */
     collectionTime?: number;
     /**
-     * Indicates whether the order experienced or will be experienced `ON_HOLD` status.
+     * Whether the order has entered or will enter an `ON_HOLD` period after buyer payment. This does not indicate that the order's current `status` is `ON_HOLD`.
      * @type {boolean}
      * @memberof GetOrderDetailResponseDataOrder
      */
     isOnHoldOrder?: boolean;
     /**
-     * The timestamp of the order's status update to `CANCELLED`.
+     * The Unix timestamp, in seconds, when the order status changed to CANCELLED.
      * @type {number}
      * @memberof GetOrderDetailResponseDataOrder
      */
@@ -404,7 +407,7 @@ export interface GetOrderDetailResponseDataOrder {
      */
     replacedOrderId?: string;
     /**
-     * If the order hasn't updated its status to `IN_TRANSIT` before this time, the order will be automatically canceled by TikTok Shop
+     * The Unix timestamp, in seconds, by which the order must reach `IN_TRANSIT`; otherwise, TikTok Shop automatically cancels the order.
      * @type {number}
      * @memberof GetOrderDetailResponseDataOrder
      */
@@ -416,8 +419,7 @@ export interface GetOrderDetailResponseDataOrder {
      */
     pickUpCutOffTime?: number;
     /**
-     * The latest collection time to gain incentives of NDD (Next Day Delivery) project. Unix timestamp
-     * Only available in Thailand and Philippines.
+     * The latest collection time for the order to qualify for Next Day Delivery (NDD) incentives. Unix timestamp, in seconds.
      * @type {number}
      * @memberof GetOrderDetailResponseDataOrder
      */
@@ -530,22 +532,23 @@ export interface GetOrderDetailResponseDataOrder {
      */
     fastDeliveryProgram?: string;
     /**
-     * The nickname of the TikTok buyer, which is defined by the TikTok user. The buyer_nickname can be used to identify the buyer when displaying the unboxing results within the TikTok Live Session.
+     * The nickname of the TikTok buyer, as defined by the TikTok user. This field is populated only for supported virtual unboxing orders and can be displayed with `buyer_avatar` in TikTok LIVE unboxing results. Use `user_id`, not this display name, for programmatic buyer identification.
      * @type {string}
      * @memberof GetOrderDetailResponseDataOrder
      */
     buyerNickname?: string;
     /**
-     * The avatar of the TikTok buyer, which is defined by the TikTok user. The buyer_avatar can be used in conjunction with the buyer_nickname when displaying the unboxing results within the TikTok Live Session.
+     * The avatar of the TikTok buyer, as defined by the TikTok user. This field is populated only for supported virtual unboxing orders and can be used with `buyer_nickname` when displaying unboxing results in a TikTok LIVE session.
      * @type {string}
      * @memberof GetOrderDetailResponseDataOrder
      */
     buyerAvatar?: string;
     /**
-     * Order tag identifier if has certain rights within the order based on the program subscribed by sellers.
-     * 1 = Shipping Fee Reimbursement Program
-     * 2 = Horizon+ Program 
-     * Applicable for SEA market only
+     * Order rights associated with seller programs. Multiple values can be returned together, and the field is omitted when no right applies.
+     * Possible values:
+     * - `1`: Shipping Fee Reimbursement Program
+     * - `2`: Horizon+ Program
+     * Applicable only in SEA markets.
      * @type {Array<number>}
      * @memberof GetOrderDetailResponseDataOrder
      */
@@ -571,7 +574,7 @@ export interface GetOrderDetailResponseDataOrder {
      */
     recommendedShippingTime?: number;
     /**
-     * The latest buyer pickup time for instore pickup method specified by the platform. Currently applicable for SEA market. Unix timestamp.
+     * The latest buyer pickup time for in-store pickup, as a Unix timestamp in seconds. Currently available in SEA markets.
      * @type {number}
      * @memberof GetOrderDetailResponseDataOrder
      */

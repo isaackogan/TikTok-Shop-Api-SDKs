@@ -21,11 +21,11 @@ var _ MappedNullable = &GetOrderDetailResponseDataOrderLineItem{}
 type GetOrderDetailResponseDataOrderLineItem struct {
 	// Line item ID.
 	Id *string `json:"id,omitempty"`
-	// SKU ID.
+	// The SKU ID for the line item. For a gift line item with gift information, the original SKU ID is returned when available.
 	SkuId *string `json:"sku_id,omitempty"`
 	// For a virtual bundle SKU, returns an array of related product SKUs that compose the virtual bundle SKU.
 	CombinedListingSkus []CombinedListingSku `json:"combined_listing_skus,omitempty"`
-	// Product ID.
+	// The product ID for the line item. For a gift line item with gift information, the original product ID is returned when available.
 	ProductId *string `json:"product_id,omitempty"`
 	// Product name.
 	ProductName *string `json:"product_name,omitempty"`
@@ -33,13 +33,13 @@ type GetOrderDetailResponseDataOrderLineItem struct {
 	SkuName *string `json:"sku_name,omitempty"`
 	// SKU image.
 	SkuImage *string `json:"sku_image,omitempty"`
-	// Item original price, please refer to the currency of `payment_info`.
+	// The line item's original price in the currency specified by `currency`.
 	OriginalPrice *string `json:"original_price,omitempty"`
 	// Item sale price, please refer to the currency of `payment_info`.
 	SalePrice *string `json:"sale_price,omitempty"`
 	// Deposit fee that is applied to certain products, typically beverage containers such as bottles or cans. **Note** Only available in Germany market
 	PfandFee *string `json:"pfand_fee,omitempty"`
-	// Platform discount amount, please refer to the currency of `payment_info`.
+	// The platform discount amount for the line item, in the currency specified by `currency`.
 	PlatformDiscount *string `json:"platform_discount,omitempty"`
 	// - `UNPAID`: The order is placed, but payment is not yet completed. - `AWAITING_SHIPMENT`: The order is ready for shipment, but no items are shipped yet. - `AWAITING_COLLECTION`:  The shipment is arranged, but the package is waiting to be collected by the carrier. - `IN_TRANSIT`: The package is collected by the carrier and delivery is in progress. - `DELIVERED`: The package is delivered to buyer. - `COMPLETED`: The order is completed, and no further returns or refunds are allowed. - `CANCELLED`: The order is canceled.
 	DisplayStatus *string `json:"display_status,omitempty"`
@@ -52,13 +52,13 @@ type GetOrderDetailResponseDataOrderLineItem struct {
 	SellerSku *string `json:"seller_sku,omitempty"`
 	// The shipping provider ID of the item.
 	ShippingProviderId *string `json:"shipping_provider_id,omitempty"`
-	// Seller discount amount. Please refer to the currency of `payment_info`.
+	// The seller discount amount for the line item, in the currency specified by `currency`.
 	SellerDiscount *string `json:"seller_discount,omitempty"`
-	// Currency for payment.
+	// The ISO 4217 currency code for monetary amounts in this line item.
 	Currency *string `json:"currency,omitempty"`
-	// An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique `package_id` (and also a `tracking_id`, which is used to track the progress of the package as it is shipped). For local sellers in the US and UK markets, the `package_id` and `package_status` property will not be returned before the package is shipped
+	// An order can contain one or more packages based on how the seller chooses to ship, and each package has a unique `package_id`. This field matches the `id` of the package in `orders[].packages[]` that contains this line item. Read the package-specific tracking value from this line item's `tracking_number`. For local sellers in the US and UK markets, `package_id` and `package_status` are not returned before the package is shipped.
 	PackageId *string `json:"package_id,omitempty"`
-	// The time seller shipped line order (call Ship Order endpoint successfully). Unix timestamp.
+	// The Unix timestamp, in seconds, when the seller successfully submitted this line item for shipment through the Ship Order API.
 	RtsTime *int64 `json:"rts_time,omitempty"`
 	// Item tax detail.
 	ItemTax []GetOrderDetailResponseDataOrderLineItemItemTax `json:"item_tax,omitempty"`

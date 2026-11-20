@@ -37,26 +37,26 @@ type GetOrderListResponseDataOrderLineItem struct {
 	SkuName *string `json:"sku_name,omitempty"`
 	// Product ID.
 	ProductId *string `json:"product_id,omitempty"`
-	// Item sale price. Please refer to the currency of `payment_info`.
+	// Sale price of the line item, in the currency specified by `currency`.
 	SalePrice *string `json:"sale_price,omitempty"`
 	// Deposit fee that is applied to certain products, typically beverage containers such as bottles or cans. **Note** Only available in Germany market
 	PfandFee *string `json:"pfand_fee,omitempty"`
-	// Platform discount amount. Please refer to the currency of `payment_info`.
+	// Platform-funded discount amount for the line item, in the currency specified by `currency`.
 	PlatformDiscount *string `json:"platform_discount,omitempty"`
-	// Seller discount amount. Please refer to the currency of `payment_info`.
+	// Seller-funded discount amount for the line item, in the currency specified by `currency`.
 	SellerDiscount *string `json:"seller_discount,omitempty"`
 	// [**Deprecated**: This field is deprecated and will be removed in a future API version. Use `order_type` instead.]  The order line type. Possible values based on region:  **All regions** - `NORMAL`: An item that is in stock and available for immediate purchase and fulfillment. - `ZERO_LOTTERY`: An item purchased during a lottery event in TikTok LIVE. - `SHOP_PARTNER`: An item purchased from a TikTok Shop partner store.  **US** - `PRE_ORDER`: An item that is not yet available or released. Fulfillment starts on a specific date in the future. - `MADE_TO_ORDER`: An item that is produced only after the order is received. Fulfillment starts after the product is produced.
 	// Deprecated
 	SkuType *string `json:"sku_type,omitempty"`
 	// The cancellation reason. Please visit [our list of cancel reasons](https://partner.tiktokshop.com/docv2/page/67e61eee427345048595487d) for more information.
 	CancelReason *string `json:"cancel_reason,omitempty"`
-	// Item original price. Please refer to the currency of `payment_info`.
+	// Original price of the line item, in the currency specified by `currency`.
 	OriginalPrice *string `json:"original_price,omitempty"`
-	// The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp.
+	// The time the package containing this line item was shipped by a successful call to the [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1). Unix timestamp in seconds.
 	RtsTime *int64 `json:"rts_time,omitempty"`
 	// The package status of the item. Available values: - `TO_FULFILL`: Package awaiting seller to arrange shipment. - `PROCESSING`: Shipping has been arranged by the seller. Awaiting carrier collection. - `FULFILLING`: Package has been collected by carrier and is in transit. - `COMPLETED`: Package has been delivered. - `CANCELLED`: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged.
 	PackageStatus *string `json:"package_status,omitempty"`
-	// Currency for payment.
+	// The ISO 4217 currency code for monetary amounts in this line item.
 	Currency *string `json:"currency,omitempty"`
 	// The shipping provider name.
 	ShippingProviderName *string `json:"shipping_provider_name,omitempty"`
@@ -68,9 +68,9 @@ type GetOrderListResponseDataOrderLineItem struct {
 	IsGift *bool `json:"is_gift,omitempty"`
 	// Item tax detail.
 	ItemTax []ItemTax `json:"item_tax,omitempty"`
-	// Tracking number. Available after package has been shipped.
+	// The tracking number for the package containing this line item. Available after the package has been shipped.
 	TrackingNumber *string `json:"tracking_number,omitempty"`
-	// An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique `package_id` and `tracking_id`.
+	// The ID of the package that contains this line item. Match this value to `packages[].id` when package information is available.
 	PackageId *string `json:"package_id,omitempty"`
 	// Retail delivery fee (RDF).   **Note**: Only available in the US market.
 	RetailDeliveryFee *string `json:"retail_delivery_fee,omitempty"`
@@ -109,7 +109,7 @@ type GetOrderListResponseDataOrderLineItem struct {
 	IsPodCustomized *bool `json:"is_pod_customized,omitempty"`
 	// ID of the print on demand customization details. This ID can be used to query for the exact details of the customization
 	PodInfoId *string `json:"pod_info_id,omitempty"`
-	// This describes the product listing type of the SKU.  Possible values: - `TEMPORARY LISTING`
+	// The product listing type of the SKU. This field is returned only for a temporary listing. Possible values: - `TEMPORARY_LISTING`: The SKU is a temporary listing.
 	ProductListingType *string `json:"product_listing_type,omitempty"`
 	AdditionalProperties map[string]interface{}
 }

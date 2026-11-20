@@ -23,6 +23,8 @@ type RecommendCategoryResponseData struct {
 	Categories []RecommendCategoryResponseDataCategory `json:"categories,omitempty"`
 	// The recommended category ID. This is always a leaf category.
 	LeafCategoryId *string `json:"leaf_category_id,omitempty"`
+	// No category recommended reason description Possible values: - NON_MAIN_CATEGORY：recommended category not main categories of merchants - PROHIBITED_CATEGORY: recommended category  Prohibition of sale - PROHIBITED_PUBLISH_CATEGORY：recommended category  Prohibition of  publish - RECOMMEND_CATEGORY_RPC_ERROR: There is a problem with downstream services.
+	NoneCategoryRecReasons []string `json:"none_category_rec_reasons,omitempty"`
 	AdditionalProperties map[string]interface{}
 }
 
@@ -109,6 +111,38 @@ func (o *RecommendCategoryResponseData) SetLeafCategoryId(v string) {
 	o.LeafCategoryId = &v
 }
 
+// GetNoneCategoryRecReasons returns the NoneCategoryRecReasons field value if set, zero value otherwise.
+func (o *RecommendCategoryResponseData) GetNoneCategoryRecReasons() []string {
+	if o == nil || IsNil(o.NoneCategoryRecReasons) {
+		var ret []string
+		return ret
+	}
+	return o.NoneCategoryRecReasons
+}
+
+// GetNoneCategoryRecReasonsOk returns a tuple with the NoneCategoryRecReasons field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *RecommendCategoryResponseData) GetNoneCategoryRecReasonsOk() ([]string, bool) {
+	if o == nil || IsNil(o.NoneCategoryRecReasons) {
+		return nil, false
+	}
+	return o.NoneCategoryRecReasons, true
+}
+
+// HasNoneCategoryRecReasons returns a boolean if a field has been set.
+func (o *RecommendCategoryResponseData) HasNoneCategoryRecReasons() bool {
+	if o != nil && !IsNil(o.NoneCategoryRecReasons) {
+		return true
+	}
+
+	return false
+}
+
+// SetNoneCategoryRecReasons gets a reference to the given []string and assigns it to the NoneCategoryRecReasons field.
+func (o *RecommendCategoryResponseData) SetNoneCategoryRecReasons(v []string) {
+	o.NoneCategoryRecReasons = v
+}
+
 func (o RecommendCategoryResponseData) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -124,6 +158,9 @@ func (o RecommendCategoryResponseData) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.LeafCategoryId) {
 		toSerialize["leaf_category_id"] = o.LeafCategoryId
+	}
+	if !IsNil(o.NoneCategoryRecReasons) {
+		toSerialize["none_category_rec_reasons"] = o.NoneCategoryRecReasons
 	}
 
 	for key, value := range o.AdditionalProperties {
@@ -149,6 +186,7 @@ func (o *RecommendCategoryResponseData) UnmarshalJSON(data []byte) (err error) {
 	if err = json.Unmarshal(data, &additionalProperties); err == nil {
 		delete(additionalProperties, "categories")
 		delete(additionalProperties, "leaf_category_id")
+		delete(additionalProperties, "none_category_rec_reasons")
 		o.AdditionalProperties = additionalProperties
 	}
 

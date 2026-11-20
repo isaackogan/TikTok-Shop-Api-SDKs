@@ -603,7 +603,7 @@ class GetOrderListResponseDataOrderRecipientAddress implements ModelInterface, A
     /**
      * Sets address_detail
      *
-     * @param string|null $address_detail Full recipient detailed address.
+     * @param string|null $address_detail The detailed street-address portion of the recipient address, combined from the address detail lines.
      *
      * @return self
      */
@@ -738,7 +738,7 @@ class GetOrderListResponseDataOrderRecipientAddress implements ModelInterface, A
     /**
      * Sets district_info
      *
-     * @param \TikTokShop\Api\Generated\Model\DistrictInfo[]|null $district_info `district_info` is unavailable under `UNPAID` and `ON_HOLD` statuses.
+     * @param \TikTokShop\Api\Generated\Model\DistrictInfo[]|null $district_info `district_info` is unavailable for orders with `UNPAID`, `ON_HOLD`, or `CANCELLED` status.
      *
      * @return self
      */

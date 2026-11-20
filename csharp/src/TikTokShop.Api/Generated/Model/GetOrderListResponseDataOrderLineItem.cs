@@ -44,23 +44,23 @@ namespace TikTokShop.Api.Generated.Model
         /// <param name="skuImage">SKU image..</param>
         /// <param name="skuName">The name of the SKU, combined by product SKU attribute like size or color. e.g. \&quot;Black, 26\&quot;.</param>
         /// <param name="productId">Product ID..</param>
-        /// <param name="salePrice">Item sale price. Please refer to the currency of &#x60;payment_info&#x60;..</param>
+        /// <param name="salePrice">Sale price of the line item, in the currency specified by &#x60;currency&#x60;..</param>
         /// <param name="pfandFee">Deposit fee that is applied to certain products, typically beverage containers such as bottles or cans. **Note** Only available in Germany market.</param>
-        /// <param name="platformDiscount">Platform discount amount. Please refer to the currency of &#x60;payment_info&#x60;..</param>
-        /// <param name="sellerDiscount">Seller discount amount. Please refer to the currency of &#x60;payment_info&#x60;..</param>
+        /// <param name="platformDiscount">Platform-funded discount amount for the line item, in the currency specified by &#x60;currency&#x60;..</param>
+        /// <param name="sellerDiscount">Seller-funded discount amount for the line item, in the currency specified by &#x60;currency&#x60;..</param>
         /// <param name="skuType">[**Deprecated**: This field is deprecated and will be removed in a future API version. Use &#x60;order_type&#x60; instead.]  The order line type. Possible values based on region:  **All regions** - &#x60;NORMAL&#x60;: An item that is in stock and available for immediate purchase and fulfillment. - &#x60;ZERO_LOTTERY&#x60;: An item purchased during a lottery event in TikTok LIVE. - &#x60;SHOP_PARTNER&#x60;: An item purchased from a TikTok Shop partner store.  **US** - &#x60;PRE_ORDER&#x60;: An item that is not yet available or released. Fulfillment starts on a specific date in the future. - &#x60;MADE_TO_ORDER&#x60;: An item that is produced only after the order is received. Fulfillment starts after the product is produced..</param>
         /// <param name="cancelReason">The cancellation reason. Please visit [our list of cancel reasons](https://partner.tiktokshop.com/docv2/page/67e61eee427345048595487d) for more information..</param>
-        /// <param name="originalPrice">Item original price. Please refer to the currency of &#x60;payment_info&#x60;..</param>
-        /// <param name="rtsTime">The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp..</param>
+        /// <param name="originalPrice">Original price of the line item, in the currency specified by &#x60;currency&#x60;..</param>
+        /// <param name="rtsTime">The time the package containing this line item was shipped by a successful call to the [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1). Unix timestamp in seconds..</param>
         /// <param name="packageStatus">The package status of the item. Available values: - &#x60;TO_FULFILL&#x60;: Package awaiting seller to arrange shipment. - &#x60;PROCESSING&#x60;: Shipping has been arranged by the seller. Awaiting carrier collection. - &#x60;FULFILLING&#x60;: Package has been collected by carrier and is in transit. - &#x60;COMPLETED&#x60;: Package has been delivered. - &#x60;CANCELLED&#x60;: Package has been canceled. Normally, the package is canceled due to the package being lost or damaged..</param>
-        /// <param name="currency">Currency for payment..</param>
+        /// <param name="currency">The ISO 4217 currency code for monetary amounts in this line item..</param>
         /// <param name="shippingProviderName">The shipping provider name..</param>
         /// <param name="cancelUser">Cancellation request initiator. Available values: - &#x60;BUYER&#x60; - &#x60;SELLER&#x60; - &#x60;OPERATOR&#x60; - &#x60;SYSTEM&#x60;.</param>
         /// <param name="shippingProviderId">The shipping provider ID of the item..</param>
         /// <param name="isGift">Indicates whether the current order line item is a gift..</param>
         /// <param name="itemTax">Item tax detail..</param>
-        /// <param name="trackingNumber">Tracking number. Available after package has been shipped..</param>
-        /// <param name="packageId">An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique &#x60;package_id&#x60; and &#x60;tracking_id&#x60;..</param>
+        /// <param name="trackingNumber">The tracking number for the package containing this line item. Available after the package has been shipped..</param>
+        /// <param name="packageId">The ID of the package that contains this line item. Match this value to &#x60;packages[].id&#x60; when package information is available..</param>
         /// <param name="retailDeliveryFee">Retail delivery fee (RDF).   **Note**: Only available in the US market..</param>
         /// <param name="buyerServiceFee">A service fee is charged on every transaction made. The charge is applied from the fifth order onwards and collected directly from customers during checkout.   **Note**: Only available in the Indonesia market..</param>
         /// <param name="smallOrderFee">Small order fee for Thailand (TH)..</param>
@@ -79,7 +79,7 @@ namespace TikTokShop.Api.Generated.Model
         /// <param name="shippingVatRate">Shipping vat rate Available in EU market.</param>
         /// <param name="isPodCustomized">Identifies if this SKU contains print on demand customization.</param>
         /// <param name="podInfoId">ID of the print on demand customization details. This ID can be used to query for the exact details of the customization.</param>
-        /// <param name="productListingType">This describes the product listing type of the SKU.  Possible values: - &#x60;TEMPORARY LISTING&#x60;.</param>
+        /// <param name="productListingType">The product listing type of the SKU. This field is returned only for a temporary listing. Possible values: - &#x60;TEMPORARY_LISTING&#x60;: The SKU is a temporary listing..</param>
         public GetOrderListResponseDataOrderLineItem(string id = default, string skuId = default, List<CombinedListingSku> combinedListingSkus = default, string displayStatus = default, string productName = default, string sellerSku = default, string skuImage = default, string skuName = default, string productId = default, string salePrice = default, string pfandFee = default, string platformDiscount = default, string sellerDiscount = default, string skuType = default, string cancelReason = default, string originalPrice = default, long rtsTime = default, string packageStatus = default, string currency = default, string shippingProviderName = default, string cancelUser = default, string shippingProviderId = default, bool isGift = default, List<ItemTax> itemTax = default, string trackingNumber = default, string packageId = default, string retailDeliveryFee = default, string buyerServiceFee = default, string smallOrderFee = default, string handlingDurationDays = default, bool isDangerousGood = default, bool needsPrescription = default, string giftRetailPrice = default, bool isUnboxingItem = default, string unboxingSkuCode = default, List<UnboxingCaseList> unboxingCaseList = default, string roomId = default, List<SubItemInfo> subItemInfo = default, string distanceShippingFee = default, string distanceFee = default, string shippingVatAmount = default, string shippingVatRate = default, bool isPodCustomized = default, string podInfoId = default, string productListingType = default)
         {
             this.Id = id;
@@ -194,9 +194,9 @@ namespace TikTokShop.Api.Generated.Model
         public string ProductId { get; set; }
 
         /// <summary>
-        /// Item sale price. Please refer to the currency of &#x60;payment_info&#x60;.
+        /// Sale price of the line item, in the currency specified by &#x60;currency&#x60;.
         /// </summary>
-        /// <value>Item sale price. Please refer to the currency of &#x60;payment_info&#x60;.</value>
+        /// <value>Sale price of the line item, in the currency specified by &#x60;currency&#x60;.</value>
         [DataMember(Name = "sale_price", EmitDefaultValue = false)]
         public string SalePrice { get; set; }
 
@@ -208,16 +208,16 @@ namespace TikTokShop.Api.Generated.Model
         public string PfandFee { get; set; }
 
         /// <summary>
-        /// Platform discount amount. Please refer to the currency of &#x60;payment_info&#x60;.
+        /// Platform-funded discount amount for the line item, in the currency specified by &#x60;currency&#x60;.
         /// </summary>
-        /// <value>Platform discount amount. Please refer to the currency of &#x60;payment_info&#x60;.</value>
+        /// <value>Platform-funded discount amount for the line item, in the currency specified by &#x60;currency&#x60;.</value>
         [DataMember(Name = "platform_discount", EmitDefaultValue = false)]
         public string PlatformDiscount { get; set; }
 
         /// <summary>
-        /// Seller discount amount. Please refer to the currency of &#x60;payment_info&#x60;.
+        /// Seller-funded discount amount for the line item, in the currency specified by &#x60;currency&#x60;.
         /// </summary>
-        /// <value>Seller discount amount. Please refer to the currency of &#x60;payment_info&#x60;.</value>
+        /// <value>Seller-funded discount amount for the line item, in the currency specified by &#x60;currency&#x60;.</value>
         [DataMember(Name = "seller_discount", EmitDefaultValue = false)]
         public string SellerDiscount { get; set; }
 
@@ -237,16 +237,16 @@ namespace TikTokShop.Api.Generated.Model
         public string CancelReason { get; set; }
 
         /// <summary>
-        /// Item original price. Please refer to the currency of &#x60;payment_info&#x60;.
+        /// Original price of the line item, in the currency specified by &#x60;currency&#x60;.
         /// </summary>
-        /// <value>Item original price. Please refer to the currency of &#x60;payment_info&#x60;.</value>
+        /// <value>Original price of the line item, in the currency specified by &#x60;currency&#x60;.</value>
         [DataMember(Name = "original_price", EmitDefaultValue = false)]
         public string OriginalPrice { get; set; }
 
         /// <summary>
-        /// The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp.
+        /// The time the package containing this line item was shipped by a successful call to the [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1). Unix timestamp in seconds.
         /// </summary>
-        /// <value>The time sellers shipped the order (called [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1) successfully). Unix timestamp.</value>
+        /// <value>The time the package containing this line item was shipped by a successful call to the [Ship Package API](https://partner.tiktokshop.com/docv2/page/650aa4f1defece02be6e7cb1). Unix timestamp in seconds.</value>
         [DataMember(Name = "rts_time", EmitDefaultValue = false)]
         public long RtsTime { get; set; }
 
@@ -258,9 +258,9 @@ namespace TikTokShop.Api.Generated.Model
         public string PackageStatus { get; set; }
 
         /// <summary>
-        /// Currency for payment.
+        /// The ISO 4217 currency code for monetary amounts in this line item.
         /// </summary>
-        /// <value>Currency for payment.</value>
+        /// <value>The ISO 4217 currency code for monetary amounts in this line item.</value>
         [DataMember(Name = "currency", EmitDefaultValue = false)]
         public string Currency { get; set; }
 
@@ -300,16 +300,16 @@ namespace TikTokShop.Api.Generated.Model
         public List<ItemTax> ItemTax { get; set; }
 
         /// <summary>
-        /// Tracking number. Available after package has been shipped.
+        /// The tracking number for the package containing this line item. Available after the package has been shipped.
         /// </summary>
-        /// <value>Tracking number. Available after package has been shipped.</value>
+        /// <value>The tracking number for the package containing this line item. Available after the package has been shipped.</value>
         [DataMember(Name = "tracking_number", EmitDefaultValue = false)]
         public string TrackingNumber { get; set; }
 
         /// <summary>
-        /// An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique &#x60;package_id&#x60; and &#x60;tracking_id&#x60;.
+        /// The ID of the package that contains this line item. Match this value to &#x60;packages[].id&#x60; when package information is available.
         /// </summary>
-        /// <value>An order can contain one or more packages based on how the seller chooses to ship. Each package has a unique &#x60;package_id&#x60; and &#x60;tracking_id&#x60;.</value>
+        /// <value>The ID of the package that contains this line item. Match this value to &#x60;packages[].id&#x60; when package information is available.</value>
         [DataMember(Name = "package_id", EmitDefaultValue = false)]
         public string PackageId { get; set; }
 
@@ -441,9 +441,9 @@ namespace TikTokShop.Api.Generated.Model
         public string PodInfoId { get; set; }
 
         /// <summary>
-        /// This describes the product listing type of the SKU.  Possible values: - &#x60;TEMPORARY LISTING&#x60;
+        /// The product listing type of the SKU. This field is returned only for a temporary listing. Possible values: - &#x60;TEMPORARY_LISTING&#x60;: The SKU is a temporary listing.
         /// </summary>
-        /// <value>This describes the product listing type of the SKU.  Possible values: - &#x60;TEMPORARY LISTING&#x60;</value>
+        /// <value>The product listing type of the SKU. This field is returned only for a temporary listing. Possible values: - &#x60;TEMPORARY_LISTING&#x60;: The SKU is a temporary listing.</value>
         [DataMember(Name = "product_listing_type", EmitDefaultValue = false)]
         public string ProductListingType { get; set; }
 

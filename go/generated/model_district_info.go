@@ -19,9 +19,9 @@ var _ MappedNullable = &DistrictInfo{}
 
 // DistrictInfo struct for DistrictInfo
 type DistrictInfo struct {
-	// The name of administrative division that can be used by seller for ship. e.g. state/county/city/district/town etc.
+	// The label of this administrative division level, such as country, state, county, city, district, or town.
 	AddressLevelName *string `json:"address_level_name,omitempty"`
-	// Administrative area name. eg: London
+	// The name of the administrative area at this level, such as London or United Kingdom.
 	AddressName *string `json:"address_name,omitempty"`
 	// Administrative district level code. Value can be L0/L1/L2/L3/L4. eg. US is L0
 	AddressLevel *string `json:"address_level,omitempty"`

@@ -268,7 +268,7 @@ export class OrdersApi extends runtime.BaseAPI {
     }
 
     /**
-     * Get the detailed order information of an order, including important attributes such as order status, shipping addresses, payment details, price and tax info, and package information.
+     * Get detailed information for up to 50 TikTok Shop orders specified by their IDs, including order status, payment details, price and tax information, package information, and shipping address information when available.
      * Get Order Detail
      */
     async getOrderDetailRaw(requestParameters: GetOrderDetailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetOrderDetailResponse>> {
@@ -279,7 +279,7 @@ export class OrdersApi extends runtime.BaseAPI {
     }
 
     /**
-     * Get the detailed order information of an order, including important attributes such as order status, shipping addresses, payment details, price and tax info, and package information.
+     * Get detailed information for up to 50 TikTok Shop orders specified by their IDs, including order status, payment details, price and tax information, package information, and shipping address information when available.
      * Get Order Detail
      */
     async getOrderDetail(requestParameters: GetOrderDetailRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetOrderDetailResponse> {
@@ -337,7 +337,7 @@ export class OrdersApi extends runtime.BaseAPI {
     }
 
     /**
-     * Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID.
+     * Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID. A response is successful when `code` is `0`, including when no orders match the request.
      * Get Order List
      */
     async getOrderListRaw(requestParameters: GetOrderListOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<runtime.ApiResponse<GetOrderListResponse>> {
@@ -348,7 +348,7 @@ export class OrdersApi extends runtime.BaseAPI {
     }
 
     /**
-     * Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID.
+     * Returns a list of orders created or updated during the timeframe indicated by the specified parameters. You can also apply a range of filtering criteria to narrow the list of orders returned, such as order status, delivery option type, and buyer user ID. A response is successful when `code` is `0`, including when no orders match the request.
      * Get Order List
      */
     async getOrderList(requestParameters: GetOrderListOperationRequest, initOverrides?: RequestInit | runtime.InitOverrideFunction): Promise<GetOrderListResponse> {

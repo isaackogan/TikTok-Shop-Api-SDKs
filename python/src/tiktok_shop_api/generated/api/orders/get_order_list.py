@@ -107,7 +107,8 @@ def sync_detailed(
 
      Returns a list of orders created or updated during the timeframe indicated by the specified
     parameters. You can also apply a range of filtering criteria to narrow the list of orders returned,
-    such as order status, delivery option type, and buyer user ID.
+    such as order status, delivery option type, and buyer user ID. A response is successful when `code`
+    is `0`, including when no orders match the request.
 
     Args:
         page_size (int):
@@ -154,7 +155,8 @@ def sync(
 
      Returns a list of orders created or updated during the timeframe indicated by the specified
     parameters. You can also apply a range of filtering criteria to narrow the list of orders returned,
-    such as order status, delivery option type, and buyer user ID.
+    such as order status, delivery option type, and buyer user ID. A response is successful when `code`
+    is `0`, including when no orders match the request.
 
     Args:
         page_size (int):
@@ -196,7 +198,8 @@ async def asyncio_detailed(
 
      Returns a list of orders created or updated during the timeframe indicated by the specified
     parameters. You can also apply a range of filtering criteria to narrow the list of orders returned,
-    such as order status, delivery option type, and buyer user ID.
+    such as order status, delivery option type, and buyer user ID. A response is successful when `code`
+    is `0`, including when no orders match the request.
 
     Args:
         page_size (int):
@@ -243,7 +246,8 @@ async def asyncio(
 
      Returns a list of orders created or updated during the timeframe indicated by the specified
     parameters. You can also apply a range of filtering criteria to narrow the list of orders returned,
-    such as order status, delivery option type, and buyer user ID.
+    such as order status, delivery option type, and buyer user ID. A response is successful when `code`
+    is `0`, including when no orders match the request.
 
     Args:
         page_size (int):
