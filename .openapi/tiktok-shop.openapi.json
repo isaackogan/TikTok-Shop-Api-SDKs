@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "TikTok Shop Partner API",
-    "version": "2026.11.24",
+    "version": "2026.11.25",
     "description": "Generated from the TikTok Shop Partner Center documentation (https://partner.tiktokshop.com/docv2). Do not edit by hand."
   },
   "externalDocs": {
@@ -49133,6 +49133,27 @@
             "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/SKUStatusChangeWebhook"
+              },
+              "example": {
+                "type": 50,
+                "tts_notification_id": "7327112393057371910",
+                "shop_id": "7494049642642441621",
+                "timestamp": 1644412885,
+                "data": {
+                  "product_id": "123456789",
+                  "skus": [
+                    {
+                      "sku_id": "987654321",
+                      "status": "DEACTIVATED",
+                      "deactivation_source": "SELLER"
+                    },
+                    {
+                      "sku_id": "987654322",
+                      "status": "CREATED"
+                    }
+                  ],
+                  "update_time": 1627587600
+                }
               }
             }
           }
