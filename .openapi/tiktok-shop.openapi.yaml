@@ -1,7 +1,7 @@
 openapi: 3.1.0
 info:
   title: TikTok Shop Partner API
-  version: 2026.11.25
+  version: 2026.11.26
   description: Generated from the TikTok Shop Partner Center documentation (https://partner.tiktokshop.com/docv2). Do not edit by hand.
 externalDocs:
   url: https://partner.tiktokshop.com/docv2
@@ -8611,7 +8611,7 @@ paths:
     get:
       operationId: getShopPerformance
       summary: Get Shop Performance
-      description: Returns performance metrics at shop/seller level.
+      description: Returns performance metrics at shop/seller level, including both real-time and offline metrics.
       tags:
         - Analytics
       parameters:
@@ -62640,7 +62640,7 @@ components:
         latest_available_date:
           type: string
           format: date
-          description: Latest date in local timezone where data is ready (ISO 8601 format).
+          description: Latest date in local timezone where offline data is ready (ISO 8601 format.)
         performance:
           $ref: "#/components/schemas/GetShopPerformanceResponseDataPerformance"
           description: Overall performance data for the shop.
